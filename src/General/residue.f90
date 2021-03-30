@@ -153,14 +153,14 @@
 !-----------------------------------------------
       IF (.not.lconm1) RETURN
 
-      fac = (ard(:,nodd)+brd(:,nodd))/                                        &
-            (ard(:,nodd)+brd(:,nodd)+azd(:,nodd)+bzd(:,nodd))
+      fac = (ard(:ns,nodd)+brd(:ns,nodd))/                                        &
+            (ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
       DO n = 0, ntor
          gcr(:,n) = fac*gcr(:,n)
       END DO
 
-      fac = (azd(:,nodd)+bzd(:,nodd))/                                        &
-            (ard(:,nodd)+brd(:,nodd)+azd(:,nodd)+bzd(:,nodd))
+      fac = (azd(:ns,nodd)+bzd(:ns,nodd))/                                        &
+            (ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
       DO n = 0, ntor
          gcz(:,n) = fac*gcz(:,n)
       END DO

@@ -106,8 +106,6 @@
 
       READ (iunit, nml=indata, iostat=istat)
 
-      print *, "indata read, istat=",istat
-
       IF (ALL(niter_array == -1)) niter_array = niter
 
       END SUBROUTINE read_indata_namelist

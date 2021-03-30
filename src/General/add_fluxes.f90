@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
       USE vmec_main
       USE realspace, ONLY: wint, guu, guv, chip, phip

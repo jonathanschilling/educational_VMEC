@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE pchfd(n, x, f, d, incfd, skip, ne, xe, fe,
      1                 de, ierr)
       USE stel_kinds

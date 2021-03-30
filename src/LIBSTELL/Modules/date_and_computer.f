@@ -1,3 +1,4 @@
+!> \file
       MODULE date_and_computer
       USE system_mod, ONLY: system, getpid
       USE safe_open_mod

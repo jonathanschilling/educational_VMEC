@@ -1,3 +1,4 @@
+!> \file
       function ddsum(n, din)
       use stel_kinds
       implicit none

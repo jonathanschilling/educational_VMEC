@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
       USE vmec_main
       USE vmec_params, ONLY: ntmax

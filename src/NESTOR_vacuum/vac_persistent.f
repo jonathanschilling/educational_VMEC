@@ -1,3 +1,4 @@
+!> \file
       MODULE vac_persistent
       USE stel_kinds
       IMPLICIT NONE

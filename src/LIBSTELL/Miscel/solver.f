@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE solver(amat, b, m, nrhs, info)
       USE stel_kinds
       IMPLICIT NONE

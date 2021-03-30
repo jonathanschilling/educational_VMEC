@@ -1,3 +1,4 @@
+!> \file
       MODULE vacmod
       USE vacmod0
       USE vac_persistent

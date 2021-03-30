@@ -1,3 +1,4 @@
+!> \file
       MODULE vforces
       USE stel_kinds, ONLY: rprec
       IMPLICIT NONE

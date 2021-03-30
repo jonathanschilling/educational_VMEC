@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE PCHSP(IC, VC, N, X, F, D, INCFD, WK, NWK, IERR)
       USE stel_kinds
       IMPLICIT NONE

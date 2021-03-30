@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE point_wise_to_power(npts, x, f, n, ac, i_full,
      1                               nsp_pts)
       USE stel_kinds

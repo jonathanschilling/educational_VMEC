@@ -1,3 +1,4 @@
+!> \file
       MODULE safe_open_mod
 !
 !     Module for performing a "safe" open of a file for

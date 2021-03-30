@@ -1,3 +1,4 @@
+!> \file
       MODULE vmercier
       USE vparams, ONLY: nsd, rprec, dp
       IMPLICIT NONE

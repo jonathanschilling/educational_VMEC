@@ -1,3 +1,4 @@
+!> \file
 !EZcdf, Easy Interface to netCDF Routine Calls
 !=============================================
  

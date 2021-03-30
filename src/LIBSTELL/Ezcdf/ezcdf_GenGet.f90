@@ -1,3 +1,4 @@
+!> \file
 MODULE ezcdf_GenGet
   USE ezcdf_opncls
   USE ezcdf_inqvar

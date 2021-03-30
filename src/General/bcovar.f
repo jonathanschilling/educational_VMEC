@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE bcovar (lu, lv, lmnsc00)
       USE vmec_main, fpsi => bvco, p5 => cp5
       USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale

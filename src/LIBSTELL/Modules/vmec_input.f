@@ -1,3 +1,4 @@
+!> \file
       MODULE vmec_input
       USE vparams, ONLY: rprec, dp, mpol1d, ntord, ndatafmax
       USE vsvd0

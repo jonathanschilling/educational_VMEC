@@ -14,10 +14,10 @@ set (vmec_sources "")
 #add_subdirectory (Sources)
 
 # Add subdirectories for all the sources.
-add_subdirectory (LIBSTELL)
 add_subdirectory (General)
 add_subdirectory (Initialization_Cleanup)
 add_subdirectory (Input_Output)
+add_subdirectory (LIBSTELL)
 add_subdirectory (NESTOR_vacuum)
 add_subdirectory (TimeStep)
 

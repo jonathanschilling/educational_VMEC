@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint,
      1           r1, rt, rz, zt, zz, bsubu, vp, phips, pres, ns, nznt)
       USE safe_open_mod

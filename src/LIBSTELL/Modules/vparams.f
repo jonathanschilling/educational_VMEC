@@ -1,3 +1,4 @@
+!> \file
       MODULE vparams
       USE stel_kinds
       USE stel_constants, ONLY: zero,twopi,mu0,one

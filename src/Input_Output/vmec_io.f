@@ -1,3 +1,4 @@
+!> \file
       MODULE vmec_io
       USE stel_kinds
       IMPLICIT NONE

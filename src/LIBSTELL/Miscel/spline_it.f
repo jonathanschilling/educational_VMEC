@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE spline_it(ndata, xdata, ydata, npts, x, y, i_full)
       USE stel_kinds
       IMPLICIT NONE

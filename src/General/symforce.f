@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, 
      1 cls, rcs, zcs, ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)
       USE vmec_main, p5 => cp5

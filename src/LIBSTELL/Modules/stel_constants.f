@@ -1,3 +1,4 @@
+!> \file
       MODULE stel_constants
 
       USE stel_kinds, ONLY: rprec, dp

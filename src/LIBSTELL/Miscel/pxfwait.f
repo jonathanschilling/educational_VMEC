@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE pxfwait_g(istat, iretpid, ierror)
       IMPLICIT NONE
       INTEGER :: istat, iretpid, ierror

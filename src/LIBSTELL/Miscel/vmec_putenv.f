@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE vmec_putenv(ename, evalue, ierror)
       IMPLICIT NONE
       INTEGER :: ierror

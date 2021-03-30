@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE fixaray
       USE vmec_main, p5 => cp5
       USE vmec_params, ONLY: jmin2, mscale, nscale,

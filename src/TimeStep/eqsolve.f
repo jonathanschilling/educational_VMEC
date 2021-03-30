@@ -1,9 +1,10 @@
+!> \file
       SUBROUTINE eqsolve(ier_flag, lscreen)
       USE vmec_main
       USE vmec_params, ONLY: ntmax, ns4, jac75_flag, norm_term_flag,
      1                       bad_jacobian_flag,
      2                       successful_term_flag
-      USE directaccess, ONLY: DeleteDAFile
+!       USE directaccess, ONLY: DeleteDAFile
       USE realspace
       USE xstuff
       USE vmec_history

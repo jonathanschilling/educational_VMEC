@@ -1,3 +1,4 @@
+!> \file
       FUNCTION PCHDF (K, X, S, IERR)
       USE stel_kinds
       IMPLICIT NONE

@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE getcurmid (curmid, izeta, gsqrt, r12)
       USE vmec_input, ONLY: rprec, dp, nzeta
       USE vmec_dim, ONLY: ns, ns1, ntheta2

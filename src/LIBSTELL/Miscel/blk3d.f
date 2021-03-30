@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE blk3d(a, bm1, bp1, srces, mblk, nblocks)
 C-----------------------------------------------
 C   M o d u l e s

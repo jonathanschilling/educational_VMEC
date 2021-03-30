@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,
      1                  plascur, rbtor, wint, ns, ivac_skip, ivac,
      2                  mnmax, ier_flag, lscreen)

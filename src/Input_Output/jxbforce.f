@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,
      1   bsubsv, gsqrt, bsq, itheta, izeta, brho, sigma_an, ier_flag 
      3                   )

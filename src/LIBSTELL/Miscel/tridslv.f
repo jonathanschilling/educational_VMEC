@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
       USE stel_kinds
       IMPLICIT NONE

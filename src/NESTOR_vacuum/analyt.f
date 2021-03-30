@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim)
       USE vacmod
       IMPLICIT NONE

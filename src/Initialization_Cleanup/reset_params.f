@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE reset_params
       USE vmec_main, ONLY: iequi, ivac, ftolv, fsqr, fsqz, fsq,
      1                     res0, delt0r, iter1, iter2, ijacob, irst

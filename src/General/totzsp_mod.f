@@ -1,3 +1,4 @@
+!> \file
       MODULE totzsp_mod
       USE vmec_main
 !-----------------------------------------------

@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE parse_extension(file_to_parse, file_or_extension, lnc)
       IMPLICIT NONE
 !-----------------------------------------------

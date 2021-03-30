@@ -1,3 +1,4 @@
+!> \file
 C*
 C*  Copyright (C) CERFACS 1998
 C*

@@ -1,10 +1,11 @@
+!> \file
       SUBROUTINE allocate_ns (linterp, neqs2_old)
       USE vmec_main
       USE vmec_params, ONLY: ntmax
       USE realspace
       USE vforces
       USE xstuff
-      USE csplinx
+!       USE csplinx
       USE mgrid_mod
       USE fbal
       IMPLICIT NONE
@@ -75,9 +76,9 @@ C-----------------------------------------------
 
       iotaf(nsp1) = 0
 
-      ALLOCATE( rmidx(2*ns), hmidx(2*ns), wmidx(2*ns), qmidx(2*ns),
-     1          tenmidx(2*ns), ymidx(2*ns), y2midx(2*ns), stat=istat1)
-      IF (istat1.ne.0) STOP 'allocation error #8 in allocate_ns'
+!       ALLOCATE( rmidx(2*ns), hmidx(2*ns), wmidx(2*ns), qmidx(2*ns),
+!      1          tenmidx(2*ns), ymidx(2*ns), y2midx(2*ns), stat=istat1)
+!       IF (istat1.ne.0) STOP 'allocation error #8 in allocate_ns'
 
       ALLOCATE (gc(neqs2), xcdot(neqs2), xsave(neqs2),
      1          xstore(neqs2), stat=istat1)

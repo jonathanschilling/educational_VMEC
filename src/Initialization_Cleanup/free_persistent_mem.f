@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE free_persistent_mem
       USE vmec_main
       USE xstuff

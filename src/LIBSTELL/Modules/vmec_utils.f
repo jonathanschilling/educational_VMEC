@@ -1,3 +1,4 @@
+!> \file
       MODULE vmec_utils
       USE stel_kinds
       USE stel_constants, ONLY: twopi, one, zero

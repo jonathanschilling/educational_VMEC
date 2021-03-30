@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE gmres (n, m, icntl, cntl, yAx, x0, b, info)
       USE stel_kinds, ONLY: rprec
       USE stel_constants, ONLY: one, zero

@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE spline_akima(x,y,xx,yy,npts,iflag)
       USE stel_kinds
       implicit none

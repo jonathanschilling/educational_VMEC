@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE getfilesize (infile, filesize)
       IMPLICIT NONE
       CHARACTER(LEN=*), INTENT(in)  :: infile

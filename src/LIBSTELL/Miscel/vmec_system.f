@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE vmec_system(cmd, ierror)
       INTEGER, OPTIONAL :: ierror
       INTEGER :: ireturn

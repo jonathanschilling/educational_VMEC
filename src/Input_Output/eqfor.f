@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
       USE vmec_main
       USE vmec_params
@@ -6,11 +7,11 @@
      1   gsqrt => azmn_o, bsq => bzmn_o, izeta => azmn_e,
      2   brho => bzmn_e, bphi => czmn_o, curtheta => brmn_e
       USE vacmod
-      USE csplinx
+!       USE csplinx
       USE vmec_io
       USE mgrid_mod
       USE fbal
-      USE v3f_vmec_comm
+!       USE v3f_vmec_comm
       USE stel_constants, ONLY: pi
       IMPLICIT NONE
 C-----------------------------------------------
@@ -260,7 +261,7 @@ C-----------------------------------------------
       d_of_kappa = surf_area_p * aminor_p / ( 2 * volume_p)
       kappa_p = 1 + (pi * pi / 8) * (d_of_kappa ** 2 + SQRT                    &
      &      (ABS(d_of_kappa ** 4 - 1)) -1)
-      vvc_kappa_p = kappa_p ! Save result for v3fit.
+!       vvc_kappa_p = kappa_p ! Save result for v3fit.
 
       aminr1 = 2*volume_p/surf_area_p
 
@@ -602,7 +603,7 @@ C-----------------------------------------------
       fgeo = rshaf/rcen
 
       smaleli = factor*sumbpol
-      vvc_smaleli = smaleli ! Save result for v3fit.
+!       vvc_smaleli = smaleli ! Save result for v3fit.
       betai   = 2*factor*sump
       musubi  = vnorm*factor*musubi
       lambda = p5*smaleli + betai

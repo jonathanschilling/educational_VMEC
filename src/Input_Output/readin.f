@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE readin(input_file, ier_flag, lscreen)
       USE vmec_main
       USE vmec_params

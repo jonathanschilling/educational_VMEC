@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE read_namelist(iunit, io_stat, lc_name)
       USE vmec_input, ONLY: read_indata_namelist
       IMPLICIT NONE

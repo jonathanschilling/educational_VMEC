@@ -1,3 +1,4 @@
+!> \file
       MODULE fbal
       USE stel_kinds, ONLY: dp
       REAL(dp), DIMENSION(:), ALLOCATABLE :: rzu_fac, rru_fac,

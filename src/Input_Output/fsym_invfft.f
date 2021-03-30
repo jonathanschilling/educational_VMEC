@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE fsym_invfft (bsubsu, bsubsv)
       USE vmec_main, ONLY: rprec, ns, nzeta, ntheta1, ntheta2, 
      1    ntheta3, ireflect

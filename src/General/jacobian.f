@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE jacobian
       USE vmec_main, ONLY: ohs, nrzt, irst
       USE vmec_params, ONLY: meven, modd

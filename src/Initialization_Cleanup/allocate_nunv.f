@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE allocate_nunv
       USE vmec_main
       USE vmec_params, ONLY: ntmax

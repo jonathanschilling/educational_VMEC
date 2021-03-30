@@ -1,3 +1,4 @@
+!> \file
 !*******************************************************************************
 !  File vmec_history.f
 !  Contains module vmec_history

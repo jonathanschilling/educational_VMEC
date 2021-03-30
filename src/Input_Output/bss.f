@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv,
      1               br, bphi, bz)
       USE vmec_main

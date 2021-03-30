@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE bextern(plascur, wint, ns, lscreen)
       USE vacmod
       USE mgrid_mod, ONLY: bvac

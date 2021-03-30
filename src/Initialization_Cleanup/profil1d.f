@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE profil1d(xc, xcdot, lreset)
       USE vmec_main
       USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp

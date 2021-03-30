@@ -1,3 +1,4 @@
+!> \file
       PROGRAM vmec
 
       USE vmec_input

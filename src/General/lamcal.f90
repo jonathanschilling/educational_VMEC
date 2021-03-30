@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE lamcal(overg, guu, guv, gvv)
       USE vmec_main
       USE vmec_params, ONLY: ntmax, jlam, lamscale

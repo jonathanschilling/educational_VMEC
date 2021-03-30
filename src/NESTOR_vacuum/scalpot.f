@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip)
       USE vacmod
       IMPLICIT NONE

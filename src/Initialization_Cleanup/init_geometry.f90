@@ -1,3 +1,4 @@
+!> \file
       MODULE INIT_GEOMETRY
 
       LOGICAL     :: lflip

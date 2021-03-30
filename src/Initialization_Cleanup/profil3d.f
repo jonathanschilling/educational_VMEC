@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
       USE vmec_main
       USE vmec_params

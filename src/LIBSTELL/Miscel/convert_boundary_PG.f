@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE convert_boundary_PG(rbc, zbs, rhobc, mpol, ntor)
       USE stel_kinds
       IMPLICIT NONE

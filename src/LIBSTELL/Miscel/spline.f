@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE spline(x,y,n,yp1,ypn,y2)
       USE stel_kinds, ONLY: rprec, dp
       IMPLICIT NONE

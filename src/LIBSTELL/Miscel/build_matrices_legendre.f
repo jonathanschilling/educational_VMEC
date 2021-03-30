@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE build_matrices_legendre(n, a, b, a_inv, b_inv)
       USE stel_kinds
       IMPLICIT NONE

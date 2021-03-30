@@ -1,3 +1,4 @@
+!> \file
       MODULE mgrid_mod
       USE stel_kinds
       USE vmec_input, ONLY: lfreeb

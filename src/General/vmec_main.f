@@ -1,3 +1,4 @@
+!> \file
       MODULE vmec_main
       USE vmec_dim
       USE vmec_input

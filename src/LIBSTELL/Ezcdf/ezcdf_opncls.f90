@@ -1,3 +1,4 @@
+!> \file
 MODULE ezcdf_opncls
   INTERFACE cdfOpn
      MODULE PROCEDURE ezcdf_open

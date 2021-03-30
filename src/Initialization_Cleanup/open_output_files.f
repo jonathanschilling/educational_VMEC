@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE open_output_files (extension, lscreen, lfirst)
       USE safe_open_mod
       USE vparams, ONLY: nthreed, nthreed0

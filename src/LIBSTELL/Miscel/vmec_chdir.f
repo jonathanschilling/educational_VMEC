@@ -1,3 +1,4 @@
+!> \file
       INTEGER FUNCTION vmec_chdir(new_path)
       IMPLICIT NONE
       CHARACTER*(*), INTENT(in) :: new_path

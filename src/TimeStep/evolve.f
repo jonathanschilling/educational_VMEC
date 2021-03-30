@@ -1,10 +1,11 @@
+!> \file
       SUBROUTINE evolve(time_step, ier_flag, liter_flag, lscreen)
       USE vmec_main
       USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,
      1                       norm_term_flag
       USE xstuff
       USE timer_sub
-      USE gmres_mod
+!       USE gmres_mod
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s

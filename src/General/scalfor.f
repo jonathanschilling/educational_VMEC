@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
       USE vmec_main
       USE vmec_params

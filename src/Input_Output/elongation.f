@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE elongation (r1, z1, waist, height)
       USE vmec_main
       IMPLICIT NONE

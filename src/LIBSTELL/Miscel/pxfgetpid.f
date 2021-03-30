@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE vmec_getpid(ipid, ierror)
       IMPLICIT NONE
       INTEGER :: ipid, ierror

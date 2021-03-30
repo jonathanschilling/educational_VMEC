@@ -1,3 +1,4 @@
+!> \file
       MODULE vsvd0
       USE stel_kinds
       IMPLICIT NONE

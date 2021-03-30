@@ -1,3 +1,4 @@
+!> \file
       MODULE timer_sub
       USE stel_kinds, ONLY: rprec
       IMPLICIT NONE

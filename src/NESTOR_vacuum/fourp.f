@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE fourp (grpmn, grp, istore, istart, iend, ndim)
       USE vacmod
       IMPLICIT NONE

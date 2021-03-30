@@ -1,3 +1,4 @@
+!> \file
       FUNCTION integral (n, x, y1, y2)
       USE stel_kinds
       IMPLICIT NONE

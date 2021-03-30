@@ -1,3 +1,4 @@
+!> \file
       FUNCTION fmax (ax, bx, f, tol)
       USE stel_kinds
       IMPLICIT NONE

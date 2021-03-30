@@ -1,3 +1,4 @@
+!> \file
 !  File profile_functions.f contains
 !    FUNCTION pcurr
 !    FUNCTION piota

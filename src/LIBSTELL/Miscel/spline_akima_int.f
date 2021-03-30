@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE spline_akima_int(x,y,xx,yy,npts,iflag)
 ! returns the integral from xx(1) to x of the function
 ! given by the Akima spline.

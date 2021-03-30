@@ -1,3 +1,4 @@
+!> \file
       FUNCTION PCHST (ARG1, ARG2)
       USE stel_kinds
       IMPLICIT NONE

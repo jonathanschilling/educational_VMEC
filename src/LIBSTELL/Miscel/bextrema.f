@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE bextrema(modb, bmin, bmax, nzeta, ntheta)
       USE stel_kinds
       IMPLICIT NONE

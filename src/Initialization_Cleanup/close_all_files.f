@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE close_all_files
       USE vparams, ONLY: nthreed
       IMPLICIT NONE

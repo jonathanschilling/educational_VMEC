@@ -1,3 +1,4 @@
+!> \file
 C**********************************************************************
 C
 C     Copyright (C) 1992  Roland W. Freund and Noel M. Nachtigal

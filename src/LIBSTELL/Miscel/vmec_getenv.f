@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE vmec_getenv(ename, evalue)
       IMPLICIT NONE
       CHARACTER(LEN=*) :: ename, evalue

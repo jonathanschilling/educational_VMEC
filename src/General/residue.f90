@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE residue (gcr, gcz, gcl)
       USE vmec_main, p5 => cp5
       USE vmec_params, ONLY: rss, zcs, rsc, zcc,                        &

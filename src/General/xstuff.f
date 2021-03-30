@@ -1,3 +1,4 @@
+!> \file
       MODULE xstuff
       USE stel_kinds, ONLY: rprec
       IMPLICIT NONE

@@ -1,3 +1,4 @@
+!> \file
 subroutine init_random_seed()
   use iso_fortran_env, only: int64
   implicit none

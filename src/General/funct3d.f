@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE funct3d (lscreen, ier_flag)
       USE vmec_main
       USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor

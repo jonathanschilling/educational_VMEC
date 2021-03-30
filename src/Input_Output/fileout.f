@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE fileout(iseq, ictrl_flag, ier_flag, lscreen)
       USE vmec_main
       USE vac_persistent
@@ -102,10 +103,6 @@ C-----------------------------------------------
          CALL second0 (twoutoff)
 
          timer(twout) = timer(twout) + twoutoff - twouton
-
-         IF (ntor .eq. 0) THEN
-            CALL write_dcon (xc)
-         END IF
 
          IF (lscreen)
      1   PRINT 120, TRIM(werror(loc_ier_flag))

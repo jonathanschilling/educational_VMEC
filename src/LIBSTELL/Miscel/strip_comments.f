@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE strip_comments(input_file,output_file)
       USE safe_open_mod
       IMPLICIT NONE

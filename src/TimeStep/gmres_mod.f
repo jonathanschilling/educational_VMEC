@@ -1,3 +1,4 @@
+!> \file
       MODULE gmres_mod
       USE vmec_main, ONLY: dp, rprec, neqs, ns, mns, mnmax, nthreed
       IMPLICIT NONE

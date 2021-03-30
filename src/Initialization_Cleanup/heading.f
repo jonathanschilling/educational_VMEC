@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE heading(extension, lscreen)
       USE vmec_main, ONLY: rprec
       USE vparams, ONLY: nthreed

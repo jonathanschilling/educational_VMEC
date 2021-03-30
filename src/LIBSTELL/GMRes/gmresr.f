@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE gmresr(oktest,n,j,mgmres,b,x,work,eps,stc,
      &                  maxits,resid,matvec,iflag)
 C*********************************************************

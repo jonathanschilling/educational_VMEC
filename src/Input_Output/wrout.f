@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu,
      1                 rzl_array, gc_array, ier_flag)
       USE vmec_main

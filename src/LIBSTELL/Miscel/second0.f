@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE second0(stime)
       USE stel_kinds
       IMPLICIT NONE

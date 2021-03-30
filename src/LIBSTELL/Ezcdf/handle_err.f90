@@ -1,3 +1,4 @@
+!> \file
 subroutine handle_err(status,nam3,nam1,nam2)
   include "netcdf.inc"
   INTEGER, intent(in) :: status

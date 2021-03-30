@@ -1,3 +1,4 @@
+!> \file
 MODULE ezcdf_attrib
    USE ezcdf_inqvar
    include "netcdf.inc"

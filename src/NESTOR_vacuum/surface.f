@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax)
       USE vacmod
       IMPLICIT NONE

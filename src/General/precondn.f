@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,
      1                    xodd, axm, axd, bxm, bxd, 
      3                    cx, eqfactor, trigmult)

@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE legendre_to_power(n, a_inv, b_inv, tc, ac)
       USE stel_kinds
       IMPLICIT NONE

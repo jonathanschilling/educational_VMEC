@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE symrzl(r1s, rus, rvs, z1s, zus, zvs, lus, lvs, rcons,
      1   zcons, r1a, rua, rva, z1a, zua, zva, lua, lva, rcona, zcona)
       USE vmec_main

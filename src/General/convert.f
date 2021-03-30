@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE convert(rmnc,zmns,lmns,rmns,zmnc,lmnc,rzl_array,js)
       USE vmec_main
       USE vmec_params

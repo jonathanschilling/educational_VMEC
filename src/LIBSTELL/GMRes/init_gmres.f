@@ -1,3 +1,4 @@
+!> \file
         subroutine init_dgmres(icntl,cntl)
         implicit none
 *

@@ -1,3 +1,4 @@
+!> \file
       MODULE biotsavart
       USE stel_kinds
       USE bsc_T

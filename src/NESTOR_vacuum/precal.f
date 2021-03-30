@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE precal
       USE vparams, ONLY: zero, one, epstan
       USE vacmod

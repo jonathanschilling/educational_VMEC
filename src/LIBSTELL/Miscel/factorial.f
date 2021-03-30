@@ -1,3 +1,4 @@
+!> \file
       RECURSIVE FUNCTION factorial(num) RESULT(fact)
       USE stel_kinds
       IMPLICIT NONE

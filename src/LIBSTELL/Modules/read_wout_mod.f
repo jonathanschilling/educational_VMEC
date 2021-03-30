@@ -1,3 +1,4 @@
+!> \file
       MODULE read_wout_mod
 !
 !     USE READ_WOUT_MOD to include variables dynamically allocated

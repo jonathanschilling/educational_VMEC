@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE power_to_legendre(n, a, b, ac, tc)
       USE stel_kinds
       IMPLICIT NONE

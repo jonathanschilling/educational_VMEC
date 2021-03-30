@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE tolower(string)
 ! convert a string to lower case
 ! note: string should NOT be a parameter (constant) or this seg faults

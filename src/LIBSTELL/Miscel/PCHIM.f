@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE PCHIM(N, X, F, D, INCFD, IERR)
       USE stel_kinds
       IMPLICIT NONE

@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
       USE vmec_main
       IMPLICIT NONE

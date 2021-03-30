@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE guess_axis(r1, z1, ru0, zu0)
       USE vmec_main
       USE vmec_params, ONLY: nscale, signgs

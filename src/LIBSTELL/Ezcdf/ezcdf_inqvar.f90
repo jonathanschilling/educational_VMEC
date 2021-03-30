@@ -1,3 +1,4 @@
+!> \file
 MODULE ezcdf_inqvar
  
   IMPLICIT NONE

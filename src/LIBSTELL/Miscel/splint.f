@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE splint(xa, ya, y2a, n, x, y)
       USE stel_kinds
       IMPLICIT NONE

@@ -1,3 +1,4 @@
+!> \file
       subroutine spline_cubic_int(x,y,xx,yy,n,iflag)
       USE stel_kinds
       implicit none

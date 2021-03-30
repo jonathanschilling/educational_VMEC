@@ -1,3 +1,4 @@
+!> \file
       SUBROUTINE spectrum(rmn, zmn)
       USE vmec_main
       USE vmec_params, ONLY: mscale, nscale, ntmax, rss, zcs, rsc, zcc

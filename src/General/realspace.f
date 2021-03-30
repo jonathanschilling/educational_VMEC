@@ -1,3 +1,4 @@
+!> \file
       MODULE realspace
       USE stel_kinds
       IMPLICIT NONE

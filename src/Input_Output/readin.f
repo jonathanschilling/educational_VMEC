@@ -1,4 +1,4 @@
-      SUBROUTINE readin(input_file, iseq_count, ier_flag, lscreen)
+      SUBROUTINE readin(input_file, ier_flag, lscreen)
       USE vmec_main
       USE vmec_params
       USE vacmod
@@ -9,7 +9,7 @@
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER :: iseq_count, ier_flag
+      INTEGER :: ier_flag
       LOGICAL :: lscreen
       CHARACTER(LEN=*) :: input_file
 C-----------------------------------------------
@@ -24,218 +24,7 @@ C-----------------------------------------------
       CHARACTER(LEN=100) :: line, line2
       CHARACTER(LEN=1)   :: ch1, ch2
 C-----------------------------------------------
-!
-!       LOCAL VARIABLES
-!
-!       rbcc,rbss,rbcs,rbsc
-!                boundary Fourier coefficient arrays for R (of cosu*cosv, etc)
-!       zbcc,zbss,zbcs,zbsc
-!                boundary Fourier coefficient arrays for Z
-!
-!       XCC*COS(MU)COS(NV), XCS*COS(MU)SIN(NV), ETC
-!
-!       STACKING ORDER DEPENDS ON LASYM AND LTHREED. EACH COMPONENT XCC, XSS, XSC, XCS
-!       HAS SIZE = mns. (PHIFAC, MSE TAKE UP 1 INDEX EACH AT END OF ARRAY)
-!
-!         LTHREED=F,      LTHREED=F,      LTHREED=T,      LTHREED=T
-!         LASYM=F         LASYM=T         LASYM=F         LASYM=T
-!
-!          rmncc           rmncc           rmncc           rmncc
-!          zmnsc           rmnsc           rmnss           rmnss
-!          lmnsc           zmnsc           zmnsc           rmnsc
-!                          zmncc           zmncs           rmncs
-!                          lmnsc           lmnsc           zmnsc
-!                          lmncc           lmncs           zmncs
-!                                                          zmncc
-!                                                          zmnss
-!                                                          lmnsc
-!                                                          lmncs
-!                                                          lmncc
-!                                                          lmnss
-!
-!
-!                STANDARD INPUT DATA AND RECOMMENDED VALUES
-!
-!   Plasma parameters (MKS units)
-!          ai:   expansion coefficients for iota (power series in s) used when ncurr=0
-!                Interpretation changes with piota_type
-!          am:   mass or pressure (gamma=0) expansion coefficients (series in s)
-!                in MKS units [NWT/M**2]
-!                Interpretation changes with pmass_type
-!          ac:   expansion coefficients for the normalized (pcurr(s=1) = 1)
-!                radial derivative of the flux-averaged toroidal current density
-!                (power series in s) used when ncurr=1
-!                Interpretation changes with pcurr_type
-!    ai_aux_s:   Auxiliary array for iota profile. Used for splines, s values
-!    ai_aux_f:   Auxiliary array for iota profile. Used for splines, function values
-!    am_aux_s:   Auxiliary array for mass profile. Used for splines, s values
-!    am_aux_f:   Auxiliary array for mass profile. Used for splines, function values
-!    ac_aux_s:   Auxiliary array for current profile. Used for splines, s values
-!    ac_aux_f:   Auxiliary array for current profile. Used for splines, function values
-!      curtor:   value of toroidal current [A]. Used if ncurr = 1 to specify
-!                current profile, or IF in data reconstruction mode.
-!     phiedge:   toroidal flux enclosed by plasma at edge (in Wb)
-!      extcur:   array of currents in each external current group. Used to
-!                multiply Green''s function for fields and loops read in from
-!                MGRID file. Should use real current units (A).
-!       gamma:   value of compressibility index (gamma=0 => pressure prescribed)
-!         nfp:   number of toroidal field periods ( =1 for Tokamak)
-!         rbc:   boundary coefficients of COS(m*theta-n*zeta) for R [m]
-!         zbs:   boundary coefficients of SIN(m*theta-n*zeta) for Z [m]
-!         rbs:   boundary coefficients of SIN(m*theta-n*zeta) for R [m]
-!         zbc:   boundary coefficients of COS(m*theta-n*zeta) for Z [m]
-!
-!
-!   Numerical and logical control parameters
-!       ncurr:   flux conserving (=0) or prescribed toroidal current (=1)
-!    ns_array:   array of radial mesh sizes to be used in multigrid sequence
-!    nvacskip:   number of iteration steps between accurate calculation of vacuum
-!                response; use fast interpolation scheme in between
-!  pres_scale:   factor used to scale pressure profile (default value = 1)
-!                useful so user can fix profile and change beta without having to change
-!                all AM coefficients separately
-!       tcon0:   weight factor for constraint force (=1 by DEFAULT)
-!       lasym:   =T, run in asymmetric mode; =F, run in stellarator symmetry mode
-!      lfreeb:   =T, run in free boundary mode if mgrid_file exists
-!     lforbal:   =T, use non-variational forces to ensure <EQUIF> = 0;
-!                =F, use variational form of forces, <EQUIF> ~ 0
-!
-!   Convergence control parameters
-!  ftol_array:   array of value of residual(s) at which each multigrid
-!                iteration ends
-! niter_array:   array of number of iterations (used to terminate run) at
-!                each multigrid iteration
-!       nstep:   number of timesteps between printouts on screen
-!    nvacskip:   iterations skipped between full update of vacuum solution
-!
-!   Preconditioner control parameters (added 8/30/04)
-! precon_type:   specifies type of 2D preconditioner to use ('default', diagonal in m,n,
-!                tri-diagonal in s; 'conjugate-gradient', block tri-di, evolve using
-!                cg method; 'gmres', block tri-di, generalized minimal residual method;
-!                'tfqmr', block tri-di, transpose-free quasi minimum residual
-! prec2d_threshold:
-!                value of preconditioned force residuals at which block (2d) tri-di
-!                solver is turned on, if requested via type_prec2d
-!
-!   Character parameters
-!  mgrid_file:   full path for vacuum Green''s function data
-!  pcurr_type:   Specifies parameterization type of pcurr function
-!                  'power_series' - I'(s)=Sum[ ac(j) s ** j] - Default
-!                  'gauss_trunc'  - I'(s)=ac(0) (exp(-(s/ac(1)) ** 2) -
-!                                                exp(-(1/ac(1)) ** 2))
-!                   others - see function pcurr
-!  piota_type:   Specifies parameterization type of piota function
-!                  'power_series' - p(s)=Sum[ am(j) s ** j] - Default
-!                   others - see function piota
-!  pmass_type:   Specifies parameterization type of pmass function
-!                  'power_series' - p(s)=Sum[ am(j) s ** j] - Default
-!                  'gauss_trunc'  - p(s)=am(0) (exp(-(s/am(1)) ** 2) -
-!                                                exp(-(1/am(1)) ** 2))
-!                   others - see function pmass
 
-!   Equilibrium reconstruction parameters
-!      phifac:   factor scaling toroidal flux to match apres or limiter
-!   datastark:   pitch angle data from stark measurement
-!    datathom:   pressure data from Thompson, CHEERS (Pa)
-!     imatch_         = 1 (default),match value of PHIEDGE in input file
-!     phiedge:   = 0, USE pressure profile width to determine PHIEDGE
-!                = 2, USE LIMPOS data (in mgrid file) to find PHIEDGE
-!                = 3, USE Ip to find PHIEDGE (fixed-boundary only)
-!        imse:   number of Motional Stark effect data points
-!                >0, USE mse data to find iota; <=0, fixed iota profile ai
-!        itse:   number of pressure profile data points
-!                = 0, no thompson scattering data to READ
-!     isnodes:   number of iota spline points (computed internally unless specified explicitly)
-!     ipnodes:   number of pressure spline points (computed internally unless specified explicitly)
-!       lpofr:   LOGICAL variable. =.true. IF pressure data are
-!                prescribed in REAL space. =.false. IF data in flux space.
-!      pknots:   array of pressure knot values in SQRT(s) space
-!      sknots:   array of iota knot values in SQRT(s) space
-!       tensp:   spline tension for pressure profile
-!
-!       tensi:   spline tension for iota
-!      tensi2:   vbl spline tension for iota
-!      fpolyi:   vbl spline tension form factor (note: IF tensi!=tensi2
-!               THEN tension(i-th point) = tensi+(tensi2-tensi)*(i/n-1))**fpolyi
-!               - - - - - - - - - - - - - - - - - -
-!    mseangle_   uniform EXPerimental offset of MSE data
-!     offset:    (calibration offset) ... PLUS ...
-!    mseangle_   multiplier on mseprof offset array
-!     offsetM:   (calibration offset)
-!     mseprof:   offset array from NAMELIST MSEPROFIL
-!                so that the total offset on the i-th MSE data point is
-!                taken to be
-!                = mseangle_offset+mseangle_offsetM*mseprof(i)
-!               - - - - - - - - - - - - - - - - - -
-! pres_offset:   uniform arbitrary  radial offset of pressure data
-!     presfac:   number by which Thomson scattering data is scaled
-!                to get actual pressure
-!     phidiam:   diamagnetic toroidal flux (Wb)
-!      dsiobt:   measured flux loop signals corresponding to the
-!                combination of signals in iconnect array
-!     indxflx:   array giving INDEX of flux measurement in iconnect array
-!    indxbfld:   array giving INDEX of bfield measurement used in matching
-!        nobd:   number of connected flux loop measurements
-!      nobser:   number of individual flux loop positions
-!      nbsets:   number of B-coil sets defined in mgrid file
-!  nbcoils(n):   number of bfield coils in each set defined in mgrid file
-!    nbcoilsn:   total number of bfield coils defined in mgrid file
-!    bbc(m,n):   measured magnetic field at rbcoil(m,n),zbcoil(m,n) at
-!                the orientation br*COS(abcoil) + bz*SIN(abcoil)
-! rbcoil(m,n):   R position of the m-th coil in the n-th set from mgrid file
-! zbcoil(m,n):   Z position of the m-th coil in the n-th set from mgrid file
-! abcoil(m,n):   orientation (surface normal wrt R axis; in radians)
-!                of the m-th coil in the n-th set from mgrid file.
-!       nflxs:   number of flux loop measurements used in matching
-!    nbfld(n):   number of selected EXTERNAL bfield measurements in set n from nml file
-!      nbfldn:   total number of EXTERNAL bfield measurements used in matching
-!               - - - - - - - - - - - - - - - - - -
-!             NOTE: FOR STANDARD DEVIATIONS (sigma''s) < 0, INTERPRET
-!             AS PERCENT OF RESPECTIVE MEASUREMENT
-!  sigma_thom:   standard deviation (Pa) for pressure profile data
-! sigma_stark:   standard deviation (degrees) in MSE data
-!  sigma_flux:   standard deviaton (Wb) for EXTERNAL poloidal flux data
-!     sigma_b:   standard deviation (T) for EXTERNAL magnetic field data
-!sigma_current:  standard deviation (A) in toroidal current
-!sigma_delphid:  standard deviation (Wb) for diamagnetic match
-!
-!
-!       THE (ABSOLUTE) CHI-SQ ERROR IS DEFINED AS FOLLOWS:
-!
-!          2
-!       CHI      =     SUM [ EQ(K,IOTA,PRESSURE)  -  DATA(K) ] ** 2
-!                     (K) -----------------------------------
-!                                   SIGMA(K)**2
-!
-!       HERE, SIGMA IS THE STANDARD DEVIATION OF THE MEASURED DATA, AND
-!       EQ(IOTA,PRESSURE) IS THE EQUILIBRIUM EXPRESSION FOR THE DATA TO BE
-!       MATCHED:
-!
-!       EQ(I)   =    SUM [ W(I,J)*X(J) ]
-!                   (J)
-!
-!       WHERE W(I,J) ARE THE (LINEAR) MATRIX ELEMENTS AND X(J) REPRESENT
-!       THE KNOT VALUES OF IOTA (AND/OR PRESSURE). THE RESULTING LEAST-SQUARES
-!       MATRIX ELEMENTS AND DATA ARRAY CAN BE EXPRESSED AS FOLLOWS:
-!
-!       ALSQ(I,J) = SUM [ W(K,I) * W(K,J) / SIGMA(K) ** 2]
-!                   (K)
-!
-!       BLSQ(I)   = SUM [ W(K,I) * DATA(K)/ SIGMA(K) ** 2]
-!                   (K)
-!
-!       THEREFORE, INTERNALLY IT IS CONVENIENT TO WORK WITH THE 'SCALED'
-!       W'(K,I) = W(K,I)/SIGMA(K) AND DATA'(K) = DATA(K)/SIGMA(K)
-!
-!       ****!   I - M - P - O - R - T - A - N - T     N - O - T - E   *****
-!
-!       THE INPUT DATA FILE WILL ACCEPT BOTH POSITIVE AND NEGATIVE
-!       SIGMAS, WHICH IT INTERPRETS DIFFERENTLY. FOR SIGMA > 0, IT
-!       TAKES SIGMA TO BE THE STANDARD DEVIATION FOR THAT MEASUREMENT
-!       AS DESCRIBED ABOVE. FOR SIGMA < 0, SIGMA IS INTERPRETED AS
-!       THE FRACTION OF THE MEASURED DATA NEEDED TO COMPUTE THE ABSOLUTE
-!       SIGMA, I.E., (-SIGMA * DATA) = ACTUAL SIGMA USED IN CODE.
-!
       ier_flag_init = ier_flag
       ier_flag = norm_term_flag
       CALL second0(treadon)
@@ -607,29 +396,6 @@ C-----------------------------------------------
          END IF
          DEALLOCATE (temp)
       END IF
-
-!
-!     PARSE TYPE OF PRECONDITIONER
-!
-      precon_type = TRIM(ADJUSTL(precon_type))
-      itype_precon = 0     !default scalar tri-di preconditioner
-      ch1 = precon_type(1:1); ch2 = precon_type(2:2)
-
-!     ALL THE FOLLOWING USE THE FULL 2D BLOCK-TRI PRECONDITIONER
-!     BUT DIFFER IN THE WAY TIME-EVOLUTION IS HANDLED
-      SELECT CASE (ch1)
-      CASE ('c', 'C')
-!conjugate gradient
-         IF (ch2 == 'g' .or. ch2 == 'G') itype_precon = 1
-      CASE ('g', 'G')
-!gmres or gmresr
-         IF (ch2 == 'm' .or. ch2 == 'M') itype_precon = 2
-         IF (LEN_TRIM(precon_type) == 6) itype_precon = 3
-      CASE ('t', 'T')
-!transpose free qmr
-         IF (ch2 == 'f' .or. ch2 == 'F') itype_precon = 4
-      END SELECT
-
 
       iresidue = -1
 

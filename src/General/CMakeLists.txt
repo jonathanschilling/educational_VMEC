@@ -2,7 +2,6 @@
 list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/add_fluxes.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/alias.f
-	${CMAKE_CURRENT_SOURCE_DIR}/angle_constraints.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/aspectratio.f
 	${CMAKE_CURRENT_SOURCE_DIR}/bcovar.f
 	${CMAKE_CURRENT_SOURCE_DIR}/convert.f

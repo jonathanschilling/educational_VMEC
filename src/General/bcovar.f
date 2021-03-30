@@ -8,8 +8,6 @@
      3             bsubu_o => clmn_o, bsubv_o => blmn_o,
      4             bsq => bzmn_o, phipog => brmn_o
       USE xstuff, ONLY: xc
-      USE precon2d, ONLY: ictrl_prec2d, lHess_exact,
-     1                    ctor_prec2d
       USE fbal
       IMPLICIT NONE
 !-----------------------------------------------
@@ -32,7 +30,6 @@
       REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
       REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh,
      1                                      bsupv, bsubvh, r12sq
-      LOGICAL :: lctor
 !-----------------------------------------------
       ndim = 1+nrzt
 
@@ -161,18 +158,8 @@
 !     WITH N -> 1 IN THE HESSIAN CALCULATION ROUTINES (Compute_Hessian_Flam_lam, etc.)
 !
 
-      IF (ncurr .eq. 1) THEN
-         IF (ictrl_prec2d .eq. 2) THEN
-            lmnsc00(2:ns) = chips(2:ns)            !Initialize
-!!          lmnsc00(2:ns) = iotas(2:ns)            !Initialize
-         ELSE IF (ictrl_prec2d .ne. 0) THEN
-            chips(2:ns) = lmnsc00(2:ns)            !Evolution
-!!          iotas(2:ns) = lmnsc00(2:ns)            !Evolution
-         END IF
-      END IF
-
 !     COMPUTE (IF NEEDED) AND ADD CHIP TO BSUPU
-      CALL add_fluxes(phipog, bsupu, bsupv, ictrl_prec2d.eq.0)
+      CALL add_fluxes(phipog, bsupu, bsupv, .true.)
 
 !
 !     COMPUTE LAMBDA FORCE KERNELS (COVARIANT B COMPONENT bsubu,v) ON RADIAL HALF-MESH
@@ -236,18 +223,7 @@
 !     NOTE: EDGE VALUES AT JS=NS DOWN BY 1/2
 !     THIS IS NEEDED FOR NUMERICAL STABILITY
 
-      IF (lHess_exact) THEN
-         lctor = lfreeb .and. ictrl_prec2d.ne.0      !Yields correct hessian near edge
-      ELSE
-         lctor = lfreeb .and. ictrl_prec2d.gt.1      !Yields better accuracy in solution
-      END IF
-      IF (lctor) THEN
-         IF (ictrl_prec2d .eq. 2)
-     1       ctor_prec2d = signgs*twopi*p5*(buco(ns) - buco(ns1))
-         ctor = ctor_prec2d + signgs*twopi*buco(ns)
-      ELSE
-         ctor = signgs*twopi*(c1p5*buco(ns) - p5*buco(ns1))
-      END IF
+      ctor = signgs*twopi*(c1p5*buco(ns) - p5*buco(ns1))
 
 !
 !     AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
@@ -279,8 +255,7 @@
 !     COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS
 !     NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
 !
-      IF ((MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0)
-     1        .and. ictrl_prec2d.eq.0) THEN
+      IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
          phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt)
          CALL lamcal(phipog, guu, guv, gvv)
          CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1),

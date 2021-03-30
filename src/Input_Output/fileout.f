@@ -7,7 +7,6 @@
      2      cleanup_flag, successful_term_flag
       USE vforces
       USE xstuff, ONLY: xc, gc, xsave, scalxc
-      USE precon2d, ONLY: ictrl_prec2d
       USE timer_sub
       IMPLICIT NONE
 C-----------------------------------------------
@@ -118,7 +117,7 @@ C-----------------------------------------------
             IF (.not. lterm) GOTO 1000
             WRITE (nthreed, 10) TRIM(input_extension), ijacob
             CALL write_times(nthreed, lscreen, lfreeb,
-     1                       ictrl_prec2d.ne.0)
+     1                       .false.)
          END IF
       END IF
 

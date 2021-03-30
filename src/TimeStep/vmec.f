@@ -24,30 +24,17 @@ C-----------------------------------------------
      1   iopen, isnml, iread, iseq, index_seq,
      2   index_dat, iunit, ncount, nsteps, i
       INTEGER, TARGET :: ictrl(5)
-      CHARACTER(LEN=120) :: input_file, seq_ext, reset_file_name, arg
+      CHARACTER(LEN=120) :: input_file, seq_ext, arg
       CHARACTER(LEN=120) :: input_file0
       CHARACTER(LEN=120), DIMENSION(10) :: command_arg
-      LOGICAL :: lscreen
+      LOGICAL :: lscreen, lreset
       INTEGER :: ictrl_flag
       INTEGER :: ns_min, nsval, ns_old=0
       INTEGER :: igrid,
      1           jacob_off, niter_store
       INTEGER, SAVE :: igrid0
-      LOGICAL :: lreset
 
-      INTERFACE
-         SUBROUTINE initialize_radial(nsval, ns_old, delt0,
-     1                                lscreen, reset_file_name)
-         USE vmec_main
-         IMPLICIT NONE
-         INTEGER, INTENT(in) :: nsval
-         INTEGER, INTENT(inout) :: ns_old
-         CHARACTER(LEN=*), OPTIONAL :: reset_file_name
-         LOGICAL, INTENT(in) :: lscreen
-         REAL(rprec), INTENT(out) :: delt0
-         END SUBROUTINE initialize_radial
-      END INTERFACE
-!
+
 !     Read in command-line arguments to get input file or sequence file,
 !     screen display information, and restart information
 !
@@ -57,7 +44,6 @@ C-----------------------------------------------
       END DO
 
       lscreen = .true.
-      reset_file_name = " "
 
       IF (numargs .lt. 1) THEN
          STOP 'Invalid command line'
@@ -84,29 +70,10 @@ C-----------------------------------------------
             arg = command_arg(iseq)
             IF (TRIM(arg).eq.'noscreen' .or. TRIM(arg).eq.'NOSCREEN')
      1         lscreen = .false.
-            index_end = INDEX(arg, "reset=")
-            index_seq = MAX(INDEX(arg, "RESET="), index_end)
-            IF (index_seq .gt. 0) reset_file_name = arg(index_seq+6:)
          END DO
       END IF
 
-!
-!     Determine type of file opened (sequential or input-data)
-!     ARG1 (char var)
-!          By DEFAULT, ARG1 obtained from the command
-!          line is parsed as follows to determine the input data file(s):
-!               a. Attempt to OPEN file ARG1 (full path + file name).
-!                  Look for the VSEQ NAMELIST to obtain nseq, nseq_select, and
-!                  extension array. If they exist and nseq>0, VMEC will run
-!                  sequentially using input determined from the array EXTENSION[i]
-!                  or input.EXTENSION[i]
-!               b. If the command argument is not a sequence NAMELIST, THEN the data file
-!                  ARG1 or input.ARG1 is READ directly, with NSEQ=1.
-!
-
-!
 !     PARSE input_file into path/input.ext
-!
       arg = command_arg(1)
       index_dat = INDEX(arg,'.')
       index_end = LEN_TRIM(arg)
@@ -119,7 +86,7 @@ C-----------------------------------------------
       END IF
 
       ictrl_flag =  restart_flag+readin_flag +timestep_flag
-     1           + output_flag +cleanup_flag     !Sets all flags
+     1           + output_flag +cleanup_flag     ! Sets all flags
 
       CALL second0 (timeon)
 
@@ -127,19 +94,17 @@ C-----------------------------------------------
       CALL reset_params
 
 !     READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
-      CALL vsetup (0)
-      CALL readin (input_file, 0, ier_flag, lscreen)
+      CALL vsetup
+      CALL readin (input_file, ier_flag, lscreen)
       IF (ier_flag .ne. 0) GOTO 1000
 
 !     COMPUTE NS-INVARIANT ARRAYS
       CALL fixaray
 
-
 !     COMPUTE INITIAL SOLUTION ON COARSE GRID
 !     IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
       igrid0 = 1
       ns_old = 0
-      IF (LEN_TRIM(reset_file_name) .ne. 0) igrid0 = multi_ns_grid
       WRITE (nthreed, 30)
       delt0r = delt
 
@@ -176,7 +141,7 @@ C-----------------------------------------------
 
          IF (ns_old .le. nsval)
      1      CALL initialize_radial(nsval, ns_old, delt0r,
-     2                             lscreen, reset_file_name)
+     2                             lscreen)
 
          ! *HERE* is the *ACTUAL* call to the equilibrium solver !
          CALL eqsolve (ier_flag, lscreen)

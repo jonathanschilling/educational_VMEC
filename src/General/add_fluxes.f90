@@ -1,7 +1,6 @@
       SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
       USE vmec_main
       USE realspace, ONLY: wint, guu, guv, chip, phip
-      USE precon2d, ONLY: ictrl_prec2d
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s

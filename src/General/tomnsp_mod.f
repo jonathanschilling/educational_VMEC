@@ -9,7 +9,6 @@
       USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs,
      1                       nscale
       USE fbal, ONLY: rru_fac, rzu_fac, frcc_fac, fzsc_fac
-      USE precon2d, ONLY: ictrl_prec2d
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -139,13 +138,6 @@
 !
 !     COMPUTE IOTA EVOLUTION EQUATION [STORED IN LMNSC(0,0) COMPONENT]
 !
-      IF (ictrl_prec2d.gt.0 .and. ncurr.eq.1) THEN
-         ni = 0+ioff;  mj = 0+joff
-         t1 = r0scale
-         DO jl = 2, ns
-            flsc(jl, ni, mj) = -t1*(buco(jl) - icurv(jl))
-         END DO
-      END IF
 
       DEALLOCATE (work1, tempr, tempz)
 

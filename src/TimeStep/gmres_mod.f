@@ -3,13 +3,12 @@
       IMPLICIT NONE
       INTEGER :: nfcn = 0
       INTEGER :: ier_flag_res
-      LOGICAL :: lqmr, lfirst
+      LOGICAL :: lfirst
 
 !
 !     nfcn :  number of calls to function (funct3d)
-!     lqmr :  logical, used by external programs to control calling these routines
 !
-      CONTAINS 
+      CONTAINS
 
       SUBROUTINE matvec (p, Ap, ndim)
       USE stel_kinds
@@ -38,21 +37,20 @@ C-----------------------------------------------
       CALL funct3d(lscreen, ier_flag_res)
       Ap = (gc(1:ndim) - gc0(1:ndim))/delta
 
-      IF (ier_flag_res .ne. 0) 
-     1  PRINT *,' IN 2D PRECONDITIONER MATVEC, IER_FLAG = ', 
+      IF (ier_flag_res .ne. 0)
+     1  PRINT *,' IN 2D PRECONDITIONER MATVEC, IER_FLAG = ',
      2          ier_flag_res
       nfcn = nfcn + 1
 
       END SUBROUTINE matvec
 
 
-      SUBROUTINE gmres_fun (ier_flag, itype)
+      SUBROUTINE gmres_fun (ier_flag)
       USE xstuff
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER, INTENT(in)  :: itype
       INTEGER, INTENT(out) :: ier_flag
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -61,7 +59,7 @@ C-----------------------------------------------
       INTEGER :: n, m
       INTEGER :: icntl(9), info(3)
       REAL(rprec) :: cntl(5)
-      CHARACTER(LEN=*), PARAMETER :: qmr_message = 
+      CHARACTER(LEN=*), PARAMETER :: qmr_message =
      1                              'Beginning GMRES iterations'
 C-----------------------------------------------
       EXTERNAL gmres
@@ -73,18 +71,6 @@ C-----------------------------------------------
       xcdot = gc
       xsave = xc
       n     = neqs
-
-!
-!     CHOOSE TYPE OF SOLVER
-!
-      IF (itype == 2) THEN
-         CALL gmresr_fun (ier_flag)
-         RETURN
-      ELSE IF (itype == 3) THEN
-         CALL qmr_fun
-         RETURN
-      END IF
-
 
       IF (lfirst) THEN
          lfirst = .false.
@@ -159,7 +145,7 @@ C-----------------------------------------------
       REAL(rprec) :: eps, resid
       REAL(rprec), ALLOCATABLE, DIMENSION(:) :: work, delx, brhs
       CHARACTER(len=3), PARAMETER :: stc="rel"
-      CHARACTER(LEN=*), PARAMETER :: qmr_message = 
+      CHARACTER(LEN=*), PARAMETER :: qmr_message =
      1                              'Beginning GMRESR iterations'
 C-----------------------------------------------
       IF (lfirst) THEN
@@ -213,7 +199,7 @@ C-----------------------------------------------
       INTEGER :: nty, ntyp, mt, mp, nt, np, jp, js
       REAL(rprec), DIMENSION(neqs,9) :: vecs
       REAL(rprec) :: tol = 1.E-3_dp
-      CHARACTER(LEN=*), PARAMETER :: qmr_message = 
+      CHARACTER(LEN=*), PARAMETER :: qmr_message =
      1                               'Beginning TF-QMR iterations'
       LOGICAL, PARAMETER :: ldump_fort33 = .false.
 C-----------------------------------------------
@@ -242,13 +228,13 @@ C-----------------------------------------------
          DO js = 1, ns
             ierr = ierr+1
             IF (ierr .gt. ndim) EXIT
-            IF (MOD(ierr,50).eq.0) PRINT '(2x,a,f8.2,a)', 'Progress: ', 
+            IF (MOD(ierr,50).eq.0) PRINT '(2x,a,f8.2,a)', 'Progress: ',
      1                             REAL(100*ierr)/ndim, ' %'
             IF (js.eq.ns .and. .not.lfreeb) CYCLE
             colx = 1;  colb = 3
             vecs(:,colx) = 0; vecs(ierr,colx) = 1
             CALL matvec(vecs(1,colx), vecs(1,colb), ndim)
-            WRITE (33, '(a,i4,2x,a,i5,2x,a,1p,e12.2)') "js' = ", js, 
+            WRITE (33, '(a,i4,2x,a,i5,2x,a,1p,e12.2)') "js' = ", js,
      1        ' ipert = ',ierr,' Ap[ipert,ipert] = ', vecs(ierr, colb)
             colx = 0
             DO ntyp = 1, 3*ntmax
@@ -257,7 +243,7 @@ C-----------------------------------------------
                      DO jp = 1, ns
                         colx = colx + 1
                         IF (colx .gt. ndim) CYCLE
-                        IF (colx.eq.ierr .or. 
+                        IF (colx.eq.ierr .or.
      1                     ABS(vecs(colx,colb)).lt.0.05_dp) CYCLE
                         WRITE (33, 123)'ntype = ', ntyp,' m = ',mp,
      1                  ' n = ', np,' js = ', jp,' iforce = ',colx,
@@ -270,7 +256,7 @@ C-----------------------------------------------
          END DO
          END DO
          END DO
- 
+
          PRINT '(/,2x,a,/)','Jacobian check in file FORT.33'
 
          END IF

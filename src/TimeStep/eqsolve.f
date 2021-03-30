@@ -3,11 +3,9 @@
       USE vmec_params, ONLY: ntmax, ns4, jac75_flag, norm_term_flag,
      1                       bad_jacobian_flag,
      2                       successful_term_flag
-      USE precon2d, ONLY: ScratchFile, lswap2disk, ictrl_prec2d
       USE directaccess, ONLY: DeleteDAFile
       USE realspace
       USE xstuff
-! Add below JDH 2010-08-03
       USE vmec_history
       IMPLICIT NONE
 C-----------------------------------------------
@@ -187,10 +185,6 @@ C-----------------------------------------------
          END IF
 
       END DO iter_loop
-
-!SPH (021711): V3FITA - SAVE STATE FOR RESTART IF PRECONDITION IS ON
-
-      IF (lSwap2Disk) CALL DeleteDAFile(ScratchFile)
 
       WRITE (nthreed, 60) w0*twopi**2, wdota, r0dot
 

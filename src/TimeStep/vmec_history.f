@@ -38,7 +38,7 @@
 !                             vmec_history_set. Used by V3FIT for reconstruction
 !                             iteration number
 !  vmh_save_i2   		  Integer stored value. Value set with subroutine
-!                             vmec_history_set. Used by V3FIT for jacobian 
+!                             vmec_history_set. Used by V3FIT for jacobian
 !                             calculation loop (reconstruction parameter number)
 !  vmh_print_flag         Logical to control printing
 !    Print Flag Usage - Now (2010-08-12)
@@ -59,7 +59,7 @@
       INTEGER            :: vmh_index = 0
       INTEGER            :: vmh_save_i1 = - 1
       INTEGER            :: vmh_save_i2 = - 1
-!      LOGICAL            :: vmh_print_flag = .TRUE.           
+!      LOGICAL            :: vmh_print_flag = .TRUE.
       LOGICAL            :: vmh_print_flag = .FALSE.
       REAL(rprec)        :: vmh_time_zero = 0
       PRIVATE vmh_dim, vmh_index, vmh_save_i1, vmh_save_i2,                    &
@@ -68,17 +68,16 @@
 !-------------------------------------------------------------------------------
 !  Module Variables - Integer arrays
 !-------------------------------------------------------------------------------
-!  vmh_iterc           VMEC's iterc 
-!  vmh_iter2m1         VMEC's iter2 - iter1 
-!  vmh_ns              VMEC's ns 
+!  vmh_iterc           VMEC's iterc
+!  vmh_iter2m1         VMEC's iter2 - iter1
+!  vmh_ns              VMEC's ns
 !  vmh_nvacskip        VMEC's nvacskip
 !  vmh_ivac            VMEC's ivac
-!  vmh_ictrl_prec2d    VMEC's ictrl_prec2d
 !  vmh_i1              V3FIT, reconstruction iteration number
 !  vmh_i2              V3FIT, jacobian calculation, reconstruction parameter #
 
       INTEGER, DIMENSION(vmh_dim) :: vmh_iterc, vmh_iter2m1, vmh_ns,           &
-     &    vmh_nvacskip, vmh_ivac, vmh_ictrl_prec2d, vmh_i1, vmh_i2
+     &    vmh_nvacskip, vmh_ivac, vmh_i1, vmh_i2
 
 !-------------------------------------------------------------------------------
 !  Module Variables - Real arrays
@@ -113,7 +112,6 @@
      &   fedge, ivac
       USE vmec_dim, ONLY: ns
       USE vmec_input, ONLY: nvacskip
-      USE precon2d, ONLY: ictrl_prec2d
 
 !-------------------------------------------------------------------------------
 !  ARGUMENT declaration
@@ -144,7 +142,6 @@
          vmh_ns(vmh_index) = ns
          vmh_nvacskip(vmh_index) = nvacskip
          vmh_ivac(vmh_index) = ivac
-         vmh_ictrl_prec2d(vmh_index) = ictrl_prec2d
          vmh_i1(vmh_index) = vmh_save_i1
          vmh_i2(vmh_index) = vmh_save_i2
          vmh_time_step(vmh_index) = time_step
@@ -177,9 +174,9 @@
       INTEGER  :: vmh_iou = 73
       INTEGER  :: istat, i
       CHARACTER(LEN=120) :: vmh_history_file_name
-      CHARACTER(LEN=80) :: vmh_format2 = 
+      CHARACTER(LEN=80) :: vmh_format2 =
      &   '(3(i5,1x),i4,1x,i3,1x,i5,1x,3(i3,1x),7(2x,es9.2))'
-      CHARACTER(LEN=150) :: vmh_header 
+      CHARACTER(LEN=150) :: vmh_header
 
 !-------------------------------------------------------------------------------
 !  Start of executable code
@@ -194,23 +191,23 @@
          WRITE(*,*) 'call to safe_open. istat = ', istat
          STOP ' (source file vmec_history.f)'
       ENDIF
-      
+
       WRITE(vmh_iou,*) 'History arrays are dimensioned ',vmh_dim
       WRITE(vmh_iou,*) 'Subroutine vmec_history_store was called ',            &
      &   vmh_index, ' times'
-      WRITE(vmh_iou,*) 
+      WRITE(vmh_iou,*)
 
       vmh_header = '    i iterc  2m1   ns nvac ivac ictrl_ i1 i2' //           &
      &  '    time_step  fsqr      fsqz       fsql      max(fsq)' //            &
      &  '    fedge      sys-time'
       WRITE(vmh_iou,*) TRIM(vmh_header)
-      WRITE(vmh_iou,*) '                      skip      prec2d'
+      WRITE(vmh_iou,*) '                      skip'
 
       DO i = 1,MIN(vmh_index,vmh_dim)
          WRITE(vmh_iou,vmh_format2)                                            &
      &      i, vmh_iterc(i), vmh_iter2m1(i), vmh_ns(i),                        &
      &      vmh_nvacskip(i), vmh_ivac(i),                                      &
-     &      vmh_ictrl_prec2d(i), vmh_i1(i), vmh_i2(i),                         &
+     &      vmh_i1(i), vmh_i2(i),                                              &
      &      vmh_time_step(i), vmh_fsqr(i), vmh_fsqz(i), vmh_fsql(i),           &
      &      MAX(vmh_fsqr(i),vmh_fsqz(i),vmh_fsql(i)),                          &
      &      vmh_fedge(i), vmh_time(i)
@@ -227,7 +224,7 @@
 
       SUBROUTINE vmec_history_set(i1,i2)
 
-!  Declare Arguments 
+!  Declare Arguments
       INTEGER, OPTIONAL :: i1, i2
 
 !  Start of executable code
@@ -246,7 +243,7 @@
 
       SUBROUTINE vmec_history_get(i1,i2)
 
-!  Declare Arguments 
+!  Declare Arguments
       INTEGER :: i1, i2
 
 !  Start of executable code
@@ -285,7 +282,7 @@
 ! SECTION III. Comments - version history
 !*******************************************************************************
 !
-!  JDH 07-12-2006. First version. 
+!  JDH 07-12-2006. First version.
 !  Module to store history information about a vmec run
 !
 !  07-24-2006 JDH

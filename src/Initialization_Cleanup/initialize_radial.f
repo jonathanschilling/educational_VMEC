@@ -1,5 +1,4 @@
-      SUBROUTINE initialize_radial(nsval, ns_old, delt0,
-     1                             lscreen, reset_file_name)
+      SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
       USE vmec_main
       USE vmec_params, ONLY: ntmax
       USE realspace
@@ -10,7 +9,6 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER, INTENT(in) :: nsval
       INTEGER, INTENT(inout) :: ns_old
-      CHARACTER(LEN=*), OPTIONAL :: reset_file_name
       REAL(rprec), INTENT(out) :: delt0
       LOGICAL, INTENT(in) :: lscreen
 C-----------------------------------------------
@@ -77,12 +75,6 @@ C-----------------------------------------------
 !     COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
 !
       CALL profil1d (xc, xcdot, lreset_internal)
-      IF (PRESENT(reset_file_name)) THEN
-         IF (LEN_TRIM(reset_file_name) .ne. 0)
-     1      CALL load_xc_from_wout(xc(1), xc(1+irzloff),
-     2      xc(1+2*irzloff), lreset_internal, ntor, mpol1, ns,
-     3      reset_file_name)
-      END IF
       CALL profil3d (xc(1), xc(1+irzloff), lreset_internal, linterp)
 
       irst = 1

@@ -3,11 +3,8 @@
       USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,
      1                       norm_term_flag
       USE xstuff
-      USE precon2d, ONLY: ictrl_prec2d, l_comp_prec2D, compute_blocks
       USE timer_sub
       USE gmres_mod
-!  Comment Out below JDH 2010-08-03
-!      USE vmec_history
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -23,57 +20,14 @@ C-----------------------------------------------
      1 "External calls to FUNCT3D: "
 !      REAL(rprec), PARAMETER :: r0dot_threshold = 5.E-06_dp
       REAL(rprec) :: fsq1, dtau, b1, bprec, fac
-      LOGICAL :: lfinal_mesh
       INTEGER :: lcount
       INTEGER, SAVE :: iter_on
 C-----------------------------------------------
-!     IF TROUBLE CONVERGING, TRY TO RECOMPUTE PRECONDITIONER ONCE MORE...
-!      IF (ictrl_prec2d.eq.1 .and. iter2.eq.(iter_on+40))
-!     1     ictrl_prec2d = 0
-
-      lfinal_mesh = (ns .eq. ns_maxval) .and. (ictrl_prec2d.eq.0)
-     1              .and. (itype_precon.ne.0)
 
       IF (iter2 .lt. 10) THEN
-         ictrl_prec2d = 0
-         lqmr = .false.
          iter_on = -1
-      ELSE IF (lfinal_mesh .and.
-     1        (fsqr+fsqz+fsql).lt.prec2d_threshold) THEN
-!     2                     .and. r0dot.lt.r0dot_threshold) THEN
-         lqmr = (itype_precon .ge. 2)
-         lfirst = (lqmr .and. iter_on.eq.-1)
+      end if
 
-!
-!        INITIATES 2D PRECONDITIONER CALCULATION
-!
-         IF (iter_on .eq. -1) THEN
-            IF (lqmr) THEN
-               nstep = 5
-               niter = iter2+100                   !Limit to 100 preconditioner steps
-            END IF
-            iter_on = iter2                     !Flag to monitor progress of preconditioner
-         ELSE
-            iter_on = iter2-11
-         END IF
-
-!         iter_on = iter2                     !Flag to monitor progress of preconditioner
-
-!SPH022111: ADD NEW CONTROL PARAMETER, l_comp_prec2D, TO FORCE RECALCULATION
-!           OF PRECONDITIONING BLOCKS IN V3FIT, FOR EXAMPLE
-         IF (lfirst .or. l_comp_prec2D) THEN
-            CALL compute_blocks (xc,xcdot,gc)
-            CALL funct3d(lscreen, ier_flag)
-         ENDIF
-         l_comp_prec2D = .FALSE.
-         ictrl_prec2d = 1
-         iter1 = iter2-1; fsq = fsqr1 + fsqz1 + fsql1
-         xc = xstore
-         IF (ANY(xstore .NE. xc))
-     1      STOP 'XSTORE != XC AFTER COMPUTE_BLOCKS!'
-         time_step = 0.50_dp
-         xcdot = 0
-      END IF
 !
 !     COMPUTE MHD FORCES
 !     MUST CALL funct3d EVEN WHEN IN 2D PRECONDITIONING MODE, SINCE
@@ -90,31 +44,10 @@ C-----------------------------------------------
      1         fsql.le.ftolv) THEN
          liter_flag = .false.
          ier_flag = successful_term_flag
-         IF (lqmr) THEN
-            WRITE (nthreed,'(/,2x,a,i5)') fcn_message,nfcn
-            WRITE (*,'(/,2x,a,i5)') fcn_message,nfcn
-         END IF
       ENDIF
 
       IF (ier_flag.ne.norm_term_flag .or. .not.liter_flag) RETURN
 
-      IF (lqmr) THEN
-         IF (irst .eq. 2) THEN
-!           TRAP IRST=2, CHANGE IN GSQRT SIGN, IF INITIAL PERT TOO LARGE
-            xc = xsave + 0.25_dp*(xc - xsave)
-            RETURN
-         END IF
-
-         CALL gmres_fun(ier_flag, itype_precon-1)
-
-         IF (lfreeb) RETURN
-         DO lcount = ns, 2*irzloff, ns
-            IF (xsave(lcount) .ne. xc(lcount))
-     1         PRINT *,' xsave = ',xsave(lcount),' != xc = ',
-     2         xc(lcount),' for lcount = ',lcount
-         END DO
-         RETURN
-      END IF
 
 !     COMPUTE DAMPING PARAMETER (DTAU) AND EVOLVE
 !     R, Z, AND LAMBDA ARRAYS IN FOURIER SPACE
@@ -123,11 +56,7 @@ C-----------------------------------------------
 
       IF (iter2 .eq. iter1) otau(:ndamp) = cp15/time_step
 
-      IF (ictrl_prec2d .eq. 0) THEN
-         bprec = 1
-      ELSE
-         bprec = 3
-      END IF
+      bprec = 1
 
       IF (iter2.gt.iter1 .and. fsq1.ne.zero)
      1    dtau = MIN(ABS(LOG(fsq1/fsq)), bprec*cp15)

@@ -1,13 +1,9 @@
       SUBROUTINE reset_params
-      USE precon2d, ONLY: ictrl_prec2d
       USE vmec_main, ONLY: iequi, ivac, ftolv, fsqr, fsqz, fsq,
      1                     res0, delt0r, iter1, iter2, ijacob, irst
       USE vmec_input, ONLY: delt
       USE timer_sub, ONLY: timer
       IMPLICIT NONE
-
-!     2d preconditioner
-      ictrl_prec2d = 0
 
       iequi = 0
       ivac  = -1

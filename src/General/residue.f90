@@ -4,7 +4,6 @@
                              meven, modd, ntmax, signgs
       USE realspace, ONLY: phip
       USE xstuff
-      USE precon2d
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -43,10 +42,6 @@
       IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs))
       IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
 
-
-!     PRECONDITIONER MUST BE CALCULATED USING RAW (UNPRECONDITIONED) FORCES
-      IF (ictrl_prec2d .GE. 2) RETURN
-
 !
 !     COMPUTE INVARIANT RESIDUALS
 !
@@ -68,26 +63,7 @@
 !
 !     PERFORM PRECONDITIONING AND COMPUTE RESIDUES
 !
-      IF (ictrl_prec2d .EQ. 1) THEN
 
-         CALL block_precond(gc)
-
-         IF (.not.lfreeb .and. ANY(gcr(ns,:,:,:) .ne. zero))            &
-            STOP 'gcr(ns) != 0 for fixed boundary in residue'
-         IF (.not.lfreeb .and. ANY(gcz(ns,:,:,:) .ne. zero))            &
-            STOP 'gcz(ns) != 0 for fixed boundary in residue'
-         IF (ANY(gcl(:,1:,0,zsc) .ne. zero))                            &
-            STOP 'gcl(m=0,n>0,sc) != 0 in residue'
-         IF (lthreed) THEN
-            IF (ANY(gcl(:,n0,:,zcs) .ne. zero))                         &
-            STOP 'gcl(n=0,m,cs) != 0 in residue'
-         END IF
-
-         fsqr1 = SUM(gcr*gcr)
-         fsqz1 = SUM(gcz*gcz)
-         fsql1 = SUM(gcl*gcl)
-
-      ELSE
 !        m = 1 constraint scaling
          IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
          IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
@@ -104,7 +80,6 @@
          fsql1 = hs*SUM(gcl*gcl)
 !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-      ENDIF
 
       END SUBROUTINE residue
 

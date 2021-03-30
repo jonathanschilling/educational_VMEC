@@ -1,14 +1,10 @@
-      SUBROUTINE vsetup (iseq_count)
+      SUBROUTINE vsetup ()
       USE vmec_main
       USE vacmod
       USE realspace
       USE mgrid_mod, ONLY: nbcoil_max, nlim_max, nextcur, mgrid_mode
       USE gmres_mod, ONLY: nfcn
       IMPLICIT NONE
-C-----------------------------------------------
-C   D u m m y   A r g u m e n t s
-C-----------------------------------------------
-      INTEGER, INTENT(in) :: iseq_count
 C-----------------------------------------------
 !
 !     Reset default initial values

@@ -6,7 +6,6 @@
       USE vforces
       USE xstuff
       USE timer_sub
-      USE precon2d, ONLY: ictrl_prec2d, lHess_exact
       USE vmec_utils, ONLY: cyl2flx
       USE vparams, ONLY: twopi
       USE totzsp_mod
@@ -58,30 +57,14 @@
 
 !        SUM SYMMETRIC, ANTISYMMETRIC PIECES APPROPRIATELY
 !        TO GET R, Z, L, (AND RCON, ZCON) ON FULL RANGE OF u (0 to 2*pi)
-         IF (ictrl_prec2d .lt. 2)
-     1   CALL symrzl (r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon, armn,
+
+         CALL symrzl (r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon, armn,
      2   brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2)
 
       ENDIF
 
       CALL second0 (tfftoff)
-      IF (ictrl_prec2d .LE. 1) timer(tfft) =
-     1                         timer(tfft) + (tfftoff - tffton)
-!
-!     IN HESSIAN LOOP, ONLY COMPUTE PERTURBATIONS TO R, Z, AND L FOR A SINGLE (m,n,ntype)
-!
-      IF (ictrl_prec2d .GE. 2) THEN
-         xcdot(:neqs2) = xcdot(:neqs2)*scalxc(:neqs2)
-         CALL totzsps_hess (xcdot, r1, ru, rv, z1, zu, zv, lu, lv,
-     1                      rcon, zcon)
-         IF (lasym) THEN
-            CALL totzspa_hess (xcdot, armn, brmn, extra3, azmn, bzmn,
-     1                         extra4, blmn, clmn, extra1, extra2)
-            CALL symrzl (r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon,
-     2                   armn, brmn, extra3, azmn, bzmn, extra4, blmn,
-     3                   clmn, extra1,extra2)
-         END IF
-      END IF
+      timer(tfft) = timer(tfft) + (tfftoff - tffton)
 
       l0pi = ns*(1 + nzeta*(ntheta2 - 1))        !u = pi, v = 0, js = ns
       r00 = r1(1,0)
@@ -126,8 +109,7 @@
       CALL bcovar (lu, lv, xc(1+2*irzloff+mns*(zsc-1)))    !FIX THIS: last arg used elsewhere!
 
       CALL second0 (tbcovoff)
-      IF (ictrl_prec2d .le. 1) timer(tbcov) = timer(tbcov)
-     1                                      + (tbcovoff - tbcovon)
+      timer(tbcov) = timer(tbcov) + (tbcovoff - tbcovon)
 
 !     COMPUTE VACUUM MAGNETIC PRESSURE AT PLASMA EDGE
 !     NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR
@@ -137,16 +119,12 @@
 !     TO THE SCALING LAW  R*BTOR .EQ. PHIEDGE/(R1 * Z1).
 
       IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
-         IF (ictrl_prec2d.le.1 .and. (fsqr + fsqz).le.1.e-3_dp)
+         IF ((fsqr + fsqz).le.1.e-3_dp)
      1      ivac = ivac+1   !decreased from e-1 to e-3 - sph12/04
          IF (nvskip0 .eq. 0) nvskip0 = MAX(1, nvacskip)
          IF (ivac .ge. 0) THEN
 !           IF INITIALLY ON, MUST TURN OFF rcon0, zcon0 SLOWLY
-            IF (ictrl_prec2d .eq. 2) THEN
-               rcon0 = 0;  zcon0 = 0
-            ELSE IF (ictrl_prec2d .eq. 0) THEN
-               rcon0 = 0.9_dp*rcon0;  zcon0 = 0.9_dp*zcon0
-            END IF
+            rcon0 = 0.9_dp*rcon0;  zcon0 = 0.9_dp*zcon0
             CALL second0 (tvacon)
             ivacskip = MOD(iter2-iter1,nvacskip)
             IF (ivac .le. 2) ivacskip = 0
@@ -157,33 +135,12 @@
                nvacskip = MAX(nvacskip, nvskip0)
             END IF
 
-!
-!           NORMALLY, WHEN COMPUTING THE HESSIAN, IT IS SUFFICIENT TO
-!           COMPUTE THE VARIATIONS IN THE "EXACT" SOLUTION, NOT THE ENTIRE
-!           FIELD PERIOD SUM. THUS, FOR ictrl_prec2d >= 2, SET ivacskip = 1
-!           FOR ictrl_prec2d = 1 (RUN WITH PRECONDITIONER APPLIED), MUST
-!           COMPUTE EXACT VACUUM RESPONSE NOW.
-!
-!           THE EXCEPTION TO THIS IS IF WE ARE TESTING THE HESSIAN (lHess_exact=T),
-!           THEN MUST USE FULL VACUUM CALCULATION TO COMPUTE IT (ivacskip=0)
-!
-            IF (lHess_exact) THEN
-               IF (ictrl_prec2d .ge. 1) ivacskip = 0       !Accurate Hessian
-            ELSE IF (ictrl_prec2d .ne. 0) THEN
-!               IF (ictrl_prec2d .ge. 2) ivacskip = 1
-!               IF (ictrl_prec2d .eq. 1) ivacskip = 0
-               IF (ictrl_prec2d .le. 2) ivacskip = 0
-               IF (ictrl_prec2d .eq. 3) ivacskip = 1       !Fast vacuum calculation used to compute Hessian
-            END IF
-
 !           NOTE: gc contains correct edge values of r,z,l arrays
 !                 convert_sym, convert_asym have been applied to m=1 modes
             CALL convert (rmnc, zmns, lmns, rmns, zmnc, lmnc, gc, ns)
-!           DO NOT UPDATE THIS WHEN USING PRECONDITIONER: BREAKS TRI-DIAGONAL STRUCTURE
-            IF (ictrl_prec2d .eq. 0) THEN
-               raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
-               zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
-            END IF
+
+            raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
+            zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
 
             CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,
      1                   ctor, rbtor, wint, ns, ivacskip, ivac, mnmax,
@@ -234,8 +191,7 @@
                bsqsav(:nznt,2) = bsqvac(:nznt)
             ENDIF
             CALL second0 (tvacoff)
-            IF (ictrl_prec2d .le. 1)
-     1         timer(tvac) = timer(tvac) + (tvacoff - tvacon)
+            timer(tvac) = timer(tvac) + (tvacoff - tvacon)
          ENDIF
       ENDIF
 
@@ -257,9 +213,6 @@
       CALL forces
 
 !
-!     FFT TEST
-!
-!
 !     SYMMETRIZE FORCES (in u-v space): NOTE - gc IS SMALL BY FACTOR 2
 !     IF lasym=T
 !
@@ -271,8 +224,7 @@
       END IF
 
       CALL second0 (tforoff)
-      IF (ictrl_prec2d .le. 1) timer(tfor) = timer(tfor)
-     1                                     + (tforoff - tforon)
+      timer(tfor) = timer(tfor) + (tforoff - tforon)
 !
 !     FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
 !
@@ -284,8 +236,7 @@
      1                         extra3, extra4, extra1, extra2)
 
       CALL second0 (tfftoff)
-      IF (ictrl_prec2d .le. 1) timer(tffi) = timer(tffi)
-     1                                     + (tfftoff - tffton)
+      timer(tffi) = timer(tffi) + (tfftoff - tffton)
 
 !================================================================
 !
@@ -301,13 +252,11 @@
      1    irst = 4
 
       CALL second0 (tresoff)
-      IF (ictrl_prec2d .le. 1) timer(tres) = timer(tres)
-     1                                     + (tresoff - treson)
+      timer(tres) = timer(tres) + (tresoff - treson)
 
  100  CONTINUE
 
       CALL second0 (tfunoff)
-      IF (ictrl_prec2d .le. 1) timer(tfun) = timer(tfun)
-     1                                     + (tfunoff - tfunon)
+      timer(tfun) = timer(tfun) + (tfunoff - tfunon)
 
       END SUBROUTINE funct3d

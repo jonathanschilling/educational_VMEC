@@ -13,7 +13,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/heading.f
 	${CMAKE_CURRENT_SOURCE_DIR}/init_geometry.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/initialize_radial.f
-	${CMAKE_CURRENT_SOURCE_DIR}/load_xc_from_wout.f
 	${CMAKE_CURRENT_SOURCE_DIR}/magnetic_fluxes.f
 	${CMAKE_CURRENT_SOURCE_DIR}/open_output_files.f
 	${CMAKE_CURRENT_SOURCE_DIR}/profil1d.f

@@ -20,7 +20,6 @@ C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
       INTEGER :: istat, loc_ier_flag
-      LOGICAL, PARAMETER :: lreset_xc = .false.
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -89,7 +88,6 @@ C-----------------------------------------------
          timer(teqf) = timer(teqf) + teqfoff - teqfon
       END IF
 
-!      CALL free_mem_precon
 !
 !     Call WROUT to write output or error message if lwrite = false
 !
@@ -98,8 +96,7 @@ C-----------------------------------------------
          CALL second0 (twouton)
 
          CALL wrout (bzmn_o, azmn_o, clmn, blmn, crmn_o, czmn_e,
-     1        crmn_e, xsave, gc, loc_ier_flag, lwrite
-     3        )
+     1        crmn_e, xsave, gc, loc_ier_flag, lwrite)
          CALL second0 (twoutoff)
 
          timer(twout) = timer(twout) + twoutoff - twouton
@@ -125,7 +122,6 @@ C-----------------------------------------------
 !     TESTING READ_WOUT MODULE WRITING ROUTINES
 !
       IF (ALLOCATED(br_out)) THEN
-!        IF (lscreen) CALL TestWout(xc, br_out, bz_out, crmn_e, czmn_e)
          DEALLOCATE (br_out, bz_out)
       END IF
 
@@ -153,12 +149,5 @@ C-----------------------------------------------
      2  sinu, cosu, sinv, cosv, sinui, cosui, cmns, csign, sinu1,
      3  cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
       IF (istat1 .ne. 0) PRINT *, Warning // "#3"
-
-      CALL free_mem_funct3d
-      CALL free_mem_ns (lreset_xc)
-      CALL free_mem_nunv
-      CALL free_persistent_mem
-
-      CALL close_all_files
 
       END SUBROUTINE fileout

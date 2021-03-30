@@ -159,9 +159,6 @@ C-----------------------------------------------
 
       chi = twopi*chi1
 
-!	WRITE (36, 201) (i, phi1(i), chi1(i), iotas(i), i=1, ns)
-!201   FORMAT (i4, 1p,3e14.6)
-
       CALL calc_fbal(bsubu, bsubv)
 
       bucof(1) = 0
@@ -210,7 +207,7 @@ C-----------------------------------------------
 !
 !     MAKE SURE WOUT FILE DOES NOT REQUIRE ANY STUFF COMPUTED BELOW....
 !
-!      IF (ier_flag .ne. successful_term_flag) RETURN
+
 
 !
 !     Calculate mean (toroidally averaged) poloidal cross section area & toroidal flux
@@ -261,7 +258,6 @@ C-----------------------------------------------
       d_of_kappa = surf_area_p * aminor_p / ( 2 * volume_p)
       kappa_p = 1 + (pi * pi / 8) * (d_of_kappa ** 2 + SQRT                    &
      &      (ABS(d_of_kappa ** 4 - 1)) -1)
-!       vvc_kappa_p = kappa_p ! Save result for v3fit.
 
       aminr1 = 2*volume_p/surf_area_p
 
@@ -603,7 +599,6 @@ C-----------------------------------------------
       fgeo = rshaf/rcen
 
       smaleli = factor*sumbpol
-!       vvc_smaleli = smaleli ! Save result for v3fit.
       betai   = 2*factor*sump
       musubi  = vnorm*factor*musubi
       lambda = p5*smaleli + betai

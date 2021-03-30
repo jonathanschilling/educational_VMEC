@@ -2,7 +2,7 @@
       SUBROUTINE forces
       USE vmec_main, p5 => cp5
       USE realspace
-      USE vforces, ru12 => azmn_e, zu12 => armn_e, 
+      USE vforces, ru12 => azmn_e, zu12 => armn_e,
      1             azmn_e => azmn_e, armn_e => armn_e,
      2             lv_e => crmn_e, lu_e => czmn_e, lu_o => czmn_o,
      3             crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
@@ -15,7 +15,7 @@ C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER :: l, ndim
-      REAL(rprec), DIMENSION(:), POINTER :: 
+      REAL(rprec), DIMENSION(:), POINTER ::
      1    bsqr, gvvs, guvs, guus
 C-----------------------------------------------
       ndim = 1+nrzt
@@ -89,7 +89,6 @@ C-----------------------------------------------
       lv_e(1:ndim) = lv_e(1:ndim)*shalf(1:ndim)
       lu_o(1:ndim) = dshalfds*lu_e(1:ndim)
 
-!DIR$ IVDEP
       DO l = 1, nrzt
          armn_o(l) = armn_o(l+1) - armn_o(l) - zu(l,0)*bsqr(l)
      1             + p5*(lv_e(l) + lv_e(l+1))
@@ -111,31 +110,30 @@ C-----------------------------------------------
      1             + guu(:nrzt)*zu(:nrzt,1) + guus(:nrzt)*zu(:nrzt,0))
 
       IF (lthreed) THEN
-!DIR$ IVDEP
          DO l = 1, nrzt
             guv(l)  = p5*(guv(l) + guv(l+1))
             guvs(l) = p5*(guvs(l) + guvs(l+1))
          END DO
 
-         brmn_e(:nrzt) = brmn_e(:nrzt) 
+         brmn_e(:nrzt) = brmn_e(:nrzt)
      1          - (guv(:nrzt)*rv(:nrzt,0) + guvs(:nrzt)*rv(:nrzt,1))
-         bzmn_e(:nrzt) = bzmn_e(:nrzt) 
+         bzmn_e(:nrzt) = bzmn_e(:nrzt)
      1          - (guv(:nrzt)*zv(:nrzt,0) + guvs(:nrzt)*zv(:nrzt,1))
-         crmn_e(:nrzt) = guv(:nrzt) *ru(:nrzt,0) 
+         crmn_e(:nrzt) = guv(:nrzt) *ru(:nrzt,0)
      1                 + gvv(:nrzt) *rv(:nrzt,0)
      2          + gvvs(:nrzt)*rv(:nrzt,1) + guvs(:nrzt)*ru(:nrzt,1)
-         czmn_e(:nrzt) = guv(:nrzt) *zu(:nrzt,0) 
+         czmn_e(:nrzt) = guv(:nrzt) *zu(:nrzt,0)
      1                 + gvv(:nrzt) *zv(:nrzt,0)
      2          + gvvs(:nrzt)*zv(:nrzt,1) + guvs(:nrzt)*zu(:nrzt,1)
          guv(:nrzt) = guv(:nrzt) *sqrts(:nrzt)*sqrts(:nrzt)
-         brmn_o(:nrzt) = brmn_o(:nrzt) 
+         brmn_o(:nrzt) = brmn_o(:nrzt)
      1          - (guvs(:nrzt)*rv(:nrzt,0) + guv(:nrzt)*rv(:nrzt,1))
-         bzmn_o(:nrzt) = bzmn_o(:nrzt) 
+         bzmn_o(:nrzt) = bzmn_o(:nrzt)
      1          - (guvs(:nrzt)*zv(:nrzt,0) + guv(:nrzt)*zv(:nrzt,1))
-         crmn_o(:nrzt) = guvs(:nrzt)*ru(:nrzt,0) 
+         crmn_o(:nrzt) = guvs(:nrzt)*ru(:nrzt,0)
      1                 + gvvs(:nrzt)*rv(:nrzt,0)
      2          + bsqr(:nrzt)*rv(:nrzt,1) + guv(:nrzt) *ru(:nrzt,1)
-         czmn_o(:nrzt) = guvs(:nrzt)*zu(:nrzt,0) 
+         czmn_o(:nrzt) = guvs(:nrzt)*zu(:nrzt,0)
      1                 + gvvs(:nrzt)*zv(:nrzt,0)
      2          + bsqr(:nrzt)*zv(:nrzt,1) + guv(:nrzt) *zu(:nrzt,1)
       ENDIF
@@ -143,13 +141,13 @@ C-----------------------------------------------
 !     ASSIGN EDGE FORCES (JS = NS) FOR FREE BOUNDARY CALCULATION
 !
       IF (ivac .ge. 1) THEN
-         armn_e(ns:nrzt:ns) = armn_e(ns:nrzt:ns) 
+         armn_e(ns:nrzt:ns) = armn_e(ns:nrzt:ns)
      1                      + zu0(ns:nrzt:ns)*rbsq(1:nznt)
-         armn_o(ns:nrzt:ns) = armn_o(ns:nrzt:ns) 
+         armn_o(ns:nrzt:ns) = armn_o(ns:nrzt:ns)
      1                      + zu0(ns:nrzt:ns)*rbsq(1:nznt)
-         azmn_e(ns:nrzt:ns) = azmn_e(ns:nrzt:ns) 
+         azmn_e(ns:nrzt:ns) = azmn_e(ns:nrzt:ns)
      1                      - ru0(ns:nrzt:ns)*rbsq(1:nznt)
-         azmn_o(ns:nrzt:ns) = azmn_o(ns:nrzt:ns) 
+         azmn_o(ns:nrzt:ns) = azmn_o(ns:nrzt:ns)
      1                      - ru0(ns:nrzt:ns)*rbsq(1:nznt)
 !         fz00_edge = SUM(wint(ns:nrzt:ns)*ru0(ns:nrzt:ns)*rbsq(1:nznt))
       ENDIF

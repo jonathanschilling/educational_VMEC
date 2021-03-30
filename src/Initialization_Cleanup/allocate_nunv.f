@@ -25,7 +25,5 @@ C-----------------------------------------------
      2          bsqsav(nznt,3), potvac(2*mnpd), raxis_nestor(nv),
      3          zaxis_nestor(nv), stat=istat1)
          IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nunv'
-         !!!!! SAL ADDITION !!!!!
-         !!!!!!!!!!!!!!!!!!!!!!!!
 
       END SUBROUTINE allocate_nunv

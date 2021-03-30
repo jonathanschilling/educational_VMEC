@@ -53,7 +53,6 @@ C-----------------------------------------------
       IF (lasym) dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
 
       mscale(0) = 1;  nscale(0) = 1
-!     mscale(0) = osqrt2;  nscale(0) = osqrt2    !versions < 6.9, incorrectly used osqrt2
 
       mscale(1:mnyq) = mscale(0)/osqrt2
       nscale(1:nnyq) = nscale(0)/osqrt2

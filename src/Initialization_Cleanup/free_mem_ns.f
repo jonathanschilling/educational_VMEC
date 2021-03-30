@@ -37,10 +37,6 @@ C-----------------------------------------------
      5     chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,
      6     presgrad, r01, z01, bdamp, stat=istat8)
 
-!       IF (ALLOCATED(rmidx))
-!      1  DEALLOCATE (rmidx,hmidx,wmidx,qmidx,tenmidx,ymidx,y2midx,
-!      2     stat=istat9)
-
       IF (ALLOCATED(gc))
      1  DEALLOCATE (gc, xsave, xstore, xcdot, stat=istat10)
       IF (ALLOCATED(xc) .and. lreset) DEALLOCATE (xc, scalxc)

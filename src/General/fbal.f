@@ -30,7 +30,6 @@
       DO js = 2, ns1
          jcurv(js) = (signgs*ohs)*(buco(js+1) - buco(js))
          jcuru(js) =-(signgs*ohs)*(bvco(js+1) - bvco(js))
-!FOR RFP vpphi(js) = (vp(js+1)/phip(js+1) + vp(js)/phip(js))/2
          vpphi(js) = (vp(js+1) + vp(js))/2
          presgrad(js) = (pres(js+1) - pres(js))*ohs
          equif(js) = (-phipf(js)*jcuru(js) + chipf(js)*jcurv(js))

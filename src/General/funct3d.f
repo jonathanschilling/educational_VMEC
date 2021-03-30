@@ -76,8 +76,8 @@
 !
       rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt)
       zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
-      ru0(:nrzt) = ru(:nrzt,0) + ru(:nrzt,1)*sqrts(:nrzt)
-      zu0(:nrzt) = zu(:nrzt,0) + zu(:nrzt,1)*sqrts(:nrzt)
+      ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)
+      zu0(:nrzt)    = zu(:nrzt,0)   + zu(:nrzt,1)*sqrts(:nrzt)
 
 !
 !     COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
@@ -89,8 +89,6 @@
 !     SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
 !
       IF (iter2.eq.iter1 .and. ivac.le.0) THEN
-!!         rcon0(1:nrzt) = rcon(1:nrzt,0)
-!!         zcon0(1:nrzt) = zcon(1:nrzt,0)
          DO l = 1, ns
             rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
             zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
@@ -122,13 +120,18 @@
       IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
          IF ((fsqr + fsqz).le.1.e-3_dp)
      1      ivac = ivac+1   !decreased from e-1 to e-3 - sph12/04
+            ! I guess this is where the vacuum pressure suddenly gets turned on ?
          IF (nvskip0 .eq. 0) nvskip0 = MAX(1, nvacskip)
          IF (ivac .ge. 0) THEN
 !           IF INITIALLY ON, MUST TURN OFF rcon0, zcon0 SLOWLY
             rcon0 = 0.9_dp*rcon0;  zcon0 = 0.9_dp*zcon0
             CALL second0 (tvacon)
             ivacskip = MOD(iter2-iter1,nvacskip)
-            IF (ivac .le. 2) ivacskip = 0
+            IF (ivac .le. 2) then
+               ivacskip = 0
+               ! vacuum pressure not turned on yet (?)
+               ! and do full vacuum calc on every iteration
+            end if
 
 !           EXTEND NVACSKIP AS EQUILIBRIUM CONVERGES
             IF (ivacskip .eq. 0) THEN
@@ -168,8 +171,6 @@
      1         presf_ns = (pmass(1._dp)/presf_ns) * pres(ns)
 
             lk = 0
-!            gcon(:nrzt) = r1(:nrzt,0)+sqrts(:nrzt)*r1(:nrzt,1)
-!            gcon(1+nrzt) = 0
             DO l = ns, nrzt, ns
                lk = lk + 1
                bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
@@ -178,14 +179,6 @@
                rbsq(lk) = gcon(l)*(r1(l,0) + r1(l,1))*ohs
                dbsq(lk) = ABS(gcon(l)-bsqsav(lk,3))
             END DO
-!
-!           COMPUTE m=0,n=0 EDGE "pedestals"
-!
-!!            alphaR = hs*hs*ard(ns,1)
-!!            IF (alphaR .ne. zero) alphaR =
-!!     1         hs*SUM(wint(ns:nrzt:ns)*zu0(ns:nrzt:ns)*rbsq)/alphaR
-
-!!            PRINT *,' alphaR/r1(ns) = ', alphaR/gcon(ns)
 
             IF (ivac .eq. 1) THEN
                bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns)
@@ -248,7 +241,7 @@
 
       gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
       CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
-!     Force new initial axis guess IF ALLOWED (l_moveaxis=T)
+
       IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
      1    irst = 4
 

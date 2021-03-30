@@ -2,7 +2,6 @@
       SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
       USE vmec_main
       USE vmec_params
-c       USE vspline, ONLY: sknots, pknots, hstark, hthom
       USE realspace
       USE xstuff
       IMPLICIT NONE
@@ -81,7 +80,6 @@ c       USE vspline, ONLY: sknots, pknots, hstark, hthom
 !     FROM SCALED BOUNDARY VALUES, AND SCALXC ARRAY
 !     (1/SQRTS FACTOR FOR ODD M VALUES)
 !
-
       DO js = 1, ns
          si = sqrts(js)*sqrts(js)
          sm0 = one - si

@@ -18,7 +18,6 @@ C-----------------------------------------------
          DO i = UBOUND(tf,1), LBOUND(tf,1), -1
             torflux_deriv = x*torflux_deriv + i*tf(i)
          END DO
-!        torflux_deriv = 1
 
       END FUNCTION torflux_deriv
 
@@ -38,7 +37,6 @@ C-----------------------------------------------
          tf = torflux(x)
          tf = MIN(tf, 1.0_dp)
          polflux_deriv = piota(tf)*torflux_deriv(x)
-!        polflux_deriv = piota(x)*torflux_deriv(x)
 
       END FUNCTION polflux_deriv
 
@@ -66,7 +64,6 @@ C-----------------------------------------------
 
       FUNCTION polflux (x)
       USE stel_kinds
-!     USE vmec_input, ONLY: af => achi
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------

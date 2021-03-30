@@ -5,7 +5,6 @@
       USE realspace
       USE vforces
       USE xstuff
-!       USE csplinx
       USE mgrid_mod
       USE fbal
       IMPLICIT NONE
@@ -19,14 +18,12 @@ C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER :: ndim, nsp1, istat1
       REAL(rprec), DIMENSION(:), ALLOCATABLE :: xc_old, scalxc_old
-      REAL(rprec) delr_mse
 C-----------------------------------------------
 !
 !     FIRST STORE COARSE-MESH XC FOR INTERPOLATION
 !
       ndim  = 1 + nrzt
       nsp1  = 1 + ns
-      delr_mse = zero
 
 !
 !     Save old xc, scalxc for possible interpolation or IF iterations restarted on same mesh...
@@ -76,10 +73,6 @@ C-----------------------------------------------
 
       iotaf(nsp1) = 0
 
-!       ALLOCATE( rmidx(2*ns), hmidx(2*ns), wmidx(2*ns), qmidx(2*ns),
-!      1          tenmidx(2*ns), ymidx(2*ns), y2midx(2*ns), stat=istat1)
-!       IF (istat1.ne.0) STOP 'allocation error #8 in allocate_ns'
-
       ALLOCATE (gc(neqs2), xcdot(neqs2), xsave(neqs2),
      1          xstore(neqs2), stat=istat1)
       xstore = zero
@@ -96,9 +89,6 @@ C-----------------------------------------------
          scalxc(1:neqs2_old) = scalxc_old(1:neqs2_old)
          DEALLOCATE (xc_old, scalxc_old)
       END IF
-
-
-      xc(neqs2) = delr_mse
 
 !
 !     Allocate nrzt-dependent arrays (persistent) for funct3d

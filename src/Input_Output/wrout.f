@@ -406,20 +406,6 @@
 !     ELIMINATE THESE EVENTUALLY: DON'T NEED THEM - CAN COMPUTE FROM GSQRT
       CALL cdf_define(nwout, vn_bsupumnc, bsupumnc, dimname=r3dim)
       CALL cdf_define(nwout, vn_bsupvmnc, bsupvmnc, dimname=r3dim)
-!     IF (lfreeb) THEN
-!         CALL cdf_define(nwout, vn_rbc, rbc,
-!    1                dimname=(/'n_mode','m_mode'/))
-!         CALL cdf_setatt(nwout, vn_rbc, ln_rbc, units='m')
-!         CALL cdf_define(nwout, vn_zbs, zbs,
-!    1                dimname=(/'n_mode','m_mode'/))
-!         CALL cdf_setatt(nwout, vn_zbs, ln_zbs, units='m')
-!        IF (lasym) THEN
-!           CALL cdf_define(nwout, vn_rbs, rbs,
-!    1                dimname=(/'n_mode','m_mode'/))
-!           CALL cdf_define(nwout, vn_zbc, zbc,
-!    1                dimname=(/'n_mode','m_mode'/))
-!        END IF
-!     END IF
 
       IF (.NOT. lasym) GO TO 800
 
@@ -519,7 +505,6 @@
 !     MUST CONVERT m=1 MODES... FROM INTERNAL TO PHYSICAL FORM
 !     Extrapolation of m=0 Lambda (cs) modes, which are not evolved at j=1, done in CONVERT
 !
-
       IF (lthreed) CALL convert_sym  (xfinal(1+mns*(rss-1)),
      1                                xfinal(1+irzloff+mns*(zcs-1)))
       IF (lasym)   CALL convert_asym (xfinal(1+mns*(rsc-1)),
@@ -599,11 +584,6 @@
      5                   bsupva, bsubsa
      8                    )
       END IF
-
-!         DO js = 2, ns
-!            WRITE (200, *) 'JS: ', js, 'BSUBU, BSUBV'
-!            WRITE (200, '(1p,6e12.4)') bsubu(js,:), bsubv(js,:)
-!         END DO
 
       RADIUS2: DO js = 2, ns
          gmn = 0

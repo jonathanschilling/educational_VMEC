@@ -40,13 +40,11 @@
 
  100  CONTINUE
 
-!     CHANGE THIS FOR lRFP = T  (solve for phips?)
       IF (ncurr .eq. 0) THEN
          chips = iotas*phips
       ELSE IF (.not.lcurrent) THEN
          WHERE (phips .ne. zero) iotas = chips/phips
       END IF
-!!      IF (.not.lcurrent) chips = iotas*phips
 
       DO js = 2, ns
          chip(js:nrzt:ns) = chips(js)
@@ -54,7 +52,6 @@
 
       chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2
       chipf(ns)    = 2*chips(ns)-chips(ns1)
-
 
 !     Do not compute iota too near origin
          iotaf(1)  = c1p5*iotas(2) - p5*iotas(3)               !zero gradient near axis

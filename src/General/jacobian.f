@@ -4,7 +4,7 @@
       USE vmec_params, ONLY: meven, modd
       USE realspace
       USE vmec_dim, ONLY: ns
-      USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e, 
+      USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e,
      1             rs => bzmn_e, zs => brmn_e, tau => azmn_o  !,z12 => blmn_e,
       IMPLICIT NONE
 !-----------------------------------------------
@@ -36,7 +36,6 @@
 !
       irst = 1
 
-CDIR$ IVDEP
       DO l = 2,nrzt
         ru12(l) = p5*(ru(l,meven) + ru(l-1,meven) +
      1      shalf(l)*(ru(l,modd)  + ru(l-1,modd)))
@@ -49,8 +48,6 @@ CDIR$ IVDEP
      2  (ru(l,meven)*z1(l,modd) + ru(l-1,meven)*z1(l-1,modd))/shalf(l))
       ENDDO
 
-
-CDIR$ IVDEP
       DO l = 2,nrzt
         zu12(l) = p5*(zu(l,meven) + zu(l-1,meven) +
      1      shalf(l)*(zu(l,modd)  + zu(l-1,modd)))

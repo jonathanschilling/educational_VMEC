@@ -14,7 +14,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/printout.f
 	${CMAKE_CURRENT_SOURCE_DIR}/readin.f
 	${CMAKE_CURRENT_SOURCE_DIR}/read_indata.f
-	${CMAKE_CURRENT_SOURCE_DIR}/TestWout.f
 	${CMAKE_CURRENT_SOURCE_DIR}/timer_sub.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vmec_io.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vmercier.f

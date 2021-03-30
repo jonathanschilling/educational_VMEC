@@ -115,10 +115,6 @@
       nu2 = nu/2 + 1
       nu3 = ntheta3
       nuv2 = nznt
-!     IF (nuv2 < mnpd) THEN
-!        PRINT *, ' nuv2 < mnpd: not enough integration points'
-!        STOP 11
-!     ENDIF
 
       IF (ncurr.eq.1 .and. ALL(ac.eq.cbig)) ac = ai            !!Old FORMAT: may not be reading in ac
       WHERE (ac .eq. cbig) ac = zero

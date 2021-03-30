@@ -34,6 +34,7 @@ C-----------------------------------------------
       INTEGER :: igrid,
      1           jacob_off, niter_store
       INTEGER, SAVE :: igrid0
+      LOGICAL, PARAMETER :: lreset_xc = .false.
 
 
 !     Read in command-line arguments to get input file or sequence file,
@@ -161,6 +162,13 @@ C-----------------------------------------------
       timer(tsum) = timer(tsum) + timeoff - timeon
 
  1000 CALL fileout (0, ictrl_flag, ier_flag, lscreen)
+
+      CALL free_mem_funct3d
+      CALL free_mem_ns (lreset_xc)
+      CALL free_mem_nunv
+      CALL free_persistent_mem
+
+      CALL close_all_files
 
       SELECT CASE (ier_flag)
       CASE (bad_jacobian_flag)

@@ -87,7 +87,6 @@
       r12sq(1:nrzt) = r1(1:nrzt,0)*r1(1:nrzt,0) + r12sq(1:nrzt)*
      1                r1(1:nrzt,1)*r1(1:nrzt,1)
 
-!DIR$ IVDEP
       DO l = nrzt, 2, -1
          guu(l) = p5*(guu(l) + guu(l-1) + shalf(l)*(luu(l) + luu(l-1)))
          r12sq(l) = p5*(r12sq(l) + r12sq(l-1) + shalf(l)*             !Comment: r12sq = r12**2
@@ -95,7 +94,6 @@
       END DO
 
       IF (lthreed) THEN
-!DIR$ IVDEP
          DO l = nrzt, 2, -1
             guv(l) = p5*(guv(l) + guv(l-1) +
      1         shalf(l)*(luv(l) + luv(l-1)))
@@ -312,7 +310,6 @@
 !
       IF (iequi .eq. 1) THEN
 
-!         IF (.FALSE.) THEN
          DO js = ns-1,2,-1
             DO l = js, nrzt, ns
                bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)
@@ -327,7 +324,6 @@
                bsubvh(l) = bsubvh(l) + curpol_temp
             END DO
          END DO
-!         END IF
 
          bsubu_e(:nrzt) = bsubuh(:nrzt)
          bsubv_e(:nrzt) = bsubvh(:nrzt)
@@ -347,7 +343,6 @@
 !
 !     STORE LU * LV COMBINATIONS USED IN FORCES
 !
-!WAC, SPH122407: sigma_an (=1 for isotropic case)
       lvv(2:nrzt) = gsqrt(2:nrzt)*sigma_an(2:nrzt)
       guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
       guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)

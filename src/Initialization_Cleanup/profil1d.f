@@ -68,8 +68,6 @@ C-----------------------------------------------
          chips(i) = torflux_edge * polflux_deriv(si)
          iotas(i) = piota(tf)
          icurv(i) = pcurr(tf)
-!         iotas(i) = piota(si)
-!         icurv(i) = pcurr(si)
       END DO
 
 !
@@ -119,7 +117,6 @@ C-----------------------------------------------
              pedge = pmass(spres_ped)
           ELSE
              pedge = pmass(tf)
-!             pedge = pmass(si)
           END IF
           mass(i) = pedge*(ABS(vpnorm)*r00)**gamma
         END DO
@@ -129,7 +126,6 @@ C-----------------------------------------------
 
       DO i = 1, ns
          si = hs*ABS(i-1.5_dp)
-!         si = torflux(si)                      !SPH060409: shalf = sqrt(s), NOT sqrt(phi(s))!
          shalf(i:nrzt:ns) = SQRT(si)
          si = hs*(i-1)
          sqrts(i:nrzt:ns) = SQRT(si)

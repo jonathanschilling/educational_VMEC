@@ -49,7 +49,7 @@
          CALL read_gade_namelist (iunit, io_stat)
       END IF
 
-!DEC$ IF DEFINED (IRIX64)
+#ifdef (IRIX64)
       IF (io_stat .eq. -1) io_stat = 0                  !Catches EOF on ORIG2000 Machine
-!DEC$ ENDIF
+#endif
       END SUBROUTINE read_namelist

@@ -30,7 +30,7 @@ c                    differently.
       INTEGER :: MPI_COMM_DIAGNO = 332                           !communicator for BOOZ_XFORM code
       INTEGER :: MPI_COMM_PARVMEC = 101                           !communicator for PARVMEC code
 
-!DEC$ IF DEFINED (MPI_OPT)
+#ifdef (MPI_OPT)
       CONTAINS
       
       SUBROUTINE mpi_stel_abort(error)
@@ -46,5 +46,5 @@ c                    differently.
       CALL FLUSH(6) 
       !CALL MPI_ABORT(MPI_COMM_STEL,1,temp)
       END SUBROUTINE
-!DEC$ ENDIF  
+#endif  
       END MODULE mpi_params

@@ -8,7 +8,7 @@ MODULE ezcdf_GenPut
   ! + support for complex numbers (ap) Wed May 16 15:18:05 EDT 2001
   ! added support for logicals (sph) Oct 1, 2002
   IMPLICIT NONE
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
 
   !
   ! C. Ludescher/A. Pletzer Tue Apr  4 10:11:33 EDT 2000
@@ -1472,5 +1472,5 @@ CONTAINS
     call cdfDefVar(ncid,varnam,dims,vartype,ier,dimname)
 
   END SUBROUTINE cdfd_1c
-!DEC$ ENDIF
+#endif
 END MODULE ezcdf_GenPut

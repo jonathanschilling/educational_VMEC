@@ -350,15 +350,15 @@ C-----------------------------------------------
 
       SUBROUTINE write_boozer_nc(extension, ierr)
       USE stel_constants, ONLY: zero
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
       USE ezcdf
-!DEC$ ENDIF
+#endif
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER :: ierr
       CHARACTER(LEN=*) :: extension
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -484,7 +484,7 @@ C-----------------------------------------------
       DEALLOCATE(jlist,packed2d)
 ! Close cdf File
       CALL cdf_close(nbooz, ierr)
-!DEC$ ENDIF
+#endif
       RETURN
       END SUBROUTINE write_boozer_nc
       

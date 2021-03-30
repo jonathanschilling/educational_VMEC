@@ -55,7 +55,7 @@
 !---------------------------------------------------------------------
 Module adas_mod_simpl
 
-!DEC$ IF DEFINED (NTCC)
+#ifdef (NTCC)
   use ezcdf
      implicit none
       INTEGER, PARAMETER :: R8=SELECTED_REAL_KIND(12,100)
@@ -2821,5 +2821,5 @@ subroutine check_data_react(freact_type,beamchrg,izneut,zion,izion_use,n_use,ist
   
 end subroutine check_data_react
 
-!DEC$ ENDIF  
+#endif  
 end module adas_mod_simpl

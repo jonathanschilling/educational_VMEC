@@ -28,7 +28,7 @@
 !---------------------------------------------------------------------!
 
 module adas_bms_splines
-!DEC$ IF DEFINED (NTCC)
+#ifdef (NTCC)
       use EZspline_obj
       use EZspline
       
@@ -976,6 +976,6 @@ subroutine adas_closeSplines(iErr)
       return
 end subroutine
 
-!DEC$ ENDIF  
+#endif  
 
 end module

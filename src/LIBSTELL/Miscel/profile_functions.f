@@ -973,4 +973,4 @@ C-----------------------------------------------
       protf = protf
 
       END FUNCTION protf
-!!!!DEC$ ENDIF
+!!!#endif

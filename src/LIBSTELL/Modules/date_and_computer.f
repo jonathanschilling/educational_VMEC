@@ -13,11 +13,11 @@
       CHARACTER(LEN=200) :: fileId
 
 
-!DEC$ IF DEFINED (WIN32)
+#ifdef (WIN32)
       computer = ' Window_NT'
       os       = ' MS Windows 2000'
       os_release  = ' 5.00'
-!DEC$ ELSE
+#else
 
 !     Get unique unit number from pid
 !      CALL getpid(ipid, ierror)
@@ -43,7 +43,7 @@
       CALL GETENV('OSTYPE',os)
       CALL GETENV('HOSTTYPE',os_release)
 !      os_release = '0'
-!DEC$ ENDIF
+#endif
 
       END SUBROUTINE GetComputerInfo
 

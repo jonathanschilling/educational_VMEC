@@ -37,9 +37,9 @@
       CONTAINS
       
       SUBROUTINE read_pies_hdf5(id_string)
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
       include 'netcdf.inc'
-!DEC$ ENDIF
+#endif
       CHARACTER(LEN=*), INTENT(in) :: id_string
       INTEGER :: i,m,n,mn,ierr,i_alloc,ncid,status,& 
      &           BMID, BNID, BKID, BLID, &
@@ -55,7 +55,7 @@
 !-----------------------------------------------------------------------
       ! Check for extension or full name
       input_extension = ''
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
       dex = INDEX(id_string,'nc',BACK=.TRUE.)
       IF (dex < LEN(id_string)) THEN
          input_extension(1:dex-2) = id_string(1:dex-2)
@@ -169,9 +169,9 @@
          END DO
       END DO
       RETURN
-!DEC$ ELSE
+#else
       STOP 'No netCDF Support, cannot read PIES output'
-!DEC$ ENDIF
+#endif
 !-----------------------------------------------------------------------
 !     End Subroutine
 !-----------------------------------------------------------------------    
@@ -186,16 +186,16 @@
 !  Version:    2.0
 !  Date:       03/26/12
 !***********************************************************************
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
       INCLUDE 'netcdf.inc'
-!DEC$ ENDIF
+#endif
       INTEGER STATUS
-!DEC$ IF DEFINED (NETCDF)
+#ifdef (NETCDF)
       IF (STATUS .NE. NF_NOERR) THEN
         PRINT *, NF_STRERROR(STATUS)
         STOP '!!!!!!DIAGNO v2.0!!!!!'
       ENDIF
-!DEC$ ENDIF
+#endif
       END SUBROUTINE HANDLE_ERR
 !-----------------------------------------------------------------------
 !     End Module

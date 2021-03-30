@@ -12,9 +12,9 @@ c      1                      trip3d_info_vmec, trip3d_free
       USE angle_constraints, ONLY: HB_EXP=>pexp
 #endif
       IMPLICIT NONE
-!DEC$ IF DEFINED (MPI_OPT)
+#ifdef (MPI_OPT)
       INCLUDE 'mpif.h'                                                          ! MPI
-!DEC$ ENDIF
+#endif
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------

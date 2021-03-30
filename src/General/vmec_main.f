@@ -42,7 +42,7 @@ C-----------------------------------------------
       LOGICAL :: lthreed, lconm1
       INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect
       INTEGER :: multi_ns_grid, iequi, irst,
-     1    iter1, iter2, iterc=1, ijacob, itfsq, iresidue, neqs, neqs1,
+     1    iter1, iter2, ijacob, itfsq, iresidue, neqs, neqs1,
      2    neqs2, irzloff, ivac, ndatap, ndatai
 C-----------------------------------------------
       END MODULE vmec_main

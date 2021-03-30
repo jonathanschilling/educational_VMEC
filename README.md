@@ -21,4 +21,4 @@ Here is how it works:
 
 ## Example Execution
  * Change into the `test` dir: `cd test`
- * Run the Solov'ev test case: `../build/build/bin/xvmec input.solovev`
+ * Run the [Solov'ev test case](https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--): `../build/build/bin/xvmec input.solovev`

@@ -14,18 +14,17 @@ C-----------------------------------------------
      2  jmin2 = (/ 1,2,(2,ink=2,mpold) /),        !starting js(m) values for which R,Z are evolved
      3  jlam  = (/ 2,2,(2,ink=2,mpold) /)         !starting js(m) values for which Lambda is evolved
 
-      INTEGER, PARAMETER :: norm_term_flag=0, bad_jacobian_flag=1, 
-     1                      more_iter_flag=2, 
+      INTEGER, PARAMETER :: norm_term_flag=0, bad_jacobian_flag=1,
      2                      jac75_flag=4, input_error_flag=5,
      3                      phiedge_error_flag=7,
      4                      ns_error_flag=8,
      5                      misc_error_flag=9,
      6                      successful_term_flag=11 !ftol force criterion has been met
       INTEGER, PARAMETER :: restart_flag=1, readin_flag=2,
-     1                      timestep_flag=4,output_flag=8, 
+     1                      timestep_flag=4,output_flag=8,
      2                      cleanup_flag=16, reset_jacdt_flag=32
-    
-      REAL(rprec), PARAMETER :: pdamp = 0.05_dp  
+
+      REAL(rprec), PARAMETER :: pdamp = 0.05_dp
       CHARACTER(LEN=*), PARAMETER :: version_ = '8.52'
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
@@ -39,7 +38,7 @@ C-----------------------------------------------
 !
 !     VERSION INFORMATION HISTORY
 !
-!     8.00 
+!     8.00
 !          a) added lforbal logical to fbal module to control whether to compute the flux-averaged
 !             force balance equation printed in the threed1 file. This requires a modification of
 !             the m=1,n=0 forces for R,Z in tomnsps subroutine. This works well, generally, and
@@ -61,7 +60,7 @@ C-----------------------------------------------
 !                             = 'gmres',   "          ", gmres time-stepper
 !                             = 'tfqmr',   "          ", transpose free qmr
 !             2) PREC2D_THRESHOLD: value of (unpreconditioned) forces at which block (2D) preconditioner
-!                                  is turned on (=0 block preconditioner never turned on); recommended 
+!                                  is turned on (=0 block preconditioner never turned on); recommended
 !                                  (default) value ~ 1.E-10, or smaller, if convergence is poor
 !             3) LFORBAL: logical variable (default = .true.); when true, the force balance
 !                         used in the threed1 file is used to evolve the m=1 R,Z components. This
@@ -80,14 +79,14 @@ C-----------------------------------------------
 !             it was not implemented entirely correctly for lforbal=true case
 !          i) for lasym m=1 constraint rsc = zcc, changed xc array so that R+ = .5*(rsc + zcc) is stored at
 !             xc(rsc,m=1) and R- = .5*(rsc - zcc) is stored at xc(zcc,m=1). In residue, gcz(R-) == gcz(zcc)
-!             is zeroed by "evolving" gcr(zcc) = azd*[xc(zcc)-xcint], and gcr(rsc) => .5*[gcr(rsc) + gcz(zcc)] 
-!             is evolved. In totzspa, the real rsc and zcc are computed from the internal representations 
-!             (check convert call, too) by calling a new routine convert_asym (also called from wrout before 
-!             writing out xc info). In readin, the original R+,R- are stored, so that for external "jogs", 
+!             is zeroed by "evolving" gcr(zcc) = azd*[xc(zcc)-xcint], and gcr(rsc) => .5*[gcr(rsc) + gcz(zcc)]
+!             is evolved. In totzspa, the real rsc and zcc are computed from the internal representations
+!             (check convert call, too) by calling a new routine convert_asym (also called from wrout before
+!             writing out xc info). In readin, the original R+,R- are stored, so that for external "jogs",
 !             there will be no change in forces. All these changes are needed to obtain an invertible Hessian.
 !          j) added m=1 constraint for 3D case (similar to (i)), rss(n) = zcs(n), for n != 0. Imposed this
 !             on forces by adding routine constrain_m1 in residue. Added convert_sym routine to totzsp to convert
-!             from internal xc representation TO internal one. 
+!             from internal xc representation TO internal one.
 !          k) Decreased exponent on pdamp factor r2 (in bcovar) from 2 to 1, to give better conditioning
 !             especially for current hole cases
 !          l) Eliminated iotas bias for determining preconditioner, previously added in v8.00 for stabilizing
@@ -118,7 +117,7 @@ C-----------------------------------------------
 !                  if you specify the logical LWOUTTXT as true.
 !             - you get the output for diagno 1.0 and 1.5 if the logical LDIAGNO set true.
 !             - you get a rather old fort.8-output if you specify LOLDOUT as true.
-!             
+!
 !             If none of these new variables is set, the behavior of vmec2000 is as
 !             expected from the version without the changes.
 !     8.49  (June, 2012)
@@ -142,11 +141,11 @@ C-----------------------------------------------
 !     8.52   (May, 2014)
 !          a) Fixed factor of 2 in integration factors tmult (WROUT) and dmult1 (JXBFORCE) for lasym=T,
 !             introduced when dnorm was changed in FIXARAY to include FULL theta range (1/23/14)
-!          b) In eqsolve (revert to v8.48), keep 
+!          b) In eqsolve (revert to v8.48), keep
 !                IF (liter_flag) CALL restart_iter(delt0)
 !             INSIDE IF (irst .eq. 2) TEST BLOCK
-!          c) Change default lforbal to FALSE in LIBSTELL, VMEC_INPUT (improves convergence, 
+!          c) Change default lforbal to FALSE in LIBSTELL, VMEC_INPUT (improves convergence,
 !             user can override in input file)
-!   
+!
 !-----------------------------------------------
       END MODULE vmec_params

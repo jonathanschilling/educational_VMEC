@@ -3,7 +3,7 @@
       USE vac_persistent
       USE realspace
       USE vmec_params, ONLY: mscale, nscale, signgs, uminus,
-     1      norm_term_flag, more_iter_flag, output_flag,
+     1      norm_term_flag, output_flag,
      2      cleanup_flag, successful_term_flag
       USE vforces
       USE xstuff, ONLY: xc, gc, xsave, scalxc
@@ -53,7 +53,7 @@ C-----------------------------------------------
       iequi = 1
       lterm = ier_flag.eq.norm_term_flag  .or.
      1        ier_flag.eq.successful_term_flag
-      lwrite = lterm .or. ier_flag.eq.more_iter_flag
+      lwrite = lterm
       loutput = (IAND(ictrl_flag, output_flag) .ne. 0)
       loc_ier_flag = ier_flag
       if (ier_flag .eq. successful_term_flag)
@@ -108,7 +108,7 @@ C-----------------------------------------------
             CALL write_dcon (xc)
          END IF
 
-         IF (lscreen .and. ier_flag.ne.more_iter_flag)
+         IF (lscreen)
      1   PRINT 120, TRIM(werror(loc_ier_flag))
          IF (lscreen .and. lterm)
      1   PRINT 10, TRIM(input_extension), ijacob
@@ -149,8 +149,7 @@ C-----------------------------------------------
 !
 !     DEALLOCATE GLOBAL MEMORY AND CLOSE FILES
 !
-      IF (IAND(ictrl_flag, cleanup_flag).eq.0 .or.
-     1         ier_flag.eq.more_iter_flag) RETURN
+      IF (IAND(ictrl_flag, cleanup_flag).eq.0) RETURN
 
       IF (ALLOCATED(cosmu))
      1  DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,

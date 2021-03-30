@@ -1,7 +1,7 @@
       SUBROUTINE eqsolve(ier_flag, lscreen)
       USE vmec_main
       USE vmec_params, ONLY: ntmax, ns4, jac75_flag, norm_term_flag,
-     1                       bad_jacobian_flag, more_iter_flag,
+     1                       bad_jacobian_flag,
      2                       successful_term_flag
       USE precon2d, ONLY: ScratchFile, lswap2disk, ictrl_prec2d
       USE directaccess, ONLY: DeleteDAFile
@@ -86,17 +86,12 @@ C-----------------------------------------------
          IF (ijacob.eq.0 .and. (ier_flag.eq.bad_jacobian_flag
      1       .or. irst.eq.4) .and. ns.ge.3) THEN
             IF (lscreen) THEN
-
                IF (ier_flag .eq. bad_jacobian_flag) THEN
-
                   PRINT *, ' INITIAL JACOBIAN CHANGED SIGN!'
-
                END IF
 
                PRINT *,
-
      1         ' TRYING TO IMPROVE INITIAL MAGNETIC AXIS GUESS'
-
             END IF
 
             CALL guess_axis (r1, z1, ru0, zu0)
@@ -131,7 +126,6 @@ C-----------------------------------------------
             ier_flag = jac75_flag
             liter_flag = .false.
          ELSE IF (iter2.ge.niter .and. liter_flag) THEN
-            ier_flag = more_iter_flag
             liter_flag = .false.
          ENDIF
 
@@ -169,10 +163,6 @@ C-----------------------------------------------
             CALL vmec_history_store(delt0r)
             CALL flush(6)
          ENDIF
-
-! SAL 2011-08-22: Call to movieout to write out movie file on each
-!                 iteration.
-
 
 !       Store force residual, wdot for plotting
          wdota = ABS(w0 - w1)/w0

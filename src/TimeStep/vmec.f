@@ -3,8 +3,7 @@
 !      USE vmec_seq
       USE safe_open_mod
       USE vparams, ONLY: nlog, nlog0, nthreed
-      USE vmec_params, ONLY: more_iter_flag,
-     1                       bad_jacobian_flag,
+      USE vmec_params, ONLY: bad_jacobian_flag,
      2    restart_flag, readin_flag, timestep_flag,
      3    output_flag, cleanup_flag,
      4    norm_term_flag, successful_term_flag ! J Geiger: for more iterations and full 3D1-output

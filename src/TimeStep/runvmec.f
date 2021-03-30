@@ -1,7 +1,7 @@
       SUBROUTINE runvmec(ictrl_array, input_file0,
      1   lscreen, COMM_WORLD, reset_file_name)
       USE vmec_main
-      USE vmec_params, ONLY: bad_jacobian_flag, more_iter_flag,
+      USE vmec_params, ONLY: bad_jacobian_flag,
      1                       norm_term_flag, successful_term_flag,
      2                       restart_flag, readin_flag,
      3                       timestep_flag, ns_error_flag,
@@ -208,8 +208,7 @@ C-----------------------------------------------
          END IF
 
          IF (ier_flag.ne.norm_term_flag .and.
-     1       ier_flag.ne.successful_term_flag .and.
-     2       ier_flag.ne.more_iter_flag) EXIT
+     1       ier_flag.ne.successful_term_flag) EXIT
          IF (numsteps>0 .or. ns_index>0) EXIT
 
 !
@@ -219,7 +218,6 @@ C-----------------------------------------------
 ! within the set number of iterations specified by NITER.
 ! The parameter fgiveup defaults to 30.
 !
-
          IF (lgiveup .and. (fsqr.gt.ftolv*fgiveup .or.
      1                      fsqz.gt.ftolv*fgiveup .or.
      2                      fsql.gt.ftolv*fgiveup     )) THEN
@@ -239,15 +237,6 @@ C-----------------------------------------------
       CALL second0 (timeoff)
       timer(tsum) = timer(tsum) + timeoff - timeon
 
-!
-!     WRITE OUTPUT TO THREED1, WOUT FILES; FREE MEMORY ALLOCATED GLOBALLY
-!
- 1000 IF(ier_flag.eq.more_iter_flag) then  ! J Geiger
-! 1000 if(lmoreiter .and. ier_flag.eq.more_iter_flag) then  ! J Geiger
-        print *, "runvmec: Running some more iterations",
-     &           " -> Skipping call to fileout!"
-      ELSE
-        CALL fileout (iseq_count, ictrl_flag, ier_flag, lscreen)
-      ENDIF
+ 1000 CALL fileout (iseq_count, ictrl_flag, ier_flag, lscreen)
 
       END SUBROUTINE runvmec

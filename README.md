@@ -9,3 +9,16 @@ which only computes the Stellarator MHD equilibrium and nothing more.
 The `cmake` build system for stand-alone VMEC is borrowed
 from [hiddenSymmetries/VMEC2000](https://github.com/hiddenSymmetries/VMEC2000)
 and from [ORNL-Fusion/LIBSTELL](https://github.com/ORNL-Fusion/LIBSTELL).
+
+## Building
+This is a fairly standard CMake setup, if you are used to it.
+Here is how it works:
+ * Create a directory `build` in the main folder: `mkdir build`
+ * Go into the `build` directory: `cd build`
+ * Run CMake: `cmake ..`
+ * Execute the actual build process: `make` (optional multi-threaded build: `make -j`)
+ * The VMEC executable `xvmec` is then located in `build/build/bin` with respect to the main folder.
+
+## Example Execution
+ * Change into the `test` dir: `cd test`
+ * Run the Solov'ev test case: `../build/build/bin/xvmec input.solovev`

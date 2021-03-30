@@ -14,7 +14,6 @@
      2                      ,pp3 
       USE fbal, ONLY: bimax_ppargrad
 #endif
-#undef NETCDF
 #ifdef NETCDF
       USE ezcdf
 #endif

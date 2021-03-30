@@ -52,7 +52,7 @@ C----|------------------------------------------------------------------
           write(fid,*) iter2
 C----|------------------------------------------------------------------
 C      Convert to mode representation
-C        coefficients of cos(mu-nv), sin(mu-nv)\
+C        coefficients of cos(mu-nv), sin(mu-nv)
           rmnc = 0
           rmns = 0
           zmnc = 0

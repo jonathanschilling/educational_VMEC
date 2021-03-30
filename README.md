@@ -5,3 +5,5 @@ It is forked from the `v251` branch of the [STELLOPT](https://github.com/Princet
 
 The goal of this project is to have a version of VMEC
 which only computes the Stellarator MHD equilibrium and nothing more.
+
+The `cmake` build system for stand-alone VMEC is borrowed from the [Hidden Symmetries VMEC2000](https://github.com/hiddenSymmetries/VMEC2000).

@@ -31,8 +31,6 @@
       REAL(rprec), DIMENSION(100) :: ftol_array
       REAL(rprec), DIMENSION(nigroup), TARGET :: extcur ! V3FIT needs a pointer to this.
       LOGICAL :: lfreeb, lasym
-      LOGICAL :: lgiveup                  ! inserted M.Drevlak
-      REAL(rprec) :: fgiveup              ! inserted M.Drevlak, giveup-factor for ftolv
       LOGICAL :: lbsubs                   ! J Hanson See jxbforce coding
 
       CHARACTER(len=200) :: mgrid_file
@@ -52,7 +50,6 @@
      5   phiedge,
      A   lfreeb,                                                           ! S Lazerson 2010
      D   lasym,
-     D   lgiveup,fgiveup,                                                  ! M.Drevlak 2012-05-10
      E   lbsubs                                                            ! 2014-01-12 See jxbforce
 
       CONTAINS
@@ -92,8 +89,6 @@
       mgrid_file = 'NONE'
       lfreeb = .true.
       lasym = .false.
-      lgiveup = .false.        ! inserted M.Drevlak
-      fgiveup = 3.E+01_dp      ! inserted M.Drevlak
       lbsubs = .false.         ! J Hanson. See jxbforce coding
 
       pcurr_type = 'power_series'

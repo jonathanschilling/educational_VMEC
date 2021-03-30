@@ -30,7 +30,7 @@ c                    differently.
       INTEGER :: MPI_COMM_DIAGNO = 332                           !communicator for BOOZ_XFORM code
       INTEGER :: MPI_COMM_PARVMEC = 101                           !communicator for PARVMEC code
 
-#ifdef (MPI_OPT)
+#ifdef MPI_OPT
       CONTAINS
       
       SUBROUTINE mpi_stel_abort(error)

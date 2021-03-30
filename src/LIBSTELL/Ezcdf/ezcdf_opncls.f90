@@ -1,5 +1,5 @@
 MODULE ezcdf_opncls
-#ifdef (NETCDF)
+#ifdef NETCDF
   INTERFACE cdfOpn
      MODULE PROCEDURE ezcdf_open
   END INTERFACE

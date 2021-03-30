@@ -1,7 +1,7 @@
 MODULE ezcdf_GenGet
   USE ezcdf_opncls
   USE ezcdf_inqvar
-#ifdef (NETCDF)
+#ifdef NETCDF
   EXTERNAL handle_err
  
   PRIVATE

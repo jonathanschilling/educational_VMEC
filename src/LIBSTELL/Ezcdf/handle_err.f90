@@ -1,5 +1,5 @@
 subroutine handle_err(status,nam3,nam1,nam2)
-#ifdef (NETCDF)
+#ifdef NETCDF
   include "netcdf.inc"
   INTEGER, intent(in) :: status
   character*(*), intent(in) :: nam1, nam2, nam3

@@ -1,6 +1,6 @@
 MODULE ezcdf_attrib
    USE ezcdf_inqvar
-#ifdef (NETCDF)
+#ifdef NETCDF
    include "netcdf.inc"
    INTEGER, PARAMETER :: r4 = SELECTED_REAL_KIND(6,37)
    INTEGER, PARAMETER :: r8 = SELECTED_REAL_KIND(12,100)

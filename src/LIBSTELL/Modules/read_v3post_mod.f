@@ -7,7 +7,7 @@
       USE stel_kinds
 
       IMPLICIT NONE
-#ifdef (NETCDF)
+#ifdef NETCDF
 C-----------------------------------------------
 C   L O C A L   P A R A M E T E R S
 C-----------------------------------------------
@@ -59,7 +59,7 @@ C-----------------------------------------------
       filename = 'v3post'
       CALL parse_extension(filename, file_or_extension, isnc)
       IF (isnc) THEN
-#ifdef (NETCDF)
+#ifdef NETCDF
          CALL read_v3post_nc (filename, ierr)
 #else
          PRINT *, "NETCDF wout file can not be opened on this platform"
@@ -89,7 +89,7 @@ C-----------------------------------------------
       END SUBROUTINE read_v3post_text
 
 
-#ifdef (NETCDF)
+#ifdef NETCDF
       SUBROUTINE read_v3post_nc(filename, ierr)
       USE ezcdf
       IMPLICIT NONE

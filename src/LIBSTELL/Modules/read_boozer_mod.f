@@ -350,7 +350,7 @@ C-----------------------------------------------
 
       SUBROUTINE write_boozer_nc(extension, ierr)
       USE stel_constants, ONLY: zero
-#ifdef (NETCDF)
+#ifdef NETCDF
       USE ezcdf
 #endif
 C-----------------------------------------------
@@ -358,7 +358,7 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER :: ierr
       CHARACTER(LEN=*) :: extension
-#ifdef (NETCDF)
+#ifdef NETCDF
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------

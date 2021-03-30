@@ -61,7 +61,7 @@
 ! work_arrays avoids premature size definition of arrays
       USE stel_kinds
       USE stel_constants
-#ifdef (NETCDF)
+#ifdef NETCDF
       USE bsc_cdf, ONLY: vn_c_type, vn_s_name, vn_l_name,
      1  vn_current, vn_raux, vn_xnod, vn_ehnod, vn_rcirc,
      1  vn_xcent, vn_enhat
@@ -131,7 +131,7 @@
 !  Other variables
 !      INTEGER :: nprfun = 0
 
-#ifdef (NETCDF)
+#ifdef NETCDF
 !*******************************************************************************
 ! SECTION II. INTERFACE BLOCKS
 !*******************************************************************************

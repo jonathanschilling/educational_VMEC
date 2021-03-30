@@ -61,13 +61,11 @@
 ! work_arrays avoids premature size definition of arrays
       USE stel_kinds
       USE stel_constants
-#ifdef NETCDF
       USE bsc_cdf, ONLY: vn_c_type, vn_s_name, vn_l_name,
      1  vn_current, vn_raux, vn_xnod, vn_ehnod, vn_rcirc,
      1  vn_xcent, vn_enhat
 !      USE response_arrays
       USE ezcdf
-#endif
       
 !  Define derived type clresfun - coil response function
       TYPE clresfun
@@ -131,7 +129,6 @@
 !  Other variables
 !      INTEGER :: nprfun = 0
 
-#ifdef NETCDF
 !*******************************************************************************
 ! SECTION II. INTERFACE BLOCKS
 !*******************************************************************************
@@ -329,5 +326,4 @@
 
 
       END SUBROUTINE cdf_prfun_read_nompi
-#endif
       END MODULE read_response_nompi

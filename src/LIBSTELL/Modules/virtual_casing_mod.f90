@@ -949,13 +949,8 @@
                           finest_nag(nfun_nag), absest_nag(nfun_nag)
       DOUBLE PRECISION, ALLOCATABLE :: vrtwrk(:)
 
-#ifdef NAG
-      EXTERNAL :: D01EAF
-
-#else
       EXTERNAL :: dcuhre
 
-#endif
 
       ! BEGIN SUBROUTINE
       IF (adapt_tol < 0) THEN
@@ -980,34 +975,6 @@
       restar = 0
       DO WHILE (adapt_rerun) 
 
-#ifdef NAG
-         CALL D01EAF(ndim_nag,a_nag,b_nag,mincls_nag,maxcls_nag,nfun_nag,funsub_nag_b,absreq_nag,&
-                   relreq_nag,lenwrk_nag,wrkstr_nag,finest_nag,absest_nag,istat)
-         IF (istat == 1 .or. istat == 3) THEN
-            maxcls_nag = maxcls_nag*10
-            mincls_nag = -1
-            restar = 1
-            WRITE(6,*) '!!!!!  WARNING Could not reach desired tollerance  !!!!!'
-            WRITE(6,*) '  BX = ',finest_nag(1),' +/- ',absest_nag(1)
-            WRITE(6,*) '  BY = ',finest_nag(2),' +/- ',absest_nag(2)
-            WRITE(6,*) '  BZ = ',finest_nag(3),' +/- ',absest_nag(3)
-            WRITE(6,*) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-         ELSE IF (mincls_nag <= 32) THEN
-            mincls_nag = 64
-            restar = 1
-         ELSE IF (istat < 0) THEN
-            bx = zero
-            by = zero
-            bz = zero
-            adapt_rerun=.false.
-         ELSE
-            bx = finest_nag(1)
-            by = finest_nag(2)
-            bz = finest_nag(3)
-            adapt_rerun=.false.
-         END IF
-
-#else
          IF (.not.ALLOCATED(vrtwrk)) THEN
             wrklen = ((maxcls_nag-ndim_nag)/(2*ndim_nag) + 1)*(2*ndim_nag+2*nfun_nag+2) + 17*nfun_nag + 256
             ALLOCATE(vrtwrk(wrklen),STAT=istat)
@@ -1040,7 +1007,6 @@
             DEALLOCATE(vrtwrk)
          END IF
 
-#endif
       END DO
       nlastcall=mincls_nag
       RETURN
@@ -1176,13 +1142,8 @@
                           finest_nag(nfun_nag), absest_nag(nfun_nag)
       DOUBLE PRECISION, ALLOCATABLE :: vrtwrk(:)
 
-#ifdef NAG
-      EXTERNAL :: D01EAF
-
-#else
       EXTERNAL :: dcuhre
 
-#endif
       ! BEGIN SUBROUTINE 
       IF (adapt_tol < 0) THEN
          CALL vecpot_virtual_casing_dbl(x,y,z,ax,ay,az)
@@ -1205,35 +1166,6 @@
       restar = 0
       DO WHILE (adapt_rerun)
 
-#ifdef NAG
-         CALL D01EAF(ndim_nag,a_nag,b_nag,mincls_nag,maxcls_nag,nfun_nag,funsub_nag_a,absreq_nag,&
-                   relreq_nag,lenwrk_nag,wrkstr_nag,finest_nag,absest_nag,istat)
-         IF (istat == 1 .or. istat == 3) THEN
-            maxcls_nag = maxcls_nag*10
-            mincls_nag = -1
-            restar = 1
-            WRITE(6,*) '!!!!!  WARNING Could not reach desired tollerance  !!!!!'
-            WRITE(6,*) '  AX = ',finest_nag(1),' +/- ',absest_nag(1)
-            WRITE(6,*) '  AY = ',finest_nag(2),' +/- ',absest_nag(2)
-            WRITE(6,*) '  AZ = ',finest_nag(3),' +/- ',absest_nag(3)
-            WRITE(6,*) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-         ELSE IF (mincls_nag <= 32) THEN
-            mincls_nag = 64
-            restar = 1
-         ELSE IF (istat < 0) THEN
-            ax = zero
-            ay = zero
-            az = zero
-            adapt_rerun=.false.
-            print *,'error'
-         ELSE
-            ax = finest_nag(1)
-            ay = finest_nag(2)
-            az = finest_nag(3)
-            adapt_rerun=.false.
-         END IF
-
-#else
          IF (.not.ALLOCATED(vrtwrk)) THEN
             wrklen = ((IWRK-ndim_nag)/(2*ndim_nag) + 1)*(2*ndim_nag+2*nfun_nag+2) + 17*nfun_nag + 256
             ALLOCATE(vrtwrk(wrklen),STAT=istat)
@@ -1265,7 +1197,6 @@
             DEALLOCATE(vrtwrk)
          END IF
 
-#endif
       END DO
       nlastcall=mincls_nag
       RETURN
@@ -1344,11 +1275,7 @@
       ! LOCAL VARIABLES
       ! BEGIN SUBROUTINE
       WRITE(iunit,'(A)')                     '----- Virtual Casing Information -----'
-#ifdef NAG 
-      WRITE(iunit,'(A,A,A)')                   '   INTEGRAL TYPE: ',TRIM(vc_type_str),' (NAG) '
-#else
       WRITE(iunit,'(A,A,A)')                   '   INTEGRAL TYPE: ',TRIM(vc_type_str),' (DCUHRE) '
-#endif
       WRITE(iunit,'(A,ES11.4)')              '   MIN_GRID_DISTANCE = ',min_delta_x
       WRITE(iunit,'(A,ES11.4)')              '   NORMAL_AREA = ',surf_area
       WRITE(iunit,'(A,I4,A,I4,A,I4,A,I3)')   '   NR = ',nr_vc,';   NU = ',nu_vc,';  NV = ',nv_vc,';  NFP = ',nvp/nv_vc
@@ -1786,13 +1713,8 @@
                           finest_nag(nfun_nag), absest_nag(nfun_nag)
       DOUBLE PRECISION, ALLOCATABLE :: vrtwrk(:)
 
-#ifdef NAG
-      EXTERNAL :: D01EAF
-
-#else
       EXTERNAL :: dcuhre
 
-#endif
       ! BEGIN SUBROUTINE 
       IF (adapt_tol < 0) THEN
          ! Not implmented
@@ -1816,31 +1738,6 @@
       restar = 0
       DO WHILE (adapt_rerun)
 
-#ifdef NAG
-         CALL D01EAF(ndim_nag,a_nag,b_nag,mincls_nag,maxcls_nag,nfun_nag,funsub_nag_a3d,absreq_nag,&
-                   relreq_nag,lenwrk_nag,wrkstr_nag,finest_nag,absest_nag,istat)
-         IF (istat == 1 .or. istat == 3) THEN
-            maxcls_nag = maxcls_nag*10
-            mincls_nag = -1
-            restar = 1
-            WRITE(6,*) '!!!!!  WARNING Could not reach desired tollerance  !!!!!'
-            WRITE(6,*) '  AX = ',finest_nag(1),' +/- ',absest_nag(1)
-            WRITE(6,*) '  AY = ',finest_nag(2),' +/- ',absest_nag(2)
-            WRITE(6,*) '  AZ = ',finest_nag(3),' +/- ',absest_nag(3)
-            WRITE(6,*) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-         ELSE IF (istat < 0) THEN
-            ax = zero
-            ay = zero
-            az = zero
-            adapt_rerun=.false.
-         ELSE
-            ax = finest_nag(1)
-            ay = finest_nag(2)
-            az = finest_nag(3)
-            adapt_rerun=.false.
-         END IF
-
-#else
          IF (.not.ALLOCATED(vrtwrk)) THEN
             wrklen = ((IWRK-ndim_nag)/(2*ndim_nag) + 1)*(2*ndim_nag+2*nfun_nag+2) + 17*nfun_nag + 256
             ALLOCATE(vrtwrk(wrklen),STAT=istat)
@@ -1872,7 +1769,6 @@
             DEALLOCATE(vrtwrk)
          END IF
 
-#endif
       END DO
       nlastcall=mincls_nag
       RETURN
@@ -2030,13 +1926,8 @@
                           finest_nag(nfun_nag), absest_nag(nfun_nag)
       DOUBLE PRECISION, ALLOCATABLE :: vrtwrk(:)
 
-#ifdef NAG
-      EXTERNAL :: D01EAF
-
-#else
       EXTERNAL :: dcuhre
 
-#endif
       ! BEGIN SUBROUTINE
       IF (adapt_tol < 0) THEN
          ! Not implmented
@@ -2060,31 +1951,6 @@
       restar = 0
       DO WHILE (adapt_rerun)
 
-#ifdef NAG
-         CALL D01EAF(ndim_nag,a_nag,b_nag,mincls_nag,maxcls_nag,nfun_nag,funsub_nag_b3d,absreq_nag,&
-                   relreq_nag,lenwrk_nag,wrkstr_nag,finest_nag,absest_nag,istat)
-         IF (istat == 1 .or. istat == 3) THEN
-            maxcls_nag = maxcls_nag*10
-            mincls_nag = -1
-            restar = 1
-            WRITE(6,*) '!!!!!  WARNING Could not reach desired tollerance  !!!!!'
-            WRITE(6,*) '  BX = ',finest_nag(1),' +/- ',absest_nag(1)
-            WRITE(6,*) '  BY = ',finest_nag(2),' +/- ',absest_nag(2)
-            WRITE(6,*) '  BZ = ',finest_nag(3),' +/- ',absest_nag(3)
-            WRITE(6,*) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-         ELSE IF (istat < 0) THEN
-            bx = zero
-            by = zero
-            bz = zero
-            adapt_rerun=.false.
-         ELSE
-            bx = finest_nag(1)
-            by = finest_nag(2)
-            bz = finest_nag(3)
-            adapt_rerun=.false.
-         END IF
-
-#else
          IF (.not.ALLOCATED(vrtwrk)) THEN
             wrklen = ((IWRK-ndim_nag)/(2*ndim_nag) + 1)*(2*ndim_nag+2*nfun_nag+2) + 17*nfun_nag + 256
             ALLOCATE(vrtwrk(wrklen),STAT=istat)
@@ -2116,7 +1982,6 @@
             DEALLOCATE(vrtwrk)
          END IF
 
-#endif
       END DO
       nlastcall=mincls_nag
       RETURN

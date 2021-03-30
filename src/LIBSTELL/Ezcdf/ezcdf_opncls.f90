@@ -1,5 +1,4 @@
 MODULE ezcdf_opncls
-#ifdef NETCDF
   INTERFACE cdfOpn
      MODULE PROCEDURE ezcdf_open
   END INTERFACE
@@ -82,5 +81,4 @@ CONTAINS
     call handle_err(status,' ','cdfcls','nf_close')
     if(PRESENT (ier)) ier = status
   end subroutine ezcdf_close
-#endif
 END MODULE ezcdf_opncls

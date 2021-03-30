@@ -22,7 +22,6 @@
       USE mgrid_mod
 
       IMPLICIT NONE
-#if defined(NETCDF)
 C-----------------------------------------------
 C   L O C A L   P A R A M E T E R S
 C-----------------------------------------------
@@ -235,7 +234,6 @@ C-----------------------------------------------
      1  ln_prprmns = 'sinmn components of radial pressure gradient',
      2  ln_pmap = '<p(s,R)>', ln_omega = 'Toroidal Angular Freq.',
      3  ln_tpotb = 'T_perp/T_parallel or T(flow)'
-#endif
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
@@ -289,11 +287,7 @@ C-----------------------------------------------
           MODULE PROCEDURE readw_and_open, readw_only
       END INTERFACE
 
-#if defined(NETCDF)
       PRIVATE :: read_wout_text, read_wout_nc
-#else
-      PRIVATE :: read_wout_text
-#endif
       PRIVATE :: norm_term_flag, bad_jacobian_flag,
      1           more_iter_flag, jac75_flag
 
@@ -328,12 +322,7 @@ C-----------------------------------------------
       CALL flush(6)
 !SPH  IF (.not.isnc) STOP 'ISNC ERR IN READ_WOUT_MOD'
       IF (isnc) THEN
-#if defined(NETCDF)
          CALL read_wout_nc(filename, ierr)
-#else
-         PRINT *, "NETCDF wout file can not be opened on this platform"
-         ierr = -100
-#endif
       ELSE
          iunit = iunit_init
          CALL safe_open (iunit, ierr, filename, 'old', 'formatted')
@@ -806,7 +795,6 @@ C-----------------------------------------------
       END SUBROUTINE read_wout_text
 
 
-#if defined(NETCDF)
       SUBROUTINE read_wout_nc(filename, ierr)
       USE ezcdf
       USE stel_constants, ONLY: mu0
@@ -1328,7 +1316,6 @@ C-----------------------------------------------
       IF (ierror. ne. 0) PRINT *,"in read_wout_nc ierror=",ierror
 
       END SUBROUTINE read_wout_nc
-#endif
 
       SUBROUTINE write_wout_text(filename, ierr)
       USE v3_utilities

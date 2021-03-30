@@ -41,10 +41,6 @@ C-----------------------------------------------
       ier_flag = norm_term_flag
 
       IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
-#if defined(VVAC2_SAL)
-      IF (.not.ALLOCATED(vforsav)) 
-     1 STOP 'VFORSAV not ALLOCATED in VACCUM' ! SAL
-#endif
       ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2),
      1    potu(nuv2), potv(nuv2), stat = i)
       IF (i .ne. 0) STOP 'Allocation error in vacuum'
@@ -135,29 +131,6 @@ C-----------------------------------------------
          brv(i) = rub(i)*bsupu + rvb(i)*bsupv
          bphiv(i) = r1b(i)*bsupv
          bzv(i) = zub(i)*bsupu + zvb(i)*bsupv
-#if defined(VVAC2_SAL)
-         !!!!!!!!!  SAL ADDTION !!!!!!!!!
-         n1 = i*ns
-         n  = n1 - 1 ! Half Grid Point
-         ! Lambda forces on full mesh
-         !blmn_e(n1) = -p5*bsubv(i)*lamscale
-         !clmn_e(n1) = -p5*bsubu(i)*lamscale
-         !blmn_o(n1) = blmn_e(n1) !*sqrts(n1)==1.0
-         !clmn_o(n1) = clmn_e(n1) !*sqrts(n1)==1.0
-         !guu(n1) = bsupu*bsupu*extra4(n1,1)
-         !guv(n1) = bsupu*bsupv*extra4(n1,1)
-         !gvv(n1) = bsupv*bsupv*extra4(n1,1)
-         !guu(n1) = (2*guu(n1)+guu(n))/3
-         !guv(n1) = (2*guv(n1)+guv(n))/3
-         !gvv(n1) = (2*gvv(n1)+gvv(n))/3
-         vforsav(i) = -p5*bsubv(i)*lamscale
-         vforsav(i+nuv2) = -p5*bsubu(i)*lamscale
-         vforsav(i+2*nuv2) = vforsav(i) !*sqrts(n1)==1.0
-         vforsav(i+3*nuv2) = vforsav(i+nuv2) !*sqrts(n1)==1.0
-         vforsav(i+4*nuv2) = bsupu*bsupu*extra4(n1,1)
-         vforsav(i+5*nuv2) = bsupu*bsupv*extra4(n1,1)
-         vforsav(i+6*nuv2) = bsupv*bsupv*extra4(n1,1)
-#endif
       END DO
 
 !

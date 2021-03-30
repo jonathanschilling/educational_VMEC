@@ -10,10 +10,6 @@
       USE xstuff, ONLY: xc
       USE precon2d, ONLY: ictrl_prec2d, lHess_exact,
      1                    ctor_prec2d
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: precondn_rho, ard2, arm2,
-     1                             azd2, azm2, brd2, brm2, bzd2, bzm2
-#endif
       USE fbal
       IMPLICIT NONE
 !-----------------------------------------------
@@ -32,9 +28,7 @@
 !-----------------------------------------------
       INTEGER :: l, js, ndim
       REAL(rprec) :: r2, volume, curpol_temp
-#ifndef _HBANGLE
       REAL(rprec) :: arnorm, aznorm, tcon_mul
-#endif
       REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
       REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh,
      1                                      bsupv, bsubvh, r12sq
@@ -196,19 +190,6 @@
 
       wb = hs*ABS(SUM(wint(:nrzt)*gsqrt(:nrzt)*bsq(:nrzt)))
 
-#ifdef _ANIMEC
-!SPH: MAKE CALL HERE (bsubX_e are used for scratch arrays)
-      CALL an_pressure(bsubu_e, bsubv_e)
-
-!     ADD KINETIC PRESSURE TO MAGNETIC PRESSURE
-      bsq(2:nrzt) = bsq(2:nrzt) + pperp(2:nrzt)
-
-!WAC-SPH: MODIFY EFFECTIVE CURRENT K = curl(sigma_an*B)
-      phipog(1:nrzt) = phipog(1:nrzt)*sigma_an(1:nrzt)
-      bsubuh(1:nrzt) = bsubuh(1:nrzt)*sigma_an(1:nrzt)
-      bsubvh(1:nrzt) = bsubvh(1:nrzt)*sigma_an(1:nrzt)
-
-#else
       pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
       wp = hs*SUM(vp(2:ns)*pres(2:ns))
 
@@ -216,7 +197,6 @@
       DO js=2,ns
          bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
       END DO
-#endif
 
 !SPH122407-MOVED HERE: COMPUTE LAMBDA FULL MESH FORCES
 !     NOTE: bsubu_e is used here ONLY as a temporary array
@@ -234,9 +214,6 @@
 !     COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
 !
 !WAC: UPDATE buco, bvco AFTER pressure called
-#ifdef _ANIMEC
-      IF (iequi .EQ. 1) papr = pmap*pres/vp
-#endif
       CALL calc_fbal(bsubuh, bsubvh)
 
       rbtor0= c1p5*fpsi(2)  - p5*fpsi(3)
@@ -308,24 +285,15 @@
          CALL lamcal(phipog, guu, guv, gvv)
          CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1),
      1                 z1(1,1),arm,ard,brm,brd,
-#ifdef _HBANGLE
-     2                 arm2, ard2, brm2, brd2,
-#endif
      3                 crd,rzu_fac,cos01)
          CALL precondn(bsupv,bsq,gsqrt,r12,rs,ru12,ru,ru(1,1),
      1                 r1(1,1),azm,azd,bzm,bzd,
-#ifdef _HBANGLE
-     2                 azm2, azd2, bzm2, bzd2,
-#endif
      3                 crd,rru_fac,sin01)
 
          rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
          rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
          frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1);  rzu_fac = rzu_fac/2
          fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1);  rru_fac = rru_fac/2
-#ifdef _HBANGLE
-         CALL precondn_rho
-#endif
 
 
          volume = hs*SUM(vp(2:ns))
@@ -342,7 +310,6 @@
 !        COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
 !        OVERRIDE USER INPUT VALUE HERE
 !
-#ifndef _HBANGLE
          r2 = ns
          tcon0 = MIN(ABS(tcon0), one)                              !!ignore large tcon0 from old-style files
          tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
@@ -361,7 +328,6 @@
          END DO
          tcon(ns) = p5*tcon(ns-1)
          IF (lasym) tcon = p5*tcon
-#endif
       ENDIF
 
 !
@@ -415,175 +381,3 @@
 
       END SUBROUTINE bcovar
 
-#ifdef _ANIMEC
-      SUBROUTINE an_pressure(gp, scratch1)
-      USE stel_kinds, ONLY: rprec, dp
-      USE realspace, ONLY: sigma_an, wint, pperp, ppar, onembc
-      USE vforces, r12 => armn_o, gsqrt => azmn_o,
-     &             bsq => bzmn_o
-      USE vmec_main, ONLY: phot, tpotb, pppr, pmap, mass, pres, vp,
-     &                     wp, gamma, wpar, wper, ns, nznt, nrzt,
-     &                     zero, one, nthreed, pperp_ns1=>dbsq,
-     &                     bcrit, medge, phedg, hs, pperp_ns
-      USE vmec_params, ONLY: signgs
-      USE fbal
-!
-!     WAC (11/30/07): See description of anisotropic pressure below
-!     SPH (12/24/07): Replaced "gp" with bsubu_e to avoid overwriting phipog
-!
-      IMPLICIT NONE
-!-----------------------------------------------
-!   D u m m y   A r g u m e n t s
-!-----------------------------------------------
-      REAL(rprec), DIMENSION(nrzt)               :: gp, scratch1
-!-----------------------------------------------
-!   L o c a l   P a r a m e t e r s
-!-----------------------------------------------
-      INTEGER     :: js   , lk   , l
-      REAL        :: pparden, pres_pv, pppr_pv
-!-----------------------------------------------
-!
-!********0*********0*********0*********0*********0*********0*********0**
-!                                                                      *
-!                 Anisotropic Pressure Model                           *
-!                  specific to case where:                             *
-!          a Bi-Maxwellian distribution is considered (by J. Graves)   *
-!          p_parallel(s,B) = pth(1 + phot(s)*H(s,B))                     *
-!      H(s,B)=(B/B_crit)/[1-(T_perp/T_par)(1-B/B_crit)] for B>B_crit   *
-!      For B<B_crit,                                                   *
-!      H(s,B)=H(s,B>B_crit){1-2[(T_perp/T_par)(1-B/B_crit)]^(5/2) /    *
-!                                    [1+(T_perp/T_par)(1-B/B_crit)]}   *
-!                                                                      *
-!********0*********0*********0*********0*********0*********0*********0**
-!
-!********0*********0*********0*********0*********0*********0*********0**
-!   1.  Compute Thermal Pressure and Hot Particle Pressure Amplitude.  *
-!********0*********0*********0*********0*********0*********0*********0**
-      DO js = 1,ns
-         gp(js:nrzt:ns) = tpotb(js)
-         scratch1(js:nrzt:ns) = phot(js)
-      END DO
-
-      bsq(1:nrzt:ns) = 0
-      onembc = one - SQRT(2*bsq(1:nrzt))/bcrit
-      WHERE (one .ne. gp*onembc) sigma_an = (one-onembc)/(one-gp*onembc)
-
-      WHERE (onembc .gt. zero) sigma_an = sigma_an*
-     1      (one-2*(gp*onembc)**2.5_dp/(one+gp*onembc))
-
-      pperp = (1 + scratch1*sigma_an)*gsqrt(1:nrzt)
-
-      DO js = 2,ns
-         pmap(js) = DOT_PRODUCT(pperp(js:nrzt:ns), wint(js:nrzt:ns))
-      END DO
-
-      DO js = 2,ns
-           pmap(js) = signgs*pmap(js)
-           pres(js) = mass(js) / pmap(js)**gamma
-           pppr(js) = pres(js) * phot(js)
-      END DO
-!
-!********0*********0*********0*********0*********0*********0*********0**
-!   3.  Compute P-Parallel, P-Perp.                                    *
-!********0*********0*********0*********0*********0*********0*********0**
-
-      DO js = 2,ns
-         scratch1(js:nrzt:ns) = pppr(js)
-      END DO
-
-      ppar = scratch1*sigma_an
-
-!FORTRAN 95 CONSTRUCT ALLOWS ELSEWHERE (TEST), F90 DOES NOT
-#if defined(WIN32)
-      WHERE (onembc .le. zero)
-         pperp = gp*(one-onembc)/(one-gp*onembc)*ppar
-      ELSEWHERE
-         WHERE (onembc*gp .eq. one)
-            ppar = 2*scratch1*(one - onembc)
-            pperp= (7*ppar*(gp-one))/16
-         ELSEWHERE
-            pperp = (one - (5-(gp*onembc)**2)*
-     &              (gp*onembc)**1.5_dp/(one+gp*onembc)**2)*scratch1
-     &              *gp*(one-onembc)**2/(one-gp*onembc)**2
-         ENDWHERE
-      ENDWHERE
-
-#else
-      WHERE (onembc .le. zero)
-
-         pperp = gp*(one-onembc)/(one-gp*onembc)*ppar
-
-      ELSEWHERE (onembc*gp .eq. one)
-
-         ppar = 2*scratch1*(one - onembc)
-         pperp= (7*ppar*(gp-one))/16
-
-      ELSEWHERE
-
-         pperp = (one - (5-(gp*onembc)**2)*
-     &           (gp*onembc)**1.5_dp/(one+gp*onembc)**2)*scratch1
-     &           *gp*(one-onembc)**2/(one-gp*onembc)**2
-
-      END WHERE
-#endif
-
-      DO js = 2,ns
-         scratch1(js:nrzt:ns) = pres(js)
-      END DO
-
-      ppar = ppar + scratch1
-      pperp= pperp+ scratch1
-
-!
-!********0*********0*********0*********0*********0*********0*********0**
-!   4.  Compute P_perp at the plasma-vacuum interface.                 *
-!********0*********0*********0*********0*********0*********0*********0**
-!
-      pparden = MAX(pppr(ns-1),1.e-30_dp)
-      DO lk=1,nznt
-         l = ns-1 + ns*(lk-1)
-         pperp_ns1(lk) = (pperp(l)-pres(ns-1))/pparden
-      END DO
-      pparden = MAX(pppr(ns),1.e-30_dp)
-      DO lk=1,nznt
-         l = ns + ns*(lk-1)                             !!SPH12-27-12: l = ns, not ns-1
-         pperp_ns(lk) = (pperp(l)-pres(ns))/pparden
-      END DO
-
-      pres_pv = medge / (1.5_dp*pmap(ns)-0.5_dp*pmap(ns-1))**gamma
-      pppr_pv = pres_pv * phedg
-
-      DO lk=1,nznt
-         pperp_ns(lk)=(1.5_dp*pperp_ns(lk)-
-     &                 0.5_dp*pperp_ns1(lk))*pppr_pv + pres_pv
-      END DO
-!
-!********0*********0*********0*********0*********0*********0*********0**
-!   5.  Compute Sigma_an. Determine Volume Averaged Pressures.            *
-!********0*********0*********0*********0*********0*********0*********0**
-!
-      wper = 0
-      gp = gsqrt(1:nrzt)*pperp
-      sigma_an = one + (pperp-ppar)/(2*bsq(1:nrzt))
-
-      pperp(1:nrzt:ns) = 0
-      sigma_an(1:nrzt:ns) = 1
-
-      IF (ALL(phot.eq.zero) .AND. ANY(sigma_an.ne.one))
-     1   STOP 'SIGMA_AN != 1'
-
-      pppr(1) = 0
-      DO js = 2,ns
-         pppr(js) = DOT_PRODUCT(gp(js:nrzt:ns),wint(js:nrzt:ns))
-      END DO
-      pppr(2:ns) = signgs*pppr(2:ns)/vp(2:ns)
-
-      wp    = hs*DOT_PRODUCT(vp(2:ns),pres(2:ns))
-      wpar  = hs*DOT_PRODUCT(pmap(2:ns),pres(2:ns))
-!      whpar = wpar - wp
-      wper  = hs*DOT_PRODUCT(vp(2:ns),pppr(2:ns))
-!      whper = wper - wp
-
-
-      END SUBROUTINE an_pressure
-#endif

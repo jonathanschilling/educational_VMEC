@@ -2,11 +2,7 @@
       USE vmec_main
       USE vmec_input, ONLY: bloat, ncurr
       USE vmec_params
-#ifdef _VACUUM2
-      USE vac2_vacmod
-#else
       USE vacmod
-#endif
       USE safe_open_mod
       IMPLICIT NONE
 !-----------------------------------------------
@@ -94,9 +90,7 @@
       zcc = 0;  zss = 0;  zcs = 0
       IF (.NOT.lasym) THEN
          ntheta3 = ntheta2
-#ifndef _VACUUM2
          mnpd2 = mnpd
-#endif
          IF (lthreed) THEN
             ntmax = 2
             rss = 2;  zcs = 2
@@ -105,9 +99,7 @@
          END IF
       ELSE
          ntheta3 = ntheta1
-#ifndef _VACUUM2
          mnpd2 = 2*mnpd
-#endif
          IF (lthreed) THEN
              ntmax = 4
              rss = 2;  rsc = 3;  rcs = 4
@@ -120,12 +112,10 @@
 
       nuv = nu*nv
       nznt = nzeta*ntheta3
-#ifndef _VACUUM2
       nfper = nfp
       nu2 = nu/2 + 1
       nu3 = ntheta3
       nuv2 = nznt
-#endif
 !     IF (nuv2 < mnpd) THEN
 !        PRINT *, ' nuv2 < mnpd: not enough integration points'
 !        STOP 11

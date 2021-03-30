@@ -158,7 +158,6 @@ C-----------------------------------------------
 !
 !     COMPUTE CONSTRAINT FORCE KERNELS
 !
-#ifndef _HBANGLE
       rcon(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt)) * gcon(:nrzt)
       zcon(:nrzt,0) = (zcon(:nrzt,0) - zcon0(:nrzt)) * gcon(:nrzt)
       brmn_e(:nrzt) = brmn_e(:nrzt) + rcon(:nrzt,0)
@@ -169,5 +168,4 @@ C-----------------------------------------------
       zcon(:nrzt,0) =  zu0(:nrzt) * gcon(:nrzt)
       rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)
       zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
-#endif
       END SUBROUTINE forces

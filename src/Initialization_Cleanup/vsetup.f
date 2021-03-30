@@ -14,11 +14,7 @@ C-----------------------------------------------
 !     Reset default initial values
 !
 !     m=1 constraint (=t: apply correct, polar constraint; =f, apply approx. constraint)
-#ifdef _HBANGLE
-      lconm1 = .FALSE.              !SPH122013: HBANGLE applies correct constraint
-#else
       lconm1 = .TRUE.
-#endif
 !	IF (lrfp) lconm1 = .false.    !SPH102109 converges better
 
 !     2d preconditioner

@@ -101,11 +101,7 @@ C-----------------------------------------------
      1    rlim, zlim, reslim, seplim
       CHARACTER(LEN=1) :: mgrid_mode
 
-#ifdef NETCDF
       PRIVATE :: read_mgrid_bin, read_mgrid_nc
-#else
-      PRIVATE :: read_mgrid_bin
-#endif
       
       CONTAINS
 
@@ -130,11 +126,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-#ifdef VMS
-      CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='vmec$:[makegrid]'
-#else
       CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='$HOME/vmec/MAKEGRID'
-#endif
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -188,12 +180,8 @@ C-----------------------------------------------
          ii = LEN_TRIM(TRIM(mgrid_path)) - 2
          lfind = (mgrid_path(ii:ii+2) == '.nc')
          IF (lfind) THEN
-#ifdef NETCDF
             CALL read_mgrid_nc (mgrid_path, extcur, nv, nfp, 
      1                          ier_flag, lscreen)
-#else
-            lgrid_exist = .false.
-#endif
          ELSE
             CALL read_mgrid_bin (mgrid_path, extcur, nv, nfp,
      1                          ier_flag, lscreen)
@@ -536,7 +524,6 @@ C-----------------------------------------------
 
       END SUBROUTINE read_mgrid_bin
 
-#ifdef NETCDF
       SUBROUTINE read_mgrid_nc (filename, extcur, nv, nfp,
      1                          ier_flag, lscreen)
       USE ezcdf
@@ -685,7 +672,6 @@ C-----------------------------------------------
      1    DEALLOCATE (vn_br, vn_bz, vn_bp, brtemp, bptemp, bztemp)
 
       END SUBROUTINE read_mgrid_nc
-#endif
 
       SUBROUTINE sum_bfield(bfield, bf_add, cur, n1)
       INTEGER     :: n1

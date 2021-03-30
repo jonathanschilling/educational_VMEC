@@ -101,11 +101,7 @@ C-----------------------------------------------
      1    rlim, zlim, reslim, seplim
       CHARACTER(LEN=1) :: mgrid_mode
 
-#if defined(NETCDF)
       PRIVATE :: read_mgrid_bin, read_mgrid_nc
-#else
-      PRIVATE :: read_mgrid_bin
-#endif
 
       CONTAINS
 
@@ -131,11 +127,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-#if defined(VMS)
-      CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='vmec$:[makegrid]'
-#else
       CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='$HOME/vmec/MAKEGRID'
-#endif
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -190,12 +182,8 @@ C-----------------------------------------------
          ii = LEN_TRIM(mgrid_path) - 2
          lfind = (mgrid_path(ii:ii+2) == '.nc')
          IF (lfind) THEN
-#if defined(NETCDF)
             CALL read_mgrid_nc (mgrid_path, extcur, nv, nfp,
      1                          ier_flag, lscreen)
-#else
-            lgrid_exist = .false.
-#endif
          ELSE
             CALL read_mgrid_bin (mgrid_path, extcur, nv, nfp,
      1                          ier_flag, lscreen)
@@ -540,7 +528,6 @@ C-----------------------------------------------
       END SUBROUTINE read_mgrid_bin
 
 
-#if defined(NETCDF)
 !
 !     PARALLEL MPI MODIFICATIONS ADDED BY Mark R. Cianciosa <cianciosamr@ornl.gov>, 092315
 !
@@ -692,7 +679,6 @@ C-----------------------------------------------
 1000  FORMAT(a,'_',i3.3)
 
       END SUBROUTINE read_mgrid_nc
-#endif
 
       SUBROUTINE sum_bfield(bfield, bf_add, cur, n1)
       INTEGER     :: n1

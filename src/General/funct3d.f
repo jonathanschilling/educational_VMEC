@@ -1,10 +1,6 @@
       SUBROUTINE funct3d (lscreen, ier_flag)
       USE vmec_main
-#ifdef _VACUUM2
-      USE vac2_vacmod, ONLY: mf, nf, bsqvac
-#else
       USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
-#endif
       USE vmec_params, ONLY: bad_jacobian_flag, zsc
       USE realspace
       USE vforces
@@ -16,9 +12,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
       USE vparams, ONLY: twopi
       USE totzsp_mod
       USE tomnsp_mod
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: getrz, getfrho, xtempa
-#endif
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -45,11 +38,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 
 !     CONVERT ODD M TO 1/SQRT(S) INTERNAL REPRESENTATION
 !
-#ifdef _HBANGLE
-!Overwrites rzl_array, but that is OK since gc = rzl_array in CALL, xc preserved
-      xtempa = xc
-      CALL getrz(xc)
-#endif
       gc(:neqs2) = xc(:neqs2)*scalxc(:neqs2)
 
 !
@@ -84,9 +72,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !     IN HESSIAN LOOP, ONLY COMPUTE PERTURBATIONS TO R, Z, AND L FOR A SINGLE (m,n,ntype)
 !
       IF (ictrl_prec2d .GE. 2) THEN
-#ifdef _HBANGLE
-         CALL getrz(xcdot)
-#endif
          xcdot(:neqs2) = xcdot(:neqs2)*scalxc(:neqs2)
          CALL totzsps_hess (xcdot, r1, ru, rv, z1, zu, zv, lu, lv,
      1                      rcon, zcon)
@@ -106,10 +91,8 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !
 !     COMPUTE CONSTRAINT RCON, ZCON
 !
-#ifndef _HBANGLE
       rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt)
       zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
-#endif
       ru0(:nrzt) = ru(:nrzt,0) + ru(:nrzt,1)*sqrts(:nrzt)
       zu0(:nrzt) = zu(:nrzt,0) + zu(:nrzt,1)*sqrts(:nrzt)
 
@@ -122,7 +105,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !     BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
 !     SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
 !
-#ifndef _HBANGLE
       IF (iter2.eq.iter1 .and. ivac.le.0) THEN
 !!         rcon0(1:nrzt) = rcon(1:nrzt,0)
 !!         zcon0(1:nrzt) = zcon(1:nrzt,0)
@@ -131,7 +113,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
             zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
          END DO
       ENDIF
-#endif
 !
 !     COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
 !
@@ -199,11 +180,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !           NOTE: gc contains correct edge values of r,z,l arrays
 !                 convert_sym, convert_asym have been applied to m=1 modes
             CALL convert (rmnc, zmns, lmns, rmns, zmnc, lmnc, gc, ns)
-#ifdef _VACUUM2
-            CALL vac2_vacuum(rmnc, rmns, zmns, zmnc, xm, xn, ctor,
-     1                       ivacskip, mnmax)
-
-#else
 !           DO NOT UPDATE THIS WHEN USING PRECONDITIONER: BREAKS TRI-DIAGONAL STRUCTURE
             IF (ictrl_prec2d .eq. 0) THEN
                raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
@@ -214,19 +190,12 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
      1                   ctor, rbtor, wint, ns, ivacskip, ivac, mnmax,
      2                   ier_flag, lscreen)
             IF (ier_flag .ne. 0) GOTO 100
-#endif
 !
 !           RESET FIRST TIME FOR SOFT START
 !
             IF (ivac .eq. 1) THEN
                irst = 2;  delt0 = delt
-#ifdef _HBANGLE
-               gc = xc; xc = xtempa
-#endif
                CALL restart_iter(delt0)
-#ifdef _HBANGLE
-               xc = gc
-#endif
                irst = 1
             END IF
 
@@ -247,11 +216,7 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
             DO l = ns, nrzt, ns
                lk = lk + 1
                bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
-#ifdef _ANIMEC
-               gcon(l)     = bsqvac(lk) + pperp_ns(lk)
-#else
                gcon(l)     = bsqvac(lk) + presf_ns
-#endif
 
                rbsq(lk) = gcon(l)*(r1(l,0) + r1(l,1))*ohs
                dbsq(lk) = ABS(gcon(l)-bsqsav(lk,3))
@@ -278,10 +243,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !
 !     COMPUTE CONSTRAINT FORCE
 !
-#ifdef _HBANGLE
-      gcon = 0
-      IF (iequi .EQ. 1) GOTO 100
-#else
       IF (iequi .NE. 1) THEN
          extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt)
      1                   + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
@@ -290,7 +251,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
       ELSE
          GOTO 100
       END IF
-#endif
 !
 !     COMPUTE MHD FORCES ON INTEGER-MESH
 !
@@ -300,12 +260,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 !
 !     FFT TEST
 !
-#ifdef _TEST_FOURIER
-!      xc = xc*scalxc
-!      CALL tomnsps_t (gc, xc, r1, ru, rv, z1, zu, zv)
-!      IF (lasym) CALL tomnspa_t (gc, xc, r1, ru, rv, z1, zu, zv)
-!      STOP
-#endif
 !
 !     SYMMETRIZE FORCES (in u-v space): NOTE - gc IS SMALL BY FACTOR 2
 !     IF lasym=T
@@ -342,9 +296,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
       CALL second0 (treson)
 
       gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
-#ifdef _HBANGLE
-      CALL getfrho(gc)
-#endif
       CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
 !     Force new initial axis guess IF ALLOWED (l_moveaxis=T)
       IF (lmove_axis .and. iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
@@ -356,9 +307,6 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
 
  100  CONTINUE
 
-#ifdef _HBANGLE
-      xc = xtempa
-#endif
       CALL second0 (tfunoff)
       IF (ictrl_prec2d .le. 1) timer(tfun) = timer(tfun)
      1                                     + (tfunoff - tfunon)

@@ -47,11 +47,6 @@
 !*******************************************************************************
 !  profiler module variables
 !*******************************************************************************
-#if PROFILE_ON
-!>  Array of buckets to hold the values.
-      TYPE (profiler_bucket), DIMENSION(profiler_bucket_size), SAVE            &
-     &   :: buckets
-#endif
 
       CONTAINS
 !*******************************************************************************
@@ -72,11 +67,6 @@
 !$    INTEGER :: i
 
 !  Start of executable code
-#if PROFILE_ON
-!$    DO i = 1, profiler_bucket_size
-!$       CALL OMP_INIT_LOCK(buckets(i)%lock)
-!$    END DO
-#endif
       END SUBROUTINE
 
 !*******************************************************************************
@@ -97,11 +87,6 @@
 !$    INTEGER :: i
 
 !  Start of executable code
-#if PROFILE_ON
-!$    DO i = 1, profiler_bucket_size
-!$       CALL OMP_DESTROY_LOCK(buckets(i)%lock)
-!$    END DO
-#endif
       END SUBROUTINE
 
 !*******************************************************************************
@@ -130,54 +115,6 @@
       REAL (rprec)                         :: time
 
 !  Start of executable code.
-#if PROFILE_ON
-      CALL second0(time)
-      time = time - start_time
-      index = profiler_hash_function(symbol_name)
-
-      DO i = index, profiler_bucket_size
-!$       CALL OMP_SET_LOCK(buckets(i)%lock)
-         IF (buckets(i)%symbol_name .eq. '') THEN
-            buckets(i)%symbol_name = symbol_name
-            buckets(i)%number_of_calls = 1
-            buckets(i)%total_time = time
-            buckets(i)%average_time = time
-!$          CALL OMP_UNSET_LOCK(buckets(i)%lock)
-            RETURN
-         ELSE IF (buckets(i)%symbol_name .eq. symbol_name) THEN
-            buckets(i)%number_of_calls = buckets(i)%number_of_calls + 1
-            buckets(i)%total_time = buckets(i)%total_time + time
-            buckets(i)%average_time = buckets(i)%total_time                    &
-     &                              / buckets(i)%number_of_calls
-!$          CALL OMP_UNSET_LOCK(buckets(i)%lock)
-            RETURN
-         END IF
-!$       CALL OMP_UNSET_LOCK(buckets(i)%lock)
-      END DO
-
-      DO i = 1, index - 1
-!$       CALL OMP_SET_LOCK(buckets(i)%lock)
-         IF (buckets(i)%symbol_name .eq. '') THEN
-            buckets(i)%symbol_name = symbol_name
-            buckets(i)%number_of_calls = 1
-            buckets(i)%total_time = time
-            buckets(i)%average_time = time
-!$          CALL OMP_UNSET_LOCK(buckets(i)%lock)
-            RETURN
-         ELSE IF (buckets(i)%symbol_name .eq. symbol_name) THEN
-            buckets(i)%number_of_calls = buckets(i)%number_of_calls + 1
-            buckets(i)%total_time = buckets(i)%total_time + time
-            buckets(i)%average_time = buckets(i)%total_time                    &
-     &                              / buckets(i)%number_of_calls
-!$          CALL OMP_UNSET_LOCK(buckets(i)%lock)
-            RETURN
-         END IF
-!$       CALL OMP_UNSET_LOCK(buckets(i)%lock)
-      END DO
-
-      WRITE (*,*) 'Profile table full: ' // TRIM(symbol_name) //               &
-     &            ' could not be profiled.'
-#endif
 
        END SUBROUTINE
 
@@ -200,11 +137,7 @@
       REAL (rprec) :: profiler_get_start_time
 
 !  Start of executable code
-#if PROFILE_ON
-      CALL second0(profiler_get_start_time)
-#else
       profiler_get_start_time = 0.0
-#endif
 
       END FUNCTION
 
@@ -234,60 +167,6 @@
       TYPE (profiler_bucket), DIMENSION(:), ALLOCATABLE :: temp_buckets
 
 !  Start of executable code
-#if PROFILE_ON
-      IF (high_index - low_index .lt. 2) THEN
-!  Since the table has been reduced to two elements, sort the sub table.
-         IF (buckets(high_index)%average_time .gt.                             &
-     &       buckets(low_index)%average_time) THEN
-!  Swap the values
-            swap_bucket = buckets(low_index)
-            buckets(low_index) = buckets(high_index)
-            buckets(high_index) = swap_bucket
-         END IF
-         RETURN
-      END IF
-
-!  Split the table in the middle and sort the sub tables.
-      mid_index = (high_index + low_index)/2
-      CALL profiler_sort(low_index, mid_index - 1)
-      CALL profiler_sort(mid_index, high_index)
-
-!  Merge the two tables.
-      i1 = low_index
-      i2 = mid_index
-
-      ALLOCATE(temp_buckets(low_index:high_index))
-
-      DO i = low_index, high_index
-         IF (buckets(i1)%average_time .gt.                                     &
-     &       buckets(i2)%average_time) THEN
-!  Take the value of the lower table and increment the lower index
-            temp_buckets(i) = buckets(i1)
-            i1 = i1 + 1
-            IF (i1 .gt. mid_index - 1) THEN
-!  Merged the last value in the lower table the remining values are all from the
-!  upper.
-               temp_buckets(i + 1:high_index) = buckets(i2:high_index)
-               EXIT
-            END IF
-         ELSE
-!  Take the value of the upper table and increment the upper index
-            temp_buckets(i) = buckets(i2)
-            i2 = i2 + 1
-            IF (i2 .gt. high_index) THEN
-!  Merged the last value in the upper tabel the remining values are all from the
-!  lower.
-               temp_buckets(i + 1:high_index) =                                &
-     &            buckets(i1:mid_index - 1)
-               EXIT
-            END IF
-         END IF
-      END DO
-
-      buckets(low_index:high_index) = temp_buckets(low_index:high_index)
-
-      DEALLOCATE(temp_buckets)
-#endif
       END SUBROUTINE
 
 !-------------------------------------------------------------------------------
@@ -345,27 +224,6 @@
       INTEGER                           :: i
 
 !  Start of executable code
-#if PROFILE_ON
-      WRITE (iou,*)
-      WRITE (iou,*) ' *** Code Profile Information'
-
-      CALL profiler_sort(1, profiler_bucket_size)
-
-      WRITE (iou,1000)
-
-      DO i = 1, profiler_bucket_size
-         IF (buckets(i)%symbol_name .ne. '') THEN
-            WRITE (iou, 1001) buckets(i)%symbol_name,                          &
-     &                        buckets(i)%average_time,                         &
-     &                        buckets(i)%total_time,                           &
-     &                        buckets(i)%number_of_calls
-         END IF
-      END DO
-
-1000  FORMAT('Symbol Name',59x,'Average Time',2x,'TotalTime',5x,               &
-     &       'Num Calls')
-1001  FORMAT(a68,2x,es12.5,2x,es12.5,2x,i9)
-#endif
 
       END SUBROUTINE
 

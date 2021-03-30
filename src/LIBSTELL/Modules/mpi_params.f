@@ -30,21 +30,4 @@ c                    differently.
       INTEGER :: MPI_COMM_DIAGNO = 332                           !communicator for BOOZ_XFORM code
       INTEGER :: MPI_COMM_PARVMEC = 101                           !communicator for PARVMEC code
 
-#ifdef MPI_OPT
-      CONTAINS
-      
-      SUBROUTINE mpi_stel_abort(error)
-      IMPLICIT NONE
-      INCLUDE 'mpif.h'         
-      INTEGER, INTENT(in)                 :: error
-      INTEGER                             :: length, temp
-      CHARACTER(LEN=MPI_MAX_ERROR_STRING) :: message
-      CALL MPI_ERROR_STRING(error,message,length,temp)
-      WRITE(6,*) '!!!!!!!!!!!!MPI_ERROR DETECTED!!!!!!!!!!!!!!'
-      WRITE(6,*) '  MESSAGE: ',message(1:length)
-      WRITE(6,*) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-      CALL FLUSH(6) 
-      !CALL MPI_ABORT(MPI_COMM_STEL,1,temp)
-      END SUBROUTINE
-#endif  
       END MODULE mpi_params

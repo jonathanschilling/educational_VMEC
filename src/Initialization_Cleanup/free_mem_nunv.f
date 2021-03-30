@@ -11,9 +11,6 @@ C-----------------------------------------------
 
       IF (ALLOCATED(bsubu0))
      1    DEALLOCATE (bsubu0, rbsq, dbsq, stat=istat1)
-#ifdef _ANIMEC
-      IF (ALLOCATED(pperp_ns)) DEALLOCATE(pperp_ns)
-#endif
       IF (ALLOCATED(rmn_bdy))
      1    DEALLOCATE (rmn_bdy, zmn_bdy, stat=istat2)
 
@@ -21,11 +18,6 @@ C-----------------------------------------------
      1    DEALLOCATE (amatsav, bvecsav, potvac, bsqsav, 
      2                raxis_nestor, zaxis_nestor, stat=istat3)
 
-#if defined(VVAC2_SAL)
-      !!!!! SAL ADDITION !!!!!
-      IF (ALLOCATED(vforsav)) DEALLOCATE(vforsav, stat=istat4)
-      !!!!!!!!!!!!!!!!!!!!!!!!
-#endif
 
       IF (istat1.ne.0 .or. istat2.ne.0 .or. istat3.ne.0
      1                .or. istat4.ne.0) THEN

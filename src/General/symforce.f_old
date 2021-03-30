@@ -87,16 +87,8 @@ C-----------------------------------------------
 
       SUBROUTINE symoutput (bsq     , gsqrt , bsubu , bsubv ,bsupu ,  
      1                      bsupv   , bsubs ,
-#ifdef _ANIMEC 
-     2                      ppar  , pperp ,densit,
-     3                      sigma_an, tau_an, pbprim, ppprim,
-#endif
      4                      bsqa    , gsqrta, bsubua, bsubva,bsupua,
      5                      bsupva  , bsubsa
-#ifdef _ANIMEC
-     6                     ,ppara , pperpa,densita,
-     7                      sigma_ana,tau_ana,pbprima,ppprima
-#endif
      6                      )
 
       USE vmec_main, p5 => cp5
@@ -106,25 +98,14 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       REAL(rprec), DIMENSION(ns*nzeta,ntheta3), INTENT(inout) ::
      1   bsq, gsqrt, bsubu, bsubv, bsupu, bsupv, bsubs
-#ifdef _ANIMEC
-     2  ,ppar, pperp, sigma_an, tau_an, pbprim, ppprim, densit
-#endif
       REAL(rprec), DIMENSION(ns*nzeta,ntheta3), INTENT(out)   ::
      1   bsqa,gsqrta,bsubua,bsubva,bsupua,bsupva,bsubsa
-#ifdef _ANIMEC
-     2  ,ppara ,pperpa, sigma_ana, tau_ana, pbprima, ppprima ,
-     3   densita
-#endif
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER :: ir, i, jk, jka
       REAL(rprec), DIMENSION(ns*nzeta) :: bsq_0, gsqrt_0, bsubu_0, 
      1    bsubv_0, bsupu_0, bsupv_0, bsubs_0
-#ifdef _ANIMEC
-     2  , ppar_0, pperp_0,
-     2    sigma_an0 , tau_an0 , pbprim_0, ppprim_0, densit_0
-#endif
 C-----------------------------------------------
 
 !
@@ -154,22 +135,6 @@ C-----------------------------------------------
             bsupu_0(jk)     = p5*(bsupu(jk,i)   +bsupu(jka,ir))
             bsupva(jk,i)    = p5*(bsupv(jk,i)   -bsupv(jka,ir))
             bsupv_0(jk)     = p5*(bsupv(jk,i)   +bsupv(jka,ir))
-#ifdef _ANIMEC
-            sigma_ana(jk,i) = p5*(sigma_an(jk,i)-sigma_an(jka,ir))
-            sigma_an0(jk)   = p5*(sigma_an(jk,i)+sigma_an(jka,ir))
-            tau_ana(jk,i)   = p5*(tau_an(jk,i)  -tau_an(jka,ir))
-            tau_an0(jk)     = p5*(tau_an(jk,i)  +tau_an(jka,ir))
-            ppara(jk,i)     = p5*(ppar(jk,i)    -ppar(jka,ir))
-            ppar_0(jk)      = p5*(ppar(jk,i)    +ppar(jka,ir))	    	    
-            pperpa(jk,i)    = p5*(pperp(jk,i)   -pperp(jka,ir))
-            pperp_0(jk)     = p5*(pperp(jk,i)   +pperp(jka,ir))
-            pbprima(jk,i)   = p5*(pbprim(jk,i)  -pbprim(jka,ir))
-            pbprim_0(jk)    = p5*(pbprim(jk,i)  +pbprim(jka,ir))
-            ppprima(jk,i)   = p5*(ppprim(jk,i)  -ppprim(jka,ir))
-            ppprim_0(jk)    = p5*(ppprim(jk,i)  +ppprim(jka,ir))
-            densita(jk,i)   = p5*(densit(jk,i)  -densit(jka,ir))
-            densit_0(jk)    = p5*(densit(jk,i)  +densit(jka,ir))
-#endif
 ! Dominant symmetry reversed
             bsubsa(jk,i)    = p5*(bsubs(jk,i)   +bsubs(jka,ir))  
             bsubs_0(jk)     = p5*(bsubs(jk,i)   -bsubs(jka,ir))
@@ -182,15 +147,6 @@ C-----------------------------------------------
          bsupu(:,i)    = bsupu_0(:)
          bsupv(:,i)    = bsupv_0(:)
          bsubs(:,i)    = bsubs_0(:)
-#ifdef _ANIMEC
-         sigma_an(:,i) = sigma_an0(:)
-         tau_an(:,i)   = tau_an0(:)
-         ppar(:,i)     = ppar_0(:)
-         pperp(:,i)    = pperp_0(:)	 
-         pbprim(:,i)   = pbprim_0(:)
-         ppprim(:,i)   = ppprim_0(:)	 
-         densit(:,i)   = densit_0(:)
-#endif
 
       END DO
 

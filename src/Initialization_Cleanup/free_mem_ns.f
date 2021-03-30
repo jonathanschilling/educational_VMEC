@@ -30,9 +30,6 @@ C-----------------------------------------------
       IF (ALLOCATED(iotaf))
      1  DEALLOCATE (iotaf,mass,phi,presf,jcuru,jcurv,jdotb,buco,bvco,
      1     bucof, bvcof, chi,
-#ifdef _ANIMEC
-     1     phot, pmap, pppr, papr, tpotb, pd,
-#endif
      2     bdotgradv,equif,specw,tcon,psi,yellip,yinden,
      3     ytrian,yshift,ygeo,overr,faclam,iotas,phips,chips,pres,vp,
      4     beta_vol, jperp2, jpar2, bdotb, clam, blam, dlam, phipf,

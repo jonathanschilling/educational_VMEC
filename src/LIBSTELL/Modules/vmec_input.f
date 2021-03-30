@@ -151,11 +151,7 @@
       lmovie = .false.         ! S Lazerson for making movie files
       lmoreiter = .false.      ! default value if no max_main_iterations given.
       max_main_iterations = 1  ! to keep a presumably expected standard behavior.
-#ifdef NETCDF
       lwouttxt = .false.       ! to keep functionality as expected with netcdf
-#else
-      lwouttxt = .true.        ! and without netcdf
-#endif
 
       pcurr_type = 'power_series'
       piota_type = 'power_series'

@@ -2,9 +2,6 @@
       USE vmec_main
       USE realspace
       USE xstuff
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: getrz
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -16,18 +13,10 @@ C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
       CHARACTER(LEN=*), PARAMETER ::
-#ifdef _HBANGLE
-     1   iter_line = "  ITER    FSQRHO   FSQ(m=0)    FSQL   ",
-     1   iter_lines= "  ITER  FSQRHO   FSQ(m=0)    FSQL   ",
-     2   fsq_line  = "  fsqrho   fsq(m=0)    fsql      DELT    ",
-     2   fsq_lines = "  fsqrho   fsq(m=0)    fsql      DELT    ",
-     4   raxis_line = " RAX(v=0) ",
-#else
      1   iter_line = "  ITER    FSQR      FSQZ      FSQL   ",
      2   fsq_line  = "   fsqr      fsqz      fsql      DELT    ",
      3   iter_lines = iter_line, fsq_lines = fsq_line,
      4   raxis_line = "RAX(v=0) ",
-#endif
      3   delt_line = "    DELT  ",        !J.Geiger 20101118
      5   zaxis_line = "  ZAX(v=0)      "
 C-----------------------------------------------
@@ -38,19 +27,12 @@ C-----------------------------------------------
      1          LEN(raxis_line) + LEN(zaxis_line)) ::
      2          print_line
 C-----------------------------------------------
-#ifdef _ANIMEC
-      betav = (2*wper + wpar)/(3*wb)
-#else
       betav = wp/wb
-#endif
       w = w0*twopi*twopi
       den = zero
       specw(1) = one
 
       gc = xstore
-#ifdef _HBANGLE
-      CALL getrz(gc)
-#endif
       CALL spectrum (gc(:irzloff), gc(1+irzloff:2*irzloff))
 
       den = SUM(vp(2:ns))

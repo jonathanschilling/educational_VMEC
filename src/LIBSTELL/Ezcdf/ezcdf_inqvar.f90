@@ -1,7 +1,6 @@
 MODULE ezcdf_inqvar
  
   IMPLICIT NONE
-#ifdef NETCDF
   PUBLIC :: cdfInqVar, cdfgv, cdfInqV, cdf_inquire, alpha_numeric
 
   INTERFACE cdfInqVarDim
@@ -310,5 +309,4 @@ end subroutine cdfInqVar
      end do
 
   END SUBROUTINE alpha_numeric
-#endif
 END MODULE ezcdf_inqvar

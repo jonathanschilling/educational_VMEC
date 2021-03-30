@@ -467,11 +467,7 @@ C-----------------------------------------------
 !     FIRST DO R00 JOG TO LOAD DIAG_VAL ARRAY (DO NOT RELY ON IT BEING THE FIRST JOG
 !
       m_2d=0; n_2d=0
-#ifdef _HBANGLE
-      ntype_2d=zsc+ntmax
-#else
       ntype_2d=rcc
-#endif
 !     APPLY JOG
       hj = eps * MAX(ABS(r01(ns)), ABS(z01(ns)))
       DO js = jstart(1), ns, 3
@@ -514,15 +510,6 @@ C-----------------------------------------------
 
          M2D: DO m_2d = 0, mpol1
             N2D: DO n_2d = 0, ntor
-#ifdef _HBANGLE
-            IF (ntype_2d.GT.ntmax .AND. ntype_2d.LE.2*ntmax) THEN
-               IF (m_2d .NE. 0) THEN
-                  block_diag(n_2d,m_2d,ntype_2d,
-     1                       n_2d,m_2d,ntype_2d,:) = diag_val
-                  CYCLE
-               END IF
-            END IF
-#endif
             MESH_3PT: DO mesh = 1,3
 !              APPLY JOG
                DO js = jstart(mesh), ns, 3
@@ -603,10 +590,8 @@ C-----------------------------------------------
 !
 !     Set diagonals for m=0,n  and m,n=0 sin modes
                   IF (m_2d. eq. 0) THEN
-#ifndef _HBANGLE
                      IF (ntype_2d .eq. zsc+ntmax) 
      1                  DataItem(n_2d,0,ntype_2d) = diag_val(js)
-#endif
                      IF (ntype_2d .eq. zsc+2*ntmax) THEN 
                         IF (ncurr.eq.0 .or. n_2d.ne.0)             !lsc(0,0) for ncurr=1 stores iotas
      1                     DataItem(n_2d,0,ntype_2d) = 1
@@ -620,10 +605,8 @@ C-----------------------------------------------
      1                      ntype_2d.eq.zcs+2*ntmax)
      2                     DataItem(n_2d,0,ntype_2d) = 1
                         IF (lasym) THEN
-#ifndef _HBANGLE
                            IF (ntype_2d .eq. zss+ntmax)
      1                     DataItem(n_2d,0,ntype_2d) = diag_val(js)
-#endif
                            IF (ntype_2d .eq. zss+2*ntmax)
      1                     DataItem(n_2d,0,ntype_2d) = 1
                         END IF
@@ -642,19 +625,15 @@ C-----------------------------------------------
                   IF (lthreed .and. n_2d.eq.0) THEN
                      IF (ntype_2d .eq. rss) 
      1                  DataItem(0,m_2d,ntype_2d) = diag_val(js)
-#ifndef _HBANGLE
                      IF (ntype_2d .eq. zcs+ntmax)
      1                  DataItem(0,m_2d,ntype_2d) = diag_val(js)
-#endif
                      IF (ntype_2d .eq. zcs+2*ntmax)
      1                  DataItem(0,m_2d,ntype_2d) = 1
                      IF (lasym) THEN
                         IF (ntype_2d .eq. rcs)
      1                     DataItem(0,m_2d,ntype_2d) = diag_val(js)
-#ifndef _HBANGLE
                         IF (ntype_2d .eq. zss+ntmax)
      1                     DataItem(0,m_2d,ntype_2d) = diag_val(js)
-#endif
                         IF (ntype_2d .eq. zss+2*ntmax)
      1                     DataItem(0,m_2d,ntype_2d) = 1
                      END IF
@@ -666,13 +645,6 @@ C-----------------------------------------------
                      DataItem(n_2d,m_2d,ntype_2d) = diag_val(js)
                   END IF
 
-#ifdef _HBANGLE
-!ADD LEVENBERG-MARQUARDT TYPE PARAMETER TO DIAGONAL
-!                  IF (m_2d.EQ.1 .AND. ntype_2d.LE.ntmax) THEN
-!                     DataItem(n_2d,m_2d,ntype_2d) = (1+1.E-1_dp)*
-!     1               DataItem(n_2d,m_2d,ntype_2d)
-!                  END IF
-#endif
 
                   IF (lswap2disk) THEN
                      !CALL WriteDAItem_RA(DataItem,js,bldia,index)

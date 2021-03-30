@@ -2,11 +2,7 @@
       USE vmec_main
       USE realspace
       USE vforces
-#ifdef _VACUUM2
-      USE vac2_vacmod
-#else
       USE vacmod
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -20,12 +16,6 @@ C-----------------------------------------------
      3   rcon0, zcon0, guu, guv, gvv, sigma_an, stat=istat1)
       IF (istat1 .ne. 0) STOP 'deallocation error#1 in funct3d'
 
-#ifdef _ANIMEC
-      IF (ALLOCATED(pperp))
-     1   DEALLOCATE (pperp, ppar, onembc, pp1, pp2, pp3,
-     2               stat=istat1)
-      IF (istat1 .ne. 0) STOP 'deallocation error#1A in funct3d'
-#endif
 
       IF (ALLOCATED(brv))
      1   DEALLOCATE (brv, bphiv, bzv, bsqvac, stat=istat1)

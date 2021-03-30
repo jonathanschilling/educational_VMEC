@@ -6,9 +6,6 @@
 !       USE vsvd
       USE xstuff
       USE precon2d
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: scalfor_rho
-#endif
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -31,14 +28,6 @@
 !     INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
 !     (ZCS = RSS, ZSS = RCS ARE THE CORRECT POLAR RELATIONS)
 !
-#ifdef _HBANGLE
-!FREE-BDY RFP MAY NEED THIS TO IMPROVE CONVERGENCE (SPH 022514)
-      IF (lfreeb .AND. lrfp) THEN
-         fac = 0
-         IF (ictrl_prec2d .EQ. 0) fac = 1.E-1_dp
-         gcz(ns,0,m0,:) = fac*gcz(ns,0,m0,:)
-      END IF
-#else
 !
 !     SYMMETRIC PERTURBATIONS (BASED ON POLAR RELATIONS):
 !        RSS(n) = ZCS(n), n != 0
@@ -63,7 +52,6 @@
          gcr(ns,0,m0,:) = fac*gcr(ns,0,m0,:)
          gcz(ns,0,m0,:) = fac*gcz(ns,0,m0,:)
       END IF
-#endif
 
 
 
@@ -119,9 +107,6 @@
          fsql1 = SUM(gcl*gcl)
 
       ELSE
-#ifdef _HBANGLE
-         CALL scalfor_rho(gcr, gcz)
-#else
 !        m = 1 constraint scaling
          IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
          IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
@@ -129,19 +114,9 @@
          CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
          jedge = 1
          CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
-#endif
 
 !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
          CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1)
-#ifdef _HBANGLE
-!
-!     TO IMPROVE CONVERGENCE, REDUCE FORCES INITIALLY IF THEY ARE TOO LARGE
-!
-         fac = .5_dp
-         IF ((iter2-iter1).LT.25 .AND. (fsqr+fsqz).GT.1.E-2_dp)         &
-         fac = fac / SQRT(1.E2_dp*(fsqr+fsqz))
-         gcr = fac*gcr; gcz = fac*gcz
-#endif
 !SPH: THIS IS NOT INVARIANT UNDER PHIP->A*PHIP, AM->A**2*AM IN PROFIL1D
 !     (EXTCUR -> A*EXTCUR for FREE BOUNDARY)
          gcl = faclam*gcl

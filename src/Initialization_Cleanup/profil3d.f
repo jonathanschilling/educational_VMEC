@@ -4,9 +4,6 @@
 c       USE vspline, ONLY: sknots, pknots, hstark, hthom
       USE realspace
       USE xstuff
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: store_init_array
-#endif
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -151,8 +148,5 @@ c       USE vspline, ONLY: sknots, pknots, hstark, hthom
       scalxc(neqs1) = 1
       scalxc(neqs2) = 1
 
-#ifdef _HBANGLE
-      IF (.NOT.linterp) CALL store_init_array(xc)
-#endif
 
       END SUBROUTINE profil3d

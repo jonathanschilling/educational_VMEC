@@ -61,13 +61,11 @@
 ! work_arrays avoids premature size definition of arrays
       USE stel_kinds
       USE stel_constants
-#ifdef NETCDF
       USE bsc_cdf, ONLY: vn_c_type, vn_s_name, vn_l_name,
      1  vn_current, vn_raux, vn_xnod, vn_ehnod, vn_rcirc,
      1  vn_xcent, vn_enhat
 !      USE response_arrays
       USE ezcdf
-#endif
       
 !  Define derived type clresfun - coil response function
       TYPE clresfun
@@ -131,7 +129,6 @@
 !  Other variables
 !      INTEGER :: nprfun = 0
 
-#ifdef NETCDF
 !*******************************************************************************
 ! SECTION II. INTERFACE BLOCKS
 !*******************************************************************************
@@ -161,9 +158,6 @@
 
       USE mpi_params
       IMPLICIT NONE
-#ifdef MPI_OPT
-      INCLUDE 'mpif.h'                                       !mpi stuff
-#endif
 
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -195,14 +189,7 @@
       nwprocs = 0
       istat = 0
 
-#ifdef MPI_OPT
-      CALL MPI_COMM_RANK(MPI_COMM_WORKERS_OK, worker_id_ok, ierr_mpi)
-      CALL MPI_COMM_SIZE(MPI_COMM_WORKERS_OK, nwprocs, ierr_mpi)
-      IF (ierr_mpi .ne. 0) STOP 'IERR_MPI != IN CDF_CRFUN_READ'
-      bReadIO = (worker_id_ok .eq. master)
-#else
       bReadIO = .true.
-#endif
 
       IF (bReadIO) THEN
          CALL cdf_open(ncrfun, cdffil, 'r', istat)
@@ -212,14 +199,6 @@
          CALL cdf_read(ncrfun, vn_n_diagn_c, crf%n_diagn_c)
       END IF
       
-#ifdef MPI_OPT
-      IF (nwprocs .gt. 1) THEN
-         CALL MPI_BCAST(crf%n_field_cg,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(crf%n_diagn_c,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-      END IF
-#endif
       IF (ASSOCIATED(crf%rdiag_coilg)) DEALLOCATE(crf%rdiag_coilg)
       ALLOCATE(crf%rdiag_coilg(crf%n_diagn_c,crf%n_field_cg),                  &
      &   stat = istat)
@@ -237,12 +216,6 @@
          CALL cdf_close(ncrfun, istat)
       END IF
 
-#ifdef MPI_OPT
-      IF (nwprocs .gt. 1) THEN
-         CALL MPI_BCAST(crf%rdiag_coilg,SIZE(crf%rdiag_coilg),
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-      END IF
-#endif
 
       END SUBROUTINE cdf_crfun_read
 
@@ -265,9 +238,6 @@
 ! SPH (05/12/05) added MPI_ logic
       USE mpi_params
       IMPLICIT NONE
-#ifdef MPI_OPT
-      INCLUDE 'mpif.h'                                       !mpi stuff
-#endif
 !      USE bsc
 
 !-----------------------------------------------
@@ -307,14 +277,7 @@
       nwprocs = 0
       istat = 0
 
-#ifdef MPI_OPT
-      CALL MPI_COMM_RANK(MPI_COMM_WORKERS_OK, worker_id_ok, ierr_mpi)
-      CALL MPI_COMM_SIZE(MPI_COMM_WORKERS_OK, nwprocs, ierr_mpi)
-      IF (ierr_mpi .ne. 0) STOP 'IERR_MPI != IN CDF_PRFUN_READ'
-      bReadIO = (worker_id_ok .eq. master)
-#else
       bReadIO = .true.
-#endif
 
       IF (bReadIO) THEN
          INQUIRE(file=cdffil, exist=lfile)
@@ -354,41 +317,6 @@
          CALL cdf_read(nprfun,vn_idrfun,pl_str%idrfun)
       END IF
 
-#ifdef MPI_OPT
-      IF (nwprocs .gt. 1) THEN
-         CALL MPI_BCAST(pl_str%s_name,LEN(pl_str%s_name),
-     1        MPI_CHARACTER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%kp,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%kp_store,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%lstell_sym,1,
-     1        MPI_LOGICAL,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%jz,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%ir,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%rmin,1,
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%rmax,1,
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%zmin,1,
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%zmax,1,
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%cdffil,LEN(pl_str%cdffil),
-     1        MPI_CHARACTER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%idc,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%n_field_periods,1,
-     1        MPI_INTEGER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%name_diagnostic_dot,
-     1        LEN(pl_str%name_diagnostic_dot),
-     1        MPI_CHARACTER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%idrfun,LEN(pl_str%idrfun),
-     1        MPI_CHARACTER,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-      END IF
-#endif
 
       IF (ldim_only_local) THEN
          IF (bReadIO) CALL cdf_close(nprfun, istat)
@@ -409,17 +337,6 @@
          CALL cdf_close(nprfun, istat)
       END IF
 
-#ifdef MPI_OPT
-      IF (nwprocs .gt. 1) THEN
-         CALL MPI_BCAST(pl_str%a_r,SIZE(pl_str%a_r),
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%a_f,SIZE(pl_str%a_f),
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-         CALL MPI_BCAST(pl_str%a_z,SIZE(pl_str%a_z),
-     1        MPI_REAL8,master,MPI_COMM_WORKERS_OK,ierr_mpi)
-      END IF
-#endif
 
       END SUBROUTINE cdf_prfun_read
-#endif
       END MODULE read_response

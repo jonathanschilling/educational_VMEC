@@ -8,13 +8,7 @@ c       USE vspline
       USE init_geometry
 c       USE trip3d_mod, ONLY: read_trip3d, trip3d_to_mgrid,
 c      1                      trip3d_info_vmec, trip3d_free
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: HB_EXP=>pexp
-#endif
       IMPLICIT NONE
-#ifdef MPI_OPT
-      INCLUDE 'mpif.h'                                                          ! MPI
-#endif
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
@@ -365,32 +359,15 @@ c          END IF
 !      am = am*delta**2
 
       WRITE (nthreed,100)
-#ifdef _HBANGLE
-     1  ns_array(multi_ns_grid),ntheta1,nzeta,mpol,ntor,HB_EXP,nfp,
-#else
      1  ns_array(multi_ns_grid),ntheta1,nzeta,mpol,ntor,nfp,
-#endif
-#ifdef _ANIMEC
-     2  gamma,spres_ped,phiedge,curtor,bcrit,lRFP
-#else
      2  gamma,spres_ped,phiedge,curtor,lRFP
-#endif
  100  FORMAT(/,' COMPUTATION PARAMETERS: (u = theta, v = zeta)'/,
      1  1x,45('-'),/,
-#ifdef _HBANGLE
-     2  '     ns     nu     nv     mu     mv     HB_EXP',/,5i7,i11//,
-#else
      2  '     ns     nu     nv     mu     mv',/,5i7//,
-#endif
      3  ' CONFIGURATION PARAMETERS:',/,1x,39('-'),/,
      4  '    nfp      gamma      spres_ped    phiedge(wb)'
-#ifdef _ANIMEC
-     5  '     curtor(A)      BCrit(T)        lRFP',
-     6  /,i7,1p,e11.3,2e15.3,2e14.3,L12/)
-#else
      5  '     curtor(A)        lRFP',
      6  /,i7,1p,e11.3,2e15.3,e14.3,L12/)
-#endif
 
       IF (nvacskip.le.0) nvacskip = nfp
       WRITE (nthreed,110) ncurr,niter_array(multi_ns_grid),ns_array(1),
@@ -501,19 +478,6 @@ c          END IF
       WRITE(nthreed,135)(aphi(i),i=1, SIZE(aphi))
  150  FORMAT(/' NORMALIZED TOROIDAL FLUX COEFFICIENTS aphi',
      1   ' (EXPANSION IN S):',/,1x,35('-'))
-#ifdef _ANIMEC
-      IF (ANY(ah .ne. zero)) THEN
-         WRITE(nthreed,160)
-         WRITE(nthreed,135)(ah(i-1),i=1, SIZE(ah))
-         WRITE(nthreed,165)
-         WRITE(nthreed,135)(at(i-1),i=1, SIZE(at))
-      END IF
-
- 160  FORMAT(' HOT PARTICLE PRESSURE COEFFICIENTS ah',
-     1  ' (EXPANSION IN TOROIDAL FLUX):',/,1x,35('-'))
- 165  FORMAT(' HOT PARTICLE TPERP/T|| COEFFICIENTS at',
-     1  ' (EXPANSION IN TOROIDAL FLUX):',/,1x,35('-'))
-#endif
 
 !  Fourier Boundary Coefficients
       WRITE(nthreed,180)

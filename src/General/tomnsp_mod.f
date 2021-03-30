@@ -75,13 +75,9 @@
             jll = l+1;  nsl = nsz+l
             l = l+nsz
             tempr(:) = armn(jll:nsl,mparity) 
-#ifndef _HBANGLE
      1               + xmpq(m,1)*arcon(jll:nsl,mparity)
-#endif
             tempz(:) = azmn(jll:nsl,mparity) 
-#ifndef _HBANGLE
      1               + xmpq(m,1)*azcon(jll:nsl,mparity)
-#endif
             work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) 
      1                              + brmn(jll:nsl,mparity)*sinmumi(i,m)
             work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m)
@@ -172,132 +168,6 @@
 
       END SUBROUTINE tomnsps
 
-#ifdef _TEST_FOURIER
-!     TEST ROUTINE TO MAKE SURE FFTs ARE CONSISTENT
-      SUBROUTINE tomnsps_t(rzl_array, rzl_array_in, r1, ru, rv, z1, zu, 
-     1                     zv)
-      USE realspace, ONLY: wint, phip
-      USE vmec_main, p5 => cp5
-      USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
-      USE precon2d, ONLY: ictrl_prec2d
-      USE totzsp_mod, ONLY: convert_sym
-      IMPLICIT NONE
-!-----------------------------------------------
-!   D u m m y   A r g u m e n t s
-!-----------------------------------------------
-      REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax),
-     1   TARGET, INTENT(out) :: rzl_array
-      REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax),
-     1   INTENT(inout) :: rzl_array_in
-      REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(in) ::
-     1   r1, ru, rv, z1, zu, zv
-!-----------------------------------------------
-!   L o c a l   V a r i a b l e s
-!-----------------------------------------------
-      INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl 
-      REAL(rprec), DIMENSION(:,:,:), POINTER :: 
-     1           rmncc, rmnss, zmncs, zmnsc
-      REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
-!-----------------------------------------------
-      rmncc => rzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
-      zmnsc => rzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
-      IF (lthreed) THEN 
-         rmnss => rzl_array(:,:,:,rss)               !!SIN(mu) SIN(nv)
-         zmncs => rzl_array(:,:,:,zcs+ntmax)         !!COS(mu) SIN(nv)
-      END IF
-
-      nsz = ns*nzeta
-
-      ALLOCATE (work1(nsz,12), stat=i)
-      IF (i .ne. 0) STOP 'Allocation error in VMEC2000 tomnsps_t'
-
-      ioff = LBOUND(rmncc,2)
-      joff = LBOUND(rmncc,3)
-
-      rzl_array = 0
-
-      jmax = ns
-!
-!     BEGIN FOURIER TRANSFORM
-!
-!     NOTE: sinmumi = -m sin(mu),  sinnvn = -n sin(nv)
-!
-      DO m = 0, mpol1
-         mparity = MOD(m,2)
-         mj = m+joff
-         j2 = jmin2(m)
-         jl = jlam(m)
-         work1 = 0
-!
-!        DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 < U < PI)
-!
-         l = 0
-         DO i = 1, ntheta2
-            jll = l+1;  nsl = nsz+l
-            l = l+nsz
-            work1(:,1) = work1(:,1) + r1(jll:nsl,mparity)*cosmui(i,m)
-            work1(:,7) = work1(:,7) + z1(jll:nsl,mparity)*sinmui(i,m)
- 
-            IF (.not.lthreed) CYCLE
-
-!            work1(:,2) = work1(:,2) - crmn(jll:nsl,mparity)*cosmui(i,m)
-            work1(:,3) = work1(:,3) + r1(jll:nsl,mparity)*sinmui(i,m)
-!            work1(:,4) = work1(:,4) - crmn(jll:nsl,mparity)*sinmui(i,m)
-            work1(:,5) = work1(:,5) + z1(jll:nsl,mparity)*cosmui(i,m)
-!            work1(:,6) = work1(:,6) - czmn(jll:nsl,mparity)*cosmui(i,m)
-!           work1(:,8) = work1(:,8) - czmn(jll:nsl,mparity)*sinmui(i,m)
-
-!            work1(:,10) =work1(:,10)- clmn(jll:nsl,mparity)*cosmui(i,m)
-!            work1(:,12) =work1(:,12)- clmn(jll:nsl,mparity)*sinmui(i,m)
-         END DO
-!
-!        NEXT, DO ZETA (V) TRANSFORM
-!
-         DO n = 0, ntor
-            ni = n+ioff
-            l = 0
-            DO k = 1, nzeta
-               j2l = j2+l; jmaxl = jmax+l; jll = jl+l; nsl = ns+l
-               l = l+ns
-               rmncc(j2:jmax,ni,mj) = rmncc(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,1)*cosnv(k,n)
-               zmnsc(j2:jmax,ni,mj) = zmnsc(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,7)*cosnv(k,n)
-
-               IF (.not.lthreed) CYCLE
-
-!               frcc(j2:jmax,ni,mj) = frcc(j2:jmax,ni,mj)
-!     1                             + work1(j2l:jmaxl,2)*sinnvn(k,n)
-!               fzsc(j2:jmax,ni,mj) = fzsc(j2:jmax,ni,mj)
-!     1                             + work1(j2l:jmaxl,8)*sinnvn(k,n)
-               rmnss(j2:jmax,ni,mj) = rmnss(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,3)*sinnv(k,n) 
-!     2                             + work1(j2l:jmaxl,4)*cosnvn(k,n)
-               zmncs(j2:jmax,ni,mj) = zmncs(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,5)*sinnv(k,n)
-!     2                             + work1(j2l:jmaxl,6)*cosnvn(k,n)
-
-!               flsc(jl:ns,ni,mj) = flsc(jl:ns,ni,mj)
-!     1                           + work1(jll:nsl,12)*sinnvn(k,n)
-            END DO
-         END DO
-      END DO
-
-      DEALLOCATE (work1)
-
-      IF (lthreed) CALL convert_sym(rzl_array_in(:,:,:,rss), 
-     1                              rzl_array_in(:,:,:,ntmax+zcs))
-
-      IF (lasym) RETURN
-         
-      IF (ANY(ABS(rzl_array(:,:,:,1:2*ntmax) - 
-     1            rzl_array_in(:,:,:,1:2*ntmax)) .GT. 1.E-12_dp)) THEN
-         STOP 'FFT ERROR!'
-      END IF
-
-      END SUBROUTINE tomnsps_t
-#endif
 
       SUBROUTINE tomnspa(frzl_array, armn, brmn, crmn, azmn, bzmn,
      1   czmn, blmn, clmn, arcon, azcon)
@@ -353,13 +223,9 @@
 !
          DO i = 1, ntheta2
             temp1(:) = armn(:,i,mparity)
-#ifndef _HBANGLE
      1                + xmpq(m,1)*arcon(:,i,mparity)
-#endif
             temp3(:) = azmn(:,i,mparity)
-#ifndef _HBANGLE
      1               + xmpq(m,1)*azcon(:,i,mparity)
-#endif
             work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m) 
      1                              + brmn(:,i,mparity)*cosmumi(i,m)
             work1(:,5) = work1(:,5) + temp3(:)*cosmui(i,m)
@@ -420,129 +286,4 @@
 
       END SUBROUTINE tomnspa
 
-#ifdef _TEST_FOURIER
-      SUBROUTINE tomnspa_t(rzl_array, rzl_array_in, r1, ru, rv, z1, zu, 
-     1                     zv)
-      USE realspace, ONLY: wint, phip
-      USE vmec_main, p5 => cp5
-      USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
-      USE precon2d, ONLY: ictrl_prec2d
-      USE totzsp_mod, ONLY: convert_asym
-      IMPLICIT NONE
-!-----------------------------------------------
-!   D u m m y   A r g u m e n t s
-!-----------------------------------------------
-      REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax),
-     1   TARGET, INTENT(out) :: rzl_array
-      REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax),
-     1   INTENT(inout) :: rzl_array_in
-      REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(in) ::
-     1   r1, ru, rv, z1, zu, zv
-!-----------------------------------------------
-!   L o c a l   V a r i a b l e s
-!-----------------------------------------------
-      INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl 
-      REAL(rprec), DIMENSION(:,:,:), POINTER :: 
-     1           rmnsc, rmncs, zmncc, zmnss
-      REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
-!-----------------------------------------------
-      rmnsc => rzl_array(:,:,:,rsc)               !!COS(mu) COS(nv)
-      zmncc => rzl_array(:,:,:,zcc+ntmax)         !!SIN(mu) COS(nv)
-      IF (lthreed) THEN 
-         rmncs => rzl_array(:,:,:,rcs)               !!SIN(mu) SIN(nv)
-         zmnss => rzl_array(:,:,:,zss+ntmax)         !!COS(mu) SIN(nv)
-      END IF
-
-      nsz = ns*nzeta
-
-      ALLOCATE (work1(nsz,12), stat=i)
-      IF (i .ne. 0) STOP 'Allocation error in VMEC2000 tomnsps_t'
-
-      ioff = LBOUND(rmnsc,2)
-      joff = LBOUND(rmnsc,3)
-
-      jmax = ns
-!
-!     BEGIN FOURIER TRANSFORM
-!
-!     NOTE: sinmumi = -m sin(mu),  sinnvn = -n sin(nv)
-!
-      DO m = 0, mpol1
-         mparity = MOD(m,2)
-         mj = m+joff
-         j2 = jmin2(m)
-         jl = jlam(m)
-         work1 = 0
-!
-!        DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 < U < PI)
-!
-         l = 0
-         DO i = 1, ntheta2
-            jll = l+1;  nsl = nsz+l
-            l = l+nsz
-            work1(:,1) = work1(:,1) + r1(jll:nsl,mparity)*sinmui(i,m)
-            work1(:,7) = work1(:,7) + z1(jll:nsl,mparity)*cosmui(i,m)
- 
-            IF (.not.lthreed) CYCLE
-
-!            work1(:,2) = work1(:,2) - crmn(jll:nsl,mparity)*cosmui(i,m)
-            work1(:,3) = work1(:,3) + r1(jll:nsl,mparity)*cosmui(i,m)
-!            work1(:,4) = work1(:,4) - crmn(jll:nsl,mparity)*sinmui(i,m)
-            work1(:,5) = work1(:,5) + z1(jll:nsl,mparity)*sinmui(i,m)
-!            work1(:,6) = work1(:,6) - czmn(jll:nsl,mparity)*cosmui(i,m)
-!           work1(:,8) = work1(:,8) - czmn(jll:nsl,mparity)*sinmui(i,m)
-
-!            work1(:,10) =work1(:,10)- clmn(jll:nsl,mparity)*cosmui(i,m)
-!            work1(:,12) =work1(:,12)- clmn(jll:nsl,mparity)*sinmui(i,m)
-         END DO
-!
-!        NEXT, DO ZETA (V) TRANSFORM
-!
-         DO n = 0, ntor
-            ni = n+ioff
-            l = 0
-            DO k = 1, nzeta
-               j2l = j2+l; jmaxl = jmax+l; jll = jl+l; nsl = ns+l
-               l = l+ns
-               rmnsc(j2:jmax,ni,mj) = rmnsc(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,1)*cosnv(k,n)
-               zmncc(j2:jmax,ni,mj) = zmncc(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,7)*cosnv(k,n)
-
-               IF (.not.lthreed) CYCLE
-
-!               frcc(j2:jmax,ni,mj) = frcc(j2:jmax,ni,mj)
-!     1                             + work1(j2l:jmaxl,2)*sinnvn(k,n)
-!               fzsc(j2:jmax,ni,mj) = fzsc(j2:jmax,ni,mj)
-!     1                             + work1(j2l:jmaxl,8)*sinnvn(k,n)
-               rmncs(j2:jmax,ni,mj) = rmncs(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,3)*sinnv(k,n) 
-!     2                             + work1(j2l:jmaxl,4)*cosnvn(k,n)
-               zmnss(j2:jmax,ni,mj) = zmnss(j2:jmax,ni,mj)
-     1                              + work1(j2l:jmaxl,5)*sinnv(k,n)
-!     2                             + work1(j2l:jmaxl,6)*cosnvn(k,n)
-
-!               flsc(jl:ns,ni,mj) = flsc(jl:ns,ni,mj)
-!     1                           + work1(jll:nsl,12)*sinnvn(k,n)
-            END DO
-         END DO
-      END DO
-
-!     IF THE SYMMETRIZED MODE USED, NEED EXTRA FACTOR OF 2 
-!     IF ntheta3 USED INSTEAD OF ntheta3, DO NOT NEED THIS FACTOR
-      rzl_array = 2*rzl_array
-
-      CALL convert_asym(rzl_array_in(:,:,:,rsc), 
-     1                  rzl_array_in(:,:,:,zcc+ntmax))
-
-      IF (ANY(ABS(rzl_array(:,:,:,1:2*ntmax) - 
-     1            rzl_array_in(:,:,:,1:2*ntmax)) .GT. 1.E-12_dp)) THEN
-         STOP 'FFT ERROR 1!'
-      END IF
-            
-      DEALLOCATE (work1)
-
-      END SUBROUTINE tomnspa_t
-#endif
       END MODULE tomnsp_mod

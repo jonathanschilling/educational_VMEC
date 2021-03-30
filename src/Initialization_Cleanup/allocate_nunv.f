@@ -14,9 +14,6 @@ C-----------------------------------------------
       ALLOCATE (bsubu0(nznt), rbsq(nznt), dbsq(nznt), stat=istat1)
       IF (istat1.ne.0) STOP 'allocation error #1 in allocate_nunv'
 
-#ifdef _ANIMEC
-      ALLOCATE (pperp_ns(nznt), stat=istat1)
-#endif
       ALLOCATE (rmn_bdy(0:ntor,0:mpol1,ntmax),
      1          zmn_bdy(0:ntor,0:mpol1,ntmax), stat=istat1)
       IF (istat1.ne.0) STOP 'allocation error #2 in allocate_nunv'
@@ -28,10 +25,6 @@ C-----------------------------------------------
      3          zaxis_nestor(nv), stat=istat1)
          IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nunv'
          !!!!! SAL ADDITION !!!!!
-#if defined(VVAC2_SAL)
-         ALLOCATE (vforsav(nznt*7), stat=istat1)
-         IF (istat1.ne.0) STOP 'allocation error #4 in allocate_nunv'
-#endif
          !!!!!!!!!!!!!!!!!!!!!!!!
 
       END SUBROUTINE allocate_nunv

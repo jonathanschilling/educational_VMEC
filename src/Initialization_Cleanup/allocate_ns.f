@@ -59,11 +59,6 @@ C-----------------------------------------------
 
       ALLOCATE( iotaf(nsp1), crd(nsp1), mass(ns), phi(ns), presf(ns),
      1          jcuru(ns), jcurv(ns), jdotb(ns), buco(ns), bvco(ns),
-#ifdef _ANIMEC
-!WAC ANISTROPIC VARIABLES
-     1          phot(ns), pmap(ns), pppr(ns), papr(ns), tpotb(ns),
-     1          pd(ns),
-#endif
      1          bucof(ns), bvcof(ns), chi(ns),
      2          bdotgradv(ns), equif(ns), specw(ns), tcon(ns),
      3          psi(ns),yellip(ns),yinden(ns), ytrian(ns),yshift(ns),
@@ -76,9 +71,6 @@ C-----------------------------------------------
      9          presgrad(ns), vp(nsp1), r01(ns), z01(ns), stat=istat1)
 
       frcc_fac = 0; fzsc_fac = 0
-#ifdef _ANIMEC
-      phot=0; tpotb=0
-#endif
       IF (istat1.ne.0) STOP 'allocation error #7 in allocate_ns'
 
       iotaf(nsp1) = 0

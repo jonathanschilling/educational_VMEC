@@ -12,9 +12,6 @@
       USE vparams, ONLY: twopi
       USE totzsp_mod
       USE tomnsp_mod
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: getrz, getfrho, xtempa
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -44,11 +41,6 @@ C-----------------------------------------------
 
 !     CONVERT ODD M TO 1/SQRT(S) INTERNAL REPRESENTATION
 !
-#ifdef _HBANGLE
-!Overwrites rzl_array, but that is OK since gc = rzl_array in CALL, xc preserved
-      xtempa = xc
-      CALL getrz(xc)
-#endif       
       gc(:neqs2) = xc(:neqs2)*scalxc(:neqs2)
 
 !
@@ -91,9 +83,6 @@ C-----------------------------------------------
 !     IN HESSIAN LOOP, ONLY COMPUTE PERTURBATIONS TO R, Z, AND L FOR A SINGLE (m,n,ntype)
 !
       IF (ictrl_prec2d .GE. 2) THEN
-#ifdef _HBANGLE
-         CALL getrz(xcdot)
-#endif       
          xcdot(:neqs2) = xcdot(:neqs2)*scalxc(:neqs2)
          CALL totzsps_hess (xcdot, r1, ru, rv, z1, zu, zv, lu, lv, 
      1                      rcon, zcon)
@@ -116,10 +105,8 @@ C-----------------------------------------------
 !     COMPUTE CONSTRAINT RCON, ZCON
 !
       DO l = 1,nrzt
-#ifndef _HBANGLE
          rcon(l,0) = rcon(l,0) + rcon(l,1)*sqrts(l)
          zcon(l,0) = zcon(l,0) + zcon(l,1)*sqrts(l)
-#endif
          ru0(l) = ru(l,0) + ru(l,1)*sqrts(l)
          zu0(l) = zu(l,0) + zu(l,1)*sqrts(l)
       END DO
@@ -133,7 +120,6 @@ C-----------------------------------------------
 !     BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
 !     SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
 !
-#ifndef _HBANGLE
       IF (iter2.eq.iter1 .and. ivac.le.0) THEN
 !!         rcon0(1:nrzt) = rcon(1:nrzt,0)
 !!         zcon0(1:nrzt) = zcon(1:nrzt,0)
@@ -142,7 +128,6 @@ C-----------------------------------------------
             zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
          END DO
       ENDIF
-#endif
 !
 !     COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
 !
@@ -225,13 +210,7 @@ C-----------------------------------------------
 !
             IF (ivac .eq. 1) THEN
                irst = 2;  delt0 = delt
-#ifdef _HBANGLE
-               gc = xc; xc = xtempa
-#endif
                CALL restart_iter(delt0)
-#ifdef _HBANGLE
-               xc = gc
-#endif
                irst = 1
             END IF
 
@@ -252,11 +231,7 @@ C-----------------------------------------------
             DO l = ns, nrzt, ns
                lk = lk + 1
                bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
-#ifdef _ANIMEC
-               gcon(l)     = bsqvac(lk) + pperp_ns(lk)
-#else
                gcon(l)     = bsqvac(lk) + presf_ns
-#endif 
 
                rbsq(lk) = gcon(l)*(r1(l,0) + r1(l,1))*ohs
                dbsq(lk) = ABS(gcon(l)-bsqsav(lk,3))  
@@ -283,10 +258,6 @@ C-----------------------------------------------
 !
 !     COMPUTE CONSTRAINT FORCE
 !
-#ifdef _HBANGLE
-      gcon = 0
-      IF (iequi .EQ. 1) GOTO 100
-#else
       IF (iequi .NE. 1) THEN
          extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt)
      1                   + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
@@ -296,7 +267,6 @@ C-----------------------------------------------
          IF (lrecon) xc(:ns) = xc(:ns) + delr_mse
          GOTO 100
       END IF
-#endif
 !
 !     COMPUTE MHD FORCES ON INTEGER-MESH
 !
@@ -343,9 +313,6 @@ C-----------------------------------------------
       CALL second0 (treson)
 
       gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
-#ifdef _HBANGLE
-      CALL getfrho(gc)
-#endif
       CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
 !     Force new initial axis guess IF ALLOWED (l_moveaxis=T)
       IF (lmove_axis .and. iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
@@ -360,9 +327,6 @@ C-----------------------------------------------
 
  100  CONTINUE
 
-#ifdef _HBANGLE
-      xc = xtempa
-#endif
       CALL second0 (tfunoff)
       IF (ictrl_prec2d .le. 1) timer(tfun) = timer(tfun) 
      1                                     + (tfunoff - tfunon)

@@ -19,10 +19,8 @@ C-----------------------------------------------
 !     CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(at rsc) = .5(rsc + zcc),
 !     R-(at zcc) = .5(rsc - zcc), TO REQUIRED rsc, zcc FORMS
 !
-#ifndef _HBANGLE
       IF (lthreed) CALL convert_sym (rmn(:,:,:,rss), zmn(:,:,:,zcs))
       IF (lasym)   CALL convert_asym (rmn(:,:,:,rsc), zmn(:,:,:,zcc))
-#endif
       dnumer(2:ns) = zero
       denom(2:ns) = zero
       DO ntype = 1,ntmax

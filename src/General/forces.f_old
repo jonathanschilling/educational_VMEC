@@ -2,9 +2,6 @@
       USE vmec_main, p5 => cp5
       USE realspace
       USE vforces
-#if defined(VVAC2_SAL)
-      USE vacmod, ONLY: vforsav  ! SAL
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
@@ -22,20 +19,6 @@ C-----------------------------------------------
 !
 !     Update boundary forces in free boundary (SAL)
 !
-#if defined(VVAC2_SAL)
-      IF (ivac .ge. 1 .and. lnewvac) THEN
-         blmn_e(ns:nrzt:ns) = vforsav(1:nznt) 
-         clmn_e(ns:nrzt:ns) = vforsav(nznt+1:2*nznt) 
-         blmn_o(ns:nrzt:ns) = vforsav(2*nznt+1:3*nznt) 
-         clmn_o(ns:nrzt:ns) = vforsav(3*nznt+1:4*nznt) 
-         guu(ns:nrzt:ns)    = (2*vforsav(4*nznt+1:5*nznt)
-     1                          +guu(ns-1:nrzt:ns))/3
-         guv(ns:nrzt:ns)    = (2*vforsav(5*nznt+1:6*nznt)
-     1                          +guv(ns-1:nrzt:ns))/3
-         gvv(ns:nrzt:ns)    = (2*vforsav(6*nznt+1:7*nznt)
-     1                          +gvv(ns-1:nrzt:ns))/3
-      END IF
-#endif
 
 !
 !     POINTER ALIASES
@@ -185,7 +168,6 @@ C-----------------------------------------------
 !
 !     COMPUTE CONSTRAINT FORCE KERNELS
 !
-#ifndef _HBANGLE
       rcon(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt)) * gcon(:nrzt)
       zcon(:nrzt,0) = (zcon(:nrzt,0) - zcon0(:nrzt)) * gcon(:nrzt)
       brmn_e(:nrzt) = brmn_e(:nrzt) + rcon(:nrzt,0)
@@ -196,5 +178,4 @@ C-----------------------------------------------
       zcon(:nrzt,0) =  zu0(:nrzt) * gcon(:nrzt)
       rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)
       zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
-#endif
       END SUBROUTINE forces

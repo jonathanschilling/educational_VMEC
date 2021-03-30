@@ -73,9 +73,6 @@ C-----------------------------------------------
 ! SAL 2011-08-22: Call to movieout to write out movie file on first
 !                 iteration.
 
-#ifdef LMOVIE
-      IF (lmovie) CALL movieout('open')
-#endif
 
 !
 !     FORCE ITERATION LOOP
@@ -112,11 +109,7 @@ C-----------------------------------------------
             RETURN
          ENDIF
 
-#ifdef _ANIMEC
-         w0 = wb + wpar/(gamma-one)
-#else
          w0 = wb + wp/(gamma - one)
-#endif
 !
 !     ADDITIONAL STOPPING CRITERION (set liter_flag to FALSE)
 !
@@ -180,9 +173,6 @@ C-----------------------------------------------
 ! SAL 2011-08-22: Call to movieout to write out movie file on each
 !                 iteration.
 
-#ifdef LMOVIE
-         IF (lmovie) CALL movieout('write')
-#endif
 
 !       Store force residual, wdot for plotting
          wdota = ABS(w0 - w1)/w0

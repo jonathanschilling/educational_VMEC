@@ -278,11 +278,7 @@ C-----------------------------------------------
          ncount = 0
          IF (iseq .gt. 1) THEN
             reset_file_name =
-#ifdef NETCDF
      1       'wout_' // TRIM(extension(index_seq-1)) // ".nc"
-#else
-     1       'wout.' // TRIM(extension(index_seq-1))
-#endif
          END IF
 !    
 !     SET UP A "REVERSE-COMMUNICATION" LOOP FOR RUNNING VMEC

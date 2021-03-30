@@ -2,9 +2,6 @@
       USE vmec_main, p5 => cp5
       USE vmec_params, ONLY: jmin2, mscale, nscale,
      1                       mnyq, nnyq, signgs
-#ifdef _HBANGLE
-      USE angle_constraints, ONLY: init_multipliers
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
@@ -154,8 +151,5 @@ C-----------------------------------------------
       faccon(mpol1) = zero
       faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
 
-#ifdef _HBANGLE
-      CALL init_multipliers
-#endif
 
       END SUBROUTINE fixaray

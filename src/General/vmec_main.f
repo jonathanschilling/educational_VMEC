@@ -13,10 +13,6 @@ C-----------------------------------------------
       REAL(rprec), DIMENSION(:), ALLOCATABLE ::
      1    crd, iotaf, phipf, chipf, mass, phi, presf, beta_vol, 
      2    jcuru, jcurv, jdotb, 
-#ifdef _ANIMEC
-!WAC: ANISOTROPIC ARRAYS
-     2    phot, pmap, pppr, papr, tpotb, pd,
-#endif
      2    buco, bvco, bdotgradv, equif, specw, tcon, 
      3    psi, yellip, yinden, ytrian, yshift, ygeo, overr, 
      4    sm, sp, iotas, phips, chips, pres, vp, jpar2, jperp2, bdotb, 
@@ -32,9 +28,6 @@ C-----------------------------------------------
      1   signiota, rc0mse, r00, r0scale, z00, dkappa, fsqsum0,
      2   pressum0, fnorm, fsqr=1, fsqz=1, fsql=1, fnorm1, fnorml, 
      3   fsqr1, fsqz1, fsql1, fsq, fedge, wb, wp, r00b, z00b, fz00_edge
-#ifdef _ANIMEC
-     4  ,wpar, wper
-#endif
       REAL(rprec), DIMENSION(nstore_seq) :: fsqt, wdot
       REAL(rprec) :: ftolv, otav, alphaR, alphaZ
       REAL(rprec), DIMENSION(ndamp) :: otau
@@ -42,10 +35,6 @@ C-----------------------------------------------
      1    rmn_bdy, zmn_bdy
       REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
       REAL(rprec), DIMENSION(:), ALLOCATABLE :: bsubu0, dbsq, rbsq
-#ifdef _ANIMEC
-      REAL(rprec), DIMENSION(:), ALLOCATABLE :: pperp_ns
-      REAL(rprec) :: medge, phedg
-#endif
       REAL(rprec) :: rbtor, rbtor0, ctor, delbsq, res0, delt0r
       REAL(rprec), DIMENSION(ndatafmax) ::
      1  spfa, spfa2, hp, sifa, sifa2, hi

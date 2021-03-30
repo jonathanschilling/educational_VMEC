@@ -47,9 +47,7 @@
          rmnss => rzl_array(:,:,:,rss)            !!SIN(mu) SIN(nv)
          zmncs => rzl_array(:,:,:,zcs+ntmax)      !!COS(mu) SIN(nv)
          lmncs => rzl_array(:,:,:,zcs+2*ntmax)    !!COS(mu) SIN(nv)
-#ifndef _HBANGLE
          CALL convert_sym (rmnss, zmncs)
-#endif
       END IF
 
 !v8.50: Norm for preconditioned R,Z forces: scale to boundary value only
@@ -63,9 +61,6 @@
 !           TRI-DIAG 2D PRECONDITIONER
 !
       rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:)
-#ifdef _HBANGLE
-!      rzl_array(1,:,m1+2,1:2*ntmax)= rzl_array(2,:,m1+2,1:2*ntmax)
-#endif
       ioff = LBOUND(rmncc,2)
       joff = LBOUND(rmncc,3)
 
@@ -95,9 +90,6 @@
          mj = m+joff
          work1 = 0
          j1 = jmin1(m)
-#ifdef _HBANGLE
-!         IF (m .EQ. 3) j1 = jmin1(1)
-#endif
 !
 !        INVERSE TRANSFORM IN N-ZETA, FOR FIXED M
 !
@@ -150,19 +142,15 @@
      1                            + work1(1:nsz,1)*cosmu(i,m)
             ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,1)*sinmum(i,m)
-#ifndef _HBANGLE
             rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) 
      1                            + work1(1:nsz,1)*cosmux
-#endif
             z11(j1l:nsl,mparity)  = z11(j1l:nsl,mparity)  
      1                            + work1(1:nsz,6)*sinmu(i,m)
 
             zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,6)*cosmum(i,m)
-#ifndef _HBANGLE
             zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) 
      1                            + work1(1:nsz,6)*sinmux
-#endif             
             lu1(j1l:nsl,mparity)  = lu1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,10)*cosmum(i,m)
 
@@ -172,10 +160,8 @@
      1                            + work1(1:nsz,2)*sinmu(i,m)
             ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,2)*cosmum(i,m)
-#ifndef _HBANGLE
             rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) 
      1                            + work1(1:nsz,2)*sinmux
-#endif
             rv1(j1l:nsl,mparity)  = rv1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,3)*cosmu(i,m) 
      1                            + work1(1:nsz,4)*sinmu(i,m)
@@ -184,10 +170,8 @@
 
             zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,5)*sinmum(i,m)
-#ifndef _HBANGLE
             zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) 
      1                            + work1(1:nsz,5)*cosmux
-#endif
             zv1(j1l:nsl,mparity)  = zv1(j1l:nsl,mparity)  
      1                            + work1(1:nsz,7)*cosmu(i,m) 
      1                            + work1(1:nsz,8)*sinmu(i,m)
@@ -250,19 +234,15 @@
          lus_save = lu1;  lvs_save = lv1;
          rus_save = ru1;  rvs_save = rv1; r1s_save = r11
          zus_save = zu1;  zvs_save = zv1; z1s_save = z11
-#ifndef _HBANGLE
          rcons_save = rcn1
          zcons_save = zcn1
-#endif
          RETURN
       ELSE
          lu1 = lus_save;  lv1 = lvs_save
          ru1 = rus_save;  rv1 = rvs_save; r11 = r1s_save
          zu1 = zus_save;  zv1 = zvs_save; z11 = z1s_save
-#ifndef _HBANGLE
          rcn1 = rcons_save
          zcn1 = zcons_save
-#endif
       END IF
 
       rmncc => rzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
@@ -284,12 +264,10 @@
 !     ENFORCE CONSTRAINT ON m=1 MODES FOR 3D (CONSISTENT WITH gcz(zcs) = 0 IN RESIDUE)
 !     NOTE: Since r,z variations are coupled, must vary BOTH whenever ONE is varied
 !
-#ifndef _HBANGLE
       IF (lthreed .and. m_2d.eq.1 .and. n_2d.ne.0 .and. lthreed .and.
      1   (ntype_2d.eq.rss .or. ntype_2d.eq.(zcs+ntmax))) THEN
          CALL convert_sym (rmnss, zmncs)
       END IF
-#endif
 !
 !     EXTRAPOLATION AT JS=1 FOR M=1 MODES
 !
@@ -382,10 +360,8 @@
      1            cosmu(i,m)
             ru1(:,i,mparity) = ru1(:,i,mparity) + work1(:,1)*
      1            sinmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,1)*
      1            cosmux
-#endif
             END IF
 
             IF (logz) THEN
@@ -393,10 +369,8 @@
      1            sinmu(i,m)
             zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,6)*
      1            cosmum(i,m)
-#ifndef _HBANGLE
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,6)*
      1            sinmux
-#endif
             END IF
  
             IF (logl)
@@ -410,10 +384,8 @@
      1            sinmu(i,m)
             ru1(:,i,mparity) = ru1(:,i,mparity) + work1(:,2)*
      1            cosmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,2)*
      1            sinmux
-#endif
             rv1(:,i,mparity) = rv1(:,i,mparity) + work1(:,3)*
      1            cosmu(i,m) + work1(:,4)*sinmu(i,m)
             END IF
@@ -423,10 +395,8 @@
      1            cosmu(i,m)
             zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,5)*
      1            sinmum(i,m)
-#ifndef _HBANGLE
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,5)*
      1            cosmux
-#endif
             zv1(:,i,mparity) = zv1(:,i,mparity) + work1(:,7)*
      1            cosmu(i,m) + work1(:,8)*sinmu(i,m)
             END IF
@@ -513,9 +483,7 @@ C-----------------------------------------------
 !     CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(at rsc) = .5(rsc + zcc),
 !     R-(at zcc) = .5(rsc - zcc), TO REQUIRED rsc, zcc FORMS
 !
-#ifndef _HBANGLE
       CALL convert_asym (rmnsc, zmncc)
-#endif
 
       IF (ictrl_prec2d .EQ. 3) RETURN
 
@@ -540,9 +508,6 @@ C-----------------------------------------------
          mj = m+joff
          work1 = 0
          j1 = jmin1(m)
-#ifdef _HBANGLE
-!         IF (m .EQ. 3) j1 = jmin1(1)
-#endif
          DO n = 0, ntor
             ni = n+ioff
             DO k = 1, nzeta
@@ -594,12 +559,10 @@ C-----------------------------------------------
      1            sinmum(i,m)
             lu1(:,i,mparity) = lu1(:,i,mparity) + work1(:,10)*
      1            sinmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,1)*
      1            sinmux
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,6)*
      1            cosmux
-#endif
             IF (.not.lthreed) CYCLE
                
             r11(:,i,mparity) = r11(:,i,mparity) + work1(:,2)*
@@ -612,12 +575,10 @@ C-----------------------------------------------
      1               cosmum(i,m)
             lu1(:,i,mparity) = lu1(:,i,mparity) + work1(:,9)*
      1               cosmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,2)*
      1               cosmux
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,5)*
      1               sinmux
-#endif
             rv1(:,i,mparity) = rv1(:,i,mparity) + work1(:,3)*
      1               sinmu(i,m) + work1(:,4)*cosmu(i,m)
             zv1(:,i,mparity) = zv1(:,i,mparity) + work1(:,7)*
@@ -685,11 +646,6 @@ C-----------------------------------------------
       logr = ntype_2d .le. ntmax
       logz = (ntype_2d.gt.ntmax) .and. (ntype_2d.le.2*ntmax)
       logl = ntype_2d .gt. 2*ntmax
-#ifdef _HBANGLE
-      IF (ntype_2d .LE. 2*ntmax) THEN
-         logr=.TRUE.;  logz=.TRUE.
-      END IF
-#endif
       rmnsc => rzl_array(:,:,:,rsc)               !!SIN(mu) COS(nv)
       zmncc => rzl_array(:,:,:,zcc+ntmax)         !!COS(mu) COS(nv)
       lmncc => rzl_array(:,:,:,zcc+2*ntmax)       !!COS(mu) COS(nv)
@@ -706,7 +662,6 @@ C-----------------------------------------------
 !     ENFORCE CONSTRAINT ON m=1 MODES FOR 3D (CONSISTENT WITH gcz(zcc) = 0 IN RESIDUE)
 !     NOTE: Since r,z variations are coupled, must vary BOTH whenever ONE is varied
 !
-#ifndef _HBANGLE
       IF (m_2d.eq.1 .and. lthreed .and.
      1   (ntype_2d.eq.rsc .or. ntype_2d.eq.(ntmax+zcc))) THEN
 !         zmncc(:,:,m1+joff) = 0
@@ -715,7 +670,6 @@ C-----------------------------------------------
          logr = .true.;  logz = .true.
          CALL convert_asym (rmnsc, zmncc)
       END IF
-#endif
 
       ALLOCATE (work1(ns*nzeta,12), stat=i)
       IF (i .ne. 0) STOP 'Allocation error in VMEC2000 totzsps'
@@ -793,10 +747,8 @@ C-----------------------------------------------
      1            sinmu(i,m)
             ru1(:,i,mparity) = ru1(:,i,mparity) + work1(:,1)*
      1            cosmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,1)*
      1            sinmux
-#endif
             END IF
 
             IF (logz) THEN
@@ -804,10 +756,8 @@ C-----------------------------------------------
      1            cosmu(i,m)
             zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,6)*
      1            sinmum(i,m)
-#ifndef _HBANGLE
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,6)*
      1            cosmux
-#endif
             END IF
  
             IF (logl)
@@ -821,10 +771,8 @@ C-----------------------------------------------
      1            cosmu(i,m)
             ru1(:,i,mparity) = ru1(:,i,mparity) + work1(:,2)*
      1            sinmum(i,m)
-#ifndef _HBANGLE
             rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,2)*
      1            cosmux
-#endif
             rv1(:,i,mparity) = rv1(:,i,mparity) + work1(:,3)*
      1            sinmu(i,m) + work1(:,4)*cosmu(i,m)
             END IF
@@ -834,10 +782,8 @@ C-----------------------------------------------
      1            sinmu(i,m)
             zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,5)*
      1            cosmum(i,m)
-#ifndef _HBANGLE
             zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,5)*
      1            sinmux
-#endif
             zv1(:,i,mparity) = zv1(:,i,mparity) + work1(:,7)*
      1            sinmu(i,m) + work1(:,8)*cosmu(i,m)
             END IF

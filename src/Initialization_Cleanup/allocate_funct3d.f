@@ -2,11 +2,7 @@
       USE vmec_main
       USE realspace
       USE vforces
-#ifdef _VACUUM2
-      USE vac2_vacmod
-#else
       USE vacmod
-#endif
       IMPLICIT NONE
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -31,12 +27,6 @@ C-----------------------------------------------
       ru0=0; zu0=0; guu=0; guv=0; gvv=0
       sigma_an=1
 
-#ifdef _ANIMEC
-      ALLOCATE(pperp(nrzt), ppar(nrzt), onembc(nrzt),
-     1   pp1(nrzt), pp2(nrzt), pp3(nrzt), stat=istat1)
-      IF (istat1.ne.0) STOP 'allocation error #1A in allocate_funct3d'
-      pperp=0; ppar=0; onembc=0; pp1=0; pp2=0; pp3=0
-#endif
 
       IF (lfreeb) THEN
          ALLOCATE (brv(nznt), bphiv(nznt), bzv(nznt), bsqvac(nznt),

@@ -26,9 +26,6 @@ C   E x t e r n a l   F u n c t i o n s
 C-----------------------------------------------
       REAL(rprec), EXTERNAL :: pcurr, pmass, piota, torflux,
      1    torflux_deriv, polflux, polflux_deriv
-#ifdef _ANIMEC
-     2  , photp, ptrat
-#endif
 C-----------------------------------------------
 !
 !                INDEX OF LOCAL VARIABLES
@@ -133,20 +130,11 @@ C-----------------------------------------------
 !             pedge = pmass(si)
           END IF
           mass(i) = pedge*(ABS(vpnorm)*r00)**gamma
-#ifdef _ANIMEC
-!         ANISOTROPIC PRESSURE, Tper/T|| RATIOS
-          phot(i) = photp(tf)
-          tpotb(i)= ptrat(tf)
-#endif
         END DO
 
       pres(:ns+1) = 0
       xcdot(:neqs2) = 0
 
-#ifdef _ANIMEC
-      medge  = pmass (one) * (ABS(phips(ns))*r00)**gamma
-      phedg  = photp (one)
-#endif
       DO i = 1, ns
          si = hs*ABS(i-1.5_dp)
 !         si = torflux(si)                      !SPH060409: shalf = sqrt(s), NOT sqrt(phi(s))!

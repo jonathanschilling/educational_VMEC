@@ -7,7 +7,6 @@
       USE stel_kinds
 
       IMPLICIT NONE
-#ifdef NETCDF
 C-----------------------------------------------
 C   L O C A L   P A R A M E T E R S
 C-----------------------------------------------
@@ -21,7 +20,6 @@ C-----------------------------------------------
      1             d1dim = (/'num_diagno'/)
       CHARACTER(LEN=*), DIMENSION(2), PARAMETER :: 
      1             d2dim = (/'str_len   ','num_diagno'/)
-#endif
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
@@ -59,12 +57,7 @@ C-----------------------------------------------
       filename = 'v3post'
       CALL parse_extension(filename, file_or_extension, isnc)
       IF (isnc) THEN
-#ifdef NETCDF
          CALL read_v3post_nc (filename, ierr)
-#else
-         PRINT *, "NETCDF wout file can not be opened on this platform"
-         ierr = -100
-#endif
       ELSE
          iunit = iunit_init
          CALL safe_open (iunit, ierr, filename, 'old', 'formatted')
@@ -89,7 +82,6 @@ C-----------------------------------------------
       END SUBROUTINE read_v3post_text
 
 
-#ifdef NETCDF
       SUBROUTINE read_v3post_nc(filename, ierr)
       USE ezcdf
       IMPLICIT NONE
@@ -129,7 +121,6 @@ C-----------------------------------------------
       CALL cdf_close(ncdf)
 
       END SUBROUTINE read_v3post_nc
-#endif
 
       SUBROUTINE read_v3post_deallocate
       IMPLICIT NONE

@@ -65,7 +65,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/vertex_list.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vf_coils.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vmec_input.f
-	${CMAKE_CURRENT_SOURCE_DIR}/vmec_seq.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vmec_utils.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vparams.f
 	${CMAKE_CURRENT_SOURCE_DIR}/vsvd0.f

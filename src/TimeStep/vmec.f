@@ -1,8 +1,7 @@
       PROGRAM vmec
       USE vmec_input
-      USE vmec_seq
+!      USE vmec_seq
       USE safe_open_mod
-!      USE precon2d, ONLY: ScratchFile
       USE vparams, ONLY: nlog, nlog0, nthreed
       USE vmec_params, ONLY: more_iter_flag,
      1                       bad_jacobian_flag,
@@ -14,7 +13,7 @@ C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
       INTEGER, PARAMETER :: nseq0 = 12
-      CHARACTER(LEN=*), PARAMETER :: increase_niter = 
+      CHARACTER(LEN=*), PARAMETER :: increase_niter =
      1   "Try increasing NITER",
      2    bad_jacobian = "The jacobian was non-definite!",
      3    full_3d1output_request = "Full threed1-output request!"
@@ -129,7 +128,7 @@ C-----------------------------------------------
 !     screen display information, and restart information
 !
       INTERFACE
-         SUBROUTINE runvmec(ictrl_array, input_file0, 
+         SUBROUTINE runvmec(ictrl_array, input_file0,
      1                      lscreen, COMM_WORLD, reset_file_name)
          IMPLICIT NONE
          INTEGER, INTENT(inout), TARGET :: ictrl_array(5)
@@ -157,13 +156,6 @@ C-----------------------------------------------
          PRINT *,' For example: '
          PRINT *,'    xvmec input.tftr OR xvmec tftr ',
      1           'OR xvmec ../input.tftr'
-         PRINT *
-         PRINT *,' Sequence files, containing a list of input files',
-     1           ' are also allowed. For example: '
-         PRINT *,'    xvmec input.tftr_runs'
-         PRINT *
-         PRINT *,' Here, input.tftr_runs contains a &VSEQ namelist',
-     1           ' entry'
          PRINT *
          PRINT *,' Additional (optional) command arguments are',
      1           ' allowed:'
@@ -210,158 +202,24 @@ C-----------------------------------------------
          input_file = 'input.'//TRIM(seq_ext)
       END IF
 
-      nseq = 1
-      nseq_select(1) = 1
-      extension(1) = input_file
-!
-!     READ IN NAMELIST VSEQ TO GET ARRAY
-!     OF INPUT FILE EXTENSIONS AND INDEXING ARRAY, NSEQ_SELECT
-!
-      nlog = nlog0
-      iunit = nseq0
-      DO iseq = 1, 2
-         IF (iseq .eq. 1) THEN
-           arg = input_file
-         ELSE
-           arg = seq_ext
-         END IF
-         CALL safe_open(iunit, iopen, TRIM(arg), 'old', 'formatted')
-         IF (iopen .eq. 0) THEN
-           DO ncount = 1, nseqmax
-              nseq_select(ncount) = ncount
-           END DO
-           CALL read_namelist (iunit, isnml, 'vseq')
-!
-!       OPEN FILE FOR STORING SEQUENTIAL RUN HISTORY
-!
-           IF (isnml .eq. 0) THEN
-              IF (nseq .gt. nseqmax) STOP 'NSEQ>NSEQMAX'
-              log_file = 'log.'//seq_ext
-              CALL safe_open(nlog, iread, log_file, 'replace',
-     1           'formatted')
-              IF (iread .ne. 0) THEN
-                 PRINT *, log_file,
-     1           ' LOG FILE IS INACCESSIBLE: IOSTAT= ',iread
-                 STOP 3
-              ELSE
-                 EXIT        !!Break out of loop
-              END IF
-           ENDIF
-        ENDIF
-        CLOSE (iunit)
-      END DO
-
 !
 !     CALL EQUILIBRIUM SOLVER
 !
-!     nseq_select:      If sequence file (VSEQ NAMELIST given with nseq >0)
-!                       array giving indices into EXTENSION array prescribing
-!                       the order in which the input files are run by VMEC
-!     nseq:             number of sequential VMEC runs to make
-!
-!
-!     CALL VMEC WITH POSSIBLE SEQUENCE EXTENSION (SEQ_EXT)
-!     AND ARRAY OF INPUT FILE EXTENSIONS (EXTENSION)
-!
       ictrl = 0
+      ictrl(1) =   restart_flag+readin_flag +timestep_flag
+     1           + output_flag +cleanup_flag                !Sets all flags
 
-!     GOTO 200  !ENABLE THIS STATEMENT TO TEST REVERSE-COMMUNICATION STOP/RESTART CODING
+      CALL runvmec (ictrl, input_file,
+     1              lscreen, 0, reset_file_name)
 
-      SEQ: DO iseq = 1, nseq
-         index_seq = nseq_select(iseq)
-         ictrl(1) = restart_flag+readin_flag+timestep_flag
-     1            + output_flag+cleanup_flag                !Sets all flags
-         ictrl(2) = 0
-!         ictrl(3) = 100
-!         ictrl(4) = 2
-         ictrl(5) = iseq-1
-         ncount = 0
-         IF (iseq .gt. 1) THEN
-            reset_file_name =
-     1       'wout_' // TRIM(extension(index_seq-1)) // ".nc"
-         END IF
-!    
-!     SET UP A "REVERSE-COMMUNICATION" LOOP FOR RUNNING VMEC
-!
-
- 100     CONTINUE
-
-         CALL runvmec (ictrl, extension(index_seq), 
-     1                 lscreen, 0, reset_file_name)
-         ierr_vmec = ictrl(2)
-         SELECT CASE (ierr_vmec)
-         CASE (more_iter_flag)                                !Need a few more iterations to converge
-            IF (lscreen) WRITE (6, '(1x,a)') increase_niter
-            WRITE (nthreed, '(1x,a)') increase_niter
-! J Geiger: if lmoreiter and lfull3d1out are false
-!           the o-lines (original) are the only
-!           ones to be executed.
-            IF (lmoreiter) THEN                                 ! J Geiger: --start--
-              DO i=2,max_main_iterations                        ! Changes to run
-                ictrl(1) = timestep_flag                        ! some more iterations if requested
-                ictrl(3) = niter                                ! - this is the number of iterations
-                CALL runvmec (ictrl, extension(1), lscreen, 0)     ! - the second iteration run with ictrl(3) iterations
-                IF (ictrl(2).eq.more_iter_flag) then
-                  WRITE (nthreed, '(1x,a)') increase_niter
-                  IF (lscreen) WRITE (6, '(1x,a)') increase_niter
-                ENDIF
-              ENDDO
-            ENDIF                                                ! J Geiger: -- end --
-            ictrl(1) = output_flag+cleanup_flag                  !Output, cleanup  ! o-lines
-                                                                 ! J Geiger: --start--
-            IF(ictrl(2) .NE. successful_term_flag) ictrl(2) = 0  ! o-line was without if-clause.
-                                                                 ! The if-clause was added to not spoil the
-                                                                 ! successful termination by not getting full 3d1 output
-            IF(lfull3d1out) THEN                                 ! in case full 3d1-output is requested
-              ictrl(2)=successful_term_flag                      ! This forces the full 3d1-output in eqfor.
-              WRITE(6,'(1x,a)') full_3d1output_request
-              WRITE(nthreed,'(1x,a)') full_3d1output_request
-            ENDIF                                                ! J Geiger: -- end --
-            CALL runvmec (ictrl, extension(1), lscreen, 0)          ! o-lines
-
-         CASE (bad_jacobian_flag)                             !Bad jacobian even after axis reset and ns->3
-            IF (lscreen) WRITE (6, '(/,1x,a)') bad_jacobian
-            WRITE (nthreed, '(/,1x,a)') bad_jacobian
-         CASE DEFAULT
-         END SELECT
-      END DO SEQ
-
-      GOTO 300
-
-!REVERSE-COMMUNICATION TEST LOOP: SHOULD BE OFF FOR NORMAL VMEC2000 RUN
-!ONLY SHOWS HOW TO IMPLEMENT EXTERNAL STOP/START OF VMEC
- 200  CONTINUE
-
-      nsteps = 50
-      ictrl(1) = restart_flag+readin_flag          !Initialization only
-      ictrl(3) = nsteps
-      ictrl(4) = 1                                 !Go to fine grid directly (assumes it is grid index=1)
-      CALL runvmec (ictrl, extension(1), lscreen, 0)
-
-      ictrl(1) = timestep_flag  + output_flag      !Set timestep flag (output_flag, too, if wout needed)
-      ictrl(1) = timestep_flag                     !Set timestep flag (output_flag, too, if wout needed)
-
-      DO iopen = 1, 3                              !Scan through grids (3, for this example)
-!      DO iopen = 1,1                              !Scan through grids
-         ictrl(4) = iopen          
-         DO ncount = 1, MAX(1,niter/nsteps)
-            CALL runvmec (ictrl, extension(1), lscreen, 0)
-            PRINT *,' BREAK HERE'
-            ierr_vmec = ictrl(2)
-            IF (ierr_vmec .ne. more_iter_flag) EXIT
-         END DO
-      END DO
-
-      ictrl(1) = output_flag+cleanup_flag      !Output, cleanup
-      CALL runvmec (ictrl, extension(1), lscreen, 0)
-
- 300  CONTINUE
+      ierr_vmec = ictrl(2)
+      SELECT CASE (ierr_vmec)
+      CASE (bad_jacobian_flag)                             !Bad jacobian even after axis reset and ns->3
+         IF (lscreen) WRITE (6, '(/,1x,a)') bad_jacobian
+         WRITE (nthreed, '(/,1x,a)') bad_jacobian
+      CASE DEFAULT
+      END SELECT
 
       CLOSE (nlog)
-
-!      IF (ScratchFile .ne. "") THEN
-!         OPEN(unit=20, file=ScratchFile, iostat=iopen)
-!         IF (iopen .eq. 0) CLOSE (20, status='delete')
-!      END IF
 
       END PROGRAM vmec

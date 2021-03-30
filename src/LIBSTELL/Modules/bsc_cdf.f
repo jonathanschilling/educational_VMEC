@@ -17,7 +17,7 @@
 !   CHANGE HISTORY
 !-------------------------------------------------------------------------------
 !
-!  12.13.2002 - Initial Coding - Ed Lazarus, 
+!  12.13.2002 - Initial Coding - Ed Lazarus,
 !  12.16.2002 - JDH Initial Comments, limit to bsc_cdf subroutines
 !  12.17.2002 - JDH - return to using stel_kinds. Eliminate some unused variables.
 !  12.18.2002 - JDH - Eliminated identifier. Added prefix. Made _coilcoll routines
@@ -37,7 +37,7 @@
 
 !*******************************************************************************
 !  MODULE bsc_cdf
-!    
+!
 ! SECTION I.   VARIABLE DECLARATIONS
 ! SECTION II.  INTERFACE BLOCKS
 ! SECTION III. DEFINITION SUBROUTINES
@@ -58,9 +58,8 @@
 
       USE stel_kinds
       USE stel_constants
-      USE bsc_T 
+      USE bsc_T
       USE ezcdf
-      USE v3_utilities
 
 !-------------------------------------------------------------------------------
 !  Implicit None comes after USE statements, before other declarations
@@ -71,29 +70,29 @@
 !  Variable Names for netCDF
 !-------------------------------------------------------------------------------
 
-      CHARACTER (LEN=*),  PARAMETER :: 
+      CHARACTER (LEN=*),  PARAMETER ::
      &  vn_c_type = 'c_type',                                                  &
      &  vn_s_name = 's_name',                                                  &
      &  vn_l_name = 'l_name',                                                  &
-     &  vn_current = 'current',                                                &         
-     &  vn_raux = 'raux',                                                      &            
-     &  vn_xnod = 'xnod',                                                      &            
-     &  vn_ehnod = 'ehnod',                                                    &    
-     &  vn_rcirc = 'rcirc',                                                    &        
-     &  vn_xcent = 'xcent',                                                    &        
+     &  vn_current = 'current',                                                &
+     &  vn_raux = 'raux',                                                      &
+     &  vn_xnod = 'xnod',                                                      &
+     &  vn_ehnod = 'ehnod',                                                    &
+     &  vn_rcirc = 'rcirc',                                                    &
+     &  vn_xcent = 'xcent',                                                    &
      &  vn_enhat = 'enhat',                                                    &
      &  vn_ave_n_area = 'ave_n_area'
 
-      CHARACTER (LEN=64), PRIVATE :: 
+      CHARACTER (LEN=64), PRIVATE ::
      &  vn_c_type_use,                                                         &
      &  vn_s_name_use,                                                         &
      &  vn_l_name_use,                                                         &
-     &  vn_current_use,                                                        &         
-     &  vn_raux_use,                                                           &            
-     &  vn_xnod_use,                                                           &            
-     &  vn_ehnod_use,                                                          &    
-     &  vn_rcirc_use,                                                          &        
-     &  vn_xcent_use,                                                          &        
+     &  vn_current_use,                                                        &
+     &  vn_raux_use,                                                           &
+     &  vn_xnod_use,                                                           &
+     &  vn_ehnod_use,                                                          &
+     &  vn_rcirc_use,                                                          &
+     &  vn_xcent_use,                                                          &
      &  vn_enhat_use,                                                          &
      &  vn_ave_n_area_use
 
@@ -101,7 +100,7 @@
 ! SECTION II. INTERFACE BLOCKS
 !*******************************************************************************
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
 
       CONTAINS
@@ -109,7 +108,7 @@
 ! SECTION III. DEFINITION SUBROUTINES
 !*******************************************************************************
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_define_coil(this,lunit,prefix)
 !  Subroutine to do the appropriate netCDF definition calls for a bsc_coil
@@ -138,7 +137,7 @@
 
 ! Define all vn_--_use variable names
       CALL bsc_cdf_defvn_coil(prefix_use)
-         
+
 ! Define Components common to all c_types
       CALL cdf_define(lunit, TRIM(vn_c_type_use), this%c_type)
       CALL cdf_define(lunit, TRIM(vn_s_name_use), this%s_name)
@@ -149,7 +148,7 @@
 ! Particular coding, depending on c_type
 
       SELECT CASE (this%c_type)
-      
+
       CASE ('fil_loop','floop') ! Filamentary Loop Variables
          IF (ASSOCIATED(this%xnod)) THEN
             CALL cdf_define(lunit, TRIM(vn_xnod_use), this%xnod)
@@ -166,13 +165,13 @@
          END IF ! this%xnod ASSOCIATED
          CALL cdf_define(lunit, TRIM(vn_ave_n_area_use),                       &
      &         this%ave_n_area)
-      
+
       END SELECT
-      
+
       END SUBROUTINE bsc_cdf_define_coil
 
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_define_coilcoll(this,lunit)
 !  Subroutine to  do the appropriate netCDF definition calls for a bsc_coilcoll
@@ -200,13 +199,13 @@
 !  Start of Executable Code
 !-----------------------------------------------
 !  Not sure of the reason for the next IF test. JDH
-!  
+!
       IF (this%s_name .eq. ' ') THEN
          WRITE(*,*) 'this%s_name = one blank. bsc_cdf_define_coilcoll'
          WRITE(*,*) ' is returning'
          RETURN
       END IF
-      
+
       ncoild = this%ncoil
 
 !  Next loop could be augmented to make sure that the prefixes are unique.
@@ -222,7 +221,7 @@
 ! SECTION IV. WRITING SUBROUTINES
 !*******************************************************************************
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_write_coil(this,lunit,prefix)
 !  Subroutine to  do the appropriate netCDF definition calls for a bsc_coil
@@ -251,7 +250,7 @@
 
 ! Define all vn_--_use variable names
       CALL bsc_cdf_defvn_coil(prefix_use)
-         
+
 ! Write Components common to all c_types
       CALL cdf_write(lunit, TRIM(vn_c_type_use), this%c_type)
       CALL cdf_write(lunit, TRIM(vn_s_name_use), this%s_name)
@@ -262,7 +261,7 @@
 ! Particular coding, depending on c_type
 
       SELECT CASE (this%c_type)
-      
+
       CASE ('fil_loop','floop') ! Filamentary Loop Variables
          IF (ASSOCIATED(this%xnod)) THEN
             CALL cdf_write(lunit, TRIM(vn_xnod_use), this%xnod)
@@ -278,14 +277,14 @@
             CALL cdf_write(lunit, TRIM(vn_xnod_use), this%xnod)
          END IF ! this%xnod ASSOCIATED
          CALL cdf_write(lunit, TRIM(vn_ave_n_area_use),                        &
-     &       this%ave_n_area)      
-      
+     &       this%ave_n_area)
+
       END SELECT
-      
+
       END SUBROUTINE bsc_cdf_write_coil
 
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_write_coilcoll(this,lunit)
 !  Subroutine to  do the appropriate netCDF definition calls for a bsc_coilcoll
@@ -313,13 +312,13 @@
 !  Start of Executable Code
 !-----------------------------------------------
 !  Not sure of the reason for the next IF test. JDH
-!  
+!
       IF (this%s_name .eq. ' ') THEN
          WRITE(*,*) 'this%s_name = one blank. bsc_cdf_write_coilcoll'
          WRITE(*,*) ' is returning'
          RETURN
       END IF
-      
+
       ncoild = this%ncoil
 
 !  Next loop could be augmented to make sure that the prefixes are unique.
@@ -335,11 +334,11 @@
 ! SECTION V. READING SUBROUTINES
 !*******************************************************************************
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_read_coil(this,iou,prefix)
 !  Subroutine to do the appropriate netCDF read calls for a bsc_coil
-!  
+!
 
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
@@ -349,7 +348,7 @@
       CHARACTER (len=*), INTENT (in), OPTIONAL   :: prefix
 
 !  this        bsc_coil - this is what gets defined and written.
-!  iou         i/o unit number of the netCDF file. 
+!  iou         i/o unit number of the netCDF file.
 !  prefix      character -  prefixed to variable names, so that netCDF
 !                  doesn't have problems with repeated, identical names
 !-----------------------------------------------
@@ -360,9 +359,9 @@
       CHARACTER(len=32)            :: prefix_use
       INTEGER, DIMENSION(3) :: dimlens
       INTEGER               :: ier1, n2
-      
+
       CHARACTER (len=8) :: c_type
-      CHARACTER (len=30) :: s_name                                 
+      CHARACTER (len=30) :: s_name
       CHARACTER (len=80) :: l_name
       REAL(rprec) :: eps_sq
       REAL(rprec) :: current
@@ -370,7 +369,7 @@
       REAL(rprec) :: rcirc
       REAL(rprec) :: ave_n_area
       REAL(rprec), DIMENSION(3) :: xcent, enhat
-      REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: xnod 
+      REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: xnod
 
 !-----------------------------------------------
 !  Start of Executable Code
@@ -385,7 +384,7 @@
 
 ! Define all vn_--_use variable names
       CALL bsc_cdf_defvn_coil(prefix_use)
-         
+
 ! Read Components
 ! Note: Read in to variables local to this subroutine.
 ! Arrays require inquiry regarding size, and allocation before actual reading.
@@ -393,11 +392,11 @@
       CALL cdf_read(iou, TRIM(vn_c_type_use), c_type)
       CALL cdf_read(iou, TRIM(vn_s_name_use),s_name)
       CALL cdf_read(iou, TRIM(vn_l_name_use),l_name)
-      CALL cdf_read(iou, TRIM(vn_current_use),current)      
+      CALL cdf_read(iou, TRIM(vn_current_use),current)
       CALL cdf_read(iou, TRIM(vn_raux_use),raux)
 
       SELECT CASE (TRIM(c_type))
-      
+
       CASE ('fil_loop','floop') ! Filamentary Loop Variables
          CALL cdf_inquire(iou, TRIM(vn_xnod_use),dimlens)
          ALLOCATE(xnod(dimlens(1),dimlens(2)),STAT=ier1)
@@ -428,7 +427,7 @@
          CALL cdf_read(iou, TRIM(vn_ave_n_area_use),ave_n_area)
          CALL bsc_construct(this,c_type,s_name,l_name,current,                 &
      &      xnod,raux = raux,anturns = one,xsarea = ave_n_area)
-      
+
       END SELECT
 
 ! Deallocate the local allocatable space
@@ -436,16 +435,16 @@
          DEALLOCATE(xnod,STAT=ier1)
          CALL assert_eq(0,ier1,sub_name // 'dealloc xnod')
       END IF
-      
+
       RETURN
-      
+
       END SUBROUTINE bsc_cdf_read_coil
 
 !*******************************************************************************
 ! SECTION VI. AUXILLIARY FUNCTIONS
 !*******************************************************************************
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
       SUBROUTINE bsc_cdf_defvn_coil(prefix_use)
 !  Subroutine to do define the character variable names for a bsc_coil,
@@ -481,14 +480,14 @@
       vn_xcent_use = bsc_cdf_mknam(prefix_use,vn_xcent)
       vn_enhat_use = bsc_cdf_mknam(prefix_use,vn_enhat)
       vn_ave_n_area_use = bsc_cdf_mknam(prefix_use,vn_ave_n_area)
-      
+
       RETURN
-      
+
       END SUBROUTINE bsc_cdf_defvn_coil
 !-------------------------------------------------------------------------------
-!  
+!
 !-------------------------------------------------------------------------------
-      
+
       FUNCTION bsc_cdf_mknam(c1,c2)
 !  A simple function to help in the generation of names
 
@@ -512,7 +511,7 @@
       ENDIF
 
       RETURN
-       
+
       END FUNCTION bsc_cdf_mknam
 
 !-----------------------------------------------

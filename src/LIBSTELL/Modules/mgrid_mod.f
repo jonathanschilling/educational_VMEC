@@ -1,5 +1,4 @@
       MODULE mgrid_mod
-      USE v3_utilities
       USE stel_kinds
       USE vmec_input, ONLY: lfreeb
       IMPLICIT NONE
@@ -102,7 +101,6 @@ C-----------------------------------------------
       SUBROUTINE read_mgrid (mgrid_file, extcur, nv, nfp, lscreen,
      1                       ier_flag)
       USE system_mod
-      USE mpi_inc
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   V a r i a b l e s
@@ -211,7 +209,6 @@ C-----------------------------------------------
      1                          ier_flag, lscreen)
       USE ezcdf
       USE vsvd0, only: nigroup
-      USE mpi_inc
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y  A r g u m e n t s

@@ -1,5 +1,5 @@
       SUBROUTINE runvmec(ictrl_array, input_file0,
-     1   lscreen, COMM_WORLD, reset_file_name)
+     1   lscreen, reset_file_name)
       USE vmec_main
       USE vmec_params, ONLY: bad_jacobian_flag,
      1                       norm_term_flag, successful_term_flag,
@@ -15,7 +15,6 @@ C-----------------------------------------------
       LOGICAL, INTENT(in) :: lscreen
       CHARACTER(LEN=*), INTENT(in) :: input_file0
       CHARACTER(LEN=*), OPTIONAL :: reset_file_name
-      INTEGER :: COMM_WORLD
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------

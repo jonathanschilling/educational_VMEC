@@ -42,7 +42,7 @@
 
       NAMELIST /indata/ mgrid_file, nfp, ncurr, nsin,
      1   niter, nstep, nvacskip, delt, ftol, gamma, am, ai, ac, aphi,
-     1   pcurr_type, pmass_type, piota_type,
+     1   pcurr_type, pmass_type, piota_type, bloat,
      1   am_aux_s, am_aux_f, ai_aux_s, ai_aux_f, ac_aux_s, ac_aux_f,  ! J Hanson 2010-03-16
      2   rbc, zbs, rbs, zbc, spres_ped, pres_scale, raxis_cc, zaxis_cs,
      3   raxis_cs, zaxis_cc, mpol, ntor, ntheta, nzeta, mfilter_fbdy,
@@ -105,6 +105,8 @@
       ai_aux_s(:) = -1
 
       READ (iunit, nml=indata, iostat=istat)
+
+      print *, "indata read, istat=",istat
 
       IF (ALL(niter_array == -1)) niter_array = niter
 

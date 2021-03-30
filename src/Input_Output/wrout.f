@@ -304,7 +304,7 @@
       CALL cdf_setatt(nwout, vn_iotaf, ln_iotaf)
 
       qfact=HUGE(qfact)
-      WHERE (iotaf .NE. zero) qfact=one/iotaf
+      WHERE (iotaf(1:ns) .NE. zero) qfact=one/iotaf(1:ns)
 
       CALL cdf_define(nwout, vn_qfact, qfact(1:ns),
      1                dimname=r1dim)

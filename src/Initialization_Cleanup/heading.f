@@ -1,17 +1,14 @@
-      SUBROUTINE heading(extension, time_slice, iseq_count, lmac,
-     1     lscreen)
+      SUBROUTINE heading(extension, lscreen)
       USE vmec_main, ONLY: rprec
-      USE vparams, ONLY: nthreed, nmac
+      USE vparams, ONLY: nthreed
       USE vmec_params, ONLY: version_
       USE date_and_computer
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER :: iseq_count
-      REAL(rprec) :: time_slice
       CHARACTER(LEN=*) :: extension
-      LOGICAL :: lmac, lscreen
+      LOGICAL :: lscreen
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
@@ -30,8 +27,7 @@ C-----------------------------------------------
 !
 !     Open output files
 !
-      CALL open_output_files (extension, iseq_count, lmac, lscreen,
-     1     lfirst)
+      CALL open_output_files (extension, lscreen, lfirst)
 
       IF (.not.lfirst) RETURN
 
@@ -44,30 +40,19 @@ c     FORTRAN-90 ROUTINE
 
       CALL GetComputerInfo
 
-      IF (lscreen .and. lfirst) WRITE (*,'(a,i4,a,1p,e12.4/2a)')
-     1  '  SEQ = ', iseq_count+1,
-     2  ' TIME SLICE',time_slice,'  PROCESSING INPUT.', TRIM(extension)
+      IF (lscreen .and. lfirst) WRITE (*,'(2a)')
+     2  '  PROCESSING INPUT.', TRIM(extension)
 
       Version = TRIM(ADJUSTL(version_))
       CALL FLUSH(nthreed) !SAL some weird error about file not being ready
       WRITE(nthreed,'(a,1x,a,/,a,//,3(2a,2x),a)') TRIM(banner),
-     1     TRIM(Version), TRIM(VersionID1), 
+     1     TRIM(Version), TRIM(VersionID1),
      2     ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),
      3     ' RELEASE: ', TRIM(os_release), TRIM(dateloc)
       IF (lscreen .and. lfirst)
      1   WRITE (*,'(1x,a,1x,a,/,1x,a,//,1x,3(2a,2x),a)') TRIM(banner),
-     2   TRIM(Version), TRIM(VersionID1), 
+     2   TRIM(Version), TRIM(VersionID1),
      3     ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),
      4     ' RELEASE: ', TRIM(os_release), TRIM(dateloc)
-
-      DO nout = nthreed, nthreed+1
-        imon = nout
-        IF (imon .eq. nthreed+1) imon = nmac
-        IF (imon.eq.nmac .and. .not.lmac) CYCLE
-        WRITE (imon,3) TRIM(extension),iseq_count,time_slice
-      ENDDO
-
- 3    FORMAT(' SHOT ID.: ',a,2x,'SEQ. NO.:',i4,/,
-     1       ' TIME SLICE = ',f5.0,' ms')
 
       END SUBROUTINE heading

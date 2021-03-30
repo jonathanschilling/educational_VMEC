@@ -14,7 +14,7 @@
       CHARACTER(LEN=LEN_TRIM(lc_name)+1) :: namelc
 !-----------------------------------------------
 
-      io_stat = -1
+      io_stat = 0
       REWIND (iunit)
       namelc = lead // TRIM(ADJUSTL(lc_name))
 

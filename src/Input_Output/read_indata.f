@@ -13,7 +13,7 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      INTEGER :: ireadseq, iosnml
+      INTEGER :: ireadseq, iosnml = 0
 !-----------------------------------------------
       iunit = indata0
       CALL safe_open (iunit, ireadseq, in_file, 'old', 'formatted')
@@ -31,8 +31,6 @@
          ier_flag = input_error_flag
          RETURN
       ENDIF
-
-      CALL read_namelist (iunit, iosnml, 'mseprofile')
 
       IF (lfreeb .and. mgrid_file.eq.'NONE') lfreeb = .false.
 

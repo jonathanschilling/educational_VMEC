@@ -354,10 +354,10 @@ C-----------------------------------------------
  110  FORMAT(' RUN CONTROL PARAMETERS:',/,1x,23('-'),/,
      1  '  ncurr  niter   nsin  nstep  nvacskip      ftol     tcon0',
      2  '    lasym  lforbal lmove_axis lconm1',/,
-     3     4i7,i10,1p,2e10.2,4L9,/,
-     4  '  mfilter_fbdy nfilter_fbdy lfull3d1out max_main_iterations', ! J Geiger 20120203
+     3     4i7,i10,1p,2e10.2,2L9,/,
+     4  '  mfilter_fbdy nfilter_fbdy', ! J Geiger 20120203
      5  ' lgiveup fgiveup',/,               ! M Drevlak 20130114
-     6     2(6x,i7),L12,10x,i10,L8,e9.1,/)  ! M Drevlak 20130114
+     6     2(6x,i7),L8,e9.1,/)  ! M Drevlak 20130114
 
       WRITE (nthreed,120) precon_type, prec2d_threshold
  120  FORMAT(' PRECONDITIONER CONTROL PARAMETERS:',/,1x,34('-'),/,

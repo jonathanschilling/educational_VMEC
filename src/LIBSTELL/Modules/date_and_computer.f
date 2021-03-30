@@ -13,7 +13,7 @@
       CHARACTER(LEN=200) :: fileId
 
 
-#ifdef (WIN32)
+#ifdef WIN32
       computer = ' Window_NT'
       os       = ' MS Windows 2000'
       os_release  = ' 5.00'

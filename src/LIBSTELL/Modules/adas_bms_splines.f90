@@ -28,7 +28,7 @@
 !---------------------------------------------------------------------!
 
 module adas_bms_splines
-#ifdef (NTCC)
+#ifdef NTCC
       use EZspline_obj
       use EZspline
       

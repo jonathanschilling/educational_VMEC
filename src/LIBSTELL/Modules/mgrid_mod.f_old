@@ -130,7 +130,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-#ifdef (VMS)
+#ifdef VMS
       CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='vmec$:[makegrid]'
 #else
       CHARACTER(LEN=*), PARAMETER :: mgrid_defarea='$HOME/vmec/MAKEGRID'

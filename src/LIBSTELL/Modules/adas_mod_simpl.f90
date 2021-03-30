@@ -55,7 +55,7 @@
 !---------------------------------------------------------------------
 Module adas_mod_simpl
 
-#ifdef (NTCC)
+#ifdef NTCC
   use ezcdf
      implicit none
       INTEGER, PARAMETER :: R8=SELECTED_REAL_KIND(12,100)

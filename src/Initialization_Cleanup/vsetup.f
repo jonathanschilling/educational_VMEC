@@ -15,24 +15,13 @@ C-----------------------------------------------
 !
 !     m=1 constraint (=t: apply correct, polar constraint; =f, apply approx. constraint)
       lconm1 = .TRUE.
-!	IF (lrfp) lconm1 = .false.    !SPH102109 converges better
 
 !     2d preconditioner
       nfcn = 0
-
-      loldout = .false.
-      ledge_dump = .false.
 
       z00 = zero
       mgrid_mode = 'S'             !Assume scaled mode; read in from mgrid in free-bdy mode
       nextcur = 0
 
-!
-!     FREE-BOUNDARY STUFF, ONLY INITIALIZED FIRST TIME
-!
-      IF (iseq_count .eq. 0) THEN
-        nbcoil_max = 0
-        nlim_max = 0
-      END IF
 
       END SUBROUTINE vsetup

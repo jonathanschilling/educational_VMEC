@@ -31,18 +31,8 @@ C-----------------------------------------------
 !      IF (ictrl_prec2d.eq.1 .and. iter2.eq.(iter_on+40))
 !     1     ictrl_prec2d = 0
 
-!  JDH 2011-09-15 Add condition to lfinal_mesh, that iter2 - iter1 > 5
-!    (5 was picked out of a hat)
-!    Purpose is to keep preconditioning from being turned on immediately upon
-!    a restart (V3FIT)
-!   The final .and. clause is a bit complicated. The purpose of the
-!   .not. lv3fit is so that if v3fita is not running, the final .and. clause
-!   is always true. Read as "and, if lv3fit, then must also have iter2 - iter1 > 5"
-!      lfinal_mesh = (ns .eq. ns_maxval) .and. (ictrl_prec2d.eq.0)
-!     1              .and. (itype_precon.ne.0)
       lfinal_mesh = (ns .eq. ns_maxval) .and. (ictrl_prec2d.eq.0)
      1              .and. (itype_precon.ne.0)
-     2              .and. ((.not. l_v3fit) .or. iter2 - iter1 .ge. 5)
 
       IF (iter2 .lt. 10) THEN
          ictrl_prec2d = 0
@@ -72,11 +62,9 @@ C-----------------------------------------------
 !SPH022111: ADD NEW CONTROL PARAMETER, l_comp_prec2D, TO FORCE RECALCULATION
 !           OF PRECONDITIONING BLOCKS IN V3FIT, FOR EXAMPLE
          IF (lfirst .or. l_comp_prec2D) THEN
-            IF (l_v3fit) WRITE(*,*) 'VMEC Evolve:compute_blocks'
             CALL compute_blocks (xc,xcdot,gc)
             CALL funct3d(lscreen, ier_flag)
          ENDIF
-         IF(l_v3fit) WRITE(*,*) 'VMEC Evolve:prec2d_On iter2 =', iter2
          l_comp_prec2D = .FALSE.
          ictrl_prec2d = 1
          iter1 = iter2-1; fsq = fsqr1 + fsqz1 + fsql1
@@ -97,16 +85,9 @@ C-----------------------------------------------
 !     COMPUTE ABSOLUTE STOPPING CRITERION
       IF (iter2.eq.1 .and. irst.eq.2) THEN
          ier_flag = bad_jacobian_flag
-!  JDH 2012-04-24. Revise this absolute stopping criterion, so that if v3fit
-!    is running, then have to iterate at least 2 * nvacskip steps
-!    (2 picked out of a hat) (nvacskip - to make sure vacuum gets updated)
-!    before returning.
-!      ELSE IF (fsqr.le.ftolv .and. fsqz.le.ftolv .and.
-!     1         fsql.le.ftolv) THEN
+
       ELSE IF (fsqr.le.ftolv .and. fsqz.le.ftolv .and.
-     1         fsql.le.ftolv .and.
-     2         ((.not. l_v3fit) .or. iter2 - iter1 .ge. 2 * nvacskip))
-     3         THEN
+     1         fsql.le.ftolv) THEN
          liter_flag = .false.
          ier_flag = successful_term_flag
          IF (lqmr) THEN
@@ -125,21 +106,6 @@ C-----------------------------------------------
          END IF
 
          CALL gmres_fun(ier_flag, itype_precon-1)
-
-!  JDH 2011-06-20. Comment out V3FIT stabilization
-!V3FITA STABILIZATION (021711): NOTE - lower 100 for turning off precondition sooner
-C         b1 = (fsqr+fsqz+fsql)/prec2d_threshold
-C         IF (b1 .ge. 10) THEN
-C            xc = xstore + (xc-xstore)/b1
-C            IF (b1 .gt. 1000) THEN
-C               xc = xstore
-C               lqmr = .FALSE.
-C               ictrl_prec2d = 0
-C               time_step = 0.9*time_step
-C               RETURN
-C            END IF
-C         END IF
-!END OF V3FITA STABILIZATION
 
          IF (lfreeb) RETURN
          DO lcount = ns, 2*irzloff, ns

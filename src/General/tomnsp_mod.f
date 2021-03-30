@@ -2,7 +2,7 @@
 
       CONTAINS
 
-      SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, 
+      SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn,
      1   bzmn, czmn, blmn, clmn, arcon, azcon)
       USE realspace, ONLY: wint, phip
       USE vmec_main, p5 => cp5
@@ -22,8 +22,8 @@
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
       INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl 
-      REAL(rprec), DIMENSION(:,:,:), POINTER :: 
+      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl
+      REAL(rprec), DIMENSION(:,:,:), POINTER ::
      1           frcc, frss, fzcs, fzsc, flcs, flsc
       REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
       REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
@@ -32,7 +32,7 @@
       frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
       fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
       flsc => frzl_array(:,:,:,zsc+2*ntmax)       !!SIN(mu) COS(nv)
-      IF (lthreed) THEN 
+      IF (lthreed) THEN
          frss => frzl_array(:,:,:,rss)               !!SIN(mu) SIN(nv)
          fzcs => frzl_array(:,:,:,zcs+ntmax)         !!COS(mu) SIN(nv)
          flcs => frzl_array(:,:,:,zcs+2*ntmax)       !!COS(mu) SIN(nv)
@@ -74,16 +74,16 @@
          DO i = 1, ntheta2
             jll = l+1;  nsl = nsz+l
             l = l+nsz
-            tempr(:) = armn(jll:nsl,mparity) 
+            tempr(:) = armn(jll:nsl,mparity)
      1               + xmpq(m,1)*arcon(jll:nsl,mparity)
-            tempz(:) = azmn(jll:nsl,mparity) 
+            tempz(:) = azmn(jll:nsl,mparity)
      1               + xmpq(m,1)*azcon(jll:nsl,mparity)
-            work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) 
+            work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m)
      1                              + brmn(jll:nsl,mparity)*sinmumi(i,m)
             work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m)
      1                              + bzmn(jll:nsl,mparity)*cosmumi(i,m)
             work1(:,11)= work1(:,11)+ blmn(jll:nsl,mparity)*cosmumi(i,m)
- 
+
             IF (.not.lthreed) CYCLE
 
             work1(:,2) = work1(:,2) - crmn(jll:nsl,mparity)*cosmui(i,m)
@@ -122,7 +122,7 @@
                fzsc(j2:jmax,ni,mj) = fzsc(j2:jmax,ni,mj)
      1                             + work1(j2l:jmaxl,8)*sinnvn(k,n)
                frss(j2:jmax,ni,mj) = frss(j2:jmax,ni,mj)
-     1                             + work1(j2l:jmaxl,3)*sinnv(k,n) 
+     1                             + work1(j2l:jmaxl,3)*sinnv(k,n)
      2                             + work1(j2l:jmaxl,4)*cosnvn(k,n)
                fzcs(j2:jmax,ni,mj) = fzcs(j2:jmax,ni,mj)
      1                             + work1(j2l:jmaxl,5)*sinnv(k,n)
@@ -147,23 +147,6 @@
          END DO
       END IF
 
-!
-!     MAKE R,Z(m=1,n=0) SATISFY AVERAGE FORCE BALANCE EXACTLY
-!     NOTE: for m=1, FR ~ Z1*(f0 + f2), FZ ~ R1*(f0 - f2), WHERE
-!     f0 is the m=0 component of frho, f2 is m=2 component.
-      IF (lforbal) THEN
-         mj = 1 + joff
-         ni = 0 + ioff
-         t1 = nscale(0)*r0scale    !/4    !!v8.52
-
-         DO jl = 2, ns-1
-            work1(jl,1) = frcc_fac(jl)*frcc(jl,ni,mj)
-     1                  + fzsc_fac(jl)*fzsc(jl,ni,mj)
-            frcc(jl,ni,mj) = rzu_fac(jl)*(t1*equif(jl) + work1(jl,1))
-            fzsc(jl,ni,mj) = rru_fac(jl)*(t1*equif(jl) - work1(jl,1))
-         END DO
-      END IF
-
       DEALLOCATE (work1, tempr, tempz)
 
       END SUBROUTINE tomnsps
@@ -185,8 +168,8 @@
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
       INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl 
-      REAL(rprec), DIMENSION(:,:,:), POINTER :: 
+      INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl
+      REAL(rprec), DIMENSION(:,:,:), POINTER ::
      1           frcs, frsc, fzcc, fzss, flcc, flss
       REAL(rprec), DIMENSION(:), ALLOCATABLE   :: temp1, temp3
       REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
@@ -226,7 +209,7 @@
      1                + xmpq(m,1)*arcon(:,i,mparity)
             temp3(:) = azmn(:,i,mparity)
      1               + xmpq(m,1)*azcon(:,i,mparity)
-            work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m) 
+            work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m)
      1                              + brmn(:,i,mparity)*cosmumi(i,m)
             work1(:,5) = work1(:,5) + temp3(:)*cosmui(i,m)
      1                              + bzmn(:,i,mparity)*sinmumi(i,m)
@@ -268,7 +251,7 @@
                fzcc(j2:jmax,ni,mj) = fzcc(j2:jmax,ni,mj)
      1                             + work1(j2l:jmaxl,6)*sinnvn(k,n)
                frcs(j2:jmax,ni,mj) = frcs(j2:jmax,ni,mj)
-     1                             + work1(j2l:jmaxl,1)*sinnv(k,n) 
+     1                             + work1(j2l:jmaxl,1)*sinnv(k,n)
      2                             + work1(j2l:jmaxl,2)*cosnvn(k,n)
                fzss(j2:jmax,ni,mj) = fzss(j2:jmax,ni,mj)
      1                             + work1(j2l:jmaxl,7)*sinnv(k,n)

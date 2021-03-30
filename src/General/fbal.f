@@ -6,12 +6,11 @@
       CONTAINS
 
       SUBROUTINE calc_fbal(bsubu, bsubv)
-      USE vmec_main, ONLY: buco, bvco, equif, 
-     1                     jcurv, jcuru, chipf, vp, pres, 
+      USE vmec_main, ONLY: buco, bvco, equif,
+     1                     jcurv, jcuru, chipf, vp, pres,
      2                     phipf, vpphi, presgrad, ohs
       USE vmec_params, ONLY: signgs
       USE vmec_dim, ONLY: ns, nrzt, nznt, ns1
-      USE vmec_input, ONLY: lrfp
       USE realspace, ONLY: wint, phip
 !-----------------------------------------------
       REAL(dp), INTENT(in) :: bsubu(1:nrzt), bsubv(1:nrzt)

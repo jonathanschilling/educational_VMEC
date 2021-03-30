@@ -47,11 +47,7 @@ C-----------------------------------------------
          IF (lscreen) PRINT 20, TRIM(print_line)//delt_line  !J Geiger 20101118
          print_line = iter_line // fsq_line // raxis_line
          IF (lasym) print_line = TRIM(print_line) // " " // zaxis_line
-         IF (imatch_phiedge .eq. 1) THEN
-            WRITE (nthreed, 15) TRIM(print_line)
-         ELSE
             WRITE (nthreed, 16) TRIM(print_line)
-         ENDIF
       ELSE IF (i0.eq.1 .and. .not.lfreeb) THEN
          print_line = raxis_line
          IF (lasym) print_line = raxis_line // zaxis_line
@@ -76,14 +72,10 @@ C-----------------------------------------------
          ENDIF
          IF (lscreen) PRINT 50, i0, fsqr, fsqz, fsql, r00, delt0, w,
      1                          delbsq !J Geiger 20101118
-         IF (imatch_phiedge .eq. 1) THEN
-            WRITE (nthreed, 40) i0, fsqr, fsqz, fsql, fsqr1, fsqz1,
-     1      fsql1, delt0, r00, w, betav, avm, delbsq, fedge
-         ELSE
+
             WRITE (nthreed, 42) i0, fsqr, fsqz, fsql, fsqr1, fsqz1,
      1      fsql1, delt0, r00, w, betav, ABS(phiedge),
      1      delbsq, fedge
-         ENDIF
 
       ELSE
          IF (.not.lfreeb) THEN
@@ -95,14 +87,9 @@ C-----------------------------------------------
          ENDIF
          IF (lscreen) PRINT 70, i0, fsqr, fsqz, fsql, r00, z00,
      1                          delt0, w, delbsq !J Geiger 20101118
-         IF (imatch_phiedge .eq. 1) THEN
-            WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1,
-     1      fsql1, delt0, r00, z00, w, betav, avm, delbsq, fedge
-         ELSE
             WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1,
      1      fsql1, delt0, r00, z00, w, betav,
      2      ABS(phiedge), delbsq, fedge
-         ENDIF
       END IF
 
    40 FORMAT(i6,1x,1p,7e10.2,e11.3,e12.4,e11.3,0p,f7.3,1p,2e9.2)

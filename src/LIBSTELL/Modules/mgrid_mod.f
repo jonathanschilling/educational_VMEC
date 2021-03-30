@@ -1,9 +1,7 @@
       MODULE mgrid_mod
       USE v3_utilities
       USE stel_kinds
-      USE vmec_input, ONLY: nbfld, nflxs, lfreeb
-      USE vsvd0, ONLY: nigroup, nparts, npfcoil, nbcoilsp, nfloops,
-     1                 nbctotp
+      USE vmec_input, ONLY: lfreeb
       IMPLICIT NONE
 
       INTEGER, PARAMETER :: nlimset = 2       !number of different limiters
@@ -16,11 +14,7 @@
       CHARACTER(LEN=*), PARAMETER ::
      1  vn_nextcur = 'nextcur',  vn_mgmode='mgrid_mode',
      2  vn_coilcur = 'raw_coil_cur',
-     3  vn_flp = 'nobser', vn_nobd = 'nobd', vn_nbset = 'nbsets',
-     4  vn_nbfld = 'nbfld',
-     2  ln_flp = 'flux loops', ln_nobd = 'Connected flux loops',
-     3  ln_nbset = 'B-coil loops', ln_next = 'External currents',
-     4  ln_nbfld = 'B-coil measurements'
+     3  ln_next = 'External currents'
 
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -101,7 +95,7 @@ C-----------------------------------------------
      1    rlim, zlim, reslim, seplim
       CHARACTER(LEN=1) :: mgrid_mode
 
-      PRIVATE :: read_mgrid_bin, read_mgrid_nc
+      PRIVATE :: read_mgrid_nc
 
       CONTAINS
 
@@ -138,7 +132,6 @@ C-----------------------------------------------
       CHARACTER(LEN=200) :: home_dir
       LOGICAL :: lgrid_exist, lfind
 C-----------------------------------------------
-
 
       mgrid_path = TRIM(mgrid_file)
 
@@ -184,9 +177,6 @@ C-----------------------------------------------
          IF (lfind) THEN
             CALL read_mgrid_nc (mgrid_path, extcur, nv, nfp,
      1                          ier_flag, lscreen)
-         ELSE
-            CALL read_mgrid_bin (mgrid_path, extcur, nv, nfp,
-     1                          ier_flag, lscreen)
          END IF
 
          IF (np0b .ne. nv) THEN
@@ -217,323 +207,10 @@ C-----------------------------------------------
 
       END SUBROUTINE read_mgrid
 
-
-      SUBROUTINE read_mgrid_bin (filename, extcur, nv, nfp, ier_flag,
-     1                           lscreen)
-      USE safe_open_mod
-      IMPLICIT NONE
-C-----------------------------------------------
-C   D u m m y  A r g u m e n t s
-C-----------------------------------------------
-!
-!     lstyle_2000  :   logical controlling ordering of magnetic field components read in
-!
-      INTEGER, INTENT(in)  :: nv, nfp
-      CHARACTER(LEN=*), INTENT(in) :: filename
-      REAL(rprec), INTENT(in) :: extcur(:)
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE ::
-     1           brtemp, bztemp, bptemp
-      INTEGER :: ier_flag, iunit = 50
-      INTEGER :: istat, ig, i, j, n, n1, m, nsets_max, k
-      LOGICAL :: lscreen, lstyle_2000
-C-----------------------------------------------
-
-      CALL safe_open(iunit, istat, filename, 'old', 'unformatted')
-      IF (istat .ne. 0) THEN
-         ier_flag = 9
-         RETURN
-      END IF
-
-      READ (iunit,iostat=istat) nr0b, nz0b, np0b, nfper0, nextcur
-      IF (istat .ne. 0) ier_flag = 9
-
-      IF (nfper0.ne.nfp .or. np0b.ne.nv) RETURN
-
-      lstyle_2000 = (nextcur < 0)
-      nextcur = ABS(nextcur)
-      READ(iunit,iostat=istat) rminb, zminb, rmaxb, zmaxb
-      IF (istat .ne. 0) ier_flag = 9
-
-      IF (nextcur .eq. 0) THEN
-        PRINT *,' NEXTCUR = 0 IN READING MGRID FILE'
-        ier_flag = 9
-      ELSE IF (nextcur .gt. nigroup) THEN
-        PRINT *,' NEXTCUR > NIGROUP IN MGRID FILE'
-        ier_flag = 9
-      END IF
-
-      IF (ier_flag .ne. 0) RETURN
-
-      ALLOCATE (curlabel(5*(nextcur/5+1)), stat=istat)    !MIN of 5 for printing
-      curlabel = " "
-      READ(iunit,iostat=istat) (curlabel(n),n=1,nextcur)
-      IF (istat .ne. 0) THEN
-         PRINT *,' reading mgrid file failed (curlabel)'
-         ier_flag = 9
-         RETURN
-      END IF
-
-!
-!     NOTE: ADD UP CONTRIBUTION TO BVAC DIRECTLY FOR ALL EXTERNAL CURRENT GROUPS
-
-      nbvac = nr0b*nz0b*np0b
-      IF (.NOT. ALLOCATED(bvac)) THEN
-         ALLOCATE (bvac(nbvac,3))
-      ELSE IF (SIZE(bvac,1) .ne. nbvac) THEN
-         DEALLOCATE (bvac);  ALLOCATE(bvac(nbvac,3))
-      END IF
-
-      ALLOCATE (brtemp(nr0b,nz0b,np0b), bptemp(nr0b,nz0b,np0b),
-     1          bztemp(nr0b,nz0b,np0b), stat=istat)
-
-      IF (istat .ne. 0) THEN
-        PRINT *,' allocation for b-vector storage failed'
-        ier_flag = 9
-        RETURN
-      END IF
-
-      bvac = 0
-
-      DO ig = 1,nextcur
-         IF (lstyle_2000) THEN
-            READ(iunit, iostat=istat) brtemp, bptemp, bztemp
-         ELSE
-            READ(iunit, iostat=istat) (((brtemp(i,j,k), bztemp(i,j,k),
-     1                                   bptemp(i,j,k), i= 1,nr0b),
-     2                                   j=1,nz0b), k=1,np0b)
-         END IF
-!
-!        STORE SUMMED BFIELD (OVER COIL GROUPS) IN BVAC
-!
-         CALL sum_bfield(bvac(1,1), brtemp, extcur(ig), nbvac)
-         CALL sum_bfield(bvac(1,2), bptemp, extcur(ig), nbvac)
-         CALL sum_bfield(bvac(1,3), bztemp, extcur(ig), nbvac)
-
-      END DO
-
-      DEALLOCATE (brtemp, bztemp, bptemp)
-
-      CALL assign_bptrs(bvac)
-
-      IF (istat .ne. 0) THEN
-         ier_flag = 9
-         RETURN
-      END IF
-
-      IF (lstyle_2000) THEN
-         READ (iunit, iostat=istat) mgrid_mode
-         IF (istat .eq. 0) THEN
-            ALLOCATE (raw_coil_current(nextcur))
-            READ (iunit, iostat=istat) raw_coil_current(1:nextcur)
-            IF (istat .ne. 0) mgrid_mode = 'N'
-         END IF
-      ELSE
-         mgrid_mode = 'N'         !Old-style, no mode info
-      END IF
-
-!
-!     READ IN EXTERNAL POLOIDAL FLUX, FIELD MEASURMENT
-!     LOOP COORDINATES AND LABELS
-!
-      READ(iunit,iostat=istat) nobser, nobd, nbsets
-      IF (istat.ne.0) THEN
-         nobser = 0
-         nobd   = 0
-         nbsets = 0
-         IF (lscreen) PRINT *,' No observation data in mgrid data'
-         GOTO 900
-      END IF
-
-      nbfldn = SUM(nbfld(:nbsets))
-      ALLOCATE (nbcoils(nbsets), stat=istat)
-      READ(iunit) (nbcoils(n),n=1,nbsets)
-
-      nbcoil_max = MAXVAL(nbcoils(:nbsets))
-
-      ALLOCATE (xobser(nobser), zobser(nobser), dsilabel(nobd),
-     1       iconnect(4,nobser+nobd), unpsiext(nobser,nextcur),
-     2       xobsqr(nobser), needflx(nobser), plflux(nobser+nobd),
-     3       dsiext(nobd), psiext(nobser), bloopnames(nbsets),
-     4       needbfld(nbcoil_max,nbsets), plbfld(nbcoil_max,nbsets),
-     5       rbcoil(nbcoil_max,nbsets), zbcoil(nbcoil_max,nbsets),
-     6       abcoil(nbcoil_max,nbsets), bcoil(nbcoil_max,nbsets),
-     7       rbcoilsqr(nbcoil_max,nbsets), b_chi(nbsets),
-     8       dbcoil(nbcoil_max,nbsets,nextcur), stat = istat)
-      IF (istat .ne. 0) THEN
-          IF (lscreen)
-     1       PRINT *,' allocation error for xobser: istat = ',istat
-          ier_flag = 9
-          RETURN
-      END IF
-
-      IF (nobser .gt. nfloops) THEN
-         PRINT *, 'NOBSER>NFLOOPS'
-         ier_flag = 9
-      END IF
-      IF (nobd .gt. nfloops) THEN
-         PRINT *, 'NOBD>NFLOOPS'
-         ier_flag = 9
-      END IF
-      IF (nflxs .gt. nfloops) THEN
-         PRINT *, 'NFLXS>NFLOOPS'
-         ier_flag = 9
-      END IF
-      IF (nbfldn .gt. nbctotp) THEN
-         PRINT *, 'NBFLDN>NBCTOTP'
-         ier_flag = 9
-      END IF
-      IF (nbcoil_max .gt. nbcoilsp) THEN
-         PRINT *, 'NBCOIL_max>NBCOILSP'
-         ier_flag = 9
-      END IF
-
-      IF (ier_flag .ne. 0) RETURN
-
-      IF (nobser+nobd .gt. 0) iconnect(:4,:nobser+nobd) = 0
-
-      READ(iunit) (xobser(n), zobser(n),n=1,nobser)
-      READ(iunit) (dsilabel(n),n=1,nobd)
-      READ(iunit) ((iconnect(j,n),j=1,4),n=1,nobd)
-
-      IF (nbcoil_max.gt.0 .and. nbsets.gt.0) THEN
-         rbcoil(:nbcoil_max,:nbsets) = 0
-         zbcoil(:nbcoil_max,:nbsets) = 0
-         abcoil(:nbcoil_max,:nbsets) = 0
-
-         DO n=1,nbsets
-           IF (nbcoils(n).gt.0) THEN
-           READ(iunit) n1,bloopnames(n1)
-           READ(iunit)(rbcoil(m,n),zbcoil(m,n),abcoil(m,n),
-     1             m=1,nbcoils(n))
-           ENDIF
-         ENDDO
-
-         dbcoil(:nbcoil_max,:nbsets,:nextcur) = 0
-      END IF
-      DO ig = 1,nextcur
-        !un-connected coil fluxes
-         READ(iunit) (unpsiext(n,ig),n=1,nobser)
-         DO n = 1,nbsets
-            READ(iunit) (dbcoil(m,n,ig),m=1,nbcoils(n))
-         ENDDO
-      ENDDO
-
-!
-!     READ LIMITER & PROUT PLOTTING SPECS
-!
-      ALLOCATE (limitr(nlimset), nsetsn(nigroup))
-
-      READ (iunit,iostat=istat) nlim,(limitr(i),i=1,nlim)
-      IF (istat .ne. 0)then
-        nlim = 0
-        IF (lscreen) PRINT *,' No limiter data in mgrid file'
-        GOTO 900
-      END IF
-
-      nlim_max = MAXVAL(limitr)
-
-      IF (nlim .gt. nlimset) THEN
-         PRINT *, 'nlim>nlimset'
-         ier_flag = 9
-         RETURN
-      END IF
-
-      ALLOCATE( rlim(nlim_max,nlim),   zlim(nlim_max,nlim),
-     1          reslim(nlim_max,nlim) ,seplim(nlim_max,nlim),
-     2          stat=istat)
-      IF (istat .ne. 0) THEN
-         PRINT *, 'rlim istat!=0'
-         ier_flag = 9
-         RETURN
-      END IF
-
-      READ(iunit, iostat=istat)
-     1   ((rlim(i,j),zlim(i,j),i=1,limitr(j)),j=1,nlim)
-      READ(iunit, iostat=istat) nsets,(nsetsn(i), i=1,nsets)
-
-      IF (nsets .gt. nigroup) THEN
-         PRINT *, 'nsets>nigroup'
-         ier_flag = 9
-         RETURN
-      ELSE IF (istat .ne. 0) THEN
-         ier_flag = 9
-         RETURN
-      END IF
-
-      nsets_max = MAXVAL(nsetsn)
-
-      IF (nsets_max .gt. npfcoil) THEN
-         PRINT *, 'nsetsn>npfcoil'
-         ier_flag = 9
-         RETURN
-      END IF
-
-      ALLOCATE (pfcspec(nparts,nsets_max,nsets), stat=istat)
-
-!     NOTE TO RMW: SHOULD READ IN NPARTS HERE (PUT INTO MGRID FILE)
-
-      READ(iunit, iostat=istat) (((pfcspec(i,j,k),i=1,nparts),
-     1        j=1,nsetsn(k)), k=1,nsets)
-
-      DEALLOCATE (limitr, nsetsn)
-
-      READ(iunit, iostat=istat) rx1,rx2,zy1,zy2,condif,
-     1  nrgrid,nzgrid,tokid
-
-      IF (istat .ne. 0) THEN
-         ier_flag = 9
-         RETURN
-      END IF
-
-      IF (nobser .gt. 0) xobsqr(:nobser) = SQRT(xobser(:nobser))
-!
-!       PARTITION MGRID B-LOOPS INTO SETS
-!
-      nbcoilsn = SUM(nbcoils(:nbsets))
-
-      DO n = 1,nbsets
-        rbcoilsqr(:nbcoils(n),n) = SQRT(rbcoil(:nbcoils(n),n))
-      ENDDO
-
- 900  CONTINUE
-
-      CLOSE (iunit)
-
-      delrb = (rmaxb-rminb)/(nr0b-1)
-      delzb = (zmaxb-zminb)/(nz0b-1)
-
-!
-!     SUM UP CONTRIBUTIONS FROM INDIVIDUAL COIL GROUPS
-!
-      IF (lfreeb) THEN
-         IF (nobser .gt. 0) psiext(:nobser) = 0
-         IF (nbcoil_max.gt.0 .and. nbsets.gt.0)
-     1       bcoil(:nbcoil_max, :nbsets) = 0
-
-         DO ig = 1,nextcur
-            IF (nobser .gt. 0)
-     1      psiext(:nobser) = psiext(:nobser) +
-     2                        extcur(ig)*unpsiext(:nobser,ig)
-            DO n=1,nbsets
-               n1 = nbcoils(n)
-               bcoil(:n1,n) = bcoil(:n1,n) +
-     1                        extcur(ig)*dbcoil(:n1,n,ig)
-            ENDDO
-         ENDDO
-      ENDIF                   !!IF LFREEB
-
-      END SUBROUTINE read_mgrid_bin
-
-
-!
-!     PARALLEL MPI MODIFICATIONS ADDED BY Mark R. Cianciosa <cianciosamr@ornl.gov>, 092315
-!
       SUBROUTINE read_mgrid_nc (filename, extcur, nv, nfp,
      1                          ier_flag, lscreen)
       USE ezcdf
+      USE vsvd0, only: nigroup
       USE mpi_inc
       IMPLICIT NONE
 C-----------------------------------------------

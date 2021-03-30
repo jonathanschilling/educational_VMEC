@@ -1,11 +1,5 @@
       SUBROUTINE read_namelist(iunit, io_stat, lc_name)
-      USE vmec_input, ONLY: read_indata_namelist,
-     1   read_mse_namelist
-      USE bootsj_input, ONLY: read_boot_namelist
-      USE optim_params, ONLY: read_optimum_namelist, lprof_opt,
-     2    lcurprof_opt, numjstar, nsd
-      USE coilsnamin, ONLY: read_coils_namelist
-      USE gade_mod, ONLY: read_gade_namelist
+      USE vmec_input, ONLY: read_indata_namelist
       IMPLICIT NONE
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s

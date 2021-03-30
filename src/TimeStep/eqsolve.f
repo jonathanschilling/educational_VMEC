@@ -200,18 +200,6 @@ C-----------------------------------------------
 
 !SPH (021711): V3FITA - SAVE STATE FOR RESTART IF PRECONDITION IS ON
 
-      IF (l_v3fit) THEN
-
-!JDH 2011-09-14. Correct logic error.
-
-!         IF (ictrl_prec2d .eq. 0) THEN
-!            lqmr = (itype_precon .ge. 2)
-!         ELSE
-         IF (ictrl_prec2d .gt. 0) THEN
-            CALL restart_iter(delt0r)
-         END IF
-      END IF
-
       IF (lSwap2Disk) CALL DeleteDAFile(ScratchFile)
 
       WRITE (nthreed, 60) w0*twopi**2, wdota, r0dot

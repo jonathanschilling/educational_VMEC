@@ -2,12 +2,9 @@
       USE vmec_main
       USE vmec_params
       USE vacmod
-c       USE vspline
       USE timer_sub
       USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
       USE init_geometry
-c       USE trip3d_mod, ONLY: read_trip3d, trip3d_to_mgrid,
-c      1                      trip3d_info_vmec, trip3d_free
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -242,7 +239,6 @@ C-----------------------------------------------
       ier_flag_init = ier_flag
       ier_flag = norm_term_flag
       CALL second0(treadon)
-      IF (ier_flag_init .eq. more_iter_flag) GOTO 1000
 
 !
 !     READ IN DATA FROM INDATA FILE
@@ -250,13 +246,10 @@ C-----------------------------------------------
       CALL read_indata(input_file, iunit, ier_flag)
       IF (ier_flag .ne. norm_term_flag) RETURN
 
-      IF (tensi2 .eq. zero ) tensi2 = tensi
-
 !
 !     Open output files here, print out heading to threed1 file
 !
-      CALL heading(input_extension, time_slice,
-     1             iseq_count, lmac, lscreen)
+      CALL heading(input_extension, lscreen)
 
 !
 !     READ IN COMMENTS DEMARKED BY "!"
@@ -292,23 +285,6 @@ C-----------------------------------------------
      1     '  nr-grid  nz-grid  np-grid      rmin      rmax      zmin',
      2     '      zmax     input-file',/,3i9,4f10.3,5x,a)
          END IF
-c
-c          ! SAL - TRIP3D mods
-c          IF (TRIM(trip3d_file) .ne. 'NONE') THEN
-c             CALL second0(trc)
-c             CALL read_trip3d(trip3d_file,ier_flag,1.0_rprec)
-c             IF (ier_flag .ne. norm_term_flag) RETURN
-c             CALL trip3d_to_mgrid
-c             !IF (lscreen) CALL trip3d_info(nthreed)
-c             CALL second0(tzc)
-c             IF (lscreen)
-c      1         WRITE (6,'(2x,a,1p,e10.2,a)')
-c      2            'Time to import TRIP3D data: ',
-c      3             tzc - trc, ' s'
-c             CALL trip3d_info_vmec(nthreed)
-c             CALL trip3d_free(ier_flag)
-c             IF (ier_flag .ne. norm_term_flag) RETURN
-c          END IF
       END IF
 
 !
@@ -360,7 +336,7 @@ c          END IF
 
       WRITE (nthreed,100)
      1  ns_array(multi_ns_grid),ntheta1,nzeta,mpol,ntor,nfp,
-     2  gamma,spres_ped,phiedge,curtor,lRFP
+     2  gamma,spres_ped,phiedge,curtor
  100  FORMAT(/,' COMPUTATION PARAMETERS: (u = theta, v = zeta)'/,
      1  1x,45('-'),/,
      2  '     ns     nu     nv     mu     mv',/,5i7//,
@@ -372,8 +348,8 @@ c          END IF
       IF (nvacskip.le.0) nvacskip = nfp
       WRITE (nthreed,110) ncurr,niter_array(multi_ns_grid),ns_array(1),
      1  nstep,nvacskip,
-     2  ftol_array(multi_ns_grid),tcon0,lasym,lforbal,lmove_axis,lconm1,
-     3  mfilter_fbdy,nfilter_fbdy,lfull3d1out,max_main_iterations,
+     2  ftol_array(multi_ns_grid),tcon0,lasym,lconm1,
+     3  mfilter_fbdy,nfilter_fbdy,
      4  lgiveup,fgiveup                                         ! M Drevlak 20130114
  110  FORMAT(' RUN CONTROL PARAMETERS:',/,1x,23('-'),/,
      1  '  ncurr  niter   nsin  nstep  nvacskip      ftol     tcon0',
@@ -433,11 +409,7 @@ c          END IF
       END SELECT
 
       IF (ncurr.eq.0) THEN
-          IF (lRFP) THEN
-             WRITE (nthreed,142)
-          ELSE
              WRITE (nthreed,140)
-          END IF
 !  Print out ai array
           WRITE(nthreed,135)(ai(i-1),i=1, SIZE(ai))
           WRITE(nthreed,143) TRIM(piota_type)

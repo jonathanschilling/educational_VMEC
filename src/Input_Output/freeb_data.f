@@ -6,7 +6,7 @@
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      REAL(rprec), DIMENSION(mnmax) :: rmnc, zmns, rmns, zmnc, 
+      REAL(rprec), DIMENSION(mnmax) :: rmnc, zmns, rmns, zmnc,
      1                                 bmodmn, bmodmn1
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -21,7 +21,7 @@ C-----------------------------------------------
 !
 !     NOTE: BR, BPHI, BZ WERE COMPUTED IN BSS, CALLED FROM EQFOR
 !
-      IF (ivac.le.0 .or. (.not.lfreeb .and. .not.ledge_dump)) RETURN
+      IF (ivac.le.0 .or. .not.lfreeb) RETURN
 
       ALLOCATE (rb(2*nznt), phib(2*nznt), zb(2*nznt), stat=l)
       IF (l .ne. 0) STOP 'allocation error in freeb_data'
@@ -52,17 +52,6 @@ C-----------------------------------------------
             ENDIF
          END DO
       END DO
-
-      IF (ledge_dump) THEN
-        WRITE(NEDGE0,*) 'INPUT FILE = ',arg1
-        WRITE(NEDGE0,*) 'NEDGE = ',nedge
-        WRITE(NEDGE0,*) 'RB = ',  (rb(i), i=1,nedge)
-        WRITE(NEDGE0,*) 'PHIB = ',(phib(i), i=1,nedge)
-        WRITE(NEDGE0,*) 'ZB = ',  (zb(i), i=1,nedge)
-        WRITE(NEDGE0,*) 'BREDGE = ', (bredge(i), i=1,nedge)
-        WRITE(NEDGE0,*) 'BPEDGE = ', (bpedge(i), i=1,nedge)
-        WRITE(NEDGE0,*) 'BZEDGE = ', (bzedge(i), i=1,nedge)
-      END IF
 
 !
 !     WRITE OUT (TO THREED1 FILE) VACUUM INFORMATION
@@ -111,7 +100,7 @@ C-----------------------------------------------
                END IF
             END DO
          WRITE (nthreed, 910) NINT(xn(mn)/nfp), NINT(xm(mn)), rmnc(mn),
-     1      zmns(mn), rmns(mn), zmnc(mn), potsin, potcos, 
+     1      zmns(mn), rmns(mn), zmnc(mn), potsin, potcos,
      2      bmodmn(mn), bmodmn1(mn)
          END DO
 
@@ -126,7 +115,7 @@ C-----------------------------------------------
                   EXIT
                END IF
             END DO
-            WRITE (nthreed, 810) NINT(xn(mn)/nfp), NINT(xm(mn)), 
+            WRITE (nthreed, 810) NINT(xn(mn)/nfp), NINT(xm(mn)),
      1      rmnc(mn), zmns(mn), potsin, bmodmn(mn), bmodmn1(mn)
          END DO
       END IF

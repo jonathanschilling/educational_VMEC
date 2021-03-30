@@ -18,7 +18,6 @@
 !                         for the computed equilibrium
 !
       USE stel_kinds
-      USE vmec_input, ONLY: lrfp
       USE mgrid_mod
 
       IMPLICIT NONE
@@ -35,7 +34,7 @@ C-----------------------------------------------
      6  vn_radnod = 'ns', vn_polmod = 'mpol', vn_tormod = 'ntor',
      7  vn_maxmod = 'mnmax', vn_maxit = 'niter', vn_actit = 'itfsq',
      8  vn_asym = 'lasym', vn_free = 'lfreeb',
-     9  vn_error = 'ier_flag', vn_aspect = 'aspect', vn_rfp = 'lrfp',
+     9  vn_error = 'ier_flag', vn_aspect = 'aspect',
      A  vn_maxmod_nyq = 'mnmax_nyq',
      B  vn_beta = 'betatotal', vn_pbeta = 'betapol',
      C  vn_tbeta = 'betator', vn_abeta = 'betaxis',
@@ -85,23 +84,7 @@ C-----------------------------------------------
      J  vn_bsupumns_sur = 'bsupumns_sur',
      K  vn_bsupvmns_sur = 'bsupvmns_sur',
      D  vn_rbc = 'rbc', vn_zbs = 'zbs', vn_rbs = 'rbs', vn_zbc = 'zbc',
-     E  vn_potvac = 'potvac',
-!    FOR ANIMEC
-     F  vn_wpar = 'wpar', vn_pparmnc = 'pparmnc', vn_ppermnc ='ppermnc',
-     G  vn_hotdmnc = 'hotdmnc', vn_pbprmnc = 'pbprmnc',
-     H  vn_ppprmnc = 'ppprmnc', vn_sigmnc  = 'sigmnc',
-     I  vn_taumnc  = 'taumnc',
-     J  vn_pparmns = 'pparmns', vn_ppermns = 'ppermns',
-     K  vn_hotdmns = 'hotdmns', vn_pbprmns = 'pbprmns',
-     L  vn_ppprmns = 'ppprmns', vn_sigmns  = 'sigmns',
-     M  vn_taumns  = 'taumns',
-!    FOR FLOW
-     N  vn_machsq = 'machsq',
-     O  vn_protmnc = 'protmnc', vn_protrsqmnc = 'protrsqmnc',
-     P  vn_prprmnc = 'prprmnc',
-     Q  vn_protmns = 'protmns', vn_protrsqmns = 'protrsqmns',
-     R  vn_prprmns = 'prprmns',
-     S  vn_pmap = 'pmap', vn_omega = 'omega', vn_tpotb = 'tpotb'
+     E  vn_potvac = 'potvac'
 
 ! Long names (ln_...)
       CHARACTER(LEN=*), PARAMETER ::
@@ -207,40 +190,13 @@ C-----------------------------------------------
      7  ln_zbs = 'Initial boundary Z sin(mu-nv) coefficients',
      8  ln_rbs = 'Initial boundary R sin(mu-nv) coefficients',
      9  ln_zbc = 'Initial boundary Z cos(mu-nv) coefficients',
-     1  ln_potvac = 'Vacuum Potential on Boundary',
-!    FOR ANIMEC
-     F  ln_wpar = 'Energy',
-     G  ln_pparmnc = 'cosmn compoents of hot part. para. pressure',
-     H  ln_ppermnc = 'cosmn compoents of hot part. perp. pressure',
-     I  ln_hotdmnc = 'cosmn compoents of hot part. density',
-     J  ln_pbprmnc = 'cosmn compoents of hot part. para. pres. grad.',
-     K  ln_ppprmnc = 'cosmn compoents of hot part. perp. pres. grad.',
-     L  ln_sigmnc  = 'cosmn firehose stability variable',
-     M  ln_taumnc  = 'cosmn mirror stability variable',
-     N  ln_pparmns = 'sinmn compoents of hot part. para. pressure',
-     O  ln_ppermns = 'sinmn compoents of hot part. perp. pressure',
-     P  ln_hotdmns = 'sinmn compoents of hot part. density',
-     Q  ln_pbprmns = 'sinmn compoents of hot part. para. pres. grad.',
-     R  ln_ppprmns = 'sinmn compoents of hot part. perp. pres. grad.',
-     S  ln_sigmns  = 'sinmn firehose stability variable',
-     T  ln_taumns  = 'sinmn mirror stability variable',
-!    FOR FLOW
-     U  ln_machsq = 'Mach # on axis (squared)',
-     V  ln_protmnc = 'cosmn components of pressure',
-     W  ln_protrsqmnc = 'cosmn component of rotational energy',
-     X  ln_prprmnc = 'cosmn components of radial pressure gradient',
-     Y  ln_protmns = 'sinmn components of pressure',
-     Z  ln_protrsqmns = 'sinmn component of rotational energy',
-     1  ln_prprmns = 'sinmn components of radial pressure gradient',
-     2  ln_pmap = '<p(s,R)>', ln_omega = 'Toroidal Angular Freq.',
-     3  ln_tpotb = 'T_perp/T_parallel or T(flow)'
+     1  ln_potvac = 'Vacuum Potential on Boundary'
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
       INTEGER :: nfp, ns, mpol, ntor, mnmax, mnmax_nyq, itfsq, niter,
      1    iasym, ierr_vmec, imse, itse, nstore_seq,
-     2    isnodes, ipnodes, imatch_phiedge, isigng, mnyq, nnyq, ntmax,
-     3    vmec_type
+     2    isnodes, ipnodes, imatch_phiedge, isigng, mnyq, nnyq, ntmax
       REAL(rprec) :: wb, wp, gamma, pfac, rmax_surf, rmin_surf,
      1    zmax_surf, aspect, betatot, betapol, betator, betaxis, b0,
      2    tswgt, msewgt, flmwgt, bcwgt, phidiam, version_,
@@ -256,11 +212,6 @@ C-----------------------------------------------
       REAL(rprec), DIMENSION(:,:), ALLOCATABLE ::
      1    bmns, gmns, bsubumns, bsubvmns, bsubsmnc,
      2    bsupumns, bsupvmns, currumns, currvmns
-      REAL(rprec), DIMENSION(:,:), ALLOCATABLE ::
-     1    pparmnc, ppermnc, hotdmnc, pbprmnc, ppprmnc, sigmnc, taumnc, ! SAL - ANIMEC
-     2    pparmns, ppermns, hotdmns, pbprmns, ppprmns, sigmns, taumns, ! SAL - ANIMEC
-     3    protmnc, protrsqmnc, prprmnc, ! SAL - FLOW
-     4    protmns, protrsqmns, prprmns  ! SAL - FLOW
       REAL(rprec), DIMENSION(:), ALLOCATABLE ::
      1   iotas, iotaf, presf, phipf, mass, pres, beta_vol, xm, xn,
      1   qfact, chipf, phi, chi,
@@ -271,8 +222,6 @@ C-----------------------------------------------
      4   sknots, ystark, y2stark, pknots, ythom, y2thom,
      5   anglemse, rmid, qmid, shear, presmid, alfa, curmid, rstark,
      6   qmeas, datastark, rthom, datathom, dsiobt, potvac
-      REAL(rprec), DIMENSION(:), ALLOCATABLE ::
-     1   pmap, omega, tpotb ! SAL -FLOW
 
       LOGICAL :: lasym, lthreed, lwout_opened=.false.
       CHARACTER :: mgrid_file*200, input_extension*100
@@ -284,10 +233,10 @@ C-----------------------------------------------
 !     OVERLOAD SUBROUTINE READ_WOUT_FILE TO ACCEPT BOTH UNIT NO. (OPENED EXTERNALLY)
 !     OR FILENAME (HANDLE OPEN/CLOSE HERE)
       INTERFACE read_wout_file
-          MODULE PROCEDURE readw_and_open, readw_only
+          MODULE PROCEDURE readw_and_open
       END INTERFACE
 
-      PRIVATE :: read_wout_text, read_wout_nc
+      PRIVATE :: read_wout_nc
       PRIVATE :: norm_term_flag, bad_jacobian_flag,
      1           more_iter_flag, jac75_flag
 
@@ -320,14 +269,8 @@ C-----------------------------------------------
       filename = 'wout'
       CALL parse_extension(filename, file_or_extension, isnc)
       CALL flush(6)
-!SPH  IF (.not.isnc) STOP 'ISNC ERR IN READ_WOUT_MOD'
       IF (isnc) THEN
          CALL read_wout_nc(filename, ierr)
-      ELSE
-         iunit = iunit_init
-         CALL safe_open (iunit, ierr, filename, 'old', 'formatted')
-         IF (ierr .eq. 0) CALL read_wout_text(iunit, ierr)
-         CLOSE(unit=iunit)
       END IF
 
       IF (PRESENT(iopen)) iopen = ierr
@@ -344,457 +287,6 @@ C-----------------------------------------------
 
       END SUBROUTINE readw_and_open
 
-
-      SUBROUTINE readw_only(iunit, ierr, iopen)
-      IMPLICIT NONE
-C-----------------------------------------------
-C   D u m m y   A r g u m e n t s
-C-----------------------------------------------
-      INTEGER, INTENT(in) :: iunit
-      INTEGER, INTENT(out):: ierr
-      INTEGER, OPTIONAL :: iopen
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER :: istat
-      CHARACTER(LEN=256) :: vmec_version
-      LOGICAL :: exfile
-C-----------------------------------------------
-!
-!     User opened the file externally and has a unit number, iunit
-!
-      ierr = 0
-
-      INQUIRE(unit=iunit, exist=exfile, name=vmec_version,iostat=istat)
-      IF (istat.ne.0 .or. .not.exfile) THEN
-        PRINT *,' In READ_WOUT_FILE, Unit = ',iunit,
-     1          ' File = ',TRIM(vmec_version),' DOES NOT EXIST'
-        IF (PRESENT(iopen)) iopen = -1
-        ierr = -1
-        RETURN
-      ELSE
-        IF (PRESENT(iopen)) iopen = 0
-      END IF
-
-      CALL read_wout_text(iunit, ierr)
-      lwout_opened = (ierr .eq. 0)
-      lthreed = ANY(NINT(xn) .ne. 0)
-
-      END SUBROUTINE readw_only
-
-
-      SUBROUTINE read_wout_text(iunit, ierr)
-      USE stel_constants, ONLY: mu0
-      IMPLICIT NONE
-C-----------------------------------------------
-C   D u m m y   A r g u m e n t s
-C-----------------------------------------------
-      INTEGER :: iunit, ierr
-C-----------------------------------------------
-C   L o c a l   P a r a m e t e r s
-C-----------------------------------------------
-      REAL(rprec), PARAMETER :: eps_w = 1.e-4_dp
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER :: istat(15), i, j, k, js, m, n, n1, mn, nparts_in,
-     1           i_animec, i_flow
-      CHARACTER(LEN=256) :: vmec_version
-      LOGICAL            :: lcurr
-C-----------------------------------------------
-!
-!     THIS SUBROUTINE READS THE TEXT FILE WOUT CREATED BY THE VMEC CODE
-!     AND STORES THE INFORMATION IN THE read_WOUT MODULE
-!
-!     CALL read_wout_file - GENERIC INTERFACE - CAN BE CALLED WITH EITHER UNIT NO. OR FILENAME
-!
-!     RMNC, ZMNS: FULL-GRID
-!     LMNS      : HALF-GRID
-!
-      istat = 0
-      ierr = 0
-      nextcur = 0
-
-      READ (iunit, '(a)', iostat=istat(2), err=1000) vmec_version
-
-      i = INDEX(vmec_version,'=')
-      !!!! ADDED BY SAL
-      i_animec = INDEX(vmec_version,'_ANIMEC')
-      i_flow = INDEX(vmec_version,'_FLOW')
-      vmec_type = 0
-      IF (i_animec > 0) THEN
-         vmec_type = 1 ! ANIMEC
-         vmec_version = vmec_version(1:i_animec-1)
-      END IF
-      IF (i_flow > 0) THEN
-         vmec_type = 2 ! FLOW
-         vmec_version = vmec_version(1:i_flow-1)
-      END IF
-      !!!! END SAL Addition
-
-
-      IF (i .ge. 0) THEN
-         READ(vmec_version(i+1:len_trim(vmec_version)),*) version_
-      ELSE
-         version_ = -1.0
-      END IF
-
-      ierr_vmec = norm_term_flag
-
-      IF (version_ .le. (5.10 + eps_w)) THEN
-         READ (iunit, *, iostat=istat(2), err=1000) wb, wp, gamma,
-     1      pfac, nfp, ns,
-     1      mpol, ntor, mnmax, itfsq, niter, iasym
-      ELSE
-         IF (version_ .lt. 6.54) THEN
-            READ (iunit, *, iostat=istat(2), err=1000) wb, wp, gamma,
-     1         pfac, rmax_surf, rmin_surf
-         ELSE
-            READ (iunit, *, iostat=istat(2), err=1000) wb, wp, gamma,
-     1         pfac, rmax_surf, rmin_surf, zmax_surf
-         END IF
-         IF (vmec_type == 2) THEN !SAL
-            READ(iunit, *,iostat=istat(2), err=1000) machsq
-         END IF
-         IF (version_ .le. (8.0+eps_w)) THEN
-            READ (iunit, *, iostat=istat(2), err=1000) nfp, ns, mpol,
-     1      ntor, mnmax, itfsq, niter, iasym, ierr_vmec
-            mnmax_nyq = mnmax
-         ELSE
-            READ (iunit, *, iostat=istat(2), err=1000) nfp, ns, mpol,
-     1      ntor, mnmax, mnmax_nyq, itfsq, niter, iasym,
-     2      ierr_vmec
-         END IF
-      END IF
-
-      lasym = (iasym .gt. 0)
-
-      IF (version_ .gt. (6.20+eps_w)) THEN
-         READ (iunit, *, iostat=istat(1), err=1000)imse, itse, nbsets,
-     1      nobd, nextcur, nstore_seq
-      ELSE
-         READ (iunit, *, iostat=istat(1), err=1000)imse, itse, nbsets,
-     1        nobd, nextcur
-         nstore_seq = 100
-      END IF
-
-      IF (ierr_vmec.ne.norm_term_flag .and. ierr_vmec.ne.more_iter_flag)
-     1   GOTO 1000
-
-      IF (nextcur .gt. nigroup) istat(15) = -1
-
-      IF (ALLOCATED(xm)) CALL read_wout_deallocate
-
-      ALLOCATE (xm(mnmax), xn(mnmax), xm_nyq(mnmax_nyq),
-     1  xn_nyq(mnmax_nyq),rmnc(mnmax,ns), zmns(mnmax,ns),
-     2  lmns(mnmax,ns), bmnc(mnmax_nyq,ns), gmnc(mnmax_nyq,ns),
-     3  bsubumnc(mnmax_nyq,ns), bsubvmnc(mnmax_nyq,ns),
-     4  bsubsmns(mnmax_nyq,ns), bsupumnc(mnmax_nyq,ns),
-     5  bsupvmnc(mnmax_nyq,ns), currvmnc(mnmax_nyq,ns),
-     5  iotas(ns), mass(ns), pres(ns), beta_vol(ns), phip(ns),
-     6  buco(ns), bvco(ns), phi(ns), iotaf(ns), presf(ns), phipf(ns),
-     5  vp(ns), overr(ns), jcuru(ns), jcurv(ns), specw(ns), Dmerc(ns),
-     6  Dshear(ns), Dwell(ns), Dcurr(ns), Dgeod(ns), equif(ns),
-     7  extcur(nextcur), curlabel(nextcur), raxis(0:ntor,2),
-     8  zaxis(0:ntor,2), jdotb(ns), bdotgradv(ns),
-     8  am(0:20), ac(0:20),  ai(0:20),
-     9  fsqt(nstore_seq), wdot(nstore_seq), stat = istat(6))
-
-      IF (lasym)
-     1   ALLOCATE (rmns(mnmax,ns), zmnc(mnmax,ns), lmnc(mnmax,ns),
-     2             bmns(mnmax_nyq,ns), gmns(mnmax_nyq,ns),
-     3             bsubumns(mnmax_nyq,ns),
-     3             bsubvmns(mnmax_nyq,ns), bsubsmnc(mnmax_nyq,ns),
-     4             bsupumns(mnmax_nyq,ns), bsupvmns(mnmax_nyq,ns),
-     5             stat=istat(6))
-
-      IF (vmec_type == 1) THEN   ! SAL
-         ALLOCATE (pparmnc(mnmax_nyq,ns),ppermnc(mnmax_nyq,ns),
-     1             hotdmnc(mnmax_nyq,ns),pbprmnc(mnmax_nyq,ns),
-     2             ppprmnc(mnmax_nyq,ns),sigmnc(mnmax_nyq,ns),
-     3             taumnc(mnmax_nyq,ns),stat=istat(6))
-         IF (lasym)
-     1      ALLOCATE (pparmns(mnmax_nyq,ns),ppermns(mnmax_nyq,ns),
-     2                hotdmns(mnmax_nyq,ns),pbprmns(mnmax_nyq,ns),
-     3                ppprmns(mnmax_nyq,ns),sigmns(mnmax_nyq,ns),
-     4                taumns(mnmax_nyq,ns),stat=istat(6))
-      ELSE IF (vmec_type == 2) THEN
-         ALLOCATE (pmap(ns), omega(ns), tpotb(ns),stat=istat(6))
-         ALLOCATE (protmnc(mnmax_nyq,ns),protrsqmnc(mnmax_nyq,ns),
-     1             prprmnc(mnmax_nyq,ns),stat=istat(6))
-         IF (lasym)
-     1      ALLOCATE (protmns(mnmax_nyq,ns),protrsqmns(mnmax_nyq,ns),
-     2                prprmns(mnmax_nyq,ns),stat=istat(6))
-      END IF
-
-      fsqt = 0; wdot = 0; raxis = 0; zaxis = 0
-
-      IF (nbsets .gt. 0) READ (iunit, *, iostat=istat(4), err=1000)
-     1   (nbfld(i),i=1,nbsets)
-      READ (iunit, '(a)', iostat=istat(5), err=1000) mgrid_file
-
-      DO js = 1, ns
-         DO mn = 1, mnmax
-            IF(js .eq. 1) THEN
-               READ (iunit, *, iostat=istat(7), err=1000) m, n
-               xm(mn) = REAL(m,rprec)
-               xn(mn) = REAL(n,rprec)
-            END IF
-            IF (version_ .le. (6.20+eps_w)) THEN
-              READ (iunit, 730, iostat=istat(8), err=1000)
-     1        rmnc(mn,js), zmns(mn,js), lmns(mn,js),
-     2        bmnc(mn,js), gmnc(mn,js), bsubumnc(mn,js),
-     3        bsubvmnc(mn,js), bsubsmns(mn,js),
-     4        bsupumnc(mn,js), bsupvmnc(mn,js),
-     5        currvmnc(mn,js)
-            ELSE IF (version_ .le. (8.0+eps_w)) THEN
-              READ (iunit, *, iostat=istat(8), err=1000)
-     1        rmnc(mn,js), zmns(mn,js), lmns(mn,js),
-     2        bmnc(mn,js), gmnc(mn,js), bsubumnc(mn,js),
-     3        bsubvmnc(mn,js), bsubsmns(mn,js),
-     4        bsupumnc(mn,js), bsupvmnc(mn,js),
-     5        currvmnc(mn,js)
-            ELSE
-              READ (iunit, *, iostat=istat(8), err=1000)
-     1        rmnc(mn,js), zmns(mn,js), lmns(mn,js)
-            END IF
-            IF (lasym) THEN
-               IF (version_ .le. (8.0+eps_w)) THEN
-                  READ (iunit, *, iostat=istat(8), err=1000)
-     1            rmns(mn,js), zmnc(mn,js), lmnc(mn,js),
-     2            bmns(mn,js), gmns(mn,js), bsubumns(mn,js),
-     3            bsubvmns(mn,js), bsubsmnc(mn,js),
-     4            bsupumns(mn,js), bsupvmns(mn,js)
-               ELSE
-                  READ (iunit, *, iostat=istat(8), err=1000)
-     1            rmns(mn,js), zmnc(mn,js), lmnc(mn,js)
-               END IF
-            END IF
-            IF (js.eq.1 .and. m.eq.0) THEN
-               n1 = ABS(n/nfp)
-               IF (n1 .le. ntor) THEN
-                  raxis(n1,1) = rmnc(mn,1)
-                  zaxis(n1,1) = zmns(mn,1)
-                  IF (lasym) THEN
-                     raxis(n1,2) = rmns(mn,1)
-                     zaxis(n1,2) = zmnc(mn,1)
-                  END IF
-               END IF
-            END IF
-         END DO
-
-         IF (version_ .le. (8.0+eps_w)) CYCLE
-         DO mn = 1, mnmax_nyq
-            IF(js .eq. 1) THEN
-               READ (iunit, *, iostat=istat(7), err=1000) m, n
-               xm_nyq(mn) = REAL(m,rprec)
-               xn_nyq(mn) = REAL(n,rprec)
-            END IF
-            IF (vmec_type == 1) THEN  !SAL (ELSE statement below is orriginal)
-               READ (iunit, *, iostat=istat(8), err=1000)
-     1         bmnc(mn,js), gmnc(mn,js), bsubumnc(mn,js),
-     2         bsubvmnc(mn,js), bsubsmns(mn,js),
-     3         bsupumnc(mn,js), bsupvmnc(mn,js),
-     3         pparmnc (mn,js), ppermnc (mn,js), hotdmnc (mn,js),
-     4         pbprmnc (mn,js), ppprmnc (mn,js), sigmnc  (mn,js),
-     5         taumnc  (mn,js)
-               IF (lasym) THEN
-                  READ (iunit, *, iostat=istat(8), err=1000)
-     1            bmns(mn,js), gmns(mn,js), bsubumns(mn,js),
-     2            bsubvmns(mn,js), bsubsmnc(mn,js),
-     3            bsupumns(mn,js), bsupvmns(mn,js),
-     3            pparmns (mn,js), ppermns (mn,js), hotdmns (mn,js),
-     4            pbprmns (mn,js), ppprmns (mn,js), sigmns  (mn,js),
-     5            taumns  (mn,js)
-               END IF
-            ELSE IF (vmec_type ==2) THEN
-               READ (iunit, *, iostat=istat(8), err=1000)
-     1         bmnc(mn,js), gmnc(mn,js), bsubumnc(mn,js),
-     2         bsubvmnc(mn,js), bsubsmns(mn,js),
-     3         bsupumnc(mn,js), bsupvmnc(mn,js),
-     4         protmnc (mn,js), protrsqmnc(mn,js), prprmnc(mn,js)
-               IF (lasym) THEN
-                  READ (iunit, *, iostat=istat(8), err=1000)
-     1            bmns(mn,js), gmns(mn,js), bsubumns(mn,js),
-     2            bsubvmns(mn,js), bsubsmnc(mn,js),
-     3            bsupumns(mn,js), bsupvmns(mn,js),
-     4            protmns (mn,js), protrsqmns(mn,js), prprmns(mn,js)
-               END IF
-            ELSE
-               READ (iunit, *, iostat=istat(8), err=1000)
-     1         bmnc(mn,js), gmnc(mn,js), bsubumnc(mn,js),
-     2         bsubvmnc(mn,js), bsubsmns(mn,js),
-     3         bsupumnc(mn,js), bsupvmnc(mn,js)
-               IF (lasym) THEN
-                  READ (iunit, *, iostat=istat(8), err=1000)
-     2            bmns(mn,js), gmns(mn,js), bsubumns(mn,js),
-     3            bsubvmns(mn,js), bsubsmnc(mn,js),
-     4            bsupumns(mn,js), bsupvmns(mn,js)
-               END IF
-            END IF
-         END DO
-
-      END DO
-
-!     Compute current coefficients on full mesh
-      IF (version_ .gt. (8.0+eps_w)) CALL Compute_Currents(ierr)
-
-
-      mnyq = INT(MAXVAL(xm_nyq));  nnyq = INT(MAXVAL(ABS(xn_nyq)))/nfp
-
-!
-!     Read FULL AND HALF-MESH QUANTITIES
-!
-!     NOTE: In version_ <= 6.00, mass, press were written out in INTERNAL (VMEC) units
-!     and are therefore multiplied here by 1/mu0 to transform to pascals. Same is true
-!     for ALL the currents (jcuru, jcurv, jdotb). Also, in version_ = 6.10 and
-!     above, PHI is the true (physical) toroidal flux (has the sign of jacobian correctly
-!     built into it)
-!
-      iotas(1) = 0; mass(1) = 0; pres(1) = 0; phip(1) = 0;
-      buco(1) = 0; bvco(1) = 0; vp(1) = 0; overr(1) = 0;  specw(1) = 1
-      beta_vol(1) = 0
-
-      IF (version_ .le. (6.05+eps_w)) THEN
-         READ (iunit, 730, iostat=istat(9), err=1000)
-     1     (iotas(js), mass(js), pres(js),
-     2      phip(js), buco(js), bvco(js), phi(js), vp(js), overr(js),
-     3      jcuru(js), jcurv(js), specw(js),js=2,ns)
-         READ (iunit, 730, iostat=istat(10), err=1000)
-     1      aspect, betatot, betapol, betator, betaxis, b0
-      ELSE IF (version_ .le. (6.20+eps_w)) THEN
-         READ (iunit, 730, iostat=istat(9), err=1000)
-     1     (iotas(js), mass(js), pres(js), beta_vol(js),
-     2      phip(js), buco(js), bvco(js), phi(js), vp(js), overr(js),
-     3      jcuru(js), jcurv(js), specw(js),js=2,ns)
-         READ (iunit, 730, iostat=istat(10), err=1000)
-     1      aspect, betatot, betapol, betator, betaxis, b0
-      ELSE IF (version_ .le. (6.95+eps_w)) THEN
-         READ (iunit, *, iostat=istat(9), err=1000)
-     1     (iotas(js), mass(js), pres(js), beta_vol(js),
-     2      phip(js), buco(js), bvco(js), phi(js), vp(js), overr(js),
-     3      jcuru(js), jcurv(js), specw(js),js=2,ns)
-         READ (iunit, *, iostat=istat(10), err=1000)
-     1      aspect, betatot, betapol, betator, betaxis, b0
-      ELSE
-         READ (iunit, *, iostat=istat(9), err=1000)
-     1   (iotaf(js), presf(js), phipf(js), phi(js),
-     2   jcuru(js), jcurv(js), js=1,ns)
-         IF (vmec_type == 2) THEN
-            READ (iunit, *, iostat=istat(9), err=1000)
-     1      (iotas(js), mass(js),
-     1       pmap(js), omega(js), tpotb(js),pres(js),
-     2      beta_vol(js), phip(js), buco(js), bvco(js), vp(js),
-     3      overr(js), specw(js),js=2,ns)
-         ELSE
-            READ (iunit, *, iostat=istat(9), err=1000)
-     1      (iotas(js), mass(js), pres(js),
-     2      beta_vol(js), phip(js), buco(js), bvco(js), vp(js),
-     3      overr(js), specw(js),js=2,ns)
-         END IF
-         READ (iunit, *, iostat=istat(10), err=1000)
-     1      aspect, betatot, betapol, betator, betaxis, b0
-      END IF
-
-
-      IF (version_ .gt. (6.10+eps_w)) THEN
-         READ (iunit, *, iostat=istat(10), err=1000) isigng
-         READ (iunit, *, iostat=istat(10), err=1000) input_extension
-         READ (iunit, *, iostat=istat(10), err=1000) IonLarmor,
-     1     VolAvgB, RBtor0, RBtor, Itor, Aminor, Rmajor, Volume
-      END IF
-
-
-!-----------------------------------------------
-!     MERCIER CRITERION
-!-----------------------------------------------
-      IF (version_.gt.(5.10+eps_w) .and. version_.lt.(6.20-eps_w)) THEN
-         READ (iunit, 730, iostat=istat(11), err=1000)
-     1      (Dmerc(js), Dshear(js), Dwell(js), Dcurr(js),
-     2       Dgeod(js), equif(js), js=2,ns-1)
-      ELSE IF (version_ .ge. (6.20-eps_w)) THEN
-         READ (iunit, *, iostat=istat(11), err=1000)
-     1      (Dmerc(js), Dshear(js), Dwell(js), Dcurr(js),
-     2       Dgeod(js), equif(js), js=2,ns-1)
-      END IF
-
-      IF (nextcur .gt. 0) THEN
-         IF (version_ .le. (6.20+eps_w)) THEN
-            READ (iunit, 730, iostat=istat(12), err=1000)
-     1      (extcur(i),i=1,nextcur)
-         ELSE
-            READ (iunit, *, iostat=istat(12), err=1000)
-     1      (extcur(i),i=1,nextcur)
-         END IF
-         !SAL 11/30/11 - To make DIAGNO v2 work with old files.
-         IF ((version_ .ge. (6.90-eps_w)) .and.
-     1       (version_ .le. (6.90+eps_w))) THEN
-            lcurr = .true.
-         ELSE
-            READ (iunit, *, iostat=istat(13)) lcurr
-         END IF
-         !READ (iunit, *, iostat=istat(13)) lcurr
-         IF (lcurr) READ (iunit, *, iostat=istat(13), err=1000)
-     1      (curlabel(i),i=1,nextcur)
-      END IF
-
-      IF (version_ .le. (6.20+eps_w)) THEN
-         READ (iunit, 730, iostat=istat(14))
-     1     (fsqt(i), wdot(i), i=1,nstore_seq)
-      ELSE
-         READ (iunit, *, iostat=istat(14))
-     1     (fsqt(i), wdot(i), i=1,nstore_seq)
-      END IF
-
-      IF ((version_.ge.6.20-eps_w) .and. (version_ .lt. (6.50-eps_w))
-     1   .and. (istat(14).eq.0)) THEN
-         READ (iunit, 730, iostat=istat(14), err=1000)
-     1     (jdotb(js), bdotgradv(js),js=1,ns)
-      ELSE IF (version_ .ge. (6.50-eps_w)) THEN
-         READ (iunit, *, iostat=istat(14), err=1000)
-     1     (jdotb(js), bdotgradv(js),js=1,ns)
-      ELSE
-         istat(14) = 0
-      END IF
-
-!
-!     CONVERT FROM INTERNAL UNITS TO PHYSICAL UNITS IF NEEDED
-!
-      IF (version_ .le. (6.05+eps_w)) THEN
-         mass = mass/mu0
-         pres = pres/mu0
-         jcuru = jcuru/mu0
-         jcurv = jcurv/mu0
-         jdotb = jdotb/mu0
-         phi   = -phi
-      END IF
-
- 1000 CONTINUE
-
-      READ (iunit, iostat=ierr) mgrid_mode
-      IF (ierr .ne. 0) THEN
-         ierr = 0; mgrid_mode = 'N'
-      END IF
-
-      IF (istat(2) .ne. 0) ierr_vmec = 1
-
-      DO m = 1,15
-        IF (istat(m) .gt. 0) THEN
-           PRINT *,' Error No. ',m,' in READ_WOUT, iostat = ',istat(m)
-           ierr = m
-           EXIT
-        END IF
-      END DO
-
-
-  720 FORMAT(8i10)
-  730 FORMAT(5e20.13)
-  740 FORMAT(a)
-  790 FORMAT(i5,/,(1p,3e12.4))
-
-      END SUBROUTINE read_wout_text
-
-
       SUBROUTINE read_wout_nc(filename, ierr)
       USE ezcdf
       USE stel_constants, ONLY: mu0
@@ -807,7 +299,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER :: nwout, ierror, i_animec, i_flow
+      INTEGER :: nwout, ierror
       INTEGER, DIMENSION(3)   :: dimlens
       REAL(rprec) :: ohs
       REAL(rprec), DIMENSION(:), ALLOCATABLE :: raxis_cc, raxis_cs,
@@ -823,18 +315,8 @@ C-----------------------------------------------
 ! Be sure all arrays are deallocated
       CALL read_wout_deallocate
 
-      ! ANIMEC/FLOW -SAL
-      i_animec = 0
-      i_flow   = 0
-      vmec_type = 0
-
       ! reset iasym, needed when using the same instance multiple times -jons
       iasym = 0
-
-      CALL cdf_inquire(nwout, vn_pparmnc, dimlens, ier=ierror)
-      IF (ierror.eq.0) vmec_type = 1
-      CALL cdf_inquire(nwout, vn_omega, dimlens, ier=ierror)
-      IF (ierror.eq.0) vmec_type = 2
 
 ! Read in scalar variables
       CALL cdf_read(nwout, vn_error, ierr_vmec)
@@ -863,7 +345,6 @@ C-----------------------------------------------
       CALL cdf_read(nwout, vn_asym, lasym)
       IF (lasym) iasym = 1
       CALL cdf_read(nwout, vn_free, lfreeb)
-      CALL cdf_read(nwout, vn_rfp, lrfp)
       CALL cdf_read(nwout, vn_aspect, aspect)
       CALL cdf_read(nwout, vn_beta, betatot)
       CALL cdf_read(nwout, vn_pbeta, betapol)
@@ -892,24 +373,9 @@ C-----------------------------------------------
       mgrid_mode = 'N'
       CALL cdf_inquire(nwout, vn_mgmode, dimlens, ier=ierror)
       IF (ierror.eq.0) CALL cdf_read(nwout, vn_mgmode, mgrid_mode)
-      IF (lfreeb) THEN
-         CALL cdf_read(nwout, vn_flp, nobser)
-         CALL cdf_read(nwout, vn_nobd, nobd)
-         CALL cdf_read(nwout, vn_nbset, nbsets)
-      END IF
-
-      ! ANIMEC/FLOW -SAL
-      CALL cdf_inquire(nwout, vn_machsq, dimlens, ier=ierror)
-      IF (ierror.eq.0) CALL cdf_read(nwout, vn_machsq, machsq)
-      CALL cdf_inquire(nwout, vn_wpar, dimlens, ier=ierror)
-      IF (ierror.eq.0) CALL cdf_read(nwout, vn_wpar, wp)  ! This overwrites wp with wpar
 
 ! Inquire existence, dimensions of arrays for allocation
 ! 1D Arrays
-      IF (lfreeb .and. nbsets.gt.0) THEN
-         CALL cdf_read(nwout, vn_nbfld, nbfld)
-      END IF
-
       CALL cdf_inquire(nwout, vn_pmod, dimlens)
       ALLOCATE (xm(dimlens(1)), stat = ierror)
       CALL cdf_inquire(nwout, vn_tmod, dimlens)
@@ -1027,15 +493,6 @@ C-----------------------------------------------
          IF (ierror == 0) ALLOCATE (potvac(1:dimlens(1)), stat = ierror)
       ENDIF
 
-      ! ANIMEC/FLOW -SAL
-      CALL cdf_inquire(nwout, vn_pmap, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (pmap(dimlens(1)), stat = ierror)
-      CALL cdf_inquire(nwout, vn_omega, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (omega(dimlens(1)), stat = ierror)
-      CALL cdf_inquire(nwout, vn_tpotb, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (tpotb(dimlens(1)), stat = ierror)
-
-
 ! 2D Arrays
       CALL cdf_inquire(nwout, vn_rmnc, dimlens)
       ALLOCATE (rmnc(dimlens(1),dimlens(2)), stat = ierror)
@@ -1059,38 +516,6 @@ C-----------------------------------------------
       ALLOCATE (bsupumnc(dimlens(1),dimlens(2)), stat = ierror)
       CALL cdf_inquire(nwout, vn_bsupvmnc, dimlens)
       ALLOCATE (bsupvmnc(dimlens(1),dimlens(2)), stat = ierror)
-
-      ! ANIMEC/FLOW -SAL
-      CALL cdf_inquire(nwout, vn_pparmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (pparmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_ppermnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (ppermnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_hotdmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (hotdmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_pbprmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (pbprmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_ppprmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (ppprmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_sigmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (sigmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_taumnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (taumnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_protmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (protmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_protrsqmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (protrsqmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_prprmnc, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (prprmnc(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
 
       IF (.NOT. lasym) GO TO 800
 
@@ -1116,38 +541,6 @@ C-----------------------------------------------
       ALLOCATE (bsupumns(dimlens(1),dimlens(2)), stat = ierror)
       CALL cdf_inquire(nwout, vn_bsupvmns, dimlens)
       ALLOCATE (bsupvmns(dimlens(1),dimlens(2)), stat = ierror)
-
-      ! ANIMEC/FLOW -SAL
-      CALL cdf_inquire(nwout, vn_pparmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (pparmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_ppermns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (ppermns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_hotdmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (hotdmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_pbprmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (pbprmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_ppprmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (ppprmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_sigmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (sigmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_taumns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (taumns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_protmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (protmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_protrsqmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (protrsqmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
-      CALL cdf_inquire(nwout, vn_prprmns, dimlens, ier=ierror)
-      IF (ierror == 0) ALLOCATE (prprmns(dimlens(1),dimlens(2)),
-     1                           stat = ierror)
 
  800  CONTINUE
 
@@ -1204,35 +597,6 @@ C-----------------------------------------------
          CALL cdf_read(nwout, vn_bsupvmns, bsupvmns)
       END IF
 
-      ! ANIMEC/FLOW -SAL
-      IF (vmec_type == 1) THEN
-         CALL cdf_read(nwout, vn_pparmnc, pparmnc)
-         CALL cdf_read(nwout, vn_ppermnc, ppermnc)
-         CALL cdf_read(nwout, vn_hotdmnc, hotdmnc)
-         CALL cdf_read(nwout, vn_pbprmnc, pbprmnc)
-         CALL cdf_read(nwout, vn_ppprmnc, ppprmnc)
-         CALL cdf_read(nwout,  vn_sigmnc,  sigmnc)
-         CALL cdf_read(nwout,  vn_taumnc,  taumnc)
-         IF (lasym) THEN
-            CALL cdf_read(nwout, vn_pparmns, pparmns)
-            CALL cdf_read(nwout, vn_ppermns, ppermns)
-            CALL cdf_read(nwout, vn_hotdmns, hotdmns)
-            CALL cdf_read(nwout, vn_pbprmns, pbprmns)
-            CALL cdf_read(nwout, vn_ppprmns, ppprmns)
-            CALL cdf_read(nwout,  vn_sigmns,  sigmns)
-            CALL cdf_read(nwout,  vn_taumns,  taumns)
-         END IF
-      ELSE IF (vmec_type == 2) THEN
-         CALL cdf_read(nwout,    vn_protmnc,    protmnc)
-         CALL cdf_read(nwout,    vn_prprmnc,    prprmnc)
-         CALL cdf_read(nwout, vn_protrsqmnc, protrsqmnc)
-         IF (lasym) THEN
-            CALL cdf_read(nwout,    vn_protmns,    protmns)
-            CALL cdf_read(nwout,    vn_prprmns,    prprmns)
-            CALL cdf_read(nwout, vn_protrsqmns, protrsqmns)
-         END IF
-      END IF
-
       CALL cdf_read(nwout, vn_am, am)
       CALL cdf_read(nwout, vn_ac, ac)
       CALL cdf_read(nwout, vn_ai, ai)
@@ -1253,12 +617,6 @@ C-----------------------------------------------
       CALL cdf_read(nwout, vn_chipf, chipf)
       CALL cdf_read(nwout, vn_jcuru, jcuru)
       CALL cdf_read(nwout, vn_jcurv, jcurv)
-
-      IF (vmec_type == 2) THEN
-         CALL cdf_read(nwout, vn_pmap, pmap)
-         CALL cdf_read(nwout, vn_omega, omega)
-         CALL cdf_read(nwout, vn_tpotb, tpotb)
-      END IF
 
 
 !     HALF-MESH quantities
@@ -1316,248 +674,6 @@ C-----------------------------------------------
       IF (ierror. ne. 0) PRINT *,"in read_wout_nc ierror=",ierror
 
       END SUBROUTINE read_wout_nc
-
-      SUBROUTINE write_wout_text(filename, ierr)
-      USE v3_utilities
-      USE vsvd0, ONLY: nparts
-      USE safe_open_mod
-      USE stel_constants, ONLY: mu0
-
-      IMPLICIT NONE
-!------------------------------------------------
-!   D u m m y   A r g u m e n t s
-!------------------------------------------------
-      CHARACTER (len=*)    :: filename
-      INTEGER, INTENT(out) :: ierr
-!------------------------------------------------
-!   L o c a l   P a r a m e t e r s
-!------------------------------------------------
-      REAL(rprec), PARAMETER :: eps_w = 1.e-4_dp
-!------------------------------------------------
-!   L o c a l   V a r i a b l e s
-!------------------------------------------------
-      INTEGER              :: iounit, js, mn, i, j, k, m, n, iasymm
-      LOGICAL              :: lcurr
-!------------------------------------------------
-!
-!     THIS SUBROUTINE WRITES A TEXT FILE WOUT CREATED BY STORED THE INFORMATION
-!     IN THE read_WOUT MODULE. This routine can only be called if the wout has
-!     already been read in.
-
-      iounit = 0
-      ierr = 0
-      CALL safe_open(iounit, ierr,                                             &
-     &               'wout_' // TRIM(filename) // '.txt',                      &
-     &               'replace', 'formatted')
-
-      CALL assert_eq(0, ierr, 'Error opening text wout file in ' //            &
-     &               'write_wout_text of read_wout_mod.')
-
-
-!  Write version info
-      WRITE (iounit, '(a15,f5.2)') 'VMEC VERSION = ', version_
-
-!  Check version numbers since values change.
-      IF (lasym) THEN
-         iasymm = 1
-      ELSE
-         iasym = 0
-      END IF
-
-      IF (version_ .le. (5.10 + eps_w)) THEN
-         WRITE (iounit, *) wb, wp, gamma, pfac, nfp, ns, mpol, ntor,           &
-     &      mnmax, itfsq, niter, iasymm
-      ELSE
-         IF (version_ .lt. 6.54) THEN
-            WRITE (iounit, *) wb, wp, gamma, pfac, rmax_surf, rmin_surf
-         ELSE
-            WRITE (iounit, *) wb, wp, gamma, pfac, rmax_surf, rmin_surf,       &
-     &                        zmax_surf
-         END IF
-         IF (version_ .le. (8.0 + eps_w)) THEN
-            WRITE (iounit, *) nfp, ns, mpol, ntor, mnmax, itfsq, niter,        &
-     &                        iasym, ierr_vmec
-         ELSE
-            WRITE (iounit, *) nfp, ns, mpol, ntor, mnmax, mnmax_nyq,           &
-     &                        itfsq, niter, iasym,                             &
-     &                        ierr_vmec
-         END IF
-      END IF
-
-      IF (version_ .gt. (6.20 + eps_w)) THEN
-         WRITE (iounit, *) imse, itse, nbsets, nobd, nextcur, nstore_seq
-      ELSE
-         WRITE (iounit, *) imse, itse, nbsets, nobd, nextcur
-      END IF
-
-      IF (ierr_vmec .ne. norm_term_flag .and.                                  &
-     &    ierr_vmec .ne. more_iter_flag) THEN
-         GOTO 1000
-      END IF
-
-      IF (nbsets .gt. 0) THEN
-         WRITE (iounit, *) nbfld(1:nbsets)
-      END IF
-      WRITE (iounit, *) TRIM(mgrid_file)
-
-      DO js = 1, ns
-         DO mn = 1, mnmax
-            IF (js .eq. 1) THEN
-               WRITE (iounit, *) NINT(xm(mn)), NINT(xn(mn)/nfp)
-            END IF
-            IF (version_ .le. (6.20 + eps_w)) THEN
-               WRITE (iounit, 730) rmnc(mn,js), zmns(mn,js),                   &
-     &                             lmns(mn,js), bmnc(mn,js),                   &
-     &                             gmnc(mn,js), bsubumnc(mn,js),               &
-     &                             bsubvmnc(mn,js), bsubsmns(mn,js),           &
-     &                             bsupumnc(mn,js), bsupvmnc(mn,js),           &
-     &                             currvmnc(mn,js)
-            ELSE IF (version_ .le. (8.0 + eps_w)) THEN
-               WRITE (iounit, *) rmnc(mn,js), zmns(mn,js), lmns(mn,js),        &
-     &                           bmnc(mn,js), gmnc(mn,js),                     &
-     &                           bsubumnc(mn,js), bsubvmnc(mn,js),             &
-     &                           bsubsmns(mn,js), bsupumnc(mn,js),             &
-     &                           bsupvmnc(mn,js), currvmnc(mn,js)
-            ELSE
-               WRITE (iounit, *) rmnc(mn,js), zmns(mn,js), lmns(mn,js)
-            END IF
-
-!  Write asymmetric components.
-            IF (lasym) THEN
-               IF (version_ .le. (8.0 + eps_w)) THEN
-                  WRITE (iounit, *) rmns(mn,js), zmnc(mn,js),                  &
-     &                              lmnc(mn,js), bmns(mn,js),                  &
-     &                              gmns(mn,js), bsubumns(mn,js),              &
-     &                              bsubvmns(mn,js), bsubsmnc(mn,js),          &
-     &                              bsupumns(mn,js), bsubvmns(mn,js)
-               ELSE
-                  WRITE (iounit, *) rmns(mn,js), zmnc(mn,js),                  &
-     &                              lmnc(mn,js)
-               END IF
-            END IF
-         END DO
-
-         IF (version_ .le. (8.0 + eps_w)) THEN
-            CYCLE
-         END IF
-
-         DO mn = 1, mnmax_nyq
-            IF (js .eq. 1) THEN
-               WRITE (iounit, *) NINT(xm_nyq(mn)),                             &
-     &                           NINT(xn_nyq(mn)/nfp)
-            END IF
-            WRITE (iounit, *) bmnc(mn,js), gmnc(mn,js),                        &
-     &                        bsubumnc(mn,js), bsubvmnc(mn,js),                &
-     &                        bsubsmns(mn,js), bsupumnc(mn,js),                &
-     &                        bsupvmnc(mn,js)
-            IF (lasym) THEN
-               WRITE (iounit, *) bmns(mn,js), gmns(mn,js),                     &
-     &                           bsubumns(mn,js), bsubvmns(mn,js),             &
-     &                           bsubsmnc(mn,js), bsupumns(mn,js),             &
-     &                           bsupvmns(mn,js)
-            END IF
-         END DO
-      END DO
-
-!
-!     Write FULL AND HALF-MESH QUANTITIES
-!
-!     NOTE: In version_ <= 6.00, mass, press were written out in INTERNAL (VMEC) units
-!     and are therefore multiplied here by 1/mu0 to transform to pascals. Same is true
-!     for ALL the currents (jcuru, jcurv, jdotb). Also, in version_ = 6.10 and
-!     above, PHI is the true (physical) toroidal flux (has the sign of jacobian correctly
-!     built into it)
-!
-
-      IF (version_ .le. (6.05 + eps_w)) THEN
-         WRITE (iounit, 730) (iotas(js), mass(js)*mu0, pres(js)*mu0,           &
-     &                        phip(js), buco(js), bvco(js), -phi(js),          &
-     &                        vp(js), overr(js), jcuru(js)*mu0,                &
-     &                        jcurv(js)*mu0, specw(js), js=2, ns)
-         WRITE (iounit, 730) aspect, betatot, betapol, betaxis, b0
-      ELSE IF (version_ .le. (6.20 + eps_w)) THEN
-         WRITE (iounit, 730) (iotas(js), mass(js), pres(js),                   &
-     &                        beta_vol(js), phip(js), buco(js),                &
-     &                        bvco(js), phi(js), vp(js), overr(js),            &
-     &                        jcuru(js), jcurv(js), specw(js),                 &
-     &                        js=2, ns)
-         WRITE (iounit, 730) aspect, betatot, betapol, betaxis, b0
-      ELSE IF (version_ .le. (6.95 + eps_w)) THEN
-         WRITE (iounit, *) (iotas(js), mass(js), pres(js),                     &
-     &                      beta_vol(js), phip(js), buco(js),                  &
-     &                      bvco(js), phi(js), vp(js), overr(js),              &
-     &                      jcuru(js), jcurv(js), specw(js),                   &
-     &                      js=2, ns)
-         WRITE (iounit, *) aspect, betatot, betapol, betaxis, b0
-      ELSE
-         WRITE (iounit, *) (iotaf(js), presf(js), phipf(js), phi(js),          &
-     &                       jcuru(js), jcurv(js), js=1, ns)
-         WRITE (iounit, *) (iotas(js), mass(js), pres(js),                     &
-     &                      beta_vol(js), phip(js), buco(js),                  &
-     &                      bvco(js), vp(js), overr(js), specw(js),            &
-     &                      js = 2, ns)
-         WRITE (iounit, *) aspect, betatot, betapol, betaxis, b0
-      END IF
-
-      IF (version_ .gt. (6.10 + eps_w)) THEN
-         WRITE (iounit, *) isigng
-         WRITE (iounit, *) TRIM(input_extension)
-         WRITE (iounit, *) IonLarmor, VolAvgB, RBtor0, RBtor, Itor,            &
-     &                     Aminor, Rmajor, Volume
-      END IF
-
-!-----------------------------------------------
-!     MERCIER CRITERION
-!-----------------------------------------------
-      IF (version_ .gt. (5.10 + eps_w) .and.                                   &
-     &    version_ .lt. (6.20 - eps_w)) THEN
-         WRITE (iounit, 730) (Dmerc(js), Dshear(js), Dwell(js),                &
-     &                        Dcurr(js), Dgeod(js), equif(js),                 &
-     &                        js=2, ns - 1)
-      ELSE IF (version_ .ge. (6.20 - eps_w)) THEN
-         WRITE (iounit, *) (Dmerc(js), Dshear(js), Dwell(js),                  &
-     &                      Dcurr(js), Dgeod(js), equif(js),                   &
-     &                      js=2, ns - 1)
-      END IF
-
-      IF (nextcur .gt. 0) THEN
-         IF (version_ .le. (6.20 + eps_w)) THEN
-            WRITE (iounit, 730) (extcur(js), js=1, nextcur)
-         ELSE
-            WRITE (iounit, *) (extcur(js), js=1, nextcur)
-         END IF
-
-         lcurr = LEN_TRIM(curlabel(1)) .gt. 0
-         WRITE (iounit, *) lcurr
-         IF (lcurr) THEN
-            WRITE (iounit, *) (TRIM(curlabel(js)), js=1, nextcur)
-         END IF
-      END IF
-
-      IF (version_ .le. (6.20 + eps_w)) THEN
-         WRITE (iounit, 730) (fsqt(js), wdot(js), js = 1, nstore_seq)
-      ELSE
-         WRITE (iounit, *) (fsqt(js), wdot(js), js = 1, nstore_seq)
-      END IF
-
-      IF (version_ .ge. (6.20 - eps_w) .and.                                   &
-     &    version_ .lt. (6.50 - eps_w)) THEN
-         WRITE (iounit, 730) (jdotb(js), bdotgradv(js), js=1, ns)
-      ELSE IF (version_ .ge. (6.50 - eps_w)) THEN
-         WRITE (iounit, *) (jdotb(js), bdotgradv(js), js=1, ns)
-      END IF
-
-1000  CONTINUE
-
-      WRITE (iounit, *) mgrid_mode
-
-  730 FORMAT(5e20.13)
-
-      CLOSE (iounit, iostat = ierr)
-      CALL assert_eq(0, ierr, 'Error closing text wout file in ' //            &
-     &               'write_wout_text of read_wout_mod.')
-
-      END SUBROUTINE
 
       SUBROUTINE Compute_Currents(ierror)
       USE stel_constants, ONLY: mu0
@@ -1694,15 +810,6 @@ C-----------------------------------------------
       IF (ALLOCATED(currumnc)) DEALLOCATE (currumnc)
       IF (ALLOCATED(currumns)) DEALLOCATE (currumns, currvmns)
       IF (ALLOCATED(rzl_local)) DEALLOCATE (rzl_local)
-
-      ! FLOW/ANIMEC additions
-      IF (ALLOCATED(pmap)) DEALLOCATE(pmap, omega, tpotb)
-      IF (ALLOCATED(pparmnc)) DEALLOCATE(pparmnc, ppermnc, hotdmnc,
-     1    pbprmnc, ppprmnc, sigmnc, taumnc)
-      IF (ALLOCATED(pparmns)) DEALLOCATE(pparmns, ppermns, hotdmns,
-     1    pbprmns, ppprmns, sigmns, taumns)
-      IF (ALLOCATED(protmnc)) DEALLOCATE(protmnc, protrsqmnc, prprmnc)
-      IF (ALLOCATED(protmns)) DEALLOCATE(protmns, protrsqmns, prprmns)
 
       ! SAL Addition
       IF (ALLOCATED(potvac)) DEALLOCATE(potvac)

@@ -4,7 +4,6 @@
       USE vmec_params, ONLY: bad_jacobian_flag, zsc
       USE realspace
       USE vforces
-c       USE vsvd, ONLY: router, rinner, gphifac, grmse
       USE xstuff
       USE timer_sub
       USE precon2d, ONLY: ictrl_prec2d, lHess_exact
@@ -298,7 +297,7 @@ c       USE vsvd, ONLY: router, rinner, gphifac, grmse
       gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
       CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
 !     Force new initial axis guess IF ALLOWED (l_moveaxis=T)
-      IF (lmove_axis .and. iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
+      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
      1    irst = 4
 
       CALL second0 (tresoff)

@@ -6,7 +6,6 @@
      1   gsqrt => azmn_o, bsq => bzmn_o, izeta => azmn_e,
      2   brho => bzmn_e, bphi => czmn_o, curtheta => brmn_e
       USE vacmod
-c       USE vspline
       USE csplinx
       USE vmec_io
       USE mgrid_mod
@@ -82,7 +81,7 @@ C-----------------------------------------------
 !
 !     STORE EDGE VALUES OF B-FIELD
 !
-      IF ((lfreeb .and. ivac.gt.1) .or. ledge_dump) THEN
+      IF (lfreeb .and. ivac.gt.1) THEN
          IF (ALLOCATED(bredge)) DEALLOCATE (bredge, bpedge, bzedge)
          ALLOCATE (bredge(2*nznt), bpedge(2*nznt), bzedge(2*nznt),
      1             stat=i)

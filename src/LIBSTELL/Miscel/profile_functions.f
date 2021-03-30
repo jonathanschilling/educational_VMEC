@@ -4,7 +4,7 @@
 !    FUNCTION pmass
 !  (JDH 2010-03-30)
 !******************************************************************************
-      
+
       FUNCTION pcurr (xx)
 !  Function to compute the current profile
 
@@ -21,10 +21,10 @@
 !                          ac(0) * ((1 - s ** ac(1)) ** ac(2))*(1 + Sum[ac(i)*Exp(-(s - ac(i+1))/ac(i+2)) ** 2])
 !    sum_atan         _    sum of arctangents
 !    power_series_I   _    Power series for I(s) (NOT default)
-!    Akima_spline_Ip  X    Akima spline for I-prime(s) 
-!    Akima_spline_I   _    Akima spline for I(s) 
-!    cubic_spline_Ip  X    cubic spline for I-prime(s) 
-!    cubic_spline_I   _    cubic spline for I(s) 
+!    Akima_spline_Ip  X    Akima spline for I-prime(s)
+!    Akima_spline_I   _    Akima spline for I(s)
+!    cubic_spline_Ip  X    cubic spline for I-prime(s)
+!    cubic_spline_I   _    cubic spline for I(s)
 !    pedestal         _    Pedestal profile
 !    rational         _    Rational function (ratio of polynomials)
 !    line_segment_Ip  X    Line segments for I-prime(s)
@@ -47,7 +47,7 @@
 !  Note that the profile that is parameterized is often I-prime, whereas
 !  I(x) (= Integral_from_0_to_x I-prime(s) ds) is the function that pcurr
 !  returns. For the default case of a power series, the integral can be
-!  computed analytically. For other cases, a numerical quadrature is done, 
+!  computed analytically. For other cases, a numerical quadrature is done,
 !  using a 10-point Gauss-Legendre quadrature.
       USE stel_kinds
       USE stel_constants, ONLY: zero, one, pi
@@ -55,12 +55,12 @@
       USE line_segment
       USE functions
       IMPLICIT NONE
-! ac assumed to be dimensioned (0:n), with n >= 20 
+! ac assumed to be dimensioned (0:n), with n >= 20
 !-----------------------------------------------
       INTEGER     :: i, ioff, iflag
       REAL(rprec) :: xx, pcurr, x, xp, temp_num, temp_denom
       CHARACTER(len=20) :: pcurr_type_lc
-      
+
       INTEGER, PARAMETER          :: gln = 10
       INTEGER                     :: gli
       REAL(rprec), DIMENSION(gln), PARAMETER :: glx = (/                       &
@@ -91,7 +91,7 @@
       pcurr_type_lc = pcurr_type
       CALL tolower(pcurr_type_lc)
       SELECT CASE(TRIM(pcurr_type_lc))
-      
+
       CASE ('gauss_trunc')
 !  Truncated Gaussian
 !  I-prime(s) = ac(0) * (exp(-(s/ac(1))**2) - exp(-(1/ac(1))**2)
@@ -102,7 +102,7 @@
      &         - exp(-(1 / ac(1)) ** 2))
          END DO
          pcurr = pcurr * x     ! correct for x interval
-         
+
       CASE ('two_power')
 !  Two power profile
 !  I-prime(s) = [1 - s**ac(0)]**ac(1)            !! Old as of 2010-05-26
@@ -136,7 +136,7 @@
 !     &         ac(5) * (2/pi) * atan(ac(6)*x**ac(7)/(1-x)**ac(8)) +            &
 !     &         ac(9) * (2/pi) * atan(ac(10)*x**ac(11)/(1-x)**ac(12)) +         &
 !     &         ac(13) * (2/pi) * atan(ac(14)*x**ac(15)/(1-x)**ac(16)) +        &
-!     &         ac(17) * (2/pi) * atan(ac(18)*x**ac(19)/(1-x)**ac(20)) 
+!     &         ac(17) * (2/pi) * atan(ac(18)*x**ac(19)/(1-x)**ac(20))
       IF (x .ge. one) THEN
          pcurr = ac(0) + ac(1) + ac(5) + ac(9) + ac(13) + ac(17)
       ELSE
@@ -157,7 +157,7 @@
        DO i = UBOUND(ac,1), ioff, -1
         pcurr = (pcurr + ac(i))*x
        END DO
-       
+
       CASE('Akima_spline_I','akima_spline_i') ! former ipcurr=11
 !  I(s) with Akima splines
 !  Akima-spline for current profile
@@ -253,21 +253,21 @@
 
          a8 =MAX(ac(i+8),0.01_dp)
          a12=MAX(ac(i+12),0.01_dp)
-      
+
          g1= (x-ac(i+7))/a8
          g3= (-ac(i+7))/a8
          g2= (x-ac(i+11))/a12
-         g4= (-ac(i+11))/a12      
+         g4= (-ac(i+11))/a12
          pcurr = pcurr + ac(i+4) * ac(i+0) *
      1 ( TANH( 2*ac(i+2)/ac(i+3) )
      2  -TANH( 2*(ac(i+2)-SQRT(x))/ac(i+3) ) )
      3  +ac(i+5)*( TANH(g1) - TANH(g3) )
      4  +ac(i+9)*( TANH(g2) - TANH(g4) )
 
-      
-      CASE('rational') ! 
+
+      CASE('rational') !
 !  I(s)  - not I-prime(s). No need for Gaussian quadrature.
-!  Ratio of polynomials. 
+!  Ratio of polynomials.
 !  Numerator coefficients: ac(LBOUND) - ac(9)
 !  Denominator coefficients: ac(10) - ac(UBOUND(ac,1))
          temp_num = zero
@@ -283,13 +283,13 @@
          ELSE
             pcurr = HUGE(pcurr)
          ENDIF
-      
+
       CASE('line_segment_Ip', 'line_segment_ip')
 !!  I(s) from I-prime(s)-values. Integrated line segments to determine the plasma
 !!  current.
          i = minloc(ac_aux_s(2:),dim=1)
          CALL line_seg_int(x,pcurr,ac_aux_s,ac_aux_f,i)
-      
+
       CASE('line_segment_I', 'line_segment_i')
 !!  I(s) values. Linearly interpolated line segments to determine the plasma
 !!  current.
@@ -298,16 +298,16 @@
 
       CASE DEFAULT
 !  Power series
-!  I-prime(s) = Sum(i,0,-)[ac(i) * s ** i] 
+!  I-prime(s) = Sum(i,0,-)[ac(i) * s ** i]
 !  Analytic integration to get I(s)
          DO i = UBOUND(ac,1), ioff, -1
             pcurr = x*pcurr + ac(i)/(i-ioff+1)
          END DO
          IF (TRIM(pcurr_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized pcurr_type:', pcurr_type 
+            WRITE(*,*) 'Unrecognized pcurr_type:', pcurr_type
             WRITE(*,*) ' *** CHECK YOUR INPUT ***'
             WRITE(*,*) 'Changing pcurr_type from ''',                          &
-     &         TRIM(pcurr_type), '''to ''power_series''.' 
+     &         TRIM(pcurr_type), '''to ''power_series''.'
             pcurr_type = 'power_series'
          END IF
          pcurr = x*pcurr
@@ -316,7 +316,7 @@
       END FUNCTION pcurr
 
 !******************************************************************************
-      
+
       FUNCTION piota (x)
 !  Function to compute the iota/q profile.
 
@@ -326,13 +326,12 @@
 !  ai_aux_f         Auxiliary array f, function-values used for splines
 !  piota_type       character, specifies the parameterization of the profile
 !    sum_atan        Sum of atan functions plus offset.
-!    Akima_spline      Akima spline 
+!    Akima_spline      Akima spline
 !    cubic_spline      cubic spline
 !    rational          rational (ratio of polynomials)
 !    nice_quadratic    quadratic with rerranged coefficients.
 !    line_segment      Linearly interpolated line segments
 !    power_series      Power Series (Default)
-!  lRFP             logical - Reversed Field Pinch
 !    True -  ai parameterization specifies q-profile (= 1 / iota)
 !    False - ai parameterization is for iota-profile
 
@@ -345,10 +344,10 @@
 
       USE stel_kinds
       USE stel_constants, ONLY: zero, one, pi
-      USE vmec_input, ONLY: ai, piota_type, ai_aux_s, ai_aux_f, lRFP
+      USE vmec_input, ONLY: ai, piota_type, ai_aux_s, ai_aux_f
       USE line_segment
       IMPLICIT NONE
-! ai assumed to be dimensioned (0:n), with n >= 20 
+! ai assumed to be dimensioned (0:n), with n >= 20
 !-----------------------------------------------
       INTEGER     :: i, iflag, ioff
       REAL(rprec) :: x, piota, temp_num, temp_denom
@@ -362,14 +361,14 @@
       CALL tolower(piota_type_lc)
       SELECT CASE(TRIM(piota_type_lc))
 
-      CASE('sum_atan') 
+      CASE('sum_atan')
 !  Sum atan functions mapped to  [0:1], with an ai(0) offset
 !       piota = ai(0) +                                                         &
 !     &         ai(1) * (2/pi) * atan(ai(2)*x**ai(3)/(1-x)**ai(4)) +            &
 !     &         ai(5) * (2/pi) * atan(ai(6)*x**ai(7)/(1-x)**ai(8)) +            &
 !     &         ai(9) * (2/pi) * atan(ai(10)*x**ai(11)/(1-x)**ai(12)) +         &
 !     &         ai(13) * (2/pi) * atan(ai(14)*x**ai(15)/(1-x)**ai(16)) +        &
-!     &         ai(17) * (2/pi) * atan(ai(18)*x**ai(19)/(1-x)**ai(20)) 
+!     &         ai(17) * (2/pi) * atan(ai(18)*x**ai(19)/(1-x)**ai(20))
       IF (x .ge. one) THEN
          piota = ai(0) + ai(1) + ai(5) + ai(9) + ai(13) + ai(17)
       ELSE
@@ -380,7 +379,7 @@
      &                 ai(13) * atan(ai(14)*x**ai(15)/(1-x)**ai(16)) +         &
      &                 ai(17) * atan(ai(18)*x**ai(19)/(1-x)**ai(20)))
       ENDIF
-     
+
       CASE('Akima_spline','akima_spline') ! former ipiota=11
 ! Akima-spline   (iogrid + siogrid)
 !        i = minloc(siogrid(2:ndatafmax),dim=1)  ! this is where zeros are again
@@ -390,7 +389,7 @@
         call spline_akima(x,piota,ai_aux_s,ai_aux_f,i,iflag)
         if(iflag < 0)                                                          &
      &       stop'piota: outside value from spline_akima requested'
-     
+
       CASE('cubic_spline') ! former ipiota=13
 ! cubic-spline   (iogrid + siogrid)
 !        i = minloc(siogrid(2:ndatafmax),dim=1)  ! this is where zeros are again
@@ -408,8 +407,8 @@
           endif
         endif
 
-      CASE('rational') ! 
-!  Ratio of polynomials. 
+      CASE('rational') !
+!  Ratio of polynomials.
 !  Numerator coefficients: ai(LBOUND) - ai(9)
 !  Denominator coefficients: ai(10) - ai(UBOUND)
          temp_num = zero
@@ -426,7 +425,7 @@
             piota = HUGE(piota)
          ENDIF
 
-      CASE('nice_quadratic') ! 
+      CASE('nice_quadratic') !
 !  Quadratic with slightly rearranged coefficients.
 !    iota(s) = a0(1-s) + a1 s + 4 a2 s (1 - s)
 !       a0 is the iota value at s = 0
@@ -440,29 +439,20 @@
 !!  Linearly interpolated line segments to determine the iotabar profile.
          i = minloc(ai_aux_s(2:),dim=1)
          CALL line_seg(x,piota,ai_aux_s,ai_aux_f,i)
-            
+
       CASE default
 !  Power Series is the default
          DO i = UBOUND(ai,1), LBOUND(ai,1), -1
             piota = x*piota + ai(i)
          END DO
          IF (TRIM(piota_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized piota_type:', piota_type 
+            WRITE(*,*) 'Unrecognized piota_type:', piota_type
             WRITE(*,*) ' *** CHECK YOUR INPUT ***'
             WRITE(*,*) 'Changing piota_type from ''',                          &
-     &         TRIM(piota_type), '''to ''power_series''.' 
+     &         TRIM(piota_type), '''to ''power_series''.'
             piota_type = 'power_series'
          END IF
       END SELECT
-
-      IF (lRFP) THEN
-!     RFP/TOKAMAK: ai are coefficients of q_safety, NOT iota
-         IF (piota .ne. zero) THEN
-            piota = one / piota
-         ELSE 
-            piota = HUGE(piota)
-         END IF
-      END IF
 
       END FUNCTION piota
 
@@ -520,7 +510,7 @@
       pmass_type_lc = pmass_type
       CALL tolower(pmass_type_lc)
       SELECT CASE(TRIM(pmass_type_lc))
-      
+
       CASE ('gauss_trunc')
 !  Truncated Gaussian
 !  p(s) = am(0) * (exp(-(s/am(1))**2) - exp(-(1/am(1))**2)
@@ -530,7 +520,7 @@
 !  c =  (1 - exp(-(1/am(1))**2)     ! so that p(0) = am(0).
          pmass = (am(0)/(one - exp(-(one / am(1)) ** 2))) *                    &
      &      (exp(-(x / am(1)) ** 2) - exp(-(one / am(1)) ** 2))
-     
+
       CASE ('two_power')
 !  Two power profile
 !  p(s) = [1 - s**am(0)]**am(1)          !! Old as of 2010-05-26
@@ -549,7 +539,7 @@
      &          (one-am(1))*(one/(one+(  x/am(5)**2)**am(6))**am(7)            &
      &                      -one/(one+(one/am(5)**2)**am(6))**am(7))/          &
      &                  (one-one/(one+(one/am(5)**2)**am(6))**am(7)))          &
-         
+
       CASE ('Akima_spline','akima_spline') ! former ipmass=11
 !        i = minloc(smagrid(2:ndatafmax),dim=1)  ! this is where zeros are again
         i = minloc(am_aux_s(2:),dim=1)  ! this is where zeros are again
@@ -597,7 +587,7 @@
      2  -TANH( 2*(am(i+2)-1._dp)  /am(i+3) ) )
 
       CASE('rational') !
-!  Ratio of polynomials. 
+!  Ratio of polynomials.
 !  Numerator coefficients: am(LBOUND) - am(9)
 !  Denominator coefficients: am(10) - am(UBOUND)
          temp_num = zero
@@ -618,359 +608,20 @@
 !!  Linearly interpolated line segments to determine the pressure profile.
          i = minloc(am_aux_s(2:),dim=1)
          CALL line_seg(x,pmass,am_aux_s,am_aux_f,i)
-      
+
       CASE DEFAULT
          DO i = UBOUND(am,1), LBOUND(am,1), -1
             pmass = x*pmass + am(i)
          END DO
          IF (TRIM(pmass_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized pmass_type:', pmass_type 
+            WRITE(*,*) 'Unrecognized pmass_type:', pmass_type
             WRITE(*,*) ' *** CHECK YOUR INPUT ***'
             WRITE(*,*) 'Changing pmass_type from ''',                          &
-     &         TRIM(pmass_type), '''to ''power_series''.' 
+     &         TRIM(pmass_type), '''to ''power_series''.'
             pmass_type = 'power_series'
          END IF
       END SELECT
-   
+
       pmass = mu0*pres_scale*pmass
 
       END FUNCTION pmass
-      
-      FUNCTION photp (xx)
-      USE stel_kinds
-      USE stel_constants, ONLY: zero, one
-      USE vmec_input, ONLY: ah, bloat, ph_type, ah_aux_s, ah_aux_f
-      USE line_segment
-      IMPLICIT NONE
-C-----------------------------------------------
-      INTEGER     :: i, iflag, ioff
-      REAL(rprec) :: xx, photp, x, temp_num, temp_denom
-      CHARACTER(len=20) :: ph_type_lc
-C-----------------------------------------------
-!     ANIMEC
-!     NOTE: On entry, ah is dimensionless
-!     HOT PARTICLE PRESSURE (RATIO TO ISOTROPIC PRESSURE)
-
-      x = MIN (ABS(xx * bloat), 1._dp)
-
-      photp = 0
-      ioff = LBOUND(ah,1)            ! Expected to be zero.
-
-!  Convert to Lower Case, to avoid typo issues
-      ph_type_lc = ph_type
-      CALL tolower(ph_type_lc)
-      SELECT CASE(TRIM(ph_type_lc))
-      
-      CASE ('gauss_trunc')
-         photp = (ah(0)/(one - exp(-(one / ah(1)) ** 2))) *                    &
-     &      (exp(-(x / ah(1)) ** 2) - exp(-(one / ah(1)) ** 2))
-      CASE ('two_power')
-         photp = ah(0) * ((one-x**ah(1))**ah(2))
-
-      CASE ('two_Lorentz','two_lorentz')
-       photp = ah(0)*(ah(1)*(one/(one+(  x/ah(2)**2)**ah(3))**ah(4)            &
-     &                      -one/(one+(one/ah(2)**2)**ah(3))**ah(4))/          &
-     &                  (one-one/(one+(one/ah(2)**2)**ah(3))**ah(4))+          &
-     &          (one-ah(1))*(one/(one+(  x/ah(5)**2)**ah(6))**ah(7)            &
-     &                      -one/(one+(one/ah(5)**2)**ah(6))**ah(7))/          &
-     &                  (one-one/(one+(one/ah(5)**2)**ah(6))**ah(7))) 
-         
-      CASE ('Akima_spline','akima_spline')
-        i = minloc(ah_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'photp: check s-grid for ah-grid values!'
-        CALL spline_akima(x,photp,ah_aux_s,ah_aux_f,i,iflag)
-        IF(iflag < 0)                                                          &
-     &       STOP 'photp: outside value from spline_akima requested'
-
-      CASE ('cubic_spline')
-        i = minloc(ah_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'photp: check s-grid for mass-grid values!'
-        CALL spline_cubic(x,photp,ah_aux_s,ah_aux_f,i,iflag)
-        IF (iflag < 0) THEN
-          IF (iflag == -1) THEN
-            STOP'photp: outside value from spline_cubic requested'
-          ELSEIF (iflag == -2) THEN
-            STOP'photp: identical ah_aux_s-values in spline_cubic'
-          ELSE
-            STOP 'photp: unknown error from spline_cubic'
-          ENDIF
-        ENDIF  
-
-      CASE ('pedestal')
-         DO i = 15, LBOUND(ah,1), -1
-            photp = x*photp + ah(i)
-         END DO
-         i = 16
-         IF (ah(i+3) .le. 0._dp ) THEN
-            ah(i:i+4) = 0
-            ah(i+3) = 1.0e30_dp
-         ELSE
-            ah(i+4) = 1.0_dp/
-     1     (TANH(2*ah(i+2)/ah(i+3))-TANH(2*(ah(i+2)-1)/ah(i+3)))
-         END IF
-         photp = photp + ah(i+4) * ah(i+1) *
-     1 ( TANH( 2*(ah(i+2)-SQRT(x))/ah(i+3) )
-     2  -TANH( 2*(ah(i+2)-1._dp)  /ah(i+3) ) )  
-
-      CASE('rational')
-         temp_num = zero
-         temp_denom = zero
-         DO i = 9, ioff, -1
-            temp_num = x * temp_num + ah(i)
-         END DO
-         DO i = UBOUND(ah,1), 10, -1
-            temp_denom = x * temp_denom + ah(i)
-         END DO
-         IF  (temp_denom .ne. zero) THEN
-            photp = temp_num / temp_denom
-         ELSE
-            photp = HUGE(photp)
-         ENDIF     
-
-      CASE('line_segment')
-         i = minloc(ah_aux_s(2:),dim=1)
-         CALL line_seg(x,photp,ah_aux_s,ah_aux_f,i)
-      
-      CASE DEFAULT
-         DO i = UBOUND(ah,1), LBOUND(ah,1), -1
-            photp = x*photp + ah(i)
-         END DO
-         IF (TRIM(ph_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized ph_type:', ph_type 
-            WRITE(*,*) ' *** CHECK YOUR INPUT ***'
-            WRITE(*,*) 'Changing ph_type from ''',                          &
-     &         TRIM(ph_type), '''to ''power_series''.' 
-            ph_type = 'power_series'
-         END IF
-      END SELECT
-
-      photp = photp
-
-      END FUNCTION photp
-
-      FUNCTION ptrat (xx)
-      USE stel_kinds
-      USE stel_constants, ONLY: zero, one
-      USE vmec_input, ONLY: at, bloat, pt_type, at_aux_s, at_aux_f
-      USE line_segment
-C-----------------------------------------------
-      INTEGER     :: i, iflag, ioff
-      REAL(rprec) :: xx, ptrat, x, temp_num, temp_denom
-      CHARACTER(len=20) :: pt_type_lc
-C-----------------------------------------------
-!     ANIMEC
-!     NOTE: On entry, at is dimensionless
-!     HOT PARTICLE T-perp/T-par
-!     FLOW
-!     NOTE: On entry, at is in arbitrary units
-!     Temperature Profile
-
-      x = MIN (ABS(xx * bloat), 1._dp)
-
-      ptrat = 0
-      ioff = LBOUND(at,1)            ! Expected to be zero.
-
-!  Convert to Lower Case, to avoid typo issues
-      pt_type_lc = pt_type
-      CALL tolower(pt_type_lc)
-      SELECT CASE(TRIM(pt_type_lc))
-      
-      CASE ('gauss_trunc')
-         ptrat = (at(0)/(one - exp(-(one / at(1)) ** 2))) *                    &
-     &      (exp(-(x / at(1)) ** 2) - exp(-(one / at(1)) ** 2))
-      CASE ('two_power')
-         ptrat = at(0) * ((one-x**at(1))**at(2))
-
-      CASE ('two_Lorentz','two_lorentz')
-       ptrat = at(0)*(at(1)*(one/(one+(  x/at(2)**2)**at(3))**at(4)            &
-     &                      -one/(one+(one/at(2)**2)**at(3))**at(4))/          &
-     &                  (one-one/(one+(one/at(2)**2)**at(3))**at(4))+          &
-     &          (one-at(1))*(one/(one+(  x/at(5)**2)**at(6))**at(7)            &
-     &                      -one/(one+(one/at(5)**2)**at(6))**at(7))/          &
-     &                  (one-one/(one+(one/at(5)**2)**at(6))**at(7))) 
-         
-      CASE ('Akima_spline','akima_spline')
-        i = minloc(at_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'ptrat: check s-grid for ah-grid values!'
-        CALL spline_akima(x,ptrat,at_aux_s,at_aux_f,i,iflag)
-        IF(iflag < 0)                                                          &
-     &       STOP 'ptrat: outside value from spline_akima requested'
-
-      CASE ('cubic_spline')
-        i = minloc(at_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'ptrat: check s-grid for mass-grid values!'
-        CALL spline_cubic(x,ptrat,at_aux_s,at_aux_f,i,iflag)
-        IF (iflag < 0) THEN
-          IF (iflag == -1) THEN
-            STOP'ptrat: outside value from spline_cubic requested'
-          ELSEIF (iflag == -2) THEN
-            STOP'ptrat: identical ah_aux_s-values in spline_cubic'
-          ELSE
-            STOP 'ptrat: unknown error from spline_cubic'
-          ENDIF
-        ENDIF  
-
-      CASE ('pedestal')
-         DO i = 15, LBOUND(at,1), -1
-            ptrat = x*ptrat + at(i)
-         END DO
-         i = 16
-         IF (at(i+3) .le. 0._dp ) THEN
-            at(i:i+4) = 0
-            at(i+3) = 1.0e30_dp
-         ELSE
-            at(i+4) = 1.0_dp/
-     1     (TANH(2*at(i+2)/at(i+3))-TANH(2*(at(i+2)-1)/at(i+3)))
-         END IF
-         ptrat = ptrat + at(i+4) * at(i+1) *
-     1 ( TANH( 2*(at(i+2)-SQRT(x))/at(i+3) )
-     2  -TANH( 2*(at(i+2)-1._dp)  /at(i+3) ) )  
-
-      CASE('rational')
-         temp_num = zero
-         temp_denom = zero
-         DO i = 9, ioff, -1
-            temp_num = x * temp_num + at(i)
-         END DO
-         DO i = UBOUND(at,1), 10, -1
-            temp_denom = x * temp_denom + at(i)
-         END DO
-         IF  (temp_denom .ne. zero) THEN
-            ptrat = temp_num / temp_denom
-         ELSE
-            ptrat = HUGE(ptrat)
-         ENDIF     
-
-      CASE('line_segment')
-         i = minloc(at_aux_s(2:),dim=1)
-         CALL line_seg(x,ptrat,at_aux_s,at_aux_f,i)
-      
-      CASE DEFAULT
-         DO i = UBOUND(at,1), LBOUND(at,1), -1
-            ptrat = x*ptrat + at(i)
-         END DO
-         IF (TRIM(pt_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized pt_type:', pt_type 
-            WRITE(*,*) ' *** CHECK YOUR INPUT ***'
-            WRITE(*,*) 'Changing pt_type from ''',                          &
-     &         TRIM(pt_type), '''to ''power_series''.' 
-            pt_type = 'power_series'
-         END IF
-      END SELECT
-
-      ptrat = ptrat
-
-      END FUNCTION ptrat
-      
-      
-      FUNCTION protf (xx)
-      USE stel_kinds
-      USE stel_constants, ONLY: zero, one
-      USE vmec_input, ONLY: ah, bloat, ph_type, ah_aux_s, ah_aux_f
-      USE line_segment
-C-----------------------------------------------
-      INTEGER     :: i, iflag, ioff
-      REAL(rprec) :: xx, protf, x, temp_num, temp_denom
-      CHARACTER(len=20) :: ph_type_lc
-C-----------------------------------------------
-!     FLOW
-!     NOTE: On entry, ah is in arbitrary units
-!     TOROIDAL ROTATIONAL FREQUENCY
-
-      x = MIN (ABS(xx * bloat), 1._dp)
-
-      protf = 0
-      ioff = LBOUND(ah,1)            ! Expected to be zero.
-
-!  Convert to Lower Case, to avoid typo issues
-      ph_type_lc = ph_type
-      CALL tolower(ph_type_lc)
-      SELECT CASE(TRIM(ph_type_lc))
-      
-      CASE ('gauss_trunc')
-         protf = (ah(0)/(one - exp(-(one / ah(1)) ** 2))) *                    &
-     &      (exp(-(x / ah(1)) ** 2) - exp(-(one / ah(1)) ** 2))
-      CASE ('two_power')
-         protf = ah(0) * ((one-x**ah(1))**ah(2))
-
-      CASE ('two_Lorentz','two_lorentz')
-       protf = ah(0)*(ah(1)*(one/(one+(  x/ah(2)**2)**ah(3))**ah(4)            &
-     &                      -one/(one+(one/ah(2)**2)**ah(3))**ah(4))/          &
-     &                  (one-one/(one+(one/ah(2)**2)**ah(3))**ah(4))+          &
-     &          (one-ah(1))*(one/(one+(  x/ah(5)**2)**ah(6))**ah(7)            &
-     &                      -one/(one+(one/ah(5)**2)**ah(6))**ah(7))/          &
-     &                  (one-one/(one+(one/ah(5)**2)**ah(6))**ah(7))) 
-         
-      CASE ('Akima_spline','akima_spline')
-        i = minloc(ah_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'protf: check s-grid for ah-grid values!'
-        CALL spline_akima(x,protf,ah_aux_s,ah_aux_f,i,iflag)
-        IF(iflag < 0)                                                          &
-     &       STOP 'protf: outside value from spline_akima requested'
-
-      CASE ('cubic_spline')
-        i = minloc(ah_aux_s(2:),dim=1)  ! this is where zeros are again
-        IF(i < 4) STOP 'protf: check s-grid for mass-grid values!'
-        CALL spline_cubic(x,protf,ah_aux_s,ah_aux_f,i,iflag)
-        IF (iflag < 0) THEN
-          IF (iflag == -1) THEN
-            STOP'protf: outside value from spline_cubic requested'
-          ELSEIF (iflag == -2) THEN
-            STOP'protf: identical ah_aux_s-values in spline_cubic'
-          ELSE
-            STOP 'protf: unknown error from spline_cubic'
-          ENDIF
-        ENDIF  
-
-      CASE ('pedestal')
-         DO i = 15, LBOUND(ah,1), -1
-            protf = x*protf + ah(i)
-         END DO
-         i = 16
-         IF (ah(i+3) .le. 0._dp ) THEN
-            ah(i:i+4) = 0
-            ah(i+3) = 1.0e30_dp
-         ELSE
-            ah(i+4) = 1.0_dp/
-     1     (TANH(2*ah(i+2)/ah(i+3))-TANH(2*(ah(i+2)-1)/ah(i+3)))
-         END IF
-         protf = protf + ah(i+4) * ah(i+1) *
-     1 ( TANH( 2*(ah(i+2)-SQRT(x))/ah(i+3) )
-     2  -TANH( 2*(ah(i+2)-1._dp)  /ah(i+3) ) )  
-
-      CASE('rational')
-         temp_num = zero
-         temp_denom = zero
-         DO i = 9, ioff, -1
-            temp_num = x * temp_num + ah(i)
-         END DO
-         DO i = UBOUND(ah,1), 10, -1
-            temp_denom = x * temp_denom + ah(i)
-         END DO
-         IF  (temp_denom .ne. zero) THEN
-            protf = temp_num / temp_denom
-         ELSE
-            protf = HUGE(protf)
-         ENDIF     
-
-      CASE('line_segment')
-         i = minloc(ah_aux_s(2:),dim=1)
-         CALL line_seg(x,protf,ah_aux_s,ah_aux_f,i)
-      
-      CASE DEFAULT
-         DO i = UBOUND(ah,1), LBOUND(ah,1), -1
-            protf = x*protf + ah(i)
-         END DO
-         IF (TRIM(ph_type_lc) .ne. 'power_series') THEN
-            WRITE(*,*) 'Unrecognized ph_type:', ph_type 
-            WRITE(*,*) ' *** CHECK YOUR INPUT ***'
-            WRITE(*,*) 'Changing ph_type from ''',                          &
-     &         TRIM(ph_type), '''to ''power_series''.' 
-            ph_type = 'power_series'
-         END IF
-      END SELECT
-
-      protf = protf
-
-      END FUNCTION protf
-!!!#endif

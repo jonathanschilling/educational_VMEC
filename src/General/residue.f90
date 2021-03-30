@@ -3,7 +3,6 @@
       USE vmec_params, ONLY: rss, zcs, rsc, zcc,                        &
                              meven, modd, ntmax, signgs
       USE realspace, ONLY: phip
-!       USE vsvd
       USE xstuff
       USE precon2d
       IMPLICIT NONE
@@ -44,21 +43,9 @@
       IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs))
       IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
 
-!FREE-BDY RFP MAY NEED THIS TO IMPROVE CONVERGENCE (SPH 022514)
-      IF (lfreeb .AND. lrfp) THEN
-!      IF (lfreeb .AND. lrfp .AND. iter2 .gt. 2000) THEN
-         fac = 0
-         IF (ictrl_prec2d .EQ. 0) fac = 1.E-1_dp
-         gcr(ns,0,m0,:) = fac*gcr(ns,0,m0,:)
-         gcz(ns,0,m0,:) = fac*gcz(ns,0,m0,:)
-      END IF
-
-
 
 !     PRECONDITIONER MUST BE CALCULATED USING RAW (UNPRECONDITIONED) FORCES
       IF (ictrl_prec2d .GE. 2) RETURN
-
-
 
 !
 !     COMPUTE INVARIANT RESIDUALS
@@ -69,15 +56,9 @@
 !ADD A V3FIT RELATED FLAG? ADD fsq criterion first
       delIter = iter2-iter1
 
-      IF (l_v3fit) THEN
-!  Coding for when run by V3FIT. Needed for correct computation
-!  of partial derivatives
-         IF (iter2-iter1.lt.50) jedge = 1
-      ELSE
 !  Coding for VMEC2000 run stand-alone
          IF (delIter.lt.50 .and.                                        &
             (fsqr+fsqz).lt.1.E-6_dp) jedge = 1
-      ENDIF
 
       CALL getfsq (gcr, gcz, fsqr, fsqz, r1*fnorm, jedge)
 

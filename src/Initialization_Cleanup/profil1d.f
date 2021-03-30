@@ -1,8 +1,6 @@
       SUBROUTINE profil1d(xc, xcdot, lreset)
       USE vmec_main
       USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp
-      USE vmec_input, ONLY: lRFP
-c       USE vspline
       USE realspace, ONLY: shalf, sqrts
       USE init_geometry, ONLY: lflip
       IMPLICIT NONE
@@ -49,7 +47,6 @@ C-----------------------------------------------
 !     BY READING INPUT COEFFICIENTS. PRESSURE CONVERTED TO
 !     INTERNAL UNITS BY MULTIPLICATION BY mu0 = 4*pi*10**-7
 !
-      IF (ncurr.EQ.1 .AND. lRFP)STOP 'ncurr=1 inconsistent with lRFP=T!'
 
       torflux_edge = signgs * phiedge / twopi
       si = torflux(one)
@@ -66,7 +63,6 @@ C-----------------------------------------------
       DO i = 2,ns
          si = hs*(i-c1p5)
          tf = MIN(one, torflux(si))
-         IF (lRFP) tf=si
          phips(i) = torflux_edge * torflux_deriv(si)
          chips(i) = torflux_edge * polflux_deriv(si)
          iotas(i) = piota(tf)
@@ -90,7 +86,6 @@ C-----------------------------------------------
       DO i = 1,ns
          si = hs*(i-1)
          tf = MIN(one, torflux(si))
-         IF (lRFP) tf=si
          iotaf(i) = piota(tf)
          phipf(i) = torflux_edge * torflux_deriv(si)
          chipf(i) = torflux_edge * polflux_deriv(si)
@@ -116,13 +111,9 @@ C-----------------------------------------------
 !         NORMALIZE mass so dV/dPHI (or dV/dPSI) in pressure to mass relation
 !         See line 195 of bcovar: pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
 
-          IF (lRFP) THEN
-             tf = si
-             vpnorm = polflux_edge * polflux_deriv(si)
-          ELSE
+
              tf = MIN(one, torflux(si))
              vpnorm = torflux_edge * torflux_deriv(si)
-          END IF
           IF (si .gt. spres_ped) THEN
              pedge = pmass(spres_ped)
           ELSE

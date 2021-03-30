@@ -1,6 +1,6 @@
       SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
       USE vmec_main
-      USE realspace, ONLY: wint, guu, guv, chip, phip, sigma_an 
+      USE realspace, ONLY: wint, guu, guv, chip, phip
       USE precon2d, ONLY: ictrl_prec2d
       IMPLICIT NONE
 !-----------------------------------------------
@@ -57,20 +57,11 @@
 
 
 !     Do not compute iota too near origin
-      IF (lrfp) THEN
-         iotaf(1)  = one/(c1p5/iotas(2) - p5/iotas(3))
-         iotaf(ns) = one/(c1p5/iotas(ns) - p5/iotas(ns-1))
-         DO js = 2, ns-1
-            iotaf(js) = 2.0_dp/(one/iotas(js) + one/iotas(js+1))
-         END DO
-
-      ELSE
          iotaf(1)  = c1p5*iotas(2) - p5*iotas(3)               !zero gradient near axis
          iotaf(ns) = c1p5*iotas(ns) - p5*iotas(ns-1)
          DO js = 2, ns-1
             iotaf(js) = p5*(iotas(js) + iotas(js+1))
          END DO
-      END IF
 
       bsupu(:nrzt) = bsupu(:nrzt)+chip(:nrzt)*overg(:nrzt)
 

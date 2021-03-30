@@ -191,19 +191,9 @@ C-----------------------------------------------
             niter = niter_array(igrid)
          END IF
 
-!  JDH 2012-06-20. V3FIT fix, inserted with change from VMEC 8.48 -> 8.49
-!    (Not sure just what in initialize_radial messes up convergence - happens slowly)
-!  Logical l_v3fit is declared in vmec_input, available via vmec_main
-         IF (l_v3fit) THEN                            ! V3FIT is running here
-            IF (ns_old .ne. nsval) THEN
-               CALL initialize_radial(nsval, ns_old, delt0r,
-     1                                lscreen, reset_file_name)
-            ENDIF
-         ELSE                                         ! V3FIT not running here
-            IF (ns_old .le. nsval)
-     1         CALL initialize_radial(nsval, ns_old, delt0r,
-     2                                lscreen, reset_file_name)
-         ENDIF
+         IF (ns_old .le. nsval)
+     1      CALL initialize_radial(nsval, ns_old, delt0r,
+     2                             lscreen, reset_file_name)
 
 !     CONTROL NUMBER OF STEPS
          IF (numsteps > 0) THEN

@@ -1,20 +1,17 @@
       PROGRAM vmec
       USE vmec_input
       USE safe_open_mod
-      USE vparams, ONLY: nlog, nlog0, nthreed
+      USE vparams, ONLY: nthreed
       USE vmec_params, ONLY: bad_jacobian_flag,
      2    restart_flag, readin_flag, timestep_flag,
      3    output_flag, cleanup_flag,
-     4    norm_term_flag, successful_term_flag ! J Geiger: for more iterations and full 3D1-output
+     4    norm_term_flag, successful_term_flag
       IMPLICIT NONE
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-      INTEGER, PARAMETER :: nseq0 = 12
-      CHARACTER(LEN=*), PARAMETER :: increase_niter =
-     1   "Try increasing NITER",
-     2    bad_jacobian = "The jacobian was non-definite!",
-     3    full_3d1output_request = "Full threed1-output request!"
+      CHARACTER(LEN=*), PARAMETER ::
+     2    bad_jacobian = "The jacobian was non-definite!"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -23,7 +20,6 @@ C-----------------------------------------------
      2   index_dat, iunit, ncount, nsteps, i
       INTEGER :: ictrl(5)
       CHARACTER(LEN=120) :: input_file, seq_ext, reset_file_name, arg
-      CHARACTER(LEN=120) :: log_file
       CHARACTER(LEN=120), DIMENSION(10) :: command_arg
       LOGICAL :: lscreen
 !     Local variables
@@ -117,8 +113,7 @@ C-----------------------------------------------
       ictrl(1) =   restart_flag+readin_flag +timestep_flag
      1           + output_flag +cleanup_flag                !Sets all flags
 
-      CALL runvmec (ictrl, input_file,
-     1              lscreen, reset_file_name)
+      CALL runvmec (ictrl, input_file, lscreen, reset_file_name)
 
       ierr_vmec = ictrl(2)
       SELECT CASE (ierr_vmec)
@@ -127,7 +122,5 @@ C-----------------------------------------------
          WRITE (nthreed, '(/,1x,a)') bad_jacobian
       CASE DEFAULT
       END SELECT
-
-      CLOSE (nlog)
 
       END PROGRAM vmec

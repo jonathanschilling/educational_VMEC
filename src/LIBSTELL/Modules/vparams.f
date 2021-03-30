@@ -19,12 +19,12 @@
 !
 !     CONSTANTS
 !
-      INTEGER, PARAMETER :: nthreed0=9, nmac0=nthreed0+1,
+      INTEGER, PARAMETER :: nthreed0=9,
      1                      indata0=nthreed0+2, nwout0=nthreed0+3,
      2                      jxbout0=nthreed0+4
-      INTEGER, PARAMETER :: nfort8=8, nfort18=18
-      INTEGER, PARAMETER :: nlog0=51, nmercier0=52
-      INTEGER            :: nthreed, nmac, nlog=nlog0
+      INTEGER, PARAMETER :: nfort18=18
+      INTEGER, PARAMETER :: nmercier0=52
+      INTEGER            :: nthreed
 
 !
 !     DERIVED (FROM FUNDAMENTAL) PARAMETERS FOR VMEC CODE
@@ -47,7 +47,5 @@
       REAL(rprec), PARAMETER :: c1pm13 = 1.0e-13_dp
       REAL(rprec), PARAMETER :: osqrt2 = 0.707106781186547462_dp
       REAL(rprec), PARAMETER :: epstan = EPSILON(zero)
-      
-      real(rprec), parameter :: dmu0   = 2.0e-7_dp*twopi                !SAL 09/26/11 for COBRA
 
       END MODULE vparams

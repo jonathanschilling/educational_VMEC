@@ -1,6 +1,6 @@
       SUBROUTINE open_output_files (extension, lscreen, lfirst)
       USE safe_open_mod
-      USE vparams, ONLY: nmac, nthreed, nmac0, nthreed0
+      USE vparams, ONLY: nthreed, nthreed0
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s

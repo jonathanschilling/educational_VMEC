@@ -135,15 +135,6 @@ C-----------------------------------------------
 
 !     END TEST
 
-!
-!     WRITE SEQUENCE HISTORY FILE
-!
-      INQUIRE(unit=nlog,opened=log_open)
-
-  100 FORMAT(' SEQ ITERS  CHISQ/N',
-     1   '  TORCUR  PRESMAX  PHIEDGE     R00 CPU-TIME  EXTENSION')
-  110 FORMAT(i4,i6,f8.2,3f9.2,f8.2,f9.2,2x,a20)
-
  1000 CONTINUE
 
 !

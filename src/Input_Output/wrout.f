@@ -12,7 +12,7 @@
       USE vmec_params
       USE vmercier
       USE vmec_persistent
-      USE vspline
+c       USE vspline
       USE xstuff
       USE vmec_io
       USE realspace, ONLY: phip, chip, gsqrta=>z1, z1=>z1

@@ -2,7 +2,7 @@
       USE vmec_main
       USE vmec_params
       USE vacmod
-      USE vspline
+c       USE vspline
       USE timer_sub
       USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
       USE init_geometry

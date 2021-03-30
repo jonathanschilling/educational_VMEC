@@ -1,7 +1,7 @@
       SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
       USE vmec_main
       USE vmec_params
-      USE vspline, ONLY: sknots, pknots, hstark, hthom
+c       USE vspline, ONLY: sknots, pknots, hstark, hthom
       USE realspace
       USE xstuff
 #ifdef _HBANGLE

@@ -13,7 +13,7 @@
 #else
       USE vacmod
 #endif
-      USE vspline
+c       USE vspline
       USE csplinx
       USE vmec_io
       USE mgrid_mod

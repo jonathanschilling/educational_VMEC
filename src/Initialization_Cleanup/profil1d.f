@@ -2,7 +2,7 @@
       USE vmec_main
       USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp
       USE vmec_input, ONLY: lRFP
-      USE vspline
+c       USE vspline
       USE realspace, ONLY: shalf, sqrts
       USE init_geometry, ONLY: lflip
       IMPLICIT NONE

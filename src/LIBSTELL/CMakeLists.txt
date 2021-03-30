@@ -4,7 +4,7 @@ add_subdirectory (GMRes)
 #add_subdirectory (Lsode)
 add_subdirectory (Miscel)
 add_subdirectory (Modules)
-add_subdirectory (Pspline)
+#add_subdirectory (Pspline)
 add_subdirectory (QMRpack)
 
 set (vmec_sources "${vmec_sources}" PARENT_SCOPE)

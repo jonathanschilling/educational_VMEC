@@ -6,8 +6,8 @@
       USE timer_sub
       USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
       USE init_geometry
-      USE trip3d_mod, ONLY: read_trip3d, trip3d_to_mgrid,
-     1                      trip3d_info_vmec, trip3d_free
+c       USE trip3d_mod, ONLY: read_trip3d, trip3d_to_mgrid,
+c      1                      trip3d_info_vmec, trip3d_free
 #ifdef _HBANGLE
       USE angle_constraints, ONLY: HB_EXP=>pexp
 #endif
@@ -298,23 +298,23 @@ C-----------------------------------------------
      1     '  nr-grid  nz-grid  np-grid      rmin      rmax      zmin',
      2     '      zmax     input-file',/,3i9,4f10.3,5x,a)
          END IF
-
-         ! SAL - TRIP3D mods
-         IF (TRIM(trip3d_file) .ne. 'NONE') THEN
-            CALL second0(trc)
-            CALL read_trip3d(trip3d_file,ier_flag,1.0_rprec)
-            IF (ier_flag .ne. norm_term_flag) RETURN
-            CALL trip3d_to_mgrid
-            !IF (lscreen) CALL trip3d_info(nthreed)
-            CALL second0(tzc)
-            IF (lscreen)
-     1         WRITE (6,'(2x,a,1p,e10.2,a)')
-     2            'Time to import TRIP3D data: ',
-     3             tzc - trc, ' s'
-            CALL trip3d_info_vmec(nthreed)
-            CALL trip3d_free(ier_flag)
-            IF (ier_flag .ne. norm_term_flag) RETURN
-         END IF
+c
+c          ! SAL - TRIP3D mods
+c          IF (TRIM(trip3d_file) .ne. 'NONE') THEN
+c             CALL second0(trc)
+c             CALL read_trip3d(trip3d_file,ier_flag,1.0_rprec)
+c             IF (ier_flag .ne. norm_term_flag) RETURN
+c             CALL trip3d_to_mgrid
+c             !IF (lscreen) CALL trip3d_info(nthreed)
+c             CALL second0(tzc)
+c             IF (lscreen)
+c      1         WRITE (6,'(2x,a,1p,e10.2,a)')
+c      2            'Time to import TRIP3D data: ',
+c      3             tzc - trc, ' s'
+c             CALL trip3d_info_vmec(nthreed)
+c             CALL trip3d_free(ier_flag)
+c             IF (ier_flag .ne. norm_term_flag) RETURN
+c          END IF
       END IF
 
 !

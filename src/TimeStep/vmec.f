@@ -24,7 +24,6 @@ C-----------------------------------------------
       INTEGER :: numargs, ier_flag, index_end,
      1   iopen, isnml, iread, iseq, index_seq,
      2   index_dat, iunit, ncount, nsteps, i
-      INTEGER, TARGET :: ictrl(5)
       CHARACTER(LEN=120) :: input_file, seq_ext, arg
       CHARACTER(LEN=120) :: input_file0
       CHARACTER(LEN=120), DIMENSION(10) :: command_arg
@@ -45,6 +44,7 @@ C-----------------------------------------------
          CALL getcarg(iseq, command_arg(iseq), numargs)
       END DO
 
+      ! default: enable screen output
       lscreen = .true.
 
       IF (numargs .lt. 1) THEN
@@ -87,8 +87,9 @@ C-----------------------------------------------
          input_file = 'input.'//TRIM(input_extension)
       END IF
 
+      ! Sets all flags --> full feature set enabled!
       ictrl_flag =  restart_flag+readin_flag +timestep_flag
-     1           + output_flag +cleanup_flag     ! Sets all flags
+     1           + output_flag +cleanup_flag
 
       CALL second0 (timeon)
 
@@ -114,45 +115,75 @@ C-----------------------------------------------
      1   ' fsqr, fsqz = Preconditioned Force Residuals',/,1x,23('-'),/,
      2   ' BEGIN FORCE ITERATIONS',/,1x,23('-'),/)
 
+      ! consistency check on requested number of flux surfaces
       IF (ALL(ns_array.eq.0)) THEN
          ier_flag = ns_error_flag
          GOTO 1000
       END IF
 
+      ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
+      ! before the user-provided ns values from ns_array are processed
+      ! in the multi-grid run
       jacob_off = 0
 
   50  CONTINUE
+
+      ! convergence flag: initially not converged yet
       iequi = 0
-      IF (lfreeb .and. jacob_off.eq.1) ivac = 1    !!restart vacuum calculations
+
+      ! jacob_off=1 indicates that in the previous interation (got back here by GOTO 50)
+      ! jacobian was bad --> also need to
+      ! restart vacuum calculations
+      IF (lfreeb .and. jacob_off.eq.1) ivac = 1
 
       ns_min = 3
 
+      ! multi-grid iterations: loop over ns_array
+      ! jacob_off=0,1 is required to insert one ns=3 run before
+      ! starting to work with the user-provided ns_array
+      ! if the first ns value from ns_array gave a bad jacobian
       ITERATIONS: DO igrid = igrid0-jacob_off, multi_ns_grid
+
+
          IF (igrid .lt. igrid0) THEN
 !           TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
             nsval = 3; ivac = -1
             ftolv = 1.e-4_dp
          ELSE
+            ! proceed regularly with ns values from ns_array
             nsval = ns_array(igrid)
-            IF (nsval .lt. ns_min) CYCLE
+            IF (nsval .lt. ns_min) then
+               ! skip entries that have less than ns_min flux surfaces
+               CYCLE
+            end if
+
+            ! update ns_min --> reduction in number of flux surfaces not allowed
             ns_min = nsval
-            ictrl(4) = igrid
+
             ftolv = ftol_array(igrid)
             niter = niter_array(igrid)
          END IF
 
-         IF (ns_old .le. nsval)
+         IF (ns_old .le. nsval) then
+            ! initialize ns-dependent arrays
+            ! and (if previous solution is available) interpolate to current ns value
      1      CALL initialize_radial(nsval, ns_old, delt0r,
      2                             lscreen)
+         end if
 
          ! *HERE* is the *ACTUAL* call to the equilibrium solver !
          CALL eqsolve (ier_flag, lscreen)
 
+         ! break the multi-grid sequence if current number of flux surfaced
+         ! did not reach convergence
          IF (ier_flag.ne.norm_term_flag .and.
      1       ier_flag.ne.successful_term_flag) EXIT
 
       END DO ITERATIONS
 
+      ! if did not converge only because jacobian was bad
+      ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
+      ! retry the whole thing again
       IF (ier_flag.eq.bad_jacobian_flag .and. jacob_off.eq.0) THEN
          jacob_off = 1
          GO TO 50
@@ -161,15 +192,19 @@ C-----------------------------------------------
       CALL second0 (timeoff)
       timer(tsum) = timer(tsum) + timeoff - timeon
 
+      ! write output files
  1000 CALL fileout (0, ictrl_flag, ier_flag, lscreen)
 
+      ! free memory
       CALL free_mem_funct3d
       CALL free_mem_ns (lreset_xc)
       CALL free_mem_nunv
       CALL free_persistent_mem
 
+      ! close output files
       CALL close_all_files
 
+      ! verbose error message
       SELECT CASE (ier_flag)
       CASE (bad_jacobian_flag)
          ! Bad jacobian even after axis reset and ns->3

@@ -29,7 +29,6 @@ C-----------------------------------------------
      1   signiota, rc0mse, r00, r0scale, z00, dkappa, fsqsum0,
      2   pressum0, fnorm, fsqr=1, fsqz=1, fsql=1, fnorm1, fnorml,
      3   fsqr1, fsqz1, fsql1, fsq, fedge, wb, wp, r00b, z00b, fz00_edge
-      REAL(rprec), DIMENSION(nstore_seq) :: fsqt, wdot
       REAL(rprec) :: ftolv, otav, alphaR, alphaZ
       REAL(rprec), DIMENSION(ndamp) :: otau
       REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE, TARGET ::

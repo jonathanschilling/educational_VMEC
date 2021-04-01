@@ -33,13 +33,17 @@
          RETURN
       ENDIF
 
-      IF (lfreeb .and. mgrid_file.eq.'NONE') lfreeb = .false.
+      IF (lfreeb .and. mgrid_file.eq.'NONE') then
+         ! disable free-boundary mode if mgrid file is not specified
+         lfreeb = .false.
+      end if
 
       IF (bloat .eq. zero) bloat = one
       IF ((bloat.ne.one) .and. (ncurr.ne.1)) THEN
-         ier_flag = 3
+         ier_flag = 3 ! 'VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.'
          RETURN
       ENDIF
+
 !
 !     COMPUTE NTHETA, NZETA VALUES
 !
@@ -49,28 +53,28 @@
       IF (ntor .gt. ntord) STOP 'ntor>ntord: lower ntor'
       mpol1 = mpol - 1
       ntor1 = ntor + 1
-! 20130924 J.Geiger, assure minimum ntheta-value
-!                    and add a notification
+
       IF (ntheta .lt. 2*mpol+6 ) THEN
-!        WRITE(6,*)"Adjust NTHETA from ",ntheta,
-!     1            " to new value: ",2*mpol+6
         ntheta = 2*mpol+6    !number of theta grid points (>=2*mpol+6)
       ENDIF
+
       ntheta1 = 2*(ntheta/2)
       ntheta2 = 1 + ntheta1/2                   !u = pi
       IF (ntor .eq. 0) lthreed = .false.
       IF (ntor .gt. 0) lthreed = .true.
 
-      IF (ntor.eq.0 .and. nzeta.eq.0) nzeta = 1
-! 20130924 J.Geiger, assure minimum nzeta-value for ntor>0
-!                    and add a notification
+      IF (ntor.eq.0 .and. nzeta.eq.0) then
+         ! Tokamak (ntor=0) needs nzeta=1
+         nzeta = 1
+      end if
+
       IF (ntor.gt.0)then
+        ! Stellarator case needs Nyquist criterion fulfilled for nzeta wrt. ntor
         IF (nzeta .lt. 2*ntor+4) THEN
-!          WRITE(6,*)"Adjust NZETA from ",nzeta,
-!     1              " to new value: ",2*ntor+4
           nzeta = 2*ntor+4      !number of zeta grid points (=1 IF ntor=0)
         ENDIF
       ENDIF
+
       mnmax = ntor1 + mpol1*(1 + 2*ntor)        !SIZE of rmnc,  rmns,  ...
       mnsize = mpol*ntor1                       !SIZE of rmncc, rmnss, ...
 
@@ -81,6 +85,7 @@
       mf1 = 1+mf
       nf1 = 2*nf+1
       mnpd = mf1*nf1
+
 !
 !     INDEXING FOR PACKED-ARRAY STRUCTURE OF XC, GC
 !
@@ -88,6 +93,7 @@
       rss = 0;  rsc = 0;  rcs = 0
       zcc = 0;  zss = 0;  zcs = 0
       IF (.NOT.lasym) THEN
+         ! can make use of Stellarator symmetry
          ntheta3 = ntheta2
          mnpd2 = mnpd
          IF (lthreed) THEN
@@ -116,7 +122,11 @@
       nu3 = ntheta3
       nuv2 = nznt
 
-      IF (ncurr.eq.1 .and. ALL(ac.eq.cbig)) ac = ai            !!Old FORMAT: may not be reading in ac
+      IF (ncurr.eq.1 .and. ALL(ac.eq.cbig)) then
+         ! previous version input of current profile: via ai (iota profile coeffs)
+         ac = ai            !!Old FORMAT: may not be reading in ac
+      end if
+
       WHERE (ac .eq. cbig) ac = zero
 
       END SUBROUTINE read_indata

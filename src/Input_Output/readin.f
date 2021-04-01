@@ -28,6 +28,7 @@ C-----------------------------------------------
 
       ier_flag_init = ier_flag
       ier_flag = norm_term_flag
+
       CALL second0(treadon)
 
 !
@@ -48,8 +49,12 @@ C-----------------------------------------------
       DO WHILE(iexit .eq. 0)
          READ (iunit, '(a)', iostat=iexit) line
          IF (iexit .ne. 0) EXIT
+
+         ! copy over only comments BEFORE START OF INDATA NAMELIST
+         ! --> occurence of INDATA or indata terminates this loop
          iexit = INDEX(line,'INDATA')
          iexit = iexit + INDEX(line,'indata')
+
          ipoint = INDEX(line,'!')
          IF (ipoint .eq. 1) WRITE (nthreed, *) TRIM(line)
       ENDDO
@@ -65,6 +70,8 @@ C-----------------------------------------------
      1                    lscreen, ier_flag)
          CALL second0(tzc)
 
+         ! check again for lfreeb
+         ! --> might have been reset to .false. if mgrid file was not found
          IF (lfreeb .and. lscreen) THEN
             WRITE (6,'(2x,a,1p,e10.2,a)') 'Time to read MGRID file: ',
      1             tzc - trc, ' s'
@@ -102,6 +109,7 @@ C-----------------------------------------------
           END DO
           multi_ns_grid = multi_ns_grid - 1
       ENDIF
+
       IF (ftol_array(1) .eq. zero) THEN
          ftol_array(1) = 1.e-8_dp
          IF (multi_ns_grid .eq. 1) ftol_array(1) = ftol
@@ -132,19 +140,23 @@ C-----------------------------------------------
      2  '     ns     nu     nv     mu     mv',/,5i7//,
      3  ' CONFIGURATION PARAMETERS:',/,1x,39('-'),/,
      4  '    nfp      gamma      spres_ped    phiedge(wb)'
-     5  '     curtor(A)        lRFP',
-     6  /,i7,1p,e11.3,2e15.3,e14.3,L12/)
+     5  '     curtor(A)        ',
+     6  /,i7,1p,e11.3,2e15.3,e14.3/)
 
-      IF (nvacskip.le.0) nvacskip = nfp
+      IF (nvacskip.le.0) then
+         ! default value for nvacskip: number of field periods ... ?
+         ! how does that work for e.g. LHD with nfp=10 ???
+         nvacskip = nfp
+      end if
       WRITE (nthreed,110) ncurr,niter_array(multi_ns_grid),ns_array(1),
      1  nstep,nvacskip,
      2  ftol_array(multi_ns_grid),tcon0,lasym,lconm1,
      3  mfilter_fbdy,nfilter_fbdy                               ! M Drevlak 20130114
  110  FORMAT(' RUN CONTROL PARAMETERS:',/,1x,23('-'),/,
      1  '  ncurr  niter   nsin  nstep  nvacskip      ftol     tcon0',
-     2  '    lasym  lforbal lmove_axis lconm1',/,
+     2  '    lasym   lconm1',/,
      3     4i7,i10,1p,2e10.2,2L9,/,
-     4  '  mfilter_fbdy nfilter_fbdy', ! J Geiger 20120203
+     4  '  mfilter_fbdy nfilter_fbdy',/, ! J Geiger 20120203
      6     2(6x,i7),/)
 
       WRITE (nthreed,120) precon_type, prec2d_threshold
@@ -239,7 +251,7 @@ C-----------------------------------------------
  150  FORMAT(/' NORMALIZED TOROIDAL FLUX COEFFICIENTS aphi',
      1   ' (EXPANSION IN S):',/,1x,35('-'))
 
-!  Fourier Boundary Coefficients
+!  Fourier Boundary Coefficients (header written always, but data only if in free-boundary mode)
       WRITE(nthreed,180)
  180  FORMAT(/,' R-Z FOURIER BOUNDARY COEFFICIENTS AND',
      1         ' MAGNETIC AXIS INITIAL GUESS',/,

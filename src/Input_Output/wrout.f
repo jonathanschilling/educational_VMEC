@@ -372,11 +372,6 @@
       CALL cdf_define(nwout, vn_equif,
      1                equif, dimname=r1dim)
 
-      CALL cdf_define(nwout, vn_fsq, fsqt(1:nstore_seq),
-     1                dimname=(/'time'/))
-      CALL cdf_define(nwout, vn_wdot, wdot(1:nstore_seq),
-     1                dimname=(/'time'/))
-
       IF (lfreeb .and. nextcur.gt.0 .and. ALLOCATED(curlabel)) THEN
          CALL cdf_define(nwout, vn_curlab,
      1        curlabel(1:nextcur), dimname=currl)
@@ -766,9 +761,6 @@
       CALL cdf_write(nwout, vn_mcurr, Dcurr)
       CALL cdf_write(nwout, vn_mgeo, Dgeod)
       CALL cdf_write(nwout, vn_equif, equif)
-
-      CALL cdf_write(nwout, vn_fsq, fsqt(1:nstore_seq))
-      CALL cdf_write(nwout, vn_wdot, wdot(1:nstore_seq))
 
       IF (lasym) THEN
          CALL cdf_write(nwout, vn_racs, raxis_cs(0:ntor))

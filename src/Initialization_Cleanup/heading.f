@@ -13,8 +13,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-      CHARACTER(LEN=50), PARAMETER ::
-     1   banner = ' THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION '
+      CHARACTER(LEN=50), PARAMETER :: banner    =
+     1   ' THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION '
       CHARACTER(LEN=*), PARAMETER :: VersionID1 =
      1   ' Lambda: Full Radial Mesh. L-Force: hybrid full/half.'
 C-----------------------------------------------

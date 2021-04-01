@@ -35,6 +35,8 @@ C-----------------------------------------------
       INTEGER, SAVE :: igrid0
       LOGICAL, PARAMETER :: lreset_xc = .false.
 
+      print *, "vmec"
+
 
 !     Read in command-line arguments to get input file or sequence file,
 !     screen display information, and restart information
@@ -60,11 +62,10 @@ C-----------------------------------------------
          PRINT *,' Additional (optional) command arguments are',
      1           ' allowed:'
          PRINT *
-         PRINT *,'  xvmec <filename> [noscreen] [reset=reset_wout_file]'
+         PRINT *,'  xvmec <filename> [noscreen]'
          PRINT *
          PRINT *,' noscreen: supresses all output to screen ',
      1           ' (default, or "screen", displays output)'
-         PRINT *,' name of reset wout file (defaults to none)'
 
          STOP
       ELSE
@@ -117,7 +118,7 @@ C-----------------------------------------------
 
       ! consistency check on requested number of flux surfaces
       IF (ALL(ns_array.eq.0)) THEN
-         ier_flag = ns_error_flag
+         ier_flag = ns_error_flag ! 'NS ARRAY MUST NOT BE ALL ZEROES'
          GOTO 1000
       END IF
 
@@ -167,7 +168,7 @@ C-----------------------------------------------
          IF (ns_old .le. nsval) then
             ! initialize ns-dependent arrays
             ! and (if previous solution is available) interpolate to current ns value
-     1      CALL initialize_radial(nsval, ns_old, delt0r,
+            CALL initialize_radial(nsval, ns_old, delt0r,
      2                             lscreen)
          end if
 

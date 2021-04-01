@@ -5,7 +5,7 @@
       USE realspace
       USE vmec_dim, ONLY: ns
       USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e,
-     1             rs => bzmn_e, zs => brmn_e, tau => azmn_o  !,z12 => blmn_e,
+     1             rs => bzmn_e, zs => brmn_e, tau => azmn_o
       IMPLICIT NONE
 !-----------------------------------------------
 !   L o c a l   P a r a m e t e r s
@@ -27,12 +27,8 @@
 !     FOR OPTIMIZATION ON CRAY, MUST USE COMPILER DIRECTIVES TO
 !     GET VECTORIZATION OF LOOPS INVOLVING MORE THAN ONE POINTER!
 !
-!
 !     HERE, TAU = (Ru * Zs - Rs * Zu). THE DERIVATIVES OF SHALF = SQRT(s)
 !     WERE COMPUTED EXPLICITLY AS: d(shalf)/ds = .5/shalf
-!
-!     NOTE: z12 IS USED IN RECONSTRUCTION PART OF CODE ONLY; COULD BE ELIMINATED...
-!
 !
       irst = 1
 
@@ -41,8 +37,6 @@
      1      shalf(l)*(ru(l,modd)  + ru(l-1,modd)))
         zs(l)   = ohs*(z1(l,meven) - z1(l-1,meven) +
      1       shalf(l)*(z1(l,modd)  - z1(l-1,modd)))
-!        z12(l)  = p5*(z1(l,meven) + z1(l-1,meven) +
-!     1       shalf(l)*(z1(l,modd)  + z1(l-1,modd)))
         tau(l) = ru12(l)*zs(l) + dshalfds*
      1  (ru(l,modd) *z1(l,modd) + ru(l-1,modd) *z1(l-1,modd) +
      2  (ru(l,meven)*z1(l,modd) + ru(l-1,meven)*z1(l-1,modd))/shalf(l))
@@ -67,6 +61,9 @@
       tau(1:nrzt:ns) = temp(:)
       taumax = MAXVAL(tau(2:nrzt))
       taumin = MINVAL(tau(2:nrzt))
-      IF (taumax*taumin .lt. zero) irst = 2
+      IF (taumax*taumin .lt. zero) then
+         ! bad jacobian !
+         irst = 2
+      end if
 
       END SUBROUTINE jacobian

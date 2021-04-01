@@ -72,7 +72,12 @@ C-----------------------------------------------
             sinmui(i,m) = dnorm*sinmu(i,m)
             IF (i.EQ.1 .OR. i.EQ.ntheta2)
      1         cosmui(i,m)=cosmui(i,m)/2
-            IF (ntheta2 .EQ. ntheta3) cosmui3(i,m) = cosmui(i,m)
+            IF (ntheta2 .EQ. ntheta3) then
+               ! cosmui3 was preset from cosmui above,
+               ! but in previous check cosmui could have changed,
+               ! so update cosmui3 again in case it matters
+               cosmui3(i,m) = cosmui(i,m)
+            end if
             cosmum(i,m) = cosmu(i,m)*(m)
             sinmum(i,m) =-sinmu(i,m)*(m)
             cosmumi(i,m)= cosmui(i,m)*(m)
@@ -147,9 +152,9 @@ C-----------------------------------------------
          END DO
       END DO
 
+      ! what is this?
       faccon(0) = zero
       faccon(mpol1) = zero
       faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
-
 
       END SUBROUTINE fixaray

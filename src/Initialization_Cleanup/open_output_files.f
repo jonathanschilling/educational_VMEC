@@ -17,7 +17,6 @@ C-----------------------------------------------
 !
 !     OPEN FILES FOR READING, WRITING
 !
-
       inthreed = 0
       threed1_file = 'threed1.'//extension
 

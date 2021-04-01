@@ -54,7 +54,7 @@ C-----------------------------------------------
       neqs2 = neqs1 + 1
 
       WRITE (nthreed, 10) ns, mnmax, ftolv, niter
-       IF (lscreen) PRINT 10, ns, mnmax, ftolv, niter
+      IF (lscreen) PRINT 10, ns, mnmax, ftolv, niter
    10 FORMAT(/'  NS = ',i4,' NO. FOURIER MODES = ',i4,' FTOLV = ',
      1   1p,e10.3,' NITER = ',i6)
 

@@ -18,8 +18,8 @@
       iter1 = iter2
       ijacob = 0
       irst = 1
-      res0 = -1       !move to vmec_main, remove from runvmec SAVE
-      delt0r = delt   !move delt0 to vmec_main from runvmec SAVE (renamed delt0r)
+      res0 = -1       ! move       to vmec_main, remove from runvmec SAVE
+      delt0r = delt   ! move delt0 to vmec_main, remove from runvmec SAVE (renamed delt0r)
 
       timer =  0
 

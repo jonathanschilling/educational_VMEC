@@ -52,3 +52,6 @@ xvmec2xgc
 
 build/
 docs/
+
+# temporary..
+test/input*

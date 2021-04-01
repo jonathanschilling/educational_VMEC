@@ -53,8 +53,10 @@
       delIter = iter2-iter1
 
 !  Coding for VMEC2000 run stand-alone
-         IF (delIter.lt.50 .and.                                        &
-            (fsqr+fsqz).lt.1.E-6_dp) jedge = 1
+      IF (delIter.lt.50 .and. (fsqr+fsqz).lt.1.E-6_dp) then
+         ! include edge contribution only under certain circumstances ?
+         jedge = 1
+      end if
 
       CALL getfsq (gcr, gcz, fsqr, fsqz, r1*fnorm, jedge)
 
@@ -65,24 +67,26 @@
 !     PERFORM PRECONDITIONING AND COMPUTE RESIDUES
 !
 
-!        m = 1 constraint scaling
-         IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
-         IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
-         jedge = 0
-         CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
-         jedge = 1
-         CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
+!     m = 1 constraint scaling
+      IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
+      IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
+      jedge = 0
+      CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
+      jedge = 1
+      CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
 
 !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
-         CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1)
+      CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1)
 !SPH: THIS IS NOT INVARIANT UNDER PHIP->A*PHIP, AM->A**2*AM IN PROFIL1D
 !     (EXTCUR -> A*EXTCUR for FREE BOUNDARY)
-         gcl = faclam*gcl
-         fsql1 = hs*SUM(gcl*gcl)
+      gcl = faclam*gcl
+      fsql1 = hs*SUM(gcl*gcl)
 !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-
       END SUBROUTINE residue
+
+
+
 
       SUBROUTINE constrain_m1(gcr, gcz)
       USE vmec_main, p5 => cp5
@@ -112,6 +116,10 @@
       IF (fsqz.LT.FThreshold .OR. iter2.LT.2) gcz = 0
 
       END SUBROUTINE constrain_m1
+
+
+
+
 
       SUBROUTINE scale_m1(gcr, gcz)
       USE vmec_main

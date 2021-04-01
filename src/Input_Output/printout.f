@@ -78,7 +78,7 @@ C-----------------------------------------------
      1      fsql1, delt0, r00, w, betav, ABS(phiedge),
      1      delbsq, fedge
 
-      ELSE
+      ELSE ! (.not. lasym)
          IF (.not.lfreeb) THEN
             IF (lscreen) PRINT 65, i0, fsqr, fsqz, fsql, r00, z00, !J Geiger 20101118
      1                             delt0, w !J Geiger 20101118

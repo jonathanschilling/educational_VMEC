@@ -98,7 +98,10 @@
 !     COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
 !
       CALL jacobian
-      IF (irst.eq.2 .and. iequi.eq.0) GOTO 100
+      IF (irst.eq.2 .and. iequi.eq.0) then
+         ! bad jacobian --> need to restart
+         GOTO 100
+      end if
 
 !
 !     COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC
@@ -106,9 +109,9 @@
 !
       CALL second0 (tbcovon)
       CALL bcovar (lu, lv, xc(1+2*irzloff+mns*(zsc-1)))    !FIX THIS: last arg used elsewhere!
-
       CALL second0 (tbcovoff)
       timer(tbcov) = timer(tbcov) + (tbcovoff - tbcovon)
+
 
 !     COMPUTE VACUUM MAGNETIC PRESSURE AT PLASMA EDGE
 !     NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR
@@ -116,17 +119,29 @@
 !     EQUAL THE VACUUM VALUE. THIS CAN BE DONE BY CHANGING
 !     EITHER PHIEDGE OR THE INITIAL CROSS SECTION ACCORDING
 !     TO THE SCALING LAW  R*BTOR .EQ. PHIEDGE/(R1 * Z1).
-
       IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
-         IF ((fsqr + fsqz).le.1.e-3_dp)
-     1      ivac = ivac+1   !decreased from e-1 to e-3 - sph12/04
+
+         IF ((fsqr + fsqz) .le. 1.e-3_dp) then
+            ! initially, ivac is initialized to -1 by reset_params
+            ! when R,Z forces are <1e-3, enable vacuum contribution
+            ivac = ivac+1   ! decreased from e-1 to e-3 - sph12/04
             ! I guess this is where the vacuum pressure suddenly gets turned on ?
-         IF (nvskip0 .eq. 0) nvskip0 = MAX(1, nvacskip)
+
+c             print *, "forces R+Z < 1e-3 => ivac += 1 leads to ivac=",
+c      &               ivac
+         end if
+
+         IF (nvskip0 .eq. 0) then
+            nvskip0 = MAX(1, nvacskip)
+         end if
+
          IF (ivac .ge. 0) THEN
 !           IF INITIALLY ON, MUST TURN OFF rcon0, zcon0 SLOWLY
             rcon0 = 0.9_dp*rcon0;  zcon0 = 0.9_dp*zcon0
+
             CALL second0 (tvacon)
-            ivacskip = MOD(iter2-iter1,nvacskip)
+
+            ivacskip = MOD(iter2-iter1, nvacskip)
             IF (ivac .le. 2) then
                ivacskip = 0
                ! vacuum pressure not turned on yet (?)
@@ -149,12 +164,17 @@
             CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,
      1                   ctor, rbtor, wint, ns, ivacskip, ivac, mnmax,
      2                   ier_flag, lscreen)
-            IF (ier_flag .ne. 0) GOTO 100
+
+            IF (ier_flag .ne. 0) then
+               ! some error occured within NESTOR, so cancel the iterations
+               GOTO 100
+            end if
 !
 !           RESET FIRST TIME FOR SOFT START
 !
             IF (ivac .eq. 1) THEN
-               irst = 2;  delt0 = delt
+               irst = 2
+               delt0 = delt
                CALL restart_iter(delt0)
                irst = 1
             END IF
@@ -184,6 +204,7 @@
                bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns)
                bsqsav(:nznt,2) = bsqvac(:nznt)
             ENDIF
+
             CALL second0 (tvacoff)
             timer(tvac) = timer(tvac) + (tvacoff - tvacon)
          ENDIF
@@ -198,8 +219,11 @@
          CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns),
      1               extra1(:,1))
       ELSE
+         ! iequi should be 1 by now, otherwise cancel iteration?
          GOTO 100
       END IF
+
+
 !
 !     COMPUTE MHD FORCES ON INTEGER-MESH
 !
@@ -219,16 +243,17 @@
 
       CALL second0 (tforoff)
       timer(tfor) = timer(tfor) + (tforoff - tforon)
+
+
+
 !
 !     FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
 !
       CALL second0 (tffton)
       CALL tomnsps (gc, armn, brmn, crmn, azmn, bzmn, czmn,
      1              blmn, clmn, rcon, zcon)
-
       IF (lasym) CALL tomnspa (gc, r1, ru, rv, z1, zu, zv,
      1                         extra3, extra4, extra1, extra2)
-
       CALL second0 (tfftoff)
       timer(tffi) = timer(tffi) + (tfftoff - tffton)
 
@@ -242,11 +267,16 @@
       gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
       CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
 
-      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp)
-     1    irst = 4
+      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
+          ! first iteration and gigantic force residuals --> what is going one here?
+          irst = 4
+      end if
 
       CALL second0 (tresoff)
       timer(tres) = timer(tres) + (tresoff - treson)
+
+
+
 
  100  CONTINUE
 

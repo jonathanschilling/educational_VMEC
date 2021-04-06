@@ -17,11 +17,11 @@
       CHARACTER(LEN=1), PARAMETER :: ch_test = '.'
 !-----------------------------------------------
 !
-!     FIRST CHECK IF FILE_OR_EXTENSION IS A FILENAME (FILE_TO_PARSE EMBEDDED) 
+!     FIRST CHECK IF FILE_OR_EXTENSION IS A FILENAME (FILE_TO_PARSE EMBEDDED)
 !     OR AN EXTENSION
 !
       index_path = INDEX(file_or_extension, TRIM(file_to_parse))
-	index_comp = index_path
+      index_comp = index_path
 
       IF (index_path .gt. 0) THEN
 !
@@ -54,12 +54,12 @@
 !     CHECK IF TEXT (.txt) OR NETCDF (.nc) FILE EXISTS
 !
          path = file_to_parse
-         IF (file_or_extension(1:1) == '.' .or. 
+         IF (file_or_extension(1:1) == '.' .or.
      1       file_or_extension(1:1) == '_') THEN
             temp = TRIM(path) // file_or_extension
          ELSE IF (index_comp == 0) THEN
             temp = TRIM(path) // '_' // file_or_extension
-	   ELSE
+         ELSE
             temp = TRIM(file_or_extension)
          END IF
 
@@ -82,17 +82,17 @@
                file_to_parse = TRIM(temp) // '.nc'
                INQUIRE (FILE=file_to_parse, EXIST=lnc, iostat=istat)
                IF (istat.ne.0 .or. .not.lnc) THEN
-                  file_to_parse = TRIM(path) // '.' 
+                  file_to_parse = TRIM(path) // '.'
      1                         // TRIM(file_or_extension) // '.nc'
                   INQUIRE (FILE=file_to_parse, EXIST=lnc, iostat=istat)
                   IF (istat.ne.0 .or. .not.lnc) THEN
                      file_to_parse = TRIM(temp) // '.txt'
-                     INQUIRE (FILE=file_to_parse, EXIST=ltxt, 
+                     INQUIRE (FILE=file_to_parse, EXIST=ltxt,
      1                        iostat=istat)
                      IF (.not.ltxt) THEN
-                        file_to_parse = TRIM(path) // '.' // 
+                        file_to_parse = TRIM(path) // '.' //
      1                               TRIM(file_or_extension) // '.txt'
-                        INQUIRE (FILE=file_to_parse, EXIST=ltxt, 
+                        INQUIRE (FILE=file_to_parse, EXIST=ltxt,
      1                          iostat=istat)
                      END IF
                   END IF
@@ -100,13 +100,13 @@
             END IF
 !
 !     DEFAULT (OLD STYLE) FILE NAME WHEN NONE OF THE ABOVE EXIST
-!      
+!
             IF ((istat.ne.0 .or. .not.ltxt) .and. .not.lnc) THEN
                file_to_parse = TRIM(path) // '.' // file_or_extension
             END IF
 
          END IF
- 
+
       END IF
-         
+
       END SUBROUTINE parse_extension

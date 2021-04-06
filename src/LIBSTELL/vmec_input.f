@@ -17,8 +17,7 @@
       REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) ::
      1   rbs, zbc, rbc, zbs
       REAL(rprec) :: curtor, delt, ftol, tcon0,
-     1   gamma, bloat, pres_scale,
-     4   prec2d_threshold
+     1   gamma, bloat, pres_scale
       REAL(rprec) :: spres_ped !< value of s beyond which pressure profile is flat (pedestal)
       REAL(rprec) :: phiedge   !< value of real toroidal flux at plasma edge (s=1)
       REAL(rprec), DIMENSION(0:20) :: am !< array of coefficients in phi-series for mass (NWT/m**2)
@@ -40,7 +39,6 @@
       LOGICAL :: lbsubs                   ! J Hanson See jxbforce coding
 
       CHARACTER(len=200) :: mgrid_file
-      CHARACTER(len=10)  :: precon_type
       CHARACTER(len=120) :: arg1
       CHARACTER(len=100) :: input_extension
 
@@ -51,7 +49,7 @@
      2   rbc, zbs, rbs, zbc, spres_ped, pres_scale, raxis_cc, zaxis_cs,
      3   raxis_cs, zaxis_cc, mpol, ntor, ntheta, nzeta, mfilter_fbdy,
      3   nfilter_fbdy, niter_array,
-     4   ns_array, ftol_array, tcon0, precon_type, prec2d_threshold,
+     4   ns_array, ftol_array, tcon0,
      4   curtor, extcur,
      5   phiedge,
      A   lfreeb,                                                           ! S Lazerson 2010
@@ -89,7 +87,6 @@
       raxis_cc = 0; zaxis_cs = 0; raxis_cs = 0; zaxis_cc = 0;
       mfilter_fbdy = -1; nfilter_fbdy = -1
       tcon0 = 1
-      precon_type = 'NONE'; prec2d_threshold = 1.E-30_dp
       curtor = 0;
       extcur = 0;  phiedge = 1;
       mgrid_file = 'NONE'
@@ -147,9 +144,6 @@
       IF (ins(1) > 1)
      1 WRITE(iunit,'(a,(1p,4i14))') '  NITER_ARRAY = ',
      2      (niter_array(i), i=1,ins(1)-1)
-      WRITE (iunit,'(2x,3a)') "PRECON_TYPE = '", TRIM(precon_type),"'"
-      WRITE (iunit,'(2x,a,1p,e14.6)') "PREC2D_THRESHOLD = ",
-     1                                prec2d_threshold
       WRITE(iunit,'(A)') '!----- Grid Parameters -----'
       WRITE(iunit,outboo) 'LASYM',lasym
       WRITE(iunit,outint4) 'NFP',nfp

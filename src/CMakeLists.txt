@@ -1,49 +1,108 @@
-cmake_minimum_required (VERSION 3.15.0)
 
-#message(STATUS "CMAKE_MODULE_PATH is ${CMAKE_MODULE_PATH}")
+add_subdirectory(data)
 
-# Start Project and note the language used. The BLAS and LAPACK libraries for ifort require a working C and C++ compiler.
-project (VMEC Fortran C CXX)
-
-#enable_testing ()
-
-
-# Activate or Deactivate code profiling. The profiler maybe activated by setting -DUSE_PROFILER=ON on the cmake command line.
-set (vmec_sources "")
-# List all the subdirectories these are in library dependancy order.
-#add_subdirectory (Sources)
-
-# Add subdirectories for all the sources.
-add_subdirectory (General)
-add_subdirectory (Initialization_Cleanup)
-add_subdirectory (Input_Output)
-add_subdirectory (LIBSTELL)
-add_subdirectory (NESTOR_vacuum)
-add_subdirectory (TimeStep)
-
-set (vmec_sources "${vmec_sources}")# PARENT_SCOPE)
-
-add_library (vmec STATIC ${vmec_sources})
-set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
-target_include_directories(vmec PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
-
-# Define an executable and link all libraries.
-add_executable (xvmec ${CMAKE_CURRENT_SOURCE_DIR}/TimeStep/vmec.f90)
-target_link_libraries (xvmec vmec)
-
-target_link_libraries (vmec PUBLIC ${NETCDF_LIBRARIES})
-
-if (SCALAPACK_LIB)
-	target_link_libraries (vmec PUBLIC ${SCALAPACK_LIB})
-endif ()
-if (BLAS_FOUND)
-	target_link_libraries (vmec PUBLIC ${BLAS_LIBRARIES})
-endif ()
-if (LAPACK_FOUND)
-	target_link_libraries (vmec PUBLIC ${LAPACK_LIBRARIES})
-endif ()
-
-get_target_property(VMEC_LINK_LIB vmec LINK_LIBRARIES)
-message(STATUS "vmec linked libraries are ${VMEC_LINK_LIB}")
-set(VMEC_LINK_LIB ${VMEC_LINK_LIB} PARENT_SCOPE)
-
+list (APPEND vmec_sources
+	${CMAKE_CURRENT_SOURCE_DIR}/eqsolve.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/evolve.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/interp.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/restart_iter.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/analysum.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/analysum2.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/analyt.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/becoil.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/belicu.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/bextern.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fouri.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fourp.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/greenf.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/precal.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/scalpot.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/surface.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/tolicu.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/vacuum.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/bextrema.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/biotsavart.f
+	${CMAKE_CURRENT_SOURCE_DIR}/bsc_T.f
+	${CMAKE_CURRENT_SOURCE_DIR}/date_and_computer.f
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf_attrib.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf_GenGet.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf_GenPut.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf_inqvar.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/ezcdf_opncls.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fmax.f
+	${CMAKE_CURRENT_SOURCE_DIR}/fmin.f
+	${CMAKE_CURRENT_SOURCE_DIR}/functions.f
+	${CMAKE_CURRENT_SOURCE_DIR}/getcarg.f
+	${CMAKE_CURRENT_SOURCE_DIR}/handle_err.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/line_segment.f
+	${CMAKE_CURRENT_SOURCE_DIR}/mgrid_mod.f
+	${CMAKE_CURRENT_SOURCE_DIR}/parse_extension.f
+	${CMAKE_CURRENT_SOURCE_DIR}/profile_functions.f
+	${CMAKE_CURRENT_SOURCE_DIR}/read_namelist.f
+	${CMAKE_CURRENT_SOURCE_DIR}/read_wout_mod.f
+	${CMAKE_CURRENT_SOURCE_DIR}/safe_open_mod.f
+	${CMAKE_CURRENT_SOURCE_DIR}/second0.f
+	${CMAKE_CURRENT_SOURCE_DIR}/solver.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/spline_akima.f
+	${CMAKE_CURRENT_SOURCE_DIR}/spline_akima_int.f
+	${CMAKE_CURRENT_SOURCE_DIR}/spline_cubic.f
+	${CMAKE_CURRENT_SOURCE_DIR}/spline_cubic_int.f
+	${CMAKE_CURRENT_SOURCE_DIR}/tolower.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/tridslv.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/bss.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/elongation.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/eqfor.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fileout.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/freeb_data.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fsym_fft.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fsym_invfft.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/getbsubs.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/getcurmid.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/jxbforce.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/mercier.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/printout.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/readin.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/read_indata.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/timer_sub.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/wrout.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/allocate_funct3d.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/allocate_ns.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/allocate_nunv.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/close_all_files.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fixaray.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/free_mem_funct3d.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/free_mem_ns.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/free_mem_nunv.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/free_persistent_mem.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/guess_axis.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/heading.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/init_geometry.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/initialize_radial.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/magnetic_fluxes.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/open_output_files.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/profil1d.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/profil3d.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/reset_params.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/vsetup.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/add_fluxes.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/alias.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/aspectratio.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/bcovar.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/convert.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fbal.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/forces.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/funct3d.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/getfsq.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/jacobian.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/lamcal.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/precondn.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/residue.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/scalfor.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/spectrum.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/symforce.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/symrzl.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/tomnsp_mod.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/totzsp_mod.f90
+)
+set (vmec_sources "${vmec_sources}" PARENT_SCOPE)

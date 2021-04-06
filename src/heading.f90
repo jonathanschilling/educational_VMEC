@@ -6,11 +6,13 @@ SUBROUTINE heading(extension, lscreen)
   USE date_and_computer
   IMPLICIT NONE
 
+  CHARACTER(LEN=3), DIMENSION(12), PARAMETER ::  &
+     months = (/ 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec' /)
+  CHARACTER(LEN=50), PARAMETER :: banner     = ' THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION '
+  CHARACTER(LEN=*),  PARAMETER :: VersionID1 = ' Lambda: Full Radial Mesh. L-Force: hybrid full/half.'
+
   CHARACTER(LEN=*) :: extension
   LOGICAL :: lscreen
-
-  CHARACTER(LEN=50), PARAMETER :: banner    = ' THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION '
-  CHARACTER(LEN=*), PARAMETER :: VersionID1 = ' Lambda: Full Radial Mesh. L-Force: hybrid full/half.'
 
   INTEGER :: imon, nout
   CHARACTER(LEN=10) :: date0, time0, zone0

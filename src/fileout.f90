@@ -31,7 +31,6 @@ SUBROUTINE fileout(iseq, ictrl_flag, ier_flag, lscreen)
      'NS ARRAY MUST NOT BE ALL ZEROES                          ',   &
      'ERROR READING MGRID FILE                                 ',   &
      'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL ' /)
-  CHARACTER(LEN=*), PARAMETER :: Warning = " Error deallocating global memory FILEOUT"
   LOGICAL :: log_open, lwrite, loutput, lterm
 
   lu => czmn
@@ -101,28 +100,5 @@ SUBROUTINE fileout(iseq, ictrl_flag, ier_flag, lscreen)
   END IF
 
 1000 CONTINUE
-
-  ! DEALLOCATE GLOBAL MEMORY AND CLOSE FILES
-  IF (IAND(ictrl_flag, cleanup_flag).eq.0) RETURN
-
-  IF (ALLOCATED(cosmu)) then
-     DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &
-                sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
-                cosmui3, cosmumi3, cos01, sin01, stat=istat1)
-     IF (istat1 .ne. 0) PRINT *, Warning // "#1"
-  end if
-
-  IF (ALLOCATED(xm)) then
-     DEALLOCATE (xm, xn, ixm, xm_nyq, xn_nyq,                           &
-                 jmin3, mscale, nscale, uminus, stat=istat1)
-     IF (istat1 .ne. 0) PRINT *, Warning // "#2"
-  end if
-
-  IF (ALLOCATED(tanu)) then
-     DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
-                sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
-                cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
-     IF (istat1 .ne. 0) PRINT *, Warning // "#3"
-  end if
 
 END SUBROUTINE fileout

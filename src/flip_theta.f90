@@ -1,11 +1,4 @@
 !> \file
-MODULE INIT_GEOMETRY
-implicit none
-
-LOGICAL     :: lflip
-
-CONTAINS
-
 SUBROUTINE flip_theta(rmn, zmn, lmn)
   USE vmec_main
   USE vmec_params, ONLY: ntmax, rcc, rss, zsc, zcs, zcc, zss, rsc, rcs
@@ -48,5 +41,3 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
   END DO
 
 END SUBROUTINE flip_theta
-
-END MODULE INIT_GEOMETRY

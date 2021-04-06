@@ -5,7 +5,6 @@
   USE vacmod
   USE timer_sub
   USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
-  USE init_geometry
   IMPLICIT NONE
 
   INTEGER :: ier_flag

@@ -31,9 +31,13 @@ SUBROUTINE free_mem_ns(lreset)
        chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,   &
        presgrad, r01, z01, bdamp, stat=istat8)
 
-  IF (ALLOCATED(gc)) &
+  IF (ALLOCATED(gc)) then
     DEALLOCATE (gc, xsave, xstore, xcdot, stat=istat10)
-  IF (ALLOCATED(xc) .and. lreset) DEALLOCATE (xc, scalxc)
+  end if
+
+  IF (ALLOCATED(xc) .and. lreset) then
+    DEALLOCATE (xc, scalxc)
+  end if
 
   IF (istat1.ne.0 .or. istat2.ne.0 .or. istat3.ne.0 .or. &
       istat4.ne.0 .or. istat5.ne.0 .or. istat6.ne.0 .or. &

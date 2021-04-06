@@ -9,7 +9,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   USE xstuff
   USE vmec_io
   USE realspace, ONLY: phip, chip, gsqrta=>z1, z1=>z1
-  USE totzsp_mod
   USE vforces, ONLY: bsupua=>brmn_e, bsupva=>czmn_o, bsqa=>bzmn_e,  &
                      bsubsa=>armn_e, bsubua=>azmn_e, bsubva=>armn_o
   USE vacmod, ONLY: potvac, mnpd

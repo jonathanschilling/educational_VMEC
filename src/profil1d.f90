@@ -3,7 +3,6 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   USE vmec_main
   USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp
   USE realspace, ONLY: shalf, sqrts
-  USE init_geometry, ONLY: lflip
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(neqs2), INTENT(out) :: xc, xcdot

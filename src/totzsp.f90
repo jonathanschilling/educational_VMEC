@@ -1,14 +1,8 @@
 !> \file
-MODULE totzsp_mod
-USE vmec_main
-
-INTEGER, PARAMETER :: m0=0, m1=1, n0=0
-
-CONTAINS
-
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
-
-  USE vmec_params, ONLY: jmin1, jlam, ntmax, rcc, rss, zsc, zcs
+  USE vmec_main
+  USE stel_kinds, only: rprec
+  USE vmec_params, ONLY: jmin1, jlam, ntmax, rcc, rss, zsc, zcs, m0, m1, n0
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
@@ -146,6 +140,9 @@ END SUBROUTINE totzsps
 
 
 SUBROUTINE convert_sym(rmnss, zmncs)
+  USE vmec_main
+  USE vmec_params, only: m1
+  USE stel_kinds, only: rprec
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1), INTENT(inout) :: rmnss, zmncs
@@ -165,14 +162,13 @@ END SUBROUTINE convert_sym
 
 SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
   USE vmec_main
-  USE vmec_params, ONLY: jmin1, jlam, ntmax, rcs, rsc, zcc, zss
+  USE stel_kinds, only: rprec
+  USE vmec_params, ONLY: jmin1, jlam, ntmax, rcs, rsc, zcc, zss, m0, m1, n0
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
   REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(out) :: &
      r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
-
-  INTEGER, PARAMETER :: m0 = 0
 
   INTEGER :: m, n, mparity, k, i, l, j1, j1l, nsl
   INTEGER :: ioff, joff, mj, ni
@@ -270,6 +266,8 @@ END SUBROUTINE totzspa
 
 
 SUBROUTINE convert_asym(rmnsc, zmncc)
+  USE vmec_main
+  USE stel_kinds, only: rprec
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1), INTENT(inout) :: rmnsc, zmncc
@@ -286,5 +284,3 @@ SUBROUTINE convert_asym(rmnsc, zmncc)
   zmncc(:,:,1) = temp(:,:) - zmncc(:,:,1)
 
 END SUBROUTINE convert_asym
-
-END MODULE totzsp_mod

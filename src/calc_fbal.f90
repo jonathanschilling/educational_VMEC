@@ -1,13 +1,4 @@
 !> \file
-MODULE fbal
-
-USE stel_kinds, ONLY: dp
-implicit none
-
-REAL(dp), DIMENSION(:), ALLOCATABLE :: rzu_fac, rru_fac, frcc_fac, fzsc_fac
-
-CONTAINS
-
 SUBROUTINE calc_fbal(bsubu, bsubv)
   USE vmec_main, ONLY: buco, bvco, equif,             &
                        jcurv, jcuru, chipf, vp, pres, &
@@ -15,6 +6,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE vmec_params, ONLY: signgs
   USE vmec_dim, ONLY: ns, nrzt, nznt, ns1
   USE realspace, ONLY: wint, phip
+  USE stel_kinds, ONLY: dp
 
   implicit none
 
@@ -41,5 +33,3 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   equif(ns) = 0
 
 END SUBROUTINE calc_fbal
-
-END MODULE fbal

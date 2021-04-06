@@ -42,4 +42,6 @@ MODULE vmec_params
   REAL(rprec) :: signgs     !< sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)
   REAL(rprec) :: lamscale=1
 
+  INTEGER, PARAMETER :: m0=0, m1=1, n0=0 !< from totzsp
+
 END MODULE vmec_params

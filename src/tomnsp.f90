@@ -1,8 +1,4 @@
 !> \file
-MODULE tomnsp_mod
-
-CONTAINS
-
 SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
                    bzmn, czmn, blmn, clmn, arcon, azcon)
   USE realspace, ONLY: wint, phip
@@ -208,5 +204,3 @@ SUBROUTINE tomnspa(frzl_array, armn, brmn, crmn, azmn, bzmn, &
   DEALLOCATE (work1, temp1, temp3)
 
 END SUBROUTINE tomnspa
-
-END MODULE tomnsp_mod

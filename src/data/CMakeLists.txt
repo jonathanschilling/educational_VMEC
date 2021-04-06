@@ -17,5 +17,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/vparams.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/vsvd0.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/xstuff.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/fbal.f90
 )
 set (vmec_sources "${vmec_sources}" PARENT_SCOPE)

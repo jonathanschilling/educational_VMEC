@@ -6,10 +6,10 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   USE xstuff
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: nsval
-  INTEGER, INTENT(inout) :: ns_old
+  INTEGER, INTENT(in)      :: nsval
+  INTEGER, INTENT(inout)   :: ns_old
   REAL(rprec), INTENT(out) :: delt0
-  LOGICAL, INTENT(in) :: lscreen
+  LOGICAL, INTENT(in)      :: lscreen
 
   INTEGER :: neqs2_old=0
   LOGICAL :: lreset_internal, linterp
@@ -18,12 +18,12 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   ! Loads data (if available) from a reset file
 
   ! Set timestep control parameters
-  fsq     = one
-  iter2 = 1
-  iter1 = iter2
+  fsq    = one
+  iter2  = 1
+  iter1  = iter2
   ijacob = 0
-  irst = 1
-  res0 = -1
+  irst   = 1
+  res0   = -1
 
   ! INITIALIZE MESH-DEPENDENT SCALARS
   ns = nsval
@@ -35,8 +35,8 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   irzloff = ntmax*mns
   nrzt = nznt*ns
   neqs = 3*irzloff
-  neqs1 = neqs + 1
-  neqs2 = neqs1 + 1
+  neqs1 = neqs + 1  ! with    some additional scalar parameter (?)
+  neqs2 = neqs1 + 1 ! with another additional scalar parameter (?)
 
   WRITE (nthreed, 10) ns, mnmax, ftolv, niter
   IF (lscreen) PRINT 10, ns, mnmax, ftolv, niter

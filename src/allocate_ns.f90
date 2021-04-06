@@ -19,11 +19,11 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
   ndim  = 1 + nrzt
   nsp1  = 1 + ns
 
-  ! Save old xc, scalxc for possible interpolation or IF iterations restarted on same mesh...
   IF (neqs2_old .gt. 0 .and. ALLOCATED(scalxc) .and. linterp) THEN
+     ! Save old xc, scalxc for possible interpolation or IF iterations restarted on same mesh...
      ALLOCATE(xc_old(neqs2_old), scalxc_old(neqs2_old), stat=istat1)
      IF (istat1.ne.0) STOP 'allocation error #1 in allocate_ns'
-     xc_old(:neqs2_old) = xc(:neqs2_old)
+         xc_old(:neqs2_old) =     xc(:neqs2_old)
      scalxc_old(:neqs2_old) = scalxc(:neqs2_old)
   END IF
 
@@ -55,15 +55,15 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
             dlam(nsp1), rru_fac(ns), rzu_fac(ns), frcc_fac(ns),     &
             fzsc_fac(ns), icurv(ns+1), vpphi(ns), bdamp(ns),        &
             presgrad(ns), vp(nsp1), r01(ns), z01(ns), stat=istat1)
-
-  frcc_fac = 0; fzsc_fac = 0
   IF (istat1.ne.0) STOP 'allocation error #7 in allocate_ns'
+  frcc_fac = 0
+  fzsc_fac = 0
 
   iotaf(nsp1) = 0
 
   ALLOCATE (gc(neqs2), xcdot(neqs2), xsave(neqs2), xstore(neqs2), stat=istat1)
-  xstore = zero
   IF (istat1.ne.0) STOP 'allocation error #9 in allocate_ns'
+  xstore = zero
 
   IF (.not.ALLOCATED(xc)) THEN
      ALLOCATE (xc(neqs2), scalxc(neqs2), stat=istat1)
@@ -72,7 +72,7 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
   END IF
 
   IF (ALLOCATED(xc_old)) THEN
-     xstore(1:neqs2_old) = xc_old(1:neqs2_old)
+     xstore(1:neqs2_old) =     xc_old(1:neqs2_old)
      scalxc(1:neqs2_old) = scalxc_old(1:neqs2_old)
      DEALLOCATE (xc_old, scalxc_old)
   END IF

@@ -9,7 +9,6 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   USE vacmod
   USE vmec_io
   USE mgrid_mod
-  USE fbal
   USE stel_constants, ONLY: pi
   IMPLICIT NONE
 
@@ -42,14 +41,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      raxis0, rcalc, rcen, rcenin, rgeo, rjs,                            &
      rjs1, rlao, rqmin1, rqmin2, rshaf, rshaf1, rshaf2, s11, s12,       &
      s13, s2, s3, sigr0, sigr1, sigz1, smaleli,                         &
-     splintx, splints, sqmin, sumbpol, sumbtot, sumbtor, sump,          &
+     sqmin, sumbpol, sumbtot, sumbtor, sump,                            &
      sump2, sump20, t1, tz, jpar_perp=0, jparPs_perp=0,                 &
      tol, toroidal_flux, vnorm, vprime, wght0, xmax,                    &
      xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin, zaxis0,            &
      zmax, zmin, yr1u, yz1u, waist(2), height(2)
   REAL(rprec) d_of_kappa
 
-  EXTERNAL splintx,splints
 
   ! POINTER ASSOCIATIONS
   rmags => rzl_array(1,:,0,rcc)

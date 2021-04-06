@@ -8,8 +8,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   USE xstuff
   USE timer_sub
   USE vparams, ONLY: twopi
-  USE totzsp_mod
-  USE tomnsp_mod
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag

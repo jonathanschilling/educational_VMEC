@@ -2,7 +2,6 @@
 SUBROUTINE spectrum(rmn, zmn)
   USE vmec_main
   USE vmec_params, ONLY: mscale, nscale, ntmax, rss, zcs, rsc, zcc
-  USE totzsp_mod, ONLY:  convert_sym, convert_asym
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: rmn, zmn

@@ -4,20 +4,19 @@ PROGRAM vmec
   USE vmec_input
   USE safe_open_mod
   USE vparams, ONLY: nthreed
-  USE vmec_params, ONLY: bad_jacobian_flag, restart_flag, readin_flag,  &
-                         timestep_flag, output_flag, cleanup_flag,      &
-                         ns_error_flag, norm_term_flag,                 &
-                         successful_term_flag, reset_jacdt_flag
+  USE vmec_params
   USE vmec_main
   USE timer_sub
+  use vacmod
+  use mgrid_mod, only: free_mgrid
 
   IMPLICIT NONE
 
   CHARACTER(LEN=*), PARAMETER :: bad_jacobian = "The jacobian was non-definite!"
-  LOGICAL, PARAMETER :: lreset_xc = .false.
+  CHARACTER(LEN=*), PARAMETER :: Warning      = "Error deallocating global memory!"
 
   INTEGER :: numargs, ier_flag, index_end, iopen, isnml, iread, iseq,   &
-             index_seq, index_dat, iunit, ncount, nsteps, i
+             index_seq, index_dat, iunit, ncount, nsteps, i, istat1
   CHARACTER(LEN=120) :: input_file, seq_ext, arg
   CHARACTER(LEN=120) :: input_file0
   CHARACTER(LEN=120), DIMENSION(10) :: command_arg
@@ -26,8 +25,8 @@ PROGRAM vmec
   INTEGER :: ns_min, nsval, ns_old=0
   INTEGER :: igrid, jacob_off, niter_store
 
-! Read in command-line arguments to get input file or sequence file,
-! screen display information, and restart information
+  ! Read in command-line arguments to get input file or sequence file,
+  ! screen display information, and restart information
   CALL getcarg(1, command_arg(1), numargs)
   DO iseq = 2, numargs
      CALL getcarg(iseq, command_arg(iseq), numargs)
@@ -59,7 +58,7 @@ PROGRAM vmec
      END DO
   END IF
 
-! PARSE input_file into path/input.ext
+  ! PARSE input_file into path/input.ext
   arg = command_arg(1)
   index_dat = INDEX(arg,'.')
   index_end = LEN_TRIM(arg)
@@ -76,19 +75,18 @@ PROGRAM vmec
 
   CALL second0 (timeon)
 
-! INITIALIZE PARAMETERS
+  ! INITIALIZE PARAMETERS
   CALL reset_params
 
-! READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
-  CALL vsetup
+  ! READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
   CALL readin (input_file, ier_flag, lscreen)
-  IF (ier_flag .ne. 0) GOTO 1000
+  IF (ier_flag .ne. 0) GOTO 1000 ! fatal error
 
-! COMPUTE NS-INVARIANT ARRAYS
+  ! COMPUTE NS-INVARIANT ARRAYS
   CALL fixaray
 
-! COMPUTE INITIAL SOLUTION ON COARSE GRID
-! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
+  ! COMPUTE INITIAL SOLUTION ON COARSE GRID
+  ! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
   ns_old = 0
   WRITE (nthreed, 30)
   delt0r = delt
@@ -100,7 +98,7 @@ PROGRAM vmec
   ! consistency check on requested number of flux surfaces
   IF (ALL(ns_array.eq.0)) THEN
      ier_flag = ns_error_flag ! 'NS ARRAY MUST NOT BE ALL ZEROES'
-     GOTO 1000
+     GOTO 1000 ! fatal error
   END IF
 
   ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
@@ -108,7 +106,7 @@ PROGRAM vmec
   ! in the multi-grid run
   jacob_off = 0
 
-50 CONTINUE
+50 CONTINUE ! retry with initial ns=3 to fix bad jacobian
 
   ! convergence flag: initially not converged yet
   iequi = 0
@@ -157,7 +155,9 @@ PROGRAM vmec
 
      ! break the multi-grid sequence if current number of flux surfaced
      ! did not reach convergence
-     IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) EXIT
+     IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
+        EXIT
+     end if
 
   END DO ITERATIONS
 
@@ -167,26 +167,50 @@ PROGRAM vmec
   ! retry the whole thing again
   IF (ier_flag.eq.bad_jacobian_flag .and. jacob_off.eq.0) THEN
      jacob_off = 1
-     GO TO 50
+     GO TO 50 ! retry with initial ns=3 to fix bad jacobian
   END IF
 
   CALL second0 (timeoff)
   timer(tsum) = timer(tsum) + timeoff - timeon
 
-
-1000 continue
+1000 continue ! fatal error
 
   ! write output files
   CALL fileout (0, ictrl_flag, ier_flag, lscreen)
 
   ! free memory
-  CALL free_mem_funct3d
-  CALL free_mem_ns (lreset_xc)
-  CALL free_mem_nunv
-  CALL free_persistent_mem
+  IF (IAND(ictrl_flag, cleanup_flag).eq.1) then
+     ! DEALLOCATE GLOBAL MEMORY
+     IF (ALLOCATED(cosmu)) then
+        DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &
+                   sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
+                   cosmui3, cosmumi3, cos01, sin01, stat=istat1)
+        IF (istat1 .ne. 0) PRINT *, Warning // "#1"
+     end if
 
-  ! close output files
-  CALL close_all_files
+     IF (ALLOCATED(xm)) then
+        DEALLOCATE (xm, xn, ixm, xm_nyq, xn_nyq,                           &
+                    jmin3, mscale, nscale, uminus, stat=istat1)
+        IF (istat1 .ne. 0) PRINT *, Warning // "#2"
+     end if
+
+     IF (ALLOCATED(tanu)) then
+        DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
+                   sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
+                   cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
+        IF (istat1 .ne. 0) PRINT *, Warning // "#3"
+     end if
+  end if
+
+  CALL free_mem_funct3d
+  CALL free_mem_ns (.true.) ! also free xc, scalxc here
+  CALL free_mem_nunv
+
+  CALL free_mgrid (istat1)
+  IF (istat1.ne.0) THEN
+      PRINT *,'problem in free_mgrid'
+      PRINT *,' istat1 = ',istat1
+  ENDIF
 
   ! verbose error message
   SELECT CASE (ier_flag)
@@ -196,5 +220,8 @@ PROGRAM vmec
      WRITE (nthreed, '(/,1x,a)') bad_jacobian
   CASE DEFAULT
   END SELECT
+
+    ! close threed1 file
+  IF (nthreed .gt. 0) CLOSE (nthreed)
 
 END PROGRAM vmec

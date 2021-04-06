@@ -25,13 +25,14 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   ! ON EXIT,  XNEW = X(NEW MESH)   [ NOT SCALED BY 1/SQRTS ]
   DO ntype = 1, 3*ntmax
 
-     WHERE (MOD(ixm(:mnsize),2) .eq. 1) &
+     ! extrapolation to axis for odd-m modes (?)
+     WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
        xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)
 
      DO js = 1, nsnew
-        sj = REAL(js - 1,rprec)/(nsnew - 1)
+        sj = REAL(js - 1, rprec)/(nsnew - 1)
         js1 = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)
-        js2 = MIN(js1 + 1,nsold)
+        js2 = MIN(js1 + 1, nsold)
         s1 = (js1 - 1)*hsold
         xint = (sj - s1)/hsold
         xint = MIN(one,xint)
@@ -40,7 +41,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
                              +        xint *xold(js2,:,ntype) )/scalxc(js,:,1)
      END DO
 
-   ! Zero M=1 modes at origin
+     ! Zero M=1 modes at origin
      WHERE (MOD(ixm(:mnsize),2) .eq. 1) xnew(1,:,ntype) = 0
   END DO
 

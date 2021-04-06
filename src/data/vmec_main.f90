@@ -42,6 +42,9 @@ MODULE vmec_main
   REAL(rprec) :: rbtor, rbtor0, ctor, delbsq, res0, delt0r
   REAL(rprec), DIMENSION(ndatafmax) :: spfa, spfa2, hp, sifa, sifa2, hi
   LOGICAL :: lthreed, lconm1
+
+  LOGICAL     :: lflip !< from init_geometry
+
   INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect !< two-dimensional array for computing 2pi-v angle
   INTEGER :: multi_ns_grid, itfsq, iresidue, neqs1, neqs2, ndatap, ndatai
 

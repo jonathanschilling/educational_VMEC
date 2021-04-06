@@ -1,0 +1,161 @@
+!> \file
+SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
+                  plascur, rbtor, wint, ns, ivac_skip, ivac,      &
+                  mnmax, ier_flag, lscreen)
+  USE vacmod
+  USE vparams, ONLY: nthreed, zero, one, mu0
+  USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag, lamscale
+  USE realspace, ONLY: extra4
+  IMPLICIT NONE
+
+  INTEGER :: ns, ivac_skip, ivac, mnmax, ier_flag
+  REAL(rprec) :: plascur, rbtor
+  REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
+  REAL(rprec), DIMENSION(*), INTENT(in) :: wint
+  LOGICAL :: lscreen
+
+  INTEGER :: mn, n, n1, m, i, info
+  REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
+  REAL(rprec), ALLOCATABLE :: bsubu(:), bsubv(:), potu(:), potv(:)
+  REAL(rprec), ALLOCATABLE :: amatrix(:)
+  REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
+
+  ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
+  ! BASED ON THE PROGRAM BY P. MERKEL [J. Comp. Phys. 66, 83 (1986)]
+  ! AND MODIFIED BY W. I. VAN RIJ AND S. P. HIRSHMAN (1987)
+
+  ! THE USER MUST SUPPLY THE FILE << MGRID >> WHICH INCLUDES THE MAGNETIC
+  ! FIELD DATA TO BE READ BY THE SUBROUTINE BECOIL
+
+  ier_flag = norm_term_flag
+
+  IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
+
+  ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2), potu(nuv2), potv(nuv2), stat = i)
+  IF (i .ne. 0) STOP 'Allocation error in vacuum'
+
+  potsin => potvac(1:mnpd)
+  potcos => potvac(1+mnpd:)
+
+  ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2),                     &
+       bexni(nuv2), r1b(nuv), rub(nuv2), rvb(nuv2),                 &
+       z1b(nuv), zub(nuv2), zvb(nuv2), auu(nuv2), auv(nuv2),        &
+       avv(nuv2), snr(nuv2), snv(nuv2), snz(nuv2), drv(nuv2),       &
+       guu_b(nuv2), guv_b(nuv2), gvv_b(nuv2), rzb2(nuv),            &
+       rcosuv(nuv), rsinuv(nuv), stat=i)
+  IF (i .ne. 0) STOP 'Allocation error in vacuum'
+
+  ! INDEX OF LOCAL VARIABLES
+  !
+  ! rmnc,rmns,zmns,zmnc:     Surface Fourier coefficients (m,n) of R,Z
+  ! xm,xn:     m, n values corresponding to rc,zs array
+  ! bsqvac:    B**2/2 at the vacuum INTERFACE
+  ! plascur:   net toroidal current
+  ! rbtor  :   net (effective) poloidal current (loop integrated R*Btor)
+  ! mnmax:     number of R, Z modes in Fourier series of R,Z
+  ! ivac_skip: regulates whether full (=0) or incremental (>0)
+  !            update of matrix elements is necessary
+
+  ! compute and store mean magnetic fields (due to
+  ! toroidal plasma current and EXTERNAL tf-coils)
+  ! note: these are fixed for a constant current iteration
+  !
+  ! bfield = rbtor*grad(zeta) + plascur*grad("theta") - grad(potential)
+  !
+  ! where "theta" is computed using Biot-Savart law for filaments
+  ! Here, the potential term is needed to satisfy B dot dS = 0 and has the form:
+  !
+  ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
+
+  IF (.not. ALLOCATED(tanu)) CALL precal
+  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax)
+  CALL bextern (plascur, wint, ns, lscreen)
+
+  ! Determine scalar magnetic potential POTVAC
+  CALL scalpot (potvac, amatrix, wint, ns, ivac_skip)
+  CALL solver (amatrix, potvac, mnpd2, 1, info)
+  IF (info .ne. 0) STOP 'Error in solver in VACUUM'
+
+  ! compute tangential covariant (sub u,v) and contravariant
+  ! (super u,v) magnetic field components on the plasma surface
+  potu(:nuv2) = zero;  potv(:nuv2) = zero
+
+  mn = 0
+  DO n = -nf, nf
+     dn2 = -(n*nfper)
+     n1 = ABS(n)
+     DO m = 0, mf
+        mn = mn + 1
+        dm2 = m
+        DO i = 1, nuv2
+           cosmn = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)
+           potu(i) = potu(i) + dm2*potsin(mn)*cosmn
+           potv(i) = potv(i) + dn2*potsin(mn)*cosmn
+        END DO
+        IF (lasym) then
+           DO i = 1, nuv2
+              sinmn = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)
+              potu(i) = potu(i) - dm2*potcos(mn)*sinmn
+              potv(i) = potv(i) - dn2*potcos(mn)*sinmn
+           END DO
+        end if
+     END DO
+  END DO
+
+  DO i = 1, nuv2
+     ! Covariant components
+     bsubu(i) = potu(i) + bexu(i)
+     bsubv(i) = potv(i) + bexv(i)
+
+     huv = p5*guv_b(i)*(nfper)
+     hvv = gvv_b(i)*(nfper*nfper)
+     det = one/(guu_b(i)*hvv-huv*huv)
+
+     ! Contravariant components
+     bsupu = (hvv*bsubu(i)-huv*bsubv(i))*det
+     bsupv = ((-huv*bsubu(i))+guu_b(i)*bsubv(i))*det
+
+     ! .5*|Bvac|**2
+     bsqvac(i) = p5*(bsubu(i)*bsupu + bsubv(i)*bsupv)
+
+     brv(i) = rub(i)*bsupu + rvb(i)*bsupv
+     bphiv(i) = r1b(i)*bsupv
+     bzv(i) = zub(i)*bsupu + zvb(i)*bsupv
+  END DO
+
+  ! PRINT OUT VACUUM PARAMETERS
+  IF (ivac .eq. 0) THEN
+     ivac = ivac + 1
+     IF (lscreen) WRITE (*, 200) nfper, mf, nf, nu, nv
+     WRITE (nthreed, 200) nfper, mf, nf, nu, nv
+200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
+
+     ! -plasma current/pi2
+     bsubuvac = SUM(bsubu(:nuv2)*wint(ns:ns*nuv2:ns))*signgs*pi2
+     bsubvvac = SUM(bsubv(:nuv2)*wint(ns:ns*nuv2:ns))
+
+     fac = 1.e-6_dp/mu0
+     IF (lscreen) WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+     WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &
+        ' TOROIDAL CURRENT = ',e10.2,/,2x,'R * BTOR(vac) = ',       &
+        e10.2,' R * BTOR(plasma) = ',e10.2)
+
+     IF (rbtor*bsubvvac .lt. zero) THEN
+           ier_flag = phiedge_error_flag
+     ENDIF
+     IF (ABS((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) THEN
+           ier_flag = 10
+     ENDIF
+  ENDIF
+
+  IF (ALLOCATED(bexu)) then
+     DEALLOCATE (bexu, bexv, bexn, bexni, r1b, rub, rvb, z1b, zub,   &
+        zvb, auu, auv, avv, snr, snv, snz, drv, guu_b, guv_b, gvv_b, &
+        rzb2, rcosuv, rsinuv, stat=i)
+     IF (i .ne. 0) STOP 'Deallocation error in vacuum'
+  end if
+
+  DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
+
+END SUBROUTINE vacuum

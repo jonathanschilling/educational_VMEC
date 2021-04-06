@@ -1,5 +1,7 @@
 
 add_subdirectory(data)
+add_subdirectory(ezcdf)
+add_subdirectory(NESTOR)
 
 list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/eqsolve.f90

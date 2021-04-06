@@ -7,7 +7,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   USE vforces
   USE xstuff
   USE timer_sub
-  USE vmec_utils, ONLY: cyl2flx
   USE vparams, ONLY: twopi
   USE totzsp_mod
   USE tomnsp_mod

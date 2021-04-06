@@ -101,7 +101,6 @@ C-----------------------------------------------
 
       SUBROUTINE read_mgrid (mgrid_file, extcur, nv, nfp, lscreen,
      1                       ier_flag)
-      USE system_mod
       IMPLICIT NONE
 C-----------------------------------------------
 C   D u m m y   V a r i a b l e s

@@ -96,7 +96,6 @@ SUBROUTINE fileout(iseq, ictrl_flag, ier_flag, lscreen)
  10 FORMAT(' FILE : ',a,/,' NUMBER OF JACOBIAN RESETS = ',i4,/)
 120 FORMAT(/1x,a,/)
 
-
   IF (ALLOCATED(br_out)) THEN
      DEALLOCATE (br_out, bz_out)
   END IF

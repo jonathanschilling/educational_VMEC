@@ -7,11 +7,9 @@
      1   gsqrt => azmn_o, bsq => bzmn_o, izeta => azmn_e,
      2   brho => bzmn_e, bphi => czmn_o, curtheta => brmn_e
       USE vacmod
-!       USE csplinx
       USE vmec_io
       USE mgrid_mod
       USE fbal
-!       USE v3f_vmec_comm
       USE stel_constants, ONLY: pi
       IMPLICIT NONE
 C-----------------------------------------------
@@ -106,8 +104,7 @@ C-----------------------------------------------
 !
 
       CALL jxbforce (bsupu, bsupv, bsubu, bsubv, crmn_o, rcon, zcon,
-     1        gsqrt, bsq, curtheta, izeta, brho, sigma_an, ier_flag
-     3                )
+     1        gsqrt, bsq, curtheta, izeta, brho, ier_flag)
 !
 !     HALF-MESH VOLUME-AVERAGED BETA
 !

@@ -37,7 +37,6 @@
 
       phip(nrzt+1) = 0
       faclam = 0
-      sigma_an = 1         !INITIALIZE sigma FOR ANISOTROPIC PLASMA
       wint(1:nrzt:ns) = 0
 
       lk = 0

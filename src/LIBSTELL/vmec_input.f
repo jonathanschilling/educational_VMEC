@@ -17,9 +17,14 @@
       REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) ::
      1   rbs, zbc, rbc, zbs
       REAL(rprec) :: curtor, delt, ftol, tcon0,
-     1   gamma, phiedge, spres_ped, bloat, pres_scale,
+     1   gamma, bloat, pres_scale,
      4   prec2d_threshold
-      REAL(rprec), DIMENSION(0:20) :: am, ai, ac
+      REAL(rprec) :: spres_ped !< value of s beyond which pressure profile is flat (pedestal)
+      REAL(rprec) :: phiedge   !< value of real toroidal flux at plasma edge (s=1)
+      REAL(rprec), DIMENSION(0:20) :: am !< array of coefficients in phi-series for mass (NWT/m**2)
+      REAL(rprec), DIMENSION(0:20) :: ai !< array of coefficients in phi-series for iota (ncurr=0)
+      REAL(rprec), DIMENSION(0:20) :: ac !< array of coefficients in phi-series for the quantity d(Icurv)/ds = toroidal
+                                         !< current density * Vprime, so Icurv(s) = Itor(s) (used for ncurr=1)
       REAL(rprec), DIMENSION(1:20) :: aphi
       CHARACTER(len=20) :: pcurr_type  !  len=12 -> len=20 J Hanson 2010-03-16
       CHARACTER(len=20) :: piota_type

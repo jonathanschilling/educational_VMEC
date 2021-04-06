@@ -40,8 +40,17 @@ C-----------------------------------------------
      1  spfa, spfa2, hp, sifa, sifa2, hi
       LOGICAL :: lthreed, lconm1
       INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect
-      INTEGER :: multi_ns_grid, iequi, irst,
-     1    iter1, iter2, ijacob, itfsq, iresidue, neqs, neqs1,
-     2    neqs2, irzloff, ivac, ndatap, ndatai
-C-----------------------------------------------
+      INTEGER :: multi_ns_grid, itfsq, iresidue, neqs, neqs1,
+     2    neqs2, irzloff, ndatap, ndatai
+
+      integer :: iequi  !< counter used to call -EQFOR- at end of run
+      integer :: ijacob !< counter for number of times jacobian changes sign
+      integer :: irst   !< "counter" monitoring sign of jacobian;
+                        !< resets R, Z, and Lambda when jacobian changes sign
+                        !< and decreases time step
+      integer :: iter1  !< stores position in main iteration loop
+      integer :: iter2  !< stores position in main iteration loop
+      integer :: ivac   !< counts number of free-boundary iterations
+
+
       END MODULE vmec_main

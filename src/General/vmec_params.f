@@ -5,8 +5,9 @@
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
-      INTEGER, PARAMETER :: meven = 0, modd = 1
-      INTEGER, PARAMETER :: ndamp = 10
+      INTEGER, PARAMETER :: meven = 0  !< parity selection label for even poloidal modes of R and Z
+      INTEGER, PARAMETER :: modd = 1   !< parity selection label for  odd poloidal modes of R and Z
+      INTEGER, PARAMETER :: ndamp = 10 !< number of iterations over which damping is averaged
       INTEGER, PARAMETER :: ns4 = 25
 
       INTEGER, PRIVATE :: ink
@@ -34,6 +35,7 @@ C-----------------------------------------------
       INTEGER :: mnyq, nnyq
       INTEGER, ALLOCATABLE :: uminus(:)
       REAL(rprec), ALLOCATABLE :: mscale(:), nscale(:)
-      REAL(rprec) :: signgs, lamscale=1
+      REAL(rprec) :: signgs     !< sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)
+      REAL(rprec) :: lamscale=1
 
       END MODULE vmec_params

@@ -28,7 +28,7 @@ set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_
 target_include_directories(vmec PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 
 # Define an executable and link all libraries.
-add_executable (xvmec ${CMAKE_CURRENT_SOURCE_DIR}/TimeStep/vmec.f)
+add_executable (xvmec ${CMAKE_CURRENT_SOURCE_DIR}/TimeStep/vmec.f90)
 target_link_libraries (xvmec vmec)
 
 target_link_libraries (vmec PUBLIC ${NETCDF_LIBRARIES})

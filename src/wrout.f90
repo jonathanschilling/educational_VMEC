@@ -67,25 +67,26 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ! reverse ns, mnmax for backwards compatibility
   REAL(rprec), DIMENSION(mnmax,ns,3*MAX(ntmax/2,1)), INTENT(inout), TARGET :: rzl_array, gc_array
   REAL(rprec), DIMENSION(ns,nznt), INTENT(inout) :: bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu
-  REAL(rprec) :: qfact(ns)
 
   REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
 
-  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) ::                      &
-               r1dim = (/'radius'/), mn1dim = (/'mn_mode'/),        &
-               mn2dim = (/'mn_mode_nyq'/), mnpddim = (/'mnpd'/),    &
-               currg = (/'ext_current'/),                           &
+  REAL(rprec) :: qfact(ns)
+
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: &
+               r1dim = (/'radius'/),           &
+               mn1dim = (/'mn_mode'/),         &
+               mn2dim = (/'mn_mode_nyq'/),     &
+               mnpddim = (/'mnpd'/),           &
+               currg = (/'ext_current'/),      &
                currl = (/'current_label'/)
-  CHARACTER(LEN=*), DIMENSION(2), PARAMETER ::                      &
-               r2dim = (/'mn_mode','radius '/),                     &
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(2) ::          &
+               r2dim = (/'mn_mode',    'radius '    /), &
                r3dim = (/'mn_mode_nyq','radius     '/)
 
-  INTEGER :: j, js, jlk, mn, lk, iasym,                             &
-             m, n, k, iwout0, n1, nwout, istat, i, indx1(1),        &
-             nwout2,                      &
-             isgn, js2, nfort
+  INTEGER :: j, js, jlk, mn, lk,                              &
+             m, n, k, iwout0, n1, nwout, istat, i, indx1(1)
   REAL(rprec) :: dmult, tcosi, tsini, vversion, sgn, tmult,         &
-                 presfactor, ftolx1, d_bsupumn, d_bsupvmn
+                 presfactor, ftolx1
   REAL(rprec), POINTER, DIMENSION(:,:) :: rmnc, rmns, zmns, zmnc, lmns, lmnc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: gmnc, bmnc, gmns, bmns, &
     bsubumnc, bsubvmnc, bsubsmns, bsubumns, bsubvmns, bsubsmnc
@@ -93,15 +94,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      rmns1, zmnc1, lmnc1, bmodmn, bmodmn1
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: gmn, bmn,               &
      bsubumn, bsubvmn, bsubsmn, bsupumn, bsupvmn
-  CHARACTER(LEN=120) :: wout_file, wout2_file
-  CHARACTER(LEN=120) :: fort_file
+  CHARACTER(LEN=120) :: wout_file
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: xfinal
 
   ! ELIMINATE THESE EVENTUALLY
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: bsupumnc, bsupumns, bsupvmnc, bsupvmns
-
-  LOGICAL :: lcurr
-  INTEGER :: nmin0
 
 
 
@@ -158,11 +155,12 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   IF (mnyq .ne. 0) cosmui(:,mnyq) = p5*cosmui(:,mnyq)
   IF (nnyq .ne. 0) cosnv (:,nnyq) = p5*cosnv (:,nnyq)
 
+  ! use wout_file as temporary storage for version number
   wout_file = version_
   READ (wout_file, *) vversion
 
   wout_file = 'wout_' // TRIM(input_extension) // '.nc'
-  CALL cdf_open(nwout,wout_file,'w',iwout0)
+  CALL cdf_open(nwout, wout_file, 'w', iwout0)
   IF (iwout0 .ne. 0) STOP 'Error opening wout.nc file VMEC WROUT'
 
   !================================

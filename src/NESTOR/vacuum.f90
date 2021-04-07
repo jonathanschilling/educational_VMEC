@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
                   plascur, rbtor, wint, ns, ivac_skip, ivac,      &
-                  mnmax, ier_flag, lscreen)
+                  mnmax, ier_flag)
   USE vacmod
   USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
@@ -12,7 +12,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   REAL(rprec) :: plascur, rbtor
   REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
-  LOGICAL :: lscreen
 
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
@@ -69,7 +68,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
   IF (.not. ALLOCATED(tanu)) CALL precal
   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax)
-  CALL bextern (plascur, wint, ns, lscreen)
+  CALL bextern (plascur, wint, ns)
 
   ! Determine scalar magnetic potential POTVAC
   CALL scalpot (potvac, amatrix, wint, ns, ivac_skip)
@@ -126,7 +125,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   ! PRINT OUT VACUUM PARAMETERS
   IF (ivac .eq. 0) THEN
      ivac = ivac + 1
-     IF (lscreen) WRITE (*, 200) nfper, mf, nf, nu, nv
+     WRITE (*, 200) nfper, mf, nf, nu, nv
      WRITE (nthreed, 200) nfper, mf, nf, nu, nv
 200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
 
@@ -135,7 +134,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
      bsubvvac = SUM(bsubv(:nuv2)*wint(ns:ns*nuv2:ns))
 
      fac = 1.e-6_dp/mu0
-     IF (lscreen) WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+     WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
      WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
 1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &
         ' TOROIDAL CURRENT = ',e10.2,/,2x,'R * BTOR(vac) = ',       &

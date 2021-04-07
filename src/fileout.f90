@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE fileout(ier_flag, lscreen)
+SUBROUTINE fileout(ier_flag)
   USE vmec_main
   USE vac_persistent
   USE realspace
@@ -9,7 +9,6 @@ SUBROUTINE fileout(ier_flag, lscreen)
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
-  LOGICAL, INTENT(in) :: lscreen
 
   INTEGER :: istat
   INTEGER :: loc_ier_flag
@@ -46,7 +45,7 @@ SUBROUTINE fileout(ier_flag, lscreen)
   IF (lterm) THEN
      ! Must save irst value if in "restart" mode
      irst0 = irst
-     CALL funct3d (lscreen, istat)
+     CALL funct3d (istat)
 
      ! The sign of the jacobian MUST multiply phi to get the physically correct toroidal flux
      ! Below few lines compute the toroidal flux profile from phip by quadrature
@@ -75,8 +74,8 @@ SUBROUTINE fileout(ier_flag, lscreen)
 
 
      ! These are the last few lines that appear on screen / in the threed1 file
-     IF (lscreen)             PRINT 120, TRIM(werror(loc_ier_flag))
-     IF (lscreen .and. lterm) PRINT 10,  TRIM(input_extension), ijacob
+     PRINT 120, TRIM(werror(loc_ier_flag))
+     IF (lterm) PRINT 10,  TRIM(input_extension), ijacob
      IF (nthreed .gt. 0) THEN
         WRITE (nthreed,120) TRIM(werror(loc_ier_flag))
         IF (lterm) then

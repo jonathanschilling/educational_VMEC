@@ -1,5 +1,5 @@
 !> \file
-  SUBROUTINE readin(input_file, ier_flag, lscreen)
+  SUBROUTINE readin(input_file, ier_flag)
   USE vmec_main
   USE vmec_params
   USE vacmod
@@ -7,7 +7,6 @@
   IMPLICIT NONE
 
   INTEGER :: ier_flag
-  LOGICAL :: lscreen
   CHARACTER(LEN=*) :: input_file
 
   INTEGER :: iexit, ipoint, n, iunit, ier_flag_init, i, ni, m, nsmin, igrid, mj, isgn, ioff, joff
@@ -27,16 +26,16 @@
   end if
 
   ! Open output files here, print out heading to threed1 file
-  CALL heading(input_extension, lscreen)
+  CALL heading(input_extension)
 
 
   IF (lfreeb) THEN
      ! READ IN AND STORE (FOR SEQUENTIAL RUNNING) MAGNETIC FIELD DATA FROM MGRID_FILE
-     CALL read_mgrid (mgrid_file, extcur, nzeta, nfp, lscreen, ier_flag)
+     CALL read_mgrid (mgrid_file, extcur, nzeta, nfp, .true., ier_flag)
 
      ! check again for lfreeb
      ! --> might have been reset to .false. if mgrid file was not found
-     IF (lfreeb .and. lscreen) THEN
+     IF (lfreeb) THEN
         IF (ier_flag .ne. norm_term_flag) then
            RETURN
         end if

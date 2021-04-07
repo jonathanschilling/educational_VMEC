@@ -42,7 +42,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/printout.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/readin.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/read_indata.f90
-	${CMAKE_CURRENT_SOURCE_DIR}/timer_sub.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/wrout.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/allocate_funct3d.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/allocate_ns.f90

@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE evolve(time_step, ier_flag, liter_flag, lscreen)
+SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   USE vmec_main
   USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,       &
                          norm_term_flag
@@ -10,14 +10,13 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag, lscreen)
   REAL(rprec), intent(in) :: time_step
   INTEGER, INTENT(inout) :: ier_flag
   LOGICAL, INTENT(inout) :: liter_flag
-  LOGICAL, INTENT(in)  :: lscreen
 
 
   CHARACTER(LEN=*), PARAMETER :: fcn_message = "External calls to FUNCT3D: "
   REAL(rprec) :: fsq1, dtau, b1, fac
 
   ! COMPUTE MHD FORCES
-  CALL funct3d (lscreen, ier_flag)
+  CALL funct3d (ier_flag)
 
   ! COMPUTE ABSOLUTE STOPPING CRITERION
   IF (iter2.eq.1 .and. irst.eq.2) THEN

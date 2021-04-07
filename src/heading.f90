@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE heading(extension, lscreen)
+SUBROUTINE heading(extension)
   USE vmec_main, ONLY: rprec
   USE vparams, ONLY: nthreed
   USE vmec_params, ONLY: version_
@@ -12,7 +12,6 @@ SUBROUTINE heading(extension, lscreen)
   CHARACTER(LEN=*),  PARAMETER :: VersionID1 = ' Lambda: Full Radial Mesh. L-Force: hybrid full/half.'
 
   CHARACTER(LEN=*) :: extension
-  LOGICAL :: lscreen
 
   INTEGER :: imon, nout
   CHARACTER(LEN=10) :: date0, time0, zone0
@@ -20,7 +19,7 @@ SUBROUTINE heading(extension, lscreen)
   LOGICAL :: lfirst
 
   !     Open output files
-  CALL open_output_files (extension, lscreen, lfirst)
+  CALL open_output_files (extension, lfirst)
 
   IF (.not.lfirst) RETURN
 
@@ -32,7 +31,7 @@ SUBROUTINE heading(extension, lscreen)
 
   CALL GetComputerInfo
 
-  IF (lscreen .and. lfirst) WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
+  IF (lfirst) WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
 
   Version = TRIM(ADJUSTL(version_))
 
@@ -43,7 +42,7 @@ SUBROUTINE heading(extension, lscreen)
        TRIM(Version), TRIM(VersionID1),                     &
        ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),    &
        ' RELEASE: ', TRIM(os_release), TRIM(dateloc)
-  IF (lscreen .and. lfirst) then
+  IF (lfirst) then
      WRITE (*,'(1x,a,1x,a,/,1x,a,//,1x,3(2a,2x),a)') TRIM(banner), &
      TRIM(Version), TRIM(VersionID1),                              &
        ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),           &

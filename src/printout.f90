@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE printout(i0, delt0, w0, lscreen)
+SUBROUTINE printout(i0, delt0, w0)
   USE vmec_main
   USE realspace
   USE xstuff
@@ -7,7 +7,6 @@ SUBROUTINE printout(i0, delt0, w0, lscreen)
 
   INTEGER :: i0
   REAL(rprec) :: delt0, w0
-  LOGICAL :: lscreen
 
   CHARACTER(LEN=*), PARAMETER :: iter_line  = "  ITER    FSQR      FSQZ      FSQL   "
   CHARACTER(LEN=*), PARAMETER :: fsq_line   = "   fsqr      fsqz      fsql      DELT    "
@@ -37,14 +36,14 @@ SUBROUTINE printout(i0, delt0, w0, lscreen)
   IF (i0.eq.1 .and. lfreeb) THEN
      print_line = iter_lines // " " // raxis_line
      IF (lasym) print_line = TRIM(print_line) // " " // zaxis_line
-     IF (lscreen) PRINT 20, TRIM(print_line)//delt_line
+     PRINT 20, TRIM(print_line)//delt_line
      print_line = iter_line // fsq_line // raxis_line
      IF (lasym) print_line = TRIM(print_line) // " " // zaxis_line
      WRITE (nthreed, 16) TRIM(print_line)
   ELSE IF (i0.eq.1 .and. .not.lfreeb) THEN
      print_line = raxis_line
      IF (lasym) print_line = raxis_line // zaxis_line
-     IF (lscreen) PRINT 30, iter_lines, TRIM(print_line)//delt_line
+     PRINT 30, iter_lines, TRIM(print_line)//delt_line
      print_line = iter_line // fsq_line // raxis_line // "     "
      IF (lasym) then
         print_line = iter_line // fsq_line // raxis_line // zaxis_line
@@ -59,23 +58,23 @@ SUBROUTINE printout(i0, delt0, w0, lscreen)
 
   IF (.not. lasym) THEN
      IF (.not.lfreeb) THEN
-        IF (lscreen) PRINT 45, i0, fsqr, fsqz, fsql, r00, delt0, w
+        PRINT 45, i0, fsqr, fsqz, fsql, r00, delt0, w
         WRITE (nthreed, 40) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, fsql1, &
            delt0, r00, w, betav, avm
      RETURN
      ENDIF
-     IF (lscreen) PRINT 50, i0, fsqr, fsqz, fsql, r00, delt0, w, delbsq
+     PRINT 50, i0, fsqr, fsqz, fsql, r00, delt0, w, delbsq
      WRITE (nthreed, 42) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &
         fsql1, delt0, r00, w, betav, ABS(phiedge), delbsq, fedge
 
   ELSE ! (.not. lasym)
      IF (.not.lfreeb) THEN
-        IF (lscreen) PRINT 65, i0, fsqr, fsqz, fsql, r00, z00, delt0, w
+        PRINT 65, i0, fsqr, fsqz, fsql, r00, z00, delt0, w
         WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &
            fsql1, delt0, r00, z00, w, betav, avm
      RETURN
      ENDIF
-     IF (lscreen) PRINT 70, i0, fsqr, fsqz, fsql, r00, z00, delt0, w, delbsq
+     PRINT 70, i0, fsqr, fsqz, fsql, r00, z00, delt0, w, delbsq
      WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &
         fsql1, delt0, r00, z00, w, betav, ABS(phiedge), delbsq, fedge
   END IF

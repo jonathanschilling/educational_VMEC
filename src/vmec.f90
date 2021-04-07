@@ -28,10 +28,6 @@ PROGRAM vmec
   INTEGER :: ns_old=0
   INTEGER :: igrid
   INTEGER :: jacob_off
-  LOGICAL :: lscreen
-
-  ! default: enable screen output
-  lscreen = .true.
 
   ! Read in command-line arguments to get input file or sequence file,
   ! screen display information, and restart information
@@ -56,12 +52,6 @@ PROGRAM vmec
      PRINT *,' noscreen: supresses all output to screen (default, or "screen", displays output)'
 
      STOP
-  ELSE
-     DO iseq = 2, numargs
-        arg = command_arg(iseq)
-        IF (TRIM(arg).eq.'noscreen' .or. TRIM(arg).eq.'NOSCREEN')       &
-          lscreen = .false.
-     END DO
   END IF
 
   ! PARSE input_file into path/input.ext
@@ -88,7 +78,7 @@ PROGRAM vmec
   CALL reset_params
 
   ! READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
-  CALL readin (input_file, ier_flag, lscreen)
+  CALL readin (input_file, ier_flag)
   IF (ier_flag .ne. 0) GOTO 1000 ! fatal error
 
   ! COMPUTE NS-INVARIANT ARRAYS
@@ -161,11 +151,11 @@ PROGRAM vmec
      IF (ns_old .le. nsval) then
         ! initialize ns-dependent arrays
         ! and (if previous solution is available) interpolate to current ns value
-        CALL initialize_radial(nsval, ns_old, delt0r, lscreen)
+        CALL initialize_radial(nsval, ns_old, delt0r)
      end if
 
      ! *HERE* is the *ACTUAL* call to the equilibrium solver !
-     CALL eqsolve (ier_flag, lscreen)
+     CALL eqsolve (ier_flag)
 
      ! break the multi-grid sequence if current number of flux surfaced
      ! did not reach convergence
@@ -193,7 +183,7 @@ PROGRAM vmec
 1000 continue ! fatal error
 
   ! write output files
-  CALL fileout (ier_flag, lscreen)
+  CALL fileout (ier_flag)
 
   ! free memory
   IF (ALLOCATED(cosmu)) then
@@ -229,7 +219,7 @@ PROGRAM vmec
   SELECT CASE (ier_flag)
   CASE (bad_jacobian_flag)
      ! Bad jacobian even after axis reset and ns->3
-     IF (lscreen) WRITE (6, '(/,1x,a)') bad_jacobian
+     WRITE (6, '(/,1x,a)') bad_jacobian
      WRITE (nthreed, '(/,1x,a)') bad_jacobian
   CASE DEFAULT
   END SELECT

@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE funct3d (lscreen, ier_flag)
+SUBROUTINE funct3d (ier_flag)
   USE vmec_main
   USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
   USE vmec_params, ONLY: bad_jacobian_flag, zsc
@@ -10,7 +10,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
-  LOGICAL, INTENT(in) :: lscreen
 
   INTEGER :: l0pi, l, lk, ivacskip
   INTEGER :: nvskip0 = 0
@@ -124,9 +123,8 @@ SUBROUTINE funct3d (lscreen, ier_flag)
         raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
         zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
 
-        CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                &
-                     ctor, rbtor, wint, ns, ivacskip, ivac, mnmax,  &
-                     ier_flag, lscreen)
+        CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
+                     ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag)
 
         IF (ier_flag .ne. 0) then
            ! some error occured within NESTOR, so cancel the iterations

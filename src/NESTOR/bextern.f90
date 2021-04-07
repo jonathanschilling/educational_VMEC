@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE bextern(plascur, wint, ns, lscreen)
+SUBROUTINE bextern(plascur, wint, ns)
   USE vacmod
   USE mgrid_mod, ONLY: bvac
   IMPLICIT NONE
@@ -7,7 +7,6 @@ SUBROUTINE bextern(plascur, wint, ns, lscreen)
   INTEGER, INTENT(in) :: ns
   REAL(rprec), INTENT(in) :: plascur
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
-  LOGICAL :: lscreen
 
   INTEGER :: i
   REAL(rprec), ALLOCATABLE :: brad(:), bphi(:), bz(:)
@@ -23,7 +22,7 @@ SUBROUTINE bextern(plascur, wint, ns, lscreen)
   ! NOTE THAT BEXN = - BEX * DS IS THE EFFECTIVE SOURCE TERM
   !
   ! COMPUTE B FROM COILS ON THE PLASMA BOUNDARY
-  CALL becoil(r1b,z1b,brad,bphi,bz,bvac(1,1),bvac(1,2),bvac(1,3),lscreen)
+  CALL becoil(r1b,z1b,brad,bphi,bz,bvac(1,1),bvac(1,2),bvac(1,3))
 
   ! COMPUTE B (ON PLASMA BOUNDARY) FROM NET TOROIDAL PLASMA CURRENT
   ! THE NET CURRENT IS MODELLED AS A WIRE AT THE MAGNETIC AXIS, AND THE

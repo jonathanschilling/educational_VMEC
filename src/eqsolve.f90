@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE eqsolve(ier_flag, lscreen)
+SUBROUTINE eqsolve(ier_flag)
 
   USE vmec_main
   USE vmec_params, ONLY: ntmax, ns4, jac75_flag, norm_term_flag,        &
@@ -10,7 +10,6 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
   IMPLICIT NONE
 
   INTEGER, intent(inout) :: ier_flag
-  LOGICAL, intent(in)    :: lscreen
 
   REAL(rprec), PARAMETER :: p98 = 0.98_dp
   REAL(rprec), PARAMETER :: p96 = 0.96_dp
@@ -49,20 +48,18 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
   iter_loop: DO WHILE (liter_flag)
 
      ! ADVANCE FOURIER AMPLITUDES OF R, Z, AND LAMBDA
-     CALL evolve (delt0r, ier_flag, liter_flag, lscreen)
+     CALL evolve (delt0r, ier_flag, liter_flag)
 
      ! check for bad jacobian and bad initial guess for axis
      IF (ijacob.eq.0 .and.                                              &
          (ier_flag.eq.bad_jacobian_flag .or. irst.eq.4) .and.           &
          ns.ge.3) THEN
 
-        IF (lscreen) THEN
-           IF (ier_flag .eq. bad_jacobian_flag) THEN
-              PRINT *, ' INITIAL JACOBIAN CHANGED SIGN!'
-           END IF
-
-           PRINT *, ' TRYING TO IMPROVE INITIAL MAGNETIC AXIS GUESS'
+        IF (ier_flag .eq. bad_jacobian_flag) THEN
+           PRINT *, ' INITIAL JACOBIAN CHANGED SIGN!'
         END IF
+
+        PRINT *, ' TRYING TO IMPROVE INITIAL MAGNETIC AXIS GUESS'
 
         CALL guess_axis (r1, z1, ru0, zu0)
         lreset_internal = .true.
@@ -89,7 +86,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         irst = 2
         CALL restart_iter(delt0r)
         delt0r = p98*delt
-        IF (lscreen) PRINT 120, delt0r
+        PRINT 120, delt0r
         irst = 1
         GOTO 20 ! try again
      ELSE IF (ijacob .eq. 50) THEN
@@ -97,7 +94,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         irst = 2
         CALL restart_iter(delt0r)
         delt0r = p96*delt
-        IF (lscreen) PRINT 120, delt0r
+        PRINT 120, delt0r
         irst = 1
         GOTO 20 ! try again
      ELSE IF (ijacob .ge. 75) THEN
@@ -146,7 +143,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
             iter2             .eq. 1 .or.                               &
             .not.liter_flag) then
 
-           CALL printout(iter2, delt0r, w0, lscreen)
+           CALL printout(iter2, delt0r, w0)
         end if
 
         ! count iterations
@@ -156,7 +153,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
      ! ivac gets set to 1 in vacuum() of NESTOR
      IF (ivac .eq. 1) THEN
         ! vacuum pressure turned on at iter2 iterations (here)
-        IF (lscreen) PRINT 110, iter2
+        PRINT 110, iter2
         WRITE (nthreed, 110) iter2
 110 FORMAT(/,2x,'VACUUM PRESSURE TURNED ON AT ',i4,' ITERATIONS'/)
 

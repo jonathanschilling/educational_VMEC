@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
+SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   USE vmec_main
   USE vmec_params, ONLY: ntmax
   USE realspace
@@ -9,7 +9,6 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   INTEGER, INTENT(in)      :: nsval
   INTEGER, INTENT(inout)   :: ns_old
   REAL(rprec), INTENT(out) :: delt0
-  LOGICAL, INTENT(in)      :: lscreen
 
   INTEGER :: neqs_old=0
   LOGICAL :: lreset_internal, linterp
@@ -37,7 +36,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   neqs = 3*irzloff ! degrees of freedom == number of Fourier coefficients
 
   WRITE (nthreed, 10) ns, mnmax, ftolv, niterv
-  IF (lscreen) PRINT 10, ns, mnmax, ftolv, niterv
+  PRINT 10, ns, mnmax, ftolv, niterv
 10 FORMAT(/'  NS = ',i4,' NO. FOURIER MODES = ',i4,' FTOLV = ',1p,e10.3,' NITER = ',i6)
 
   ! ALLOCATE NS-DEPENDENT ARRAYS

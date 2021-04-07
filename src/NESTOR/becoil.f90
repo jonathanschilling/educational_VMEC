@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac, lscreen)
+SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac)
   USE vparams, ONLY: nthreed
   USE vacmod
   IMPLICIT NONE
@@ -7,7 +7,6 @@ SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac, lscreen)
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: rad, zee
   REAL(rprec), DIMENSION(nuv2), INTENT(out) :: br, bp, bz
   REAL(rprec), DIMENSION(nr0b,nz0b,np0b), INTENT(in) :: brvac, bpvac, bzvac
-  LOGICAL :: lscreen
 
   CHARACTER(LEN=50), PARAMETER :: warning = 'Plasma Boundary exceeded Vacuum Grid Size'
 
@@ -66,7 +65,7 @@ SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac, lscreen)
      bp(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)
   END DO
 
-  IF (MOD(icount,25).eq.0 .and. lscreen) THEN
+  IF (MOD(icount,25).eq.0) THEN
      ! PRINT INFO IF R, Z OUT OF BOX
      i = 0
      rad0 = MAXVAL(rad)

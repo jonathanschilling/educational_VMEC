@@ -76,7 +76,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   CHARACTER(LEN=*), PARAMETER, DIMENSION(1) ::                      &
                r1dim = (/'radius'/), mn1dim = (/'mn_mode'/),        &
-               mn2dim = (/'mn_mode_nyq'/),                          &
+               mn2dim = (/'mn_mode_nyq'/), mnpddim = (/'mnpd'/),    &
                currg = (/'ext_current'/),                           &
                currl = (/'current_label'/)
   CHARACTER(LEN=*), DIMENSION(2), PARAMETER ::                      &
@@ -319,7 +319,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   IF (lfreeb .and. nextcur.gt.0 .and. ALLOCATED(curlabel)) THEN
      CALL cdf_define(nwout, vn_curlab, curlabel(1:nextcur), dimname=currl)
      ! SAL for potvac
-     CALL cdf_define(nwout, vn_potvac, potvac, dimname=mn1dim)
+     CALL cdf_define(nwout, vn_potvac, potvac, dimname=mnpddim)
   ENDIF
 
   ! 2D Arrays
@@ -680,12 +680,12 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_overr, overr(1:ns))
 
   ! MERCIER_CRITERION
-  CALL cdf_write(nwout, vn_merc, Dmerc)
-  CALL cdf_write(nwout, vn_mshear, Dshear)
-  CALL cdf_write(nwout, vn_mwell, Dwell)
-  CALL cdf_write(nwout, vn_mcurr, Dcurr)
-  CALL cdf_write(nwout, vn_mgeo, Dgeod)
-  CALL cdf_write(nwout, vn_equif, equif)
+  CALL cdf_write(nwout, vn_merc, Dmerc(2:ns1))
+  CALL cdf_write(nwout, vn_mshear, Dshear(2:ns1))
+  CALL cdf_write(nwout, vn_mwell, Dwell(2:ns1))
+  CALL cdf_write(nwout, vn_mcurr, Dcurr(2:ns1))
+  CALL cdf_write(nwout, vn_mgeo, Dgeod(2:ns1))
+  CALL cdf_write(nwout, vn_equif, equif(2:ns1))
 
   IF (lasym) THEN
      CALL cdf_write(nwout, vn_racs, raxis_cs(0:ntor))

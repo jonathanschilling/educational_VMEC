@@ -21,7 +21,7 @@ MODULE vmec_params
   INTEGER, PARAMETER :: phiedge_error_flag   =  7
   INTEGER, PARAMETER :: ns_error_flag        =  8
   INTEGER, PARAMETER :: misc_error_flag      =  9
-  INTEGER, PARAMETER :: successful_term_flag = 11 !ftol force criterion has been met
+  INTEGER, PARAMETER :: successful_term_flag = 11 ! ftol force criterion has been met
 
   INTEGER, PARAMETER :: restart_flag     =  1
   INTEGER, PARAMETER :: readin_flag      =  2

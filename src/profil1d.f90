@@ -5,7 +5,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   USE realspace, ONLY: shalf, sqrts
   IMPLICIT NONE
 
-  REAL(rprec), DIMENSION(neqs2), INTENT(out) :: xc, xcdot
+  REAL(rprec), DIMENSION(neqs), INTENT(out) :: xc, xcdot
   LOGICAL, INTENT(in) :: lreset
 
   REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
@@ -87,7 +87,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   END DO
 
   pres(:ns+1) = 0
-  xcdot(:neqs2) = 0
+  xcdot(:neqs) = 0
 
   DO i = 1, ns
      si = hs*ABS(i-1.5_dp)
@@ -112,7 +112,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   sp(1) = sm(2)
 
   IF (lreset) THEN
-    xc(:neqs1) = 0
+    xc = 0
   END IF
 
 END SUBROUTINE profil1d

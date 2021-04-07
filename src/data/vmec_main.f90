@@ -46,7 +46,12 @@ MODULE vmec_main
   LOGICAL     :: lflip !< from init_geometry
 
   INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect !< two-dimensional array for computing 2pi-v angle
-  INTEGER :: multi_ns_grid, itfsq, iresidue, neqs1, neqs2, ndatap, ndatai
+  INTEGER :: multi_ns_grid
+  INTEGER :: itfsq
+  INTEGER :: iresidue
+  INTEGER :: ndatap
+  INTEGER :: ndatai
+  integer :: niterv  !< max iterations for current multi-grid iteration
 
   integer :: neqs    !< total number of equations to evolve (size of xc)
   integer :: irzloff !< offset in xc array between R,Z,L components

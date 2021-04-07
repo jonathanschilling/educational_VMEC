@@ -12,30 +12,30 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
   INTEGER, intent(inout) :: ier_flag
   LOGICAL, intent(in)    :: lscreen
 
-  REAL(rprec), PARAMETER :: p98 = 0.98_dp, p96 = 0.96_dp
+  REAL(rprec), PARAMETER :: p98 = 0.98_dp
+  REAL(rprec), PARAMETER :: p96 = 0.96_dp
 
   REAL(rprec) :: w0
-  LOGICAL :: liter_flag, lreset_internal
+  LOGICAL :: liter_flag
+  LOGICAL :: lreset_internal
 
   print *, " eqsolve"
 
   liter_flag = iter2 .eq. 1 ! true at startup of program
 
-1000 CONTINUE
+  ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
+20 CONTINUE ! try again
 
-
-!     COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
-20 CONTINUE
-
-!     RECOMPUTE INITIAL PROFILE, BUT WITH IMPROVED AXIS
-!     OR
-!     RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
+  ! RECOMPUTE INITIAL PROFILE, BUT WITH IMPROVED AXIS
+  ! OR
+  ! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
   IF (irst .EQ. 2) THEN
      xc = 0
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal, .FALSE.)
      irst = 1
      IF (liter_flag) then
-        CALL restart_iter(delt0r)    !(OFF IN v8.50)
+        ! (OFF IN v8.50)
+        CALL restart_iter(delt0r)
      end if
   END IF
 
@@ -68,7 +68,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         lreset_internal = .true.
         ijacob = 1
         irst = 2
-        GOTO 20
+        GOTO 20 ! try again
      ELSE IF (ier_flag.ne.norm_term_flag .and.                          &
               ier_flag.ne.successful_term_flag) THEN
         ! if something went totally wrong even in this initial stuff,
@@ -91,7 +91,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         delt0r = p98*delt
         IF (lscreen) PRINT 120, delt0r
         irst = 1
-        GOTO 1000
+        GOTO 20 ! try again
      ELSE IF (ijacob .eq. 50) THEN
         ! jacobian changed sign 50 times: what the hell? :-S
         irst = 2
@@ -99,12 +99,12 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         delt0r = p96*delt
         IF (lscreen) PRINT 120, delt0r
         irst = 1
-        GOTO 1000
+        GOTO 20 ! try again
      ELSE IF (ijacob .ge. 75) THEN
         ! jacobian changed sign at least 75 times: time to give up :-(
         ier_flag = jac75_flag ! 'MORE THAN 75 JACOBIAN ITERATIONS (DECREASE DELT)'
         liter_flag = .false.
-     ELSE IF (iter2.ge.niter .and. liter_flag) THEN
+     ELSE IF (iter2.ge.niterv .and. liter_flag) THEN
         ! allowed number of iterations exceeded
         liter_flag = .false.
      ENDIF
@@ -141,7 +141,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
         ! Increment time step and printout every nstep iterations
         ! status report due or
         ! first iteration or
-        ! iterations cancelled already
+        ! iterations cancelled already (last iteration)
         IF (MOD(iter2, nstep) .eq. 0 .or.                               &
             iter2             .eq. 1 .or.                               &
             .not.liter_flag) then
@@ -165,6 +165,7 @@ SUBROUTINE eqsolve(ier_flag, lscreen)
 
   END DO iter_loop
 
+  ! write MHD energy at end of iterations for current number of surfaces
   WRITE (nthreed, 60) w0*twopi**2
 60 FORMAT(/,' MHD Energy = ',1p,e12.6)
 

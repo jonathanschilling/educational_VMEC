@@ -280,7 +280,7 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
      ! ADJUST <bsubvh> AFTER MESH-BLENDING
      DO js = 2, ns
         curpol_temp = fpsi(js) - SUM(bsubvh(js:nrzt:ns)*wint(js:nrzt:ns))
-       DO l = js, nrzt, ns
+        DO l = js, nrzt, ns
            bsubvh(l) = bsubvh(l) + curpol_temp
         END DO
      END DO
@@ -292,7 +292,6 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
      bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
      RETURN
-
   END IF
 
   ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE

@@ -12,8 +12,8 @@ SUBROUTINE restart_iter(time_step)
   SELECT CASE (irst)
   CASE (2:3)
 
-     xcdot(:neqs2) = zero
-     xc(:neqs2) = xstore(:neqs2)
+     xcdot(:neqs) = zero
+     xc(:neqs) = xstore(:neqs)
 
      ! this is only executed when irst ==2 or ==3
      ! first case: irst == 2:
@@ -36,7 +36,7 @@ SUBROUTINE restart_iter(time_step)
 
      RETURN
   CASE DEFAULT
-     xstore(:neqs2) = xc(:neqs2)
+     xstore(:neqs) = xc(:neqs)
      RETURN
   END SELECT
 

@@ -4,7 +4,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
                   mnmax, ier_flag, lscreen)
   USE vacmod
   USE vparams, ONLY: nthreed, zero, one, mu0
-  USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag, lamscale
+  USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
   USE realspace, ONLY: extra4
   IMPLICIT NONE
 

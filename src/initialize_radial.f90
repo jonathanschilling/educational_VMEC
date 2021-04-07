@@ -11,7 +11,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   REAL(rprec), INTENT(out) :: delt0
   LOGICAL, INTENT(in)      :: lscreen
 
-  INTEGER :: neqs2_old=0
+  INTEGER :: neqs_old=0
   LOGICAL :: lreset_internal, linterp
 
   ! Allocates memory for radial arrays and initializes radial profiles
@@ -34,23 +34,21 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
   mns = ns*mnsize
   irzloff = ntmax*mns
   nrzt = nznt*ns
-  neqs = 3*irzloff
-  neqs1 = neqs + 1  ! with    some additional scalar parameter (?)
-  neqs2 = neqs1 + 1 ! with another additional scalar parameter (?)
+  neqs = 3*irzloff ! degrees of freedom == number of Fourier coefficients
 
-  WRITE (nthreed, 10) ns, mnmax, ftolv, niter
-  IF (lscreen) PRINT 10, ns, mnmax, ftolv, niter
+  WRITE (nthreed, 10) ns, mnmax, ftolv, niterv
+  IF (lscreen) PRINT 10, ns, mnmax, ftolv, niterv
 10 FORMAT(/'  NS = ',i4,' NO. FOURIER MODES = ',i4,' FTOLV = ',1p,e10.3,' NITER = ',i6)
 
   ! ALLOCATE NS-DEPENDENT ARRAYS
   lreset_internal = .true.
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
   IF (ns_old .eq. ns) RETURN
-  CALL allocate_ns(linterp, neqs2_old)
+  CALL allocate_ns(linterp, neqs_old)
 
   ! SAVE THIS FOR INTERPOLATION
-  IF (neqs2_old.gt.0 .and. linterp) THEN
-     gc(1:neqs2_old)=scalxc(1:neqs2_old)*xstore(1:neqs2_old)
+  IF (neqs_old.gt.0 .and. linterp) THEN
+     gc(1:neqs_old)=scalxc(1:neqs_old)*xstore(1:neqs_old)
   END IF
 
   ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
@@ -65,6 +63,6 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0, lscreen)
      CALL interp (xc, gc, scalxc, ns, ns_old)
   END IF
   ns_old = ns
-  neqs2_old = neqs2
+  neqs_old = neqs
 
 END SUBROUTINE initialize_radial

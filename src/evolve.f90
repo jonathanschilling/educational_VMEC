@@ -4,7 +4,6 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag, lscreen)
   USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,       &
                          norm_term_flag
   USE xstuff
-  USE timer_sub
 
   IMPLICIT NONE
 

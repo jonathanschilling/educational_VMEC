@@ -21,7 +21,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/read_namelist.f
 	${CMAKE_CURRENT_SOURCE_DIR}/read_wout_mod.f
 	${CMAKE_CURRENT_SOURCE_DIR}/safe_open_mod.f
-	${CMAKE_CURRENT_SOURCE_DIR}/second0.f
 	${CMAKE_CURRENT_SOURCE_DIR}/solver.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/spline_akima.f
 	${CMAKE_CURRENT_SOURCE_DIR}/spline_akima_int.f

@@ -6,7 +6,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   USE realspace
   USE vforces
   USE xstuff
-  USE timer_sub
   USE vparams, ONLY: twopi
   IMPLICIT NONE
 
@@ -21,18 +20,16 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   REAL(dp), EXTERNAL :: pmass
 
   ! POINTER ALIASES
-  lu => czmn;  lv => crmn
-
-  CALL second0 (tfunon)
+  lu => czmn
+  lv => crmn
 
   ! CONVERT ODD M TO 1/SQRT(S) INTERNAL REPRESENTATION
-  gc(:neqs2) = xc(:neqs2)*scalxc(:neqs2)
+  gc(:neqs) = xc(:neqs)*scalxc(:neqs)
 
   ! INVERSE FOURIER TRANSFORM TO S,THETA,ZETA SPACE
   ! R, Z, AND LAMBDA ARRAYS IN FOURIER SPACE
   ! FIRST, DO SYMMETRIC [ F(u,v) = F(-u,-v) ] PIECES
   ! ON THE RANGE u = 0,pi  and v = 0,2*pi
-  CALL second0 (tffton)
   CALL totzsps (gc, r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon)
 
   IF (lasym) THEN
@@ -45,9 +42,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
      CALL symrzl (r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon, armn,             &
                   brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2)
   ENDIF
-
-  CALL second0 (tfftoff)
-  timer(tfft) = timer(tfft) + (tfftoff - tffton)
 
   ! u = pi, v = 0, js = ns
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
@@ -78,16 +72,13 @@ SUBROUTINE funct3d (lscreen, ier_flag)
   CALL jacobian
   IF (irst.eq.2 .and. iequi.eq.0) then
      ! bad jacobian --> need to restart
-     GOTO 100
+     return
   end if
 
   ! COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC
   ! PRESSURE, AND METRIC ELEMENTS ON HALF-GRID
-  CALL second0 (tbcovon)
   ! FIX THIS: last arg used elsewhere!
   CALL bcovar (lu, lv, xc(1+2*irzloff+mns*(zsc-1)))
-  CALL second0 (tbcovoff)
-  timer(tbcov) = timer(tbcov) + (tbcovoff - tbcovon)
 
   ! COMPUTE VACUUM MAGNETIC PRESSURE AT PLASMA EDGE
   ! NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR
@@ -112,8 +103,6 @@ SUBROUTINE funct3d (lscreen, ier_flag)
         ! IF INITIALLY ON, MUST TURN OFF rcon0, zcon0 SLOWLY
         rcon0 = 0.9_dp*rcon0
         zcon0 = 0.9_dp*zcon0
-
-        CALL second0 (tvacon)
 
         ivacskip = MOD(iter2-iter1, nvacskip)
         IF (ivac .le. 2) then
@@ -141,7 +130,7 @@ SUBROUTINE funct3d (lscreen, ier_flag)
 
         IF (ier_flag .ne. 0) then
            ! some error occured within NESTOR, so cancel the iterations
-           GOTO 100
+           return
         end if
 
         ! RESET FIRST TIME FOR SOFT START
@@ -177,67 +166,53 @@ SUBROUTINE funct3d (lscreen, ier_flag)
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns)
            bsqsav(:nznt,2) = bsqvac(:nznt)
         ENDIF
-
-        CALL second0 (tvacoff)
-        timer(tvac) = timer(tvac) + (tvacoff - tvacon)
      ENDIF
   ENDIF
 
-  ! COMPUTE CONSTRAINT FORCE
   IF (iequi .NE. 1) THEN
+
+     ! COMPUTE CONSTRAINT FORCE
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
                      + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1))
+
+     ! COMPUTE MHD FORCES ON INTEGER-MESH
+     CALL forces
+
+     ! SYMMETRIZE FORCES (in u-v space): NOTE - gc IS SMALL BY FACTOR 2 IF lasym=T
+     IF (lasym) THEN
+        CALL symforce (armn, brmn, crmn, azmn, bzmn,                   &
+          czmn, blmn, clmn, rcon, zcon, r1, ru, rv, z1, zu, zv,        &
+          extra3, extra4, extra1, extra2)
+
+        ! NOT NECESSARY (EVEN THOUGH CORRECT)
+        ! gc = 2*gc
+     END IF
+
+     ! FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
+     CALL tomnsps (gc,               &
+                   armn, brmn, crmn, &
+                   azmn, bzmn, czmn, &
+                         blmn, clmn, &
+                   rcon, zcon         )
+     IF (lasym) then
+        CALL tomnspa (gc, r1, ru, rv, &
+                          z1, zu, zv, &
+                      extra3, extra4, &
+                      extra1, extra2)
+     end if
+
+     ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
+     gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
+     CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
+
+     IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
+         ! first iteration and gigantic force residuals --> what is going one here?
+         irst = 4
+     end if
+
   ELSE
-     ! iequi should be 1 by now, otherwise cancel iteration?
-     GOTO 100
+     ! iequi == 1 --> skip remainder of funct3d
   END IF
-
-  ! COMPUTE MHD FORCES ON INTEGER-MESH
-  CALL second0 (tforon)
-  CALL forces
-
-  ! SYMMETRIZE FORCES (in u-v space): NOTE - gc IS SMALL BY FACTOR 2 IF lasym=T
-  IF (lasym) THEN
-     CALL symforce (armn, brmn, crmn, azmn, bzmn,                   &
-       czmn, blmn, clmn, rcon, zcon, r1, ru, rv, z1, zu, zv,        &
-       extra3, extra4, extra1, extra2)
-
-     ! NOT NECESSARY (EVEN THOUGH CORRECT)
-     ! gc = 2*gc
-  END IF
-
-  CALL second0 (tforoff)
-  timer(tfor) = timer(tfor) + (tforoff - tforon)
-
-  ! FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
-  CALL second0 (tffton)
-  CALL tomnsps (gc, armn, brmn, crmn, azmn, bzmn, czmn,    &
-                blmn, clmn, rcon, zcon)
-  IF (lasym) then
-     CALL tomnspa (gc, r1, ru, rv, z1, zu, zv,     &
-                   extra3, extra4, extra1, extra2)
-  end if
-  CALL second0 (tfftoff)
-  timer(tffi) = timer(tffi) + (tfftoff - tffton)
-
-  ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
-  CALL second0 (treson)
-
-  gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
-  CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
-
-  IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
-      ! first iteration and gigantic force residuals --> what is going one here?
-      irst = 4
-  end if
-
-  CALL second0 (tresoff)
-  timer(tres) = timer(tres) + (tresoff - treson)
-
-100  CONTINUE
-
-  CALL second0 (tfunoff)
-  timer(tfun) = timer(tfun) + (tfunoff - tfunon)
 
 END SUBROUTINE funct3d

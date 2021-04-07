@@ -83,6 +83,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
               ! Do not overwrite r,z if read in from wout file AND in free bdy mode
               ! For fixed boundary, edge values MAY have been perturbed, so must execute this loop
               IF (.not.lreset .and. lfreeb) CYCLE
+
               IF (m .eq. 0) THEN
                  IF (.not.lreset) CYCLE        !Freeze axis if read in from wout file
                  rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + si*(rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))
@@ -102,14 +103,15 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
                     zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0*(zax1*t1 - zold(n,ntype))
                  END IF
               ELSE
-                 ! TURN OFF NEXT 3 LINES IF THIS ONE ACTIVATED
+                 ! TURN OFF BELOW LINES IF THIS ONE ACTIVATED
                  facj = sqrts(js)**m
 
                  ! IF (MOD(m,2) .eq. 0) THEN
-                 !     facj = sqrts(js)*sqrts(js)
+                 !    facj = sqrts(js)*sqrts(js)
                  ! ELSE IF (MOD(m,2) .eq. 1) THEN
                  !    facj = sqrts(js)**MIN(m,3)
                  ! END IF
+
                  rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + (rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))*facj
                  zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + (zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))*facj
               ENDIF
@@ -123,12 +125,5 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
 
   ! Lamda-components
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
-
-  ! STORE PHIFAC IN XC(NEQS1) ARRAY ELEMENT
-  ! STORE DEL-RMSE IN XC(NEQS2) ARRAY ELEMENT
-  xc(neqs1) = 1
-  xc(neqs2) = 0
-  scalxc(neqs1) = 1
-  scalxc(neqs2) = 1
 
 END SUBROUTINE profil3d

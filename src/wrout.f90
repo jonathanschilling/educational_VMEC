@@ -430,7 +430,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_pmod_nyq, xm_nyq0)
   CALL cdf_write(nwout, vn_tmod_nyq, xn_nyq0)
 
-  ALLOCATE (xfinal(neqs2), stat=js)
+  ALLOCATE (xfinal(neqs), stat=js)
   IF (js .ne. 0) STOP 'Allocation error for xfinal in WROUT!'
   xfinal = xc
 

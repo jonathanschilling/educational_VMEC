@@ -6,7 +6,6 @@ PROGRAM vmec
   USE vparams, ONLY: nthreed
   USE vmec_params
   USE vmec_main
-  USE timer_sub
   use vacmod
   use mgrid_mod, only: free_mgrid
 
@@ -15,29 +14,36 @@ PROGRAM vmec
   CHARACTER(LEN=*), PARAMETER :: bad_jacobian = "The jacobian was non-definite!"
   CHARACTER(LEN=*), PARAMETER :: Warning      = "Error deallocating global memory!"
 
-  INTEGER :: numargs, ier_flag, index_end, iopen, isnml, iread, iseq,   &
-             index_seq, index_dat, iunit, ncount, nsteps, i, istat1
-  CHARACTER(LEN=120) :: input_file, seq_ext, arg
-  CHARACTER(LEN=120) :: input_file0
   CHARACTER(LEN=120), DIMENSION(10) :: command_arg
-  LOGICAL :: lscreen, lreset
-  INTEGER :: ictrl_flag
-  INTEGER :: ns_min, nsval, ns_old=0
-  INTEGER :: igrid, jacob_off, niter_store
-
-  ! Read in command-line arguments to get input file or sequence file,
-  ! screen display information, and restart information
-  CALL getcarg(1, command_arg(1), numargs)
-  DO iseq = 2, numargs
-     CALL getcarg(iseq, command_arg(iseq), numargs)
-  END DO
+  CHARACTER(LEN=120) :: arg
+  CHARACTER(LEN=120) :: input_file
+  INTEGER :: numargs
+  INTEGER :: ier_flag
+  INTEGER :: index_end
+  INTEGER :: iseq
+  INTEGER :: index_dat
+  INTEGER :: istat1
+  INTEGER :: ns_min
+  INTEGER :: nsval
+  INTEGER :: ns_old=0
+  INTEGER :: igrid
+  INTEGER :: jacob_off
+  LOGICAL :: lscreen
 
   ! default: enable screen output
   lscreen = .true.
 
+  ! Read in command-line arguments to get input file or sequence file,
+  ! screen display information, and restart information
+  numargs = iargc()
+  DO iseq = 1, numargs
+     CALL getarg(iseq, command_arg(iseq))
+  END DO
+
   IF (numargs .lt. 1) THEN
      STOP 'Invalid command line'
   ELSE IF (command_arg(1).eq.'-h' .or. command_arg(1).eq.'/h') THEN
+     ! print help text
      PRINT *,' ENTER INPUT FILE NAME OR INPUT-FILE SUFFIX ON COMMAND LINE'
      PRINT *
      PRINT *,' For example: '
@@ -60,20 +66,23 @@ PROGRAM vmec
 
   ! PARSE input_file into path/input.ext
   arg = command_arg(1)
-  index_dat = INDEX(arg,'.')
+  index_dat = INDEX(arg,'.') ! find position of '.'
   index_end = LEN_TRIM(arg)
   IF (index_dat .gt. 0) THEN
-     input_extension  = arg(index_dat+1:index_end)
+     ! found '.' in arg
+     input_extension = arg(index_dat+1:index_end) ! extension is rest of arg after first '.'
      input_file = TRIM(arg)
   ELSE
+     ! no '.' found --> extension given directly
      input_extension = TRIM(arg)
      input_file = 'input.'//TRIM(input_extension)
   END IF
 
-  ! Sets all flags --> full feature set enabled!
-  ictrl_flag =  restart_flag+readin_flag +timestep_flag + output_flag +cleanup_flag
 
-  CALL second0 (timeon)
+
+
+
+
 
   ! INITIALIZE PARAMETERS
   CALL reset_params
@@ -95,16 +104,19 @@ PROGRAM vmec
           ' fsqr, fsqz = Preconditioned Force Residuals',/,1x,23('-'),/,&
           ' BEGIN FORCE ITERATIONS',/,1x,23('-'),/)
 
-  ! consistency check on requested number of flux surfaces
-  IF (ALL(ns_array.eq.0)) THEN
-     ier_flag = ns_error_flag ! 'NS ARRAY MUST NOT BE ALL ZEROES'
-     GOTO 1000 ! fatal error
-  END IF
-
   ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
   ! before the user-provided ns values from ns_array are processed
   ! in the multi-grid run
   jacob_off = 0
+
+
+
+
+
+
+
+
+
 
 50 CONTINUE ! retry with initial ns=3 to fix bad jacobian
 
@@ -113,8 +125,10 @@ PROGRAM vmec
 
   ! jacob_off=1 indicates that in the previous interation (got back here by GOTO 50)
   ! jacobian was bad --> also need to
-  ! restart vacuum calculations
-  IF (lfreeb .and. jacob_off.eq.1) ivac = 1
+  IF (lfreeb .and. jacob_off.eq.1) then
+     ! restart vacuum calculations
+     ivac = 1
+  end if
 
   ns_min = 3
 
@@ -127,7 +141,7 @@ PROGRAM vmec
      IF (igrid .lt. 1) THEN
         ! TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
         nsval = 3
-        ivac = -1
+        ivac = -1 ! fully restart vacuum (why then assign ivac=1 then above???)
         ftolv = 1.e-4_dp
      ELSE
         ! proceed regularly with ns values from ns_array
@@ -141,7 +155,7 @@ PROGRAM vmec
         ns_min = nsval
 
         ftolv = ftol_array(igrid)
-        niter = niter_array(igrid)
+        niterv = niter_array(igrid)
      END IF
 
      IF (ns_old .le. nsval) then
@@ -170,38 +184,37 @@ PROGRAM vmec
      GO TO 50 ! retry with initial ns=3 to fix bad jacobian
   END IF
 
-  CALL second0 (timeoff)
-  timer(tsum) = timer(tsum) + timeoff - timeon
+
+
+
+
+
 
 1000 continue ! fatal error
 
   ! write output files
-  CALL fileout (0, ictrl_flag, ier_flag, lscreen)
+  CALL fileout (ier_flag, lscreen)
 
   ! free memory
-  IF (IAND(ictrl_flag, cleanup_flag).eq.1) then
-     ! DEALLOCATE GLOBAL MEMORY
-     IF (ALLOCATED(cosmu)) then
-        DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &
-                   sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
-                   cosmui3, cosmumi3, cos01, sin01, stat=istat1)
-        IF (istat1 .ne. 0) PRINT *, Warning // "#1"
-     end if
-
-     IF (ALLOCATED(xm)) then
-        DEALLOCATE (xm, xn, ixm, xm_nyq, xn_nyq,                           &
-                    jmin3, mscale, nscale, uminus, stat=istat1)
-        IF (istat1 .ne. 0) PRINT *, Warning // "#2"
-     end if
-
-     IF (ALLOCATED(tanu)) then
-        DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
-                   sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
-                   cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
-        IF (istat1 .ne. 0) PRINT *, Warning // "#3"
-     end if
+  IF (ALLOCATED(cosmu)) then
+  DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &
+              sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
+              cosmui3, cosmumi3, cos01, sin01, stat=istat1)
+  IF (istat1 .ne. 0) PRINT *, Warning // "#1"
   end if
 
+  IF (ALLOCATED(xm)) then
+  DEALLOCATE (xm, xn, ixm, xm_nyq, xn_nyq,                           &
+              jmin3, mscale, nscale, uminus, stat=istat1)
+  IF (istat1 .ne. 0) PRINT *, Warning // "#2"
+  end if
+
+  IF (ALLOCATED(tanu)) then
+  DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
+              sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
+              cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
+  IF (istat1 .ne. 0) PRINT *, Warning // "#3"
+  end if
   CALL free_mem_funct3d
   CALL free_mem_ns (.true.) ! also free xc, scalxc here
   CALL free_mem_nunv

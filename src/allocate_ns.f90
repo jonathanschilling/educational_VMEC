@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE allocate_ns (linterp, neqs2_old)
+SUBROUTINE allocate_ns (linterp, neqs_old)
   USE vmec_main
   USE vmec_params, ONLY: ntmax
   USE realspace
@@ -9,7 +9,7 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
   USE fbal
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: neqs2_old
+  INTEGER, INTENT(in) :: neqs_old
   LOGICAL, INTENT(inout) :: linterp
 
   INTEGER :: ndim, nsp1, istat1
@@ -19,12 +19,12 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
   ndim  = 1 + nrzt
   nsp1  = 1 + ns
 
-  IF (neqs2_old .gt. 0 .and. ALLOCATED(scalxc) .and. linterp) THEN
+  IF (neqs_old .gt. 0 .and. ALLOCATED(scalxc) .and. linterp) THEN
      ! Save old xc, scalxc for possible interpolation or IF iterations restarted on same mesh...
-     ALLOCATE(xc_old(neqs2_old), scalxc_old(neqs2_old), stat=istat1)
+     ALLOCATE(xc_old(neqs_old), scalxc_old(neqs_old), stat=istat1)
      IF (istat1.ne.0) STOP 'allocation error #1 in allocate_ns'
-         xc_old(:neqs2_old) =     xc(:neqs2_old)
-     scalxc_old(:neqs2_old) = scalxc(:neqs2_old)
+         xc_old(:neqs_old) =     xc(:neqs_old)
+     scalxc_old(:neqs_old) = scalxc(:neqs_old)
   END IF
 
   ! ALLOCATES MEMORY FOR NS-DEPENDENT ARRAYS
@@ -61,19 +61,19 @@ SUBROUTINE allocate_ns (linterp, neqs2_old)
 
   iotaf(nsp1) = 0
 
-  ALLOCATE (gc(neqs2), xcdot(neqs2), xsave(neqs2), xstore(neqs2), stat=istat1)
+  ALLOCATE (gc(neqs), xcdot(neqs), xsave(neqs), xstore(neqs), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #9 in allocate_ns'
   xstore = zero
 
   IF (.not.ALLOCATED(xc)) THEN
-     ALLOCATE (xc(neqs2), scalxc(neqs2), stat=istat1)
+     ALLOCATE (xc(neqs), scalxc(neqs), stat=istat1)
      IF (istat1.ne.0) STOP 'allocation error #10 in allocate_ns'
-     xc(:neqs2) = zero
+     xc = zero
   END IF
 
   IF (ALLOCATED(xc_old)) THEN
-     xstore(1:neqs2_old) =     xc_old(1:neqs2_old)
-     scalxc(1:neqs2_old) = scalxc_old(1:neqs2_old)
+     xstore(1:neqs_old) =     xc_old(1:neqs_old)
+     scalxc(1:neqs_old) = scalxc_old(1:neqs_old)
      DEALLOCATE (xc_old, scalxc_old)
   END IF
 

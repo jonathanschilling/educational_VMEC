@@ -7,12 +7,32 @@ MODULE vmec_input
   INTEGER, PARAMETER :: mpol_default = 6
   INTEGER, PARAMETER :: ntor_default = 0
   INTEGER, PARAMETER :: ns_default   = 31
+  INTEGER, PARAMETER :: niter_default   = 100
+  REAL(rprec), PARAMETER :: ftol_default = 1.E-10_dp
 
-  INTEGER :: nfp, ncurr, nsin, niter, nstep, nvacskip, mpol, ntor, &
-             ntheta, nzeta, mfilter_fbdy, nfilter_fbdy
-  INTEGER, DIMENSION(100) :: ns_array, niter_array
+
+  INTEGER :: nfp
+  INTEGER :: ncurr
+  INTEGER :: nstep
+  INTEGER :: nvacskip
+  INTEGER :: mpol
+  INTEGER :: ntor
+  INTEGER :: ntheta
+  INTEGER :: nzeta
+  INTEGER :: mfilter_fbdy
+  INTEGER :: nfilter_fbdy
+
+  INTEGER, DIMENSION(100) :: ns_array
+  INTEGER, DIMENSION(100) :: niter_array
+  REAL(rprec), DIMENSION(100) :: ftol_array
+
   REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbs, zbc, rbc, zbs
-  REAL(rprec) :: curtor, delt, ftol, tcon0, gamma, bloat, pres_scale
+  REAL(rprec) :: curtor
+  REAL(rprec) :: delt
+  REAL(rprec) :: tcon0
+  REAL(rprec) :: gamma
+  REAL(rprec) :: bloat
+  REAL(rprec) :: pres_scale
   REAL(rprec) :: spres_ped !< value of s beyond which pressure profile is flat (pedestal)
   REAL(rprec) :: phiedge   !< value of real toroidal flux at plasma edge (s=1)
   REAL(rprec), DIMENSION(0:20) :: am !< array of coefficients in phi-series for mass (NWT/m**2)
@@ -28,17 +48,16 @@ MODULE vmec_input
   REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_s, ac_aux_f
 
   REAL(rprec), DIMENSION(0:ntord) :: raxis_cc, raxis_cs, zaxis_cc, zaxis_cs
-  REAL(rprec), DIMENSION(100) :: ftol_array
-  REAL(rprec), DIMENSION(nigroup), TARGET :: extcur ! V3FIT needs a pointer to this.
-  LOGICAL :: lfreeb, lasym
+  REAL(rprec), DIMENSION(nigroup) :: extcur
+  LOGICAL :: lfreeb
+  LOGICAL :: lasym
   LOGICAL :: lbsubs                   ! J Hanson See jxbforce coding
 
   CHARACTER(len=200) :: mgrid_file
-  CHARACTER(len=120) :: arg1
   CHARACTER(len=100) :: input_extension
 
-  NAMELIST /indata/ mgrid_file, nfp, ncurr, nsin,                   &
-     niter, nstep, nvacskip, delt, ftol, gamma, am, ai, ac, aphi,   &
+  NAMELIST /indata/ mgrid_file, nfp, ncurr,                         &
+     nstep, nvacskip, delt, gamma, am, ai, ac, aphi,   &
      pcurr_type, pmass_type, piota_type, bloat,                     &
      am_aux_s, am_aux_f, ai_aux_s, ai_aux_f, ac_aux_s, ac_aux_f,    &
      rbc, zbs, rbs, zbc, spres_ped, pres_scale, raxis_cc, zaxis_cs, &
@@ -57,26 +76,25 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   mpol = mpol_default
   ntor = ntor_default
   ntheta = 0;  nzeta = 0
-  ns_array = 0;  ns_array(1) = ns_default
-  niter_array = -1;
+
+     ns_array =  0;    ns_array(1) =    ns_default
+   ftol_array =  0;  ftol_array(1) =  ftol_default
+  niter_array = -1; niter_array(1) = niter_default
+
   bloat = 1
   rbc = 0;  rbs = 0; zbs = 0; zbc = 0
   nfp = 1
   ncurr = 0
-  nsin = ns_default
-  niter = 100
   nstep = 10
   nvacskip = 1
   delt = 1
-  ftol = 1.E-10_dp
-  ftol_array = 0;  ftol_array(1) = ftol
   am = 0; ai = 0; ac = 0; aphi = 0; aphi(1) = 1
   pres_scale = 1
-  raxis_cc = 0; zaxis_cs = 0; raxis_cs = 0; zaxis_cc = 0;
+  raxis_cc = 0; zaxis_cs = 0; raxis_cs = 0; zaxis_cc = 0
   mfilter_fbdy = -1; nfilter_fbdy = -1
   tcon0 = 1
   curtor = 0;
-  extcur = 0;  phiedge = 1;
+  extcur = 0;  phiedge = 1
   mgrid_file = 'NONE'
   lfreeb = .true.
   lasym = .false.
@@ -91,8 +109,6 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   ai_aux_s(:) = -1
 
   READ (iunit, nml=indata, iostat=istat)
-
-  IF (ALL(niter_array == -1)) niter_array = niter
 
 END SUBROUTINE read_indata_namelist
 
@@ -118,7 +134,6 @@ SUBROUTINE write_indata_namelist (iunit, istat)
   WRITE(iunit,'(A)') '!----- Runtime Parameters -----'
   WRITE(iunit,'(A)') '&INDATA'
   WRITE(iunit,outflt) 'DELT',delt
-  WRITE(iunit,outint) 'NITER',niter
   WRITE(iunit,outint) 'NSTEP',nstep
   WRITE(iunit,outflt) 'TCON0',tcon0
   ins = MAXLOC(ns_array)

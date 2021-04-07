@@ -3,7 +3,6 @@
   USE vmec_main
   USE vmec_params
   USE vacmod
-  USE timer_sub
   USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
   IMPLICIT NONE
 
@@ -21,42 +20,27 @@
   ier_flag_init = ier_flag
   ier_flag      = norm_term_flag
 
-  CALL second0(treadon)
-
   ! READ IN DATA FROM INDATA FILE
   CALL read_indata(input_file, iunit, ier_flag)
-  IF (ier_flag .ne. norm_term_flag) RETURN
+  IF (ier_flag .ne. norm_term_flag) then
+     RETURN
+  end if
 
   ! Open output files here, print out heading to threed1 file
   CALL heading(input_extension, lscreen)
 
-  ! READ IN COMMENTS DEMARKED BY "!"
-  REWIND (iunit, iostat=iexit)
-  DO WHILE(iexit .eq. 0)
-     READ (iunit, '(a)', iostat=iexit) line
-     IF (iexit .ne. 0) EXIT
-
-     ! copy over only comments BEFORE START OF INDATA NAMELIST
-     ! --> occurence of INDATA or indata terminates this loop
-     iexit = INDEX(line,'INDATA')
-     iexit = iexit + INDEX(line,'indata')
-
-     ipoint = INDEX(line,'!')
-     IF (ipoint .eq. 1) WRITE (nthreed, *) TRIM(line)
-  ENDDO
-  CLOSE (iunit)
 
   IF (lfreeb) THEN
      ! READ IN AND STORE (FOR SEQUENTIAL RUNNING) MAGNETIC FIELD DATA FROM MGRID_FILE
-     CALL second0(trc)
      CALL read_mgrid (mgrid_file, extcur, nzeta, nfp, lscreen, ier_flag)
-     CALL second0(tzc)
 
      ! check again for lfreeb
      ! --> might have been reset to .false. if mgrid file was not found
      IF (lfreeb .and. lscreen) THEN
-        WRITE (6,'(2x,a,1p,e10.2,a)') 'Time to read MGRID file: ', tzc - trc, ' s'
-        IF (ier_flag .ne. norm_term_flag) RETURN
+        IF (ier_flag .ne. norm_term_flag) then
+           RETURN
+        end if
+
         WRITE (nthreed,20) nr0b, nz0b, np0b, rminb, rmaxb, zminb, zmaxb, TRIM(mgrid_file)
 20 FORMAT(//,' VACUUM FIELD PARAMETERS:',/,1x,24('-'),/,       &
              '  nr-grid  nz-grid  np-grid      rmin      rmax      zmin', &
@@ -65,40 +49,27 @@
   END IF
 
   ! PARSE NS_ARRAY
-  nsin = MAX (3, nsin)
   multi_ns_grid = 1
-  IF (ns_array(1) .eq. 0) THEN
-      ! Old input style: only "nsin"
-      ns_array(1) = MIN(nsin,nsd)
-      multi_ns_grid = 2
+  nsmin = 1
+  DO WHILE (ns_array(multi_ns_grid) .ge. nsmin .and. & ! increasing or constant ns
+            multi_ns_grid .lt. 100)                    ! max 100 multi-grid iterations
+     nsmin = MAX(nsmin, ns_array(multi_ns_grid))
+     IF (nsmin .le. nsd) THEN ! max ns is given by nsd
+        multi_ns_grid = multi_ns_grid + 1
+     ELSE
+        ! Optimizer, Boozer code overflows otherwise
+        ns_array(multi_ns_grid) = nsd
+        nsmin = nsd
+        PRINT *,' NS_ARRAY ELEMENTS CANNOT EXCEED ',nsd
+        PRINT *,' CHANGING NS_ARRAY(',multi_ns_grid,') to ', nsd
+     END IF
+  END DO
+  multi_ns_grid = multi_ns_grid - 1
 
-      ! default: Run on 31-point mesh
-      ns_array(multi_ns_grid) = ns_default
-  ELSE
-      nsmin = 1
-      ! .ge. previously .gt.
-      DO WHILE (ns_array(multi_ns_grid) .ge. nsmin .and. multi_ns_grid .lt. 100)
-         nsmin = MAX(nsmin, ns_array(multi_ns_grid))
-         IF (nsmin .le. nsd) THEN
-            multi_ns_grid = multi_ns_grid + 1
-         ELSE
-            ! Optimizer, Boozer code overflows otherwise
-            ns_array(multi_ns_grid) = nsd
-            nsmin = nsd
-            PRINT *,' NS_ARRAY ELEMENTS CANNOT EXCEED ',nsd
-            PRINT *,' CHANGING NS_ARRAY(',multi_ns_grid,') to ', nsd
-         END IF
-      END DO
-      multi_ns_grid = multi_ns_grid - 1
-  ENDIF
-
-  IF (ftol_array(1) .eq. zero) THEN
-     ftol_array(1) = 1.e-8_dp
-     IF (multi_ns_grid .eq. 1) ftol_array(1) = ftol
-     DO igrid = 2, multi_ns_grid
-        ftol_array(igrid) = 1.e-8_dp * (1.e8_dp * ftol)**( REAL(igrid-1,rprec)/(multi_ns_grid-1) )
-     END DO
-  ENDIF
+   ! consistency check on requested number of flux surfaces
+  IF (ALL(ns_array.eq.0)) THEN
+     stop 'NS ARRAY MUST NOT BE ALL ZEROES' ! was ier_flag=ns_error_flag
+  END IF
 
   ns_maxval = nsmin
 
@@ -369,8 +340,5 @@
 
   ! Convert to Internal units
   currv = mu0*curtor
-
-  CALL second0(treadoff)
-  timer(tread) = timer(tread) + (treadoff-treadon)
 
 END SUBROUTINE readin

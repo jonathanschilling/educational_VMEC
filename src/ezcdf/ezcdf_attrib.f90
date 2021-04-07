@@ -1,7 +1,8 @@
-!> \file
 MODULE ezcdf_attrib
    USE ezcdf_inqvar
-   include "netcdf.inc"
+#ifdef NETCDF
+   USE netcdf_inc
+
    INTEGER, PARAMETER :: r4 = SELECTED_REAL_KIND(6,37)
    INTEGER, PARAMETER :: r8 = SELECTED_REAL_KIND(12,100)
    CHARACTER(len=nf_max_name) :: varnam_noalpha
@@ -309,5 +310,6 @@ SUBROUTINE cdfga_d(ncid,varnam,valid_range,long_name,units,ier)
   CALL handle_err(status,'valid_range','cdf_getatt','nf_get_att_double')
  
 END SUBROUTINE cdfga_d
+#endif
 END MODULE ezcdf_attrib
  

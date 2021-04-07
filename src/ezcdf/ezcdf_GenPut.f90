@@ -1,7 +1,10 @@
-!> \file
 MODULE ezcdf_GenPut
   USE ezcdf_opncls
   USE ezcdf_inqvar
+#ifdef NETCDF
+  USE netcdf_inc
+#endif
+
 
   ! Generic Interface to Write netcdf data Variables
   ! 03/10/99 C. Ludescher
@@ -9,6 +12,7 @@ MODULE ezcdf_GenPut
   ! + support for complex numbers (ap) Wed May 16 15:18:05 EDT 2001
   ! added support for logicals (sph) Oct 1, 2002
   IMPLICIT NONE
+#ifdef NETCDF
 
   !
   ! C. Ludescher/A. Pletzer Tue Apr  4 10:11:33 EDT 2000
@@ -51,7 +55,6 @@ MODULE ezcdf_GenPut
   END INTERFACE
 
   PRIVATE
-  include "netcdf.inc"
 
   INTEGER, PARAMETER :: r4 = SELECTED_REAL_KIND(6,37)
   INTEGER, PARAMETER :: r8 = SELECTED_REAL_KIND(12,100)
@@ -428,7 +431,8 @@ CONTAINS
     sts = nf_enddef(ncid)
     call cdfInqV(ncid,varnam,varid,dimlens,ndims,sts)
     if (sts .ne. 0) return
-    if (ndims .ne. 2) then
+    if (ndims .gt. 2) then
+!    if (ndims .ne. 2) then   !error if this 2d array has dimension 1 for second element
        print "('% cdfPutVar_2c: --E-- The variable ',a,               &
             &         ' was defined as',i2,' dimensional')",varnam,ndims
        return
@@ -1472,4 +1476,5 @@ CONTAINS
     call cdfDefVar(ncid,varnam,dims,vartype,ier,dimname)
 
   END SUBROUTINE cdfd_1c
+#endif
 END MODULE ezcdf_GenPut

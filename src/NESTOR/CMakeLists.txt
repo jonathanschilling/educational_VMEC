@@ -1,4 +1,6 @@
 
+add_subdirectory(data)
+
 list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/analysum.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/analysum2.f90

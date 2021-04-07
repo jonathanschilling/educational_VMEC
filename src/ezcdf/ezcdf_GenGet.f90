@@ -1,12 +1,12 @@
-!> \file
 MODULE ezcdf_GenGet
   USE ezcdf_opncls
   USE ezcdf_inqvar
+#ifdef NETCDF
+  USE netcdf_inc
+
   EXTERNAL handle_err
  
   PRIVATE
- 
-  include "netcdf.inc"
 
   INTEGER, PARAMETER :: r4 = SELECTED_REAL_KIND(6,37)
   INTEGER, PARAMETER :: r8 = SELECTED_REAL_KIND(12,100)
@@ -1027,4 +1027,5 @@ SUBROUTINE cdfr_0c8(ncid,varnam,varval,ier)
   call handle_err(status,varnam,'cdfr_0f','nf_get_var_real')
   if (PRESENT (ier)) ier = status
 END SUBROUTINE cdfr_0c8
+#endif
 END MODULE ezcdf_GenGet

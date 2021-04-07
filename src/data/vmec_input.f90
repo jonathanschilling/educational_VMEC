@@ -51,7 +51,14 @@ MODULE vmec_input
   REAL(rprec), DIMENSION(nigroup) :: extcur
   LOGICAL :: lfreeb
   LOGICAL :: lasym
-  LOGICAL :: lbsubs                   ! J Hanson See jxbforce coding
+
+  ! RESET lbsubs DEFAULT FLAG TO FALSE TO CAPTURE CURRENT SHEETS!
+  ! LOGICAL, PARAMETER :: lbsubs = .false. ! False to use (correct)  bsubs calculation (from metrics)
+  !                                        ! True  to use (modified) bsubs calculation (from mag. diff. eq.)
+  ! lbsubs is now a namelist input variable, so user can change.
+  ! LOGICAL, PARAMETER :: lbsubs = .true.  ! True  to use NEW bsubs calculation (from mag. diff. eq.)
+  !                                        ! False to use OLD bsubs calculation (from metrics)
+  LOGICAL :: lbsubs
 
   CHARACTER(len=200) :: mgrid_file
   CHARACTER(len=100) :: input_extension

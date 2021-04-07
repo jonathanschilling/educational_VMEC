@@ -48,7 +48,6 @@ MODULE vmec_main
   INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect !< two-dimensional array for computing 2pi-v angle
   INTEGER :: multi_ns_grid
   INTEGER :: itfsq
-  INTEGER :: iresidue
   INTEGER :: ndatap
   INTEGER :: ndatai
   integer :: niterv  !< max iterations for current multi-grid iteration

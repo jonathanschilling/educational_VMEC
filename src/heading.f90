@@ -3,7 +3,6 @@ SUBROUTINE heading(extension)
   USE vmec_main, ONLY: rprec
   USE vparams, ONLY: nthreed
   USE vmec_params, ONLY: version_
-  USE date_and_computer
   IMPLICIT NONE
 
   CHARACTER(LEN=3), DIMENSION(12), PARAMETER ::  &
@@ -18,6 +17,8 @@ SUBROUTINE heading(extension)
   CHARACTER(LEN=50) :: dateloc, Version
   LOGICAL :: lfirst
 
+  CHARACTER(LEN=100) :: computer, os, os_release
+
   !     Open output files
   CALL open_output_files (extension, lfirst)
 
@@ -29,7 +30,9 @@ SUBROUTINE heading(extension)
   WRITE(dateloc,100)months(imon),date0(7:8),date0(1:4), time0(1:2),time0(3:4),time0(5:6)
 100  FORMAT('DATE = ',a3,' ',a2,',',a4,' ',' TIME = ',2(a2,':'),a2)
 
-  CALL GetComputerInfo
+  CALL GETENV('HOST',    computer)
+  CALL GETENV('OSTYPE',  os)
+  CALL GETENV('HOSTTYPE',os_release)
 
   IF (lfirst) WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
 

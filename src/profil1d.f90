@@ -87,7 +87,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   END DO
 
   pres(:ns+1) = 0
-  xcdot(:neqs) = 0
+  xcdot = 0
 
   DO i = 1, ns
      si = hs*ABS(i-1.5_dp)

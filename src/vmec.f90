@@ -71,7 +71,7 @@ PROGRAM vmec
 
 
 
-
+  ier_flag = norm_term_flag
 
 
   ! INITIALIZE PARAMETERS
@@ -94,93 +94,82 @@ PROGRAM vmec
           ' fsqr, fsqz = Preconditioned Force Residuals',/,1x,23('-'),/,&
           ' BEGIN FORCE ITERATIONS',/,1x,23('-'),/)
 
-     ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
-     ! before the user-provided ns values from ns_array are processed
-     ! in the multi-grid run
-     jacob_off = 0
+     do jacob_off = 0, 1
+        ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
+        ! before the user-provided ns values from ns_array are processed
+        ! in the multi-grid run
 
+        ! convergence flag: initially not converged yet
+        iequi = 0
 
+        IF (lfreeb .and. jacob_off.eq.1) then
+           ! jacob_off=1 indicates that in the previous iteration jacobian was bad --> also need to restart vacuum calculations
+           ivac = 1
+        end if
 
+        ns_min = 3
 
+        ! multi-grid iterations: loop over ns_array
+        ! jacob_off=0,1 is required to insert one ns=3 run before
+        ! starting to work with the user-provided ns_array
+        ! if the first ns value from ns_array gave a bad jacobian
+        ITERATIONS: DO igrid = 1-jacob_off, multi_ns_grid
 
+           IF (igrid .lt. 1) THEN
+              ! igrid .lt. 1 can only happen when jacob_off == 1 (then igrid==0)
 
+              ! TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
+              ! COMPUTE INITIAL SOLUTION ON COARSE GRID
+              ! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
+              nsval = 3
+              ftolv = 1.e-4_dp
 
+              ! fully restart vacuum (why then assign ivac=1 then above???)
+              ivac = -1
 
+           ELSE
+              ! proceed regularly with ns values from ns_array
+              nsval = ns_array(igrid)
+              IF (nsval .lt. ns_min) then
+                 ! skip entries that have less flux surfaces than previous iteration
+                 CYCLE
+              end if
 
+              ! update ns_min --> reduction in number of flux surfaces not allowed
+              ns_min = nsval
 
-   50 CONTINUE ! retry with initial ns=3 to fix bad jacobian
+              ftolv  = ftol_array(igrid)
+              niterv = niter_array(igrid)
+           END IF
 
-     ! convergence flag: initially not converged yet
-     iequi = 0
-
-     ! jacob_off=1 indicates that in the previous interation (got back here by GOTO 50)
-     ! jacobian was bad --> also need to
-     IF (lfreeb .and. jacob_off.eq.1) then
-        ! restart vacuum calculations
-        ivac = 1
-     end if
-
-     ns_min = 3
-
-     ! multi-grid iterations: loop over ns_array
-     ! jacob_off=0,1 is required to insert one ns=3 run before
-     ! starting to work with the user-provided ns_array
-     ! if the first ns value from ns_array gave a bad jacobian
-     ITERATIONS: DO igrid = 1-jacob_off, multi_ns_grid
-
-        IF (igrid .lt. 1) THEN
-           ! TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
-           ! COMPUTE INITIAL SOLUTION ON COARSE GRID
-           ! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
-           nsval = 3
-           ivac = -1 ! fully restart vacuum (why then assign ivac=1 then above???)
-           ftolv = 1.e-4_dp
-        ELSE
-           ! proceed regularly with ns values from ns_array
-           nsval = ns_array(igrid)
-           IF (nsval .lt. ns_min) then
-              ! skip entries that have less than ns_min flux surfaces
-              CYCLE
+           IF (ns_old .le. nsval) then
+              ! initialize ns-dependent arrays
+              ! and (if previous solution is available) interpolate to current ns value
+              CALL initialize_radial(nsval, ns_old, delt0r)
            end if
 
-           ! update ns_min --> reduction in number of flux surfaces not allowed
-           ns_min = nsval
+           ! *HERE* is the *ACTUAL* call to the equilibrium solver !
+           CALL eqsolve (ier_flag)
 
-           ftolv = ftol_array(igrid)
-           niterv = niter_array(igrid)
+           ! break the multi-grid sequence if current number of flux surfaced
+           ! did not reach convergence
+           IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
+              EXIT
+           end if
+
+        END DO ITERATIONS
+
+
+        ! if did not converge only because jacobian was bad
+        ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
+        ! retry the whole thing again
+        IF (ier_flag.ne.bad_jacobian_flag) THEN
+           exit ! jacob_off loop
+           ! otherwise, retry with initial ns=3 to fix bad jacobian
         END IF
 
-        IF (ns_old .le. nsval) then
-           ! initialize ns-dependent arrays
-           ! and (if previous solution is available) interpolate to current ns value
-           CALL initialize_radial(nsval, ns_old, delt0r)
-        end if
-
-        ! *HERE* is the *ACTUAL* call to the equilibrium solver !
-        CALL eqsolve (ier_flag)
-
-        ! break the multi-grid sequence if current number of flux surfaced
-        ! did not reach convergence
-        IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
-           EXIT
-        end if
-
-     END DO ITERATIONS
-
-
-     ! if did not converge only because jacobian was bad
-     ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
-     ! retry the whole thing again
-     IF (ier_flag.eq.bad_jacobian_flag .and. jacob_off.eq.0) THEN
-        jacob_off = 1
-        GO TO 50 ! retry with initial ns=3 to fix bad jacobian
-     END IF
-
-
-
-
-
-
+     ! if ier_flag .eq. bad_jacobian_flag, repeat once again with ns=3 before
+     end do ! jacob_off = 0, 1
 
   end if ! (ier_flag .eq. 0) after readin
 
@@ -190,8 +179,8 @@ PROGRAM vmec
   ! free memory
   IF (ALLOCATED(cosmu)) then
   DEALLOCATE(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &
-              sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
-              cosmui3, cosmumi3, cos01, sin01, stat=istat1)
+             sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &
+             cosmui3, cosmumi3, cos01, sin01, stat=istat1)
   IF (istat1 .ne. 0) PRINT *, Warning // "#1"
   end if
 
@@ -221,7 +210,7 @@ PROGRAM vmec
   SELECT CASE (ier_flag)
   CASE (bad_jacobian_flag)
      ! Bad jacobian even after axis reset and ns->3
-     WRITE (6, '(/,1x,a)') bad_jacobian
+     WRITE (      6, '(/,1x,a)') bad_jacobian
      WRITE (nthreed, '(/,1x,a)') bad_jacobian
   CASE DEFAULT
   END SELECT

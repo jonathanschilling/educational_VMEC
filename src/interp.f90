@@ -37,12 +37,13 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
         xint = (sj - s1)/hsold
         xint = MIN(one,xint)
         xint = MAX(zero,xint)
-        xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype)             &
-                             +        xint *xold(js2,:,ntype) )/scalxc(js,:,1)
+        xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype) &
+                             +        xint *xold(js2,:,ntype)   )/scalxc(js,:,1)
      END DO
 
      ! Zero M=1 modes at origin
-     WHERE (MOD(ixm(:mnsize),2) .eq. 1) xnew(1,:,ntype) = 0
+     WHERE (MOD(ixm(:mnsize),2) .eq. 1) &
+        xnew(1,:,ntype) = 0
   END DO
 
   END SUBROUTINE interp

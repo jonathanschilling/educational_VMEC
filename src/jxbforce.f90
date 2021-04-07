@@ -16,18 +16,12 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   REAL(rprec), DIMENSION(ns,nznt), TARGET :: bsubs
   INTEGER, INTENT(in) :: ier_flag
 
-  ! RESET lbsubs DEFAULT FLAG TO FALSE TO CAPTURE CURRENT SHEETS!
-  ! LOGICAL, PARAMETER :: lbsubs = .false. ! False to use (correct)  bsubs calculation (from metrics)
-  !                                        ! True  to use (modified) bsubs calculation (from mag. diff. eq.)
-  ! lbsubs is now a namelist input variable, so user can change.
-  ! LOGICAL, PARAMETER :: lbsubs = .true.  ! True  to use NEW bsubs calculation (from mag. diff. eq.)
-  !                                        ! False to use OLD bsubs calculation (from metrics)
   LOGICAL, PARAMETER :: lprint = .false.   ! Prints out bsubs spectrum to fort.33
   REAL(rprec), PARAMETER :: two=2, p5=0.5_dp, c1p5=1.5_dp
 
   INTEGER lk, lz, lt, k, m, js, j, n, injxbout, mparity, nznt1
   INTEGER :: njxbout = jxbout0, nmin, info
-  INTEGER, PARAMETER :: ns_skip = 1, nu_skip = 1, nv_skip = 1
+
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bdotk, bsubuv, bsubvu
   REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: bsubsmn
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE ::   brhomn,           &
@@ -78,41 +72,42 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
     vn_bsubv = 'bsubv',                                             &
     vn_bsubs = 'bsubs'
 
+
+
+   ! PROGRAM FOR COMPUTING LOCAL KXB = grad-p FORCE BALANCE
+   !
+   ! K = CURL(B) is the "effective" current (=J for isotropic pressure)
+   ! Compute u (=theta), v (=zeta) derivatives of B sub s
+
+
+
   lprint_flag = (ier_flag.eq.successful_term_flag)
   IF (lprint_flag) THEN
+     jxbout_file = 'jxbout_'//TRIM(input_extension)//'.nc'
 
-  jxbout_file = 'jxbout_'//TRIM(input_extension)//'.nc'
+     CALL cdf_open(njxbout,jxbout_file,'w',injxbout)
+     IF (injxbout .ne. 0) THEN
+        PRINT *,' Error opening JXBOUT file in jxbforce'
+        RETURN
+     END IF
 
-  CALL cdf_open(njxbout,jxbout_file,'w',injxbout)
-  IF (injxbout .ne. 0) THEN
-     PRINT *,' Error opening JXBOUT file in jxbforce'
-     RETURN
-  END IF
-
-  ! PROGRAM FOR COMPUTING LOCAL KXB = grad-p FORCE BALANCE
-  !
-  ! jons: sigma_an (=1 for VMEC anyway) removed
-  ! sigma_an = one + (pperp-ppar)/(2*bsq(1:nrzt))   (=1 for isotropic pressure)
-  ! K = CURL(sigma_an B) is the "effective" current (=J for isotropic pressure)
-  ! Compute u (=theta), v (=zeta) derivatives of B sub s
-  legend(1) = " S = normalized toroidal flux (0 - 1)"
-  IF (lasym) THEN
-     legend(2) = " U = VMEC poloidal angle (0 - 2*pi, FULL period)"
-  ELSE
-     legend(2) = " U = VMEC poloidal angle (0 - pi, HALF a period)"
-  END IF
-  legend(3) = " V = VMEC (geometric) toroidal angle (0 - 2*pi)"
-  legend(4) = " SQRT(g') = |SQRT(g-VMEC)| / VOL': Cylindrical-to-s,u,v Jacobian normed to volume derivative"
-  legend(5) = " VOL = Int_s'=0,s Int_u Int_v |SQRT(g_VMEC)| : plasma volume  enclosed by surface s'=s"
-  legend(6) = " VOL' = d(VOL)/ds: differential volume element"
-  legend(7) = " Es = SQRT(g') [grad(U) X grad(V)] : covariant radial unit vector (based on volume radial coordinate)"
-  legend(8) = " BSUP{U,V} = sigma_an B DOT GRAD{U,V}:  contravariant components of B"
-  legend(9) = " JSUP{U,V} = SQRT(g) J DOT GRAD{U,V}"
-  legend(10)= " K X B = Es DOT [K X B]: covariant component of K X B force"
-  legend(11)= " K * B = K DOT B * SQRT(g')"
-  legend(12)= " p' = dp/d(VOL): pressure gradient (based on volume radial coordinate)"
-  legend(13)= " <KSUP{U,V}> = Int_u Int_v [KSUP{U,V}]/dV/ds"
-
+     legend(1) = " S = normalized toroidal flux (0 - 1)"
+     IF (lasym) THEN
+        legend(2) = " U = VMEC poloidal angle (0 - 2*pi, FULL period)"
+     ELSE
+        legend(2) = " U = VMEC poloidal angle (0 - pi, HALF a period)"
+     END IF
+     legend(3) = " V = VMEC (geometric) toroidal angle (0 - 2*pi)"
+     legend(4) = " SQRT(g') = |SQRT(g-VMEC)| / VOL': Cylindrical-to-s,u,v Jacobian normed to volume derivative"
+     legend(5) = " VOL = Int_s'=0,s Int_u Int_v |SQRT(g_VMEC)| : plasma volume  enclosed by surface s'=s"
+     legend(6) = " VOL' = d(VOL)/ds: differential volume element"
+     legend(7) = " Es = SQRT(g') [grad(U) X grad(V)] : covariant radial unit vector (based on volume radial coordinate)"
+     legend(8) = " BSUP{U,V} = B DOT GRAD{U,V}:  contravariant components of B"
+     legend(9) = " JSUP{U,V} = SQRT(g) J DOT GRAD{U,V}"
+     legend(10)= " K X B = Es DOT [K X B]: covariant component of K X B force"
+     legend(11)= " K * B = K DOT B * SQRT(g')"
+     legend(12)= " p' = dp/d(VOL): pressure gradient (based on volume radial coordinate)"
+     legend(13)= " <KSUP{U,V}> = Int_u Int_v [KSUP{U,V}]/dV/ds"
   ENDIF
 
   nznt1 = nzeta*ntheta2
@@ -516,7 +511,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
      jpar2(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)**2*wint(2:nrzt:ns)/sqgb2(:nznt))
      jperp2(js)= dnorm1*tjnorm*SUM(kp2(:nznt)*wint(2:nrzt:ns)*sqrtg(:nznt))
 
-     IF (MOD(js,ns_skip) .eq. 0 .and. lprint_flag) THEN
+     IF (lprint_flag) THEN
         phin(js) = phi(js)/phi(ns)
         DO lz = 1, nzeta
            toroidal_angle(lz)=REAL(360*(lz-1),rprec)/nzeta
@@ -557,71 +552,69 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)
 
   IF (lprint_flag) THEN
-  CALL cdf_define(njxbout,vn_legend,legend)
-  CALL cdf_define(njxbout,vn_mpol,mpol)
-  CALL cdf_define(njxbout,vn_ntor,ntor)
-  CALL cdf_define(njxbout,vn_phin,phin)
-  CALL cdf_define(njxbout,vn_radial_surfaces,ns)
-  CALL cdf_define(njxbout,vn_poloidal_grid_points,ntheta3)
-  CALL cdf_define(njxbout,vn_toroidal_grid_points,nzeta)
-  CALL cdf_define(njxbout,vn_avforce,avforce)
-  CALL cdf_define(njxbout,vn_jdotb,jdotb)
+     CALL cdf_define(njxbout,vn_legend,legend)
+     CALL cdf_define(njxbout,vn_mpol,mpol)
+     CALL cdf_define(njxbout,vn_ntor,ntor)
+     CALL cdf_define(njxbout,vn_phin,phin)
+     CALL cdf_define(njxbout,vn_radial_surfaces,ns)
+     CALL cdf_define(njxbout,vn_poloidal_grid_points,ntheta3)
+     CALL cdf_define(njxbout,vn_toroidal_grid_points,nzeta)
+     CALL cdf_define(njxbout,vn_avforce,avforce)
+     CALL cdf_define(njxbout,vn_jdotb,jdotb)
 
-  CALL cdf_define(njxbout,vn_sqg_bdotk,jdotb_sqrtg)
-  CALL cdf_define(njxbout,vn_sqrtg,sqrtg3)
+     CALL cdf_define(njxbout,vn_sqg_bdotk,jdotb_sqrtg)
+     CALL cdf_define(njxbout,vn_sqrtg,sqrtg3)
 
-  CALL cdf_define(njxbout,vn_bdotgradv,bdotgradv)
-  CALL cdf_define(njxbout,vn_pprime,pprim)
-  CALL cdf_define(njxbout,vn_aminfor,aminfor)
-  CALL cdf_define(njxbout,vn_amaxfor,amaxfor)
-  CALL cdf_define(njxbout,vn_jsupu,jsupu3)
-  CALL cdf_define(njxbout,vn_jsupv,jsupv3)
-  CALL cdf_define(njxbout,vn_jsups,jsups3)
-  CALL cdf_define(njxbout,vn_bsupu,bsupu3)
-  CALL cdf_define(njxbout,vn_bsupv,bsupv3)
-  CALL cdf_define(njxbout,vn_jcrossb,jcrossb)
-  CALL cdf_define(njxbout,vn_jxb_gradp,jxb_gradp)
-  CALL cdf_define(njxbout,vn_bsubu,bsubu3)
-  CALL cdf_define(njxbout,vn_bsubv,bsubv3)
-  CALL cdf_define(njxbout,vn_bsubs,bsubs3)
+     CALL cdf_define(njxbout,vn_bdotgradv,bdotgradv)
+     CALL cdf_define(njxbout,vn_pprime,pprim)
+     CALL cdf_define(njxbout,vn_aminfor,aminfor)
+     CALL cdf_define(njxbout,vn_amaxfor,amaxfor)
+     CALL cdf_define(njxbout,vn_jsupu,jsupu3)
+     CALL cdf_define(njxbout,vn_jsupv,jsupv3)
+     CALL cdf_define(njxbout,vn_jsups,jsups3)
+     CALL cdf_define(njxbout,vn_bsupu,bsupu3)
+     CALL cdf_define(njxbout,vn_bsupv,bsupv3)
+     CALL cdf_define(njxbout,vn_jcrossb,jcrossb)
+     CALL cdf_define(njxbout,vn_jxb_gradp,jxb_gradp)
+     CALL cdf_define(njxbout,vn_bsubu,bsubu3)
+     CALL cdf_define(njxbout,vn_bsubv,bsubv3)
+     CALL cdf_define(njxbout,vn_bsubs,bsubs3)
 
-  CALL cdf_write(njxbout,vn_legend,legend)
-  CALL cdf_write(njxbout,vn_mpol,mpol)
-  CALL cdf_write(njxbout,vn_ntor,ntor)
-  CALL cdf_write(njxbout,vn_phin,phin)
-  CALL cdf_write(njxbout,vn_radial_surfaces,ns)
-  CALL cdf_write(njxbout,vn_poloidal_grid_points,ntheta3)
-  CALL cdf_write(njxbout,vn_toroidal_grid_points,nzeta)
-  CALL cdf_write(njxbout,vn_avforce,avforce)
-  CALL cdf_write(njxbout,vn_jdotb,jdotb)
+     CALL cdf_write(njxbout,vn_legend,legend)
+     CALL cdf_write(njxbout,vn_mpol,mpol)
+     CALL cdf_write(njxbout,vn_ntor,ntor)
+     CALL cdf_write(njxbout,vn_phin,phin)
+     CALL cdf_write(njxbout,vn_radial_surfaces,ns)
+     CALL cdf_write(njxbout,vn_poloidal_grid_points,ntheta3)
+     CALL cdf_write(njxbout,vn_toroidal_grid_points,nzeta)
+     CALL cdf_write(njxbout,vn_avforce,avforce)
+     CALL cdf_write(njxbout,vn_jdotb,jdotb)
 
-  CALL cdf_write(njxbout,vn_sqg_bdotk,jdotb_sqrtg)
-  CALL cdf_write(njxbout,vn_sqrtg,sqrtg3)
+     CALL cdf_write(njxbout,vn_sqg_bdotk,jdotb_sqrtg)
+     CALL cdf_write(njxbout,vn_sqrtg,sqrtg3)
 
-  CALL cdf_write(njxbout,vn_bdotgradv,bdotgradv)
-  CALL cdf_write(njxbout,vn_pprime,pprim)
-  CALL cdf_write(njxbout,vn_aminfor,aminfor)
-  CALL cdf_write(njxbout,vn_amaxfor,amaxfor)
-  CALL cdf_write(njxbout,vn_jsupu,jsupu3)
-  CALL cdf_write(njxbout,vn_jsupv,jsupv3)
-  CALL cdf_write(njxbout,vn_jsups,jsups3)
-  CALL cdf_write(njxbout,vn_bsupu,bsupu3)
-  CALL cdf_write(njxbout,vn_bsupv,bsupv3)
-  CALL cdf_write(njxbout,vn_jcrossb,jcrossb)
-  CALL cdf_write(njxbout,vn_jxb_gradp,jxb_gradp)
-  CALL cdf_write(njxbout,vn_bsubu,bsubu3)
-  CALL cdf_write(njxbout,vn_bsubv,bsubv3)
-  CALL cdf_write(njxbout,vn_bsubs,bsubs3)
+     CALL cdf_write(njxbout,vn_bdotgradv,bdotgradv)
+     CALL cdf_write(njxbout,vn_pprime,pprim)
+     CALL cdf_write(njxbout,vn_aminfor,aminfor)
+     CALL cdf_write(njxbout,vn_amaxfor,amaxfor)
+     CALL cdf_write(njxbout,vn_jsupu,jsupu3)
+     CALL cdf_write(njxbout,vn_jsupv,jsupv3)
+     CALL cdf_write(njxbout,vn_jsups,jsups3)
+     CALL cdf_write(njxbout,vn_bsupu,bsupu3)
+     CALL cdf_write(njxbout,vn_bsupv,bsupv3)
+     CALL cdf_write(njxbout,vn_jcrossb,jcrossb)
+     CALL cdf_write(njxbout,vn_jxb_gradp,jxb_gradp)
+     CALL cdf_write(njxbout,vn_bsubu,bsubu3)
+     CALL cdf_write(njxbout,vn_bsubv,bsubv3)
+     CALL cdf_write(njxbout,vn_bsubs,bsubs3)
 
-  CALL cdf_close(njxbout)
+     CALL cdf_close(njxbout)
 
-  DEALLOCATE(                                                       &
-       bsubs3, bsubv3, bsubu3, jxb_gradp, jcrossb, bsupv3,          &
-       bsupu3, jsups3, jsupv3, jsupu3, jdotb_sqrtg, phin,           &
-       toroidal_angle, sqrtg3, stat=j)
-
-
-  END IF
+     DEALLOCATE(                                                       &
+          bsubs3, bsubv3, bsubu3, jxb_gradp, jcrossb, bsupv3,          &
+          bsupu3, jsups3, jsupv3, jsupu3, jdotb_sqrtg, phin,           &
+          toroidal_angle, sqrtg3, stat=j)
+  END IF ! lprint_flag
 
   DEALLOCATE (kperpu, kperpv, sqgb2, sqrtg, kp2, brhomn, bsubsmn,   &
       jxb, jxb2, bsupu1, bsupv1, bsubu1, bsubv1, avforce, aminfor,  &

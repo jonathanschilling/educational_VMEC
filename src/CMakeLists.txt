@@ -11,7 +11,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/bextrema.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/biotsavart.f
 	${CMAKE_CURRENT_SOURCE_DIR}/bsc_T.f
-	${CMAKE_CURRENT_SOURCE_DIR}/date_and_computer.f
 	${CMAKE_CURRENT_SOURCE_DIR}/functions.f
 	${CMAKE_CURRENT_SOURCE_DIR}/getcarg.f
 	${CMAKE_CURRENT_SOURCE_DIR}/line_segment.f

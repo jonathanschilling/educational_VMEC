@@ -15,7 +15,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
   REAL(rprec), PARAMETER :: fac=0.25_dp
   REAL(rprec), PARAMETER :: edge_pedestal= 0.05_dp
-  INTEGER :: m , mp, n, js, jmax, jmin4(0:mnsize-1)
+  INTEGER :: m , mp, n, js, jmax
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE :: ax, bx, dx
   REAL(rprec) :: mult_fac
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
@@ -87,15 +87,9 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   !    dx(ns,1:,1:) = 3*dx(ns,1:,1:)
   ! END IF
 
-  ! FOR DATA MATCHING MODE (0 <= IRESIDUE < 3),
-  ! MAGNETIC AXIS IS FIXED SO JMIN3(0) => 2 FOR M=0,N=0
-  jmin4 = jmin3
-  IF (iresidue.GE.0 .and. iresidue.LT.3) then
-     jmin4(0) = 2
-  end if
 
-  ! SOLVES BX(I)*X(I-1)+DX(I)*X(I)+AX(I)*X(I+1)=GCX(I), I=JMIN4,JMAX AND RETURNS ANSWER IN GCX(I)
-  CALL tridslv (ax, dx, bx, gcx, jmin4, jmax, mnsize-1, ns, ntmax)
+  ! SOLVES BX(I)*X(I-1)+DX(I)*X(I)+AX(I)*X(I+1)=GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)
+  CALL tridslv (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, ns, ntmax)
 
   DEALLOCATE (ax, bx, dx)
 

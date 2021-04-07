@@ -75,8 +75,10 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
               mn = n + ntor1*m
               l = js + ns*mn + (ntype - 1)*mns
               IF (MOD(m,2) .eq. 0) THEN
+                 ! m is even
                  scalxc(l) = one
               ELSE
+                 ! m is odd
                  scalxc(l) = one/MAX(sqrts(js),sqrts(2))
               ENDIF
 
@@ -102,7 +104,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
                  IF (ntype.eq.zcs .or. ntype.eq.zcc) THEN
                     zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0*(zax1*t1 - zold(n,ntype))
                  END IF
-              ELSE
+              ELSE ! m != 0
                  ! TURN OFF BELOW LINES IF THIS ONE ACTIVATED
                  facj = sqrts(js)**m
 

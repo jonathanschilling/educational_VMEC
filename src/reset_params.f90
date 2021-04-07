@@ -15,12 +15,17 @@ SUBROUTINE reset_params
   ftolv = fsqr
 
   fsq   = 1
+
   iter2 = 1
   iter1 = iter2
+
   ijacob = 0
+
   irst = 1
-  res0 = -1       ! move       to vmec_main, remove from runvmec SAVE
-  delt0r = delt   ! move delt0 to vmec_main, remove from runvmec SAVE (renamed delt0r)
+
+  res0 = -1
+
+  delt0r = delt
 
   !> m=1 constraint (=t: apply correct, polar constraint; =f, apply approx. constraint)
   lconm1 = .TRUE.

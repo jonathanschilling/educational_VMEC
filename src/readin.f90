@@ -201,25 +201,22 @@
            /,'   nb  mb     rbc         rbs         zbc         zbs   ',&
              '    raxis(c)    raxis(s)    zaxis(c)    zaxis(s)')
 
-1000 CONTINUE
 
-  ! CONVERT TO REPRESENTATION WITH RBS(m=1) = ZBC(m=1)
   IF (lasym) THEN
-
-  delta = ATAN( (rbs(0,1) - zbc(0,1))/(ABS(rbc(0,1)) + ABS(zbs(0,1))) )
-  IF (delta .ne. zero) THEN
-    DO m = 0,mpol1
-      DO n = -ntor,ntor
-        trc = rbc(n,m)*COS(m*delta) + rbs(n,m)*SIN(m*delta)
-        rbs(n,m) = rbs(n,m)*COS(m*delta) - rbc(n,m)*SIN(m*delta)
-        rbc(n,m) = trc
-        tzc = zbc(n,m)*COS(m*delta) + zbs(n,m)*SIN(m*delta)
-        zbs(n,m) = zbs(n,m)*COS(m*delta) - zbc(n,m)*SIN(m*delta)
-        zbc(n,m) = tzc
-      ENDDO
-    ENDDO
-  ENDIF
-
+     ! CONVERT TO REPRESENTATION WITH RBS(m=1) = ZBC(m=1)
+     delta = ATAN( (rbs(0,1) - zbc(0,1))/(ABS(rbc(0,1)) + ABS(zbs(0,1))) )
+     IF (delta .ne. zero) THEN
+       DO m = 0,mpol1
+         DO n = -ntor,ntor
+           trc = rbc(n,m)*COS(m*delta) + rbs(n,m)*SIN(m*delta)
+           rbs(n,m) = rbs(n,m)*COS(m*delta) - rbc(n,m)*SIN(m*delta)
+           rbc(n,m) = trc
+           tzc = zbc(n,m)*COS(m*delta) + zbs(n,m)*SIN(m*delta)
+           zbs(n,m) = zbs(n,m)*COS(m*delta) - zbc(n,m)*SIN(m*delta)
+           zbc(n,m) = tzc
+         ENDDO
+       ENDDO
+     ENDIF
   ENDIF
 
   ! ALLOCATE MEMORY FOR NU, NV, MPOL, NTOR SIZED ARRAYS
@@ -227,9 +224,9 @@
 
   ! CONVERT TO INTERNAL REPRESENTATION OF MODES
   !
-  ! R = RBCC*COS(M*U)*COS(N*V) + RBSS*SIN(M*U)*SIN(N*V)
+  ! R =   RBCC*COS(M*U)*COS(N*V) + RBSS*SIN(M*U)*SIN(N*V)
   !     + RBCS*COS(M*U)*SIN(N*V) + RBSC*SIN(M*U)*COS(N*V)
-  ! Z = ZBCS*COS(M*U)*SIN(N*V) + ZBSC*SIN(M*U)*COS(N*V)
+  ! Z =   ZBCS*COS(M*U)*SIN(N*V) + ZBSC*SIN(M*U)*COS(N*V)
   !     + ZBCC*COS(M*U)*COS(N*V) + ZBSS*SIN(M*U)*SIN(N*V)
   !
   !
@@ -257,12 +254,24 @@
   ioff = LBOUND(rbcc,1)
   joff = LBOUND(rbcc,2)
 
+  ! go over all mode number combinations that could be specified in input file
+  ! for given Fourier resolution
   DO m=0,mpol1
+
      mj = m+joff
+
+     ! in free-boundary, skip initial guess with Fourier mode number m larger than mfilter_fbdy
      IF (lfreeb .and. (mfilter_fbdy.gt.1 .and. m.gt.mfilter_fbdy)) CYCLE
+
      DO n=-ntor,ntor
+
+        ! in free-boundary, skip initial guess with Fourier mode number n larger than nfilter_fbdy
         IF (lfreeb .and. (nfilter_fbdy.gt.0 .and. ABS(n).gt.nfilter_fbdy)) CYCLE
+
         ni = ABS(n) + ioff
+
+        ! rbc, zbs etc are defined for the full 2d Fourier kernel with possibly negative n
+        ! this sign is used to convert it to positive-only Fourier numbers
         IF (n .eq. 0) THEN
            isgn = 0
         ELSE IF (n .gt. 0) THEN
@@ -270,6 +279,7 @@
         ELSE
            isgn = -1
         END IF
+
         rbcc(ni,mj) = rbcc(ni,mj) + rbc(n,m)
         IF (m .gt. 0) zbsc(ni,mj) = zbsc(ni,mj) + zbs(n,m)
 
@@ -281,24 +291,46 @@
         IF (lasym) THEN
            IF (m .gt. 0) rbsc(ni,mj) = rbsc(ni,mj) + rbs(n,m)
            zbcc(ni,mj) = zbcc(ni,mj) + zbc(n,m)
+
            IF (lthreed) THEN
-           rbcs(ni,mj) = rbcs(ni,mj) - isgn*rbs(n,m)
-           IF (m .gt. 0) zbss(ni,mj) = zbss(ni,mj) + isgn*zbc(n,m)
+              rbcs(ni,mj) = rbcs(ni,mj) - isgn*rbs(n,m)
+              IF (m .gt. 0) zbss(ni,mj) = zbss(ni,mj) + isgn*zbc(n,m)
            END IF
         END IF
 
-        IF (ier_flag_init .ne. norm_term_flag) CYCLE
+        ! TODO: why exit only here or is this leftover from something else?
+        IF (ier_flag_init .ne. norm_term_flag) then
+           print *, "skip printing of initial guess for geometry, since ier_flag_init = ",ier_flag_init
+           CYCLE
+        end if
+
+        ! compute sum of quantities to be printed below
         trc = ABS(rbc(n,m)) + ABS(rbs(n,m)) + ABS(zbc(n,m)) + ABS(zbs(n,m))
+
         IF (m .eq. 0) THEN
+           ! m=0: also axis coefficients can be printed
+
+           ! above n-loop is re-used for printing:
+           ! negative n come before positive n, so any |n| will have been completely assigned also its negative counterparts at this point
            IF (n .lt. 0) CYCLE
-           IF (trc.eq.zero .and. ABS(raxis_cc(n)).eq.zero .and. ABS(zaxis_cs(n)).eq.zero) CYCLE
-           WRITE (nthreed,195) n, m, rbc(n,m), rbs(n,m),            &
-                     zbc(n,m), zbs(n,m), raxis_cc(n), raxis_cs(n),  &
-                     zaxis_cc(n), zaxis_cs(n)
+
+           IF (trc.eq.zero .and. ABS(raxis_cc(n)).eq.zero .and. ABS(zaxis_cs(n)).eq.zero) then
+              ! all values to be printed are zero, so skip printing them
+              CYCLE
+           end if
+
+           WRITE (nthreed,195) n, m, rbc(n,m), rbs(n,m), zbc(n,m), zbs(n,m), &
+                               raxis_cc(n), raxis_cs(n), zaxis_cc(n), zaxis_cs(n)
         ELSE
-           IF (trc .eq. zero) CYCLE
+           ! m > 0, so only print boundary coeffs (axis does not have coeffs with m>1
+
+           IF (trc .eq. zero) then
+              ! all values to be printed are zero, so skip printing them
+              CYCLE
+           end if
            WRITE (nthreed,195) n, m, rbc(n,m), rbs(n,m), zbc(n,m), zbs(n,m)
         END IF
+
      END DO
   END DO
 195 FORMAT(i5,i4,1p,8e12.4)
@@ -314,7 +346,7 @@
 
   ! CONVERT TO INTERNAL FORM FOR (CONSTRAINED) m=1 MODES
   ! INTERNALLY, FOR m=1: XC(rss) = .5(RSS+ZCS), XC(zcs) = .5(RSS-ZCS)
-  ! WITH XC(zcs) -> 0 FOR POLAR CONSTRAINT
+  ! WITH XC(zcs) -> 0 FOR POLAR CONSTRAINT ! TODO: jons: maybe XC(zsc) -> 0 is meant here ?
   ! FOR ASYMMETRIC CASE, XC(rsc) = .5(RSC+ZCC), XC(zcc) = .5(RSC-ZCC)
   ! WITH XC(zss) -> 0 FOR POLAR CONSTRAINT
   ! (see convert_sym, convert_asym in totzsp_mod file)
@@ -334,8 +366,6 @@
      END IF
      DEALLOCATE (temp)
   END IF
-
-  iresidue = -1
 
   ! Convert to Internal units
   currv = mu0*curtor

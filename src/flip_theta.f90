@@ -16,23 +16,29 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
   l_lmn = PRESENT(lmn)
   DO m=1,mpol1
      DO n=0,ntor
+
         rmn(n,m,rcc) = mul1*rmn(n,m,rcc)
         zmn(n,m,zsc) =-mul1*zmn(n,m,zsc)
         IF (l_lmn) lmn(n,m,zsc) =-mul1*lmn(n,m,zsc)
+
         IF (lthreed) THEN
            rmn(n,m,rss) =-mul1*rmn(n,m,rss)
            zmn(n,m,zcs) = mul1*zmn(n,m,zcs)
            IF (l_lmn) lmn(n,m,zcs) = mul1*lmn(n,m,zcs)
         END IF
+
         IF (lasym) THEN
+
            rmn(n,m,rsc) =-mul1*rmn(n,m,rsc)
            zmn(n,m,zcc) = mul1*zmn(n,m,zcc)
            IF (l_lmn) lmn(n,m,zcc) = mul1*lmn(n,m,zcc)
+
            IF (lthreed) THEN
               rmn(n,m,rcs) = mul1*rmn(n,m,rcs)
               zmn(n,m,zss) =-mul1*zmn(n,m,zss)
               IF (l_lmn) lmn(n,m,zss) =-mul1*lmn(n,m,zss)
            END IF
+
         END IF
      END DO
 

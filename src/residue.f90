@@ -109,14 +109,14 @@ SUBROUTINE scale_m1(gcr, gcz)
 
   IF (.not.lconm1) RETURN
 
-  fac = (ard(:ns,nodd)+brd(:ns,nodd))/                                        &
-        (ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
+  fac =  (ard(:ns,nodd)+brd(:ns,nodd)                            )      &
+        /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
   DO n = 0, ntor
      gcr(:,n) = fac*gcr(:,n)
   END DO
 
-  fac = (azd(:ns,nodd)+bzd(:ns,nodd))/                                        &
-        (ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
+  fac =  (                            azd(:ns,nodd)+bzd(:ns,nodd))      &
+        /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
   DO n = 0, ntor
      gcz(:,n) = fac*gcz(:,n)
   END DO

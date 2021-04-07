@@ -42,26 +42,29 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   ! ALLOCATE NS-DEPENDENT ARRAYS
   lreset_internal = .true.
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
-  IF (ns_old .eq. ns) RETURN
-  CALL allocate_ns(linterp, neqs_old)
 
-  ! SAVE THIS FOR INTERPOLATION
-  IF (neqs_old.gt.0 .and. linterp) THEN
-     gc(1:neqs_old)=scalxc(1:neqs_old)*xstore(1:neqs_old)
-  END IF
+  IF (ns_old .ne. ns) then
+     CALL allocate_ns(linterp, neqs_old)
 
-  ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
-  CALL profil1d (xc, xcdot, lreset_internal)
-  CALL profil3d (xc(1), xc(1+irzloff), lreset_internal, linterp)
+     ! SAVE THIS FOR INTERPOLATION
+     IF (neqs_old.gt.0 .and. linterp) THEN
+        gc(1:neqs_old)=scalxc(1:neqs_old)*xstore(1:neqs_old)
+     END IF
 
-  irst = 1
-  CALL restart_iter(delt)
+     ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
+     CALL profil1d (xc, xcdot, lreset_internal)
+     CALL profil3d (xc(1), xc(1+irzloff), lreset_internal, linterp)
 
-  ! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID
-  IF (linterp) THEN
-     CALL interp (xc, gc, scalxc, ns, ns_old)
-  END IF
-  ns_old = ns
-  neqs_old = neqs
+     irst = 1
+     CALL restart_iter(delt)
+
+     ! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID
+     IF (linterp) THEN
+        CALL interp (xc, gc, scalxc, ns, ns_old)
+     END IF
+
+     ns_old = ns
+     neqs_old = neqs
+  end if
 
 END SUBROUTINE initialize_radial

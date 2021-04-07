@@ -56,7 +56,7 @@ PROGRAM vmec
 
   ! PARSE input_file into path/input.ext
   arg = command_arg(1)
-  index_dat = INDEX(arg,'.') ! find position of '.'
+  index_dat = INDEX(arg, '.') ! find position of '.'
   index_end = LEN_TRIM(arg)
   IF (index_dat .gt. 0) THEN
      ! found '.' in arg
@@ -79,25 +79,25 @@ PROGRAM vmec
 
   ! READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
   CALL readin (input_file, ier_flag)
-  IF (ier_flag .ne. 0) GOTO 1000 ! fatal error
 
-  ! COMPUTE NS-INVARIANT ARRAYS
-  CALL fixaray
+  IF (ier_flag .eq. 0) then
+     ! reading of input file was successful, so start computation
 
-  ! COMPUTE INITIAL SOLUTION ON COARSE GRID
-  ! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
-  ns_old = 0
-  WRITE (nthreed, 30)
-  delt0r = delt
+     ! COMPUTE NS-INVARIANT ARRAYS
+     CALL fixaray
 
+     ns_old = 0
+     delt0r = delt
+
+     WRITE (nthreed, 30)
 30 FORMAT(' FSQR, FSQZ = Normalized Physical Force Residuals',/,        &
           ' fsqr, fsqz = Preconditioned Force Residuals',/,1x,23('-'),/,&
           ' BEGIN FORCE ITERATIONS',/,1x,23('-'),/)
 
-  ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
-  ! before the user-provided ns values from ns_array are processed
-  ! in the multi-grid run
-  jacob_off = 0
+     ! jacob_off=1 indicates that an initial run with ns=3 shall be inserted
+     ! before the user-provided ns values from ns_array are processed
+     ! in the multi-grid run
+     jacob_off = 0
 
 
 
@@ -108,79 +108,81 @@ PROGRAM vmec
 
 
 
-50 CONTINUE ! retry with initial ns=3 to fix bad jacobian
+   50 CONTINUE ! retry with initial ns=3 to fix bad jacobian
 
-  ! convergence flag: initially not converged yet
-  iequi = 0
+     ! convergence flag: initially not converged yet
+     iequi = 0
 
-  ! jacob_off=1 indicates that in the previous interation (got back here by GOTO 50)
-  ! jacobian was bad --> also need to
-  IF (lfreeb .and. jacob_off.eq.1) then
-     ! restart vacuum calculations
-     ivac = 1
-  end if
+     ! jacob_off=1 indicates that in the previous interation (got back here by GOTO 50)
+     ! jacobian was bad --> also need to
+     IF (lfreeb .and. jacob_off.eq.1) then
+        ! restart vacuum calculations
+        ivac = 1
+     end if
 
-  ns_min = 3
+     ns_min = 3
 
-  ! multi-grid iterations: loop over ns_array
-  ! jacob_off=0,1 is required to insert one ns=3 run before
-  ! starting to work with the user-provided ns_array
-  ! if the first ns value from ns_array gave a bad jacobian
-  ITERATIONS: DO igrid = 1-jacob_off, multi_ns_grid
+     ! multi-grid iterations: loop over ns_array
+     ! jacob_off=0,1 is required to insert one ns=3 run before
+     ! starting to work with the user-provided ns_array
+     ! if the first ns value from ns_array gave a bad jacobian
+     ITERATIONS: DO igrid = 1-jacob_off, multi_ns_grid
 
-     IF (igrid .lt. 1) THEN
-        ! TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
-        nsval = 3
-        ivac = -1 ! fully restart vacuum (why then assign ivac=1 then above???)
-        ftolv = 1.e-4_dp
-     ELSE
-        ! proceed regularly with ns values from ns_array
-        nsval = ns_array(igrid)
-        IF (nsval .lt. ns_min) then
-           ! skip entries that have less than ns_min flux surfaces
-           CYCLE
+        IF (igrid .lt. 1) THEN
+           ! TRY TO GET NON-SINGULAR JACOBIAN ON A 3 PT RADIAL MESH
+           ! COMPUTE INITIAL SOLUTION ON COARSE GRID
+           ! IF PREVIOUS SEQUENCE DID NOT CONVERGE WELL
+           nsval = 3
+           ivac = -1 ! fully restart vacuum (why then assign ivac=1 then above???)
+           ftolv = 1.e-4_dp
+        ELSE
+           ! proceed regularly with ns values from ns_array
+           nsval = ns_array(igrid)
+           IF (nsval .lt. ns_min) then
+              ! skip entries that have less than ns_min flux surfaces
+              CYCLE
+           end if
+
+           ! update ns_min --> reduction in number of flux surfaces not allowed
+           ns_min = nsval
+
+           ftolv = ftol_array(igrid)
+           niterv = niter_array(igrid)
+        END IF
+
+        IF (ns_old .le. nsval) then
+           ! initialize ns-dependent arrays
+           ! and (if previous solution is available) interpolate to current ns value
+           CALL initialize_radial(nsval, ns_old, delt0r)
         end if
 
-        ! update ns_min --> reduction in number of flux surfaces not allowed
-        ns_min = nsval
+        ! *HERE* is the *ACTUAL* call to the equilibrium solver !
+        CALL eqsolve (ier_flag)
 
-        ftolv = ftol_array(igrid)
-        niterv = niter_array(igrid)
+        ! break the multi-grid sequence if current number of flux surfaced
+        ! did not reach convergence
+        IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
+           EXIT
+        end if
+
+     END DO ITERATIONS
+
+
+     ! if did not converge only because jacobian was bad
+     ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
+     ! retry the whole thing again
+     IF (ier_flag.eq.bad_jacobian_flag .and. jacob_off.eq.0) THEN
+        jacob_off = 1
+        GO TO 50 ! retry with initial ns=3 to fix bad jacobian
      END IF
 
-     IF (ns_old .le. nsval) then
-        ! initialize ns-dependent arrays
-        ! and (if previous solution is available) interpolate to current ns value
-        CALL initialize_radial(nsval, ns_old, delt0r)
-     end if
-
-     ! *HERE* is the *ACTUAL* call to the equilibrium solver !
-     CALL eqsolve (ier_flag)
-
-     ! break the multi-grid sequence if current number of flux surfaced
-     ! did not reach convergence
-     IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
-        EXIT
-     end if
-
-  END DO ITERATIONS
-
-
-  ! if did not converge only because jacobian was bad
-  ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
-  ! retry the whole thing again
-  IF (ier_flag.eq.bad_jacobian_flag .and. jacob_off.eq.0) THEN
-     jacob_off = 1
-     GO TO 50 ! retry with initial ns=3 to fix bad jacobian
-  END IF
 
 
 
 
 
 
-
-1000 continue ! fatal error
+  end if ! (ier_flag .eq. 0) after readin
 
   ! write output files
   CALL fileout (ier_flag)

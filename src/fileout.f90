@@ -72,7 +72,6 @@ SUBROUTINE fileout(ier_flag)
      CALL wrout (bzmn_o, azmn_o, clmn, blmn, crmn_o, czmn_e,            &
                  crmn_e, xsave, gc, loc_ier_flag, lterm)
 
-
      ! These are the last few lines that appear on screen / in the threed1 file
      PRINT 120, TRIM(werror(loc_ier_flag))
      IF (lterm) PRINT 10,  TRIM(input_extension), ijacob

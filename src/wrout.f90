@@ -71,9 +71,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
 
-  ! =false, eliminate nyquist stuff
-  LOGICAL :: lnyquist = .FALSE.
-
   CHARACTER(LEN=*), PARAMETER, DIMENSION(1) ::                      &
                r1dim = (/'radius'/), mn1dim = (/'mn_mode'/),        &
                mn2dim = (/'mn_mode_nyq'/), mnpddim = (/'mnpd'/),    &
@@ -85,7 +82,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   INTEGER :: j, js, jlk, mn, lk, iasym,                             &
              m, n, k, iwout0, n1, nwout, istat, i, indx1(1),        &
-             mnmax_nyq0, mnyq0, nnyq0, nwout2,                      &
+             nwout2,                      &
              isgn, js2, nfort
   REAL(rprec) :: dmult, tcosi, tsini, vversion, sgn, tmult,         &
                  presfactor, ftolx1, d_bsupumn, d_bsupvmn
@@ -99,13 +96,22 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CHARACTER(LEN=120) :: wout_file, wout2_file
   CHARACTER(LEN=120) :: fort_file
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: xfinal
-  REAL(rprec), DIMENSION(:), POINTER ::   xm_nyq0, xn_nyq0
 
   ! ELIMINATE THESE EVENTUALLY
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: bsupumnc, bsupumns, bsupvmnc, bsupvmns
 
   LOGICAL :: lcurr
   INTEGER :: nmin0
+
+
+
+  ! THIS SUBROUTINE CREATES THE FILE WOUT.
+  ! IT CONTAINS THE CYLINDRICAL COORDINATE SPECTRAL COEFFICIENTS
+  ! RMN,ZMN (full), LMN (half_mesh - CONVERTED FROM INTERNAL full REPRESENTATION),
+  ! AS WELL AS COEFFICIENTS (ON NYQ MESH) FOR COMPUTED QUANTITIES:
+  ! BSQ, BSUPU,V, BSUBU,V, GSQRT (HALF); BSUBS (FULL-CONVERTED IN JXBFORCE)
+
+
 
   ! Pointer assignments for storage arrays
   n1 = MAX(1,ntmax/2)
@@ -119,37 +125,19 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      lmnc => gc_array(:,:,1+2*n1)     ! store COS(mu-nv)
   END IF
 
-  ! THIS SUBROUTINE CREATES THE FILE WOUT.IT CONTAINS THE CYLINDRICAL COORDINATE SPECTRAL
-  ! COEFFICIENTS RMN,ZMN (full), LMN (half_mesh - CONVERTED FROM
-  ! INTERNAL full REPRESENTATION), AS WELL AS COEFFICIENTS (ON NYQ MESH) FOR COMPUTED
-  ! QUANTITIES:
-  !
-  ! BSQ, BSUPU,V, BSUBU,V, GSQRT (HALF); BSUBS (FULL-CONVERTED IN JXBFORCE)
-  IF (lnyquist) THEN
-     mnmax_nyq0 = mnmax_nyq
-     mnyq0 = mnyq
-     nnyq0 = nnyq
-     xm_nyq0 => xm_nyq; xn_nyq0 => xn_nyq
-  ELSE
-     mnmax_nyq0 = mnmax
-     mnyq0 = mpol1
-     nnyq0 = ntor
-     xm_nyq0 => xm; xn_nyq0 => xn
-  END IF
+  ALLOCATE (gmn(mnmax_nyq), bmn(mnmax_nyq),                       &
+     bsubumn(mnmax_nyq), bsubvmn(mnmax_nyq), bsubsmn(mnmax_nyq), &
+     bsupumn(mnmax_nyq), bsupvmn(mnmax_nyq), stat=istat)
 
-  ALLOCATE (gmn(mnmax_nyq0), bmn(mnmax_nyq0),                       &
-     bsubumn(mnmax_nyq0), bsubvmn(mnmax_nyq0), bsubsmn(mnmax_nyq0), &
-     bsupumn(mnmax_nyq0), bsupvmn(mnmax_nyq0), stat=istat)
-
-  ALLOCATE (gmnc(mnmax_nyq0,ns), bmnc(mnmax_nyq0,ns),               &
-            bsubumnc(mnmax_nyq0,ns), bsubvmnc(mnmax_nyq0,ns),       &
-            bsubsmns(mnmax_nyq0,ns), bsupumnc(mnmax_nyq0,ns),       &
-            bsupvmnc(mnmax_nyq0,ns), stat=istat)
+  ALLOCATE (gmnc(mnmax_nyq,ns), bmnc(mnmax_nyq,ns),               &
+            bsubumnc(mnmax_nyq,ns), bsubvmnc(mnmax_nyq,ns),       &
+            bsubsmns(mnmax_nyq,ns), bsupumnc(mnmax_nyq,ns),       &
+            bsupvmnc(mnmax_nyq,ns), stat=istat)
   IF (lasym) THEN
-    ALLOCATE (gmns(mnmax_nyq0,ns), bmns(mnmax_nyq0,ns),             &
-              bsubumns(mnmax_nyq0,ns), bsubvmns(mnmax_nyq0,ns),     &
-              bsubsmnc(mnmax_nyq0,ns), bsupumns(mnmax_nyq0,ns),     &
-              bsupvmns(mnmax_nyq0,ns), stat=istat)
+    ALLOCATE (gmns(mnmax_nyq,ns), bmns(mnmax_nyq,ns),             &
+              bsubumns(mnmax_nyq,ns), bsubvmns(mnmax_nyq,ns),     &
+              bsubsmnc(mnmax_nyq,ns), bsupumns(mnmax_nyq,ns),     &
+              bsupvmns(mnmax_nyq,ns), stat=istat)
   END IF
   IF (istat .ne. 0) STOP 'Error allocating arrays in VMEC WROUT'
 
@@ -167,10 +155,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ftolx1=ftol_array(indx1(1))
 
   ! NYQUIST FREQUENCY REQUIRES FACTOR OF 1/2
-  IF (lnyquist) THEN
-     IF (mnyq .ne. 0) cosmui(:,mnyq) = p5*cosmui(:,mnyq)
-     IF (nnyq .ne. 0) cosnv (:,nnyq) = p5*cosnv (:,nnyq)
-  END IF
+  IF (mnyq .ne. 0) cosmui(:,mnyq) = p5*cosmui(:,mnyq)
+  IF (nnyq .ne. 0) cosnv (:,nnyq) = p5*cosnv (:,nnyq)
+
   wout_file = version_
   READ (wout_file, *) vversion
 
@@ -199,7 +186,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_polmod, mpol)
   CALL cdf_define(nwout, vn_tormod, ntor)
   CALL cdf_define(nwout, vn_maxmod, mnmax)
-  CALL cdf_define(nwout, vn_maxmod_nyq, mnmax_nyq0)
+  CALL cdf_define(nwout, vn_maxmod_nyq, mnmax_nyq)
   CALL cdf_define(nwout, vn_maxit, iter2)
   CALL cdf_define(nwout, vn_actit, itfsq)
   CALL cdf_define(nwout, vn_asym, lasym)
@@ -234,9 +221,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_setatt(nwout, vn_pmod, ln_pmod)
   CALL cdf_define(nwout, vn_tmod, xn, dimname=mn1dim)
   CALL cdf_setatt(nwout, vn_tmod, ln_tmod)
-  CALL cdf_define(nwout, vn_pmod_nyq, xm_nyq0, dimname=mn2dim)
+  CALL cdf_define(nwout, vn_pmod_nyq, xm_nyq, dimname=mn2dim)
   CALL cdf_setatt(nwout, vn_pmod_nyq, ln_pmod_nyq)
-  CALL cdf_define(nwout, vn_tmod_nyq, xn_nyq0, dimname=mn2dim)
+  CALL cdf_define(nwout, vn_tmod_nyq, xn_nyq, dimname=mn2dim)
   CALL cdf_setatt(nwout, vn_tmod_nyq, ln_tmod_nyq)
 
   CALL cdf_define(nwout, vn_racc, raxis_cc(0:ntor), dimname=(/'n_tor'/))
@@ -388,7 +375,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_polmod, mpol)
   CALL cdf_write(nwout, vn_tormod, ntor)
   CALL cdf_write(nwout, vn_maxmod, mnmax)
-  CALL cdf_write(nwout, vn_maxmod_nyq, mnmax_nyq0)
+  CALL cdf_write(nwout, vn_maxmod_nyq, mnmax_nyq)
   CALL cdf_write(nwout, vn_maxit, iter2)
   CALL cdf_write(nwout, vn_actit, itfsq)
   CALL cdf_write(nwout, vn_asym, lasym)
@@ -427,8 +414,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ! 1D Arrays
   CALL cdf_write(nwout, vn_pmod, xm)
   CALL cdf_write(nwout, vn_tmod, xn)
-  CALL cdf_write(nwout, vn_pmod_nyq, xm_nyq0)
-  CALL cdf_write(nwout, vn_tmod_nyq, xn_nyq0)
+  CALL cdf_write(nwout, vn_pmod_nyq, xm_nyq)
+  CALL cdf_write(nwout, vn_tmod_nyq, xn_nyq)
 
   ALLOCATE (xfinal(neqs), stat=js)
   IF (js .ne. 0) STOP 'Allocation error for xfinal in WROUT!'
@@ -442,7 +429,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   ! CONVERT TO rmnc, zmns, lmns, etc EXTERNAL representation (without internal mscale, nscale)
   ! IF B^v ~ phip + lamu, MUST DIVIDE BY phipf(js) below to maintain old-style format
-  ! THIS COULD BE A PROBLEM FOR RFP WHERE PHIPF->0 INSIDE THE PLASMA!
   RADIUS1: DO js = 1, ns
 
      CALL convert (rmnc1, zmns1, lmns1, rmns1, zmnc1, lmnc1, xfinal, js)
@@ -516,9 +502,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      bsupumn = 0
      bsupvmn = 0
 
-     MN2: DO mn = 1, mnmax_nyq0
-        n = NINT(xn_nyq0(mn))/nfp
-        m = NINT(xm_nyq0(mn))
+     MN2: DO mn = 1, mnmax_nyq
+        n = NINT(xn_nyq(mn))/nfp
+        m = NINT(xm_nyq(mn))
         n1 = ABS(n)
         dmult = mscale(m)*nscale(n1)*tmult
         IF (m.eq.0 .or. n.eq.0) dmult = 2*dmult
@@ -571,9 +557,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         bsubsmn = 0
         bsupumn = 0
         bsupvmn = 0
-        MN3: DO mn = 1, mnmax_nyq0
-           n = NINT(xn_nyq0(mn))/nfp
-           m = NINT(xm_nyq0(mn))
+        MN3: DO mn = 1, mnmax_nyq
+           n = NINT(xn_nyq(mn))/nfp
+           m = NINT(xm_nyq(mn))
            n1 = ABS(n)
            dmult = mscale(m)*nscale(n1)*tmult
            IF (m.eq.0 .or. n.eq.0) dmult = 2*dmult
@@ -706,11 +692,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   CALL cdf_close(nwout)
 
-  IF (lnyquist) THEN
-     ! RESTORE nyq ENDPOINT VALUES
-     IF (mnyq .ne. 0) cosmui(:,mnyq) = 2*cosmui(:,mnyq)
-     IF (nnyq .ne. 0) cosnv (:,nnyq) = 2*cosnv (:,nnyq)
-  END IF
+  ! RESTORE nyq ENDPOINT VALUES
+  IF (mnyq .ne. 0) cosmui(:,mnyq) = 2*cosmui(:,mnyq)
+  IF (nnyq .ne. 0) cosnv (:,nnyq) = 2*cosnv (:,nnyq)
 
   ! DEALLOCATIONS
   IF (ALLOCATED(gmnc)) DEALLOCATE(gmnc, bmnc, bsubumnc, bsubvmnc, &

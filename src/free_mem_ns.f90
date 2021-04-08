@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE free_mem_ns(lreset)
+SUBROUTINE free_mem_ns
   USE vmec_main
   USE realspace
   USE vforces
@@ -7,7 +7,6 @@ SUBROUTINE free_mem_ns(lreset)
   USE fbal
   IMPLICIT NONE
 
-  LOGICAL, INTENT(in) :: lreset
 
   INTEGER :: istat1 = 0, istat2 = 0, istat3 = 0, istat4 = 0, &
              istat5 = 0, istat6 = 0, istat7 = 0, istat8 = 0, &
@@ -35,7 +34,7 @@ SUBROUTINE free_mem_ns(lreset)
     DEALLOCATE (gc, xsave, xstore, xcdot, stat=istat10)
   end if
 
-  IF (ALLOCATED(xc) .and. lreset) then
+  IF (ALLOCATED(xc)) then
     DEALLOCATE (xc, scalxc)
   end if
 

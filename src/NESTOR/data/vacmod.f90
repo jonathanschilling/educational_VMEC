@@ -2,9 +2,8 @@
 MODULE vacmod
   USE vacmod0
   USE vac_persistent
-  USE vmec_params, ONLY: signgs
   USE vparams, ONLY: zero, one, c2p0, cp5
-  USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: p5 = cp5

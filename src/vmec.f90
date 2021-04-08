@@ -204,7 +204,7 @@ PROGRAM vmec
   IF (istat1 .ne. 0) PRINT *, Warning // "#3"
   end if
   CALL free_mem_funct3d
-  CALL free_mem_ns (.true.) ! also free xc, scalxc here
+  CALL free_mem_ns
   CALL free_mem_nunv
 
   CALL free_mgrid (istat1)

@@ -2,8 +2,8 @@
   SUBROUTINE readin(input_file, ier_flag)
   USE vmec_main
   USE vmec_params
-  USE vacmod
-  USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid
+  USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid, &
+                       nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
@@ -355,14 +355,14 @@
      IF (lthreed) THEN
         mj = 1+joff
         temp = rbss(:,mj)
-        rbss(:,mj) = p5*(temp(:) + zbcs(:,mj))
-        zbcs(:,mj) = p5*(temp(:) - zbcs(:,mj))
+        rbss(:,mj) = cp5*(temp(:) + zbcs(:,mj))
+        zbcs(:,mj) = cp5*(temp(:) - zbcs(:,mj))
      END IF
      IF (lasym) THEN
         mj = 1+joff
         temp = rbsc(:,mj)
-        rbsc(:,mj) = p5*(temp(:) + zbcc(:,mj))
-        zbcc(:,mj) = p5*(temp(:) - zbcc(:,mj))
+        rbsc(:,mj) = cp5*(temp(:) + zbcc(:,mj))
+        zbcc(:,mj) = cp5*(temp(:) - zbcc(:,mj))
      END IF
      DEALLOCATE (temp)
   END IF

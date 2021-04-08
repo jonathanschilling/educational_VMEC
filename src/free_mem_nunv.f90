@@ -12,7 +12,7 @@ SUBROUTINE free_mem_nunv
       DEALLOCATE (rmn_bdy, zmn_bdy, stat=istat2)
 
   IF (ALLOCATED(amatsav)) then
-      DEALLOCATE (amatsav, bvecsav, potvac, bsqsav,  &
+      DEALLOCATE (amatsav, bvecsav, bsqsav, potvac,  &
                   raxis_nestor, zaxis_nestor, stat=istat3)
   end if
 

@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
                   plascur, rbtor, wint, ns, ivac_skip, ivac,      &
-                  mnmax, ier_flag, lasym)
+                  mnmax, ier_flag, lasym, signgs)
   USE vacmod
   USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
@@ -13,6 +13,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
   logical, intent(in) :: lasym
+  real(rprec), intent(in) :: signgs
 
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
@@ -70,7 +71,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   IF (.not. ALLOCATED(tanu)) then
      CALL precal
   end if
-  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym)
+  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
   CALL bextern (plascur, wint, ns)
 
   ! Determine scalar magnetic potential POTVAC

@@ -2,7 +2,7 @@
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
   USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
-  USE vmec_params, ONLY: bad_jacobian_flag, zsc
+  USE vmec_params, ONLY: bad_jacobian_flag, zsc, signgs
   USE realspace
   USE vforces
   USE xstuff
@@ -126,7 +126,7 @@ SUBROUTINE funct3d (ier_flag)
 
         CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
                      ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag, &
-                     lasym)
+                     lasym, signgs)
 
         IF (ier_flag .ne. 0) then
            ! some error occured within NESTOR, so cancel the iterations

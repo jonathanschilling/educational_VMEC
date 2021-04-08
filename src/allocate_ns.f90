@@ -29,7 +29,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
 
   ! ALLOCATES MEMORY FOR NS-DEPENDENT ARRAYS
   ! FIRST BE SURE TO FREE MEMORY PREVIOUSLY ALLOCATED
-  CALL free_mem_ns (.true.)
+  CALL free_mem_ns
 
   ALLOCATE (phip(ndim), chip(ndim), shalf(ndim), sqrts(ndim), wint(ndim), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #2 in allocate_ns'

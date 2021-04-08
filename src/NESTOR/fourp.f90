@@ -1,11 +1,10 @@
 !> \file
-SUBROUTINE fourp (grpmn, grp, istore, istart, iend, ndim)
+SUBROUTINE fourp (grpmn, grp, ndim)
   USE vacmod
   IMPLICIT NONE
 
-  INTEGER, INTENT(inout) :: istart
-  INTEGER, INTENT(in)    :: iend, istore, ndim
-  REAL(rprec), INTENT(in)    :: grp(nuv,istore)
+  INTEGER, INTENT(in)    :: ndim
+  REAL(rprec), INTENT(in)    :: grp(nuv,nuv2)
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
 
   INTEGER :: n, kv, ku, ip, iuv, m, ireflect, isym
@@ -21,7 +20,7 @@ SUBROUTINE fourp (grpmn, grp, istore, istart, iend, ndim)
 
   IF (ndim .GT. 2) STOP 'NDIM > 2'
 
-  ALLOCATE (g1(istore,0:nf,ndim), g2(istore,0:nf,ndim), stat=m)
+  ALLOCATE (g1(nuv2,0:nf,ndim), g2(nuv2,0:nf,ndim), stat=m)
   IF (m .NE. 0) STOP 'Allocation error in fourp'
 
   DO ku = 1,nu2
@@ -34,7 +33,7 @@ SUBROUTINE fourp (grpmn, grp, istore, istart, iend, ndim)
            iuv = kv+nv*(ku-1)
            ireflect = imirr(iuv)
            DO isym = 1, ndim
-              DO ip = 1,istore
+              DO ip = 1,nuv2
                  IF (isym .eq. 1) THEN
                     ! anti-symmetric part (u,v -> -u,-v)
                     kernel = grp(iuv,ip) - grp(ireflect,ip)
@@ -60,20 +59,18 @@ SUBROUTINE fourp (grpmn, grp, istore, istart, iend, ndim)
               cosm = sinui(m,ku)
            END IF
            DO n= 0,nf
-             DO ip = 1,istore
+             DO ip = 1,nuv2
                  gcos = g1(ip,n,isym)*sinm
                  gsin = g2(ip,n,isym)*cosm
-                 grpmn(m,n,ip+istart,isym)     = grpmn(m,n,ip+istart,isym) + gcos + gsin
+                 grpmn(m,n,ip,isym)     = grpmn(m,n,ip,isym) + gcos + gsin
                  IF (n .NE. 0) THEN
-                    grpmn(m,-n,ip+istart,isym) = grpmn(m,-n,ip+istart,isym) + gcos - gsin
+                    grpmn(m,-n,ip,isym) = grpmn(m,-n,ip,isym) + gcos - gsin
                  ENDIF
              END DO
            END DO
         END DO
      END DO
   END DO
-
-  istart = iend
 
   DEALLOCATE (g1, g2, stat=m)
 

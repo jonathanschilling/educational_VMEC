@@ -33,7 +33,8 @@ MODULE vmec_params
   REAL(rprec), PARAMETER :: pdamp = 0.05_dp
   CHARACTER(LEN=*), PARAMETER :: version_ = '8.52'
 
-  INTEGER :: ntmax, rcc, rss, rsc, rcs, zsc, zcs, zcc, zss
+  INTEGER :: ntmax
+  INTEGER :: rcc, rss, rsc, rcs, zsc, zcs, zcc, zss
   INTEGER :: mnyq, nnyq
   INTEGER, ALLOCATABLE :: uminus(:)
   REAL(rprec), ALLOCATABLE :: mscale(:) !< array for norming theta-trig functions (internal use only)

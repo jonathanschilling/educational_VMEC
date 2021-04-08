@@ -9,8 +9,8 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
   USE fbal
   IMPLICIT NONE
 
+  LOGICAL, INTENT(in) :: linterp
   INTEGER, INTENT(in) :: neqs_old
-  LOGICAL, INTENT(inout) :: linterp
 
   INTEGER :: ndim, nsp1, istat1
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: xc_old, scalxc_old
@@ -39,7 +39,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_ns'
 
   ALLOCATE( ard(nsp1,2),arm(nsp1,2),brd(nsp1,2),brm(nsp1,2),  &
-            azd(nsp1,2),azm(nsp1,2),bzd(nsp1,2), bzm(nsp1,2), &
+            azd(nsp1,2),azm(nsp1,2),bzd(nsp1,2),bzm(nsp1,2), &
             sm(ns), sp(0:ns), bmin(ntheta2,ns), bmax(ntheta2,ns), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #6 in allocate_ns'
 

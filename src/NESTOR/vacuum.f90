@@ -37,12 +37,11 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   potsin => potvac(1:mnpd)
   potcos => potvac(1+mnpd:)
 
-  ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2),                     &
-       bexni(nuv2), r1b(nuv), rub(nuv2), rvb(nuv2),                 &
-       z1b(nuv), zub(nuv2), zvb(nuv2), auu(nuv2), auv(nuv2),        &
-       avv(nuv2), snr(nuv2), snv(nuv2), snz(nuv2), drv(nuv2),       &
-       guu_b(nuv2), guv_b(nuv2), gvv_b(nuv2), rzb2(nuv),            &
-       rcosuv(nuv), rsinuv(nuv), stat=i)
+  ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2), bexni(nuv2),                    &
+            r1b(nuv), rub(nuv2), rvb(nuv2), z1b(nuv), zub(nuv2), zvb(nuv2), &
+            auu(nuv2), auv(nuv2), avv(nuv2), snr(nuv2), snv(nuv2), snz(nuv2), &
+            drv(nuv2), guu_b(nuv2), guv_b(nuv2), gvv_b(nuv2), &
+            rzb2(nuv), rcosuv(nuv), rsinuv(nuv), stat=i)
   IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
   ! INDEX OF LOCAL VARIABLES
@@ -152,8 +151,10 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   ENDIF
 
   IF (ALLOCATED(bexu)) then
-     DEALLOCATE (bexu, bexv, bexn, bexni, r1b, rub, rvb, z1b, zub,   &
-        zvb, auu, auv, avv, snr, snv, snz, drv, guu_b, guv_b, gvv_b, &
+     DEALLOCATE (bexu, bexv, bexn, bexni, &
+        r1b, rub, rvb, z1b, zub, zvb,   &
+        auu, auv, avv, snr, snv, snz, &
+        drv, guu_b, guv_b, gvv_b, &
         rzb2, rcosuv, rsinuv, stat=i)
      IF (i .ne. 0) STOP 'Deallocation error in vacuum'
   end if

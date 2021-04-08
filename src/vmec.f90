@@ -75,10 +75,10 @@ PROGRAM vmec
 
 
   ! INITIALIZE PARAMETERS
-  CALL reset_params
+  CALL reset_params ! no further calls
 
   ! READ INPUT FILE (INDATA NAMELIST), MGRID_FILE (VACUUM FIELD DATA)
-  CALL readin (input_file, ier_flag)
+  CALL readin (input_file, ier_flag) ! calls read_indata, heading, read_mgrid, allocate_nunv (,flip_theta if required)
 
   IF (ier_flag .eq. 0) then
      ! reading of input file was successful, so start computation

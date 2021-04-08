@@ -26,6 +26,7 @@ SUBROUTINE allocate_funct3d
   ru0=0; zu0=0; guu=0; guv=0; gvv=0
 
   IF (lfreeb) THEN
+     ! TODO: none of these depends on ns, so why are they allocated here ???
      ALLOCATE (brv(nznt), bphiv(nznt), bzv(nznt), bsqvac(nznt), stat=istat1)
      IF (istat1.ne.0) STOP 'allocation error #2 in allocate_funct3d'
 

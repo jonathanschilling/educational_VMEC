@@ -17,7 +17,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/mgrid_mod.f
 	${CMAKE_CURRENT_SOURCE_DIR}/parse_extension.f
 	${CMAKE_CURRENT_SOURCE_DIR}/profile_functions.f
-	${CMAKE_CURRENT_SOURCE_DIR}/read_namelist.f
 	${CMAKE_CURRENT_SOURCE_DIR}/read_wout_mod.f
 	${CMAKE_CURRENT_SOURCE_DIR}/safe_open_mod.f
 	${CMAKE_CURRENT_SOURCE_DIR}/solver.f90

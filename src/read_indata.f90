@@ -5,6 +5,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   USE vmec_params
   USE vacmod
   USE safe_open_mod
+  USE vmec_input, ONLY: read_indata_namelist
   IMPLICIT NONE
 
   INTEGER ier_flag, iunit
@@ -20,7 +21,10 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      RETURN
   ENDIF
 
-  CALL read_namelist (iunit, iosnml, 'indata')
+  iosnml = 0
+  REWIND (iunit)
+  CALL read_indata_namelist (iunit, iosnml)
+
   IF (iosnml .ne. 0) THEN
      WRITE (6, '(a,i4)') ' In VMEC, indata NAMELIST error: iostat = ', iosnml
      ier_flag = input_error_flag

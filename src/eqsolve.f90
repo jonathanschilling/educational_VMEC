@@ -30,7 +30,7 @@ SUBROUTINE eqsolve(ier_flag)
   ! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
   IF (irst .EQ. 2) THEN
      xc = 0
-     CALL profil3d (xc(1), xc(1+irzloff), lreset_internal, .FALSE.)
+     CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
      irst = 1
      IF (liter_flag) then
         ! (OFF IN v8.50)

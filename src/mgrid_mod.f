@@ -174,7 +174,7 @@ C-----------------------------------------------
          lfind = (mgrid_path(ii:ii+2) == '.nc')
          IF (lfind) THEN
             CALL read_mgrid_nc (mgrid_path, extcur, nv, nfp,
-     1                          ier_flag, lscreen)
+     1                          ier_flag)
          END IF
 
          IF (np0b .ne. nv) THEN
@@ -206,7 +206,7 @@ C-----------------------------------------------
       END SUBROUTINE read_mgrid
 
       SUBROUTINE read_mgrid_nc (filename, extcur, nv, nfp,
-     1                          ier_flag, lscreen)
+     1                          ier_flag)
       USE ezcdf
       USE vsvd0, only: nigroup
       IMPLICIT NONE
@@ -223,7 +223,6 @@ C-----------------------------------------------
      1                       brtemp, bztemp, bptemp
       INTEGER :: ier_flag, ngrid
       INTEGER :: istat, ig
-      LOGICAL :: lscreen
       INTEGER, DIMENSION(3)   :: dimlens
       CHARACTER(LEN=100) :: temp
 
@@ -337,7 +336,7 @@ C-----------------------------------------------
 
       CALL cdf_inquire(ngrid, vn_coilcur, dimlens, ier=istat)
       IF (istat .eq. 0) THEN
-	   IF (ALLOCATED(raw_coil_current)) DEALLOCATE(raw_coil_current)
+      IF (ALLOCATED(raw_coil_current)) DEALLOCATE(raw_coil_current)
          ALLOCATE (raw_coil_current(nextcur), stat=istat)
          IF (istat .ne. 0) STOP 'Error allocating RAW_COIL in mgrid_mod'
          CALL cdf_read(ngrid, vn_coilcur, raw_coil_current)

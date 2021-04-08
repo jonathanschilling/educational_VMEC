@@ -616,7 +616,6 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            ' musubi                  = ',f14.6,/,                       &
            ' betai                   = ',f14.6,/,                       &
            ' lambda                  = ',f14.6,/)
-172 FORMAT(' musubi (diamagnetism)   = ',f14.6)
 174 FORMAT(/,32x,'R = RT',12x,'R = RG',12x,'R = RL',/,                  &
            20x,3(10x,8('-')),/,                                         &
            ' delta = 1 - RT/R     = ',3(f14.6,4x),/,                    &

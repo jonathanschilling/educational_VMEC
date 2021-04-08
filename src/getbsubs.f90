@@ -125,7 +125,8 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
 
   ! CHECK SOLUTION FROM SOLVER
 
-  ! GOTO 100
+  ! GOTO 100 ! comment this in to skip below test
+
   ijtot = 0
   DO i = 1, ntheta3
      DO j = 1, nzeta
@@ -140,7 +141,8 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
     END DO
   END DO
  50 FORMAT(a,i5,a,i5,a,1p,e10.3,a,1p,e10.3)
-100 CONTINUE
+
+! 100 CONTINUE ! comment this in to skip above test
 
   ! CONVERT BACK TO BS*SIN(MU - NV) REPRESENTATION
   ! AND (FOR lasym) BC*COS(MU - NV)

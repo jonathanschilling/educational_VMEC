@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
+SUBROUTINE profil3d(rmn, zmn, lreset)
   USE vmec_main
   USE vmec_params
   USE realspace
@@ -7,7 +7,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset, linterp)
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) ::  rmn, zmn
-  LOGICAL, INTENT(in) :: lreset, linterp
+  LOGICAL, INTENT(in) :: lreset
 
   INTEGER :: js, l, lk, lt, lz, ntype, m, n, mn
   REAL(rprec), DIMENSION(0:ntor,ntmax) :: rold, zold

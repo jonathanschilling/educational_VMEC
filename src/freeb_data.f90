@@ -116,7 +116,6 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
        ,8x,'BRv',7x,'BPHIv',5x,'BZv',/)
 770 FORMAT(1p,e10.2,6e12.4)
 780 FORMAT(1p,e10.2,2e12.4,6e10.2)
-790 FORMAT(i5,/,(1p,3e12.4))
 800 FORMAT(//,3x,'nb',2x,'mb',6x,'rbc',9x,'zbs',6x,'vacpot_s',          &
               2x, '|B|_c(s=.5)',1x,'|B|_c(s=1.)'/)
 810 FORMAT(i5,i4,1p,7e12.4)

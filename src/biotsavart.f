@@ -507,7 +507,7 @@
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
       INTEGER :: igroup
-      REAL :: cosp, sinp
+      REAL(rprec) :: cosp, sinp ! why should this be only 32-bit floating point ?
       REAL(rprec), DIMENSION(3) :: xpt, bvec
 !-----------------------------------------------
 
@@ -606,7 +606,7 @@
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
       INTEGER :: igroup
-      REAL :: cosp, sinp
+      REAL(rprec) :: cosp, sinp ! why should this be 32-bit floating point only ?
       REAL(rprec), DIMENSION(3) :: xpt, avec
 !-----------------------------------------------
 

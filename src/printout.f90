@@ -50,7 +50,6 @@ SUBROUTINE printout(i0, delt0, w0)
      end if
      WRITE (nthreed, 25) TRIM(print_line)
   ENDIF
-15 FORMAT(/,a,6x,'WMHD      BETA      <M>   DEL-BSQ   FEDGE',/)
 16 FORMAT(/,a,6x,'WMHD      BETA     PHIEDGE  DEL-BSQ    FEDGE',/)
 20 FORMAT(/,a,6x,'WMHD      DEL-BSQ',/)
 25 FORMAT(/,a,6x,'WMHD      BETA      <M>        ',/)

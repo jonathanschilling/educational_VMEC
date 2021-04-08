@@ -101,7 +101,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
      legend(4) = " SQRT(g') = |SQRT(g-VMEC)| / VOL': Cylindrical-to-s,u,v Jacobian normed to volume derivative"
      legend(5) = " VOL = Int_s'=0,s Int_u Int_v |SQRT(g_VMEC)| : plasma volume  enclosed by surface s'=s"
      legend(6) = " VOL' = d(VOL)/ds: differential volume element"
-     legend(7) = " Es = SQRT(g') [grad(U) X grad(V)] : covariant radial unit vector (based on volume radial coordinate)"
+     legend(7) = " Es = SQRT(g') [grad(U) X grad(V)]: covariant radial unit vector (based on volume radial coordinate)"
      legend(8) = " BSUP{U,V} = B DOT GRAD{U,V}:  contravariant components of B"
      legend(9) = " JSUP{U,V} = SQRT(g) J DOT GRAD{U,V}"
      legend(10)= " K X B = Es DOT [K X B]: covariant component of K X B force"

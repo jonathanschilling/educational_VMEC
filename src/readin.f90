@@ -88,9 +88,8 @@
              1x,45('-'),/,                                                   &
              '     ns     nu     nv     mu     mv',/,5i7//,                  &
              ' CONFIGURATION PARAMETERS:',/,1x,39('-'),/,                    &
-             '    nfp      gamma      spres_ped    phiedge(wb)'              &
-             '     curtor(A)        ',                                       &
-           /,i7,1p,e11.3,2e15.3,e14.3/)
+             '    nfp      gamma      spres_ped    phiedge(wb)     curtor(A)',/, &
+             i7,1p,e11.3,2e15.3,e14.3/)
 
   IF (nvacskip.le.0) then
      ! default value for nvacskip: number of field periods ... ?
@@ -131,8 +130,8 @@
   ENDIF
 
   IF (pres_scale .ne. one) THEN
-      WRITE (nthreed,'(" Pressure profile factor: ",1pe11.4,        &
-            " (multiplier for pressure)")') pres_scale
+      WRITE (nthreed,'(" Pressure profile factor: ",1pe11.4,'//        &
+            '" (multiplier for pressure)")') pres_scale
   END IF
 
   ! Print out am array

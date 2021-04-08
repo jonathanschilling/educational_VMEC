@@ -78,10 +78,8 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, &
 END SUBROUTINE symforce
 
 
-SUBROUTINE symoutput (bsq     , gsqrt , bsubu , bsubv ,bsupu , &
-                      bsupv   , bsubs ,                        &
-                      bsqa    , gsqrta, bsubua, bsubva,bsupua, &
-                      bsupva  , bsubsa )
+SUBROUTINE symoutput (bsq , gsqrt , bsubu , bsubv ,bsupu,  bsupv , bsubs , &
+                      bsqa, gsqrta, bsubua, bsubva,bsupua, bsupva, bsubsa   )
 
   USE vmec_main, p5 => cp5
   IMPLICIT NONE
@@ -136,51 +134,3 @@ SUBROUTINE symoutput (bsq     , gsqrt , bsubu , bsubv ,bsupu , &
 
 END SUBROUTINE symoutput
 
-
-!  Put the surface routines in a separate subroutine since these the quantites
-!  these work on only exist on free boundary runs.
-SUBROUTINE symoutput_sur(bsubu, bsubv, bsupu, bsupv, bsubua, bsubva, bsupua, bsupva)
-  USE vmec_main, p5 => cp5
-
-  IMPLICIT NONE
-
-  REAL(rprec), DIMENSION(nzeta,ntheta3), INTENT(inout) :: bsubu, bsubv, bsupu, bsupv
-  REAL(rprec), DIMENSION(nzeta,ntheta2), INTENT(out)   :: bsubua, bsubva, bsupua, bsupva
-
-  INTEGER :: ir, i, jk, jka
-  REAL(rprec), DIMENSION(nzeta) :: bsubu_0, bsubv_0, bsupu_0, bsupv_0
-
-  ! SYMMETRIZE FORCES ON RESTRICTED THETA INTERVAL (0 <= u <= pi)
-  ! SO COS,SIN INTEGRALS CAN BE PERFORMED. FOR EXAMPLE,
-  !
-  ! BSQ-S(v,u) = .5*( BSQ(v,u) + BSQ(-v,-u) )     ! * COS(mu - nv)
-  ! BSQ-A(v,u) = .5*( BSQ(v,u) - BSQ(-v,-u) )     ! * SIN(mu - nv)
-  !
-  ! FOR BSUBS, THIS IS REVERSED, S-PIECE ~ SIN, A-PIECE ~ COS
-
-  ir = 1 !-theta
-  DO i = 1, ntheta2
-     jka = 1 !-zeta
-     DO jk = 1, nzeta
-        bsubua(jk,i) = p5*(bsubu(jk,i) - bsubu(jka,ir))
-        bsubu_0(jk)  = p5*(bsubu(jk,i) + bsubu(jka,ir))
-        bsubva(jk,i) = p5*(bsubv(jk,i) - bsubv(jka,ir))
-        bsubv_0(jk)  = p5*(bsubv(jk,i) + bsubv(jka,ir))
-        bsupua(jk,i) = p5*(bsupu(jk,i) - bsupu(jka,ir))
-        bsupu_0(jk)  = p5*(bsupu(jk,i) + bsupu(jka,ir))
-        bsupva(jk,i) = p5*(bsupv(jk,i) - bsupv(jka,ir))
-        bsupv_0(jk)  = p5*(bsupv(jk,i) + bsupv(jka,ir))
-        jka = nzeta - jk + 1
-
-     END DO
-
-     ir = ntheta3 - i + 1
-
-     bsubu(:,i) = bsubu_0(:)
-     bsubv(:,i) = bsubv_0(:)
-     bsupu(:,i) = bsupu_0(:)
-     bsupv(:,i) = bsupv_0(:)
-
-  END DO
-
-END SUBROUTINE symoutput_sur

@@ -173,8 +173,15 @@ PROGRAM vmec
 
   end if ! (ier_flag .eq. 0) after readin
 
+
+
   ! write output files
   CALL fileout (ier_flag)
+
+
+
+
+
 
   ! free memory
   IF (ALLOCATED(cosmu)) then

@@ -154,10 +154,11 @@
   END SELECT
 
   IF (ncurr.eq.0) THEN
-      WRITE (nthreed,140)
+      WRITE(nthreed,140)
+      WRITE(nthreed,143) TRIM(piota_type)
+      WRITE(nthreed,132)
       !  Print out ai array
       WRITE(nthreed,135)(ai(i-1),i=1, SIZE(ai))
-      WRITE(nthreed,143) TRIM(piota_type)
       SELECT CASE(TRIM(piota_type))
       CASE ('Akima_spline','cubic_spline')
          WRITE(nthreed,"(' ai_aux_s is' )")
@@ -181,8 +182,7 @@
       END SELECT
   ENDIF
 
-140 FORMAT(/' IOTA PROFILE COEFFICIENTS ai (EXPANSION IN NORMALIZED RADIUS):',/,1x,35('-'))
-142 FORMAT(/' SAFETY-FACTOR (q) PROFILE COEFFICIENTS ai (EXPANSION IN NORMALIZED RADIUS):',/,1x,35('-'))
+140 FORMAT(/' IOTA PROFILE COEFFICIENTS ai (EXPANSION IN NORMALIZED RADIUS):')
 143 FORMAT(' PIOTA parameterization type is ''', a,'''')
 145 FORMAT(/' TOROIDAL CURRENT DENSITY (*V'') COEFFICIENTS ac (EXPANSION IN NORMALIZED RADIUS):')
 146 FORMAT(' PCURR parameterization type is ''', a,'''')

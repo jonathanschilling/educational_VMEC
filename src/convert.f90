@@ -1,12 +1,12 @@
 !> \file
-SUBROUTINE convert(rmnc,zmns,lmns,rmns,zmnc,lmnc,rzl_array,js)
+SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
   USE vmec_main
   USE vmec_params
   IMPLICIT NONE
 
-  INTEGER js
+  INTEGER, INTENT(in) :: js
   REAL(rprec), DIMENSION(mnmax), INTENT(out) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
-  REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), INTENT(in) :: rzl_array
+  REAL(rprec), DIMENSION(ns, 0:ntor, 0:mpol1, 3*ntmax), INTENT(in) :: rzl_array
 
   REAL(rprec), PARAMETER :: p5 = 0.5_dp
 

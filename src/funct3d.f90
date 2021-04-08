@@ -38,8 +38,8 @@ SUBROUTINE funct3d (ier_flag)
 
      ! SUM SYMMETRIC, ANTISYMMETRIC PIECES APPROPRIATELY
      ! TO GET R, Z, L, (AND RCON, ZCON) ON FULL RANGE OF u (0 to 2*pi)
-     CALL symrzl (r1, ru, rv, z1, zu, zv, lu, lv, rcon, zcon, armn,             &
-                  brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2)
+     CALL symrzl (  r1,   ru,     rv,   z1,   zu,     zv,   lu,   lv,   rcon,   zcon, &
+                  armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
   ! u = pi, v = 0, js = ns
@@ -76,8 +76,7 @@ SUBROUTINE funct3d (ier_flag)
 
   ! COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC
   ! PRESSURE, AND METRIC ELEMENTS ON HALF-GRID
-  ! FIX THIS: last arg used elsewhere!
-  CALL bcovar (lu, lv, xc(1+2*irzloff+mns*(zsc-1)))
+  CALL bcovar (lu, lv)
 
   ! COMPUTE VACUUM MAGNETIC PRESSURE AT PLASMA EDGE
   ! NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR

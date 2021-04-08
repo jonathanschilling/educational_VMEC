@@ -20,27 +20,36 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
   ! IF ncurr == 1
   !IF (.not.lcurrent .or. ncurr.eq.0) GOTO 100
   IF (lcurrent .and. ncurr.ne.0) then
+     ! given current profile and lcurrent set --> compute fluxes, iota consistent with given current profile
      DO js = 2, ns
         top = icurv(js)
         bot = 0
         DO l = js, nrzt, ns
            top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))
-           bot = bot + wint(l)*overg(l)*guu(l)
+           bot = bot + wint(l)* guu(l)*overg(l)
         END DO
-        IF (bot .ne. zero) chips(js) = top/bot
-        IF (phips(js) .ne. zero) iotas(js) = chips(js)/phips(js)
+        IF (bot .ne. zero) then
+           chips(js) = top/bot
+        end if
+        IF (phips(js) .ne. zero) then
+           iotas(js) = chips(js)/phips(js)
+        end if
      END DO
   end if
 
   IF (ncurr .eq. 0) THEN
+     ! given iota profile: compute chips from iotas, phips
      chips = iotas*phips
   ELSE IF (.not.lcurrent) THEN
+     ! given current profile, but .not. lcurrent (???): compute iotas from chips, phips
      WHERE (phips .ne. zero) iotas = chips/phips
   END IF
 
   DO js = 2, ns
      chip(js:nrzt:ns) = chips(js)
   END DO
+
+  ! half-grid to full-grid for chi-prime and iota below
 
   chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2
   chipf(ns)    = 2*chips(ns)-chips(ns1)
@@ -52,6 +61,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
      iotaf(js) = p5*(iotas(js) + iotas(js+1))
   END DO
 
+  ! what is this?
   bsupu(:nrzt) = bsupu(:nrzt)+chip(:nrzt)*overg(:nrzt)
 
 END SUBROUTINE add_fluxes

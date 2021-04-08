@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE bcovar (lu, lv, lmnsc00)
+SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
   USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale
   USE realspace
@@ -13,7 +13,6 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lu, lv
-  REAL(rprec), DIMENSION(ns), INTENT(inout) :: lmnsc00
 
   ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1)
   ! (STORED IN VMEC_PARAMS)
@@ -28,14 +27,20 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   ndim = 1+nrzt
 
   ! POINTER ALIAS ASSIGNMENTS
-  tau => extra1(:,1);  luu => extra2(:,1);
-  luv => extra3(:,1);  lvv => extra4(:,1)
+  tau => extra1(:,1)
+  luu => extra2(:,1)
+  luv => extra3(:,1)
+  lvv => extra4(:,1)
 
-  bsupu => luu;  bsubuh => bsubu_o
-  bsupv => luv;  bsubvh => bsubv_o
-  r12sq => bsq
+  bsupu  => luu
+  bsupv  => luv
+  bsubuh => bsubu_o
+  bsubvh => bsubv_o
+  r12sq  => bsq
 
-  guu(ndim) = 0;  guv = 0;  gvv = 0
+  guu(ndim) = 0
+  guv = 0
+  gvv = 0
 
   ! COMPUTE METRIC ELEMENTS GIJ ON HALF MESH
   ! FIRST, GIJ = EVEN PART (ON FULL MESH), LIJ = ODD PART (ON FULL MESH)
@@ -115,7 +120,7 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   lv = lv*lamscale
 
   DO js=1,ns
-     lu(js:nrzt:ns,0)=lu(js:nrzt:ns,0)+phipf(js)
+     lu(js:nrzt:ns,0) = lu(js:nrzt:ns,0) + phipf(js)
   END DO
 
   bsupu(2:nrzt) = p5*phipog(2:nrzt)*(lv(2:nrzt,0) + lv(1:nrzt-1,0)  &
@@ -123,13 +128,14 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   bsupv(2:nrzt) = p5*phipog(2:nrzt)*(lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
                 + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1)))
 
+  bsupu(1)=0
+  bsupv(1)=0
   ! v8.49: add ndim points
-  bsupu(1)=0;  bsupu(ndim)=0
-  bsupv(1)=0;  bsupv(ndim)=0
+  bsupu(ndim)=0
+  bsupv(ndim)=0
 
   ! UPDATE IOTA EITHER OF TWO WAYS:
-  ! 1)  FOR ictrl_prec2d = 0, SOLVE THE LINEAR ALGEBRAIC EQUATION <Bsubu> = icurv
-  !     FOR iotas
+  ! 1)  FOR ictrl_prec2d = 0, SOLVE THE LINEAR ALGEBRAIC EQUATION <Bsubu> = icurv FOR iotas
   ! 2)  FOR ictrl_prec2d > 0, EVOLVE IOTAS IN TIME, USING Force-iota  = <Bsubu> - icurv.
   !
   ! NEED TO DO IT WAY (#2) TO EASILY COMPUTE THE HESSIAN ELEMENTS DUE TO LAMBDA-VARIATIONS.
@@ -145,7 +151,8 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   bsubvh(1:nrzt)=guv(1:nrzt)*bsupu(1:nrzt)+gvv(1:nrzt)*bsupv(1:nrzt)
 
   ! v8.49
-  bsubuh(ndim) = 0; bsubvh(ndim) = 0
+  bsubuh(ndim) = 0
+  bsubvh(ndim) = 0
 
   ! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH
   bsq(:nrzt) = p5*(bsupu(:nrzt)*bsubuh(:nrzt) + bsupv(:nrzt)*bsubvh(:nrzt))
@@ -173,9 +180,10 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
               +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))
 
   ! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
-  !WAC: UPDATE buco, bvco AFTER pressure called
   CALL calc_fbal(bsubuh, bsubvh)
 
+  ! fpsi is simply an alias to bvco (which is filled in calc_fbal)
+  ! --> why not use bvco here ???
   rbtor0= c1p5*fpsi(2)  - p5*fpsi(3)
   rbtor = c1p5*fpsi(ns) - p5*fpsi(ns-1)
 
@@ -201,7 +209,7 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
      lvv(l:nrzt:ns) = bdamp(l)
   END DO
 
-  ! COMMENTED OUT BY SAL
+  ! COMMENTED OUT BY SAL --> why does this check hurt ?
   ! IF (ANY(bsubuh(1:ndim:ns) .ne. zero)) STOP 'BSUBUH != 0 AT JS=1'
   ! IF (ANY(bsubvh(1:ndim:ns) .ne. zero)) STOP 'BSUBVH != 0 AT JS=1'
 
@@ -231,8 +239,10 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
 
      rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
      rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
-     frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1);  rzu_fac = rzu_fac/2
-     fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1);  rru_fac = rru_fac/2
+     frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1)
+     fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1)
+     rzu_fac = rzu_fac/2
+     rru_fac = rru_fac/2
 
      volume = hs*SUM(vp(2:ns))
      r2 = MAX(wb,wp)/volume
@@ -248,7 +258,7 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
      ! OVERRIDE USER INPUT VALUE HERE
      r2 = ns
      tcon0 = MIN(ABS(tcon0), one)                              ! ignore large tcon0 from old-style files
-     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
+     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120))) ! what kind of function is mimiced here?
 
      tcon_mul = tcon_mul/((4*r0scale**2)**2)                   ! Scaling of ard, azd (2*r0scale**2);
                                                                ! Scaling of cos**2 in alias (4*r0scale**2)
@@ -270,7 +280,7 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
   ! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH
   ! FOR FORCE BALANCE AND RETURN (IEQUI=1)
   IF (iequi .eq. 1) THEN
-
+     ! final call from fileout --> compute additional stuff
      DO js = ns-1,2,-1
         DO l = js, nrzt, ns
            bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)
@@ -291,21 +301,22 @@ SUBROUTINE bcovar (lu, lv, lmnsc00)
      bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
      bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-     RETURN
+  else
+     ! iequi != 1 --> normal iterations
+
+     ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
+     bsubu_e = -lamscale*bsubu_e
+     bsubv_e = -lamscale*bsubv_e
+     bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
+     bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
+
+     ! STORE LU * LV COMBINATIONS USED IN FORCES
+     lvv(2:nrzt) = gsqrt(2:nrzt)
+     guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
+     guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+     gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+     lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
+     lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
   END IF
-
-  ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
-  bsubu_e = -lamscale*bsubu_e
-  bsubv_e = -lamscale*bsubv_e
-  bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
-  bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
-
-  ! STORE LU * LV COMBINATIONS USED IN FORCES
-  lvv(2:nrzt) = gsqrt(2:nrzt)
-  guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
-  guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-  gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-  lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
-  lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
 END SUBROUTINE bcovar

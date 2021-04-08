@@ -125,7 +125,8 @@ SUBROUTINE funct3d (ier_flag)
         zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
 
         CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
-                     ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag)
+                     ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag, &
+                     lasym)
 
         IF (ier_flag .ne. 0) then
            ! some error occured within NESTOR, so cancel the iterations

@@ -1,10 +1,11 @@
 !> \file
-SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax)
+SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym)
   USE vacmod
   IMPLICIT NONE
 
-  INTEGER mnmax
+  INTEGER, intent(in) :: mnmax
   REAL(rprec), DIMENSION(mnmax) :: rc, rs, zs, zc, xm, xn
+  logical, intent(in) :: lasym
 
   INTEGER :: i, mn, m, n, n1
   REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruu, ruv, rvv, zuu, zuv, zvv

@@ -48,7 +48,6 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      ! Old FORMAT: may not be reading in ac
      ac = ai
   end if
-
   WHERE (ac .eq. cbig) ac = zero
 
   ! COMPUTE NTHETA, NZETA VALUES
@@ -64,14 +63,11 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
     ntheta = 2*mpol+6
   ENDIF
 
-  ntheta1 = 2*(ntheta/2)
+  ntheta1 = 2*(ntheta/2) ! even (rounded down) ntheta
   ! u = pi
-  ntheta2 = 1 + ntheta1/2
-  IF (ntor .eq. 0) then
-     lthreed = .false.
-  else
-     lthreed = .true.
-  end if
+  ntheta2 = 1 + ntheta1/2 ! odd stellarator-symmetric little-more-than-half of ntheta
+
+  lthreed = (ntor .gt. 0)
 
   IF (ntor.eq.0 .and. nzeta.eq.0) then
      ! Tokamak (ntor=0) needs nzeta=1
@@ -120,7 +116,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
 
 
 
-  ! below stuff is required for NESTOR
+  ! below stuff is required only for NESTOR
   mf = mpol+1
   nf = ntor
   nu = ntheta1

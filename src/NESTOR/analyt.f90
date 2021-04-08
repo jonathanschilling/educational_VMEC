@@ -1,11 +1,12 @@
 !> \file
-SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim)
+SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim, lasym)
   USE vacmod
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ivacskip, ndim
   REAL(rprec), INTENT(out) :: grpmn(nuv2*mnpd2)
   REAL(rprec), INTENT(out) :: bvec(mnpd2)
+  integer, intent(in) :: lasym
 
   INTEGER :: l, n, m
   REAL(rprec), DIMENSION(:), ALLOCATABLE ::                         &
@@ -125,10 +126,10 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim)
 
            IF (n.eq.0 .or. m.eq.0) THEN
              ! 1. n = 0 and  m >= 0  OR n > 0 and m = 0
-             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, ndim)
+             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, ndim, lasym)
            ELSE
              ! 2. n>=1  and  m>=1
-             CALL analysum2 (grpmn, bvec, slm, tlm, slp, tlp, m, n, l, ivacskip, ndim)
+             CALL analysum2 (grpmn, bvec, slm, tlm, slp, tlp, m, n, l, ivacskip, ndim, lasym)
            ENDIF
         END DO
      END DO

@@ -1,11 +1,12 @@
 !> \file
-SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip)
+SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
   USE vacmod
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ns, ivacskip
   REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2)
   REAL(rprec), INTENT(in) :: wint(*)
+  logical, intent(in) :: lasym
 
   INTEGER :: ip, istore, istart, istore_max, ndim
   REAL(rprec), ALLOCATABLE :: grpmn(:), green(:), gstore(:)
@@ -26,7 +27,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip)
   ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
 
   ndim = mnpd2/mnpd
-  CALL analyt (grpmn, bvec, ivacskip, ndim)
+  CALL analyt (grpmn, bvec, ivacskip, ndim, lasym)
 
   IF (ivacskip .ne. 0) THEN
      bvec = bvec + bvecsav
@@ -73,7 +74,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip)
 
      ! COMPUTE FOURIER INTEGRAL OF GRADIENT (GRPMN) OVER PRIMED MESH IN EQ. 2.14
      ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
-     CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, ndim, ns)
+     CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, ndim, ns, lasym)
 
      DEALLOCATE (green, greenp, gstore)
   ENDIF

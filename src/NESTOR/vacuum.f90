@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
                   plascur, rbtor, wint, ns, ivac_skip, ivac,      &
-                  mnmax, ier_flag)
+                  mnmax, ier_flag, lasym)
   USE vacmod
   USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
@@ -12,6 +12,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   REAL(rprec) :: plascur, rbtor
   REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
+  logical, intent(in) :: lasym
 
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
@@ -66,12 +67,14 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   !
   ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
 
-  IF (.not. ALLOCATED(tanu)) CALL precal
-  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax)
+  IF (.not. ALLOCATED(tanu)) then
+     CALL precal
+  end if
+  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym)
   CALL bextern (plascur, wint, ns)
 
   ! Determine scalar magnetic potential POTVAC
-  CALL scalpot (potvac, amatrix, wint, ns, ivac_skip)
+  CALL scalpot (potvac, amatrix, wint, ns, ivac_skip, lasym)
   CALL solver (amatrix, potvac, mnpd2, 1, info)
   IF (info .ne. 0) STOP 'Error in solver in VACUUM'
 

@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, ndim)
+SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, ndim, lasym)
   USE vacmod
   IMPLICIT NONE
 
@@ -7,6 +7,7 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, ndim)
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
   REAL(rprec), INTENT(inout) :: bvec(0:mf,-nf:nf,ndim)
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: sl, tl
+  logical, intent(in) :: lasym
 
   INTEGER :: i
   REAL(rprec) :: sinp, cosp

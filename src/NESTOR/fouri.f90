@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns)
+SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
   USE vacmod
   IMPLICIT NONE
 
@@ -10,6 +10,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns)
   REAL(rprec), DIMENSION(mnpd2,mnpd2), INTENT(out) :: amatsq
   REAL(rprec), DIMENSION(0:mf,-nf:nf,ndim), INTENT(inout) :: bvec
   REAL(rprec), DIMENSION(*) :: wint
+  logical, intent(in) :: lasym
 
   !> interior  (int_ext=-1), exterior  (int_ext=+1)  neumann problem
   REAL(rprec), PARAMETER :: int_ext = 1

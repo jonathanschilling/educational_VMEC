@@ -62,8 +62,10 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
   source = p5*onp*source
 
   ! INITIALIZE RUNNING-SUM ARRAYS
-  bcos = 0;      bsin = 0
-  actemp = 0;    astemp = 0
+  bcos = 0
+  bsin = 0
+  actemp = 0
+  astemp = 0
   amatrix = 0
 
   ! PERFORM KV (TOROIDAL ANGLE) TRANSFORM

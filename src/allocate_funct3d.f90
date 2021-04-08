@@ -28,11 +28,17 @@ SUBROUTINE allocate_funct3d
   IF (lfreeb) THEN
      ALLOCATE (brv(nznt), bphiv(nznt), bzv(nznt), bsqvac(nznt), stat=istat1)
      IF (istat1.ne.0) STOP 'allocation error #2 in allocate_funct3d'
-     brv=0; bphiv=0; bzv=0; bsqvac=0
+
+     brv=0
+     bphiv=0
+     bzv=0
+
+     bsqvac=0
   END IF
 
   ALLOCATE (extra1(ndim,0:1), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_funct3d'
+
   extra1=0
 
   IF (lasym) THEN
@@ -41,34 +47,45 @@ SUBROUTINE allocate_funct3d
      ALLOCATE (extra2(ndim,  1), extra3(ndim,  1), extra4(ndim,  1), stat=istat1)
   END IF
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_funct3d'
-  extra2=0; extra3=0; extra4=0
+
+  extra2=0
+  extra3=0
+  extra4=0
 
   ! Pointer alias assignments
   ! NOTE: In FORCES, X_e(nrzt+1) overlaps X_o(1), which should never be used...
   armn_e => armn(:ndim)
   armn_o => armn(ndim:)
   armn(:ndim2) = zero
+
   brmn_e => brmn(:ndim)
   brmn_o => brmn(ndim:)
   brmn(:ndim2) = zero
+
   azmn_e => azmn(:ndim)
   azmn_o => azmn(ndim:)
   azmn(:ndim2) = zero
+
   bzmn_e => bzmn(:ndim)
   bzmn_o => bzmn(ndim:)
   bzmn(:ndim2) = zero
+
   crmn_e => crmn(:ndim)
   crmn_o => crmn(ndim:)
   crmn(:ndim2) = zero
+
   czmn_e => czmn(:ndim)
   czmn_o => czmn(ndim:)
   czmn(:ndim2) = zero
+
   blmn_e => blmn(:ndim)
   blmn_o => blmn(ndim:)
   blmn(:ndim2) = zero
+
   clmn_e => clmn(:ndim)
   clmn_o => clmn(ndim:)
   clmn(:ndim2) = zero
+
   rcon0(:ndim) = zero
   zcon0(:ndim) = zero
 

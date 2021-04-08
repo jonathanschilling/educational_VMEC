@@ -7,7 +7,6 @@ SUBROUTINE free_mem_ns
   USE fbal
   IMPLICIT NONE
 
-
   INTEGER :: istat1 = 0, istat2 = 0, istat3 = 0, istat4 = 0, &
              istat5 = 0, istat6 = 0, istat7 = 0, istat8 = 0, &
              istat9 = 0, istat10 = 0

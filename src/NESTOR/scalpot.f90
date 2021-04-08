@@ -13,7 +13,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
   REAL(rprec), ALLOCATABLE :: greenp(:,:)
 
   IF (.not.ALLOCATED(amatsav)) then
-     STOP 'AMATSAV: Allocation error in scalpot'
+     STOP 'AMATSAV not allocated in scalpot'
   end if
 
   ALLOCATE (grpmn(nuv2*mnpd2), stat=ip)

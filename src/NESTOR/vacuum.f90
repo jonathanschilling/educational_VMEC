@@ -133,7 +133,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
      bsubuvac = SUM(bsubu(:nuv2)*wint(ns:ns*nuv2:ns))*signgs*pi2
      bsubvvac = SUM(bsubv(:nuv2)*wint(ns:ns*nuv2:ns))
 
-     fac = 1.e-6_dp/mu0
+     fac = 1.e-6_dp/mu0 ! currents in MA
      WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
      WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
 1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &

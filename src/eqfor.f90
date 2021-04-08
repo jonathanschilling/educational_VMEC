@@ -228,6 +228,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   ! (EXTRACTED FROM FQ-CODE, 9-10-92)
   !
   ! b poloidals (cylindrical estimates)
+  rcen = p5*(router + rinner)               !geometric center
   n = 0
   n1 = n + 1
   rcenin = DOT_PRODUCT(rmncc(ns,n1,:mpol1+1:2), mscale(:mpol1:2)*nscale(n))

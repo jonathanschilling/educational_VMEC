@@ -36,6 +36,8 @@ MODULE vmec_main
      fnorm, fsqr=1, fsqz=1, fsql=1, fnorm1, fnorml, &
      fsqr1, fsqz1, fsql1, fsq, fedge, wb, wp
 
+  REAL(rprec) :: router, rinner
+
   REAL(rprec) :: ftolv
 
   !> time-step algorithm

@@ -44,6 +44,8 @@ SUBROUTINE funct3d (ier_flag)
 
   ! u = pi, v = 0, js = ns
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
+  router = r1(  ns,0) + r1(  ns,1)
+  rinner = r1(l0pi,0) + r1(l0pi,1)
   r00 = r1(1,0)
   z00 = z1(1,0)
 

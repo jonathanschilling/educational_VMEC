@@ -38,6 +38,15 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      RETURN
   ENDIF
 
+  ! fixup current profile
+  IF (ncurr.eq.1 .and. ALL(ac.eq.cbig)) then
+     ! previous version input of current profile: via ai (iota profile coeffs)
+     ! Old FORMAT: may not be reading in ac
+     ac = ai
+  end if
+
+  WHERE (ac .eq. cbig) ac = zero
+
   ! COMPUTE NTHETA, NZETA VALUES
   mpol = ABS(mpol)
   ntor = ABS(ntor)
@@ -78,14 +87,6 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   ! SIZE of rmncc, rmnss, ...
   mnsize = mpol*ntor1
 
-  mf = mpol+1
-  nf = ntor
-  nu = ntheta1
-  nv = nzeta
-  mf1 = 1+mf
-  nf1 = 2*nf+1
-  mnpd = mf1*nf1
-
   ! INDEXING FOR PACKED-ARRAY STRUCTURE OF XC, GC
   rcc = 1;  zsc = 1
   rss = 0;  rsc = 0;  rcs = 0
@@ -93,7 +94,6 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   IF (.NOT.lasym) THEN
      ! can make use of Stellarator symmetry
      ntheta3 = ntheta2
-     mnpd2 = mnpd
      IF (lthreed) THEN
         ntmax = 2
         rss = 2;  zcs = 2
@@ -102,7 +102,6 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      END IF
   ELSE
      ntheta3 = ntheta1
-     mnpd2 = 2*mnpd
      IF (lthreed) THEN
          ntmax = 4
          rss = 2;  rsc = 3;  rcs = 4
@@ -113,19 +112,30 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      END IF
   END IF
 
-  nuv = nu*nv
   nznt = nzeta*ntheta3
+
+
+
+  ! below stuff is required for NESTOR
+  mf = mpol+1
+  nf = ntor
+  nu = ntheta1
+  nv = nzeta
+  mf1 = 1+mf
+  nf1 = 2*nf+1
+  mnpd = mf1*nf1
+
+  IF (.NOT.lasym) THEN
+    mnpd2 = mnpd
+  ELSE
+    mnpd2 = 2*mnpd
+  END IF
+
+  nuv = nu*nv
   nfper = nfp
   nu2 = nu/2 + 1
   nu3 = ntheta3
   nuv2 = nznt
 
-  IF (ncurr.eq.1 .and. ALL(ac.eq.cbig)) then
-     ! previous version input of current profile: via ai (iota profile coeffs)
-     ! Old FORMAT: may not be reading in ac
-     ac = ai
-  end if
-
-  WHERE (ac .eq. cbig) ac = zero
 
 END SUBROUTINE read_indata

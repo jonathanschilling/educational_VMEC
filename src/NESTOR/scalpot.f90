@@ -77,15 +77,14 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
      CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, ndim, ns, lasym)
 
      DEALLOCATE (green, greenp, gstore)
+
+     ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
+     bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)
+
   ENDIF
 
   DEALLOCATE (grpmn)
 
   amatrix = amatsav
-
-  IF (ivacskip .ne. 0) RETURN
-
-  ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
-  bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)
 
 END SUBROUTINE scalpot

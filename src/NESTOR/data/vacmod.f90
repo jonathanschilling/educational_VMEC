@@ -8,9 +8,11 @@ MODULE vacmod
   USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: p5 = cp5, two = c2p0
+  REAL(rprec), PARAMETER :: p5 = cp5
+  REAL(rprec), PARAMETER :: two = c2p0
 
-  INTEGER :: nfper, nvper
+  INTEGER :: nfper
+  INTEGER :: nvper
 
   REAL(rprec) :: bsubvvac
   REAL(rprec) :: pi2

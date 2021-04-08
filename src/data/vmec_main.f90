@@ -16,34 +16,42 @@ MODULE vmec_main
       psi, yellip, yinden, ytrian, yshift, ygeo, overr, &
       sm, sp, pres, vp, jpar2, jperp2, bdotb, &
       blam, clam, dlam, vpphi, presgrad, &
-      r01, z01, bdamp, bucof, bvcof, chi
+      bdamp, bucof, bvcof, chi
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: presf !< pressure profile on full-grid, mass/phip**gamma
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: chips !< poloidal flux (same as chip), one-dimensional array
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: phips !< toroidal flux (same as phip), one-dimensional array
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: iotas !< rotational transform , on half radial mesh
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: icurv !< (-)toroidal current inside flux surface (vanishes like s)
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: mass  !< mass profile on half-grid
-  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam, faclam0
+  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam
+  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam0
 
   REAL(rprec), ALLOCATABLE :: xcl0(:)
 
   REAL(rprec), DIMENSION(0:mpol1d,3) :: xmpq
   REAL(rprec), DIMENSION(0:mpol1d) :: faccon
   REAL(rprec) :: hs !< radial mesh size increment
-  REAL(rprec) :: dcon, currv, aspect, ohs, voli, &
-     signiota, rc0mse, r00, r0scale, z00, dkappa, fsqsum0, &
-     pressum0, fnorm, fsqr=1, fsqz=1, fsql=1, fnorm1, fnorml, &
-     fsqr1, fsqz1, fsql1, fsq, fedge, wb, wp, r00b, z00b, fz00_edge
-  REAL(rprec) :: ftolv, otav, alphaR, alphaZ
+  REAL(rprec) :: currv, aspect, ohs, voli, &
+     r00, r0scale, z00, fsqsum0, &
+     fnorm, fsqr=1, fsqz=1, fsql=1, fnorm1, fnorml, &
+     fsqr1, fsqz1, fsql1, fsq, fedge, wb, wp
+
+  REAL(rprec) :: ftolv
+
+  !> time-step algorithm
+  REAL(rprec) :: otav
   REAL(rprec), DIMENSION(ndamp) :: otau
+
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE, TARGET :: rmn_bdy, zmn_bdy
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bsubu0, dbsq, rbsq
   REAL(rprec) :: rbtor, rbtor0, ctor, delbsq, res0, delt0r
   REAL(rprec), DIMENSION(ndatafmax) :: spfa, spfa2, hp, sifa, sifa2, hi
-  LOGICAL :: lthreed, lconm1
 
-  LOGICAL     :: lflip !< from init_geometry
+  LOGICAL :: lthreed
+  LOGICAL :: lconm1
+
+  LOGICAL :: lflip !< from init_geometry
 
   INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect !< two-dimensional array for computing 2pi-v angle
   INTEGER :: multi_ns_grid

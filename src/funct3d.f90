@@ -168,6 +168,7 @@ SUBROUTINE funct3d (ier_flag)
   ENDIF
 
   IF (iequi .NE. 1) THEN
+     ! normal iterations, not final call from fileout (which sets iequi=1)
 
      ! COMPUTE CONSTRAINT FORCE
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
@@ -210,7 +211,7 @@ SUBROUTINE funct3d (ier_flag)
      end if
 
   ELSE
-     ! iequi == 1 --> skip remainder of funct3d
+     ! iequi == 1 --> skip above remainder of funct3d
   END IF
 
 END SUBROUTINE funct3d

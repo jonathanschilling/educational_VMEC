@@ -29,7 +29,7 @@ SUBROUTINE free_mem_ns(lreset)
        ytrian,yshift,ygeo,overr,faclam,iotas,phips,chips,pres,vp,   &
        beta_vol, jperp2, jpar2, bdotb, clam, blam, dlam, phipf,     &
        chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,   &
-       presgrad, r01, z01, bdamp, stat=istat8)
+       presgrad, bdamp, stat=istat8)
 
   IF (ALLOCATED(gc)) then
     DEALLOCATE (gc, xsave, xstore, xcdot, stat=istat10)

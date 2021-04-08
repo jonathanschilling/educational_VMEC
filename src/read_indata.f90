@@ -54,8 +54,11 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   ntheta1 = 2*(ntheta/2)
   ! u = pi
   ntheta2 = 1 + ntheta1/2
-  IF (ntor .eq. 0) lthreed = .false.
-  IF (ntor .gt. 0) lthreed = .true.
+  IF (ntor .eq. 0) then
+     lthreed = .false.
+  else
+     lthreed = .true.
+  end if
 
   IF (ntor.eq.0 .and. nzeta.eq.0) then
      ! Tokamak (ntor=0) needs nzeta=1

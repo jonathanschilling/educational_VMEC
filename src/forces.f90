@@ -8,25 +8,23 @@ SUBROUTINE forces
                crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: p25 = p5*p5, dshalfds=p25
+  REAL(rprec), PARAMETER :: p25 = p5*p5
+  REAL(rprec), PARAMETER :: dshalfds=p25
 
-  INTEGER :: l, ndim
-  REAL(rprec), DIMENSION(:), POINTER :: bsqr, gvvs, guvs, guus
+  INTEGER :: l
+  INTEGER :: ndim
+  REAL(rprec), DIMENSION(:), POINTER :: bsqr
+  REAL(rprec), DIMENSION(:), POINTER :: gvvs
+  REAL(rprec), DIMENSION(:), POINTER :: guvs
+  REAL(rprec), DIMENSION(:), POINTER :: guus
 
-  ndim = 1+nrzt
-
-  ! POINTER ALIASES
-  bsqr => extra1(:,1);  gvvs => extra2(:,1)
-  guvs => extra3(:,1);  guus => extra4(:,1)
-
-  ! ON ENTRY, ARMN=ZU,BRMN=ZS,AZMN=RU,BZMN=RS,LU=R*BSQ,LV = BSQ*SQRT(G)/R12
+  ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)
   ! BSQ = |B|**2/2 + p
   ! GIJ = (BsupI * BsupJ) * SQRT(G)  (I,J = U,V)
   ! IT IS ESSENTIAL THAT LU,LV AT j=1 ARE ZERO INITIALLY
   !
-  ! SOME OF THE BIGGER LOOPS WERE SPLIT TO FACILITATE CACHE
-  ! HITS, PIPELINING ON RISCS
+  ! SOME OF THE BIGGER LOOPS WERE SPLIT TO FACILITATE CACHE HITS, PIPELINING ON RISCS
   !
   ! ORIGIN OF VARIOUS TERMS
   !
@@ -37,9 +35,23 @@ SUBROUTINE forces
   ! GVV:  VARIATION OF R**2-TERM AND Rv**2,Zv**2 IN gvv
   !
   ! GUU, GUV: VARIATION OF Ru, Rv, Zu, Zv IN guu, guv
-  lu_e(1:ndim:ns) = 0; lv_e(1:ndim:ns) = 0
-  guu(1:ndim:ns)  = 0; guv(1:ndim:ns)  = 0; gvv(1:ndim:ns) = 0
-  guus = guu*shalf;    guvs = guv*shalf;    gvvs = gvv*shalf
+
+  ndim = 1+nrzt
+
+  ! POINTER ALIASES
+  bsqr => extra1(:,1)
+  gvvs => extra2(:,1)
+  guvs => extra3(:,1)
+  guus => extra4(:,1)
+
+  lu_e(1:ndim:ns) = 0
+  lv_e(1:ndim:ns) = 0
+  guu(1:ndim:ns)  = 0
+  guv(1:ndim:ns)  = 0
+  gvv(1:ndim:ns) = 0
+  guus = guu*shalf
+  guvs = guv*shalf
+  gvvs = gvv*shalf
 
   armn_e  = ohs*zu12 * lu_e
   azmn_e  =-ohs*ru12 * lu_e
@@ -53,8 +65,7 @@ SUBROUTINE forces
   bzmn_o(1:ndim)  = bzmn_e(1:ndim) *shalf
 
   ! CONSTRUCT CYLINDRICAL FORCE KERNELS
-  ! NOTE: presg(ns+1) == 0, AND WILL BE "FILLED IN" AT EDGE
-  ! FOR FREE-BOUNDARY BY RBSQ
+  ! NOTE: presg(ns+1) == 0, AND WILL BE "FILLED IN" AT EDGE FOR FREE-BOUNDARY BY RBSQ
   DO l = 1, nrzt
      guu(l) = p5*(guu(l) + guu(l+1))
      gvv(l) = p5*(gvv(l) + gvv(l+1))
@@ -112,7 +123,6 @@ SUBROUTINE forces
      armn_o(ns:nrzt:ns) = armn_o(ns:nrzt:ns) + zu0(ns:nrzt:ns)*rbsq(1:nznt)
      azmn_e(ns:nrzt:ns) = azmn_e(ns:nrzt:ns) - ru0(ns:nrzt:ns)*rbsq(1:nznt)
      azmn_o(ns:nrzt:ns) = azmn_o(ns:nrzt:ns) - ru0(ns:nrzt:ns)*rbsq(1:nznt)
-     ! fz00_edge = SUM(wint(ns:nrzt:ns)*ru0(ns:nrzt:ns)*rbsq(1:nznt))
   ENDIF
 
   ! COMPUTE CONSTRAINT FORCE KERNELS

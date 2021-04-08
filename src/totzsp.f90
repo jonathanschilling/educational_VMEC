@@ -131,11 +131,6 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
   DEALLOCATE (work1)
 
-  z01(1:ns) = zmnsc(1:ns,n0+ioff,m1+joff)
-  r01(1:ns) = rmncc(1:ns,n0+ioff,m1+joff)
-  IF (r01(1) .EQ. zero) STOP 'r01(0) = 0 in totzsps'
-  dkappa = z01(1)/r01(1)
-
 END SUBROUTINE totzsps
 
 
@@ -193,8 +188,6 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
   ioff = LBOUND(rmnsc,2)
   joff = LBOUND(rmnsc,3)
-
-  z00b = zmncc(ns,ioff,joff)
 
   ALLOCATE (work1(ns*nzeta,12), stat=i)
   IF (i .ne. 0) STOP 'Allocation error in VMEC totzspa'

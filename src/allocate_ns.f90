@@ -54,7 +54,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
             phipf(ns), chipf(ns), blam(nsp1), clam(nsp1),           &
             dlam(nsp1), rru_fac(ns), rzu_fac(ns), frcc_fac(ns),     &
             fzsc_fac(ns), icurv(ns+1), vpphi(ns), bdamp(ns),        &
-            presgrad(ns), vp(nsp1), r01(ns), z01(ns), stat=istat1)
+            presgrad(ns), vp(nsp1), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #7 in allocate_ns'
   frcc_fac = 0
   fzsc_fac = 0

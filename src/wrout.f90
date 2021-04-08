@@ -8,10 +8,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   USE vmec_persistent
   USE xstuff
   USE vmec_io
-  USE realspace, ONLY: phip, chip, gsqrta=>z1, z1=>z1
+  USE realspace, ONLY: phip, gsqrta=>z1, z1=>z1
   USE vforces, ONLY: bsupua=>brmn_e, bsupva=>czmn_o, bsqa=>bzmn_e,  &
                      bsubsa=>armn_e, bsubua=>azmn_e, bsubva=>armn_o
-  USE vacmod, ONLY: potvac, mnpd
+  USE vacmod, ONLY: potvac
   USE ezcdf
   USE read_wout_mod, ONLY: vn_version, vn_extension, vn_mgrid,      &
     vn_magen, vn_therm, vn_gam, vn_maxr, vn_minr, vn_maxz, vn_fp,   &
@@ -84,9 +84,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
                r3dim = (/'mn_mode_nyq','radius     '/)
 
   INTEGER :: j, js, jlk, mn, lk,                              &
-             m, n, k, iwout0, n1, nwout, istat, i, indx1(1)
+             m, n, k, iwout0, n1, nwout, istat, indx1(1)
   REAL(rprec) :: dmult, tcosi, tsini, vversion, sgn, tmult,         &
-                 presfactor, ftolx1
+                 ftolx1
   REAL(rprec), POINTER, DIMENSION(:,:) :: rmnc, rmns, zmns, zmnc, lmns, lmnc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: gmnc, bmnc, gmns, bmns, &
     bsubumnc, bsubvmnc, bsubsmns, bsubumns, bsubvmns, bsubsmnc

@@ -2,19 +2,18 @@
   SUBROUTINE readin(input_file, ier_flag)
   USE vmec_main
   USE vmec_params
-  USE mgrid_mod, ONLY: nextcur, curlabel, nfper0, read_mgrid, &
-                       nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
+  USE mgrid_mod, ONLY: nextcur, curlabel, read_mgrid, &
+                       nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
   CHARACTER(LEN=*) :: input_file
 
-  INTEGER :: iexit, ipoint, n, iunit, ier_flag_init, i, ni, m, nsmin, igrid, mj, isgn, ioff, joff
+  INTEGER :: n, iunit, ier_flag_init, i, ni, m, nsmin, mj, isgn, ioff, joff
   REAL(rprec), DIMENSION(:,:), POINTER :: rbcc, rbss, rbcs, rbsc, zbcs, zbsc, zbcc, zbss
   REAL(rprec) :: rtest, ztest, tzc, trc, delta
   REAL(rprec), ALLOCATABLE :: temp(:)
   CHARACTER(LEN=100) :: line, line2
-  CHARACTER(LEN=1)   :: ch1, ch2
 
   ier_flag_init = ier_flag
   ier_flag      = norm_term_flag

@@ -20,9 +20,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   REAL(rprec), PARAMETER :: c1p5=1.5_dp
 
-  INTEGER :: i, icount, itheta, js, js1, l, loff,                       &
-     lpi, lt, n, n1, nchicur, nchiiota0, noff,                          &
-     nout, nsort, iv, iu, lk, nplanes
+  INTEGER :: i, icount, itheta, js, l, loff,                       &
+     lpi, lt, n, n1, noff,                          &
+     iv, iu, lk, nplanes
   REAL(rprec), DIMENSION(:), POINTER :: rmags, zmags, rmaga, zmaga
   REAL(rprec), DIMENSION(:,:,:), POINTER :: rmncc,zmnsc
   REAL(rprec), DIMENSION(ns) :: phi1, chi1, jPS2
@@ -30,21 +30,20 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   REAL(rprec), DIMENSION(:), ALLOCATABLE ::                             &
      btor_vac, btor1, dbtor, phat, t12u, guu_1u, surf_area,             &
      r3v, redge, rbps1u, bpol2vac, phipf_loc
-  REAL(rprec) :: aminr1, aminr2, aminr2in, anorm,                       &
+  REAL(rprec) :: aminr1, aminr2in, anorm,                       &
      aspectratio, betai, betstr, scaling_ratio,                         &
-     bminz2, bminz2in, btor, iotamax, musubi,                           &
-     bzcalc, bzin, chisq, chiwgt, cur0,                                 &
-     delphid_exact, delta1, delta2, delta3, denwgt, lambda,             &
-     dlogidsi, dmusubi_meas, er, es, fac, facnorm, factor, fgeo,        &
-     fmax, fmin, flao, fpsi0, pavg, pitchc, pitchm,                     &
-     pprime, qedge, qmin1, qmin2, qmin3, qzero,                         &
-     raxis0, rcalc, rcen, rcenin, rgeo, rjs,                            &
-     rjs1, rlao, rqmin1, rqmin2, rshaf, rshaf1, rshaf2, s11, s12,       &
+     bminz2, bminz2in, musubi,                           &
+      cur0,                                 &
+     delphid_exact, delta1, delta2, delta3, lambda,             &
+     er, es, fac, facnorm, factor, fgeo,        &
+     flao, fpsi0, pavg,                      &
+     rcen, rcenin, rgeo,                            &
+     rlao, rshaf, rshaf1, rshaf2, s11, s12,       &
      s13, s2, s3, sigr0, sigr1, sigz1, smaleli,                         &
-     sqmin, sumbpol, sumbtot, sumbtor, sump,                            &
+     sumbpol, sumbtot, sumbtor, sump,                            &
      sump2, sump20, t1, tz, jpar_perp=0, jparPs_perp=0,                 &
-     tol, toroidal_flux, vnorm, vprime, wght0, xmax,                    &
-     xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin, zaxis0,            &
+     toroidal_flux, vnorm, xmax,                    &
+     xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin,    &
      zmax, zmin, yr1u, yz1u, waist(2), height(2)
   REAL(rprec) d_of_kappa
 

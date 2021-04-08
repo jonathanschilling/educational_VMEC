@@ -7,8 +7,8 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
 
   REAL(rprec), DIMENSION(mnmax) :: rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1
 
-  INTEGER :: iprint, nzskip, i, l, k, lk, mn,                           &
-             mn0, n, nedge, nedge0 = 99, iu, iv, nl, lkr
+  INTEGER :: iprint, nzskip, l, k, lk, mn,                           &
+             mn0, n, nedge, iu, iv, nl, lkr
   REAL(rprec) :: zeta, potsin, potcos
   REAL(rprec), ALLOCATABLE, DIMENSION(:) :: rb, phib, zb
 

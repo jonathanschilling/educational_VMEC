@@ -5,20 +5,20 @@ MODULE ezcdf_GenGet
   USE netcdf_inc
 
   EXTERNAL handle_err
- 
+
   PRIVATE
 
   INTEGER, PARAMETER :: r4 = SELECTED_REAL_KIND(6,37)
   INTEGER, PARAMETER :: r8 = SELECTED_REAL_KIND(12,100)
   CHARACTER*(*), PARAMETER :: cmplx_name = '__CmPlx_Re_Im'
   PRIVATE :: r4, r8, cmplx_name
- 
+
   PUBLIC :: cdfr_3i, cdfr_3l, cdfr_3d, cdfr_3c16, cdfr_3f, cdfr_3c8,           &
        & cdfr_2i, cdfr_2l, cdfr_2d, cdfr_2c16, cdfr_2f, cdfr_2c8, cdfr_2c,     &
        & cdfr_1i, cdfr_1l, cdfr_1d, cdfr_1c16, cdfr_1f, cdfr_1c8, cdfr_1c,     &
        & cdfr_0i, cdfr_0l, cdfr_0d, cdfr_0c16, cdfr_0f, cdfr_0c8, cdfGetVar,   &
        & cdf_read
- 
+
 
   ! Generic Interface to Read netcdf data Variables
   ! 03/10/99 C. Ludescher
@@ -44,7 +44,7 @@ MODULE ezcdf_GenGet
 
 CONTAINS
 !---------------------------------------------
-!cdfGetVar implementation routines 
+!cdfGetVar implementation routines
 
 SUBROUTINE cdfr_3i(ncid,varnam,varval,ier)
   ! Read 3 dimensional Integer array
@@ -57,12 +57,12 @@ SUBROUTINE cdfr_3i(ncid,varnam,varval,ier)
   integer, dimension(:,:,:), intent(inout) :: varval
   integer, optional,         intent(out) :: ier
   ! Local
-  integer, dimension(3)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j,  k
+  integer, dimension(3)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(3)   :: dimlens
 
   integer, dimension(:,:,:), allocatable :: temp
-  integer :: ndim1, ndim2, ndim3 
+  integer :: ndim1, ndim2, ndim3
 
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
@@ -108,7 +108,7 @@ SUBROUTINE cdfr_3i(ncid,varnam,varval,ier)
 !!$  end do
   if (PRESENT (ier)) ier = 0
 END SUBROUTINE cdfr_3i
- 
+
 SUBROUTINE cdfr_3l(ncid,varnam,varval,ier)
   ! Read 3 dimensional logical array
   !
@@ -123,12 +123,12 @@ SUBROUTINE cdfr_3l(ncid,varnam,varval,ier)
   integer                                :: status
   integer, dimension(:,:,:), allocatable :: varval_i
   character*11, parameter :: logical_name = '__logical__'
- 
+
   ALLOCATE (varval_i(size(varval,1), size(varval,2), size(varval,3)), stat=status)
   if (status .ne. 0) STOP 'Allocation error in cdf_getvar'
- 
+
   call cdfr_3i(ncid,trim(varnam)//logical_name,varval_i,ier)
- 
+
   WHERE (varval_i == 0)
      varval = .false.
   ELSEWHERE
@@ -136,7 +136,7 @@ SUBROUTINE cdfr_3l(ncid,varnam,varval,ier)
   END WHERE
   DEALLOCATE (varval_i)
 END SUBROUTINE cdfr_3l
- 
+
 SUBROUTINE cdfr_3d(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -146,8 +146,8 @@ SUBROUTINE cdfr_3d(ncid,varnam,varval,ier)
   REAL(KIND=r8), dimension(:,:,:), intent(inout) ::  varval
   integer, optional,               intent(out) :: ier
   ! Local
-  integer, dimension(3)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j,  k
+  integer, dimension(3)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(3)   :: dimlens
 
   real(r8), dimension(:,:,:), allocatable :: temp
@@ -209,13 +209,13 @@ SUBROUTINE cdfr_3c16(ncid,varnam,varval,ier)
   COMPLEX(KIND=r8), dimension(:,:,:), intent(inout) ::  varval
   integer, optional,               intent(out) :: ier
   ! Local
-  integer, dimension(3)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j,  k, i
+  integer, dimension(3)   :: ldim
+  integer                 :: varid,  status, i
   integer, dimension(3)   :: dimlens
 
   real(r8), dimension(:,:,:), allocatable :: temp
   integer ndim1, ndim2, ndim3
- 
+
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
   ldim(1) = 2*ldim(1) ! Re/Im pairs
@@ -242,7 +242,7 @@ SUBROUTINE cdfr_3c16(ncid,varnam,varval,ier)
      do i = 1, ndim1/2
         varval(i, 1:ndim2, 1:ndim3) = temp(2*(i-1)+1, 1:ndim2, 1:ndim3) +  &
              & (0._r8,1._r8)*temp(2*(i-1)+2, 1:ndim2, 1:ndim3)
-     enddo 
+     enddo
      deallocate(temp)
   endif
 !!$
@@ -274,8 +274,8 @@ SUBROUTINE cdfr_3f(ncid,varnam,varval,ier)
   REAL(KIND=r4), dimension(:,:,:), intent(inout) ::  varval
   integer, optional,               intent(out) :: ier
   ! Local
-  integer, dimension(3)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j,  k
+  integer, dimension(3)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(3)   :: dimlens
 
   real, dimension(:,:,:), allocatable :: temp
@@ -335,13 +335,13 @@ SUBROUTINE cdfr_3c8(ncid,varnam,varval,ier)
   COMPLEX(KIND=r4), dimension(:,:,:), intent(inout) ::  varval
   integer, optional,               intent(out) :: ier
   ! Local
-  integer, dimension(3)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j,  k
+  integer, dimension(3)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(3)   :: dimlens
 
   real, dimension(:,:,:), allocatable :: temp
   integer ndim1, ndim2, ndim3, i
- 
+
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
   ldim(1) = 2*ldim(1) ! Re/Im pairs
@@ -368,7 +368,7 @@ SUBROUTINE cdfr_3c8(ncid,varnam,varval,ier)
      do i = 1, ndim1/2
         varval(i, 1:ndim2, 1:ndim3) = temp(2*(i-1)+1, 1:ndim2, 1:ndim3) +  &
              & (0.,1.)*temp(2*(i-1)+2, 1:ndim2, 1:ndim3)
-     enddo 
+     enddo
      deallocate(temp)
   endif
 
@@ -390,7 +390,7 @@ SUBROUTINE cdfr_3c8(ncid,varnam,varval,ier)
 !!$  end do
   if (PRESENT (ier)) ier = 0
 END SUBROUTINE cdfr_3c8
- 
+
 SUBROUTINE cdfr_2i(ncid,varnam,varval,ier)
   ! Read 2 dimensional Integer array
   !
@@ -402,8 +402,8 @@ SUBROUTINE cdfr_2i(ncid,varnam,varval,ier)
   integer, dimension(:,:), intent(inout) :: varval
   integer, optional,       intent(out) :: ier
   ! Local
-  integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j
+  integer, dimension(2)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(2)   :: dimlens
 
   integer, dimension(:,:), allocatable :: temp
@@ -448,7 +448,7 @@ SUBROUTINE cdfr_2i(ncid,varnam,varval,ier)
 !!$  end do
   if (PRESENT (ier)) ier = 0
 END SUBROUTINE cdfr_2i
- 
+
 SUBROUTINE cdfr_2l(ncid,varnam,varval,ier)
   ! Read 2 dimensional logical array
   !
@@ -463,12 +463,12 @@ SUBROUTINE cdfr_2l(ncid,varnam,varval,ier)
   integer                              :: status
   integer, dimension(:,:), allocatable :: varval_i
   character*11, parameter :: logical_name = '__logical__'
- 
+
   ALLOCATE (varval_i(size(varval,1), size(varval,2)), stat=status)
   if (status .ne. 0) STOP 'Allocation error in cdf_getvar'
- 
+
   call cdfr_2i(ncid,trim(varnam)//logical_name,varval_i,ier)
- 
+
   WHERE (varval_i == 0)
      varval = .false.
   ELSEWHERE
@@ -476,7 +476,7 @@ SUBROUTINE cdfr_2l(ncid,varnam,varval,ier)
   END WHERE
   DEALLOCATE (varval_i)
 END SUBROUTINE cdfr_2l
- 
+
 SUBROUTINE cdfr_2d(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -486,8 +486,8 @@ SUBROUTINE cdfr_2d(ncid,varnam,varval,ier)
   REAL(KIND=r8), dimension(:,:), intent(inout) ::  varval
   integer, optional,             intent(out) :: ier
   ! Local
-  integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j
+  integer, dimension(2)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(2)   :: dimlens
 
   real(r8), dimension(:,:), allocatable :: temp
@@ -542,13 +542,13 @@ SUBROUTINE cdfr_2c16(ncid,varnam,varval,ier)
   COMPLEX(KIND=r8), dimension(:,:), intent(inout) ::  varval
   integer, optional,             intent(out) :: ier
   ! Local
-  integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j, i
+  integer, dimension(2)   :: ldim
+  integer                 :: varid,  status, i
   integer, dimension(2)   :: dimlens
 
   real(r8), dimension(:,:), allocatable :: temp
   integer ndim1, ndim2
- 
+
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
   ldim(1) = 2*ldim(1) ! Re/Im pairs
@@ -601,8 +601,8 @@ SUBROUTINE cdfr_2f(ncid,varnam,varval,ier)
   REAL(KIND=r4), dimension(:,:), intent(inout) ::  varval
   integer, optional,             intent(out) :: ier
   ! Local
-  integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j
+  integer, dimension(2)   :: ldim
+  integer                 :: varid,  status
   integer, dimension(2)   :: dimlens
 
   real, dimension(:,:), allocatable :: temp
@@ -657,13 +657,13 @@ SUBROUTINE cdfr_2c8(ncid,varnam,varval,ier)
   COMPLEX(KIND=r4), dimension(:,:), intent(inout) ::  varval
   integer, optional,             intent(out) :: ier
   ! Local
-  integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, j, i
+  integer, dimension(2)   :: ldim
+  integer                 :: varid,  status, i
   integer, dimension(2)   :: dimlens
 
   real(r8), dimension(:,:), allocatable :: temp
   integer ndim1, ndim2
- 
+
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
   ldim(1) = 2*ldim(1) ! Re/Pairs
@@ -717,7 +717,7 @@ SUBROUTINE cdfr_2c(ncid,varnam,varval,ier)
   integer, optional,          intent(out) :: ier
   ! Local
   integer, dimension(2)   :: st,     cnt,    ldim
-  integer                 :: varid,  status, charlen, j
+  integer                 :: varid,  status, j
   integer, dimension(2)   :: dimlens
   if (PRESENT (ier)) ier = 1
   ldim(1) = len(varval)
@@ -739,7 +739,7 @@ SUBROUTINE cdfr_2c(ncid,varnam,varval,ier)
   end do
   if (PRESENT (ier)) ier = 0
 END SUBROUTINE cdfr_2c
- 
+
 SUBROUTINE cdfr_1i(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -760,7 +760,7 @@ SUBROUTINE cdfr_1i(ncid,varnam,varval,ier)
   call handle_err(status,varnam,'cdfr_1i','nf_get_var_int')
   if (PRESENT (ier)) ier = status
 END SUBROUTINE cdfr_1i
- 
+
 SUBROUTINE cdfr_1l(ncid,varnam,varval,ier)
   ! Read 1 dimensional logical array
   !
@@ -775,12 +775,12 @@ SUBROUTINE cdfr_1l(ncid,varnam,varval,ier)
   integer                            :: status
   integer, dimension(:), allocatable :: varval_i
   character*11, parameter :: logical_name = '__logical__'
- 
+
   ALLOCATE (varval_i(size(varval,1)), stat=status)
   if (status .ne. 0) STOP 'Allocation error in cdf_getvar'
- 
+
   call cdfr_1i(ncid,trim(varnam)//logical_name,varval_i,ier)
- 
+
   WHERE (varval_i == 0)
      varval = .false.
   ELSEWHERE
@@ -788,7 +788,7 @@ SUBROUTINE cdfr_1l(ncid,varnam,varval,ier)
   END WHERE
   DEALLOCATE (varval_i)
 END SUBROUTINE cdfr_1l
- 
+
 SUBROUTINE cdfr_1d(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -818,7 +818,7 @@ SUBROUTINE cdfr_1c16(ncid,varnam,varval,ier)
   ! Output
   COMPLEX(KIND=r8), dimension(:), intent(inout) :: varval
   integer, optional,           intent(out) :: ier
- 
+
   ! Local
   integer                 :: varid,  status
   integer, dimension(1)   :: dimlens,ldim
@@ -865,7 +865,7 @@ SUBROUTINE cdfr_1c8(ncid,varnam,varval,ier)
   ! Local
   integer                 :: varid,  status
   integer, dimension(1)   :: dimlens,ldim
- 
+
   if (PRESENT (ier)) ier = 1
   ldim = shape(varval)
   ldim(1) = 2*ldim(1)
@@ -897,7 +897,7 @@ SUBROUTINE cdfr_1c(ncid,varnam,varval,ier)
   call handle_err(status,varnam,'cdfr_1c','nf_get_var_text')
   if (PRESENT (ier)) ier = status
 END SUBROUTINE cdfr_1c
- 
+
 SUBROUTINE cdfr_0i(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -918,7 +918,7 @@ SUBROUTINE cdfr_0i(ncid,varnam,varval,ier)
   call handle_err(status,varnam,'cdfr_0i','nf_get_var_int')
   if (PRESENT (ier)) ier = status
 END SUBROUTINE cdfr_0i
- 
+
 SUBROUTINE cdfr_0l(ncid,varnam,varval,ier)
   ! Read scalar logical array
   !
@@ -932,16 +932,16 @@ SUBROUTINE cdfr_0l(ncid,varnam,varval,ier)
   ! Local
   integer :: varval_i
   character*11, parameter :: logical_name = '__logical__'
- 
+
   call cdfr_0i(ncid,trim(varnam)//logical_name,varval_i,ier)
- 
+
   IF (varval_i == 0) THEN
      varval = .false.
   ELSE
      varval = .true.
   END IF
 END SUBROUTINE cdfr_0l
- 
+
 SUBROUTINE cdfr_0d(ncid,varnam,varval,ier)
   implicit none
   ! Input
@@ -974,7 +974,7 @@ SUBROUTINE cdfr_0c16(ncid,varnam,varval,ier)
   ! Local
   integer                 :: varid,  status
   integer, dimension(1)   :: dimlens,ldim
- 
+
   if (PRESENT (ier)) ier = 1
   ldim(1) = 2 ! Re/Im pair
   call cdfgv(ncid,trim(varnam)//cmplx_name,varid,dimlens,ldim,'d',status)
@@ -1017,7 +1017,7 @@ SUBROUTINE cdfr_0c8(ncid,varnam,varval,ier)
   ! Local
   integer                 :: varid,  status
   integer, dimension(1)   :: dimlens,ldim
- 
+
   if (PRESENT (ier)) ier = 1
   ldim(1) = 2 ! Re/Im pair
   call cdfgv(ncid,trim(varnam)//cmplx_name,varid,dimlens,ldim,'r',status)

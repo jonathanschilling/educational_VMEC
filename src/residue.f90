@@ -2,8 +2,7 @@
 SUBROUTINE residue (gcr, gcz, gcl)
   USE vmec_main, p5 => cp5
   USE vmec_params, ONLY: rss, zcs, rsc, zcc,                        &
-                         meven, modd, ntmax, signgs
-  USE realspace, ONLY: phip
+                         meven, modd, ntmax
   USE xstuff
   IMPLICIT NONE
 
@@ -12,8 +11,8 @@ SUBROUTINE residue (gcr, gcz, gcl)
   INTEGER, PARAMETER :: n0=0, m0=0, m1=1
   INTEGER, PARAMETER :: n3d=0, nasym=1
 
-  INTEGER :: nsfix, jedge, delIter
-  REAL(rprec) :: r1, tnorm, fac
+  INTEGER :: jedge, delIter
+  REAL(rprec) :: r1
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)

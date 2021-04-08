@@ -2,7 +2,7 @@
 SUBROUTINE eqsolve(ier_flag)
 
   USE vmec_main
-  USE vmec_params, ONLY: ntmax, ns4, jac75_flag, norm_term_flag,        &
+  USE vmec_params, ONLY: ns4, jac75_flag, norm_term_flag,        &
                          bad_jacobian_flag, successful_term_flag
   USE realspace
   USE xstuff

@@ -3,7 +3,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
                     bsubsv, gsqrt, bsq, itheta, izeta, brho, ier_flag)
   USE safe_open_mod
   USE vmec_main
-  USE vmec_params, ONLY: mscale, nscale, signgs, mnyq, nnyq, successful_term_flag
+  USE vmec_params, ONLY: signgs, mnyq, nnyq, successful_term_flag
   USE realspace,   ONLY: shalf, wint, guu, guv, gvv, r1, ru, rv, zu, zv, phip
   USE ezcdf
   IMPLICIT NONE
@@ -20,7 +20,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   REAL(rprec), PARAMETER :: two=2, p5=0.5_dp, c1p5=1.5_dp
 
   INTEGER lk, lz, lt, k, m, js, j, n, injxbout, mparity, nznt1
-  INTEGER :: njxbout = jxbout0, nmin, info
+  INTEGER :: njxbout = jxbout0, info
 
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bdotk, bsubuv, bsubvu
   REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: bsubsmn

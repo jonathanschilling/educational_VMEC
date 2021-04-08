@@ -16,7 +16,7 @@
      &   coil_group
 
 !
-!     coil_group            Collection of coils, used to store coils by group id    
+!     coil_group            Collection of coils, used to store coils by group id
 !     single coil           A single coil
 !
       CONTAINS
@@ -25,7 +25,7 @@
 !*******************************************************************************
 !----------------------------------------------------------------------
 
-      SUBROUTINE initialize_biotsavart (extcur_in, extension, 
+      SUBROUTINE initialize_biotsavart (extcur_in, extension,
      1                                  xpt, scaled)
       IMPLICIT NONE
 !-----------------------------------------------
@@ -38,8 +38,6 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      TYPE(bsc_coil)     :: coil_temp
-      INTEGER            :: istat
       INTEGER     :: nextcur, ig, nc
       REAL(rprec)        :: current, current_first
       CHARACTER(len=200) :: coil_file
@@ -50,7 +48,7 @@
 
       IF (PRESENT(extension)) THEN
 !  Parse coils.extension file and initialize bsc routines
-         coil_file = 'coils.' // TRIM(extension)      
+         coil_file = 'coils.' // TRIM(extension)
          CALL parse_coils_file (TRIM(coil_file))
 !  Set currents in coils in each group
 !  Note: current_first is read in from "coil_file"
@@ -60,7 +58,7 @@
                DO nc = 1, coil_group(ig) % ncoil
                   current = coil_group(ig) % coils(nc) % current
                   IF (nc .eq. 1) current_first = current
-                  IF (current_first .ne. zero) 
+                  IF (current_first .ne. zero)
      1            coil_group(ig) % coils(nc) % current =
      1            (current/current_first)*extcur_in(ig)
                END DO
@@ -76,7 +74,7 @@
          ALLOCATE (single_coil)
          CALL bsc_construct(single_coil,'fil_loop','','',                      &
      &         extcur_in(1),xpt(1:3,1:nc))
-       
+
       ELSE
          STOP 'Fatal: initialize_bs: xpt or extension must be specified'
       END IF
@@ -94,7 +92,7 @@
 !   D u m m y   A r g u m e n t s
 !-----------------------------------------------
       CHARACTER(LEN=*)      :: coil_file
-      LOGICAL, OPTIONAL     :: lgrps           
+      LOGICAL, OPTIONAL     :: lgrps
 !-----------------------------------------------
 !   L o c a l   P a r a m e t e r s
 !-----------------------------------------------
@@ -146,7 +144,7 @@
             EXIT
          ENDIF
       END DO read_loop
-      
+
 100   IF (n_line_start_string .eq. 0) THEN
          REWIND (iou_coil, IOSTAT=istat)
          IF (istat .ne. 0) THEN
@@ -166,8 +164,8 @@
 
       local_lgrps = .false.
       IF (PRESENT(lgrps)) local_lgrps = lgrps
-      
-!   First pass through the input file, to find out how many coil groups, 
+
+!   First pass through the input file, to find out how many coil groups,
 !   and the maximum number of nodes in ANY one coil.
       CALL read_coils_pass1(iou_coil, nextcur, nmaxnodes, ngroup,              &
      &                      local_lgrps, n_line_skip)
@@ -187,14 +185,14 @@
 !   them in the appropriate groups.
       CALL read_coils_pass2(iou_coil, nmaxnodes, coil_group, ngroup,           &
      &                      local_lgrps, n_line_skip)
- 
+
       END SUBROUTINE parse_coils_file
 
 !----------------------------------------------------------------------
 !*******************************************************************************
 !----------------------------------------------------------------------
 
-      SUBROUTINE read_coils_pass1 (iou, n_coilgroups, nmaxnodes, ngroup,       & 
+      SUBROUTINE read_coils_pass1 (iou, n_coilgroups, nmaxnodes, ngroup,       &
      &                             lgrps, n_skip)
 !     Subroutine to do a first pass read of the "coils" file. The purpose is
 !     to find the number of coil groups, and the maximum number of
@@ -250,7 +248,7 @@
       DO i = 1,n_skip
          READ(iou,'(a)') line
       END DO
-    
+
 !     Initialize counters
       inodes = 0
       nmaxnodes = 0
@@ -266,29 +264,29 @@
             WRITE(6,*) line
             STOP
          END IF
-         
+
          IF (line(1:3) .eq. 'end') EXIT
          inodes = inodes + 1
 
 !     Reread the line, assuming igroup and group_id are there.
 !     For most of the file, they won't be there, and istat will be nonzero
 !     But, when igroup and group_id are there, istat will be zero.
-!     This is the indication of the END of a coil 
+!     This is the indication of the END of a coil
 !
 !     Note: IGROUP numbering may NOT be contiguous in file NOR does it
-!           have to be sequential (1,2,3). Thus, igroup = 55,11,101,... 
+!           have to be sequential (1,2,3). Thus, igroup = 55,11,101,...
 !           MIGHT occur in file and should be accounted for in this logic.
 
          READ(line,*,iostat=istat) xw, yw, zw, currin, igroup, group_id
          lparsed = (istat .eq. 0)
-         IF (lparsed) THEN 
+         IF (lparsed) THEN
             i = MINVAL(ABS(igroup - ngroup(:)))
             IF (i.ne.0 .or. lgrps) THEN       !ADD NEW GROUP AND STORE IN NGROUP
                n_coilgroups = n_coilgroups + 1
                IF (n_coilgroups .gt. SIZE(ngroup)) THEN
                   STOP ' read_coils_pass1: coil groups > SIZE(ngroup)'
                ENDIF
-               IF (lgrps) THEN 
+               IF (lgrps) THEN
                   ngroup(n_coilgroups) = n_coilgroups
                ELSE ! lgrps is False
                   ngroup(n_coilgroups) = igroup
@@ -307,15 +305,15 @@
          n_coilgroups = 1
          ngroup(1) = 1
       END IF
-      
+
       RETURN
 
 100   IF (.not. lparsed) THEN
          WRITE(6,*) 'Problems in read_coils_pass1'
          WRITE(6,*) 'EOF reached before END'
-         WRITE(6,*) 'Make sure last line of file is "end"' 
+         WRITE(6,*) 'Make sure last line of file is "end"'
       END IF
-      
+
       END SUBROUTINE read_coils_pass1
 !----------------------------------------------------------------------
 !*******************************************************************************
@@ -323,8 +321,8 @@
 
       SUBROUTINE read_coils_pass2 (iou, nmaxnodes, coil_group, ngroup,         &
      &                             lgrps, n_skip)
-!     Subroutine to do a second pass read of the coils file. The data is then 
-!     used tocreate a filamentary loop coil (fil_loop). The fil_loop is then appended 
+!     Subroutine to do a second pass read of the coils file. The data is then
+!     used tocreate a filamentary loop coil (fil_loop). The fil_loop is then appended
 !     to the correct coil group.
 
       IMPLICIT NONE
@@ -399,7 +397,7 @@
       DO i = 1,n_skip
          READ(iou,'(a)') line
       END DO
-    
+
 !     Initialize counters
       inodes = 0
       id_group = 0
@@ -413,15 +411,15 @@
 
 !     Reread the line
          READ(line,*,iostat=istat) xnod_in(1:3,inodes), currin
-        
+
 !     Save the current from the first node
          IF (inodes .eq. 1) currin_first = currin
 
 !     Reread the line, assuming igroup and group_id are there.
 !     For most of the file, they won't be there, and istat will be nonzero
 !     But, when igroup and group_id are there, istat will be zero.
-!     This is the indication of the END of a coil 
-         READ(line,*,iostat=istat) xnod_in(1:3,inodes), currin,                &              
+!     This is the indication of the END of a coil
+         READ(line,*,iostat=istat) xnod_in(1:3,inodes), currin,                &
      &     igroup, group_id
          lparsed = (istat .eq. 0)
          IF (lparsed) THEN
@@ -432,10 +430,10 @@
 !     Find sequential group id no. for this igroup value
             IF (lgrps) THEN
                id_group = id_group + 1
-            ELSE 
+            ELSE
                index1 = MINLOC(ABS(igroup - ngroup(:)))
                id_group = index1(1)
-               IF (igroup .ne. ngroup(id_group))                               & 
+               IF (igroup .ne. ngroup(id_group))                               &
      &            STOP 'ID_GROUP != IGROUP in coils_dot_pass2'
             END IF
 
@@ -445,18 +443,18 @@
 
 !  Various cases, depending on how many lines have been read in
             SELECT CASE (inodes)
-            
+
             CASE (1) ! Circular coil
                this_xcent(1:3) = (/ zero, zero, xnod_in(3,1) /)
                this_enhat(1:3) = (/ zero, zero, 1.0_rprec /)
                this_rcirc = xnod_in(1,1)
-               CALL bsc_construct(coil_temp,'fil_circ',s_name,'',              &                   
+               CALL bsc_construct(coil_temp,'fil_circ',s_name,'',              &
      &            currin_first, rcirc = this_rcirc,                            &
      &            xcent = this_xcent(1:3),enhat = this_enhat(1:3))
 
             CASE (2) ! Two point filament - treat like infinite straight coil
                nnod = inodes
-               CALL bsc_construct(coil_temp,'fil_loop',s_name,'',              &                   
+               CALL bsc_construct(coil_temp,'fil_loop',s_name,'',              &
      &            currin_first,xnod_in(1:3,1:nnod))
 
             CASE DEFAULT ! Filamentary loop
@@ -464,11 +462,11 @@
 !     first point of the coil. bsc_construct assumes that the
 !     coil is not yet closed, so don't include the last point
                nnod = inodes - 1
-               CALL bsc_construct(coil_temp,'fil_loop',s_name,'',              &                   
+               CALL bsc_construct(coil_temp,'fil_loop',s_name,'',              &
      &            currin_first,xnod_in(1:3,1:nnod))
 
             END SELECT
-            
+
 !     Append the coil to the appropriate coil group
             CALL bsc_append(coil_group(id_group),coil_temp)
 
@@ -480,17 +478,17 @@
 !   Reset the number of nodes to zero
             inodes = 0
 
-         END IF  ! of istat .eq. 0 IF 
+         END IF  ! of istat .eq. 0 IF
       END DO read_loop
-      
+
       RETURN
 
 100   IF (.not. lparsed) THEN
          WRITE(6,*) 'Problems in read_coils_pass2'
          WRITE(6,*) 'EOF reached before END'
-         WRITE(6,*) 'Make sure last line of file is "end"' 
+         WRITE(6,*) 'Make sure last line of file is "end"'
       END IF
-      
+
       END SUBROUTINE  read_coils_pass2
 
 !----------------------------------------------------------------------
@@ -573,11 +571,11 @@
             current = coil_group(ig) % coils(n) % current
             nwire = SIZE(coil_group(ig) % coils(n) % xnod, 2)
             IF (ANY(coil_group(ig) % coils(n) % xnod(:,1) .ne.
-     1              coil_group(ig) % coils(n) % xnod(:,nwire))) 
+     1              coil_group(ig) % coils(n) % xnod(:,nwire)))
      1      PRINT *, 'Coil did not close in WRITE_COILS_DOT for group ',
      2      ig,' COIL ',n
             DO iwire = 1, nwire-1
-               WRITE(cunit,'(1p,4e22.14)') 
+               WRITE(cunit,'(1p,4e22.14)')
      1            coil_group(ig) % coils(n) % xnod(:,iwire), current
             END DO
             WRITE(cunit,'(1p,4e22.14,i4,1x,a)')
@@ -641,7 +639,7 @@
 !-----------------------------------------------
       INTEGER :: i
 !-----------------------------------------------
-      
+
       IF (ALLOCATED(coil_group)) THEN
          DO i = 1, SIZE(coil_group)
             CALL bsc_destroy(coil_group(i))

@@ -5,7 +5,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   USE vacmod
   USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
-  USE realspace, ONLY: extra4
   IMPLICIT NONE
 
   INTEGER :: ns, ivac_skip, ivac, mnmax, ier_flag

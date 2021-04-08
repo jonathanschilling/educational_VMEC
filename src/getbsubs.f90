@@ -2,9 +2,8 @@
 SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
   USE stel_kinds
   USE vmec_input, ONLY: nfp, nzeta, lasym
-  USE vmec_dim, ONLY: ntheta1, ntheta2, ntheta3
+  USE vmec_dim, ONLY: ntheta2, ntheta3
   USE vmec_persistent, ONLY: cosmu, sinmu, cosnv, sinnv
-  USE vmec_main, ONLY: r0scale
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: mmax, nmax

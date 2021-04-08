@@ -2,7 +2,7 @@
 SUBROUTINE lamcal(overg, guu, guv, gvv)
   USE vmec_main
   USE vmec_params, ONLY: ntmax, jlam, lamscale
-  USE realspace, ONLY: sqrts, phip
+  USE realspace, ONLY: sqrts
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: overg, guu, guv, gvv

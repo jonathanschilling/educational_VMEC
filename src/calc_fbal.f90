@@ -4,8 +4,8 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
                        jcurv, jcuru, chipf, vp, pres, &
                        phipf, vpphi, presgrad, ohs
   USE vmec_params, ONLY: signgs
-  USE vmec_dim, ONLY: ns, nrzt, nznt, ns1
-  USE realspace, ONLY: wint, phip
+  USE vmec_dim, ONLY: ns, nrzt, ns1
+  USE realspace, ONLY: wint
   USE stel_kinds, ONLY: dp
 
   implicit none

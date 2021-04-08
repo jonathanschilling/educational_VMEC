@@ -12,7 +12,7 @@ SUBROUTINE heading(extension)
 
   CHARACTER(LEN=*) :: extension
 
-  INTEGER :: imon, nout
+  INTEGER :: imon
   CHARACTER(LEN=10) :: date0, time0, zone0
   CHARACTER(LEN=50) :: dateloc, Version
   LOGICAL :: lfirst

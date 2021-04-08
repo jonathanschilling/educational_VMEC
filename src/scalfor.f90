@@ -3,7 +3,6 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   USE vmec_main
   USE vmec_params
   USE vmec_dim, ONLY: ns
-  USE realspace, ONLY: wint, ru0
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: iflag

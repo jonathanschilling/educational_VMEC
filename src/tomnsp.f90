@@ -1,10 +1,8 @@
 !> \file
 SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
                    bzmn, czmn, blmn, clmn, arcon, azcon)
-  USE realspace, ONLY: wint, phip
-  USE vmec_main, p5 => cp5
-  USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs, nscale
-  USE fbal, ONLY: rru_fac, rzu_fac, frcc_fac, fzsc_fac
+  USE vmec_main
+  USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(out) :: frzl_array
@@ -16,7 +14,6 @@ SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
   REAL(rprec), DIMENSION(:,:,:), POINTER :: frcc, frss, fzcs, fzsc, flcs, flsc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
-  REAL(rprec)  :: t1
 
   frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)

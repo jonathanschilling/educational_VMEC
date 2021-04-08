@@ -2,7 +2,7 @@
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
   USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
-  USE vmec_params, ONLY: bad_jacobian_flag, zsc, signgs
+  USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces
   USE xstuff
@@ -15,7 +15,7 @@ SUBROUTINE funct3d (ier_flag)
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
-  REAL(dp) :: presf_ns, delr_mse, delt0
+  REAL(dp) :: presf_ns, delt0
   REAL(dp), EXTERNAL :: pmass
 
   ! POINTER ALIASES

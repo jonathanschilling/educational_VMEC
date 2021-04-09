@@ -3,7 +3,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   USE vmec_main
   USE vmec_input, ONLY: bloat, ncurr
   USE vmec_params
-  USE vacmod
+  USE vacmod0
   USE safe_open_mod
   USE vmec_input, ONLY: read_indata_namelist
   IMPLICIT NONE

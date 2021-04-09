@@ -7,7 +7,7 @@ SUBROUTINE precal
   REAL(rprec), PARAMETER :: p25 = p5*p5, bigno = 1.e50_dp
 
   INTEGER :: kp, ku, kuminus, kv, kvminus, i, m, n, mn,            &
-     imn, jmn, kmn, l, istat1, smn, nuv_tan
+     imn, jmn, kmn, l, istat1, smn
   REAL(rprec), DIMENSION(0:mf + nf,0:mf,0:nf) :: cmn
   REAL(rprec) :: argu, argv, argp, dn1, f1, f2, f3, alp_per
 

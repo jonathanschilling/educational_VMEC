@@ -45,7 +45,6 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(ndamp) :: otau
 
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE, TARGET :: rmn_bdy, zmn_bdy
-  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bsubu0, dbsq, rbsq
   REAL(rprec) :: rbtor, rbtor0, ctor, delbsq, res0, delt0r
   REAL(rprec), DIMENSION(ndatafmax) :: spfa, spfa2, hp, sifa, sifa2, hi

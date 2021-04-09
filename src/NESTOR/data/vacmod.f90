@@ -9,9 +9,6 @@ MODULE vacmod
   REAL(rprec), PARAMETER :: p5 = cp5
   REAL(rprec), PARAMETER :: two = c2p0
 
-  INTEGER :: nfper
-  INTEGER :: nvper
-
   REAL(rprec) :: bsubvvac
   REAL(rprec) :: pi2
   REAL(rprec) :: pi3
@@ -35,6 +32,8 @@ MODULE vacmod
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bzv
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bsqvac
+
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: r1b
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: rub
@@ -72,5 +71,50 @@ MODULE vacmod
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: raxis_nestor
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: zaxis_nestor
+
+
+CONTAINS
+
+subroutine allocate_nestor
+  integer :: istat1, istat2
+
+  ! nuv2 = nznt in read_indata
+
+  ALLOCATE (amatsav(mnpd2*mnpd2), bvecsav(mnpd2), &
+            bsqsav(nuv2,3), potvac(2*mnpd),          &
+            raxis_nestor(nv), zaxis_nestor(nv), stat=istat1)
+  IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nestor'
+
+  ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
+  IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
+
+ brv=0
+ bphiv=0
+ bzv=0
+
+ bsqvac=0
+
+
+end subroutine allocate_nestor
+
+subroutine free_mem_nestor
+
+  integer :: istat3, istat4
+  IF (ALLOCATED(amatsav)) then
+      DEALLOCATE (amatsav, bvecsav, bsqsav, potvac,  &
+                  raxis_nestor, zaxis_nestor, stat=istat3)
+      IF (istat3.ne.0) STOP 'dealloc error #3 in free_mem_nestor'
+  end if
+
+  IF (ALLOCATED(brv)) then
+     DEALLOCATE (brv, bphiv, bzv, bsqvac, stat=istat4)
+     IF (istat4.ne.0) STOP 'dealloc error #4 in free_mem_nestor'
+  end if
+
+
+
+
+end subroutine free_mem_nestor
+
 
 END MODULE vacmod

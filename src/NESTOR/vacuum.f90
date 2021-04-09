@@ -119,14 +119,16 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
      ! .5*|Bvac|**2
      bsqvac(i) = p5*(bsubu(i)*bsupu + bsubv(i)*bsupv)
 
-     brv(i) = rub(i)*bsupu + rvb(i)*bsupv
-     bphiv(i) = r1b(i)*bsupv
-     bzv(i) = zub(i)*bsupu + zvb(i)*bsupv
+     ! cylindrical components of vacuum magnetic field
+     brv(i)   = rub(i)*bsupu + rvb(i)*bsupv
+     bphiv(i) =                r1b(i)*bsupv
+     bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
   END DO
 
   ! PRINT OUT VACUUM PARAMETERS
   IF (ivac .eq. 0) THEN
      ivac = ivac + 1
+
      WRITE (*, 200) nfper, mf, nf, nu, nv
      WRITE (nthreed, 200) nfper, mf, nf, nu, nv
 200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
@@ -143,11 +145,14 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
         e10.2,' R * BTOR(plasma) = ',e10.2)
 
      IF (rbtor*bsubvvac .lt. zero) THEN
-           ier_flag = phiedge_error_flag
+        ! rbtor and bsubvvac must have the same sign
+        ier_flag = phiedge_error_flag
      ENDIF
+
      IF (ABS((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) THEN
-           ier_flag = 10
+           ier_flag = 10 ! 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
      ENDIF
+
   ENDIF
 
   IF (ALLOCATED(bexu)) then

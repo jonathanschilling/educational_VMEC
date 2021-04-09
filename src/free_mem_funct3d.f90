@@ -15,12 +15,6 @@ SUBROUTINE free_mem_funct3d
   IF (istat1 .ne. 0) STOP 'deallocation error#1 in funct3d'
   end if
 
-  IF (ALLOCATED(brv)) then
-     ! TODO: none of these depends on ns, so why are they allocated here ???
-     DEALLOCATE (brv, bphiv, bzv, bsqvac, stat=istat1)
-     IF (istat1 .ne. 0) STOP 'deallocation error#2 in funct3d'
-  end if
-
   IF (ALLOCATED(extra1)) then
      DEALLOCATE (extra1, extra2, extra3, extra4, stat=istat1)
      IF (istat1 .ne. 0) STOP 'deallocation error#3 in funct3d'

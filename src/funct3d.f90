@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
-  USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
+  USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor, bsqsav
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces
@@ -23,6 +23,7 @@ SUBROUTINE funct3d (ier_flag)
   lv => crmn
 
   ! CONVERT ODD M TO 1/SQRT(S) INTERNAL REPRESENTATION
+  ! temprary use of gc (force) for scaled xc (position)
   gc(:neqs) = xc(:neqs)*scalxc(:neqs)
 
   ! INVERSE FOURIER TRANSFORM TO S,THETA,ZETA SPACE
@@ -33,8 +34,10 @@ SUBROUTINE funct3d (ier_flag)
 
   IF (lasym) THEN
      ! ANTI-SYMMETRIC CONTRIBUTIONS TO INVERSE TRANSFORMS
-     CALL totzspa (gc, armn, brmn, extra3, azmn, bzmn, extra4,      &
-                   blmn, clmn, extra1, extra2)
+     CALL totzspa (gc, armn,   brmn, extra3, &
+                       azmn,   bzmn, extra4, &
+                       blmn,   clmn,         &
+                     extra1, extra2           )
 
      ! SUM SYMMETRIC, ANTISYMMETRIC PIECES APPROPRIATELY
      ! TO GET R, Z, L, (AND RCON, ZCON) ON FULL RANGE OF u (0 to 2*pi)
@@ -42,6 +45,7 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
+  ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
   ! u = pi, v = 0, js = ns
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
   router = r1(  ns,0) + r1(  ns,1)
@@ -63,6 +67,7 @@ SUBROUTINE funct3d (ier_flag)
   ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
   ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
+     ! immediately before first vacuum call
      DO l = 1, ns
         rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
         zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
@@ -73,19 +78,19 @@ SUBROUTINE funct3d (ier_flag)
   CALL jacobian
   IF (irst.eq.2 .and. iequi.eq.0) then
      ! bad jacobian --> need to restart
+     ! except when computing output file --> ignore bad jacobian
      return
   end if
 
-  ! COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC
-  ! PRESSURE, AND METRIC ELEMENTS ON HALF-GRID
+  ! COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC PRESSURE,
+  ! AND METRIC ELEMENTS ON HALF-GRID
   CALL bcovar (lu, lv)
 
   ! COMPUTE VACUUM MAGNETIC PRESSURE AT PLASMA EDGE
-  ! NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR
-  ! AT THE PLASMA EDGE SHOULD BE ADJUSTED TO APPROXIMATELY
-  ! EQUAL THE VACUUM VALUE. THIS CAN BE DONE BY CHANGING
-  ! EITHER PHIEDGE OR THE INITIAL CROSS SECTION ACCORDING
-  ! TO THE SCALING LAW  R*BTOR .EQ. PHIEDGE/(R1 * Z1).
+  ! NOTE: FOR FREE BOUNDARY RUNS, THE VALUE OF RBTOR=R*BTOR AT THE PLASMA EDGE
+  ! SHOULD BE ADJUSTED TO APPROXIMATELY EQUAL THE VACUUM VALUE.
+  ! THIS CAN BE DONE BY CHANGING EITHER PHIEDGE OR THE INITIAL CROSS SECTION
+  ! ACCORDING TO THE SCALING LAW  R*BTOR .EQ. PHIEDGE/(R1 * Z1).
   IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
 
      IF ((fsqr + fsqz) .le. 1.e-3_dp) then
@@ -136,9 +141,9 @@ SUBROUTINE funct3d (ier_flag)
         ! RESET FIRST TIME FOR SOFT START
         IF (ivac .eq. 1) THEN
            irst = 2
-           delt0 = delt
+           delt0 = delt ! delt0 is never used --> ignore change to time step by restart_iter
            CALL restart_iter(delt0)
-           irst = 1
+           irst = 1 ! already done in restart_iter...
         END IF
 
         ! IN CASE PRESSURE IS NOT ZERO AT EXTRAPOLATED EDGE...
@@ -155,16 +160,26 @@ SUBROUTINE funct3d (ier_flag)
         lk = 0
         DO l = ns, nrzt, ns
            lk = lk + 1
+
+           ! current extrapolation to LCFS of plasma magnetic field
            bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
+
+           ! total pressure (?) at LCFS
            gcon(l)      = bsqvac(lk) + presf_ns
 
+           ! what is this ?
            rbsq(lk) = gcon(l)*(r1(l,0) + r1(l,1))*ohs
+
+           ! residual magnetic field discontinuity at LCFS
+           ! --> used in last column of printout (as flux surface avg.; relative to <bsqsav>)
            dbsq(lk) = ABS(gcon(l)-bsqsav(lk,3))
         END DO
 
         IF (ivac .eq. 1) THEN
-           bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns)
-           bsqsav(:nznt,2) = bsqvac(:nznt)
+           ! first time: debugging of initial soft-start ????
+           print *,"bsqsav(:,1:2) are filled now"
+           bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary
+           bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary
         ENDIF
      ENDIF
   ENDIF

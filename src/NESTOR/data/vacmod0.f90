@@ -10,10 +10,14 @@ MODULE vacmod0
   INTEGER :: nf1
   INTEGER :: mnpd
   INTEGER :: mnpd2
-  INTEGER :: nvp
   INTEGER :: nuv
   INTEGER :: nu2
   INTEGER :: nu3
   INTEGER :: nuv2
+  INTEGER :: nfper
+  INTEGER :: nvper
+  INTEGER :: nuv_tan
+  INTEGER :: nvp
+
 
 END MODULE vacmod0

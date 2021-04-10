@@ -72,11 +72,16 @@ MODULE vacmod
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: raxis_nestor
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: zaxis_nestor
 
+  ! from vacuum
+  REAL(rprec), ALLOCATABLE :: bsubu(:), bsubv(:), potu(:), potv(:)
+  REAL(rprec), ALLOCATABLE :: amatrix(:)
 
-CONTAINS
+
+
+  CONTAINS
 
 subroutine allocate_nestor
-  integer :: istat1, istat2
+  integer :: istat1, istat2, i, ndim
 
   ! nuv2 = nznt in read_indata
 
@@ -94,12 +99,25 @@ subroutine allocate_nestor
 
  bsqvac=0
 
+ ! from vacuum()
+ ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2), potu(nuv2), potv(nuv2), stat = i)
+  IF (i .ne. 0) STOP 'Allocation error in vacuum'
+
+  ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2), bexni(nuv2),                    &
+            r1b(nuv), rub(nuv2), rvb(nuv2), z1b(nuv), zub(nuv2), zvb(nuv2), &
+            auu(nuv2), auv(nuv2), avv(nuv2), snr(nuv2), snv(nuv2), snz(nuv2), &
+            drv(nuv2), guu_b(nuv2), guv_b(nuv2), gvv_b(nuv2), &
+            rzb2(nuv), rcosuv(nuv), rsinuv(nuv), stat=i)
+  IF (i .ne. 0) STOP 'Allocation error in vacuum'
+
+
 
 end subroutine allocate_nestor
 
 subroutine free_mem_nestor
 
-  integer :: istat3, istat4
+  integer :: istat3, istat4, i
+
   IF (ALLOCATED(amatsav)) then
       DEALLOCATE (amatsav, bvecsav, bsqsav, potvac,  &
                   raxis_nestor, zaxis_nestor, stat=istat3)
@@ -111,7 +129,17 @@ subroutine free_mem_nestor
      IF (istat4.ne.0) STOP 'dealloc error #4 in free_mem_nestor'
   end if
 
+  ! from vacuum()
+IF (ALLOCATED(bexu)) then
+     DEALLOCATE (bexu, bexv, bexn, bexni, &
+        r1b, rub, rvb, z1b, zub, zvb,   &
+        auu, auv, avv, snr, snv, snz, &
+        drv, guu_b, guv_b, gvv_b, &
+        rzb2, rcosuv, rsinuv, stat=i)
+     IF (i .ne. 0) STOP 'Deallocation error in vacuum'
+  end if
 
+  DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
 
 
 end subroutine free_mem_nestor

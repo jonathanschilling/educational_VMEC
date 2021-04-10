@@ -1,6 +1,6 @@
 !> \file
 SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
-  USE vacmod
+  USE vacmod, vm_amatrix => amatrix
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ns, ivacskip

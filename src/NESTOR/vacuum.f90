@@ -16,8 +16,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
-  REAL(rprec), ALLOCATABLE :: bsubu(:), bsubv(:), potu(:), potv(:)
-  REAL(rprec), ALLOCATABLE :: amatrix(:)
   REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
 
   ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
@@ -31,18 +29,11 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
   IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
 
-  ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2), potu(nuv2), potv(nuv2), stat = i)
-  IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
   potsin => potvac(1:mnpd)
   potcos => potvac(1+mnpd:)
 
-  ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2), bexni(nuv2),                    &
-            r1b(nuv), rub(nuv2), rvb(nuv2), z1b(nuv), zub(nuv2), zvb(nuv2), &
-            auu(nuv2), auv(nuv2), avv(nuv2), snr(nuv2), snv(nuv2), snz(nuv2), &
-            drv(nuv2), guu_b(nuv2), guv_b(nuv2), gvv_b(nuv2), &
-            rzb2(nuv), rcosuv(nuv), rsinuv(nuv), stat=i)
-  IF (i .ne. 0) STOP 'Allocation error in vacuum'
+
 
   ! INDEX OF LOCAL VARIABLES
   !
@@ -155,15 +146,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
   ENDIF
 
-  IF (ALLOCATED(bexu)) then
-     DEALLOCATE (bexu, bexv, bexn, bexni, &
-        r1b, rub, rvb, z1b, zub, zvb,   &
-        auu, auv, avv, snr, snv, snz, &
-        drv, guu_b, guv_b, gvv_b, &
-        rzb2, rcosuv, rsinuv, stat=i)
-     IF (i .ne. 0) STOP 'Deallocation error in vacuum'
-  end if
 
-  DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
 
 END SUBROUTINE vacuum

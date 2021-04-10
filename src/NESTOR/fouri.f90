@@ -1,6 +1,6 @@
 !> \file
 SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
-  USE vacmod
+  USE vacmod, vm_amatrix => amatrix
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ns, ndim

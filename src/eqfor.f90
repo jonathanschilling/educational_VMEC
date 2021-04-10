@@ -6,7 +6,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   USE vforces, r12 => armn_o, bsupu => crmn_e, bsupv => czmn_e,         &
                gsqrt => azmn_o, bsq => bzmn_o, izeta => azmn_e,         &
                brho => bzmn_e, bphi => czmn_o, curtheta => brmn_e
-  USE vacmod
+  USE vacmod, only: bredge, bpedge, bzedge, bphiv, bsqvac, bsubvvac
   USE vmec_io
   USE mgrid_mod
   USE stel_constants, ONLY: pi
@@ -70,9 +70,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         DO iu = 1,ntheta3
            lk = iv + nzeta*(iu-1)
            n1 = ns*lk
-           bredge(lk) = 1.5_dp*br(n1)   - p5*br(n1-1)
-           bpedge(lk) = 1.5_dp*bphi(n1) - p5*bphi(n1-1)
-           bzedge(lk) = 1.5_dp*bz(n1)   - p5*bz(n1-1)
+           bredge(lk) = 1.5_dp*br(n1)   - cp5*br(n1-1)
+           bpedge(lk) = 1.5_dp*bphi(n1) - cp5*bphi(n1-1)
+           bzedge(lk) = 1.5_dp*bz(n1)   - cp5*bz(n1-1)
         END DO
      END DO
   END IF
@@ -93,7 +93,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      beta_vol(i) = pres(i)/s2
   END DO
 
-  betaxis = c1p5*beta_vol(2) - p5*beta_vol(3)
+  betaxis = c1p5*beta_vol(2) - cp5*beta_vol(3)
 
   WRITE (nthreed, 5)
 5 FORMAT(/,' NOTE:  S=normalized toroidal flux (0 - 1)',/,              &
@@ -114,14 +114,14 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   ALLOCATE (phipf_loc(ns))
 
-  phipf_loc(1) = twopi*signgs*(c1p5*phip(2) - p5*phip(3))
-  presf(1) = c1p5*pres(2) - p5*pres(3)
+  phipf_loc(1) = twopi*signgs*(c1p5*phip(2) - cp5*phip(3))
+  presf(1) = c1p5*pres(2) - cp5*pres(3)
   DO i = 2,ns1
-     presf(i) = p5*(pres(i) + pres(i+1))
-     phipf_loc(i) = p5*twopi*signgs*(phip(i) + phip(i+1))
+     presf(i) = cp5*(pres(i) + pres(i+1))
+     phipf_loc(i) = cp5*twopi*signgs*(phip(i) + phip(i+1))
   END DO
-  presf(ns) = c1p5*pres(ns)- p5*pres(ns-1)
-  phipf_loc(ns) = twopi*signgs*(c1p5*phip(ns) - p5*phip(ns1))
+  presf(ns) = c1p5*pres(ns)- cp5*pres(ns-1)
+  phipf_loc(ns) = twopi*signgs*(c1p5*phip(ns) - cp5*phip(ns1))
 
   phi1(1) = zero
   chi1(1) = zero
@@ -135,7 +135,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   CALL calc_fbal(bsubu, bsubv)
 
   bucof(1) = 0
-  bvcof(1) = c1p5*bvco(2) - p5*bvco(3)
+  bvcof(1) = c1p5*bvco(2) - cp5*bvco(3)
 
   ! NOTE:  jcuru, jcurv on FULL radial mesh coming out of calc_fbal
   !        They are local (surface-averaged) current densities (NOT integrated in s)
@@ -143,23 +143,23 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   DO i = 2,ns1
      equif(i) = equif(i)*vpphi(i)/(ABS(jcurv(i)*chipf(i))               &
               + ABS(jcuru(i)*phipf(i))+ABS(presgrad(i)*vpphi(i)))
-     bucof(i) = p5*(buco(i) + buco(i+1))
-     bvcof(i) = p5*(bvco(i) + bvco(i+1))
+     bucof(i) = cp5*(buco(i) + buco(i+1))
+     bvcof(i) = cp5*(bvco(i) + bvco(i+1))
   END DO
 
-  bucof(ns) = c1p5*buco(ns) - p5*buco(ns1)
-  bvcof(ns) = c1p5*bvco(ns) - p5*bvco(ns1)
+  bucof(ns) = c1p5*buco(ns) - cp5*buco(ns1)
+  bvcof(ns) = c1p5*bvco(ns) - cp5*bvco(ns1)
 
-  equif(1) = two*equif(2) - equif(3)
-  jcuru(1) = two*jcuru(2) - jcuru(3)
-  jcurv(1) = two*jcurv(2) - jcurv(3)
-  presgrad(1)  = two*presgrad(2) - presgrad(3)
-  presgrad(ns) = two*presgrad(ns1) - presgrad(ns1-1)
-  vpphi(1)  = two*vpphi(2) - vpphi(3)
-  vpphi(ns) = two*vpphi(ns1) - vpphi(ns1-1)
-  equif(ns) = two*equif(ns1) - equif(ns1-1)
-  jcuru(ns) = two*jcuru(ns1) - jcuru(ns1-1)
-  jcurv(ns) = two*jcurv(ns1) - jcurv(ns1-1)
+  equif(1) = c2p0*equif(2) - equif(3)
+  jcuru(1) = c2p0*jcuru(2) - jcuru(3)
+  jcurv(1) = c2p0*jcurv(2) - jcurv(3)
+  presgrad(1)  = c2p0*presgrad(2) - presgrad(3)
+  presgrad(ns) = c2p0*presgrad(ns1) - presgrad(ns1-1)
+  vpphi(1)  = c2p0*vpphi(2) - vpphi(3)
+  vpphi(ns) = c2p0*vpphi(ns1) - vpphi(ns1-1)
+  equif(ns) = c2p0*equif(ns1) - equif(ns1-1)
+  jcuru(ns) = c2p0*jcuru(ns1) - jcuru(ns1-1)
+  jcurv(ns) = c2p0*jcurv(ns1) - jcurv(ns1-1)
   ! NOTE: phipf = phipf_loc/(twopi), phipf_loc ACTUAL (twopi factor) Toroidal flux derivative
   ! SPH/JDH (060211): remove twopi factors from <JSUPU,V> (agree with output in JXBOUT file)
   fac = twopi*signgs
@@ -227,7 +227,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   ! (EXTRACTED FROM FQ-CODE, 9-10-92)
   !
   ! b poloidals (cylindrical estimates)
-  rcen = p5*(router + rinner)               !geometric center
+  rcen = cp5*(router + rinner)               !geometric center
   n = 0
   n1 = n + 1
   rcenin = DOT_PRODUCT(rmncc(ns,n1,:mpol1+1:2), mscale(:mpol1:2)*nscale(n))
@@ -241,7 +241,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   DEALLOCATE (t12u)
 
   ! vol av minor radius
-  aminr1 = SQRT(two*volume_p/(twopi*twopi*r00))
+  aminr1 = SQRT(c2p0*volume_p/(twopi*twopi*r00))
 
   ! cylindrical estimates for beta poloidal
   sump = vnorm*SUM(vp(2:ns)*pres(2:ns))
@@ -264,7 +264,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      delphid_exact = delphid_exact + SUM( (btor_vac(:nznt)/r12(js:nrzt:ns) - bsupv(js:nrzt:ns))*tau(js:nrzt:ns) )
      dbtor(:nznt) = btor1(:nznt)**2 - btor_vac(:nznt)**2
      musubi = musubi - SUM(dbtor(:nznt)*tau(js:nrzt:ns))
-     phat(:nznt) = bsq(js:nrzt:ns) - p5*btor_vac(:nznt)**2
+     phat(:nznt) = bsq(js:nrzt:ns) - cp5*btor_vac(:nznt)**2
      phat(:nznt) = (phat(:nznt) - dbtor(:nznt))*tau(js:nrzt:ns)
      rshaf1 = rshaf1 + SUM(phat(:nznt))
      rshaf2 = rshaf2 + SUM(phat(:nznt)/r12(js:nrzt:ns))
@@ -272,16 +272,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   redge(:nznt) = r1(ns:nrzt:ns,0) + r1(ns:nrzt:ns,1)
   IF (lfreeb .and. ivac.gt.1) THEN
-     phat = bsqvac - p5*(bsubvvac/redge)**2
+     phat = bsqvac - cp5*(bsubvvac/redge)**2
   ELSE
-     phat = c1p5*bsq(ns:nrzt:ns) - p5*bsq(ns-1:nrzt:ns) - p5*(rbtor/redge(:))**2
+     phat = c1p5*bsq(ns:nrzt:ns) - cp5*bsq(ns-1:nrzt:ns) - cp5*(rbtor/redge(:))**2
   END IF
 
   DEALLOCATE (btor_vac, btor1, dbtor)
 
   delphid_exact = anorm*delphid_exact
   rshaf = rshaf1/rshaf2
-  fpsi0 = c1p5*bvco(2) - p5*bvco(3)
+  fpsi0 = c1p5*bvco(2) - cp5*bvco(3)
   b0 = fpsi0/r00
 
   rmax_surf = MAXVAL(r1(ns:nrzt:ns,0)+r1(ns:nrzt:ns,1))
@@ -289,7 +289,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   zmax_surf = MAXVAL(ABS(z1(ns:nrzt:ns,0)+z1(ns:nrzt:ns,1)))
 
   DO js = 2, ns
-     modb(:nznt) = SQRT(two*(bsq(js:nrzt:ns)-pres(js)))
+     modb(:nznt) = SQRT(c2p0*(bsq(js:nrzt:ns)-pres(js)))
      CALL bextrema (modb, bmin(1,js), bmax(1,js), nzeta, ntheta2)
   END DO
 
@@ -438,10 +438,10 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         xmidb = r1(js+lt,0)  + sqrts(js)*r1(js+lt,1)
 
         ! Geometric major radius
-        rgeo = p5*(xmidb + xmida)
+        rgeo = cp5*(xmidb + xmida)
 
         ! Geometric minor radius
-        ygeo(js) = p5*(xmidb - xmida)
+        ygeo(js) = cp5*(xmidb - xmida)
 
         ! Geometric indentation
         yinden(js) = (xmida - xmin)/(xmax - xmin)
@@ -479,7 +479,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   WRITE (nthreed, 130)
 130 FORMAT(//,' Magnetic Fields and Pressure',/,1x,71('-'))
-  fac = p5/mu0
+  fac = cp5/mu0
   WRITE (nthreed, 140) sump/mu0, pavg/mu0, fac*sumbpol,                 &
      fac*sumbpol/volume_p, fac*sumbtor, fac*sumbtor/volume_p,           &
      fac*sumbtot, fac*sumbtot/volume_p, c1p5*sump/mu0,                  &
@@ -509,7 +509,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END DO
 820 FORMAT(i5,1p,4e12.4)
 
-  betstr = two*SQRT(sump2/volume_p)/(sumbtot/volume_p)
+  betstr = c2p0*SQRT(sump2/volume_p)/(sumbtot/volume_p)
 
   WRITE (nthreed, 150) betatot, betapol, betator
 150 FORMAT(/,' From volume averages over plasma, betas are',/,          &
@@ -530,8 +530,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   IF (lfreeb .and. ivac.gt.1) THEN
      bpol2vac = 2*bsqvac - bphiv*bphiv
   ELSE
-     bpol2vac = 2*(c1p5*bsq(ns:nrzt:ns)   - p5*bsq(ns-1:nrzt:ns))       &
-              -  ((c1p5*bsupv(ns:nrzt:ns) - p5*bsupv(ns-1:nrzt:ns))     &
+     bpol2vac = 2*(c1p5*bsq(ns:nrzt:ns)   - cp5*bsq(ns-1:nrzt:ns))       &
+              -  ((c1p5*bsupv(ns:nrzt:ns) - cp5*bsupv(ns-1:nrzt:ns))     &
               * redge)**2
   END IF
 
@@ -564,7 +564,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   smaleli = factor*sumbpol
   betai   = 2*factor*sump
   musubi  = vnorm*factor*musubi
-  lambda = p5*smaleli + betai
+  lambda = cp5*smaleli + betai
 
   ! Shafranov def. based on RT, Eq.(12)
   s11 = er - rshaf*sigr0
@@ -589,13 +589,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      s11, s12, s13, s2, s2/fgeo, s2/flao,                               &
      musubi + s11,musubi + s12,                                         &
      musubi + s13,                                                      &
-     p5*s11 + s2, p5*s12 + s2/fgeo, p5*s13 + s2/flao,                   &
-     p5*(3*betai+smaleli-musubi)/(s11+s2) - one,                        &
-     p5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - one,                   &
-     p5*(3*betai+smaleli-musubi)/(s13+s2/flao) - one,                   &
-     p5*(betai+smaleli+musubi)/s2 - one,                                &
-     p5*fgeo*(betai+smaleli+musubi)/s2 - one,                           &
-     p5*flao*(betai+smaleli+musubi)/s2 - one
+     cp5*s11 + s2, cp5*s12 + s2/fgeo, cp5*s13 + s2/flao,                   &
+     cp5*(3*betai+smaleli-musubi)/(s11+s2) - one,                        &
+     cp5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - one,                   &
+     cp5*(3*betai+smaleli-musubi)/(s13+s2/flao) - one,                   &
+     cp5*(betai+smaleli+musubi)/s2 - one,                                &
+     cp5*fgeo*(betai+smaleli+musubi)/s2 - one,                           &
+     cp5*flao*(betai+smaleli+musubi)/s2 - one
 
 168 FORMAT(' Shafranov Surface Integrals',/                             &
            ' Ref: S. P. Hirshman, Phys. Fluids B, 5, (1993) 3119',/,    &

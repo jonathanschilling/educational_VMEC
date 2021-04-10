@@ -57,7 +57,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   !
   ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
 
-  IF (.not. ALLOCATED(tanu)) then
+  IF (.not. precal_done) then
      CALL precal
   end if
   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)

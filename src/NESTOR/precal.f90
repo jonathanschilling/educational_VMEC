@@ -23,28 +23,8 @@ SUBROUTINE precal
   alp = pi2*onp
   alvp = onp*alv
 
-  ! ALLOCATE PERSISTENT ARRAYS
-  IF (nv == 1) THEN
-     ! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V
-     nvper = 64
-     nuv_tan = 2*nu*nvper
-  ELSE
-     nvper = nfper
-     nuv_tan = 2*nuv
-  END IF
-
   alp_per = pi2/nvper
   nvp = nv*nvper
-
-  ALLOCATE (tanu(nuv_tan), tanv(nuv_tan),                           &
-       sinper(nvper), cosper(nvper), sinuv(nuv), cosuv(nuv),        &
-       sinu(0:mf,nu), cosu(0:mf,nu), sinv(-nf:nf,nv),               &
-       cosv(-nf:nf,nv), sinui(0:mf,nu2), cosui(0:mf,nu2),           &
-       cmns(0:(mf+nf),0:mf,0:nf), csign(-nf:nf),                    &
-       sinu1(nuv2,0:mf), cosu1(nuv2,0:mf),                          &
-       sinv1(nuv2,0:nf), cosv1(nuv2,0:nf), imirr(nuv),              &
-       xmpot(mnpd), xnpot(mnpd), stat=istat1)
-  IF (istat1.ne.0) STOP 'allocation error in precal'
 
   ! IMIRR(I) GIVES THE INDEX OF THE POINT TWOPI-THETA(I),TWOPI-ZETA(I)
   DO kp = 1, nvper
@@ -185,5 +165,7 @@ SUBROUTINE precal
   cmns(0:mf+nf,1:mf,0) = (p5*alp)*(cmn(0:mf+nf,1:mf,0) + cmn(0:mf+nf,:mf-1,0))
   cmns(0:mf+nf,0,1:nf) = (p5*alp)*(cmn(0:mf+nf,0,1:nf) + cmn(0:mf+nf,0,:nf-1))
   cmns(0:mf+nf,0,0)    = (p5*alp)*(cmn(0:mf+nf,0,0)    + cmn(0:mf+nf,0,0))
+
+  precal_done = .true.
 
 END SUBROUTINE precal

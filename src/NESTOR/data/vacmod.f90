@@ -20,6 +20,8 @@ MODULE vacmod
   REAL(rprec) :: onp
   REAL(rprec) :: onp2
 
+  logical :: precal_done
+
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: potvac
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvecsav
@@ -83,6 +85,8 @@ MODULE vacmod
 subroutine allocate_nestor
   integer :: istat1, istat2, i, ndim
 
+  precal_done = .false.
+
   ! nuv2 = nznt in read_indata
 
   ALLOCATE (amatsav(mnpd2*mnpd2), bvecsav(mnpd2), &
@@ -110,13 +114,32 @@ subroutine allocate_nestor
             rzb2(nuv), rcosuv(nuv), rsinuv(nuv), stat=i)
   IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
+  ! from precal
+! ALLOCATE PERSISTENT ARRAYS
+  IF (nv == 1) THEN
+     ! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V
+     nvper = 64
+     nuv_tan = 2*nu*nvper
+  ELSE
+     nvper = nfper
+     nuv_tan = 2*nuv
+  END IF
 
+  ALLOCATE (tanu(nuv_tan), tanv(nuv_tan),                           &
+       sinper(nvper), cosper(nvper), sinuv(nuv), cosuv(nuv),        &
+       sinu(0:mf,nu), cosu(0:mf,nu), sinv(-nf:nf,nv),               &
+       cosv(-nf:nf,nv), sinui(0:mf,nu2), cosui(0:mf,nu2),           &
+       cmns(0:(mf+nf),0:mf,0:nf), csign(-nf:nf),                    &
+       sinu1(nuv2,0:mf), cosu1(nuv2,0:mf),                          &
+       sinv1(nuv2,0:nf), cosv1(nuv2,0:nf), imirr(nuv),              &
+       xmpot(mnpd), xnpot(mnpd), stat=istat1)
+  IF (istat1.ne.0) STOP 'allocation error in precal'
 
 end subroutine allocate_nestor
 
 subroutine free_mem_nestor
 
-  integer :: istat3, istat4, i
+  integer :: istat1, istat3, istat4, i
 
   IF (ALLOCATED(amatsav)) then
       DEALLOCATE (amatsav, bvecsav, bsqsav, potvac,  &
@@ -139,9 +162,17 @@ IF (ALLOCATED(bexu)) then
      IF (i .ne. 0) STOP 'Deallocation error in vacuum'
   end if
 
-  DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
+  if (allocated(amatrix)) then
+     DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
+     IF (i .ne. 0) STOP 'Deallocation error in vacuum'
+  end if
 
-
+  IF (ALLOCATED(tanu)) then
+     DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
+                sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
+                cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
+     IF (istat1 .ne. 0) STOP 'Deallocation error in vacuum'
+  end if
 end subroutine free_mem_nestor
 
 

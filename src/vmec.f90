@@ -197,12 +197,8 @@ PROGRAM vmec
   IF (istat1 .ne. 0) PRINT *, Warning // "#2"
   end if
 
-  IF (ALLOCATED(tanu)) then
-  DEALLOCATE(tanu, tanv, sinper, cosper, sinuv, cosuv, cmns,         &
-              sinu, cosu, sinv, cosv, sinui, cosui, csign, sinu1,     &
-              cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
-  IF (istat1 .ne. 0) PRINT *, Warning // "#3"
-  end if
+
+
   CALL free_mem_funct3d
   CALL free_mem_ns
   CALL free_mem_nunv

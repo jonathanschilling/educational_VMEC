@@ -24,7 +24,6 @@ SUBROUTINE precal
   alvp = onp*alv
 
   alp_per = pi2/nvper
-  nvp = nv*nvper
 
   ! IMIRR(I) GIVES THE INDEX OF THE POINT TWOPI-THETA(I),TWOPI-ZETA(I)
   DO kp = 1, nvper

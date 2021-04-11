@@ -1,12 +1,11 @@
 !> \file
-SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac)
+SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
   USE vparams, ONLY: nthreed
   USE vacmod
   USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: rad, zee
-  REAL(rprec), DIMENSION(nuv2), INTENT(out) :: br, bp, bz
   REAL(rprec), DIMENSION(nr0b,nz0b,np0b), INTENT(in) :: brvac, bpvac, bzvac
 
   CHARACTER(LEN=50), PARAMETER :: warning = 'Plasma Boundary exceeded Vacuum Grid Size'
@@ -61,9 +60,9 @@ SUBROUTINE becoil(rad, zee, br, bp, bz, brvac, bpvac, bzvac)
      w11 = 1 + w22 - (pr + qz)     ! (1-p)*(1-q)
 
      ! COMPUTE B FIELD AT R, PHI, Z BY INTERPOLATION
-     br(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)
+     brad(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)
      bz(i) = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)
-     bp(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)
+     bphi(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)
   END DO
 
   IF (MOD(icount,25).eq.0) THEN

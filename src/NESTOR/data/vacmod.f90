@@ -78,12 +78,46 @@ MODULE vacmod
   REAL(rprec), ALLOCATABLE :: bsubu(:), bsubv(:), potu(:), potv(:)
   REAL(rprec), ALLOCATABLE :: amatrix(:)
 
+  ! from surface
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruu, ruv, rvv, zuu, zuv, zvv
+
+  ! from bextern
+  REAL(rprec), ALLOCATABLE :: brad(:), bphi(:), bz(:)
+
+  ! from tolicu
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: xpts
+
+  ! from scalpot
+  REAL(rprec), ALLOCATABLE :: grpmn(:)
+  REAL(rprec), ALLOCATABLE :: green(:), gstore(:), greenp(:,:)
+
+  ! from analyt
+  REAL(rprec), DIMENSION(:), ALLOCATABLE ::                         &
+     r0p, r1p, r0m, r1m, sqrtc, sqrta, tlp2, tlp1, tlp, tlm2,       &
+     tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm, slp, tlpm, slpm,    &
+     delt1u, azp1u, azm1u, cma11u, sqad1u, sqad2u
+
+  ! from greenf
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave, ga1, ga2, dsave
+
+  ! from fourp
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: g1, g2
+
+  ! from fouri
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: bcos, bsin, source
+  REAL(rprec), ALLOCATABLE :: actemp(:,:,:,:), astemp(:,:,:,:)
 
 
   CONTAINS
 
 subroutine allocate_nestor
-  integer :: istat1, istat2, i, ndim
+  integer :: istat = 0
+  integer :: istat1 = 0
+  integer :: istat2 = 0
+  integer :: i = 0
+  integer :: l = 0
+  integer :: m = 0
+  integer :: ip = 0
 
   precal_done = .false.
 
@@ -94,17 +128,18 @@ subroutine allocate_nestor
             raxis_nestor(nv), zaxis_nestor(nv), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nestor'
 
+
   ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
   IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
 
- brv=0
- bphiv=0
- bzv=0
+  brv=0
+  bphiv=0
+  bzv=0
 
- bsqvac=0
+  bsqvac=0
 
- ! from vacuum()
- ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2), potu(nuv2), potv(nuv2), stat = i)
+  ! from vacuum()
+  ALLOCATE (amatrix(mnpd2*mnpd2), bsubu(nuv2), bsubv(nuv2), potu(nuv2), potv(nuv2), stat = i)
   IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
   ALLOCATE (bexu(nuv2), bexv(nuv2), bexn(nuv2), bexni(nuv2),                    &
@@ -115,16 +150,6 @@ subroutine allocate_nestor
   IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
   ! from precal
-! ALLOCATE PERSISTENT ARRAYS
-  IF (nv == 1) THEN
-     ! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V
-     nvper = 64
-     nuv_tan = 2*nu*nvper
-  ELSE
-     nvper = nfper
-     nuv_tan = 2*nuv
-  END IF
-
   ALLOCATE (tanu(nuv_tan), tanv(nuv_tan),                           &
        sinper(nvper), cosper(nvper), sinuv(nuv), cosuv(nuv),        &
        sinu(0:mf,nu), cosu(0:mf,nu), sinv(-nf:nf,nv),               &
@@ -135,11 +160,68 @@ subroutine allocate_nestor
        xmpot(mnpd), xnpot(mnpd), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error in precal'
 
+  ! from surface()
+  ALLOCATE (ruu(nuv2), ruv(nuv2), rvv(nuv2), zuu(nuv2), zuv(nuv2), zvv(nuv2), stat = i)
+  IF (i .NE. 0) STOP 'Allocation error in SURFACE'
+
+  ! from bextern
+  ALLOCATE (brad(nuv2), bphi(nuv2), bz(nuv2), stat=i)
+  IF (i .ne. 0) STOP 'allocation error in bextern'
+
+  ! from tolicu
+  ALLOCATE (xpts(3,nvp), stat=i)
+  IF (i .ne. 0) STOP ' allocation error in tolicu'
+
+  ! from scalpot
+  ALLOCATE (grpmn(nuv2*mnpd2), stat=ip)
+  IF (ip .ne. 0) STOP 'GRPMN: Allocation error in scalpot'
+
+  ALLOCATE (green(nuv), gstore(nuv), greenp(nuv,nuv2), stat=istat)
+  if (istat.ne.0) then
+     ! Below loop over nuv2 was previously chunked.
+     ! Therefore, some extra care shall be used here to make sure
+     ! everything still fits into memory...
+     stop 'green allocation error in scalpot.'
+  end if
+
+  ! from analyt
+  ALLOCATE (r0p(nuv2), r1p(nuv2), r0m(nuv2), r1m(nuv2),             &
+            sqrtc(nuv2), sqrta(nuv2), tlp2(nuv2), tlp1(nuv2),       &
+            tlp(nuv2), tlm2(nuv2), tlm1(nuv2), tlm(nuv2), adp(nuv2),&
+            adm(nuv2), cma(nuv2), ra1p(nuv2), ra1m(nuv2), slm(nuv2),&
+            slp(nuv2), tlpm(nuv2), slpm(nuv2), delt1u(nuv2),        &
+            azp1u(nuv2), azm1u(nuv2), cma11u(nuv2), sqad1u(nuv2),   &
+            sqad2u(nuv2), stat = l)
+  IF (l .ne. 0) STOP 'Allocation error in SUBROUTINE analyt'
+
+  ! from greenf
+  ALLOCATE (gsave(nuv), ga1(nuv), ga2(nuv), dsave(nuv), stat=i)
+  IF (i .ne. 0) STOP 'allocation error in greenf'
+
+  print *, "allocations; ndim=",ndim
+
+  ! from fourp
+  ALLOCATE (g1(nuv2,0:nf,ndim), g2(nuv2,0:nf,ndim), stat=m)
+  IF (m .NE. 0) STOP 'Allocation error in fourp'
+
+  ! from fouri
+  ALLOCATE (bcos(nu2,-nf:nf,ndim), bsin(nu2,-nf:nf,ndim),           &
+     actemp(mnpd,-nf:nf,nu3,ndim), astemp(mnpd,-nf:nf,nu3,ndim),    &
+     source(nv,nu2,ndim), stat = i)
+  IF (i .ne. 0) STOP 'allocation error in fouri'
+
 end subroutine allocate_nestor
+
+
 
 subroutine free_mem_nestor
 
-  integer :: istat1, istat3, istat4, i
+  integer :: istat1 = 0
+  integer :: istat3 = 0
+  integer :: istat4 = 0
+  integer :: i = 0
+  integer :: l = 0
+  integer :: m = 0
 
   IF (ALLOCATED(amatsav)) then
       DEALLOCATE (amatsav, bvecsav, bsqsav, potvac,  &
@@ -153,7 +235,7 @@ subroutine free_mem_nestor
   end if
 
   ! from vacuum()
-IF (ALLOCATED(bexu)) then
+  IF (ALLOCATED(bexu)) then
      DEALLOCATE (bexu, bexv, bexn, bexni, &
         r1b, rub, rvb, z1b, zub, zvb,   &
         auu, auv, avv, snr, snv, snz, &
@@ -173,6 +255,53 @@ IF (ALLOCATED(bexu)) then
                 cosu1, sinv1, cosv1, imirr, xmpot, xnpot, stat=istat1)
      IF (istat1 .ne. 0) STOP 'Deallocation error in vacuum'
   end if
+
+  ! from surface
+  if (allocated(ruu)) then
+     DEALLOCATE (ruu, ruv, rvv, zuu, zuv, zvv, stat=i)
+  end if
+
+  ! from bextern
+  if (allocated(brad)) then
+     DEALLOCATE (brad, bphi, bz)
+  end if
+
+  ! added for tolicu
+  if (allocated(xpts)) then
+     print *, "deallocate xpts"
+     deallocate(xpts)
+  end if
+
+  ! from scalpot
+  if (allocated(grpmn)) then
+    DEALLOCATE (grpmn)
+    DEALLOCATE (green, greenp, gstore)
+  end if
+
+  ! from analyt
+  if (allocated(r0p)) then
+    DEALLOCATE (r0p, r1p, r0m, r1m, sqrtc, sqrta, tlp2, tlp1,         &
+              tlp, tlm2, tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm,   &
+              slp, tlpm, slpm, delt1u, azp1u, azm1u, cma11u, sqad1u,  &
+              sqad2u, stat = l)
+  end if
+
+  ! from greenf
+  if (allocated(gsave)) then
+    DEALLOCATE (gsave, ga1, ga2, dsave, stat=i)
+  end if
+
+  ! from fourp
+  if (allocated(g1)) then
+    DEALLOCATE (g1, g2, stat=m)
+  end if
+
+  ! from fouri
+  if (allocated(bcos)) then
+    DEALLOCATE (bcos, bsin, actemp, astemp, source, stat=i)
+  end if
+
+
 end subroutine free_mem_nestor
 
 

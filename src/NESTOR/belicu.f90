@@ -1,6 +1,6 @@
 !> \file
 SUBROUTINE belicu(bx, by, bz, cos1, sin1, rp, zp)
-  USE vacmod
+  USE vacmod, vm_bz => bz
   USE biotsavart
   IMPLICIT NONE
 

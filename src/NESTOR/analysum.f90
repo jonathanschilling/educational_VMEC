@@ -1,9 +1,9 @@
 !> \file
-SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, ndim, lasym)
-  USE vacmod
+SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym)
+  USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: m, n, l, ivacskip, ndim
+  INTEGER, INTENT(in) :: m, n, l, ivacskip
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
   REAL(rprec), INTENT(inout) :: bvec(0:mf,-nf:nf,ndim)
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: sl, tl

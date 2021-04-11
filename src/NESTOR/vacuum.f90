@@ -7,8 +7,9 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
   IMPLICIT NONE
 
-  INTEGER :: ns, ivac_skip, ivac, mnmax, ier_flag
-  REAL(rprec) :: plascur, rbtor
+  INTEGER, intent(in) :: ns, ivac_skip, mnmax
+  integer, intent(inout) :: ivac, ier_flag
+  REAL(rprec), intent(in) :: plascur, rbtor
   REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
   logical, intent(in) :: lasym

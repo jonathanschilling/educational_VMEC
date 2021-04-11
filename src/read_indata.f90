@@ -3,7 +3,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   USE vmec_main
   USE vmec_input, ONLY: bloat, ncurr
   USE vmec_params
-  USE vacmod0
+  USE vacmod0, only: set_nestor_sizes
   USE safe_open_mod
   USE vmec_input, ONLY: read_indata_namelist
   IMPLICIT NONE
@@ -114,28 +114,6 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
 
   nznt = nzeta*ntheta3
 
-
-
-  ! below stuff is required only for NESTOR
-  mf = mpol+1
-  nf = ntor
-  nu = ntheta1
-  nv = nzeta
-  mf1 = 1+mf
-  nf1 = 2*nf+1
-  mnpd = mf1*nf1
-
-  IF (.NOT.lasym) THEN
-    mnpd2 = mnpd
-  ELSE
-    mnpd2 = 2*mnpd
-  END IF
-
-  nuv = nu*nv
-  nfper = nfp
-  nu2 = nu/2 + 1
-  nu3 = ntheta3
-  nuv2 = nznt
-
+  call set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
 
 END SUBROUTINE read_indata

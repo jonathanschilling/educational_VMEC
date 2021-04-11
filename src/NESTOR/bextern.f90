@@ -9,20 +9,17 @@ SUBROUTINE bextern(plascur, wint, ns)
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
 
   INTEGER :: i
-  REAL(rprec), ALLOCATABLE :: brad(:), bphi(:), bz(:)
 
   ! exterior Neumann problem
 
   IF (.not.ALLOCATED(bvac)) STOP 'BVAC unallocated in bextern'
 
-  ALLOCATE (brad(nuv2), bphi(nuv2), bz(nuv2), stat=i)
-  IF (i .ne. 0) STOP 'allocation error in bextern'
 
   ! THIS ROUTINE COMPUTES THE B DOT DS ARISING FROM EXTERNAL COILS AND INTERNAL PLASMA CURRENT
   ! NOTE THAT BEXN = - BEX * DS IS THE EFFECTIVE SOURCE TERM
   !
   ! COMPUTE B FROM COILS ON THE PLASMA BOUNDARY
-  CALL becoil(r1b,z1b,brad,bphi,bz,bvac(1,1),bvac(1,2),bvac(1,3))
+  CALL becoil(r1b, z1b, bvac(1,1), bvac(1,2), bvac(1,3))
 
   ! COMPUTE B (ON PLASMA BOUNDARY) FROM NET TOROIDAL PLASMA CURRENT
   ! THE NET CURRENT IS MODELLED AS A WIRE AT THE MAGNETIC AXIS, AND THE
@@ -47,8 +44,6 @@ SUBROUTINE bextern(plascur, wint, ns)
     bexv(i) = rvb(i)*brad(i) + zvb(i)*bz(i) + r1b(i)*bphi(i)
     bexn(i) =-(brad(i)*snr(i) + bphi(i)*snv(i) + bz(i)*snz(i))
   END DO
-
-  DEALLOCATE (brad, bphi, bz)
 
   ! COMPUTE NORMALIZED [(2*pi)**2], READY-TO-INTEGRATE (WINT FACTOR) SOURCE TERM
   ! NOTE: BEXN == NP*F = -B0 dot [Xu cross Xv] NP        (see PKM, Eq. 2.13)

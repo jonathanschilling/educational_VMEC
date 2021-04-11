@@ -1,29 +1,15 @@
 !> \file
-SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim, lasym)
-  USE vacmod
+SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
+  USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ivacskip, ndim
+  INTEGER, INTENT(in) :: ivacskip
   REAL(rprec), INTENT(out) :: grpmn(nuv2*mnpd2)
   REAL(rprec), INTENT(out) :: bvec(mnpd2)
   integer, intent(in) :: lasym
 
   INTEGER :: l, n, m
-  REAL(rprec), DIMENSION(:), ALLOCATABLE ::                         &
-     r0p, r1p, r0m, r1m, sqrtc, sqrta, tlp2, tlp1, tlp, tlm2,       &
-     tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm, slp, tlpm, slpm,    &
-     delt1u, azp1u, azm1u, cma11u, sqad1u, sqad2u
   REAL(rprec) :: fl, fl1, sign1
-
-  ALLOCATE (r0p(nuv2), r1p(nuv2), r0m(nuv2), r1m(nuv2),             &
-            sqrtc(nuv2), sqrta(nuv2), tlp2(nuv2), tlp1(nuv2),       &
-            tlp(nuv2), tlm2(nuv2), tlm1(nuv2), tlm(nuv2), adp(nuv2),&
-            adm(nuv2), cma(nuv2), ra1p(nuv2), ra1m(nuv2), slm(nuv2),&
-            slp(nuv2), tlpm(nuv2), slpm(nuv2), delt1u(nuv2),        &
-            azp1u(nuv2), azm1u(nuv2), cma11u(nuv2), sqad1u(nuv2),   &
-            sqad2u(nuv2), stat = l)
-  IF (l .ne. 0) STOP 'Allocation error in SUBROUTINE analyt'
-
 
   ! ALL EQUATIONS REFER TO THE PAPER BY P. MERKEL (PKM)
   ! IN J. COMPUT. PHYSICS 66, p83 (1986)
@@ -126,10 +112,10 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim, lasym)
 
            IF (n.eq.0 .or. m.eq.0) THEN
              ! 1. n = 0 and  m >= 0  OR n > 0 and m = 0
-             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, ndim, lasym)
+             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, lasym)
            ELSE
              ! 2. n>=1  and  m>=1
-             CALL analysum2 (grpmn, bvec, slm, tlm, slp, tlp, m, n, l, ivacskip, ndim, lasym)
+             CALL analysum2 (grpmn, bvec, m, n, l, ivacskip, lasym)
            ENDIF
         END DO
      END DO
@@ -150,10 +136,5 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, ndim, lasym)
      tlm = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlm1 - fl*adp*tlm2)/(adm*fl1)
      tlpm = tlp + tlm
   END DO LLOOP
-
-  DEALLOCATE (r0p, r1p, r0m, r1m, sqrtc, sqrta, tlp2, tlp1,         &
-            tlp, tlm2, tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm,   &
-            slp, tlpm, slpm, delt1u, azp1u, azm1u, cma11u, sqad1u,  &
-            sqad2u, stat = l)
 
 END SUBROUTINE analyt

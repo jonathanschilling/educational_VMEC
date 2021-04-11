@@ -4,12 +4,11 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   IMPLICIT NONE
 
   INTEGER, intent(in) :: mnmax
-  REAL(rprec), DIMENSION(mnmax) :: rc, rs, zs, zc, xm, xn
+  REAL(rprec), DIMENSION(mnmax), intent(in) :: rc, rs, zs, zc, xm, xn
   logical, intent(in) :: lasym
   real(rprec), intent(in) :: signgs
 
   INTEGER :: i, mn, m, n, n1
-  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruu, ruv, rvv, zuu, zuv, zvv
   REAL(rprec) :: cosmn1, sinmn1
 
   ! THIS ROUTINE COMPUTES THE SURFACE VALUES OF R,Z AND DERIVATIVES
@@ -21,9 +20,6 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   !
   ! NOTE: u, v here are actual angles (0, 2pi), NOT the normalized
   !       variables used in PKM paper
-
-  ALLOCATE (ruu(nuv2), ruv(nuv2), rvv(nuv2), zuu(nuv2), zuv(nuv2), zvv(nuv2), stat = i)
-  IF (i .NE. 0) STOP 'Allocation error in SURFACE'
 
   r1b = 0;   rub = 0;   rvb = 0;  ruu = 0; ruv = 0; rvv = 0
   z1b = 0;   zub = 0;   zvb = 0;  zuu = 0; zuv = 0; zvv = 0
@@ -61,7 +57,7 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
            zuv(i) = zuv(i) + xm(mn)*xn(mn)*zc(mn) * cosmn1
            zvv(i) = zvv(i) - xn(mn)*xn(mn)*zc(mn) * cosmn1
         END IF
-  END DO
+     END DO
   END DO
 
   ! COMPUTE METRIC COEFFICIENTS GIJ_B AND SURFACE NORMAL COMPONENTS
@@ -106,7 +102,5 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
     rcosuv(i) = r1b(i)*cosuv(i)
     rsinuv(i) = r1b(i)*sinuv(i)
   END DO
-
-  DEALLOCATE (ruu, ruv, rvv, zuu, zuv, zvv, stat=i)
 
 END SUBROUTINE surface

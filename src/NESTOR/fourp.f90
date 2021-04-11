@@ -1,14 +1,12 @@
 !> \file
-SUBROUTINE fourp (grpmn, grp, ndim)
-  USE vacmod
+SUBROUTINE fourp (grpmn, grp)
+  USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
-  INTEGER, INTENT(in)    :: ndim
   REAL(rprec), INTENT(in)    :: grp(nuv,nuv2)
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
 
   INTEGER :: n, kv, ku, ip, iuv, m, ireflect, isym
-  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: g1, g2
   REAL(rprec) :: cosm, sinm, cosn, sinn, kernel, gcos, gsin
 
   ! PERFORM KV (TOROIDAL ANGLE) TRANSFORM (OVER UNPRIMED MESH IN EQ. 2.14)
@@ -20,8 +18,7 @@ SUBROUTINE fourp (grpmn, grp, ndim)
 
   IF (ndim .GT. 2) STOP 'NDIM > 2'
 
-  ALLOCATE (g1(nuv2,0:nf,ndim), g2(nuv2,0:nf,ndim), stat=m)
-  IF (m .NE. 0) STOP 'Allocation error in fourp'
+
 
   DO ku = 1,nu2
      g1 = 0
@@ -72,6 +69,5 @@ SUBROUTINE fourp (grpmn, grp, ndim)
      END DO
   END DO
 
-  DEALLOCATE (g1, g2, stat=m)
 
 END SUBROUTINE fourp

@@ -1,9 +1,9 @@
 !> \file
-SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
-  USE vacmod, vm_amatrix => amatrix
+SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ns, lasym)
+  USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ns, ndim
+  INTEGER, INTENT(in) :: ns
   REAL(rprec), DIMENSION(mnpd,nv,nu3,ndim), INTENT(in) :: grpmn
   REAL(rprec), DIMENSION(nuv), INTENT(in) :: gsource
   REAL(rprec), DIMENSION(mnpd,mnpd,ndim**2), INTENT(out) :: amatrix
@@ -16,8 +16,6 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
   REAL(rprec), PARAMETER :: int_ext = 1
 
   INTEGER :: k, i, j, n, kvi, kui, mn, m, mn0, isym
-  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: bcos, bsin, source
-  REAL(rprec), ALLOCATABLE :: actemp(:,:,:,:), astemp(:,:,:,:)
   REAL(rprec) :: cosn, sinn, cosm, sinm
 
   ! AMATRIX(,1) = A(Sin)(Sin');  AMATRIX(,2) = A(Sin)(Cos');
@@ -32,11 +30,6 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
   !
   ! IN CONTRAST, THE INTEGRAL OF THE SOURCE TERM OVER THE PRIMED MESH WAS ALREADY
   ! DONE (IN SCALPOT), SO HERE THE FT ARE OVER THE UNPRIMED MESH FOR THE SOURCE.
-
-  ALLOCATE (bcos(nu2,-nf:nf,ndim), bsin(nu2,-nf:nf,ndim),           &
-     actemp(mnpd,-nf:nf,nu3,ndim), astemp(mnpd,-nf:nf,nu3,ndim),    &
-     source(nv,nu2,ndim), stat = i)
-  IF (i .ne. 0) STOP 'allocation error in fouri'
 
   ! SYMMETRIZE SOURCE TERMS (with respect to u,v and -u,-v)
   ! INDEX (1) IS ANTI-SYMMETRIC, INDEX (2) IS SYMMETRIC, PART
@@ -122,7 +115,9 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ndim, ns, lasym)
      END DO
   END DO
 
-  DEALLOCATE (bcos, bsin, actemp, astemp, source, stat=i)
+
+  ! below is not related to Fourier transforms anymore,
+  ! but should probably go into the main vacuum routine...
 
   amatrix = (pi2*pi2)*amatrix
 

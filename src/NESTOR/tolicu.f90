@@ -9,12 +9,8 @@ SUBROUTINE tolicu(torcur)
 
   INTEGER :: i, kper, kv
   REAL(rprec) :: current(1)
-  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: xpts
 
   ! COMPUTE WIRE SEGMENTS (DO NOT CLOSE LOOP, CLOSURE DONE IN biotsavart ROUTINES)
-
-  ALLOCATE (xpts(3,nvp), stat=i)
-  IF (i .ne. 0) STOP ' allocation error in tolicu'
 
   current = torcur/mu0
 

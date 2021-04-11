@@ -9,7 +9,6 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   INTEGER, DIMENSION(2) :: ilow, ihigh
   INTEGER :: ivoff, iskip, iuoff, i, kp, nloop, ivoff0
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave, ga1, ga2, dsave
   REAL(rprec):: xip, yip, xper, yper, sxsave, sysave, ftemp, htemp
 
   ! ON ENTRANCE, IP IS THE INDEX OF THE PRIMED MESH POINT (lies in 1st field period)
@@ -21,9 +20,6 @@ SUBROUTINE greenf(delgr, delgrp, ip)
   !
   ! BOTH THESE QUANTITIES ARE COMPUTED FOR ALL UNPRIMED U,V POINTS IN ONE FIELD PERIOD,
   ! FOR THIS FIXED PRIMED POINT (IP).
-
-  ALLOCATE (gsave(nuv), ga1(nuv), ga2(nuv), dsave(nuv), stat=i)
-  IF (i .ne. 0) STOP 'allocation error in greenf'
 
   ! COMPUTE OFFSETS FOR U,V ANGLE DIFFERENCES AND CONSTANTS
   ilow(1) = 1
@@ -106,6 +102,5 @@ SUBROUTINE greenf(delgr, delgrp, ip)
         END DO
      ENDIF
   END DO
-  DEALLOCATE (gsave, ga1, ga2, dsave, stat=i)
 
 END SUBROUTINE greenf

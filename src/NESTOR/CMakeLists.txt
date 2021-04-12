@@ -14,7 +14,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/precal.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/scalpot.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/surface.f90
-	${CMAKE_CURRENT_SOURCE_DIR}/tolicu.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/vacuum.f90
 )
 set (vmec_sources "${vmec_sources}" PARENT_SCOPE)

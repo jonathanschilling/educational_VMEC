@@ -26,8 +26,7 @@ SUBROUTINE bextern(plascur, wint, ns)
   ! BIOT-SAVART LAW IS USED TO COMPUTE THE FIELD AT THE PLASMA SURFACE
   !
   ! USE BEXU, BEXV, BEXN AS TEMPORARY STORAGE FOR BX, BY, BZ
-  CALL tolicu (plascur)
-  CALL belicu (bexu, bexv, bexn, cosuv, sinuv, r1b, z1b)
+  CALL belicu (plascur, bexu, bexv, bexn, cosuv, sinuv, r1b, z1b)
   DO i = 1, nuv2
      brad(i) = brad(i) + bexu(i)*cosuv(i) + bexv(i)*sinuv(i)
      bphi(i) = bphi(i) - bexu(i)*sinuv(i) + bexv(i)*cosuv(i)

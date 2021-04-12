@@ -153,6 +153,7 @@ SUBROUTINE eqsolve(ier_flag)
      ! ivac gets set to 1 in vacuum() of NESTOR
      IF (ivac .eq. 1) THEN
         ! vacuum pressure turned on at iter2 iterations (here)
+        ! this makes ivac=1 --> ivac=2
         PRINT 110, iter2
         WRITE (nthreed, 110) iter2
 110 FORMAT(/,2x,'VACUUM PRESSURE TURNED ON AT ',i4,' ITERATIONS'/)

@@ -191,7 +191,7 @@ subroutine allocate_nestor
   ALLOCATE (gsave(nuv), ga1(nuv), ga2(nuv), dsave(nuv), stat=i)
   IF (i .ne. 0) STOP 'allocation error in greenf'
 
-  print *, "allocations; ndim=",ndim
+  ! print *, "allocations; ndim=",ndim
 
   ! from fourp
   ALLOCATE (g1(nuv2,0:nf,ndim), g2(nuv2,0:nf,ndim), stat=m)

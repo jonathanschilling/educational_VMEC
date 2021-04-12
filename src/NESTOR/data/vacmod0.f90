@@ -36,7 +36,7 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
   ! copied from vmec:read_indata
   integer :: ntheta1, ntheta2, ntheta3, nznt
 
-  print *, "set_nestor_sizes"
+  !print *, "set_nestor_sizes"
 
   ! even (rounded down) ntheta
   ntheta1 = 2*(ntheta/2)

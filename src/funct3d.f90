@@ -1,8 +1,8 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
-  USE vacmod, ONLY: bsqvac
-  use nestor_io, only: write_nestor_inputs, write_nestor_outputs
+  USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2
+  use nestor_io, only: write_nestor_outputs
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces
@@ -112,6 +112,9 @@ SUBROUTINE funct3d (ier_flag)
   IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
 
      IF ((fsqr + fsqz) .le. 1.e-3_dp) then
+        !print *, "force residuals decreased sufficiently => increment ivac=",ivac
+        ! this does ivac=-1 --> ivac=0 to enable NESTOR at all
+
         ! initially, ivac is initialized to -1 by reset_params
         ! when R,Z forces are <1e-3, enable vacuum contribution
         ivac = ivac+1   ! decreased from e-1 to e-3 - sph12/04
@@ -153,22 +156,20 @@ SUBROUTINE funct3d (ier_flag)
               vacuum_calls, ".nc"
 
            ! write NESTOR inputs
-           call write_nestor_inputs(trim(vac_file),                               &
+           call write_nestor_inputs(trim(vac_file),                                &
                   vacuum_calls, ier_flag, trim(mgrid_file), trim(input_extension), &
-                  ivacskip, ivac, ns, nfp, ntor, mpol, nzeta, ntheta, &
-                  mnmax, xm, xn, rmnc, zmns, rmns, zmnc,  &
-                  rbtor, ctor, lasym, signgs, extcur, &
-                  r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0), wint, nznt)
+                  ivacskip, ivac, nfp, ntor, mpol, nzeta, ntheta,                  &
+                  mnmax, xm, xn, rmnc, zmns, rmns, zmnc,                           &
+                  rbtor, ctor, lasym, signgs, extcur,                              &
+                  r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0), wint(ns:nznt*ns:ns), nznt, &
+                  amatsav, bvecsav, mnpd2)
 
            ! print *, "dumped NESTOR inputs to '"//trim(vac_file)//"'"
-
         end if
-
 
         if (.not. lexternal_nestor) then
            ! use internal NESTOR
-
-           CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
+           CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                                    &
                         ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
                         lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
 
@@ -177,10 +178,10 @@ SUBROUTINE funct3d (ier_flag)
            write(nestor_cmd, "(A,X,A)") trim(nestor_executable), trim(vac_file)
 
            ! do system call to external NESTOR
-           print *, "NESTOR command: '",trim(nestor_cmd),"'"
-           !call system(nestor_cmd)
+           !print *, "NESTOR command: '",trim(nestor_cmd),"'"
+           call system(nestor_cmd)
 
-           print *, "system call to NESTOR finished"
+           !print *, "system call to NESTOR finished"
         end if
 
 
@@ -189,7 +190,7 @@ SUBROUTINE funct3d (ier_flag)
            write(vac_file, "(A,I6.6,A)") "vac/vacout_ref_"//TRIM(input_extension)//"_", &
               vacuum_calls, ".nc"
 
-           call write_nestor_outputs(vac_file, vacuum_calls, lasym, &
+           call write_nestor_outputs(vac_file, lasym, &
               ivac, ier_flag)
 
            ! print *, "dumped NESTOR outputs to '"//trim(vac_file)//"'"
@@ -199,13 +200,15 @@ SUBROUTINE funct3d (ier_flag)
           write(vac_file, "(A,I6.6,A)") "vac/vacout_"//TRIM(input_extension)//"_", &
              vacuum_calls, ".nc"
 
-          ! read output of external NESTOR
-          ! call read_nestor_output(vac_file, ier_flag)
+          !print *, "read NESTOR output from '"//trim(vac_file)//"'"
 
-          print *, "reading of NESTOR output from '"//trim(vac_file)//"' completed"
+          ! read output of external NESTOR
+          call read_nestor_outputs(trim(vac_file), ier_flag, ivac)
+          !print *, "read in NESTOR output: ivac=",ivac," ier_flag=",ier_flag
+
         end if
 
-        ! update counter for calls to NESTOR
+        ! update counter for calls to NESTOR (initialized to 0 in reset_params)
         vacuum_calls = vacuum_calls + 1
 
 

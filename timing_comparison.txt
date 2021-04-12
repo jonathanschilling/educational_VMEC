@@ -1,0 +1,11 @@
+NESTOR: allocs mostly distributed
+aa6af60afbc861d81799c8be9f4ea79d29c61bcc
+real	11m23.678s
+user	11m22.223s
+sys	0m0.951s
+
+NESTOR: centralized allocs
+6eb636aa144f5d3bc8c83a2384e789ff2bc8874c
+real	11m0.156s
+user	10m58.787s
+sys	0m0.980s

@@ -1,12 +1,11 @@
 !> \file
-SUBROUTINE bextern(plascur, wint, ns)
+SUBROUTINE bextern(plascur, wint)
   USE vacmod
   USE mgrid_mod, ONLY: bvac
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ns
   REAL(rprec), INTENT(in) :: plascur
-  REAL(rprec), DIMENSION(*), INTENT(in) :: wint
+  REAL(rprec), DIMENSION(nuv2), INTENT(in) :: wint
 
   INTEGER :: i
 
@@ -45,6 +44,6 @@ SUBROUTINE bextern(plascur, wint, ns)
 
   ! COMPUTE NORMALIZED [(2*pi)**2], READY-TO-INTEGRATE (WINT FACTOR) SOURCE TERM
   ! NOTE: BEXN == NP*F = -B0 dot [Xu cross Xv] NP        (see PKM, Eq. 2.13)
-  bexni(:nuv2) = wint(ns:nuv2*ns:ns)*bexn(:nuv2)*pi2*pi2
+  bexni(:nuv2) = wint(:nuv2)*bexn(:nuv2)*pi2*pi2
 
 END SUBROUTINE bextern

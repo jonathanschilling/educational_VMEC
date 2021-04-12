@@ -79,4 +79,7 @@ MODULE vmec_main
   integer :: ivac    !< counts number of free-boundary iterations
 
 
+  integer :: vacuum_calls = 0
+
+
 END MODULE vmec_main

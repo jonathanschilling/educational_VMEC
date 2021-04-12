@@ -2,6 +2,7 @@
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
   USE vacmod, ONLY: bsqvac
+  use nestor_io, only: write_nestor_inputs, write_nestor_outputs
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces
@@ -18,9 +19,12 @@ SUBROUTINE funct3d (ier_flag)
   REAL(dp) :: presf_ns, delt0
   REAL(dp), EXTERNAL :: pmass
 
+  CHARACTER(LEN=255) :: vac_file
+  integer :: nvac, istat_vac
+
   character(len=255) :: nestor_cmd
   character(*), parameter :: nestor_executable = &
-    "/home/jonathan/work/code/educational_VMEC/build/bin/xnestor"
+    "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
 
   !> use system call to stand-alone NESTOR for vacuum computation
   logical :: lexternal_nestor = .false.
@@ -143,23 +147,66 @@ SUBROUTINE funct3d (ier_flag)
         ! raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
         ! zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
 
+        if (ldump_vacuum_ref .or. lexternal_nestor) then
+           ! build filename for NESTOR inputs
+           write(vac_file, "(A,I6.6,A)") "vac/vacin_"//TRIM(input_extension)//"_", &
+              vacuum_calls, ".nc"
+
+           ! write NESTOR inputs
+           call write_nestor_inputs(trim(vac_file),                               &
+                  vacuum_calls, ier_flag, trim(mgrid_file), trim(input_extension), &
+                  ivacskip, ivac, ns, nfp, ntor, mpol, nzeta, ntheta, &
+                  mnmax, xm, xn, rmnc, zmns, rmns, zmnc,  &
+                  rbtor, ctor, lasym, signgs, extcur, &
+                  r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0), wint, nznt)
+
+           ! print *, "dumped NESTOR inputs to '"//trim(vac_file)//"'"
+
+        end if
 
 
+        if (.not. lexternal_nestor) then
+           ! use internal NESTOR
+
+           CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
+                        ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
+                        lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
+
+        else
+           ! construct command with argument for stand-alone external NESTOR
+           write(nestor_cmd, "(A,X,A)") trim(nestor_executable), trim(vac_file)
+
+           ! do system call to external NESTOR
+           print *, "NESTOR command: '",trim(nestor_cmd),"'"
+           !call system(nestor_cmd)
+
+           print *, "system call to NESTOR finished"
+        end if
 
 
+        if (ldump_vacuum_ref) then
+           ! construct filename for reference NESTOR output
+           write(vac_file, "(A,I6.6,A)") "vac/vacout_ref_"//TRIM(input_extension)//"_", &
+              vacuum_calls, ".nc"
 
+           call write_nestor_outputs(vac_file, vacuum_calls, lasym, &
+              ivac, ier_flag)
 
-        CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
-                     ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag, &
-                     lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
+           ! print *, "dumped NESTOR outputs to '"//trim(vac_file)//"'"
 
+        else if (lexternal_nestor) then
+          ! contruct filename from which to read output of stand-alone NESTOR
+          write(vac_file, "(A,I6.6,A)") "vac/vacout_"//TRIM(input_extension)//"_", &
+             vacuum_calls, ".nc"
 
+          ! read output of external NESTOR
+          ! call read_nestor_output(vac_file, ier_flag)
 
+          print *, "reading of NESTOR output from '"//trim(vac_file)//"' completed"
+        end if
 
-
-
-
-
+        ! update counter for calls to NESTOR
+        vacuum_calls = vacuum_calls + 1
 
 
         IF (ier_flag .ne. 0) then

@@ -102,7 +102,8 @@ MODULE vacmod
   REAL(rprec), ALLOCATABLE :: actemp(:,:,:,:), astemp(:,:,:,:)
 
 
-  CONTAINS
+
+contains
 
 subroutine allocate_nestor
   integer :: istat = 0
@@ -114,8 +115,6 @@ subroutine allocate_nestor
   integer :: ip = 0
 
   precal_done = .false.
-
-  ! nuv2 = nznt in read_indata
 
   ALLOCATE (amatsav(mnpd2*mnpd2), bvecsav(mnpd2), &
             potvac(2*mnpd),          &

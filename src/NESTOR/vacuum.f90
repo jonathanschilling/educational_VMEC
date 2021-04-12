@@ -1,18 +1,17 @@
 !> \file
 SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
-                  plascur, rbtor, wint, ns, ivac_skip, ivac,  &
+                  plascur, rbtor, wint, ivac_skip, ivac,  &
                   mnmax, ier_flag, lasym, signgs,             &
                   raxis, zaxis)
   USE vacmod
-  !USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
   IMPLICIT NONE
 
-  INTEGER, intent(in) :: ns, ivac_skip, mnmax
+  INTEGER, intent(in) :: ivac_skip, mnmax
   integer, intent(inout) :: ivac, ier_flag
   REAL(rprec), intent(in) :: plascur, rbtor
   REAL(rprec), DIMENSION(mnmax), INTENT(in) :: rmnc, rmns, zmns, zmnc, xm, xn
-  REAL(rprec), DIMENSION(*), INTENT(in) :: wint
+  REAL(rprec), DIMENSION(nuv2), INTENT(in) :: wint
   logical, intent(in) :: lasym
   real(rprec), intent(in) :: signgs
   real(rprec), dimension(nv), intent(in) :: raxis, zaxis
@@ -64,10 +63,10 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
      CALL precal
   end if
   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
-  CALL bextern (plascur, wint, ns)
+  CALL bextern (plascur, wint)
 
   ! Determine scalar magnetic potential POTVAC
-  CALL scalpot (potvac, amatrix, wint, ns, ivac_skip, lasym)
+  CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym)
   CALL solver (amatrix, potvac, mnpd2, 1, info)
   IF (info .ne. 0) STOP 'Error in solver in VACUUM'
 
@@ -128,8 +127,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
 
      ! -plasma current/pi2
-     bsubuvac = SUM(bsubu(:nuv2)*wint(ns:ns*nuv2:ns))*signgs*pi2
-     bsubvvac = SUM(bsubv(:nuv2)*wint(ns:ns*nuv2:ns))
+     bsubuvac = SUM(bsubu(:nuv2)*wint(:nuv2))*signgs*pi2
+     bsubvvac = SUM(bsubv(:nuv2)*wint(:nuv2))
 
      fac = 1.e-6_dp/mu0 ! currents in MA
      WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor

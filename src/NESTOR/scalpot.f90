@@ -1,11 +1,11 @@
 !> \file
-SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
+SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym)
   USE vacmod, vm_amatrix => amatrix
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ns, ivacskip
+  INTEGER, INTENT(in) :: ivacskip
   REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2)
-  REAL(rprec), INTENT(in) :: wint(*)
+  REAL(rprec), dimension(nuv2), INTENT(in) :: wint
   logical, intent(in) :: lasym
 
   INTEGER :: ip, istat
@@ -58,7 +58,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
 
      ! COMPUTE FOURIER INTEGRAL OF GRADIENT (GRPMN) OVER PRIMED MESH IN EQ. 2.14
      ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
-     CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, ns, lasym)
+     CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, lasym)
 
      ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
      bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)

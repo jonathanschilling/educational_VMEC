@@ -1,15 +1,14 @@
 !> \file
-SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ns, lasym)
+SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ns
   REAL(rprec), DIMENSION(mnpd,nv,nu3,ndim), INTENT(in) :: grpmn
   REAL(rprec), DIMENSION(nuv), INTENT(in) :: gsource
   REAL(rprec), DIMENSION(mnpd,mnpd,ndim**2), INTENT(out) :: amatrix
   REAL(rprec), DIMENSION(mnpd2,mnpd2), INTENT(out) :: amatsq
   REAL(rprec), DIMENSION(0:mf,-nf:nf,ndim), INTENT(inout) :: bvec
-  REAL(rprec), DIMENSION(*) :: wint
+  REAL(rprec), DIMENSION(nuv2) :: wint
   logical, intent(in) :: lasym
 
   !> interior  (int_ext=-1), exterior  (int_ext=+1)  neumann problem
@@ -97,8 +96,8 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, ns, lasym)
     !                    = 1 CORRESPONDS TO SIN (UNPRIMED) TRANSFORM (FIRST INDEX OF AMATRIX)
     !                    = 2 CORRESPONDS TO COS (UNPRIMED) TRANSFORM
      DO kui = 1, nu3
-        cosm = cosu(m,kui)*wint(kui*ns*nv)
-        sinm = sinu(m,kui)*wint(kui*ns*nv)
+        cosm = cosu(m,kui)*wint(kui*nv)
+        sinm = sinu(m,kui)*wint(kui*nv)
 
         ! SIN SIN'
         amatrix(:,m+1:mnpd:mf1,1) = amatrix(:,m+1:mnpd:mf1,1) + sinm*actemp(:,-nf:nf,kui,1) - cosm*astemp(:,-nf:nf,kui,1)

@@ -162,7 +162,8 @@ subroutine allocate_nestor
   IF (i .ne. 0) STOP 'allocation error in bextern'
 
   ! from tolicu
-  ALLOCATE (xpts(3,nvp), stat=i)
+  ! need 0:nvp for "virtual" point at index 0 which is equal to last point for closed curve
+  ALLOCATE (xpts(3,0:nvp), stat=i)
   IF (i .ne. 0) STOP ' allocation error in tolicu'
 
   ! from scalpot
@@ -261,7 +262,6 @@ subroutine free_mem_nestor
 
   ! added for tolicu
   if (allocated(xpts)) then
-     print *, "deallocate xpts"
      deallocate(xpts)
   end if
 

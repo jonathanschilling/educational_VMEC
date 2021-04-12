@@ -60,7 +60,6 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ns, ivacskip, lasym)
      ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
      CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, ns, lasym)
 
-
      ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
      bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)
 

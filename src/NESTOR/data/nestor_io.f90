@@ -14,6 +14,10 @@ IMPLICIT NONE
   integer  :: ier_flag, ivac, ivacskip, mnmax, vacuum_calls
   real(dp) :: ctor, rbtor, signgs
 
+  integer :: mnpd2_nestor
+  real(dp), dimension(:), ALLOCATABLE :: amatsav_nestor, bvecsav_nestor
+  real(dp) :: bsubvvac_nestor
+
   CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: &
      mn1dim = (/'mn_mode'/), &
      mnpotdim = (/'mn_mode_pot'/), &
@@ -66,7 +70,8 @@ IMPLICIT NONE
      vn_bzv      = "bzv", &
      vn_bsubvvac = "bsubvvac", &
      vn_amatsav = "amatsav", &
-     vn_bvecsav = "bvecsav"
+     vn_bvecsav = "bvecsav", &
+     vn_mnpd2   = "mnpd2"
 
   CONTAINS
 
@@ -152,6 +157,27 @@ subroutine read_nestor_inputs(vac_file)
 
   CALL cdf_read(nvac, vn_wint,          wint)
 
+  CALL cdf_read(nvac, vn_mnpd2, mnpd2_nestor)
+
+  CALL cdf_inquire(nvac, vn_amatsav, dimlens)
+  if (dimlens(1) .ne. mnpd2_nestor*mnpd2_nestor) then
+     print *, "dimension mismatch in amatsav: shall be mnpd2*mnpd2=", &
+        mnpd2_nestor*mnpd2_nestor," but is ",dimlens(1)
+  end if
+  ALLOCATE (amatsav_nestor(dimlens(1)), stat = ierror)
+
+  CALL cdf_inquire(nvac, vn_bvecsav, dimlens)
+  if (dimlens(1) .ne. mnpd2_nestor) then
+     print *, "dimension mismatch in bvecsav: shall be mnpd2=", &
+        mnpd2_nestor," but is ",dimlens(1)
+  end if
+  ALLOCATE (bvecsav_nestor(dimlens(1)), stat = ierror)
+
+  CALL cdf_read(nvac, vn_amatsav,       amatsav_nestor)
+  CALL cdf_read(nvac, vn_bvecsav,       bvecsav_nestor)
+
+  CALL cdf_read(nvac, vn_bsubvvac,      bsubvvac_nestor)
+
   call cdf_close(nvac)
 
   if (ierror .ne. 0) then
@@ -171,7 +197,7 @@ end subroutine
 subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   USE ezcdf
   use stel_kinds, only: dp
-  use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, bsubvvac, &
+  use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, mnpd2, bsubvvac, &
      amatsav, bvecsav
 
   character(len=*), intent(in) :: vac_file
@@ -189,9 +215,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_ier_flag, ier_flag)
   call cdf_define(nvac, vn_bsqvac  , bsqvac  )
   call cdf_define(nvac, vn_mnpd    , mnpd    )
+  call cdf_define(nvac, vn_mnpd2    , mnpd2    )
   call cdf_define(nvac, vn_xmpot   , xmpot   )
   call cdf_define(nvac, vn_xnpot   , xnpot   )
-  call cdf_define(nvac, vn_potvac  , potvac  )
+  call cdf_define(nvac, vn_potvac  , potvac(1:mnpd2)  )
   call cdf_define(nvac, vn_brv     , brv     )
   call cdf_define(nvac, vn_bphiv   , bphiv   )
   call cdf_define(nvac, vn_bzv     , bzv     )
@@ -205,9 +232,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_ier_flag, ier_flag)
   call cdf_write(nvac, vn_bsqvac  , bsqvac  )
   call cdf_write(nvac, vn_mnpd    , mnpd    )
+  call cdf_write(nvac, vn_mnpd2    , mnpd2    )
   call cdf_write(nvac, vn_xmpot   , xmpot   )
   call cdf_write(nvac, vn_xnpot   , xnpot   )
-  call cdf_write(nvac, vn_potvac  , potvac  )
+  call cdf_write(nvac, vn_potvac  , potvac(1:mnpd2)  )
   call cdf_write(nvac, vn_brv     , brv     )
   call cdf_write(nvac, vn_bphiv   , bphiv   )
   call cdf_write(nvac, vn_bzv     , bzv     )
@@ -233,7 +261,8 @@ subroutine write_nestor_inputs(vac_file,                               &
                   ivacskip, ivac, nfp, ntor, mpol, nzeta, ntheta,  &
                   mnmax, xm, xn, rmnc, zmns, rmns, zmnc,               &
                   rbtor, ctor, lasym, signgs, extcur_nestor,           &
-                  raxis_nestor, zaxis_nestor, wint, nznt, amatsav, bvecsav, mnpd2)
+                  raxis_nestor, zaxis_nestor, wint, nznt, amatsav, bvecsav, mnpd2, &
+                  bsubvvac)
 
   USE ezcdf
   use stel_kinds, only: dp
@@ -268,7 +297,9 @@ subroutine write_nestor_inputs(vac_file,                               &
     vn_zaxis_nestor, &
     vn_wint, &
     vn_amatsav, &
-    vn_bvecsav
+    vn_bvecsav, &
+    vn_mnpd2, &
+    vn_bsubvvac
 
   character(len=*), intent(in) :: vac_file, mgrid_file, input_extension
   integer, intent(in) :: &
@@ -282,6 +313,7 @@ subroutine write_nestor_inputs(vac_file,                               &
   REAL(dp), DIMENSION(nznt), INTENT(in) :: wint
   real(dp), dimension(mnpd2), intent(in) :: bvecsav
   real(dp), dimension(mnpd2*mnpd2), intent(in) :: amatsav
+  real(dp), intent(in) :: bsubvvac
 
   integer :: istat_vac, nvac
 
@@ -320,6 +352,8 @@ subroutine write_nestor_inputs(vac_file,                               &
   CALL cdf_define(nvac, vn_wint,         wint, dimname=nzntdim)
   CALL cdf_define(nvac, vn_bvecsav,      bvecsav, dimname=bvecsavdim)
   CALL cdf_define(nvac, vn_amatsav,      amatsav, dimname=amatsavdim)
+  CALL cdf_define(nvac, vn_mnpd2,         mnpd2)
+  CALL cdf_define(nvac, vn_bsubvvac,      bsubvvac)
 
   ! actually write data
   CALL cdf_write(nvac, vn_vacuum_calls,  vacuum_calls)
@@ -352,6 +386,8 @@ subroutine write_nestor_inputs(vac_file,                               &
   CALL cdf_write(nvac, vn_wint,          wint)
   CALL cdf_write(nvac, vn_bvecsav,      bvecsav)
   CALL cdf_write(nvac, vn_amatsav,      amatsav)
+  CALL cdf_write(nvac, vn_mnpd2,         mnpd2)
+  CALL cdf_write(nvac, vn_bsubvvac,      bsubvvac)
 
   CALL cdf_close(nvac)
 end subroutine
@@ -359,7 +395,7 @@ end subroutine
 subroutine read_nestor_outputs(vac_file, ier_flag, ivac)
   USE ezcdf
   use stel_kinds, only: dp
-  use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, bsubvvac, &
+  use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, mnpd2, bsubvvac, &
      amatsav, bvecsav
   use nestor_io, only: &
     vn_ier_flag    , &
@@ -374,7 +410,8 @@ subroutine read_nestor_outputs(vac_file, ier_flag, ivac)
     vn_bzv     , &
     vn_bsubvvac, &
     vn_amatsav , &
-    vn_bvecsav
+    vn_bvecsav, &
+    vn_mnpd2
 
   character(len=*), intent(in) :: vac_file
   integer, intent(out) :: ier_flag
@@ -391,9 +428,10 @@ subroutine read_nestor_outputs(vac_file, ier_flag, ivac)
   call cdf_read(nvac, vn_ier_flag, ier_flag)
   call cdf_read(nvac, vn_bsqvac  , bsqvac  )
   call cdf_read(nvac, vn_mnpd    , mnpd    )
+  call cdf_read(nvac, vn_mnpd2    , mnpd2    )
   call cdf_read(nvac, vn_xmpot   , xmpot   )
   call cdf_read(nvac, vn_xnpot   , xnpot   )
-  call cdf_read(nvac, vn_potvac  , potvac  )
+  call cdf_read(nvac, vn_potvac  , potvac(1:mnpd2)  )
   call cdf_read(nvac, vn_brv     , brv     )
   call cdf_read(nvac, vn_bphiv   , bphiv   )
   call cdf_read(nvac, vn_bzv     , bzv     )

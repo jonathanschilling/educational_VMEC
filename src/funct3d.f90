@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
-  USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2
+  USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2, bsubvvac
   use nestor_io, only: write_nestor_outputs
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
@@ -27,10 +27,10 @@ SUBROUTINE funct3d (ier_flag)
     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .false.
+  logical :: lexternal_nestor = .true.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .true.
+  logical :: ldump_vacuum_ref = .false.
 
 
 
@@ -162,7 +162,7 @@ SUBROUTINE funct3d (ier_flag)
                   mnmax, xm, xn, rmnc, zmns, rmns, zmnc,                           &
                   rbtor, ctor, lasym, signgs, extcur,                              &
                   r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0), wint(ns:nznt*ns:ns), nznt, &
-                  amatsav, bvecsav, mnpd2)
+                  amatsav, bvecsav, mnpd2, bsubvvac)
 
            ! print *, "dumped NESTOR inputs to '"//trim(vac_file)//"'"
         end if
@@ -190,8 +190,7 @@ SUBROUTINE funct3d (ier_flag)
            write(vac_file, "(A,I6.6,A)") "vac/vacout_ref_"//TRIM(input_extension)//"_", &
               vacuum_calls, ".nc"
 
-           call write_nestor_outputs(vac_file, lasym, &
-              ivac, ier_flag)
+           call write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
 
            ! print *, "dumped NESTOR outputs to '"//trim(vac_file)//"'"
 

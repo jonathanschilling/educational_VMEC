@@ -1,7 +1,7 @@
 program nestor
   use stel_kinds, only: dp
   use vacmod0, only: set_nestor_sizes
-  use vacmod, only: allocate_nestor, free_mem_nestor
+  use vacmod, only: allocate_nestor, free_mem_nestor, amatsav, bvecsav, bsubvvac
   use nestor_io
 
   implicit none
@@ -27,6 +27,11 @@ program nestor
   call set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
 
   call allocate_nestor
+
+  ! copy over from input file, not though vacuum call
+  amatsav = amatsav_nestor
+  bvecsav = bvecsav_nestor
+  bsubvvac = bsubvvac_nestor
 
   CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
                ctor, rbtor, wint, ivacskip, ivac, mnmax, ier_flag, &

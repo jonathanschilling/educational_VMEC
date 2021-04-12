@@ -56,4 +56,4 @@ docs/
 # temporary..
 test/input*
 test/vac*
-
+test/*.nc

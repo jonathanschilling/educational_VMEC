@@ -156,10 +156,12 @@ SUBROUTINE bcovar (lu, lv)
 
   ! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH
   bsq(:nrzt) = p5*(bsupu(:nrzt)*bsubuh(:nrzt) + bsupv(:nrzt)*bsubvh(:nrzt))
+  pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
 
+  ! magnetic energy
   wb = hs*ABS(SUM(wint(:nrzt)*gsqrt(:nrzt)*bsq(:nrzt)))
 
-  pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
+  ! kinetic == thermal enery
   wp = hs*SUM(vp(2:ns)*pres(2:ns))
 
   ! ADD KINETIC PRESSURE TO MAGNETIC PRESSURE
@@ -257,11 +259,11 @@ SUBROUTINE bcovar (lu, lv)
      ! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
      ! OVERRIDE USER INPUT VALUE HERE
      r2 = ns
-     tcon0 = MIN(ABS(tcon0), one)                              ! ignore large tcon0 from old-style files
-     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120))) ! what kind of function is mimiced here?
+     tcon0 = MIN(ABS(tcon0), one)                      ! ignore large tcon0 from old-style files
+     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120))) ! some parabola, but why these specific values of the parameters ?
 
-     tcon_mul = tcon_mul/((4*r0scale**2)**2)                   ! Scaling of ard, azd (2*r0scale**2);
-                                                               ! Scaling of cos**2 in alias (4*r0scale**2)
+     tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
+                                                       ! Scaling of cos**2 in alias (4*r0scale**2)
 
      DO js = 2, ns-1
        arnorm = SUM(wint(js:nrzt:ns)*ru0(js:nrzt:ns)**2)
@@ -311,7 +313,7 @@ SUBROUTINE bcovar (lu, lv)
      bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
 
      ! STORE LU * LV COMBINATIONS USED IN FORCES
-     lvv(2:nrzt) = gsqrt(2:nrzt)
+     lvv(2:nrzt)  = gsqrt(2:nrzt)
      guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
      guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
      gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)

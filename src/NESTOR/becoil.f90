@@ -29,8 +29,8 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
 
   DO i = 1, nuv2
 
-     ! CHECK THAT BOUNDARY POINTS ARE INSIDE VACUUM GRID.  IF NOT,
-     ! SET THEM EQUAL TO LARGEST (OR SMALLEST) VACUUM GRID POINTS
+     ! CHECK THAT BOUNDARY POINTS ARE INSIDE VACUUM GRID.
+     ! IF NOT, SET THEM EQUAL TO LARGEST (OR SMALLEST) VACUUM GRID POINTS
      rad0 = MIN(rad(i), rmaxb)
      rad0 = MAX(rad0,   rminb)
      zee0 = MIN(zee(i), zmaxb)
@@ -61,7 +61,7 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
 
      ! COMPUTE B FIELD AT R, PHI, Z BY INTERPOLATION
      brad(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)
-     bz(i) = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)
+     bz(i)   = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)
      bphi(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)
   END DO
 

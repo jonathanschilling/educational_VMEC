@@ -90,11 +90,15 @@ SUBROUTINE fixaray
      xmpq(m,1) = m*(m - 1)
      xmpq(m,2) = m**pexp
      xmpq(m,3) = m**(pexp+1)
+
+     ! compute ixm == _i_nteger version of xm
      DO n = 0, ntor
-        jmin3(mn) = jmin2(m)
+        jmin3(mn) = jmin2(m) ! what is this?
         mn = mn + 1
         ixm(mn) = m
      END DO
+
+     ! use this loop also to compute xm, xn array contents
      nmin0 = -ntor
      IF (m .eq. 0) nmin0 = 0
      DO n = nmin0, ntor
@@ -109,7 +113,8 @@ SUBROUTINE fixaray
   ! COMPUTE NYQUIST-SIZED ARRAYS FOR OUTPUT.
   ! RESTORE m,n Nyquist TO 1 X ... (USED IN WROUT, JXBFORCE)
   !  mnyq = mnyq0;  nnyq = nnyq0
-  mnyq = mnyq/2;  nnyq = nnyq/2
+  mnyq = mnyq/2
+  nnyq = nnyq/2
 
   mn1 = 0
   DO m = 0, mnyq

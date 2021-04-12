@@ -5,16 +5,12 @@ SUBROUTINE heading(extension)
   USE vmec_params, ONLY: version_
   IMPLICIT NONE
 
-  CHARACTER(LEN=3), DIMENSION(12), PARAMETER ::  &
-     months = (/ 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec' /)
   CHARACTER(LEN=50), PARAMETER :: banner     = ' THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION '
   CHARACTER(LEN=*),  PARAMETER :: VersionID1 = ' Lambda: Full Radial Mesh. L-Force: hybrid full/half.'
 
-  CHARACTER(LEN=*) :: extension
+  CHARACTER(LEN=*), intent(in) :: extension
 
-  INTEGER :: imon
-  CHARACTER(LEN=10) :: date0, time0, zone0
-  CHARACTER(LEN=50) :: dateloc, Version
+  CHARACTER(LEN=50) :: Version
   LOGICAL :: lfirst
 
   CHARACTER(LEN=100) :: computer, os, os_release
@@ -24,16 +20,6 @@ SUBROUTINE heading(extension)
 
   IF (.not.lfirst) RETURN
 
-  ! FORTRAN-90 ROUTINE
-  CALL DATE_AND_TIME(date0,time0,zone0)
-  READ(date0(5:6),'(i2)')imon
-  WRITE(dateloc,100)months(imon),date0(7:8),date0(1:4), time0(1:2),time0(3:4),time0(5:6)
-100  FORMAT('DATE = ',a3,' ',a2,',',a4,' ',' TIME = ',2(a2,':'),a2)
-
-  CALL GETENV('HOST',    computer)
-  CALL GETENV('OSTYPE',  os)
-  CALL GETENV('HOSTTYPE',os_release)
-
   IF (lfirst) WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
 
   Version = TRIM(ADJUSTL(version_))
@@ -41,15 +27,11 @@ SUBROUTINE heading(extension)
   ! SAL some weird error about file not being ready
   CALL FLUSH(nthreed)
 
-  WRITE(nthreed,'(a,1x,a,/,a,//,3(2a,2x),a)') TRIM(banner), &
-       TRIM(Version), TRIM(VersionID1),                     &
-       ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),    &
-       ' RELEASE: ', TRIM(os_release), TRIM(dateloc)
+  WRITE(nthreed,'(a,1x,a,/,a,/)') TRIM(banner), &
+       TRIM(Version), TRIM(VersionID1)
   IF (lfirst) then
-     WRITE (*,'(1x,a,1x,a,/,1x,a,//,1x,3(2a,2x),a)') TRIM(banner), &
-     TRIM(Version), TRIM(VersionID1),                              &
-       ' COMPUTER: ', TRIM(computer), ' OS: ', TRIM(os),           &
-       ' RELEASE: ', TRIM(os_release), TRIM(dateloc)
+     WRITE (*,'(1x,a,1x,a,/,1x,a,/)') TRIM(banner), &
+     TRIM(Version), TRIM(VersionID1)
   end if
 
 END SUBROUTINE heading

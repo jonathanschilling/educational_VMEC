@@ -3,7 +3,6 @@ SUBROUTINE free_mem_funct3d
   USE vmec_main
   USE realspace
   USE vforces
-  USE vacmod
   IMPLICIT NONE
 
   INTEGER :: istat1 = 0

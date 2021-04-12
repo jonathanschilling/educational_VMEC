@@ -6,7 +6,6 @@ PROGRAM vmec
   USE vparams, ONLY: nthreed
   USE vmec_params
   USE vmec_main
-  use vacmod
   use mgrid_mod, only: free_mgrid
 
   IMPLICIT NONE

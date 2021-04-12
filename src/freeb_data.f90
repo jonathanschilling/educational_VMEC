@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
   USE vmec_main
-  USE vacmod
+  USE vacmod, only: brv, bphiv, bzv, bsqvac, potvac, mnpd, xmpot, xnpot
   USE realspace, ONLY: r1, z1
   IMPLICIT NONE
 
@@ -73,6 +73,7 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
      END DO
   END DO
 
+  ! allocated in eqfor
   DEALLOCATE (rb, phib, zb, bredge, bpedge, bzedge, stat=l)
 
   IF (lasym) THEN

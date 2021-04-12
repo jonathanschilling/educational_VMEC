@@ -2,7 +2,7 @@
 SUBROUTINE allocate_nunv
   USE vmec_main
   USE vmec_params, ONLY: ntmax
-  USE vacmod, only: allocate_nestor
+  USE vacmod, only: allocate_nestor, nuv2
   IMPLICIT NONE
 
   INTEGER :: istat1
@@ -18,6 +18,8 @@ SUBROUTINE allocate_nunv
   ! PERSISTENT ARRAYS (DURATION OF PROGRAM) for NESTOR
   IF (lfreeb) then
      call allocate_nestor
+
+     ALLOCATE(bsqsav(nuv2,3))
   end if
 
 END SUBROUTINE allocate_nunv

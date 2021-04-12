@@ -1,6 +1,6 @@
 !> \file
 SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
-  USE vparams, ONLY: nthreed
+  ! USE vparams, ONLY: nthreed
   USE vacmod
   USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
   IMPLICIT NONE
@@ -78,7 +78,7 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
      IF (zj .lt. zminb) i = i + 8
      IF (i .ne. 0) THEN
         PRINT *, warning
-        WRITE (nthreed, *) warning
+        ! WRITE (nthreed, *) warning
         IF (i/8 .ne. 0) PRINT *,' zmin = ', zj
         i = MOD(i,8)
         IF (i/4 .ne. 0) PRINT *,' rmin = ', ri

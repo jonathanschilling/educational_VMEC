@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
-  USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor, bsqsav
+  USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces

@@ -6,7 +6,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   USE vforces, r12 => armn_o, bsupu => crmn_e, bsupv => czmn_e,         &
                gsqrt => azmn_o, bsq => bzmn_o, izeta => azmn_e,         &
                brho => bzmn_e, bphi => czmn_o, curtheta => brmn_e
-  USE vacmod, only: bredge, bpedge, bzedge, bphiv, bsqvac, bsubvvac
+  USE vacmod, only: bphiv, bsqvac, bsubvvac
   USE vmec_io
   USE mgrid_mod
   USE stel_constants, ONLY: pi

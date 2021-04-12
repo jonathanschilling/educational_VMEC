@@ -1,7 +1,6 @@
 !> \file
 SUBROUTINE greenf(delgr, delgrp, ip)
   USE vacmod
-  USE vparams, ONLY: one
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ip

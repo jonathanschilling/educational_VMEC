@@ -26,6 +26,12 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam
   REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam0
 
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
+
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bredge
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bpedge
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bzedge
+
   REAL(rprec), ALLOCATABLE :: xcl0(:)
 
   REAL(rprec), DIMENSION(0:mpol1d,3) :: xmpq

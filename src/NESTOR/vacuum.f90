@@ -3,7 +3,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
                   plascur, rbtor, wint, ns, ivac_skip, ivac,      &
                   mnmax, ier_flag, lasym, signgs)
   USE vacmod
-  USE vparams, ONLY: nthreed, zero, one, mu0
+  !USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
   IMPLICIT NONE
 
@@ -30,11 +30,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
   IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
 
-
   potsin => potvac(1:mnpd)
   potcos => potvac(1+mnpd:)
-
-
 
   ! INDEX OF LOCAL VARIABLES
   !
@@ -122,7 +119,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
      ivac = ivac + 1
 
      WRITE (*, 200) nfper, mf, nf, nu, nv
-     WRITE (nthreed, 200) nfper, mf, nf, nu, nv
+     ! WRITE (nthreed, 200) nfper, mf, nf, nu, nv
 200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
 
      ! -plasma current/pi2
@@ -131,7 +128,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
 
      fac = 1.e-6_dp/mu0 ! currents in MA
      WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
-     WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+     ! WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
 1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &
         ' TOROIDAL CURRENT = ',e10.2,/,2x,'R * BTOR(vac) = ',       &
         e10.2,' R * BTOR(plasma) = ',e10.2)
@@ -146,7 +143,5 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
      ENDIF
 
   ENDIF
-
-
 
 END SUBROUTINE vacuum

@@ -1,6 +1,6 @@
 !> \file
 SUBROUTINE tolicu(torcur)
-  USE vparams, ONLY: mu0
+  ! USE vparams, ONLY: mu0
   USE vacmod
   USE biotsavart
   IMPLICIT NONE

@@ -4,7 +4,7 @@ SUBROUTINE free_mem_nunv
   USE vacmod, only: free_mem_nestor
   IMPLICIT NONE
 
-  INTEGER :: istat1 = 0, istat2 = 0, istat4=0
+  INTEGER :: istat1 = 0, istat2 = 0
 
   IF (ALLOCATED(bsubu0)) &
       DEALLOCATE (bsubu0, rbsq, dbsq, stat=istat1)
@@ -12,7 +12,9 @@ SUBROUTINE free_mem_nunv
       DEALLOCATE (rmn_bdy, zmn_bdy, stat=istat2)
 
   call free_mem_nestor
-
+  if (allocated(bsqsav)) then
+     deallocate(bsqsav)
+  end if
 
   IF (istat1.ne.0 .or. istat2.ne.0) THEN
       PRINT *,' deallocation problem in free_mem_nunv'

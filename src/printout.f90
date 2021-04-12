@@ -3,7 +3,6 @@ SUBROUTINE printout(i0, delt0, w0)
   USE vmec_main
   USE realspace
   USE xstuff
-  use vacmod, only: bsqsav
   IMPLICIT NONE
 
   INTEGER :: i0

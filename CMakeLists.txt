@@ -46,15 +46,8 @@ add_library (vmec STATIC ${vmec_sources})
 set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 target_include_directories(vmec PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 
-# Define an executable and link all libraries.
-add_executable (xvmec ${CMAKE_CURRENT_SOURCE_DIR}/src/vmec.f90)
-target_link_libraries (xvmec vmec)
-
 target_link_libraries (vmec PUBLIC ${NETCDF_LIBRARIES})
 
-if (SCALAPACK_LIB)
-	target_link_libraries (vmec PUBLIC ${SCALAPACK_LIB})
-endif ()
 if (BLAS_FOUND)
 	target_link_libraries (vmec PUBLIC ${BLAS_LIBRARIES})
 endif ()
@@ -64,4 +57,14 @@ endif ()
 
 get_target_property(VMEC_LINK_LIB vmec LINK_LIBRARIES)
 message(STATUS "vmec linked libraries are ${VMEC_LINK_LIB}")
+
+
+
+# Define an executable and link all libraries.
+add_executable (xvmec ${CMAKE_CURRENT_SOURCE_DIR}/src/vmec.f90)
+target_link_libraries (xvmec vmec)
+
+### stand-alone NESTOR
+add_executable (xnestor ${CMAKE_CURRENT_SOURCE_DIR}/src/NESTOR/nestor_main.f90)
+target_link_libraries (xnestor vmec)
 

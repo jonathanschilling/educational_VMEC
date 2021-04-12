@@ -1,7 +1,7 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
   USE vmec_main
-  USE vacmod, ONLY: bsqvac, raxis_nestor, zaxis_nestor
+  USE vacmod, ONLY: bsqvac
   USE vmec_params, ONLY: bad_jacobian_flag, signgs
   USE realspace
   USE vforces
@@ -17,6 +17,20 @@ SUBROUTINE funct3d (ier_flag)
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
   REAL(dp) :: presf_ns, delt0
   REAL(dp), EXTERNAL :: pmass
+
+  character(len=255) :: nestor_cmd
+  character(*), parameter :: nestor_executable = &
+    "/home/jonathan/work/code/educational_VMEC/build/build/bin/xnestor"
+
+  !> use system call to stand-alone NESTOR for vacuum computation
+  logical :: lexternal_nestor = .false.
+
+  !> dump reference input for and output of NESTOR when using internal NESTOR
+  logical :: ldump_vacuum_ref = .true.
+
+
+
+
 
   ! POINTER ALIASES
   lu => czmn
@@ -126,12 +140,27 @@ SUBROUTINE funct3d (ier_flag)
         ! convert_sym, convert_asym have been applied to m=1 modes
         CALL convert (rmnc, zmns, lmns, rmns, zmnc, lmnc, gc, ns)
 
-        raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
-        zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
+        ! raxis_nestor(1:nzeta) = r1(1:ns*nzeta:ns,0)
+        ! zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
+
+
+
+
+
+
 
         CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                         &
                      ctor, rbtor, wint, ns, ivacskip, ivac, mnmax, ier_flag, &
-                     lasym, signgs)
+                     lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
+
+
+
+
+
+
+
+
+
 
         IF (ier_flag .ne. 0) then
            ! some error occured within NESTOR, so cancel the iterations

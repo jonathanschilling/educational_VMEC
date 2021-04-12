@@ -1,7 +1,8 @@
 !> \file
-SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
-                  plascur, rbtor, wint, ns, ivac_skip, ivac,      &
-                  mnmax, ier_flag, lasym, signgs)
+SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
+                  plascur, rbtor, wint, ns, ivac_skip, ivac,  &
+                  mnmax, ier_flag, lasym, signgs,             &
+                  raxis, zaxis)
   USE vacmod
   !USE vparams, ONLY: nthreed, zero, one, mu0
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
@@ -14,6 +15,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   REAL(rprec), DIMENSION(*), INTENT(in) :: wint
   logical, intent(in) :: lasym
   real(rprec), intent(in) :: signgs
+  real(rprec), dimension(nv), intent(in) :: raxis, zaxis
 
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
@@ -27,6 +29,9 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,                 &
   ! FIELD DATA TO BE READ BY THE SUBROUTINE BECOIL
 
   ier_flag = norm_term_flag
+
+  raxis_nestor = raxis
+  zaxis_nestor = zaxis
 
   IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
 

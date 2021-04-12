@@ -17,9 +17,9 @@ Here is how it works:
  * Go into the `build` directory: `cd build`
  * Run CMake: `cmake ..`
  * Execute the actual build process: `make` (optional multi-threaded build: `make -j`)
- * The VMEC executable `xvmec` is then located in `build/build/bin` with respect to the main folder.
+ * The VMEC executable `xvmec` is then located in `build/bin` with respect to the main folder.
  
 ## Example Execution
  * Change into the `test` dir: `cd test`
- * Run the [Solov'ev test case](https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--): `../build/build/bin/xvmec input.solovev`
+ * Run the [Solov'ev test case](https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--): `../build/bin/xvmec input.solovev`
 

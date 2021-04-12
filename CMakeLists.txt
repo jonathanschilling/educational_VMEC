@@ -11,8 +11,8 @@ find_package (NetCDF MODULE REQUIRED)
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "ON")
 
 # Set a directories to build all binary files.
-set (EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/build/bin)
-set (LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/build/lib)
+set (EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
+set (LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 # Add extra compiler flags to various builds.
 set (CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${EXTRA_RELEASE_FLAGS}")
@@ -22,7 +22,7 @@ set (CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${EXTRA_FLAGS}")
 # Fortran specific settings. The first setting tells the compiler to use the C preprocessor.
 # The second places a common directory to place all of the module files.
 set (CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -cpp")
-set (CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/build/modules)
+set (CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules)
 
 find_package (BLAS REQUIRED)
 if (NOT ${BLA_VENDOR} MATCHES "^Intel")

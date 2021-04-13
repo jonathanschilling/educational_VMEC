@@ -100,9 +100,13 @@ IMPLICIT NONE
      vn_avv    = "avv"   , &
      vn_rcosuv = "rcosuv", &
      vn_rsinuv = "rsinuv", &
-     vn_brad = "brad", &
-     vn_bphi = "bphi", &
-     vn_bz = "bz"
+     vn_brad   = "brad", &
+     vn_bphi   = "bphi", &
+     vn_bz     = "bz", &
+     vn_bexu   = "bexu", &
+     vn_bexv   = "bexv", &
+     vn_bexn   = "bexn", &
+     vn_bexni  = "bexni"
 
   CONTAINS
 
@@ -288,6 +292,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_bphi, bphi)
   call cdf_define(nvac, vn_bz  , bz  )
 
+  call cdf_define(nvac, vn_bexu, bexu)
+  call cdf_define(nvac, vn_bexv, bexv)
+  call cdf_define(nvac, vn_bexn, bexn)
+  call cdf_define(nvac, vn_bexni, bexni)
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -335,6 +343,11 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_brad, brad)
   call cdf_write(nvac, vn_bphi, bphi)
   call cdf_write(nvac, vn_bz  , bz  )
+
+  call cdf_write(nvac, vn_bexu, bexu)
+  call cdf_write(nvac, vn_bexv, bexv)
+  call cdf_write(nvac, vn_bexn, bexn)
+  call cdf_write(nvac, vn_bexni, bexni)
 
 
 

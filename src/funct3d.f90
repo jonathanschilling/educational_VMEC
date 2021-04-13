@@ -27,10 +27,10 @@ SUBROUTINE funct3d (ier_flag)
     "/home/IPP-HGW/jons/work/code/educational_VMEC/build/bin/xnestor"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .true.
+  logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .false.
+  logical :: ldump_vacuum_ref = .true.
 
 
 

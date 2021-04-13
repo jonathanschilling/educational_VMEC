@@ -32,10 +32,10 @@ SUBROUTINE precal
   END DO
 
   DO ku = 1, nu
-     kuminus = MOD(nu + 1 - ku,nu) + 1
+     kuminus = MOD(nu + 1 - ku, nu) + 1
      DO kv = 1, nv
-        kvminus = MOD(nv + 1 - kv,nv) + 1
-        i = kv + nv*(ku - 1)
+        kvminus = MOD(nv + 1 - kv, nv) + 1
+        i        = kv      + nv*(ku      - 1)
         imirr(i) = kvminus + nv*(kuminus - 1)
         cosuv(i) = COS(alvp*(kv - 1))
         sinuv(i) = SIN(alvp*(kv - 1))

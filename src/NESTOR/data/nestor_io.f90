@@ -73,6 +73,37 @@ IMPLICIT NONE
      vn_bvecsav = "bvecsav", &
      vn_mnpd2   = "mnpd2"
 
+  ! for debugging
+  character(len=*), parameter :: &
+     vn_r1b    = "r1b"   , &
+     vn_rub    = "rub"   , &
+     vn_rvb    = "rvb"   , &
+     vn_z1b    = "z1b"   , &
+     vn_zub    = "zub"   , &
+     vn_zvb    = "zvb"   , &
+     vn_ruu    = "ruu"   , &
+     vn_ruv    = "ruv"   , &
+     vn_rvv    = "rvv"   , &
+     vn_zuu    = "zuu"   , &
+     vn_zuv    = "zuv"   , &
+     vn_zvv    = "zvv"   , &
+     vn_guu_b  = "guu_b" , &
+     vn_guv_b  = "guv_b" , &
+     vn_gvv_b  = "gvv_b" , &
+     vn_rzb2   = "rzb2"  , &
+     vn_snr    = "snr"   , &
+     vn_snv    = "snv"   , &
+     vn_snz    = "snz"   , &
+     vn_drv    = "drv"   , &
+     vn_auu    = "auu"   , &
+     vn_auv    = "auv"   , &
+     vn_avv    = "avv"   , &
+     vn_rcosuv = "rcosuv", &
+     vn_rsinuv = "rsinuv", &
+     vn_brad = "brad", &
+     vn_bphi = "bphi", &
+     vn_bz = "bz"
+
   CONTAINS
 
 
@@ -197,8 +228,9 @@ end subroutine
 subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   USE ezcdf
   use stel_kinds, only: dp
-  use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, mnpd2, bsubvvac, &
-     amatsav, bvecsav
+  !use vacmod, only: brv, bphiv, bzv, bsqvac, mnpd, xmpot, xnpot, potvac, mnpd2, bsubvvac, &
+  !   amatsav, bvecsav
+  use vacmod
 
   character(len=*), intent(in) :: vac_file
   logical, intent(in) :: lasym
@@ -225,6 +257,37 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_bsubvvac, bsubvvac)
   call cdf_define(nvac, vn_amatsav, amatsav)
   call cdf_define(nvac, vn_bvecsav, bvecsav)
+  ! below quantities are only written for debugging
+  call cdf_define(nvac, vn_r1b   , r1b   )
+  call cdf_define(nvac, vn_rub   , rub   )
+  call cdf_define(nvac, vn_rvb   , rvb   )
+  call cdf_define(nvac, vn_z1b   , z1b   )
+  call cdf_define(nvac, vn_zub   , zub   )
+  call cdf_define(nvac, vn_zvb   , zvb   )
+  call cdf_define(nvac, vn_ruu   , ruu   )
+  call cdf_define(nvac, vn_ruv   , ruv   )
+  call cdf_define(nvac, vn_rvv   , rvv   )
+  call cdf_define(nvac, vn_zuu   , zuu   )
+  call cdf_define(nvac, vn_zuv   , zuv   )
+  call cdf_define(nvac, vn_zvv   , zvv   )
+  call cdf_define(nvac, vn_guu_b , guu_b )
+  call cdf_define(nvac, vn_guv_b , guv_b )
+  call cdf_define(nvac, vn_gvv_b , gvv_b )
+  call cdf_define(nvac, vn_rzb2  , rzb2  )
+  call cdf_define(nvac, vn_snr   , snr   )
+  call cdf_define(nvac, vn_snv   , snv   )
+  call cdf_define(nvac, vn_snz   , snz   )
+  call cdf_define(nvac, vn_drv   , drv   )
+  call cdf_define(nvac, vn_auu   , auu   )
+  call cdf_define(nvac, vn_auv   , auv   )
+  call cdf_define(nvac, vn_avv   , avv   )
+  call cdf_define(nvac, vn_rcosuv, rcosuv)
+  call cdf_define(nvac, vn_rsinuv, rsinuv)
+
+  call cdf_define(nvac, vn_brad, brad)
+  call cdf_define(nvac, vn_bphi, bphi)
+  call cdf_define(nvac, vn_bz  , bz  )
+
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -242,6 +305,40 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_bsubvvac, bsubvvac)
   call cdf_write(nvac, vn_amatsav, amatsav)
   call cdf_write(nvac, vn_bvecsav, bvecsav)
+  ! below quantities are only written for debugging
+  call cdf_write(nvac, vn_r1b   , r1b   )
+  call cdf_write(nvac, vn_rub   , rub   )
+  call cdf_write(nvac, vn_rvb   , rvb   )
+  call cdf_write(nvac, vn_z1b   , z1b   )
+  call cdf_write(nvac, vn_zub   , zub   )
+  call cdf_write(nvac, vn_zvb   , zvb   )
+  call cdf_write(nvac, vn_ruu   , ruu   )
+  call cdf_write(nvac, vn_ruv   , ruv   )
+  call cdf_write(nvac, vn_rvv   , rvv   )
+  call cdf_write(nvac, vn_zuu   , zuu   )
+  call cdf_write(nvac, vn_zuv   , zuv   )
+  call cdf_write(nvac, vn_zvv   , zvv   )
+  call cdf_write(nvac, vn_guu_b , guu_b )
+  call cdf_write(nvac, vn_guv_b , guv_b )
+  call cdf_write(nvac, vn_gvv_b , gvv_b )
+  call cdf_write(nvac, vn_rzb2  , rzb2  )
+  call cdf_write(nvac, vn_snr   , snr   )
+  call cdf_write(nvac, vn_snv   , snv   )
+  call cdf_write(nvac, vn_snz   , snz   )
+  call cdf_write(nvac, vn_drv   , drv   )
+  call cdf_write(nvac, vn_auu   , auu   )
+  call cdf_write(nvac, vn_auv   , auv   )
+  call cdf_write(nvac, vn_avv   , avv   )
+  call cdf_write(nvac, vn_rcosuv, rcosuv)
+  call cdf_write(nvac, vn_rsinuv, rsinuv)
+
+  call cdf_write(nvac, vn_brad, brad)
+  call cdf_write(nvac, vn_bphi, bphi)
+  call cdf_write(nvac, vn_bz  , bz  )
+
+
+
+
 
   CALL cdf_close(nvac)
 

@@ -58,8 +58,11 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
   sqrtc  = two*SQRT(gvv_b)
   sqrta  = two*SQRT(guu_b)
 
+  ! INITIALIZE VECTORS
+  bvec = 0
   IF (ivacskip .eq. 0) THEN
      grpmn = 0
+
      delt1u  = adp*adm  - cma*cma
      azp1u  = auu  + auv  + avv
      azm1u  = auu  - auv  + avv
@@ -71,9 +74,6 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
      ra1p = azp1u/adp
      ra1m = azm1u/adm
   ENDIF
-
-  ! INITIALIZE VECTORS
-  bvec = 0
 
   ! INITIALIZE T0+ and T0-
   !

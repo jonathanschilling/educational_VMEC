@@ -34,9 +34,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 
   IF (.not.ALLOCATED(potvac)) STOP 'POTVAC not ALLOCATED in VACCUM'
 
-  potsin => potvac(1:mnpd)
-  potcos => potvac(1+mnpd:)
-
   ! INDEX OF LOCAL VARIABLES
   !
   ! rmnc,rmns,zmns,zmnc:     Surface Fourier coefficients (m,n) of R,Z
@@ -67,85 +64,89 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 
   ! Determine scalar magnetic potential POTVAC
   CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym)
-  CALL solver (amatrix, potvac, mnpd2, 1, info)
-  IF (info .ne. 0) STOP 'Error in solver in VACUUM'
-
-  ! compute tangential covariant (sub u,v) and contravariant
-  ! (super u,v) magnetic field components on the plasma surface
-  potu(:nuv2) = zero;  potv(:nuv2) = zero
-
-  mn = 0
-  DO n = -nf, nf
-     dn2 = -(n*nfper)
-     n1 = ABS(n)
-     DO m = 0, mf
-        mn = mn + 1
-        dm2 = m
-        DO i = 1, nuv2
-           cosmn = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)
-           potu(i) = potu(i) + dm2*potsin(mn)*cosmn
-           potv(i) = potv(i) + dn2*potsin(mn)*cosmn
-        END DO
-        IF (lasym) then
-           DO i = 1, nuv2
-              sinmn = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)
-              potu(i) = potu(i) - dm2*potcos(mn)*sinmn
-              potv(i) = potv(i) - dn2*potcos(mn)*sinmn
-           END DO
-        end if
-     END DO
-  END DO
-
-  DO i = 1, nuv2
-     ! Covariant components
-     bsubu(i) = potu(i) + bexu(i)
-     bsubv(i) = potv(i) + bexv(i)
-
-     huv = p5*guv_b(i)*(nfper)
-     hvv = gvv_b(i)*(nfper*nfper)
-     det = one/(guu_b(i)*hvv-huv*huv)
-
-     ! Contravariant components
-     bsupu = (hvv*bsubu(i)-huv*bsubv(i))*det
-     bsupv = ((-huv*bsubu(i))+guu_b(i)*bsubv(i))*det
-
-     ! .5*|Bvac|**2
-     bsqvac(i) = p5*(bsubu(i)*bsupu + bsubv(i)*bsupv)
-
-     ! cylindrical components of vacuum magnetic field
-     brv(i)   = rub(i)*bsupu + rvb(i)*bsupv
-     bphiv(i) =                r1b(i)*bsupv
-     bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
-  END DO
-
-  ! PRINT OUT VACUUM PARAMETERS
-  IF (ivac .eq. 0) THEN
-     ivac = ivac + 1
-
-     WRITE (*, 200) nfper, mf, nf, nu, nv
-     ! WRITE (nthreed, 200) nfper, mf, nf, nu, nv
-200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
-
-     ! -plasma current/pi2
-     bsubuvac = SUM(bsubu(:nuv2)*wint(:nuv2))*signgs*pi2
-     bsubvvac = SUM(bsubv(:nuv2)*wint(:nuv2))
-
-     fac = 1.e-6_dp/mu0 ! currents in MA
-     WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
-     ! WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
-1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &
-        ' TOROIDAL CURRENT = ',e10.2,/,2x,'R * BTOR(vac) = ',       &
-        e10.2,' R * BTOR(plasma) = ',e10.2)
-
-     IF (rbtor*bsubvvac .lt. zero) THEN
-        ! rbtor and bsubvvac must have the same sign
-        ier_flag = phiedge_error_flag
-     ENDIF
-
-     IF (ABS((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) THEN
-           ier_flag = 10 ! 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
-     ENDIF
-
-  ENDIF
+!   CALL solver (amatrix, potvac, mnpd2, 1, info)
+!   IF (info .ne. 0) STOP 'Error in solver in VACUUM'
+!
+!   potsin => potvac(1:mnpd)
+!   potcos => potvac(1+mnpd:)
+!
+!   ! compute tangential covariant (sub u,v) and contravariant
+!   ! (super u,v) magnetic field components on the plasma surface
+!   potu(:nuv2) = zero
+!   potv(:nuv2) = zero
+!
+!   mn = 0
+!   DO n = -nf, nf
+!      dn2 = -(n*nfper)
+!      n1 = ABS(n)
+!      DO m = 0, mf
+!         mn = mn + 1
+!         dm2 = m
+!         DO i = 1, nuv2
+!            cosmn = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)
+!            potu(i) = potu(i) + dm2*potsin(mn)*cosmn
+!            potv(i) = potv(i) + dn2*potsin(mn)*cosmn
+!         END DO
+!         IF (lasym) then
+!            DO i = 1, nuv2
+!               sinmn = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)
+!               potu(i) = potu(i) - dm2*potcos(mn)*sinmn
+!               potv(i) = potv(i) - dn2*potcos(mn)*sinmn
+!            END DO
+!         end if
+!      END DO
+!   END DO
+!
+!   DO i = 1, nuv2
+!      ! Covariant components
+!      bsubu(i) = potu(i) + bexu(i)
+!      bsubv(i) = potv(i) + bexv(i)
+!
+!      huv = p5*guv_b(i)*(nfper)
+!      hvv = gvv_b(i)*(nfper*nfper)
+!      det = one/(guu_b(i)*hvv-huv*huv)
+!
+!      ! Contravariant components
+!      bsupu = (hvv*bsubu(i)-huv*bsubv(i))*det
+!      bsupv = ((-huv*bsubu(i))+guu_b(i)*bsubv(i))*det
+!
+!      ! .5*|Bvac|**2
+!      bsqvac(i) = p5*(bsubu(i)*bsupu + bsubv(i)*bsupv)
+!
+!      ! cylindrical components of vacuum magnetic field
+!      brv(i)   = rub(i)*bsupu + rvb(i)*bsupv
+!      bphiv(i) =                r1b(i)*bsupv
+!      bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
+!   END DO
+!
+!   ! PRINT OUT VACUUM PARAMETERS
+!   IF (ivac .eq. 0) THEN
+!      ivac = ivac + 1
+!
+!      WRITE (*, 200) nfper, mf, nf, nu, nv
+!      ! WRITE (nthreed, 200) nfper, mf, nf, nu, nv
+! 200 FORMAT(/,2x,'In VACUUM, np =',i3,2x,'mf =',i3,2x,'nf =',i3,' nu =',i3,2x,'nv = ',i4)
+!
+!      ! -plasma current/pi2
+!      bsubuvac = SUM(bsubu(:nuv2)*wint(:nuv2))*signgs*pi2
+!      bsubvvac = SUM(bsubv(:nuv2)*wint(:nuv2))
+!
+!      fac = 1.e-6_dp/mu0 ! currents in MA
+!      WRITE (*,1000) bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+!      ! WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor
+! 1000 FORMAT(2x,'2*pi * a * -BPOL(vac) = ',1p,e10.2,                 &
+!         ' TOROIDAL CURRENT = ',e10.2,/,2x,'R * BTOR(vac) = ',       &
+!         e10.2,' R * BTOR(plasma) = ',e10.2)
+!
+!      IF (rbtor*bsubvvac .lt. zero) THEN
+!         ! rbtor and bsubvvac must have the same sign
+!         ier_flag = phiedge_error_flag
+!      ENDIF
+!
+!      IF (ABS((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) THEN
+!            ier_flag = 10 ! 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
+!      ENDIF
+!
+!   ENDIF
 
 END SUBROUTINE vacuum

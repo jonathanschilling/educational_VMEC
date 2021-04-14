@@ -106,7 +106,25 @@ IMPLICIT NONE
      vn_bexu   = "bexu", &
      vn_bexv   = "bexv", &
      vn_bexn   = "bexn", &
-     vn_bexni  = "bexni"
+     vn_bexni  = "bexni", &
+     vn_grpmn  = "grpmn", &
+     vn_adp    = "adp"   , &
+     vn_adm    = "adm"   , &
+     vn_cma    = "cma"   , &
+     vn_sqrtc  = "sqrtc" , &
+     vn_sqrta  = "sqrta" , &
+     vn_delt1u = "delt1u", &
+     vn_azp1u  = "azp1u" , &
+     vn_azm1u  = "azm1u" , &
+     vn_cma11u = "cma11u", &
+     vn_r1p    = "r1p"   , &
+     vn_r1m    = "r1m"   , &
+     vn_r0p    = "r0p"   , &
+     vn_r0m    = "r0m"   , &
+     vn_ra1p   = "ra1p"  , &
+     vn_ra1m   = "ra1m"  , &
+     vn_sqad1u = "sqad1u", &
+     vn_sqad2u = "sqad2u"
 
   CONTAINS
 
@@ -296,6 +314,24 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_bexv, bexv)
   call cdf_define(nvac, vn_bexn, bexn)
   call cdf_define(nvac, vn_bexni, bexni)
+  call cdf_define(nvac, vn_grpmn , grpmn )
+  call cdf_define(nvac, vn_adp   , adp   )
+  call cdf_define(nvac, vn_adm   , adm   )
+  call cdf_define(nvac, vn_cma   , cma   )
+  call cdf_define(nvac, vn_sqrtc , sqrtc )
+  call cdf_define(nvac, vn_sqrta , sqrta )
+  call cdf_define(nvac, vn_delt1u, delt1u)
+  call cdf_define(nvac, vn_azp1u , azp1u )
+  call cdf_define(nvac, vn_azm1u , azm1u )
+  call cdf_define(nvac, vn_cma11u, cma11u)
+  call cdf_define(nvac, vn_r1p   , r1p   )
+  call cdf_define(nvac, vn_r1m   , r1m   )
+  call cdf_define(nvac, vn_r0p   , r0p   )
+  call cdf_define(nvac, vn_r0m   , r0m   )
+  call cdf_define(nvac, vn_ra1p  , ra1p  )
+  call cdf_define(nvac, vn_ra1m  , ra1m  )
+  call cdf_define(nvac, vn_sqad1u, sqad1u)
+  call cdf_define(nvac, vn_sqad2u, sqad2u)
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -348,6 +384,25 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_bexv, bexv)
   call cdf_write(nvac, vn_bexn, bexn)
   call cdf_write(nvac, vn_bexni, bexni)
+
+  call cdf_write(nvac, vn_grpmn , grpmn )
+  call cdf_write(nvac, vn_adp   , adp   )
+  call cdf_write(nvac, vn_adm   , adm   )
+  call cdf_write(nvac, vn_cma   , cma   )
+  call cdf_write(nvac, vn_sqrtc , sqrtc )
+  call cdf_write(nvac, vn_sqrta , sqrta )
+  call cdf_write(nvac, vn_delt1u, delt1u)
+  call cdf_write(nvac, vn_azp1u , azp1u )
+  call cdf_write(nvac, vn_azm1u , azm1u )
+  call cdf_write(nvac, vn_cma11u, cma11u)
+  call cdf_write(nvac, vn_r1p   , r1p   )
+  call cdf_write(nvac, vn_r1m   , r1m   )
+  call cdf_write(nvac, vn_r0p   , r0p   )
+  call cdf_write(nvac, vn_r0m   , r0m   )
+  call cdf_write(nvac, vn_ra1p  , ra1p  )
+  call cdf_write(nvac, vn_ra1m  , ra1m  )
+  call cdf_write(nvac, vn_sqad1u, sqad1u)
+  call cdf_write(nvac, vn_sqad2u, sqad2u)
 
 
 

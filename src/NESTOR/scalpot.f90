@@ -23,6 +23,9 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
 
   CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map)
 
+  ! stand-alone debugging: only work on bvec from analyt at the moment
+  return
+
    IF (ivacskip .ne. 0) THEN
       ! Here, bvecsav contains the previous non-singular contribution to the "final" bvec from fouri.
       ! For ivacskip != 0, this contribution is used from the cache in bvecsav.

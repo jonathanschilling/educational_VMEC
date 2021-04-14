@@ -32,7 +32,7 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map)
      sinp = (sinu1(i,m)*cosv1(i,n) - cosu1(i,m)*sinv1(i,n))
 
      ! Fourier-transform S_l or T_l*bexni and then
-     ! add up Fourier coefficients weighted by cmns
+     ! add up Fourier coefficients, weighted by cmns
      IF (ivacskip .EQ. 0) then
      grpmn(m,n,i,1) = grpmn(m,n,i,1)  + cmns(l,m,n) *          sl(i)*sinp
      end if

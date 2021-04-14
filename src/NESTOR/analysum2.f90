@@ -1,11 +1,13 @@
 !> \file
-SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym)
+SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map)
   USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: m, n, l, ivacskip
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
   REAL(rprec), INTENT(inout) :: bvec(0:mf,-nf:nf,ndim)
+  real(rprec), intent(inout) :: m_map(0:mf,-nf:nf)
+  real(rprec), intent(inout) :: n_map(0:mf,-nf:nf)
   logical, intent(in) :: lasym
 
   INTEGER :: i
@@ -13,7 +15,19 @@ SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym)
 
   IF (n .LT. 0) STOP 'error calling analysum2!'
 
+  m_map(m,  n) =  m
+  m_map(m, -n) =  m
+
+  n_map(m,  n) =  n
+  n_map(m, -n) = -n
+
+  if (cmns(l,m,n) .eq. zero) then
+     ! no need to compute zeros...
+     return
+  end if
+
   DO i = 1,nuv2
+
      sinp =  sinu1(i,m)*cosv1(i,n) * cmns(l,m,n)
      temp = -cosu1(i,m)*sinv1(i,n) * cmns(l,m,n)
 

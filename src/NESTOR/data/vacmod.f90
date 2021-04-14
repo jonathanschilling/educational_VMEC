@@ -23,6 +23,7 @@ MODULE vacmod
   logical :: precal_done
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: potvac
+  real(rprec), dimension(:), allocatable :: m_map_wrt, n_map_wrt
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvecsav
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: amatsav
@@ -123,6 +124,11 @@ subroutine allocate_nestor
             potvac(2*mnpd),          &
             raxis_nestor(nv), zaxis_nestor(nv), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nestor'
+
+  allocate(m_map_wrt(mnpd2), n_map_wrt(mnpd2), stat=istat1)
+  if (istat1 .ne. 0) then
+     stop 'could not allocate m_map, n_map'
+  end if
 
   ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
   IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
@@ -227,6 +233,11 @@ subroutine free_mem_nestor
       DEALLOCATE (amatsav, bvecsav, potvac,  &
                   raxis_nestor, zaxis_nestor, stat=istat3)
       IF (istat3.ne.0) STOP 'dealloc error #3 in free_mem_nestor'
+  end if
+
+  if (allocated(m_map_wrt)) then
+     deallocate(m_map_wrt, n_map_wrt, stat=istat3)
+     if (istat3 .ne. 0) stop 'could not deallocate m_map, n_map'
   end if
 
   IF (ALLOCATED(brv)) then

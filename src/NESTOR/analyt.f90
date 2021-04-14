@@ -1,11 +1,13 @@
 !> \file
-SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
+SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map)
   USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ivacskip
   REAL(rprec), INTENT(out) :: grpmn(nuv2*mnpd2)
   REAL(rprec), INTENT(out) :: bvec(mnpd2)
+  real(rprec), intent(out) :: m_map(mnpd2)
+  real(rprec), intent(out) :: n_map(mnpd2)
   integer, intent(in) :: lasym
 
   INTEGER :: l, n, m
@@ -115,14 +117,15 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
      ! BEGIN MODE NUMBER (m,n) LOOP
      DO n = 0, nf
         DO m = 0, mf
-           IF (cmns(l,m,n) .eq. zero) CYCLE
+           ! always call analysum, analysum2 to get bvec fill pattern
+           ! IF (cmns(l,m,n) .eq. zero) CYCLE
 
            IF (n.eq.0 .or. m.eq.0) THEN
              ! 1. n = 0 and  m >= 0  OR n > 0 and m = 0
-             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, lasym)
+             CALL analysum (grpmn, bvec, slpm, tlpm, m, n, l, ivacskip, lasym, m_map, n_map)
            ELSE
              ! 2. n>=1  and  m>=1
-             CALL analysum2 (grpmn, bvec, m, n, l, ivacskip, lasym)
+             CALL analysum2 (grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map)
            ENDIF
         END DO
      END DO

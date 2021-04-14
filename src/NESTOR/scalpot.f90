@@ -1,10 +1,10 @@
 !> \file
-SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym)
+SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
   USE vacmod, vm_amatrix => amatrix
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ivacskip
-  REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2)
+  REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2), m_map(mnpd2), n_map(mnpd2)
   REAL(rprec), dimension(nuv2), INTENT(in) :: wint
   logical, intent(in) :: lasym
 

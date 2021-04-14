@@ -63,7 +63,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   CALL bextern (plascur, wint)
 
   ! Determine scalar magnetic potential POTVAC
-  CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym)
+  CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
 !   CALL solver (amatrix, potvac, mnpd2, 1, info)
 !   IF (info .ne. 0) STOP 'Error in solver in VACUUM'
 !

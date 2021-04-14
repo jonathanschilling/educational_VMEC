@@ -128,7 +128,9 @@ IMPLICIT NONE
      vn_all_tlp = "all_tlp", &
      vn_all_tlm = "all_tlm", &
      vn_all_slp = "all_slp", &
-     vn_all_slm = "all_slm"
+     vn_all_slm = "all_slm", &
+     vn_m_map = "m_map", &
+     vn_n_map = "n_map"
 
   CONTAINS
 
@@ -338,6 +340,8 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_all_tlm, all_tlm)
   call cdf_define(nvac, vn_all_slp, all_slp)
   call cdf_define(nvac, vn_all_slm, all_slm)
+  call cdf_define(nvac, vn_m_map, m_map_wrt)
+  call cdf_define(nvac, vn_n_map, n_map_wrt)
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -410,9 +414,8 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_all_tlm, all_tlm)
   call cdf_write(nvac, vn_all_slp, all_slp)
   call cdf_write(nvac, vn_all_slm, all_slm)
-
-
-
+  call cdf_write(nvac, vn_m_map, m_map_wrt)
+  call cdf_write(nvac, vn_n_map, n_map_wrt)
 
 
   CALL cdf_close(nvac)

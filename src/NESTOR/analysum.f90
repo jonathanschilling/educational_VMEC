@@ -38,9 +38,9 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map)
      end if
      bvec (m,n,1)   = bvec (m,n,1)    + cmns(l,m,n) * bexni(i)*tl(i)*sinp
 
-     if (m.eq.1 .and. n.eq.0) then
-       print *, "cmns=",cmns(l,m,n)," sinp(",i,") = ",sinp," in=",bexni(i)*tl(i)," => bvec(1,0)=", bvec(m,n,1)
-     end if
+!     if (m.eq.1 .and. n.eq.0) then
+!       print *, "cmns=",cmns(l,m,n)," sinp(",i,") = ",sinp," in=",bexni(i)*tl(i)," => bvec(1,0)=", bvec(m,n,1)
+!     end if
 
      IF (lasym) THEN
         ! COS(mu - |n|v)*cmns

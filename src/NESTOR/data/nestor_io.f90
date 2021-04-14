@@ -124,7 +124,11 @@ IMPLICIT NONE
      vn_ra1p   = "ra1p"  , &
      vn_ra1m   = "ra1m"  , &
      vn_sqad1u = "sqad1u", &
-     vn_sqad2u = "sqad2u"
+     vn_sqad2u = "sqad2u", &
+     vn_all_tlp = "all_tlp", &
+     vn_all_tlm = "all_tlm", &
+     vn_all_slp = "all_slp", &
+     vn_all_slm = "all_slm"
 
   CONTAINS
 
@@ -305,11 +309,9 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_avv   , avv   )
   call cdf_define(nvac, vn_rcosuv, rcosuv)
   call cdf_define(nvac, vn_rsinuv, rsinuv)
-
   call cdf_define(nvac, vn_brad, brad)
   call cdf_define(nvac, vn_bphi, bphi)
   call cdf_define(nvac, vn_bz  , bz  )
-
   call cdf_define(nvac, vn_bexu, bexu)
   call cdf_define(nvac, vn_bexv, bexv)
   call cdf_define(nvac, vn_bexn, bexn)
@@ -332,6 +334,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_ra1m  , ra1m  )
   call cdf_define(nvac, vn_sqad1u, sqad1u)
   call cdf_define(nvac, vn_sqad2u, sqad2u)
+  call cdf_define(nvac, vn_all_tlp, all_tlp)
+  call cdf_define(nvac, vn_all_tlm, all_tlm)
+  call cdf_define(nvac, vn_all_slp, all_slp)
+  call cdf_define(nvac, vn_all_slm, all_slm)
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -375,16 +381,13 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_avv   , avv   )
   call cdf_write(nvac, vn_rcosuv, rcosuv)
   call cdf_write(nvac, vn_rsinuv, rsinuv)
-
   call cdf_write(nvac, vn_brad, brad)
   call cdf_write(nvac, vn_bphi, bphi)
   call cdf_write(nvac, vn_bz  , bz  )
-
   call cdf_write(nvac, vn_bexu, bexu)
   call cdf_write(nvac, vn_bexv, bexv)
   call cdf_write(nvac, vn_bexn, bexn)
   call cdf_write(nvac, vn_bexni, bexni)
-
   call cdf_write(nvac, vn_grpmn , grpmn )
   call cdf_write(nvac, vn_adp   , adp   )
   call cdf_write(nvac, vn_adm   , adm   )
@@ -403,6 +406,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_ra1m  , ra1m  )
   call cdf_write(nvac, vn_sqad1u, sqad1u)
   call cdf_write(nvac, vn_sqad2u, sqad2u)
+  call cdf_write(nvac, vn_all_tlp, all_tlp)
+  call cdf_write(nvac, vn_all_tlm, all_tlm)
+  call cdf_write(nvac, vn_all_slp, all_slp)
+  call cdf_write(nvac, vn_all_slm, all_slm)
 
 
 

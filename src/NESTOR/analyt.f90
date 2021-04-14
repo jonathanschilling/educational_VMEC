@@ -57,6 +57,8 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
   cma  = gvv_b  - guu_b
   sqrtc  = two*SQRT(gvv_b)
   sqrta  = two*SQRT(guu_b)
+  sqad1u = SQRT(adp)
+  sqad2u = SQRT(adm)
 
   ! INITIALIZE VECTORS
   bvec = 0
@@ -80,12 +82,10 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
   ! TLP(M): TL+(-)
   ! TLP(M)1:T(L-1)+(-)
   ! TLP(M)2:T(L-2)+(-)
-  sqad1u = SQRT(adp)
-  sqad2u = SQRT(adm)
   tlp1 = 0
   tlm1 = 0
   tlp  = one/sqad1u*log((sqad1u*sqrtc + adp + cma)/(sqad1u*sqrta - adp + cma))
-  tlm  = one/sqad2u*log((sqad2u*sqrtc + adm + cma)/(sqad2u*sqrta - adm + cma ))
+  tlm  = one/sqad2u*log((sqad2u*sqrtc + adm + cma)/(sqad2u*sqrta - adm + cma))
   tlpm = tlp  + tlm
 
   ! BEGIN L-SUM IN EQ (A14) TO COMPUTE Imn (and Kmn) INTEGRALS
@@ -103,6 +103,13 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym)
         slp = (r1p*fl + ra1p)*tlp + r0p*fl*tlp1 - (r1p + r0p)/sqrtc + sign1*(r0p - r1p)/sqrta
         slm = (r1m*fl + ra1m)*tlm + r0m*fl*tlm1 - (r1m + r0m)/sqrtc + sign1*(r0m - r1m)/sqrta
         slpm = slp + slm
+
+        ! here, tlp/m and slp/m are available for the current value of l
+        ! --> save into matrix for debugging
+        all_tlp(:,l) = tlp
+        all_tlm(:,l) = tlm
+        all_slp(:,l) = slp
+        all_slm(:,l) = slm
      ENDIF
 
      ! BEGIN MODE NUMBER (m,n) LOOP

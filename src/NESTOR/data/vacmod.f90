@@ -91,6 +91,9 @@ MODULE vacmod
      tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm, slp, tlpm, slpm,    &
      delt1u, azp1u, azm1u, cma11u, sqad1u, sqad2u
 
+  real(rprec), dimension(:,:), allocatable :: &
+     all_tlp, all_tlm, all_slp, all_slm
+
   ! from greenf
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave, ga1, ga2, dsave
 
@@ -186,6 +189,10 @@ subroutine allocate_nestor
             azp1u(nuv2), azm1u(nuv2), cma11u(nuv2), sqad1u(nuv2),   &
             sqad2u(nuv2), stat = l)
   IF (l .ne. 0) STOP 'Allocation error in SUBROUTINE analyt'
+
+  allocate(all_tlp(nuv2, 0:mf+nf), all_tlm(nuv2, 0:mf+nf), &
+           all_slp(nuv2, 0:mf+nf), all_slm(nuv2, 0:mf+nf), stat=l)
+  IF (l .ne. 0) STOP 'Allocation error for debugging analyt'
 
   ! from greenf
   ALLOCATE (gsave(nuv), ga1(nuv), ga2(nuv), dsave(nuv), stat=i)

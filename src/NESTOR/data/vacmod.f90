@@ -2,7 +2,7 @@
 MODULE vacmod
   USE vacmod0
   USE vac_persistent
-  USE vparams, ONLY: zero, one, c2p0, cp5, epstan, mu0
+  USE vparams, ONLY: zero, one, c2p0, cp5, mu0
 
   IMPLICIT NONE
 
@@ -84,7 +84,7 @@ MODULE vacmod
 
   ! from scalpot
   REAL(rprec), ALLOCATABLE :: grpmn(:)
-  REAL(rprec), ALLOCATABLE :: green(:), gstore(:), greenp(:,:)
+  REAL(rprec), ALLOCATABLE :: gstore(:), green(:,:), greenp(:,:)
 
   ! from analyt
   REAL(rprec), DIMENSION(:), ALLOCATABLE ::                         &
@@ -178,7 +178,7 @@ subroutine allocate_nestor
   ALLOCATE (grpmn(nuv2*mnpd2), stat=ip)
   IF (ip .ne. 0) STOP 'GRPMN: Allocation error in scalpot'
 
-  ALLOCATE (green(nuv), gstore(nuv), greenp(nuv,nuv2), stat=istat)
+  ALLOCATE (gstore(nuv), green(nuv,nuv2), greenp(nuv,nuv2), stat=istat)
   if (istat.ne.0) then
      ! Below loop over nuv2 was previously chunked.
      ! Therefore, some extra care shall be used here to make sure

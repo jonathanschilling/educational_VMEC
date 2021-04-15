@@ -14,19 +14,15 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
      STOP 'AMATSAV not allocated in scalpot'
   end if
 
-  ! COMPUTE TRANFORM OF ANALYTIC SOURCE AND KERNEL
-  ! ON EXIT, BVEC CONTAINS THE TRANSFORM OF THE ANALYTIC SOURCE
-  ! AND GRPMN CONTAINS TRANSFORM OF NORMAL DERIVATIVE
-  ! OF THE GREENS FUNCTION [PKM, EQ.(2.15)]
-  !
-  ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
-
+  ! COMPUTE TRANFORM OF ANALYTIC SOURCE AND KERNEL.
+  ! ON EXIT:
+  ! BVEC  CONTAINS THE TRANSFORM OF THE ANALYTIC SOURCE AND
+  ! GRPMN CONTAINS THE TRANSFORM OF THE NORMAL DERIVATIVE OF THE GREENS FUNCTION [PKM, EQ.(2.15)]
   CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map)
 
-  ! stand-alone debugging: only work on bvec from analyt at the moment
-  return
-
    IF (ivacskip .ne. 0) THEN
+      ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
+
       ! Here, bvecsav contains the previous non-singular contribution to the "final" bvec from fouri.
       ! For ivacskip != 0, this contribution is used from the cache in bvecsav.
       bvec = bvec + bvecsav
@@ -45,12 +41,12 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
 
          ! COMPUTE DIFFERENCE BETWEEN THE EXACT AND ANALYTIC GREENS FUNCTION AND GRADIENT
          ! [FIRST TERMS IN EQ.(2.14, 2.16)].
-         CALL greenf (green, greenp(1,ip), ip)
+         CALL greenf (green(1,ip), greenp(1,ip), ip)
 
          ! PERFORM INTEGRAL (SUM) OVER PRIMED MESH OF NON-SINGULAR SOURCE TERM
          ! [(h-hsing)(u,v,u',v') == bexni(ip)*green(u,v; ip) in Eq. 2.16]
          ! AND STORE IT - FOR UNPRIMED MESH VALUES - IN GSTORE
-         gstore = gstore + bexni(ip)*green
+         gstore = gstore + bexni(ip)*green(1,ip)
 
       END DO
 

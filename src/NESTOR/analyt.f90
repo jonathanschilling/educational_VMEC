@@ -117,7 +117,7 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map)
      ! BEGIN MODE NUMBER (m,n) LOOP
      DO n = 0, nf
         DO m = 0, mf
-           ! always call analysum, analysum2 to get bvec fill pattern
+           ! always call analysum, analysum2 to get bvec fill pattern (m_map, n_map)
            ! IF (cmns(l,m,n) .eq. zero) CYCLE
 
            IF (n.eq.0 .or. m.eq.0) THEN

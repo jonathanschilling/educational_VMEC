@@ -1,15 +1,18 @@
 !> \file
 SUBROUTINE precal
-  ! USE vparams, ONLY: zero, one, epstan
   USE vacmod
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: p25 = p5*p5, bigno = 1.e50_dp
+  REAL(rprec), PARAMETER :: p25 = p5*p5
+  REAL(rprec), PARAMETER :: bigno = 1.e50_dp
+  REAL(rprec), PARAMETER :: epstan = EPSILON(one)
+
 
   INTEGER :: kp, ku, kuminus, kv, kvminus, i, m, n, mn,            &
      imn, jmn, kmn, l, istat1, smn
   REAL(rprec), DIMENSION(0:mf + nf,0:mf,0:nf) :: cmn
   REAL(rprec) :: argu, argv, argp, dn1, f1, f2, f3, alp_per
+
 
   ! THIS ROUTINE COMPUTES INITIAL CONSTANTS AND ARRAYS
 
@@ -58,6 +61,9 @@ SUBROUTINE precal
            i = i + 1
            argv = p5*alv*(kv - 1) + argp
 
+
+
+
            IF (ABS(argu - p25*pi2)<epstan .or. ABS(argu - 0.75_dp*pi2) < epstan) THEN
               tanu(i) = bigno
            ELSE
@@ -69,6 +75,9 @@ SUBROUTINE precal
            ELSE
               tanv(i) = 2*TAN(argv)
            ENDIF
+
+
+           print *, i, kp, argp, ku, argu, kv, argv, tanu(i), tanv(i)
         END DO
      END DO
   END DO

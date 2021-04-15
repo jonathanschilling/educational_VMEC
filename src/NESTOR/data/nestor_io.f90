@@ -130,7 +130,11 @@ IMPLICIT NONE
      vn_all_slp = "all_slp", &
      vn_all_slm = "all_slm", &
      vn_m_map = "m_map", &
-     vn_n_map = "n_map"
+     vn_n_map = "n_map", &
+     vn_green = "green", &
+     vn_greenp = "greenp", &
+     vn_tanu = "tanu", &
+     vn_tanv = "tanv"
 
   CONTAINS
 
@@ -342,6 +346,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_all_slm, all_slm)
   call cdf_define(nvac, vn_m_map, m_map_wrt)
   call cdf_define(nvac, vn_n_map, n_map_wrt)
+  call cdf_define(nvac, vn_green, green)
+  call cdf_define(nvac, vn_greenp, greenp)
+  call cdf_define(nvac, vn_tanu, tanu)
+  call cdf_define(nvac, vn_tanv, tanv)
 
   ! actually write data
   !print *, "write ivac=",ivac
@@ -416,6 +424,11 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_all_slm, all_slm)
   call cdf_write(nvac, vn_m_map, m_map_wrt)
   call cdf_write(nvac, vn_n_map, n_map_wrt)
+  call cdf_write(nvac, vn_green, green)
+  call cdf_write(nvac, vn_greenp, greenp)
+  call cdf_write(nvac, vn_tanu, tanu)
+  call cdf_write(nvac, vn_tanv, tanv)
+
 
 
   CALL cdf_close(nvac)

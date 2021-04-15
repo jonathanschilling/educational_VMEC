@@ -12,22 +12,27 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   ! ON ENTRANCE, IP IS THE INDEX OF THE PRIMED MESH POINT (lies in 1st field period)
   !
-  ! ON EXIT, DELGR IS THE DIFFERENCE OF "GREEN'S FUNCTION"
-  ! AND ANALYTIC APPROXIMATION, SUMMED OVER ALL FIELD PERIODS
-  ! DELGRP IS DIFFERENCE OF DERIVATIVE OF "GREEN'S FUNCTION"
-  ! AND ANALYTIC APPROXIMATION.
+  ! ON EXIT:
+  ! DELGR  IS THE DIFFERENCE OF "GREEN'S FUNCTION" AND ANALYTIC APPROXIMATION, SUMMED OVER ALL FIELD PERIODS
+  ! DELGRP IS THE DIFFERENCE OF DERIVATIVE OF "GREEN'S FUNCTION" AND ANALYTIC APPROXIMATION.
   !
   ! BOTH THESE QUANTITIES ARE COMPUTED FOR ALL UNPRIMED U,V POINTS IN ONE FIELD PERIOD,
   ! FOR THIS FIXED PRIMED POINT (IP).
 
   ! COMPUTE OFFSETS FOR U,V ANGLE DIFFERENCES AND CONSTANTS
+
+  ! first round: up before singularity
   ilow(1) = 1
-  ilow(2) = ip + 1
   ihigh(1) = ip - 1
+
+  ! second round: from after singularity onwards
+  ilow(2) = ip + 1
   ihigh(2) = nuv
-  ivoff0 = nuv + 1 - ip
-  iskip = (ip - 1)/nv
-  iuoff = nuv - nv*iskip
+
+  ivoff0  = nuv - (ip - 1)
+
+  iskip  = (ip - 1)/nv
+  iuoff  = nuv - nv*iskip
 
   ! x == r*COS(ip), in 1st field period
   xip = rcosuv(ip)
@@ -50,6 +55,7 @@ SUBROUTINE greenf(delgr, delgrp, ip)
   ! NOTE THE SURFACE NORMAL SNORM == Xu cross Xv = NP*[SNR, SNV, SNZ]
   ! IS PERIODIC ON EACH FIELD PERIOD: NOTE THE LOOP OVER KP IS A REDUCTION ON delgr, delgrp
   DO kp = 1, nvper
+     ! add in offset due to toroidal module
      ivoff = ivoff0 + 2*nu*(kp-1)
 
      ! x(ip) in field period kp
@@ -63,11 +69,19 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
      IF (kp.EQ.1 .OR. nv.EQ.1) THEN
         ! INITIALIZE ANALYTIC APPROXIMATIONS GA1, GA2
+
+        !if (ip .eq. 1) write(*,*)"#         ip,         kp,     ivoff0,      ivoff,      iskip,      iuoff"
+        !print *,  ip, kp, ivoff0, ivoff, iskip, iuoff
+
         DO i = 1, nuv
+
+           ! this is where log_greenf_2.txt comes from
+           !print *, ip, i, iuoff, ivoff, i+iuoff, i+ivoff, tanu(i+iuoff), tanv(i+ivoff)
+
            ga1(i) = tanu(i+iuoff)*(  guu_b(ip)*tanu(i+iuoff) + guv_b(ip)*tanv(i+ivoff)) &
                                    + gvv_b(ip)*tanv(i+ivoff)*tanv(i+ivoff)
-           ga2(i) = tanu(i+iuoff)*(  auu(ip)*tanu(i+iuoff) + auv(ip)*tanv(i+ivoff)) &
-                                   + avv(ip)*tanv(i+ivoff)*tanv(i+ivoff)
+           ga2(i) = tanu(i+iuoff)*(  auu  (ip)*tanu(i+iuoff) + auv  (ip)*tanv(i+ivoff)) &
+                                   + avv  (ip)*tanv(i+ivoff)*tanv(i+ivoff)
         END DO
 
         DO nloop = 1, 2

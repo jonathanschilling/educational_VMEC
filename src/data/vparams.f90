@@ -38,6 +38,5 @@ MODULE vparams
   REAL(rprec), PARAMETER :: cp05   = 0.05_dp
   REAL(rprec), PARAMETER :: c1pm13 = 1.0e-13_dp
   REAL(rprec), PARAMETER :: osqrt2 = 0.707106781186547462_dp
-  REAL(rprec), PARAMETER :: epstan = EPSILON(zero)
 
 END MODULE vparams

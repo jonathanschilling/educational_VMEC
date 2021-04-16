@@ -9,8 +9,13 @@ MODULE vac_persistent
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: cosper
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: sinuv
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: cosuv
+
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: tanu
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: tanv
+
+  REAL(rprec), DIMENSION(:),     ALLOCATABLE :: tanu_1d
+  REAL(rprec), DIMENSION(:),     ALLOCATABLE :: tanv_1d
+
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: xmpot
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: xnpot
   REAL(rprec), DIMENSION(:),     ALLOCATABLE :: csign

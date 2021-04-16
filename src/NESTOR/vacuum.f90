@@ -66,8 +66,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
 
   ! stand-alone for debugging: working on scalpot at the moment
-  return
-  
+  !return
+
    CALL solver (amatrix, potvac, mnpd2, 1, info)
    IF (info .ne. 0) STOP 'Error in solver in VACUUM'
 

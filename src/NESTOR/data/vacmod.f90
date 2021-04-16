@@ -151,6 +151,13 @@ subroutine allocate_nestor
   IF (i .ne. 0) STOP 'Allocation error in vacuum'
 
   ! from precal
+  allocate(tanu_1d(2*nu))
+  if (nv .eq. 1) then
+    allocate(tanv_1d(nvper))
+  else
+    allocate(tanv_1d(nv))
+  end if
+
   ALLOCATE (tanu(nuv_tan), tanv(nuv_tan),                           &
        sinper(nvper), cosper(nvper), sinuv(nuv), cosuv(nuv),        &
        sinu(0:mf,nu), cosu(0:mf,nu), sinv(-nf:nf,nv),               &
@@ -258,6 +265,11 @@ subroutine free_mem_nestor
   if (allocated(amatrix)) then
      DEALLOCATE (amatrix, bsubu, bsubv, potu, potv, stat = i)
      IF (i .ne. 0) STOP 'Deallocation error in vacuum'
+  end if
+
+  if (allocated(tanu_1d)) then
+    deallocate(tanu_1d)
+    deallocate(tanv_1d)
   end if
 
   IF (ALLOCATED(tanu)) then

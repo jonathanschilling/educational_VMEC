@@ -8,6 +8,7 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   INTEGER, DIMENSION(2) :: ilow, ihigh
   INTEGER :: ivoff, iskip, iuoff, i, kp, nloop, ivoff0
+  integer :: ku_i, kv_i, ku_ip, kv_ip, delta_ku, delta_kv
   REAL(rprec):: xip, yip, xper, yper, sxsave, sysave, ftemp, htemp
 
   ! ON ENTRANCE, IP IS THE INDEX OF THE PRIMED MESH POINT (lies in 1st field period)
@@ -33,6 +34,14 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   iskip  = (ip - 1)/nv
   iuoff  = nuv - nv*iskip
+
+  if (nv .eq. 1) then
+     ! Tokamak: nvper toroidal "modules"
+     ku_ip = (ip-1)/nvper + 1
+  else
+     ! Stellarator: nv toroidal grid points
+     ku_ip = (ip-1)/nv + 1
+  end if
 
   ! x == r*COS(ip), in 1st field period
   xip = rcosuv(ip)
@@ -68,6 +77,16 @@ SUBROUTINE greenf(delgr, delgrp, ip)
      sysave = (snr(ip)*yper + snv(ip)*xper)/r1b(ip)
 
      IF (kp.EQ.1 .OR. nv.EQ.1) THEN
+
+         if (nv .eq. 1) then
+            ! Tokamak: nvper toroidal "modules"
+            !kv_ip = mod(ip-1, nvper) + 1
+            kv_ip = kp
+         else
+            ! Stellarator: nv toroidal grid points
+            kv_ip = mod(ip-1, nv) + 1
+         end if
+
         ! INITIALIZE ANALYTIC APPROXIMATIONS GA1, GA2
 
         !if (ip .eq. 1) write(*,*)"#         ip,         kp,     ivoff0,      ivoff,      iskip,      iuoff"
@@ -75,13 +94,71 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
         DO i = 1, nuv
 
+          if (nv .eq. 1) then
+              ! Tokamak: nvper toroidal "modules"
+              ku_i = (i-1)/nvper + 1
+              kv_i = mod(i-1, nvper) + 1
+
+              delta_kv = mod(kv_i-kv_ip+nvper, nvper) + 1
+           else
+              ! Stellarator: nv toroidal grid points
+              ku_i =    (i-1)/nv  + 1
+              kv_i = mod(i-1, nv) + 1
+
+              delta_kv = mod(kv_i-kv_ip+nv, nv) + 1
+           end if
+
+           delta_ku = ku_i-ku_ip+nu + 1
+
            ! this is where log_greenf_2.txt comes from
            !print *, ip, i, iuoff, ivoff, i+iuoff, i+ivoff, tanu(i+iuoff), tanv(i+ivoff)
 
-           ga1(i) = tanu(i+iuoff)*(  guu_b(ip)*tanu(i+iuoff) + guv_b(ip)*tanv(i+ivoff)) &
-                                   + gvv_b(ip)*tanv(i+ivoff)*tanv(i+ivoff)
-           ga2(i) = tanu(i+iuoff)*(  auu  (ip)*tanu(i+iuoff) + auv  (ip)*tanv(i+ivoff)) &
-                                   + avv  (ip)*tanv(i+ivoff)*tanv(i+ivoff)
+!            ga1(i) = tanu(i+iuoff)*(  guu_b(ip)*tanu(i+iuoff) + guv_b(ip)*tanv(i+ivoff)) &
+!                                    + gvv_b(ip)*tanv(i+ivoff)*tanv(i+ivoff)
+!            ga2(i) = tanu(i+iuoff)*(  auu  (ip)*tanu(i+iuoff) + auv  (ip)*tanv(i+ivoff)) &
+!                                    + avv  (ip)*tanv(i+ivoff)*tanv(i+ivoff)
+
+           if (abs(tanu(i+iuoff) - tanu_1d(delta_ku)) .gt. 1.0e-9_dp) then
+              print *, "mismatch in tanu:"
+              print *, "  tanu(i+iuoff)    = ", tanu(i+iuoff)
+              print *, "  tanu_1d(delta_ku)= ", tanu_1d(delta_ku)
+              print *, "        difference = ", tanu(i+iuoff) - tanu_1d(delta_ku)
+              print *, "                ip = ", ip
+              print *, "                i  = ", i
+              print *, "            iskip  = ", iskip
+              print *, "            iuoff  = ", iuoff
+              print *, "             ku_i  = ", ku_i
+              print *, "             kv_i  = ", kv_i
+              print *, "            ku_ip  = ", ku_ip
+              print *, "            kv_ip  = ", kv_ip
+              print *, "         delta_ku  = ", delta_ku
+              stop
+           end if
+
+
+           if (abs(tanv(i+ivoff) - tanv_1d(delta_kv)) .gt. 1.0e-9_dp) then
+              print *, "mismatch in tanv:"
+              print *, "  tanv(i+ivoff)    = ", tanv(i+ivoff)
+              print *, "  tanv_1d(delta_kv)= ", tanv_1d(delta_kv)
+              print *, "        difference = ", tanv(i+iuoff) - tanv_1d(delta_kv)
+              print *, "                ip = ", ip
+              print *, "                i  = ", i
+              print *, "           ivoff0  = ", ivoff0
+              print *, "           ivoff   = ", ivoff
+              print *, "             ku_i  = ", ku_i
+              print *, "             kv_i  = ", kv_i
+              print *, "            ku_ip  = ", ku_ip
+              print *, "            kv_ip  = ", kv_ip
+              print *, "         delta_kv  = ", delta_kv
+              stop
+           end if
+
+
+
+           ga1(i) = tanu_1d(delta_ku)*(  guu_b(ip)*tanu_1d(delta_ku) + guv_b(ip)*tanv_1d(delta_kv)) &
+                                   + gvv_b(ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
+           ga2(i) = tanu_1d(delta_ku)*(  auu  (ip)*tanu_1d(delta_ku) + auv  (ip)*tanv_1d(delta_kv)) &
+                                   + avv  (ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
         END DO
 
         DO nloop = 1, 2

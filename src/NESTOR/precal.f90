@@ -51,6 +51,37 @@ SUBROUTINE precal
   !       THE KP SUM BELOW IS USED ONLY FOR NV == 1. IT PERFORMS THE V-INTEGRAL
   !       IN AN AXISYMMETRIC PLASMA
 
+  if (nv .eq. 1) then
+    ! Tokamak; nvper = 64
+    DO kp = 1, nvper
+      argp = p5*alp_per*(kp-1)
+      IF (ABS(argp - p25*pi2) < epstan) THEN
+         tanv_1d(kp) = bigno
+      ELSE
+         tanv_1d(kp) = 2*TAN(argp)
+      ENDIF
+    end do
+  else
+    ! Stellarator
+    DO kv = 1, nv
+       argv = p5*alv*(kv - 1)
+       IF (ABS(argv - p25*pi2) < epstan) THEN
+          tanv_1d(kv) = bigno
+       ELSE
+          tanv_1d(kv) = 2*TAN(argv)
+       ENDIF
+    end do
+  end if
+
+  DO ku = 1, 2*nu
+    argu = p5*alu*(ku - 1)
+    IF (ABS(argu - p25*pi2)<epstan .or. ABS(argu - 0.75_dp*pi2) < epstan) THEN
+       tanu_1d(ku) = bigno
+    ELSE
+       tanu_1d(ku) = 2*TAN(argu)
+    ENDIF
+  end do
+
   i = 0
   DO kp = 1, nvper
      IF (kp.gt.1 .and. nv.ne.1) EXIT
@@ -60,9 +91,6 @@ SUBROUTINE precal
         DO kv = 1, nv
            i = i + 1
            argv = p5*alv*(kv - 1) + argp
-
-
-
 
            IF (ABS(argu - p25*pi2)<epstan .or. ABS(argu - 0.75_dp*pi2) < epstan) THEN
               tanu(i) = bigno
@@ -76,8 +104,7 @@ SUBROUTINE precal
               tanv(i) = 2*TAN(argv)
            ENDIF
 
-
-           print *, i, kp, argp, ku, argu, kv, argv, tanu(i), tanv(i)
+           ! print *, i, kp, argp, ku, argu, kv, argv, tanu(i), tanv(i)
         END DO
      END DO
   END DO

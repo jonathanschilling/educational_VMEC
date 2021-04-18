@@ -162,7 +162,14 @@ SUBROUTINE greenf(delgr, delgrp, ip)
         END DO
 
         DO nloop = 1, 2
-           IF (kp.GT.1 .AND. nloop.EQ.2) CYCLE
+
+           IF (kp.GT.1 .AND. nloop.EQ.2) then
+              ! Tokamak (kp>1): only need to skip exactly singular point if in same module
+              ! --> first round already goes to nuv, since ihigh(1) was updated below
+              CYCLE
+           end if
+
+           ! loop over grid points; ilow, ihigh used to skip point at which exact singularity occurs: ip==i
            DO i = ilow(nloop), ihigh(nloop)
              ga2(i) = ga2(i)/ga1(i)
              ga1(i) = one/SQRT(ga1(i))
@@ -175,11 +182,17 @@ SUBROUTINE greenf(delgr, delgrp, ip)
         END DO
 
         IF (kp.EQ.nvper .AND. nv.EQ.1) THEN
+            ! Tokamak: toroidal summation is actually an integration
+            ! --> need to divide by step length!
             delgrp = delgrp/nvper
             delgr  = delgr /nvper
         END IF
 
+        ! this is not needed anymore since ivoff is computed directly from ivoff0 and kp above
         ! ivoff = ivoff + 2*nu
+
+        ! update the upper bound of the first loop
+        ! --> in Tokamak case, skip exact singularity only if in first toroidal "module"
         ihigh(1) = nuv
 
      ELSE

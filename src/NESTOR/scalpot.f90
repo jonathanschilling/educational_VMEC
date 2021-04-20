@@ -36,7 +36,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       ! NOTE: SOURCE IS THE RHS OF EQ.(3.2), KERNEL IS THE LHS OF EQ (3.2).
       ! IP IS THE INDEX OF THE PRIMED VARIABLE MESH.
 
-      gstore  = 0
+      gstore = 0
       DO ip = 1, nuv2
 
          ! COMPUTE DIFFERENCE BETWEEN THE EXACT AND ANALYTIC GREENS FUNCTION AND GRADIENT
@@ -46,7 +46,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
          ! PERFORM INTEGRAL (SUM) OVER PRIMED MESH OF NON-SINGULAR SOURCE TERM
          ! [(h-hsing)(u,v,u',v') == bexni(ip)*green(u,v; ip) in Eq. 2.16]
          ! AND STORE IT - FOR UNPRIMED MESH VALUES - IN GSTORE
-         gstore = gstore + bexni(ip)*green(1,ip)
+         gstore = gstore + bexni(ip)*green(:,ip)
 
       END DO
 

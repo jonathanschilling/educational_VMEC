@@ -49,6 +49,8 @@ SUBROUTINE greenf(delgr, delgrp, ip)
   ! y == r*SIN(ip), in 1st field period
   yip = rsinuv(ip)
 
+!   print *, ip, xip, yip
+
   delgr  = 0
   delgrp = 0
 
@@ -57,6 +59,9 @@ SUBROUTINE greenf(delgr, delgrp, ip)
   DO i = 1, nuv
      gsave(i) = rzb2(ip) + rzb2(i) - 2*z1b(ip)*z1b(i)
      dsave(i) = drv(ip) + z1b(i)*snz(ip)
+
+     ! log_gsave_dsave.dat
+     ! print *, ip, i, gsave(i), dsave(i)
   END DO
 
   ! SUM OVER FIELD-PERIODS (NVPER=NFPER) OR INTEGRATE OVER NV (NVPER=64) IF NV == 1
@@ -76,7 +81,14 @@ SUBROUTINE greenf(delgr, delgrp, ip)
      sxsave = (snr(ip)*xper - snv(ip)*yper)/r1b(ip)
      sysave = (snr(ip)*yper + snv(ip)*xper)/r1b(ip)
 
+     ! log_xper_yper_sxsave_sysave.dat
+!      print *, ip, kp, cosper(kp), sinper(kp), xper, yper, sxsave, sysave
+
      IF (kp.EQ.1 .OR. nv.EQ.1) THEN
+
+!          if (ip .eq. 1) then
+!            print *, "period ", kp
+!          end if
 
          if (nv .eq. 1) then
             ! Tokamak: nvper toroidal "modules"
@@ -159,10 +171,12 @@ SUBROUTINE greenf(delgr, delgrp, ip)
                                    + gvv_b(ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
            ga2(i) = tanu_1d(delta_ku)*(  auu  (ip)*tanu_1d(delta_ku) + auv  (ip)*tanv_1d(delta_kv)) &
                                    + avv  (ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
+
+           ! This was used to generate log_ga1_ga2.dat
+           ! print *, ip, i, ga1(i), ga2(i)
         END DO
 
         DO nloop = 1, 2
-
            IF (kp.GT.1 .AND. nloop.EQ.2) then
               ! Tokamak (kp>1): only need to skip exactly singular point if in same module
               ! --> first round already goes to nuv, since ihigh(1) was updated below
@@ -175,10 +189,17 @@ SUBROUTINE greenf(delgr, delgrp, ip)
              ga1(i) = one/SQRT(ga1(i))
              ftemp = one/(gsave(i) - 2*(xper*rcosuv(i) + yper*rsinuv(i)))
              htemp = SQRT(ftemp)
-             delgrp(i) = delgrp(i) - ga2(i)*ga1(i) &
-                + ftemp*htemp*(rcosuv(i)*sxsave + rsinuv(i)*sysave + dsave(i))
-             delgr(i) = delgr(i) + htemp - ga1(i)
+             delgrp(i) = delgrp(i) + ftemp*htemp*(rcosuv(i)*sxsave + rsinuv(i)*sysave + dsave(i)) - ga2(i)*ga1(i)
+             delgr(i)  = delgr(i)  +       htemp                                                  -        ga1(i)
+
+             ! log_ftemp_htemp_green_greenp.dat
+             ! print *, ip, i, ga1(i), ga2(i), ftemp, htemp, delgr(i), delgrp(i)
+
            END DO
+
+!            if (nloop.eq.1) then
+!               print *, ip, ip, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+!            end if
         END DO
 
         IF (kp.EQ.nvper .AND. nv.EQ.1) THEN
@@ -196,12 +217,22 @@ SUBROUTINE greenf(delgr, delgrp, ip)
         ihigh(1) = nuv
 
      ELSE
+!         if (ip.eq.1) then
+!           print *, "period ",kp
+!         end if
+
         DO i = 1,nuv
+
+          ! log_otherPeriods_gsave_green_etc.dat
+          ! print *, ip, kp, i, gsave(i), dsave(i), xper, yper, rcosuv(i), rsinuv(i), sxsave, sysave, delgr(i), delgrp(i)
+
           ftemp = one/(gsave(i) - 2*(xper*rcosuv(i) + yper*rsinuv(i)))
           htemp = SQRT(ftemp)
-          delgrp(i) = delgrp(i) &
-             + ftemp*htemp*(rcosuv(i)*sxsave + rsinuv(i)*sysave + dsave(i))
-          delgr(i) = delgr(i) + htemp
+          delgrp(i) = delgrp(i) + ftemp*htemp*(rcosuv(i)*sxsave + rsinuv(i)*sysave + dsave(i))
+          delgr(i)  = delgr(i)  +       htemp
+
+          ! print *, ip, i, ftemp, htemp, delgr(i), delgrp(i)
+
         END DO
      ENDIF
   END DO

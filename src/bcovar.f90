@@ -97,8 +97,9 @@ SUBROUTINE bcovar (lu, lv)
 
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
   WHERE (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)
-  phipog(1:ndim:ns) = 0
+  phipog(1:ndim:ns) = 0 ! magnetic axis (?)
 
+  ! compute plasma volume profile (vp) and total volume (voli)
   vp(1) = 0;  vp(ns+1) = 0
   DO js = 2, ns
      vp(js) = signgs*SUM(gsqrt(js:nrzt:ns)*wint(js:nrzt:ns))
@@ -107,12 +108,12 @@ SUBROUTINE bcovar (lu, lv)
     voli = twopi*twopi*hs*SUM(vp(2:ns))
   end if
 
-  ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH
-  ! TO ACCOMODATE LRFP=T CASES, THE OVERALL PHIP FACTOR (PRIOR TO v8.46)
-  ! HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!
+  ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.
+  ! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!
   !
-  ! NOTE: LU = LAMU == d(LAM)/du, LV = -LAMV == -d(LAM)/dv COMING INTO THIS ROUTINE
-  ! WILL ADD CHIP IN CALL TO ADD_FLUXES. THE NET BSUPU, BSUPV ARE (PHIPOG=1/GSQRT AS NOTED ABOVE):
+  ! NOTE: LU = LAMU == d(LAM)/du, LV = -LAMV == -d(LAM)/dv COMING INTO THIS ROUTINE.
+  ! WILL ADD CHIP IN CALL TO ADD_FLUXES.
+  ! THE NET BSUPU, BSUPV ARE (PHIPOG=1/GSQRT AS NOTED ABOVE):
   !
   !      BSUPU = PHIPOG*(chip - LAMV*LAMSCALE),
   !      BSUPV = PHIPOG*(phip + LAMU*LAMSCALE)
@@ -123,10 +124,10 @@ SUBROUTINE bcovar (lu, lv)
      lu(js:nrzt:ns,0) = lu(js:nrzt:ns,0) + phipf(js)
   END DO
 
-  bsupu(2:nrzt) = p5*phipog(2:nrzt)*(lv(2:nrzt,0) + lv(1:nrzt-1,0)  &
-                + shalf(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1)))
-  bsupv(2:nrzt) = p5*phipog(2:nrzt)*(lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
-                + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1)))
+  bsupu(2:nrzt) = p5*phipog(2:nrzt)*(                 lv(2:nrzt,0) + lv(1:nrzt-1,0)  &
+                                     + shalf(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1))  )
+  bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
+                                     + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
 
   bsupu(1)=0
   bsupv(1)=0
@@ -144,17 +145,18 @@ SUBROUTINE bcovar (lu, lv)
   ! WITH N -> 1 IN THE HESSIAN CALCULATION ROUTINES (Compute_Hessian_Flam_lam, etc.)
 
   ! COMPUTE (IF NEEDED) AND ADD CHIP TO BSUPU
-  CALL add_fluxes(phipog, bsupu, bsupv, .true.)
+  CALL add_fluxes(phipog, bsupu, bsupv)
 
   ! COMPUTE LAMBDA FORCE KERNELS (COVARIANT B COMPONENT bsubu,v) ON RADIAL HALF-MESH
-  bsubuh(1:nrzt)=guu(1:nrzt)*bsupu(1:nrzt)+guv(1:nrzt)*bsupv(1:nrzt)
-  bsubvh(1:nrzt)=guv(1:nrzt)*bsupu(1:nrzt)+gvv(1:nrzt)*bsupv(1:nrzt)
+  bsubuh(1:nrzt) = guu(1:nrzt)*bsupu(1:nrzt) + guv(1:nrzt)*bsupv(1:nrzt)
+  bsubvh(1:nrzt) = guv(1:nrzt)*bsupu(1:nrzt) + gvv(1:nrzt)*bsupv(1:nrzt)
 
   ! v8.49
   bsubuh(ndim) = 0
   bsubvh(ndim) = 0
 
   ! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH
+  ! bsq = |B|^2/2 = 0.5*(B^u*B_u + B^v*B_v)
   bsq(:nrzt) = p5*(bsupu(:nrzt)*bsubuh(:nrzt) + bsupv(:nrzt)*bsubvh(:nrzt))
   pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
 
@@ -170,7 +172,7 @@ SUBROUTINE bcovar (lu, lv)
   END DO
 
   ! COMPUTE LAMBDA FULL MESH FORCES
-  ! NOTE: bsubu_e is used here ONLY as a temporary array
+  ! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)
   lvv = phipog(:ndim)*gvv
   bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)
 
@@ -186,6 +188,8 @@ SUBROUTINE bcovar (lu, lv)
 
   ! fpsi is simply an alias to bvco (which is filled in calc_fbal)
   ! --> why not use bvco here ???
+  ! This computes the poloidal current close to the axis (rbtor0)
+  ! and the poloidal current at the boundary (rbtor).
   rbtor0= c1p5*fpsi(2)  - p5*fpsi(3)
   rbtor = c1p5*fpsi(ns) - p5*fpsi(ns-1)
 
@@ -203,6 +207,8 @@ SUBROUTINE bcovar (lu, lv)
   ! NEXT COMPUTE COVARIANT BSUBV COMPONENT ~ lvv ON FULL RADIAL MESH BY AVERAGING HALF-MESH METRICS
   ! NOTE: EDGE VALUES AT JS=NS DOWN BY 1/2
   ! THIS IS NEEDED FOR NUMERICAL STABILITY
+
+  ! This computes the net toroidal current enclosed by the LCFS (ctor).
   ctor = signgs*twopi*(c1p5*buco(ns) - p5*buco(ns1))
 
   ! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
@@ -230,11 +236,16 @@ SUBROUTINE bcovar (lu, lv)
   ! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS
   ! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
   IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
+     ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
+
      phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt)
+
      CALL lamcal(phipog, guu, guv, gvv)
+
      CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1), &
                    z1(1,1),arm,ard,brm,brd,                &
                    crd,rzu_fac,cos01)
+
      CALL precondn(bsupv,bsq,gsqrt,r12,rs,ru12,ru,ru(1,1), &
                    r1(1,1),azm,azd,bzm,bzd, &
                    crd,rru_fac,sin01)
@@ -248,19 +259,32 @@ SUBROUTINE bcovar (lu, lv)
 
      volume = hs*SUM(vp(2:ns))
      r2 = MAX(wb,wp)/volume
-     guu(:nrzt) = guu(:nrzt)*r12(:nrzt)**2                     !R12 from RP in force
-     fnorm = one/(SUM(guu(1:nrzt)*wint(1:nrzt))*(r2*r2))       !Norm, unpreconditioned R,Z forces
-     fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)                   !Norm for preconditioned R,Z forces
-     fnormL = one/(SUM((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)      &
-              *wint(1:nrzt))*lamscale**2)                      !Norm for unpreconditioned Lambda force
+
+     !> R12 from RP in force
+     guu(:nrzt) = guu(:nrzt)*r12(:nrzt)**2
+
+     !> Norm, unpreconditioned R,Z forces
+     fnorm = one/(SUM(guu(1:nrzt)*wint(1:nrzt))*(r2*r2))
+
+     !> Norm for preconditioned R,Z forces
+     fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)
+
+     !> Norm for unpreconditioned Lambda force
+     fnormL = one/(SUM((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*wint(1:nrzt))*lamscale**2)
+
      ! r3 = one/(2*r0scale)**2
-     ! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4) !Norm for preconditioned Lambda force
+     ! > Norm for preconditioned Lambda force
+     ! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4)
 
      ! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
      ! OVERRIDE USER INPUT VALUE HERE
      r2 = ns
-     tcon0 = MIN(ABS(tcon0), one)                      ! ignore large tcon0 from old-style files
-     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120))) ! some parabola, but why these specific values of the parameters ?
+
+     ! ignore large tcon0 from old-style files
+     tcon0 = MIN(ABS(tcon0), one)
+
+     ! some parabola, but why these specific values of the parameters ?
+     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
 
      tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
                                                        ! Scaling of cos**2 in alias (4*r0scale**2)
@@ -272,8 +296,7 @@ SUBROUTINE bcovar (lu, lv)
           STOP 'arnorm or aznorm=0 in bcovar'
        end if
 
-       tcon(js) =   MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) &
-                  * tcon_mul*(32*hs)**2
+       tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
      END DO
      tcon(ns) = p5*tcon(ns-1)
      IF (lasym) tcon = p5*tcon

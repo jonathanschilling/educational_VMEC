@@ -245,9 +245,12 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
 
            ! total pressure (?) at LCFS
+           ! (gcon(l) is probably only used as a temporary variable here,
+           !  since it immediately gets overwritten when entering alias())
            gcon(l)      = bsqvac(lk) + presf_ns
 
-           ! what is this ?
+           ! edge force contribution (see forces())
+           ! --> *HERE* is where the free-boundary computation enters VMEC !
            rbsq(lk) = gcon(l)*(r1(l,0) + r1(l,1))*ohs
 
            ! residual magnetic field discontinuity at LCFS

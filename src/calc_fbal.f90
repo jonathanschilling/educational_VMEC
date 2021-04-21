@@ -17,8 +17,8 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
 
   ! compute flux-surface averages of covariant magnetic field components
   DO js = 2, ns
-     buco(js) = SUM(bsubu(js:nrzt:ns)*wint(js:nrzt:ns))
-     bvco(js) = SUM(bsubv(js:nrzt:ns)*wint(js:nrzt:ns))
+     buco(js) = SUM(bsubu(js:nrzt:ns)*wint(js:nrzt:ns)) ! toroidal current I (?)
+     bvco(js) = SUM(bsubv(js:nrzt:ns)*wint(js:nrzt:ns)) ! poloidal current G (?)
   END DO
 
   ! FROM AMPERE'S LAW, JcurX are angle averages of jac*JsupX, so

@@ -1,5 +1,5 @@
 !> \file
-SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
+SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   USE vmec_main
   USE realspace, ONLY: wint, guu, guv, chip
 
@@ -7,7 +7,6 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
 
   REAL(rprec), DIMENSION(nrzt), INTENT(in)    :: overg
   REAL(rprec), DIMENSION(nrzt), INTENT(inout) :: bsupu, bsupv
-  LOGICAL, INTENT(in) :: lcurrent
 
   REAL(rprec), PARAMETER :: p5=0.5_dp, c1p5=1.5_dp
   REAL(rprec), PARAMETER :: iotaped = 0.10
@@ -15,16 +14,21 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
   INTEGER :: js, l
   REAL(rprec) :: top, bot
 
+  ! I think this is the "zero-current algorithm" published in section 2.3 of
+  ! Hirshman, Hogan, "ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code" (1986), J. Comp. Phys. 63 (2), 329-352
+  ! https://doi.org/10.1016/0021-9991(86)90197-X
+
   ! ADD MAGNETIC FLUX (CHIP, PHIP) TERMS TO BSUPU=-OVERG*LAM_V, BSUPV=OVERG*LAM_U
   ! COMPUTE FLUX FROM ITOR = <B_u>, ITOR(s) = integrated toroidal current (icurv)
-  ! IF ncurr == 1
-  !IF (.not.lcurrent .or. ncurr.eq.0) GOTO 100
-  IF (lcurrent .and. ncurr.ne.0) then
+  IF (ncurr .eq. 1) then
      ! given current profile and lcurrent set --> compute fluxes, iota consistent with given current profile
      DO js = 2, ns
-        top = icurv(js)
+        ! solve Eqn. (11) of the ORMEC paper for each flux surface
+        top = icurv(js) ! offset: this makes the zero-current algorithm a constrained-current algorithm
         bot = 0
         DO l = js, nrzt, ns
+           ! bsupu is somehow related to d(lambda)/d(zeta)
+           ! bsupv is somehow related to 1+d(lambda)/d(theta)
            top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))
            bot = bot + wint(l)* guu(l)*overg(l)
         END DO
@@ -35,16 +39,12 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv, lcurrent)
            iotas(js) = chips(js)/phips(js)
         end if
      END DO
-  end if
-
-  IF (ncurr .eq. 0) THEN
+  else ! ncurr .eq. 0
      ! given iota profile: compute chips from iotas, phips
      chips = iotas*phips
-  ELSE IF (.not.lcurrent) THEN
-     ! given current profile, but .not. lcurrent (???): compute iotas from chips, phips
-     WHERE (phips .ne. zero) iotas = chips/phips
   END IF
 
+  ! distribute chips (ns-sized array) into larger chip array (over full surface) (?)
   DO js = 2, ns
      chip(js:nrzt:ns) = chips(js)
   END DO

@@ -32,7 +32,13 @@ SUBROUTINE fourp (grpmn, grp)
               DO ip = 1,nuv2
                  IF (isym .eq. 1) THEN ! only contrib for stellarator-symmetry
                     ! anti-symmetric part (u,v -> -u,-v)
+
                     kernel = grp(iuv,ip) - grp(ireflect,ip)
+
+!                     if (iuv .eq. ireflect) then
+!                       print *, "reflecting on self at iuv=", iuv, " ip=", ip, " n=", n, " ku=", ku, " kv=", kv, &
+!                                " => kernel=", kernel
+!                     end if
 
 !                      if (n.eq.0) then
 !                         ! fourp_kernel.dat

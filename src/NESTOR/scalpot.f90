@@ -24,6 +24,9 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    ! investigate contribution to grpmn from analyt alone
    ! return
 
+   ! debugging of fourp: get only contribution to grpmn from fourp / greenp
+   ! grpmn = 0
+
    IF (ivacskip .ne. 0) THEN
       ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
 

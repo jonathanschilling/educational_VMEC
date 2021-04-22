@@ -84,6 +84,8 @@ MODULE vacmod
 
   ! from scalpot
   REAL(rprec), ALLOCATABLE :: grpmn(:)
+  real(rprec), dimension(:), allocatable :: grpmn_m_map_wrt, grpmn_n_map_wrt
+
   REAL(rprec), ALLOCATABLE :: gstore(:), green(:,:), greenp(:,:)
 
   ! from analyt
@@ -183,6 +185,9 @@ subroutine allocate_nestor
 
   ! from scalpot
   ALLOCATE (grpmn(nuv2*mnpd2), stat=ip)
+  IF (ip .ne. 0) STOP 'GRPMN: Allocation error in scalpot'
+
+  ALLOCATE (grpmn_m_map_wrt(nuv2*mnpd2), grpmn_n_map_wrt(nuv2*mnpd2), stat=ip)
   IF (ip .ne. 0) STOP 'GRPMN: Allocation error in scalpot'
 
   ALLOCATE (gstore(nuv), green(nuv,nuv2), greenp(nuv,nuv2), stat=istat)
@@ -298,6 +303,10 @@ subroutine free_mem_nestor
   if (allocated(grpmn)) then
     DEALLOCATE (grpmn)
     DEALLOCATE (green, greenp, gstore)
+  end if
+
+  if (allocated(grpmn_m_map_wrt)) then
+     deallocate(grpmn_m_map_wrt, grpmn_n_map_wrt)
   end if
 
   ! from analyt

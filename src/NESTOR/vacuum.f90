@@ -56,17 +56,17 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   !
   ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
 
-  IF (.not. precal_done) then
-     CALL precal
-  end if
-  CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
-  CALL bextern (plascur, wint)
+   IF (.not. precal_done) then
+      CALL precal
+   end if
+   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
+   CALL bextern (plascur, wint)
 
-  ! Determine scalar magnetic potential POTVAC
-  CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
+   ! Determine scalar magnetic potential POTVAC
+   CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
 
-  ! stand-alone for debugging: working on scalpot at the moment
-  return
+   ! stand-alone for debugging: working on scalpot at the moment
+   return
 
    CALL solver (amatrix, potvac, mnpd2, 1, info)
    IF (info .ne. 0) STOP 'Error in solver in VACUUM'

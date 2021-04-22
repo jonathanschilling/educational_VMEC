@@ -1,5 +1,6 @@
 !> \file
-SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map)
+SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map, &
+                    grpmn_m_map, grpmn_n_map)
   USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE
 
@@ -8,6 +9,8 @@ SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map)
   REAL(rprec), INTENT(inout) :: bvec(0:mf,-nf:nf,ndim)
   real(rprec), intent(inout) :: m_map(0:mf,-nf:nf)
   real(rprec), intent(inout) :: n_map(0:mf,-nf:nf)
+  real(rprec), intent(inout) :: grpmn_m_map(0:mf,-nf:nf,nuv2)
+  real(rprec), intent(inout) :: grpmn_n_map(0:mf,-nf:nf,nuv2)
   logical, intent(in) :: lasym
 
   INTEGER :: i
@@ -21,12 +24,18 @@ SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map)
   n_map(m,  n) =  n
   n_map(m, -n) = -n
 
-  if (cmns(l,m,n) .eq. zero) then
-     ! no need to compute zeros...
-     return
-  end if
+!   if (cmns(l,m,n) .eq. zero) then
+!      ! no need to compute zeros...
+!      return
+!   end if
 
   DO i = 1,nuv2
+
+     grpmn_m_map(m, n, i) =  m
+     grpmn_m_map(m,-n, i) =  m
+
+     grpmn_n_map(m, n, i) =  n
+     grpmn_n_map(m,-n, i) = -n
 
      sinp =  sinu1(i,m)*cosv1(i,n) * cmns(l,m,n)
      temp = -cosu1(i,m)*sinv1(i,n) * cmns(l,m,n)

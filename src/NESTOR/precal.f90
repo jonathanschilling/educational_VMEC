@@ -16,7 +16,7 @@ SUBROUTINE precal
 
   ! THIS ROUTINE COMPUTES INITIAL CONSTANTS AND ARRAYS
 
-  pi2 = 8*ATAN(one)
+  pi2 = 8*ATAN(one) ! 2 pi
   pi3 = p5*pi2**3
   pi4 = 2*pi2
   onp = one/nfper
@@ -28,18 +28,22 @@ SUBROUTINE precal
 
   alp_per = pi2/nvper
 
-  ! IMIRR(I) GIVES THE INDEX OF THE POINT TWOPI-THETA(I),TWOPI-ZETA(I)
   DO kp = 1, nvper
      cosper(kp) = COS(alp_per*(kp - 1))
      sinper(kp) = SIN(alp_per*(kp - 1))
   END DO
 
+  ! IMIRR(I) GIVES THE INDEX OF THE POINT (TWOPI-THETA(I), TWOPI-ZETA(I))
+  ! k(u,v)minus count from the other side of the grid
+  ! imirr is then the linear index correponding to (kuminus, kvminus)
   DO ku = 1, nu
-     kuminus = MOD(nu + 1 - ku, nu) + 1
+     kuminus = MOD(nu - (ku-1), nu) + 1
      DO kv = 1, nv
-        kvminus = MOD(nv + 1 - kv, nv) + 1
+        kvminus = MOD(nv - (kv-1), nv) + 1
+
         i        = kv      + nv*(ku      - 1)
         imirr(i) = kvminus + nv*(kuminus - 1)
+
         cosuv(i) = COS(alvp*(kv - 1))
         sinuv(i) = SIN(alvp*(kv - 1))
      END DO
@@ -109,13 +113,19 @@ SUBROUTINE precal
      END DO
   END DO
 
+  ! poloidal Fourier transform basis functions
   DO m = 0, mf
      l40: DO ku = 1, nu
         cosu(m,ku) = COS(alu*(m*(ku - 1)))
         sinu(m,ku) = SIN(alu*(m*(ku - 1)))
         DO kv = 1, nv
            i = kv + nv*(ku - 1)
-           IF (i > nuv2) CYCLE  l40
+           IF (i > nuv2) then
+              ! This crops the linear index i to the stellarator-symmetric half of a toroidal module.
+              ! ku == poloidal is the slow direction, so there the index ku will only run up to nu2.
+              ! Above ku loop was probably not directly ended at nu2 to have the full set of Fourier basis functions in cosu, sinu.
+              CYCLE l40
+           end if
            cosu1(i,m) = cosu(m,ku)
            sinu1(i,m) = sinu(m,ku)
         END DO
@@ -123,10 +133,14 @@ SUBROUTINE precal
      DO ku = 1, nu2
         cosui(m,ku) = cosu(m,ku)*alu*alv*2
         sinui(m,ku) = sinu(m,ku)*alu*alv*2
-        IF (ku.eq.1 .or. ku.eq.nu2) cosui(m,ku) = p5*cosui(m,ku)
+        IF (ku.eq.1 .or. ku.eq.nu2) then
+           ! This seems to be some kind of trapezoidal quadrature (weighting of "edge" contributions by 1/2) ?
+           cosui(m,ku) = p5*cosui(m,ku)
+        end if
      END DO
   END DO
 
+  ! toroidal Fourier transform basis functions
   DO n = -nf, nf
      dn1 = alvp*(n*nfper)
      csign(n) = SIGN(one,dn1)
@@ -135,13 +149,19 @@ SUBROUTINE precal
            i = kv + nv*(ku - 1)
            cosv(n,kv) = COS(dn1*(kv - 1))
            sinv(n,kv) = SIN(dn1*(kv - 1))
-           IF (i.gt.nuv2 .or. n.lt.0) CYCLE  l50
+           IF (i.gt.nuv2 .or. n.lt.0) then
+              ! This crops the linear index i to the stellarator-symmetric half of a toroidal module.
+              ! ku == poloidal is the slow direction, so there the index ku will only run up to nu2.
+              ! Above ku loop was probably not directly ended at nu2 to have the full set of Fourier basis functions in cosv, sinv.
+              CYCLE  l50
+           end if
            cosv1(i,n) = cosv(n,kv)
            sinv1(i,n) = sinv(n,kv)
         END DO
      END DO l50
   END DO
 
+  ! Fourier mode number arrays for potsin, potcos
   mn = 0
   DO n = -nf, nf
      DO m = 0, mf

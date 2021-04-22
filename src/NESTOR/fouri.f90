@@ -8,7 +8,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   REAL(rprec), DIMENSION(mnpd,mnpd,ndim**2), INTENT(out) :: amatrix
   REAL(rprec), DIMENSION(mnpd2,mnpd2), INTENT(out) :: amatsq
   REAL(rprec), DIMENSION(0:mf,-nf:nf,ndim), INTENT(inout) :: bvec
-  REAL(rprec), DIMENSION(nuv2) :: wint
+  REAL(rprec), DIMENSION(nuv2), intent(in) :: wint
   logical, intent(in) :: lasym
 
   !> interior  (int_ext=-1), exterior  (int_ext=+1)  neumann problem
@@ -51,13 +51,14 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      END DO
   END DO
 
-  source = p5*onp*source
+  source = p5*onp*source ! TODO: why is this required?
 
   ! INITIALIZE RUNNING-SUM ARRAYS
   bcos = 0
   bsin = 0
   actemp = 0
   astemp = 0
+
   amatrix = 0
 
   ! PERFORM KV (TOROIDAL ANGLE) TRANSFORM
@@ -92,39 +93,41 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
         END IF
      END DO
 
-    ! RECALL, LAST INDEX OF AS,CTEMP
-    !                    = 1 CORRESPONDS TO SIN (UNPRIMED) TRANSFORM (FIRST INDEX OF AMATRIX)
-    !                    = 2 CORRESPONDS TO COS (UNPRIMED) TRANSFORM
+     ! RECALL, LAST INDEX OF A(S,C)TEMP
+     !                    = 1 CORRESPONDS TO SIN (UNPRIMED) TRANSFORM (FIRST INDEX OF AMATRIX)
+     !                    = 2 CORRESPONDS TO COS (UNPRIMED) TRANSFORM
      DO kui = 1, nu3
         cosm = cosu(m,kui)*wint(kui*nv)
         sinm = sinu(m,kui)*wint(kui*nv)
 
         ! SIN SIN'
         amatrix(:,m+1:mnpd:mf1,1) = amatrix(:,m+1:mnpd:mf1,1) + sinm*actemp(:,-nf:nf,kui,1) - cosm*astemp(:,-nf:nf,kui,1)
-        IF (.not.lasym) CYCLE
 
-        ! SIN COS'
-        amatrix(:,m+1:mnpd:mf1,2) = amatrix(:,m+1:mnpd:mf1,2) + cosm*actemp(:,-nf:nf,kui,1) + sinm*astemp(:,-nf:nf,kui,1)
+        IF (lasym) then
+           ! SIN COS'
+           amatrix(:,m+1:mnpd:mf1,2) = amatrix(:,m+1:mnpd:mf1,2) + cosm*actemp(:,-nf:nf,kui,1) + sinm*astemp(:,-nf:nf,kui,1)
 
-        ! COS SIN'
-        amatrix(:,m+1:mnpd:mf1,3) = amatrix(:,m+1:mnpd:mf1,3) + sinm*actemp(:,-nf:nf,kui,2) - cosm*astemp(:,-nf:nf,kui,2)
+           ! COS SIN'
+           amatrix(:,m+1:mnpd:mf1,3) = amatrix(:,m+1:mnpd:mf1,3) + sinm*actemp(:,-nf:nf,kui,2) - cosm*astemp(:,-nf:nf,kui,2)
 
-        ! COS COS'
-        amatrix(:,m+1:mnpd:mf1,4) = amatrix(:,m+1:mnpd:mf1,4) + cosm*actemp(:,-nf:nf,kui,2) + sinm*astemp(:,-nf:nf,kui,2)
+           ! COS COS'
+           amatrix(:,m+1:mnpd:mf1,4) = amatrix(:,m+1:mnpd:mf1,4) + cosm*actemp(:,-nf:nf,kui,2) + sinm*astemp(:,-nf:nf,kui,2)
+        end if
+
      END DO
   END DO
 
 
-  ! below is not related to Fourier transforms anymore,
-  ! but should probably go into the main vacuum routine...
+  ! The code below is not related to Fourier transforms anymore,
+  ! so it should probably go into the main vacuum routine...
 
-  amatrix = (pi2*pi2)*amatrix
+  amatrix = (pi2*pi2)*amatrix ! TODO: can this be cancelled with some factors of 2*pi in the rest of NESTOR?
 
-  ! ZERO BVEC(0,n) FOR n < 0
+  ! ZERO BVEC(0,n) FOR n < 0 (TODO: why ?)
   ! Fixed SPH081515: had -nf:0 before
   bvec(0,-nf:-1,1:ndim) = 0
 
-  !     ZERO AMATRIX(0,n,m',n') M = 0 MODES FOR n < 0
+  !     ZERO AMATRIX(0,n,m',n') M = 0 MODES FOR n < 0 (TODO: why ?)
   ! Index of m=0,n=0
   mn0 = 1+mf1*nf
   ! SPH082415: mn0-mf1: (m=0,n=-1 index)
@@ -137,26 +140,31 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
   IF (lasym) THEN
      DO mn = 1, mnpd
+        ! last index == 4 is the lower-right corner of amatrix
+        ! and this corner is crossed by the main diagnoal as well
+        ! --> no need to touch 2 and 3 (off-diagonal blocks of amatrix)
         amatrix(mn,mn,4) = amatrix(mn,mn,4) + pi3*int_ext
      END DO
 
-     ! COS(0-0) mode *2
+     ! COS(0-0) mode *2 (TODO: why is this required ?)
      amatrix(mn0,mn0,4) = amatrix(mn0,mn0,4) + pi3*int_ext
   END IF
 
+
   ! PUT ELEMENTS INTO SQUARE MATRIX
+
   ! Sin-Sin'
   amatsq(:mnpd,:mnpd) = amatrix(:,:,1)
 
-  IF (.not.lasym) RETURN
+  IF (lasym) then
+     ! Sin-Cos'
+     amatsq(:mnpd,1+mnpd:mnpd2) = amatrix(:,:,2)
 
-  ! Sin-Cos'
-  amatsq(:mnpd,1+mnpd:mnpd2) = amatrix(:,:,2)
+     ! Cos-Sin'
+     amatsq(1+mnpd:mnpd2,:mnpd) = amatrix(:,:,3)
 
-  ! Cos-Sin'
-  amatsq(1+mnpd:mnpd2,:mnpd) = amatrix(:,:,3)
-
-  ! Cos-Cos'
-  amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
+     ! Cos-Cos'
+     amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
+  end if
 
 END SUBROUTINE fouri

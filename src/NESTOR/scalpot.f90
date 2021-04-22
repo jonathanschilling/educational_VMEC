@@ -18,6 +18,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
   ! ON EXIT:
   ! BVEC  CONTAINS THE TRANSFORM OF THE ANALYTIC SOURCE AND
   ! GRPMN CONTAINS THE TRANSFORM OF THE NORMAL DERIVATIVE OF THE GREENS FUNCTION [PKM, EQ.(2.15)]
+  ! GReen's function Primed (normal derivative...) and Fourier-transformed to MN mode numbers --> "GR P MN"
   CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map)
 
    IF (ivacskip .ne. 0) THEN

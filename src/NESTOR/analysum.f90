@@ -29,7 +29,7 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map)
 
   DO i = 1, nuv2
      ! SIN(mu - |n|v)*cmns
-     sinp = (sinu1(i,m)*cosv1(i,n) - cosu1(i,m)*sinv1(i,n))
+     sinp = sinu1(i,m)*cosv1(i,n) - cosu1(i,m)*sinv1(i,n)
 
      ! Fourier-transform S_l or T_l*bexni and then
      ! add up Fourier coefficients, weighted by cmns
@@ -44,7 +44,7 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map)
 
      IF (lasym) THEN
         ! COS(mu - |n|v)*cmns
-        cosp = (cosu1(i,m)*cosv1(i,n) + sinv1(i,n)*sinu1(i,m))
+        cosp = cosu1(i,m)*cosv1(i,n) + sinv1(i,n)*sinu1(i,m)
 
         IF (ivacskip .EQ. 0) then
            grpmn(m,n,i,2) = grpmn(m,n,i,2)  + sl(i)*cmns(l,m,n)*cosp

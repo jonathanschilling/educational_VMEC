@@ -33,10 +33,18 @@ SUBROUTINE fourp (grpmn, grp)
                  IF (isym .eq. 1) THEN ! only contrib for stellarator-symmetry
                     ! anti-symmetric part (u,v -> -u,-v)
                     kernel = grp(iuv,ip) - grp(ireflect,ip)
+
+!                      if (n.eq.0) then
+!                         ! fourp_kernel.dat
+!                         print *, iuv, ip, kernel
+!                      end if
                  ELSE IF (isym .eq. 2) THEN
                     ! symmetric part
                     kernel = grp(iuv,ip) + grp(ireflect,ip)
                  END IF
+
+
+
                  g1(ip,n,isym)=g1(ip,n,isym) + cosn*kernel
                  g2(ip,n,isym)=g2(ip,n,isym) + sinn*kernel
               END DO

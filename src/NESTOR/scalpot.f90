@@ -22,7 +22,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map_wrt, grpmn_n_map_wrt)
 
    ! investigate contribution to grpmn from analyt alone
-   return
+   ! return
 
    IF (ivacskip .ne. 0) THEN
       ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED

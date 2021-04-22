@@ -1,24 +1,26 @@
 !> \file
 SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
-  USE vacmod, vm_amatrix => amatrix
-  IMPLICIT NONE
+   USE vacmod, vm_amatrix => amatrix
+   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ivacskip
-  REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2), m_map(mnpd2), n_map(mnpd2)
-  REAL(rprec), dimension(nuv2), INTENT(in) :: wint
-  logical, intent(in) :: lasym
+   INTEGER, INTENT(in) :: ivacskip
+   REAL(rprec), INTENT(out) :: bvec(mnpd2), amatrix(mnpd2*mnpd2), m_map(mnpd2), n_map(mnpd2)
+   REAL(rprec), dimension(nuv2), INTENT(in) :: wint
+   logical, intent(in) :: lasym
 
-  INTEGER :: ip, istat
+   INTEGER :: ip, istat
 
-  IF (.not.ALLOCATED(amatsav)) then
-     STOP 'AMATSAV not allocated in scalpot'
-  end if
+   IF (.not.ALLOCATED(amatsav)) then
+      STOP 'AMATSAV not allocated in scalpot'
+   end if
 
-  ! COMPUTE TRANFORM OF ANALYTIC SOURCE AND KERNEL.
-  ! ON EXIT:
-  ! BVEC  CONTAINS THE TRANSFORM OF THE ANALYTIC SOURCE AND
-  ! GRPMN CONTAINS THE TRANSFORM OF THE NORMAL DERIVATIVE OF THE GREENS FUNCTION [PKM, EQ.(2.15)]
-  CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map)
+   ! COMPUTE TRANFORM OF ANALYTIC SOURCE AND KERNEL.
+   ! ON EXIT:
+   ! BVEC  CONTAINS THE TRANSFORM OF THE ANALYTIC SOURCE AND
+   ! GRPMN CONTAINS THE TRANSFORM OF THE NORMAL DERIVATIVE OF THE GREENS FUNCTION [PKM, EQ.(2.15)]
+   CALL analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map)
+
+   return
 
    IF (ivacskip .ne. 0) THEN
       ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED

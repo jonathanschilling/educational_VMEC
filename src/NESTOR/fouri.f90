@@ -92,7 +92,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
         END IF
      END DO
 
-    ! RECALL, LAST INDEX OF AS,CTEMP
+    ! RECALL, LAST INDEX OF A(S,C)TEMP
     !                    = 1 CORRESPONDS TO SIN (UNPRIMED) TRANSFORM (FIRST INDEX OF AMATRIX)
     !                    = 2 CORRESPONDS TO COS (UNPRIMED) TRANSFORM
      DO kui = 1, nu3
@@ -116,7 +116,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
 
   ! below is not related to Fourier transforms anymore,
-  ! but should probably go into the main vacuum routine...
+  ! do it should probably go into scalpot...
 
   amatrix = (pi2*pi2)*amatrix
 
@@ -128,7 +128,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   ! Index of m=0,n=0
   mn0 = 1+mf1*nf
   ! SPH082415: mn0-mf1: (m=0,n=-1 index)
-  amatrix(1:mn0-mf1:mf1,:,1:ndim*ndim) = 0
+  amatrix(1:mn0-mf1:mf1, :, 1:ndim*ndim) = 0
 
   ! ADD DIAGONAL TERMS TO AMATRIX [THE FIRST TERM IN EQ(3.2) OF PKM]
   DO mn = 1, mnpd
@@ -140,7 +140,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
         amatrix(mn,mn,4) = amatrix(mn,mn,4) + pi3*int_ext
      END DO
 
-     ! COS(0-0) mode *2
+     ! COS(0-0) mode *2 (why on earth is this necessary ???)
      amatrix(mn0,mn0,4) = amatrix(mn0,mn0,4) + pi3*int_ext
   END IF
 
@@ -148,15 +148,15 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   ! Sin-Sin'
   amatsq(:mnpd,:mnpd) = amatrix(:,:,1)
 
-  IF (.not.lasym) RETURN
+  IF (lasym) then
+     ! Sin-Cos'
+     amatsq(:mnpd,1+mnpd:mnpd2) = amatrix(:,:,2)
 
-  ! Sin-Cos'
-  amatsq(:mnpd,1+mnpd:mnpd2) = amatrix(:,:,2)
+     ! Cos-Sin'
+     amatsq(1+mnpd:mnpd2,:mnpd) = amatrix(:,:,3)
 
-  ! Cos-Sin'
-  amatsq(1+mnpd:mnpd2,:mnpd) = amatrix(:,:,3)
-
-  ! Cos-Cos'
-  amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
+     ! Cos-Cos'
+     amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
+  end if
 
 END SUBROUTINE fouri

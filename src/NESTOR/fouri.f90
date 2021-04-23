@@ -72,12 +72,14 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
         DO isym = 1, ndim
            bcos(:,n,isym) = bcos(:,n,isym) + cosn*source(kvi,:,isym)
            bsin(:,n,isym) = bsin(:,n,isym) + sinn*source(kvi,:,isym)
+
            actemp(:,n,:,isym) = actemp(:,n,:,isym) + cosn*grpmn(:,kvi,:,isym)
            astemp(:,n,:,isym) = astemp(:,n,:,isym) + sinn*grpmn(:,kvi,:,isym)
 
            IF (n .ne. 0) THEN
               bcos(:,(-n),isym) =  bcos(:,n,isym)
               bsin(:,(-n),isym) = -bsin(:,n,isym)
+
               actemp(:,(-n),:,isym) =  actemp(:,n,:,isym)
               astemp(:,(-n),:,isym) = -astemp(:,n,:,isym)
            ENDIF
@@ -119,6 +121,10 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
      END DO
   END DO
+
+
+  ! debugging: first focus on above Fourier transforms
+  return
 
 
   ! The code below is not related to Fourier transforms anymore,

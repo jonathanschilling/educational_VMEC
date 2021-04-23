@@ -27,6 +27,9 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    ! debugging of fourp: get only contribution to grpmn from fourp / greenp
    ! grpmn = 0
 
+   ! debugging of fouri: get only contribution to bvec from fouri / green / gstore
+   ! bvec = 0
+
    IF (ivacskip .ne. 0) THEN
       ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
 
@@ -65,6 +68,9 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       ! COMPUTE FOURIER INTEGRAL OF GRADIENT (GRPMN) OVER PRIMED MESH IN EQ. 2.14
       ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
       CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, lasym)
+
+      ! debugging: focus on Fourier transforms in fouri for now
+      return
 
       ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
       bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)

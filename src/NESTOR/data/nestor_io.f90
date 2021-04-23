@@ -140,7 +140,6 @@ IMPLICIT NONE
      vn_grpmn_n_map = "grpmn_n_map", &
      vn_imirr = "imirr"
 
-
   CONTAINS
 
 
@@ -359,6 +358,7 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_grpmn_m_map, grpmn_m_map_wrt)
   call cdf_define(nvac, vn_grpmn_n_map, grpmn_n_map_wrt)
   call cdf_define(nvac, vn_imirr, imirr)
+
 
 
   ! actually write data

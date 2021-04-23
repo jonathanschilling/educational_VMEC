@@ -124,13 +124,17 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
 
   ! debugging: first focus on above Fourier transforms
-  return
+  ! return
 
 
   ! The code below is not related to Fourier transforms anymore,
   ! so it should probably go into the main vacuum routine...
 
   amatrix = (pi2*pi2)*amatrix ! TODO: can this be cancelled with some factors of 2*pi in the rest of NESTOR?
+
+
+
+
 
   ! ZERO BVEC(0,n) FOR n < 0 (TODO: why ?)
   ! Fixed SPH081515: had -nf:0 before
@@ -141,6 +145,9 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   mn0 = 1+mf1*nf
   ! SPH082415: mn0-mf1: (m=0,n=-1 index)
   amatrix(1:mn0-mf1:mf1, :, 1:ndim*ndim) = 0
+
+
+
 
   ! ADD DIAGONAL TERMS TO AMATRIX [THE FIRST TERM IN EQ(3.2) OF PKM]
   DO mn = 1, mnpd

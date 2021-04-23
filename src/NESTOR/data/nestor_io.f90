@@ -139,7 +139,11 @@ IMPLICIT NONE
      vn_grpmn_m_map = "grpmn_m_map", &
      vn_grpmn_n_map = "grpmn_n_map", &
      vn_imirr = "imirr", &
-     vn_amatrix = "amatrix"
+     vn_amatrix = "amatrix", &
+     vn_potu = "potu", &
+     vn_potv = "potv", &
+     vn_bsubu = "bsubu", &
+     vn_bsubv = "bsubv"
 
   CONTAINS
 
@@ -360,6 +364,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_grpmn_n_map, grpmn_n_map_wrt)
   call cdf_define(nvac, vn_imirr, imirr)
   call cdf_define(nvac, vn_amatrix, amatrix)
+  call cdf_define(nvac, vn_potu, potu)
+  call cdf_define(nvac, vn_potv, potv)
+  call cdf_define(nvac, vn_bsubu, bsubu)
+  call cdf_define(nvac, vn_bsubv, bsubv)
 
 
 
@@ -445,6 +453,10 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_write(nvac, vn_grpmn_n_map, grpmn_n_map_wrt)
   call cdf_write(nvac, vn_imirr, imirr)
   call cdf_write(nvac, vn_amatrix, amatrix)
+  call cdf_write(nvac, vn_potu, potu)
+  call cdf_write(nvac, vn_potv, potv)
+  call cdf_write(nvac, vn_bsubu, bsubu)
+  call cdf_write(nvac, vn_bsubv, bsubv)
 
 
   CALL cdf_close(nvac)

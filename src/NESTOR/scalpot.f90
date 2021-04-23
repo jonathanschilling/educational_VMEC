@@ -70,7 +70,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, lasym)
 
       ! debugging: focus on Fourier transforms in fouri for now
-      return
+      ! return
 
       ! SAVE NON-SINGULAR CONTRIBUTION TO BVEC (IN BVECSAV)
       bvecsav(:mnpd2) = bvec - bvecsav(:mnpd2)

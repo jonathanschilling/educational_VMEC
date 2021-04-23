@@ -102,7 +102,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      !                    = 1 CORRESPONDS TO SIN (UNPRIMED) TRANSFORM (FIRST INDEX OF AMATRIX)
      !                    = 2 CORRESPONDS TO COS (UNPRIMED) TRANSFORM
      DO kui = 1, nu3
-        cosm = cosu(m,kui)*wint(kui*nv)
+        cosm = cosu(m,kui)*wint(kui*nv) ! wint only varies in the poloidal direction --> only need every nv-th entry
         sinm = sinu(m,kui)*wint(kui*nv)
 
         ! SIN SIN'

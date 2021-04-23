@@ -44,6 +44,9 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
         ! anti-symmetric part
         source(j,i,1) = gsource(k) - gsource(imirr(k))
 
+        ! gsource_sym.dat
+        ! print *, i, j, source(j,i,1)
+
         IF (lasym) then
            ! symmetric part
            source(j,i,2) = gsource(k) + gsource(imirr(k))

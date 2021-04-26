@@ -27,8 +27,10 @@ Here is how it works:
 The poloidal angle-like coordinate is a priori not uniquely defined and needs special care.
 The original VMEC from the STELLOPT repo had essentially two options for this.
 They were alternatively compiled in via the preprocessor flag `_HBANGLE`.
+
 1. The Hirshman-Breslau explicit spectrally optimized Fourier series (see https://doi.org/10.1063/1.872954 for details) and
 2. an unknown mixture of several constraints of the `m=1` Fourier coefficients (the logical `lconm1` is true for this constraint).
+
 By default, the `_HBANGLE` preprocessor flag is not active and thus, the "old" `m=1` constraint is active.
 
 This version of VMEC has most, if not all, of its preprocessor flags explicitly expanded.

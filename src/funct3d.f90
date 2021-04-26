@@ -78,8 +78,12 @@ SUBROUTINE funct3d (ier_flag)
   z00 = z1(1,0)
 
   ! COMPUTE CONSTRAINT RCON, ZCON
+
+! # else ifndef _HBANGLE
   rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt)
   zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
+! # end ifndef _HBANGLE
+
   ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)
   zu0(:nrzt)    = zu(:nrzt,0)   + zu(:nrzt,1)*sqrts(:nrzt)
 
@@ -90,6 +94,8 @@ SUBROUTINE funct3d (ier_flag)
   ! NOTE: IN ORDER TO MAKE INITIAL CONSTRAINT FORCES SAME FOR FREE/FIXED
   ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
   ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
+
+! # else ifndef _HBANGLE
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
      ! immediately before first vacuum call
      DO l = 1, ns
@@ -97,6 +103,7 @@ SUBROUTINE funct3d (ier_flag)
         zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
      END DO
   ENDIF
+! # end ifndef _HBANGLE
 
   ! COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
   CALL jacobian
@@ -271,6 +278,7 @@ SUBROUTINE funct3d (ier_flag)
      ENDIF
   ENDIF
 
+! # else ifndef _HBANGLE
   IF (iequi .NE. 1) THEN
      ! normal iterations, not final call from fileout (which sets iequi=1)
 
@@ -278,6 +286,7 @@ SUBROUTINE funct3d (ier_flag)
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
                      + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1))
+! # end ifndef _HBANGLE
 
      ! COMPUTE MHD FORCES ON INTEGER-MESH
      CALL forces

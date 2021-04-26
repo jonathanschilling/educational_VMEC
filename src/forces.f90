@@ -125,6 +125,7 @@ SUBROUTINE forces
      azmn_o(ns:nrzt:ns) = azmn_o(ns:nrzt:ns) - ru0(ns:nrzt:ns)*rbsq(1:nznt)
   ENDIF
 
+! # ifndef _HBANGLE
   ! COMPUTE CONSTRAINT FORCE KERNELS
   rcon(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt)) * gcon(:nrzt)
   zcon(:nrzt,0) = (zcon(:nrzt,0) - zcon0(:nrzt)) * gcon(:nrzt)
@@ -136,5 +137,6 @@ SUBROUTINE forces
   zcon(:nrzt,0) =  zu0(:nrzt) * gcon(:nrzt)
   rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)
   zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
+! # end ifndef _HBANGLE
 
 END SUBROUTINE forces

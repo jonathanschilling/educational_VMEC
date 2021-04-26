@@ -25,11 +25,13 @@ SUBROUTINE funct3d (ier_flag)
   character(len=255) :: nestor_cmd
 !  character(len=*), parameter :: nestor_executable = &
 !    "/home/IPP-HGW/jons/work/code/educational_VMEC/build/bin/xnestor"
+!  character(len=*), parameter :: nestor_executable = &
+!     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
   character(len=*), parameter :: nestor_executable = &
-     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
+     "python /home/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .false.
+  logical :: lexternal_nestor = .true.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.

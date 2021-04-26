@@ -298,6 +298,7 @@ subroutine write_nestor_outputs(vac_file, lasym, ivac, ier_flag)
   call cdf_define(nvac, vn_bsubvvac, bsubvvac)
   call cdf_define(nvac, vn_amatsav, amatsav)
   call cdf_define(nvac, vn_bvecsav, bvecsav)
+
   ! below quantities are only written for debugging
   call cdf_define(nvac, vn_r1b   , r1b   )
   call cdf_define(nvac, vn_rub   , rub   )

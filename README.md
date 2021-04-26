@@ -36,12 +36,12 @@ It became clear that it is nevertheless useful to have at least a vague idea of 
 Therefore, those parts of VMEC related to the `m=1`constraint are marked to start with 
 
 ```Fortran
-! # else ifndef _HBANGLE`
+! # else ifndef _HBANGLE
 ```
 
 and end with
 
 
 ```Fortran
-! # end ifndef _HBANGLE`
+! # end ifndef _HBANGLE
 ```

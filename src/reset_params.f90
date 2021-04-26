@@ -27,8 +27,10 @@ SUBROUTINE reset_params
 
   delt0r = delt
 
+! # else ifndef _HBANGLE
   !> m=1 constraint (=t: apply correct, polar constraint; =f, apply approx. constraint)
   lconm1 = .TRUE.
+! # end ifndef _HBANGLE
 
   z00 = zero
 

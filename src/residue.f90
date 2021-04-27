@@ -18,7 +18,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
   ! (ZCS = RSS, ZSS = RCS ARE THE CORRECT POLAR RELATIONS)
 
-! # ifndef _HBANGLE
+! #ifndef _HBANGLE
   ! SYMMETRIC PERTURBATIONS (BASED ON POLAR RELATIONS):
   !    RSS(n) = ZCS(n), n != 0
   ! ASYMMETRIC PERTURBATIONS:
@@ -32,7 +32,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   !    ASYM:     GC(zcc) = 0
   IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs))
   IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   ! COMPUTE INVARIANT RESIDUALS
   r1 = one/(2*r0scale)**2
@@ -55,7 +55,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
 
   ! PERFORM PRECONDITIONING AND COMPUTE RESIDUES
 
-! # ifndef _HBANGLE
+! #ifndef _HBANGLE
   ! m = 1 constraint scaling
   IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
@@ -63,7 +63,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
   jedge = 1
   CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
   CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1)

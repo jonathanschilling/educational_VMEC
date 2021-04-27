@@ -31,9 +31,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      zmncs => rzl_array(:,:,:,zcs+ntmax)      !!COS(mu) SIN(nv)
      lmncs => rzl_array(:,:,:,zcs+2*ntmax)    !!COS(mu) SIN(nv)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
      CALL convert_sym (rmnss, zmncs)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   END IF
 
@@ -106,17 +106,17 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         r11(j1l:nsl,mparity)  = r11(j1l:nsl,mparity)  + work1(1:nsz,1)*cosmu(i,m)
         ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  + work1(1:nsz,1)*sinmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,1)*cosmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         z11(j1l:nsl,mparity)  = z11(j1l:nsl,mparity)  + work1(1:nsz,6)*sinmu(i,m)
 
         zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  + work1(1:nsz,6)*cosmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,6)*sinmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         lu1(j1l:nsl,mparity)  = lu1(j1l:nsl,mparity)  + work1(1:nsz,10)*cosmum(i,m)
 
@@ -125,9 +125,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         r11(j1l:nsl,mparity)  = r11(j1l:nsl,mparity)  + work1(1:nsz,2)*sinmu(i,m)
         ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  + work1(1:nsz,2)*cosmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,2)*sinmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         rv1(j1l:nsl,mparity)  = rv1(j1l:nsl,mparity)  + work1(1:nsz,3)*cosmu(i,m) &
                                                       + work1(1:nsz,4)*sinmu(i,m)
@@ -135,9 +135,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
         zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  + work1(1:nsz,5)*sinmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,5)*cosmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         zv1(j1l:nsl,mparity)  = zv1(j1l:nsl,mparity)  + work1(1:nsz,7)*cosmu(i,m) &
                                                       + work1(1:nsz,8)*sinmu(i,m)
@@ -205,9 +205,9 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(at rsc) = .5(rsc + zcc),
   ! R-(at zcc) = .5(rsc - zcc), TO REQUIRED rsc, zcc FORMS
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
   CALL convert_asym (rmnsc, zmncc)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   ioff = LBOUND(rmnsc,2)
   joff = LBOUND(rmnsc,3)
@@ -259,10 +259,10 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,6)*sinmum(i,m)
         lu1(:,i,mparity) = lu1(:,i,mparity) + work1(:,10)*sinmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,1)*sinmux
         zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,6)*cosmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         IF (.not.lthreed) CYCLE
 
@@ -272,10 +272,10 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         zu1(:,i,mparity) = zu1(:,i,mparity) + work1(:,5)*cosmum(i,m)
         lu1(:,i,mparity) = lu1(:,i,mparity) + work1(:,9)*cosmum(i,m)
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
         rcn1(:,i,mparity) = rcn1(:,i,mparity) + work1(:,2)*cosmux
         zcn1(:,i,mparity) = zcn1(:,i,mparity) + work1(:,5)*sinmux
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         rv1(:,i,mparity) = rv1(:,i,mparity) + work1(:,3)*sinmu(i,m) + work1(:,4)*cosmu(i,m)
         zv1(:,i,mparity) = zv1(:,i,mparity) + work1(:,7)*sinmu(i,m) + work1(:,8)*cosmu(i,m)

@@ -21,9 +21,9 @@ SUBROUTINE bcovar (lu, lv)
   INTEGER :: l, js, ndim
   REAL(rprec) :: r2, volume, curpol_temp
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
   REAL(rprec) :: arnorm, aznorm, tcon_mul
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
@@ -283,7 +283,7 @@ SUBROUTINE bcovar (lu, lv)
      ! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
      ! OVERRIDE USER INPUT VALUE HERE
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
      r2 = ns
 
      ! ignore large tcon0 from old-style files
@@ -306,7 +306,7 @@ SUBROUTINE bcovar (lu, lv)
      END DO
      tcon(ns) = p5*tcon(ns-1)
      IF (lasym) tcon = p5*tcon
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   ENDIF
 

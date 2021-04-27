@@ -57,14 +57,14 @@ SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
         jll = l+1;  nsl = nsz+l
         l = l+nsz
         tempr(:) = armn(jll:nsl,mparity) &
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
             + xmpq(m,1)*arcon(jll:nsl,mparity)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         tempz(:) = azmn(jll:nsl,mparity) &
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
             + xmpq(m,1)*azcon(jll:nsl,mparity)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) + brmn(jll:nsl,mparity)*sinmumi(i,m)
         work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m) + bzmn(jll:nsl,mparity)*cosmumi(i,m)
@@ -163,14 +163,14 @@ SUBROUTINE tomnspa(frzl_array, armn, brmn, crmn, azmn, bzmn, &
 
      DO i = 1, ntheta2
         temp1(:) = armn(:,i,mparity) &
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
             + xmpq(m,1)*arcon(:,i,mparity)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         temp3(:) = azmn(:,i,mparity) &
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
             + xmpq(m,1)*azcon(:,i,mparity)
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
         work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m) + brmn(:,i,mparity)*cosmumi(i,m)
         work1(:,5) = work1(:,5) + temp3(:)*cosmui(i,m) + bzmn(:,i,mparity)*sinmumi(i,m)

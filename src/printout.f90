@@ -8,13 +8,13 @@ SUBROUTINE printout(i0, delt0, w0)
   INTEGER :: i0
   REAL(rprec) :: delt0, w0
 
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
   CHARACTER(LEN=*), PARAMETER :: iter_line  = "  ITER    FSQR      FSQZ      FSQL   "
   CHARACTER(LEN=*), PARAMETER :: fsq_line   = "   fsqr      fsqz      fsql      DELT    "
   CHARACTER(LEN=*), PARAMETER :: iter_lines = iter_line
   CHARACTER(LEN=*), PARAMETER :: fsq_lines  = fsq_line
   CHARACTER(LEN=*), PARAMETER :: raxis_line = "RAX(v=0) "
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 
   CHARACTER(LEN=*), PARAMETER :: delt_line  = "    DELT  "
   CHARACTER(LEN=*), PARAMETER :: zaxis_line = "  ZAX(v=0)      "

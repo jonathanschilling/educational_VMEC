@@ -26,6 +26,7 @@ Here is how it works:
 ## External NESTOR
 The free-boundary part of VMEC is the Neumann Solver for Toroidal Systems (NESTOR).
 Its source code is in a separate folder [`NESTOR`](src/NESTOR).
+The appropriate reference is https://doi.org/10.1016/0021-9991(86)90055-0 .
 
 This version of NESTOR can be run stand-alone. It reads its inputs from a netCDF file and writes its outputs into another netCDF file.
 The main executable of this stand-alone version of NESTOR is [`nestor_main.f90`](src/NESTOR/nestor_main.f90).

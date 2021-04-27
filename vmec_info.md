@@ -90,7 +90,7 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
      2. added "bias" to iotas in bcovar when determining preconditioner for very small iota
         values. Seems to need this for improving convergence of preconditioned current-hole cases.
         Eliminated in v8.20.
-     3. added "totzsps,a_hess" to recompute r,z,l rapidly for only those modes that are jogged during
+     3. added "totzsp(s,a)_hess" to recompute r,z,l rapidly for only those modes that are jogged during
         Hessian calculation. NOTE: need to do this for lasym=true case, as well, eventually
  * 8.20  (August, 2004)
      1. removed 2-pt tie at origin for m=1 modes, to preserve tri-diagonal structure of Hessian.
@@ -136,7 +136,7 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
         current hole cases (not needed with corrected preconditioner)
  * 8.30  (October, 2004)
      1. Implemented flags for "reverse-communication" mode of vmec
- * 8.40 
+ * 8.40
      1. Converted the m=1 constraints for 3D and asym back to old way; did not always
         converge well with the new constraints introduced in 8.20 (i-j)
  * 8.45  (December, 2005)
@@ -193,35 +193,6 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
 
 ## Input File Contents
 
-      LOCAL VARIABLES
-
-      rbcc,rbss,rbcs,rbsc
-               boundary Fourier coefficient arrays for R (of cosu*cosv, etc)
-      zbcc,zbss,zbcs,zbsc
-               boundary Fourier coefficient arrays for Z
-
-      XCC*COS(MU)COS(NV), XCS*COS(MU)SIN(NV), ETC
-
-      STACKING ORDER DEPENDS ON LASYM AND LTHREED. EACH COMPONENT XCC, XSS, XSC, XCS
-      HAS SIZE = mns. (PHIFAC, MSE TAKE UP 1 INDEX EACH AT END OF ARRAY)
-
-        LTHREED=F,      LTHREED=F,      LTHREED=T,      LTHREED=T
-        LASYM=F         LASYM=T         LASYM=F         LASYM=T
-
-         rmncc           rmncc           rmncc           rmncc
-         zmnsc           rmnsc           rmnss           rmnss
-         lmnsc           zmnsc           zmnsc           rmnsc
-                         zmncc           zmncs           rmncs
-                         lmnsc           lmnsc           zmnsc
-                         lmncc           lmncs           zmncs
-                                                         zmncc
-                                                         zmnss
-                                                         lmnsc
-                                                         lmncs
-                                                         lmncc
-                                                         lmnss
-
-
                STANDARD INPUT DATA AND RECOMMENDED VALUES
 
   Plasma parameters (MKS units)
@@ -277,10 +248,11 @@ niter_array:   array of number of iterations (used to terminate run) at
    nvacskip:   iterations skipped between full update of vacuum solution
 
   Preconditioner control parameters (added 8/30/04)
-precon_type:   specifies type of 2D preconditioner to use ('default', diagonal in m,n,
-               tri-diagonal in s; 'conjugate-gradient', block tri-di, evolve using
-               cg method; 'gmres', block tri-di, generalized minimal residual method;
-               'tfqmr', block tri-di, transpose-free quasi minimum residual
+precon_type:   specifies type of 2D preconditioner to use:
+               'default'            - diagonal in m,n, tri-diagonal in s
+               'conjugate-gradient' - block tri-di, evolve using cg method
+               'gmres'              - block tri-di, generalized minimal residual method
+               'tfqmr'              - block tri-di, transpose-free quasi minimum residual
 prec2d_threshold:
                value of preconditioned force residuals at which block (2d) tri-di
                solver is turned on, if requested via type_prec2d
@@ -300,106 +272,3 @@ prec2d_threshold:
                  'gauss_trunc'  - p(s)=am(0) (exp(-(s/am(1)) ** 2) -
                                                exp(-(1/am(1)) ** 2))
                   others - see function pmass
-
-  Equilibrium reconstruction parameters
-     phifac:   factor scaling toroidal flux to match apres or limiter
-  datastark:   pitch angle data from stark measurement
-   datathom:   pressure data from Thompson, CHEERS (Pa)
-    imatch_         = 1 (default),match value of PHIEDGE in input file
-    phiedge:   = 0, USE pressure profile width to determine PHIEDGE
-               = 2, USE LIMPOS data (in mgrid file) to find PHIEDGE
-               = 3, USE Ip to find PHIEDGE (fixed-boundary only)
-       imse:   number of Motional Stark effect data points
-               >0, USE mse data to find iota; <=0, fixed iota profile ai
-       itse:   number of pressure profile data points
-               = 0, no thompson scattering data to READ
-    isnodes:   number of iota spline points (computed internally unless specified explicitly)
-    ipnodes:   number of pressure spline points (computed internally unless specified explicitly)
-      lpofr:   LOGICAL variable. =.true. IF pressure data are
-               prescribed in REAL space. =.false. IF data in flux space.
-     pknots:   array of pressure knot values in SQRT(s) space
-     sknots:   array of iota knot values in SQRT(s) space
-      tensp:   spline tension for pressure profile
-
-      tensi:   spline tension for iota
-     tensi2:   vbl spline tension for iota
-     fpolyi:   vbl spline tension form factor (note: IF tensi!=tensi2
-              THEN tension(i-th point) = tensi+(tensi2-tensi)*(i/n-1))**fpolyi
-              - - - - - - - - - - - - - - - - - -
-   mseangle_   uniform EXPerimental offset of MSE data
-    offset:    (calibration offset) ... PLUS ...
-   mseangle_   multiplier on mseprof offset array
-    offsetM:   (calibration offset)
-    mseprof:   offset array from NAMELIST MSEPROFIL
-               so that the total offset on the i-th MSE data point is
-               taken to be
-               = mseangle_offset+mseangle_offsetM*mseprof(i)
-              - - - - - - - - - - - - - - - - - -
-pres_offset:   uniform arbitrary  radial offset of pressure data
-    presfac:   number by which Thomson scattering data is scaled
-               to get actual pressure
-    phidiam:   diamagnetic toroidal flux (Wb)
-     dsiobt:   measured flux loop signals corresponding to the
-               combination of signals in iconnect array
-    indxflx:   array giving INDEX of flux measurement in iconnect array
-   indxbfld:   array giving INDEX of bfield measurement used in matching
-       nobd:   number of connected flux loop measurements
-     nobser:   number of individual flux loop positions
-     nbsets:   number of B-coil sets defined in mgrid file
- nbcoils(n):   number of bfield coils in each set defined in mgrid file
-   nbcoilsn:   total number of bfield coils defined in mgrid file
-   bbc(m,n):   measured magnetic field at rbcoil(m,n),zbcoil(m,n) at
-               the orientation br*COS(abcoil) + bz*SIN(abcoil)
-rbcoil(m,n):   R position of the m-th coil in the n-th set from mgrid file
-zbcoil(m,n):   Z position of the m-th coil in the n-th set from mgrid file
-abcoil(m,n):   orientation (surface normal wrt R axis; in radians)
-               of the m-th coil in the n-th set from mgrid file.
-      nflxs:   number of flux loop measurements used in matching
-   nbfld(n):   number of selected EXTERNAL bfield measurements in set n from nml file
-     nbfldn:   total number of EXTERNAL bfield measurements used in matching
-              - - - - - - - - - - - - - - - - - -
-            NOTE: FOR STANDARD DEVIATIONS (sigma''s) < 0, INTERPRET
-            AS PERCENT OF RESPECTIVE MEASUREMENT
- sigma_thom:   standard deviation (Pa) for pressure profile data
-sigma_stark:   standard deviation (degrees) in MSE data
- sigma_flux:   standard deviaton (Wb) for EXTERNAL poloidal flux data
-    sigma_b:   standard deviation (T) for EXTERNAL magnetic field data
-sigma_current:  standard deviation (A) in toroidal current
-sigma_delphid:  standard deviation (Wb) for diamagnetic match
-
-
-      THE (ABSOLUTE) CHI-SQ ERROR IS DEFINED AS FOLLOWS:
-
-         2
-      CHI      =     SUM [ EQ(K,IOTA,PRESSURE)  -  DATA(K) ] ** 2
-                    (K) -----------------------------------
-                                  SIGMA(K)**2
-
-      HERE, SIGMA IS THE STANDARD DEVIATION OF THE MEASURED DATA, AND
-      EQ(IOTA,PRESSURE) IS THE EQUILIBRIUM EXPRESSION FOR THE DATA TO BE
-      MATCHED:
-
-      EQ(I)   =    SUM [ W(I,J)*X(J) ]
-                  (J)
-
-      WHERE W(I,J) ARE THE (LINEAR) MATRIX ELEMENTS AND X(J) REPRESENT
-      THE KNOT VALUES OF IOTA (AND/OR PRESSURE). THE RESULTING LEAST-SQUARES
-      MATRIX ELEMENTS AND DATA ARRAY CAN BE EXPRESSED AS FOLLOWS:
-
-      ALSQ(I,J) = SUM [ W(K,I) * W(K,J) / SIGMA(K) ** 2]
-                  (K)
-
-      BLSQ(I)   = SUM [ W(K,I) * DATA(K)/ SIGMA(K) ** 2]
-                  (K)
-
-      THEREFORE, INTERNALLY IT IS CONVENIENT TO WORK WITH THE 'SCALED'
-      W'(K,I) = W(K,I)/SIGMA(K) AND DATA'(K) = DATA(K)/SIGMA(K)
-
-      ****!   I - M - P - O - R - T - A - N - T     N - O - T - E   *****
-
-      THE INPUT DATA FILE WILL ACCEPT BOTH POSITIVE AND NEGATIVE
-      SIGMAS, WHICH IT INTERPRETS DIFFERENTLY. FOR SIGMA > 0, IT
-      TAKES SIGMA TO BE THE STANDARD DEVIATION FOR THAT MEASUREMENT
-      AS DESCRIBED ABOVE. FOR SIGMA < 0, SIGMA IS INTERPRETED AS
-      THE FRACTION OF THE MEASURED DATA NEEDED TO COMPUTE THE ABSOLUTE
-      SIGMA, I.E., (-SIGMA * DATA) = ACTUAL SIGMA USED IN CODE.

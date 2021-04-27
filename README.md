@@ -23,9 +23,26 @@ Here is how it works:
  * Change into the `test` dir: `cd test`
  * Run the [Solov'ev test case](https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--): `../build/bin/xvmec input.solovev`
 
+## External NESTOR
+The free-boundary part of VMEC is the Neumann Solver for Toroidal Systems (NESTOR).
+Its source code is in a separate folder [`NESTOR`](src/NESTOR).
+The appropriate reference is https://doi.org/10.1016/0021-9991(86)90055-0 .
+
+This version of NESTOR can be run stand-alone. It reads its inputs from a netCDF file and writes its outputs into another netCDF file.
+The main executable of this stand-alone version of NESTOR is [`nestor_main.f90`](src/NESTOR/nestor_main.f90).
+The input and output files are read and written in [`nestor_io.f90`](src/NESTOR/data/nestor_io.f90).
+
+This version of VMEC can be configured to dump the corresponding input and output files, but still run the compiled-in version of NESTOR.
+This is enabled via the logical flag `ldump_vacuum_ref` in [`funct3d.f90`](src/funct3d.f90).
+
+Also, an external NESTOR implementation can be called instead of using the compiled-in version of NESTOR.
+This is enabled via the logical flag `lexternal_nestor` in [`funct3d.f90`](src/funct3d.f90).
+The corresponding system call to execute the external NESTOR implementation has to be specified in
+`nestor_executable` in [`funct3d.f90`](src/funct3d.f90).
+
 ## Angle Constraint
 The poloidal angle-like coordinate is a priori not uniquely defined and needs special care.
-The original VMEC from the STELLOPT repo had essentially two options for this.
+The version of VMEC from the STELLOPT repo had essentially two options for this.
 They were alternatively compiled in via the preprocessor flag `_HBANGLE`.
 
 1. The Hirshman-Breslau explicit spectrally optimized Fourier series (see https://doi.org/10.1063/1.872954 for details) and
@@ -38,12 +55,12 @@ It became clear that it is nevertheless useful to have at least a vague idea of 
 Therefore, those parts of VMEC related to the `m=1`constraint are marked to start with 
 
 ```Fortran
-! # else ifndef _HBANGLE
+! #ifndef _HBANGLE
 ```
 
 and end with
 
 
 ```Fortran
-! # end ifndef _HBANGLE
+! #end /* ndef _HBANGLE */
 ```

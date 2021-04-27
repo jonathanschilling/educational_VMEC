@@ -129,10 +129,12 @@ SUBROUTINE forces
   ! COMPUTE CONSTRAINT FORCE KERNELS
   rcon(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt)) * gcon(:nrzt)
   zcon(:nrzt,0) = (zcon(:nrzt,0) - zcon0(:nrzt)) * gcon(:nrzt)
+
   brmn_e(:nrzt) = brmn_e(:nrzt) + rcon(:nrzt,0)
   bzmn_e(:nrzt) = bzmn_e(:nrzt) + zcon(:nrzt,0)
-  brmn_o(:nrzt) = brmn_o(:nrzt)+ rcon(:nrzt,0)*sqrts(:nrzt)
-  bzmn_o(:nrzt) = bzmn_o(:nrzt)+ zcon(:nrzt,0)*sqrts(:nrzt)
+  brmn_o(:nrzt) = brmn_o(:nrzt) + rcon(:nrzt,0) * sqrts(:nrzt)
+  bzmn_o(:nrzt) = bzmn_o(:nrzt) + zcon(:nrzt,0) * sqrts(:nrzt)
+
   rcon(:nrzt,0) =  ru0(:nrzt) * gcon(:nrzt)
   zcon(:nrzt,0) =  zu0(:nrzt) * gcon(:nrzt)
   rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)

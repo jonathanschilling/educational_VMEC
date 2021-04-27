@@ -7,7 +7,7 @@ SUBROUTINE allocate_funct3d
 
   INTEGER :: istat1, ndim, ndim2
 
-  ndim  = 1+nrzt
+  ndim  = 1+nrzt ! TODO: why +1? some hidden scalar variable stored in the last entry?
   ndim2 = 2*ndim
 
   CALL free_mem_funct3d

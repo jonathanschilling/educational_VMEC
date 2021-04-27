@@ -27,8 +27,8 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
         top = icurv(js) ! offset: this makes the zero-current algorithm a constrained-current algorithm
         bot = 0
         DO l = js, nrzt, ns
-           ! bsupu is somehow related to d(lambda)/d(zeta)
-           ! bsupv is somehow related to 1+d(lambda)/d(theta)
+           ! bsupu contains -d(lambda)/d(zeta)*lamscale on entry (?)
+           ! bsupv contains  d(lambda)/d(theta)*lamscale on entry (?)
            top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))
            bot = bot + wint(l)* guu(l)*overg(l)
         END DO
@@ -61,7 +61,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
      iotaf(js) = p5*(iotas(js) + iotas(js+1))
   END DO
 
-  ! what is this?
-  bsupu(:nrzt) = bsupu(:nrzt)+chip(:nrzt)*overg(:nrzt)
+  ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.
+  bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)
 
 END SUBROUTINE add_fluxes

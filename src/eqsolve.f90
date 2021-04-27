@@ -16,7 +16,7 @@ SUBROUTINE eqsolve(ier_flag)
 
   REAL(rprec) :: w0
   LOGICAL :: liter_flag
-  LOGICAL :: lreset_internal
+  LOGICAL :: lreset_internal ! TODO: initial value of lreset_internal is undefined!
 
   print *, " eqsolve"
 
@@ -33,6 +33,7 @@ SUBROUTINE eqsolve(ier_flag)
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
      irst = 1
      IF (liter_flag) then
+        ! Note that at this point, liter_flag could also simply contain (iter2 .eq. 1) (see above).
         ! (OFF IN v8.50)
         CALL restart_iter(delt0r)
      end if

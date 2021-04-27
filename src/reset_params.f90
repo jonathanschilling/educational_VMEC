@@ -33,8 +33,9 @@ SUBROUTINE reset_params
 ! #end /* ndef _HBANGLE */
 
   z00 = zero
+  ! r00 gets assiged in profil1d and in funct3d
 
-  !> ! Assume scaled mode; read in from mgrid in free-bdy mode
+  !> Assume scaled mode; read in from mgrid in free-bdy mode
   mgrid_mode = 'S'
   nextcur = 0
 

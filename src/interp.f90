@@ -29,6 +29,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
      WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
        xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)
 
+     ! radial interpolation from old, coarse state vector to new, finer state vector
      DO js = 1, nsnew
         sj = REAL(js - 1, rprec)/(nsnew - 1)
         js1 = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)

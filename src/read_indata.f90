@@ -38,6 +38,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
 
   IF (bloat .eq. zero) bloat = one
   IF ((bloat.ne.one) .and. (ncurr.ne.1)) THEN
+     ! bloat != 1 is only allowed when ncurr == 1
      ier_flag = 3 ! 'VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.'
      RETURN
   ENDIF
@@ -70,7 +71,8 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   lthreed = (ntor .gt. 0)
 
   IF (ntor.eq.0 .and. nzeta.eq.0) then
-     ! Tokamak (ntor=0) needs nzeta=1
+     ! Tokamak (ntor=0) needs (at least) nzeta=1
+     ! I think this implies that in principle one could do an axisymmetric run with nzeta>1...
      nzeta = 1
   end if
 
@@ -85,9 +87,11 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
   mnmax = ntor1 + mpol1*(1 + 2*ntor)
 
   ! SIZE of rmncc, rmnss, ...
+  ! --> m = 0, 1, ..., (mpol-1); n = 0, 1, ..., ntor
   mnsize = mpol*ntor1
 
   ! INDEXING FOR PACKED-ARRAY STRUCTURE OF XC, GC
+  ! The result of this can be seen in the comment section at the top of data/xstuff.f90 .
   rcc = 1;  zsc = 1
   rss = 0;  rsc = 0;  rcs = 0
   zcc = 0;  zss = 0;  zcs = 0
@@ -97,16 +101,16 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      IF (lthreed) THEN
         ntmax = 2
         rss = 2;  zcs = 2
-     ELSE
+     ELSE ! lthreed = F
         ntmax = 1
      END IF
-  ELSE
+  ELSE ! lasym = T
      ntheta3 = ntheta1
      IF (lthreed) THEN
          ntmax = 4
          rss = 2;  rsc = 3;  rcs = 4
          zcs = 2;  zcc = 3;  zss = 4
-     ELSE
+     ELSE ! lthreed = F
          ntmax = 2
          rsc = 2;  zcc = 2
      END IF

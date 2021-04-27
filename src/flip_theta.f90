@@ -5,7 +5,7 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
   implicit none
 
   REAL(rprec), DIMENSION(0:ntor,0:mpol1,ntmax), INTENT(inout) :: rmn, zmn
-  REAL(rprec), DIMENSION(0:ntor,0:mpol1,ntmax), INTENT(inout), OPTIONAL :: lmn
+  REAL(rprec), DIMENSION(0:ntor,0:mpol1,ntmax), INTENT(inout), OPTIONAL :: lmn !< never used: can also flip lambda...
 
   INTEGER :: n, m
   REAL(rprec) :: mul1
@@ -15,6 +15,7 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
   mul1=-1
   l_lmn = PRESENT(lmn)
   DO m=1,mpol1
+
      DO n=0,ntor
 
         rmn(n,m,rcc) = mul1*rmn(n,m,rcc)

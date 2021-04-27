@@ -43,6 +43,7 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
   END DO
 
   IF (lthreed .and. js.eq.1) THEN
+     ! extrapolate to axis if 3D
      mn = 0
      DO n = 0, ntor
         t1 = mscale(m)*nscale(n)
@@ -53,6 +54,7 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
 
   lmns(1) = 0 ! may have been used for storing iota variation...
 
+  ! now come the m>0, n=-ntor, ..., ntor entries
   DO m = 1, mpol1
      DO n = -ntor, ntor
         n1 = ABS(n)
@@ -84,6 +86,8 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
      lmnc = 0
      RETURN
   END IF
+
+  ! add non-stellarator-symmetric terms now
 
   mn = 0; m = 0
   rmns(1:ntor+1) = 0

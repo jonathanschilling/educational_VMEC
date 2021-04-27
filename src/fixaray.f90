@@ -39,7 +39,8 @@ SUBROUTINE fixaray
   dnorm = one/(nzeta*(ntheta2-1))
   IF (lasym) dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
 
-  mscale(0) = 1;  nscale(0) = 1
+  mscale(0) = 1
+  nscale(0) = 1
 
   mscale(1:mnyq) = mscale(0)/osqrt2
   nscale(1:nnyq) = nscale(0)/osqrt2
@@ -87,7 +88,7 @@ SUBROUTINE fixaray
   mn = 0
   mn1 = 0
   DO m = 0, mpol1
-     xmpq(m,1) = m*(m - 1)
+     xmpq(m,1) = m*(m - 1)  ! used for spectral constraint force --> m^2-m
      xmpq(m,2) = m**pexp
      xmpq(m,3) = m**(pexp+1)
 

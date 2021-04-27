@@ -12,6 +12,9 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
   INTEGER :: m, i, ir, jk, jka, n, k, js, l
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work, gcona
 
+  ! Fourier transform alias force from ztemp to gcons
+  ! and also return intermediate output in g(c,s)(c,s)
+
   ALLOCATE (work(ns*nzeta,4), gcona(ns*nzeta,ntheta3))
 
   gcons = 0

@@ -14,6 +14,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   REAL(rprec) :: sm0, t1, facj, si, rax1, zax1
   INTEGER :: jcount, jk, k
 
+  ! expant to full surface grid
   DO js = 1, ns
      phip(js:nrzt:ns) = phips(js)
      chip(js:nrzt:ns) = chips(js)
@@ -36,7 +37,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   ! COMPUTE ARRAY FOR REFLECTING v = -v (ONLY needed for lasym)
   jcount = 0
   DO k = 1, nzeta
-     jk = nzeta + 2 - k
+     jk = nzeta + 2 - k ! (nzeta+1) - (k-1)
      IF (k .eq. 1) jk = 1
      DO js = 1,ns
        jcount = jcount+1
@@ -49,7 +50,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   lk = 0
   IF (.NOT.ALLOCATED(uminus)) ALLOCATE (uminus(nznt))
   DO lt = 1, ntheta2
-     k = ntheta1-lt+2
+     k = ntheta1-lt+2 ! (ntheta1+1) - (lt-1)
      IF (lt .eq. 1) then
         ! u=-0 => u=0
         k = 1
@@ -79,12 +80,18 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
                  scalxc(l) = one
               ELSE
                  ! m is odd
+
+                 ! make sure to use at least sqrts(2)==1/(ns-1) as normalization/scaling factor, since sqrts(1)==0 (see profil1d)
                  scalxc(l) = one/MAX(sqrts(js),sqrts(2))
               ENDIF
 
               ! Do not overwrite r,z if read in from wout file AND in free bdy mode
               ! For fixed boundary, edge values MAY have been perturbed, so must execute this loop
               IF (.not.lreset .and. lfreeb) CYCLE
+
+
+              ! below code segment does the extrapolation
+              ! of the boundary Fourier coefficients into the plasma volume
 
               IF (m .eq. 0) THEN
                  IF (.not.lreset) CYCLE        !Freeze axis if read in from wout file
@@ -117,15 +124,16 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
                  rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + (rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))*facj
                  zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + (zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))*facj
               ENDIF
+
            END DO
         END DO
      END DO
   END DO
 
-  ! Z-components
+  ! copy scalxc content from R to Z-components
   scalxc(1+irzloff:2*irzloff)   = scalxc(:irzloff)
 
-  ! Lamda-components
+  ! copy scalxc content from R to Lamda-components
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
 
 END SUBROUTINE profil3d

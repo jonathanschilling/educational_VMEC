@@ -19,8 +19,8 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,     &
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ptau, ptau2
   REAL(rprec) :: t1, t2, t3, pfactor
 
-  ! COMPUTE PRECONDITIONING MATRIX ELEMENTS FOR R,Z
-  ! FORCE. NOTE THAT THE NORMALIZATION IS:
+  ! COMPUTE PRECONDITIONING MATRIX ELEMENTS FOR R,Z FORCE.
+  ! NOTE THAT THE NORMALIZATION IS:
   !
   ! AX(off-diag) ~ <(cosmui cosmu cosnv cosnv) 2(R**2*Xu**2*bsq/gsqrt)>
   ! Factor of 2 arising from 1/gsqrt**2 in bsq
@@ -30,8 +30,11 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,     &
   !               ~ 2*r0scale**2 <...>
   ALLOCATE (ax(ns+1,4), bx(ns+1,4), ptau(nznt), ptau2(nznt))
 
-  ax = 0;  bx = 0;  cx = 0
+  ax = 0
+  bx = 0
+  cx = 0
   temp = 0
+
   ! pfactor = -2*r0scale**2       !v8.50
   pfactor = -4*r0scale**2        !restored in v8.51
 

@@ -14,8 +14,8 @@ SUBROUTINE bcovar (lu, lv)
 
   REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lu, lv
 
-  ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1)
-  ! (STORED IN VMEC_PARAMS)
+  ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1) (STORED IN VMEC_PARAMS)
+
   REAL(rprec), PARAMETER :: c1p5 = (one + p5)
 
   INTEGER :: l, js, ndim
@@ -28,7 +28,7 @@ SUBROUTINE bcovar (lu, lv)
   REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
 
-  ndim = 1+nrzt
+  ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
   ! POINTER ALIAS ASSIGNMENTS
   tau => extra1(:,1)
@@ -42,7 +42,7 @@ SUBROUTINE bcovar (lu, lv)
   bsubvh => bsubv_o
   r12sq  => bsq
 
-  guu(ndim) = 0
+  guu(ndim) = 0 ! TODO: can probably go away if last element is not used anyway...
   guv = 0
   gvv = 0
 
@@ -57,7 +57,7 @@ SUBROUTINE bcovar (lu, lv)
 
   luu(1:nrzt)   = (ru(1:nrzt,0)*ru(1:nrzt,1)                        &
                 +  zu(1:nrzt,0)*zu(1:nrzt,1))*2
-  phipog(1:nrzt)= 2*r1(1:nrzt,0)*r1(1:nrzt,1)
+  phipog(1:nrzt)= 2*r1(1:nrzt,0)*r1(1:nrzt,1) ! temporary re-use of phipog for 2*R^2 ???
 
   IF (lthreed) THEN
      guv(1:nrzt)   = ru(1:nrzt,0)*rv(1:nrzt,0)                      &
@@ -100,11 +100,15 @@ SUBROUTINE bcovar (lu, lv)
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
+
+  ! this is where phipog == 1/sqrt(g) is actually assigned
+  ! note that the phip factor in phipog is gone... (see comment below)
   WHERE (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)
   phipog(1:ndim:ns) = 0 ! magnetic axis (?)
 
   ! compute plasma volume profile (vp) and total volume (voli)
-  vp(1) = 0;  vp(ns+1) = 0
+  vp(1) = 0
+  vp(ns+1) = 0
   DO js = 2, ns
      vp(js) = signgs*SUM(gsqrt(js:nrzt:ns)*wint(js:nrzt:ns))
   END DO
@@ -116,7 +120,7 @@ SUBROUTINE bcovar (lu, lv)
   ! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!
   !
   ! NOTE: LU = LAMU == d(LAM)/du, LV = -LAMV == -d(LAM)/dv COMING INTO THIS ROUTINE.
-  ! WILL ADD CHIP IN CALL TO ADD_FLUXES.
+  ! CHIP will be added IN CALL TO ADD_FLUXES.
   ! THE NET BSUPU, BSUPV ARE (PHIPOG=1/GSQRT AS NOTED ABOVE):
   !
   !      BSUPU = PHIPOG*(chip - LAMV*LAMSCALE),
@@ -133,9 +137,11 @@ SUBROUTINE bcovar (lu, lv)
   bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
                                      + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
 
+  ! TODO: what is this?
   bsupu(1)=0
   bsupv(1)=0
-  ! v8.49: add ndim points
+
+  ! v8.49: add ndim points --> TODO: likely not needed anymore, reconstruction-related?
   bsupu(ndim)=0
   bsupv(ndim)=0
 
@@ -151,11 +157,11 @@ SUBROUTINE bcovar (lu, lv)
   ! COMPUTE (IF NEEDED) AND ADD CHIP TO BSUPU
   CALL add_fluxes(phipog, bsupu, bsupv)
 
-  ! COMPUTE LAMBDA FORCE KERNELS (COVARIANT B COMPONENT bsubu,v) ON RADIAL HALF-MESH
+  ! COMPUTE COVARIANT B COMPONENT bsubu,v (LAMBDA FORCE KERNELS) ON RADIAL HALF-MESH
   bsubuh(1:nrzt) = guu(1:nrzt)*bsupu(1:nrzt) + guv(1:nrzt)*bsupv(1:nrzt)
   bsubvh(1:nrzt) = guv(1:nrzt)*bsupu(1:nrzt) + gvv(1:nrzt)*bsupv(1:nrzt)
 
-  ! v8.49
+  ! v8.49 --> TODO: likely not needed anymore, reconstruction-related?
   bsubuh(ndim) = 0
   bsubvh(ndim) = 0
 
@@ -218,7 +224,7 @@ SUBROUTINE bcovar (lu, lv)
   ! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
   ! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS
   DO l=1,ns
-     lvv(l:nrzt:ns) = bdamp(l)
+     lvv(l:nrzt:ns) = bdamp(l) ! what is this exactly ??? related to time-step algorithm...
   END DO
 
   ! COMMENTED OUT BY SAL --> why does this check hurt ?
@@ -242,7 +248,7 @@ SUBROUTINE bcovar (lu, lv)
   IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
      ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
 
-     phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt)
+     phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
 
      CALL lamcal(phipog, guu, guv, gvv)
 
@@ -262,7 +268,8 @@ SUBROUTINE bcovar (lu, lv)
      rru_fac = rru_fac/2
 
      volume = hs*SUM(vp(2:ns))
-     r2 = MAX(wb,wp)/volume
+
+     r2 = MAX(wb,wp)/volume ! energy density ???
 
      !> R12 from RP in force
      guu(:nrzt) = guu(:nrzt)*r12(:nrzt)**2
@@ -284,12 +291,12 @@ SUBROUTINE bcovar (lu, lv)
      ! OVERRIDE USER INPUT VALUE HERE
 
 ! #ifndef _HBANGLE
-     r2 = ns
+     r2 = ns ! temporary re-use of variable for floating-point version of ns
 
      ! ignore large tcon0 from old-style files
      tcon0 = MIN(ABS(tcon0), one)
 
-     ! some parabola, but why these specific values of the parameters ?
+     ! some parabola in ns, but why these specific values of the parameters ?
      tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
 
      tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
@@ -304,7 +311,9 @@ SUBROUTINE bcovar (lu, lv)
 
        tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
      END DO
+
      tcon(ns) = p5*tcon(ns-1)
+
      IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 

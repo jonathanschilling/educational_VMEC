@@ -70,17 +70,20 @@ SUBROUTINE funct3d (ier_flag)
   ENDIF
 
   ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
-  ! u = pi, v = 0, js = ns
+
+  router = r1(  ns,0) + r1(  ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
+
+  ! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
-  router = r1(  ns,0) + r1(  ns,1)
   rinner = r1(l0pi,0) + r1(l0pi,1)
+
   r00 = r1(1,0)
   z00 = z1(1,0)
 
   ! COMPUTE CONSTRAINT RCON, ZCON
 
 ! #ifndef _HBANGLE
-  rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt)
+  rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt) ! odd-m entries need to be scaled appropriately
   zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
@@ -97,10 +100,11 @@ SUBROUTINE funct3d (ier_flag)
 
 ! #ifndef _HBANGLE
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
-     ! immediately before first vacuum call
+     ! immediately before first vacuum call (?)
      DO l = 1, ns
-        rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
-        zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0)*sqrts(l:nrzt:ns)**2
+        ! value of rcon(ns) is scaled into the volume proportional to s
+        rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
+        zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
      END DO
   ENDIF
 ! #end /* ndef _HBANGLE */
@@ -278,10 +282,10 @@ SUBROUTINE funct3d (ier_flag)
      ENDIF
   ENDIF
 
-! #ifndef _HBANGLE
   IF (iequi .NE. 1) THEN
      ! normal iterations, not final call from fileout (which sets iequi=1)
 
+! #ifndef _HBANGLE
      ! COMPUTE CONSTRAINT FORCE
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
                      + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
@@ -322,7 +326,7 @@ SUBROUTINE funct3d (ier_flag)
          irst = 4
      end if
 
-  ELSE
+!  ELSE
      ! iequi == 1 --> skip above remainder of funct3d
   END IF
 

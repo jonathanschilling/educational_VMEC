@@ -6,14 +6,25 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: &
-    r11, ru1, rv1, z11, zu1,  zv1, lu1, lv1, rcn1, zcn1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: r11  !< R
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: ru1  !< dR/dTheta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rv1  !< dR/dZeta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: z11  !< Z
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zu1  !< dZ/dTheta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zv1  !< dZ/dZeta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lu1  !< dLambda/dTheta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lv1  !< -dLambda/dZeta
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rcn1 !< TODO: what is this?
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zcn1 !< TODO: what is this?
 
   INTEGER :: n, m, mparity, k, i, j1, l, j1l, nsl
   INTEGER :: ioff, joff, mj, ni, nsz
   REAL(rprec), DIMENSION(:,:,:), POINTER :: rmncc, rmnss, zmncs, zmnsc, lmncs, lmnsc
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
   REAL(rprec) :: cosmux, sinmux
+
+  ! This is the inverse Fourier transform from the (odd-m-scaled-by-1/sqrt(s))-xc
+  ! given in rzl_array to real space. Tangential derivatives are also computed.
 
   ! WORK1 Array of inverse transforms in toroidal angle (zeta), for all radial positions
   ! NOTE: ORDERING OF LAST INDEX IS DIFFERENT HERE THAN IN PREVIOUS VMEC2000 VERSIONS
@@ -45,7 +56,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION
   !       FOR R,Z. HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE
   !       TRI-DIAG 2D PRECONDITIONER
-  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:)
+  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! constant extrapolation to axis (?)
   ioff = LBOUND(rmncc,2)
   joff = LBOUND(rmncc,3)
 
@@ -99,15 +110,17 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      ! INVERSE TRANSFORM IN M-THETA, FOR ALL RADIAL, ZETA VALUES
      l = 0
      DO i = 1, ntheta2
-        j1l = l+1;  nsl = nsz+l
+        j1l = l+1;  nsl = nsz+l ! start and end indices of poloidal slice of current flux surface
         l = l + nsz
+
         cosmux = xmpq(m,1)*cosmu(i,m)
         sinmux = xmpq(m,1)*sinmu(i,m)
+
         r11(j1l:nsl,mparity)  = r11(j1l:nsl,mparity)  + work1(1:nsz,1)*cosmu(i,m)
         ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  + work1(1:nsz,1)*sinmum(i,m)
 
 ! #ifndef _HBANGLE
-        rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,1)*cosmux
+        rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,1)*cosmux ! rmncc*cosnv*cosmux
 ! #end /* ndef _HBANGLE */
 
         z11(j1l:nsl,mparity)  = z11(j1l:nsl,mparity)  + work1(1:nsz,6)*sinmu(i,m)
@@ -115,7 +128,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  + work1(1:nsz,6)*cosmum(i,m)
 
 ! #ifndef _HBANGLE
-        zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,6)*sinmux
+        zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,6)*sinmux ! zmnsc*cosnv*sinmux
 ! #end /* ndef _HBANGLE */
 
         lu1(j1l:nsl,mparity)  = lu1(j1l:nsl,mparity)  + work1(1:nsz,10)*cosmum(i,m)
@@ -126,7 +139,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         ru1(j1l:nsl,mparity)  = ru1(j1l:nsl,mparity)  + work1(1:nsz,2)*cosmum(i,m)
 
 ! #ifndef _HBANGLE
-        rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,2)*sinmux
+        rcn1(j1l:nsl,mparity) = rcn1(j1l:nsl,mparity) + work1(1:nsz,2)*sinmux ! rmnss*sinnv*sinmux
 ! #end /* ndef _HBANGLE */
 
         rv1(j1l:nsl,mparity)  = rv1(j1l:nsl,mparity)  + work1(1:nsz,3)*cosmu(i,m) &
@@ -136,7 +149,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  + work1(1:nsz,5)*sinmum(i,m)
 
 ! #ifndef _HBANGLE
-        zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,5)*cosmux
+        zcn1(j1l:nsl,mparity) = zcn1(j1l:nsl,mparity) + work1(1:nsz,5)*cosmux ! zmncs*sinnv*cosmux
 ! #end /* ndef _HBANGLE */
 
         zv1(j1l:nsl,mparity)  = zv1(j1l:nsl,mparity)  + work1(1:nsz,7)*cosmu(i,m) &
@@ -167,6 +180,8 @@ SUBROUTINE convert_sym(rmnss, zmncs)
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSS, ZMNCS FOURIER FORM
   ! rmnss = .5(RMNSS+ZMNCS), zmnss = .5(RMNSS-ZMNCS) -> 0
   IF (.NOT.lconm1) RETURN
+
+  ! This essentially reverts the operation performed at the end of readin().
 
   temp(:,:) = rmnss(:,:,m1)                  !This is internal
   rmnss(:,:,m1) = temp(:,:) + zmncs(:,:,m1)  !Now these are physical
@@ -216,8 +231,10 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   IF (i .ne. 0) STOP 'Allocation error in VMEC totzspa'
 
   ! INITIALIZATION BLOCK
-  r11 = 0;  ru1 = 0;  rv1 = 0;  z11 = 0;  zu1 = 0
-  zv1 = 0;  lu1 = 0;  lv1 = 0;  rcn1 = 0; zcn1 = 0
+  r11 = 0;  ru1 = 0;  rv1 = 0
+  z11 = 0;  zu1 = 0;  zv1 = 0
+  lu1 = 0;  lv1 = 0
+  rcn1 = 0; zcn1 = 0
 
   IF (jlam(m0) .gt. 1) lmncc(1,:,m0+joff) = lmncc(2,:,m0+joff)
 
@@ -251,8 +268,10 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
      ! INVERSE TRANSFORM IN M-THETA
      DO i = 1, ntheta2
+
         cosmux = xmpq(m,1)*cosmu(i,m)
         sinmux = xmpq(m,1)*sinmu(i,m)
+
         r11(:,i,mparity) = r11(:,i,mparity) + work1(:,1)*sinmu(i,m)
         ru1(:,i,mparity) = ru1(:,i,mparity) + work1(:,1)*cosmum(i,m)
         z11(:,i,mparity) = z11(:,i,mparity) + work1(:,6)*cosmu(i,m)

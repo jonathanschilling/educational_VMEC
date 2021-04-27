@@ -15,9 +15,8 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
   INTEGER :: ndim, nsp1, istat1
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: xc_old, scalxc_old
 
-  ! FIRST STORE COARSE-MESH XC FOR INTERPOLATION
-  ndim  = 1 + nrzt
-  nsp1  = 1 + ns
+  ndim  = 1 + nrzt ! TODO: why +1? some magical hidden storage at the end of the array ?
+  nsp1  = 1 + ns   ! TODO: why +1? some magical hidden storage at the end of the array ?
 
   IF (neqs_old .gt. 0 .and. ALLOCATED(scalxc) .and. linterp) THEN
      ! Save old xc, scalxc for possible interpolation or IF iterations restarted on same mesh...
@@ -59,7 +58,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
   frcc_fac = 0
   fzsc_fac = 0
 
-  iotaf(nsp1) = 0
+  iotaf(nsp1) = 0 ! TODO: why explicitly zero out only the last entry? hidden storage?
 
   ALLOCATE (gc(neqs), xcdot(neqs), xsave(neqs), xstore(neqs), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #9 in allocate_ns'
@@ -71,6 +70,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
      xc = zero
   END IF
 
+  ! FIRST STORE COARSE-MESH XC FOR INTERPOLATION
   IF (ALLOCATED(xc_old)) THEN
      xstore(1:neqs_old) =     xc_old(1:neqs_old)
      scalxc(1:neqs_old) = scalxc_old(1:neqs_old)

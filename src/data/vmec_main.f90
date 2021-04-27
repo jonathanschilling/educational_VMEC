@@ -74,8 +74,8 @@ MODULE vmec_main
   integer :: irst    !< "counter" monitoring sign of jacobian;
                      !< resets R, Z, and Lambda when jacobian changes sign
                      !< and decreases time step
-  integer :: iter1   !< stores position in main iteration loop
-  integer :: iter2   !< stores position in main iteration loop
+  integer :: iter1   !< number of iterations at which the currently active evolution was branched off from
+  integer :: iter2   !< total number of iterations
   integer :: ivac    !< counts number of free-boundary iterations
 
 

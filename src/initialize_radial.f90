@@ -31,11 +31,11 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   ns1 = ns-1
   delt0 = delt
   hs = one/ns1
-  ohs = one/hs
-  mns = ns*mnsize
-  irzloff = ntmax*mns
+  ohs = one/hs ! == ns1 ?
+  mns = ns*mnsize ! number of flux surfaces * number of Fourier coeffs per surface --> total size of Fourier basis (n>=0)
+  irzloff = ntmax*mns ! total number of Fourier coeffs for each of R, Z and Lambda --> including (lasym, lthreed)-dependent ntmax
   nrzt = nznt*ns
-  neqs = 3*irzloff ! degrees of freedom == number of Fourier coefficients
+  neqs = 3*irzloff ! degrees of freedom == total number of (R,Z,Lambda) Fourier coefficients
 
   WRITE (nthreed, 10) ns, mnmax, ftolv, niterv
   PRINT 10, ns, mnmax, ftolv, niterv

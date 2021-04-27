@@ -1,13 +1,13 @@
 !> \file
 FUNCTION torflux_deriv (x)
   USE stel_kinds
-  USE vmec_main, ONLY: zero
   USE vmec_input, ONLY: tf => aphi
 
   REAL(rprec), INTENT(IN) :: x !< radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
   REAL(rprec) :: torflux_deriv
-  REAL(rprec), EXTERNAL :: polflux_deriv, piota
   INTEGER     :: i
+
+  ! This evaluates the aphi polynomial (possibly modified by the user in the input file).
 
   ! TOKAMAK/STELLARATOR (default is tf(1) = 1)
   torflux_deriv = 0
@@ -32,6 +32,10 @@ FUNCTION polflux_deriv (x)
   tf = MIN(tf, 1.0_dp)
   polflux_deriv = piota(tf)*torflux_deriv(x)
 
+  ! TODO: how does above code work if the iota profile is not specified,
+  ! i.e., in constrained-toroidal-current mode?
+  ! or is it simply not used...?
+
 END FUNCTION polflux_deriv
 
 
@@ -43,6 +47,8 @@ FUNCTION torflux (x)
   REAL(rprec), EXTERNAL :: torflux_deriv
   INTEGER     :: i
 
+  ! some ad-hoc trapezoidal integration radially outward to given x
+  ! with a fixed number (100) of quadrature nodes?
   h = 1.E-2_dp*x
   torflux = 0
   DO i=1,101
@@ -63,6 +69,8 @@ FUNCTION polflux (x)
   REAL(rprec), EXTERNAL :: polflux_deriv
   INTEGER     :: i
 
+  ! some ad-hoc trapezoidal integration radially outward to given x
+  ! with a fixed number (100) of quadrature nodes?
   h = 1.E-2_dp*x
   polflux = 0
   DO i=1,101

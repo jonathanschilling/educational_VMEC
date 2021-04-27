@@ -12,9 +12,11 @@ SUBROUTINE restart_iter(time_step)
   SELECT CASE (irst)
   CASE (2:3)
 
+     ! restore previous good state
      xcdot(:neqs) = zero
      xc(:neqs) = xstore(:neqs)
 
+     ! ---- reduce time step ----
      ! this is only executed when irst ==2 or ==3
      ! first case: irst == 2:
      !  => irst-2 == 0
@@ -36,6 +38,7 @@ SUBROUTINE restart_iter(time_step)
 
      RETURN
   CASE DEFAULT
+     ! save current state vector
      xstore(:neqs) = xc(:neqs)
      RETURN
   END SELECT

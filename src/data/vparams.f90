@@ -13,7 +13,12 @@ MODULE vparams
   INTEGER, PARAMETER :: ndatafmax  = 101
   INTEGER, PARAMETER :: nstore_seq = 100
 
-  ! CONSTANTS
+  ! DERIVED (FROM FUNDAMENTAL) PARAMETERS FOR VMEC CODE
+  INTEGER, PARAMETER :: mpol1d = mpold - 1
+  INTEGER, PARAMETER :: ntor1d = ntord + 1
+
+
+  ! file units
   INTEGER, PARAMETER :: nthreed0=9
   INTEGER, PARAMETER :: indata0=nthreed0+2
   INTEGER, PARAMETER :: nwout0 =nthreed0+3
@@ -21,10 +26,6 @@ MODULE vparams
   INTEGER, PARAMETER :: nfort18=18
   INTEGER, PARAMETER :: nmercier0=52
   INTEGER            :: nthreed
-
-  ! DERIVED (FROM FUNDAMENTAL) PARAMETERS FOR VMEC CODE
-  INTEGER, PARAMETER :: mpol1d = mpold - 1
-  INTEGER, PARAMETER :: ntor1d = ntord + 1
 
   ! MISCELLANEOUS PARAMETERS
   REAL(rprec), PARAMETER :: c1pm2  =  1.e-2_dp

@@ -17,8 +17,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
                            torflux, torflux_deriv, polflux, polflux_deriv
 
   ! COMPUTE PHIP, IOTA PROFILES ON FULL-GRID
-  ! COMPUTE MASS PROFILE ON HALF-GRID
-  ! BY READING INPUT COEFFICIENTS.
+  ! COMPUTE MASS PROFILE ON HALF-GRID BY READING INPUT COEFFICIENTS.
   ! PRESSURE CONVERTED TO INTERNAL UNITS BY MULTIPLICATION BY mu0 = 4*pi*10**-7
 
   torflux_edge = signgs * phiedge / twopi
@@ -27,24 +26,28 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   polflux_edge = torflux_edge
   si = polflux(one)
   IF (si .ne. zero) polflux_edge = polflux_edge/si
+
+  ! z00 gets assiged in reset_params and in funct3d
   r00 = rmn_bdy(0,0,rcc)
 
+  ! zero fluxes and current at magnetic axis
   phips(1) = 0
   chips(1) = 0
   icurv(1) = 0
 
+  ! half-grid quantities: s_i are shifted inwards by 0.5 grid points
   DO i = 2,ns
      si = hs*(i-c1p5)
      tf = MIN(one, torflux(si))
      phips(i) = torflux_edge * torflux_deriv(si)
      chips(i) = torflux_edge * polflux_deriv(si)
-     iotas(i) = piota(tf)
-     icurv(i) = pcurr(tf)
+     iotas(i) = piota(tf) ! evaluate iota profile
+     icurv(i) = pcurr(tf) ! evaluate current profile
   END DO
 
   ! Compute lamscale factor for "normalizing" lambda (needed for scaling hessian)
   lamscale = SQRT(hs*SUM(phips(2:ns)**2))
-  phips(ns+1) = 2*phips(ns)-phips(ns-1)
+  phips(ns+1) = 2*phips(ns)-phips(ns-1) ! virtual point outside the LCFS
   IF (lamscale .EQ. 0) STOP 'PHIP == 0: ERROR!'
 
   IF (lflip) THEN
@@ -52,19 +55,23 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
      chips = -chips
   END IF
 
+  ! full-grid quantities
   DO i = 1,ns
      si = hs*(i-1)
      tf = MIN(one, torflux(si))
-     iotaf(i) = piota(tf)
      phipf(i) = torflux_edge * torflux_deriv(si)
      chipf(i) = torflux_edge * polflux_deriv(si)
+     iotaf(i) = piota(tf)
   ENDDO
 
   ! SCALE CURRENT TO MATCH INPUT EDGE VALUE, CURTOR
   ! FACTOR OF SIGNGS NEEDED HERE, SINCE MATCH IS MADE TO LINE
   ! INTEGRAL OF BSUBU (IN GETIOTA) ~ SIGNGS * CURTOR
-  pedge = pcurr(one)
+  pedge = pcurr(one) ! pcurr gives current enclosed between axis and given parameter
+  ! --> pedge is radial integral over current density profile (still in Amperes)
   Itor = 0
+  ! TODO: what is this? might have something to do with preventing division-by-zero
+  ! when computing scaled toroidal current profile from pcurr and curtor...
   IF (ABS(pedge) .gt. ABS(EPSILON(pedge)*curtor)) then
      Itor = signgs*currv/(twopi*pedge)
   end if
@@ -90,17 +97,23 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   xcdot = 0
 
   DO i = 1, ns
+
+     ! sqrt(s_i) for half-grid s values (shifted inwards by -0.5 grid points)
      si = hs*ABS(i-1.5_dp)
      shalf(i:nrzt:ns) = SQRT(si)
+
+     ! sqrt(s_i) for full-grid s values
      si = hs*(i-1)
      sqrts(i:nrzt:ns) = SQRT(si)
+
+     ! TODO: what is this?
      bdamp(i) = 2*pdamp*(1-si)
   END DO
 
   ! Avoid round-off
-  sqrts(ns:nrzt:ns) = 1
-  shalf(nrzt+1) = 1
-  sqrts(nrzt+1) = 1
+  sqrts(ns:nrzt:ns) = 1 ! boundary  value
+  shalf(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of shalf (see ndim in allocate_ns)
+  sqrts(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of sqrts (see ndim in allocate_ns)
 
   DO i = 2,ns
      sm(i) = shalf(i)/sqrts(i)
@@ -111,6 +124,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   sp(0) = 0
   sp(1) = sm(2)
 
+  ! reset Fourier coefficients vector if lreset was specified
   IF (lreset) THEN
     xc = 0
   END IF

@@ -35,7 +35,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
 ! #end /* ndef _HBANGLE */
 
   ! COMPUTE INVARIANT RESIDUALS
-  r1 = one/(2*r0scale)**2
+  r1 = one/(2*r0scale)**2 ! --> actually look at r1*fnorm --> scaling factor for forces (?)
   jedge = 0
 
   ! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK
@@ -44,14 +44,14 @@ SUBROUTINE residue (gcr, gcz, gcl)
 
   ! Coding for VMEC2000 run stand-alone
   IF (delIter.lt.50 .and. (fsqr+fsqz).lt.1.E-6_dp) then
-     ! include edge contribution only under certain circumstances ?
+     ! include edge contribution only if converged well enough fast enough (?)
      jedge = 1
   end if
 
   CALL getfsq (gcr, gcz, fsqr, fsqz, r1*fnorm, jedge)
 
   fsql = fnormL*SUM(gcl*gcl)
-  fedge = r1*fnorm*SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
+  fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
   ! PERFORM PRECONDITIONING AND COMPUTE RESIDUES
 
@@ -59,6 +59,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   ! m = 1 constraint scaling
   IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
+
   jedge = 0
   CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
   jedge = 1
@@ -66,7 +67,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
 ! #end /* ndef _HBANGLE */
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
-  CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1)
+  CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1) ! m1 is simply == 1 --> include edge
 
   !SPH: THIS IS NOT INVARIANT UNDER PHIP->A*PHIP, AM->A**2*AM IN PROFIL1D
   !     (EXTCUR -> A*EXTCUR for FREE BOUNDARY)

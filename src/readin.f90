@@ -27,7 +27,6 @@
   ! Open output files here, print out heading to threed1 file
   CALL heading(input_extension)
 
-
   IF (lfreeb) THEN
      ! READ IN AND STORE (FOR SEQUENTIAL RUNNING) MAGNETIC FIELD DATA FROM MGRID_FILE
      CALL read_mgrid (mgrid_file, extcur, nzeta, nfp, .true., ier_flag)
@@ -199,7 +198,6 @@
            /,'   nb  mb     rbc         rbs         zbc         zbs   ',&
              '    raxis(c)    raxis(s)    zaxis(c)    zaxis(s)')
 
-
   IF (lasym) THEN
      ! CONVERT TO REPRESENTATION WITH RBS(m=1) = ZBC(m=1)
      delta = ATAN( (rbs(0,1) - zbc(0,1))/(ABS(rbc(0,1)) + ABS(zbs(0,1))) )
@@ -252,8 +250,7 @@
   ioff = LBOUND(rbcc,1)
   joff = LBOUND(rbcc,2)
 
-  ! go over all mode number combinations that could be specified in input file
-  ! for given Fourier resolution
+  ! go over all mode number combinations that could be specified in input file for given Fourier resolution
   DO m=0,mpol1
 
      mj = m+joff
@@ -347,17 +344,17 @@
   ! WITH XC(zcs) -> 0 FOR POLAR CONSTRAINT ! TODO: jons: maybe XC(zsc) -> 0 is meant here ?
   ! FOR ASYMMETRIC CASE, XC(rsc) = .5(RSC+ZCC), XC(zcc) = .5(RSC-ZCC)
   ! WITH XC(zss) -> 0 FOR POLAR CONSTRAINT
-  ! (see convert_sym, convert_asym in totzsp_mod file)
+  ! (see convert_sym, convert_asym in totzsp.f90 file)
   IF (lconm1 .AND. (lthreed.OR.lasym)) THEN
      ALLOCATE (temp(SIZE(rbcc,1)))
      IF (lthreed) THEN
-        mj = 1+joff
+        mj = 1+joff ! index of n=0, m=1 modes
         temp = rbss(:,mj)
         rbss(:,mj) = cp5*(temp(:) + zbcs(:,mj))
         zbcs(:,mj) = cp5*(temp(:) - zbcs(:,mj))
      END IF
      IF (lasym) THEN
-        mj = 1+joff
+        mj = 1+joff ! index of n=0, m=1 modes
         temp = rbsc(:,mj)
         rbsc(:,mj) = cp5*(temp(:) + zbcc(:,mj))
         zbcc(:,mj) = cp5*(temp(:) - zbcc(:,mj))

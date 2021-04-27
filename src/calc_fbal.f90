@@ -35,6 +35,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
      presgrad(js) = (pres(js+1) - pres(js))*ohs
 
      ! total resulting force-imbalance: magnetic pressure + (prescribed) kinetic pressure
+     ! F = grad(p) - <j x B> (or something like this...)
      equif(js) = (-phipf(js)*jcuru(js) + chipf(js)*jcurv(js))/vpphi(js) + presgrad(js)
   END DO
 

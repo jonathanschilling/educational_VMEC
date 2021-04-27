@@ -25,12 +25,13 @@ SUBROUTINE jacobian
   irst = 1
 
   DO l = 2,nrzt
-    zs(l)   = ohs*( z1(l,meven) - z1(l-1,meven) + shalf(l)*(z1(l,modd)  - z1(l-1,modd)) )
-    rs(l)   = ohs*( r1(l,meven) - r1(l-1,meven) + shalf(l)*(r1(l,modd)  - r1(l-1,modd)) )
-    r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) )
-    ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) )
-    zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) )
+    zs(l)   = ohs*( z1(l,meven) - z1(l-1,meven) + shalf(l)*(z1(l,modd)  - z1(l-1,modd)) ) ! dZ/ds on half grid (?)
+    rs(l)   = ohs*( r1(l,meven) - r1(l-1,meven) + shalf(l)*(r1(l,modd)  - r1(l-1,modd)) ) ! dR/ds on half grid (?)
+    r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! 0.5*R on half grid (?)
+    ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) ) ! 0.5*dR/du on half grid (?)
+    zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) ) ! 0.5*dZ/du on half grid (?)
 
+    ! TODO: the lower four lines of below expression could be split off into some separate variables...
     tau(l)  = ru12(l)*zs(l) - rs(l)*zu12(l) + dshalfds*                               &
               (      ru(l,modd) *z1(l,modd) + ru(l-1,modd) *z1(l-1,modd)              &
                    - zu(l,modd) *r1(l,modd) - zu(l-1,modd) *r1(l-1,modd)              &

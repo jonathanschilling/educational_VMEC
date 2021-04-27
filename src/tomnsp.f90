@@ -77,10 +77,11 @@ SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
         work1(:,4) = work1(:,4) - crmn(jll:nsl,mparity)*sinmui(i,m)
         work1(:,5) = work1(:,5) + tempz(:)*cosmui(i,m) + bzmn(jll:nsl,mparity)*sinmumi(i,m)
         work1(:,6) = work1(:,6) - czmn(jll:nsl,mparity)*cosmui(i,m)
-        work1(:,8) = work1(:,8) - czmn(jll:nsl,mparity)*sinmui(i,m)
 
+        work1(:,8) = work1(:,8) - czmn(jll:nsl,mparity)*sinmui(i,m)
         work1(:,9) = work1(:,9) + blmn(jll:nsl,mparity)*sinmumi(i,m)
         work1(:,10) =work1(:,10)- clmn(jll:nsl,mparity)*cosmui(i,m)
+
         work1(:,12) =work1(:,12)- clmn(jll:nsl,mparity)*sinmui(i,m)
      END DO
 

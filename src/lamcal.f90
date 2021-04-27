@@ -33,11 +33,14 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   DO m = 0, mpol1
      tmm = m*m
      power = MIN(tmm/256, 8._dp)
+
      pfactor = pfactor0
      DO n = 0, ntor
         IF (m.eq.0 .and. n.eq.0) CYCLE
+
         ! sometimes helps convergence
         ! IF (n .gt. 1) pfactor = pfactor0/4
+
         tnn = (n*nfp)**2
         tnm = 2*m*n*nfp
         DO js = jlam(m), ns
@@ -45,8 +48,10 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
            IF (faclam(js,n,m,1) .eq. zero) then
                faclam(js,n,m,1) = -1.E-10_dp
            end if
+
            ! Damps m > 16 modes
            faclam(js,n,m,1) = (pfactor/faclam(js,n,m,1)) * sqrts(js)**power
+
         END DO
      END DO
   END DO

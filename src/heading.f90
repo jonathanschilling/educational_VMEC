@@ -18,20 +18,16 @@ SUBROUTINE heading(extension)
   !     Open output files
   CALL open_output_files (extension, lfirst)
 
-  IF (.not.lfirst) RETURN
-
-  IF (lfirst) WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
-
-  Version = TRIM(ADJUSTL(version_))
-
-  ! SAL some weird error about file not being ready
-  CALL FLUSH(nthreed)
-
-  WRITE(nthreed,'(a,1x,a,/,a,/)') TRIM(banner), &
-       TRIM(Version), TRIM(VersionID1)
   IF (lfirst) then
-     WRITE (*,'(1x,a,1x,a,/,1x,a,/)') TRIM(banner), &
-     TRIM(Version), TRIM(VersionID1)
+     WRITE (*,'(2a)') '  PROCESSING INPUT.', TRIM(extension)
+
+     Version = TRIM(ADJUSTL(version_))
+
+     ! SAL some weird error about file not being ready
+     CALL FLUSH(nthreed)
+
+     WRITE(nthreed,'(a,1x,a,/,a,/)') TRIM(banner), TRIM(Version), TRIM(VersionID1)
+     WRITE (*,'(1x,a,1x,a,/,1x,a,/)') TRIM(banner), TRIM(Version), TRIM(VersionID1)
   end if
 
 END SUBROUTINE heading

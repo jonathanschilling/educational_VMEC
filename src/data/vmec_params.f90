@@ -33,7 +33,7 @@ MODULE vmec_params
   REAL(rprec), PARAMETER :: pdamp = 0.05_dp
   CHARACTER(LEN=*), PARAMETER :: version_ = '8.52'
 
-  INTEGER :: ntmax
+  INTEGER :: ntmax !< number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()
 
   INTEGER :: rcc, rss, rsc, rcs, zsc, zcs, zcc, zss ! stacking indices for xc, gc, ...
 

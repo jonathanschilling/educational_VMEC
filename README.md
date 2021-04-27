@@ -25,7 +25,7 @@ Here is how it works:
 
 ## Angle Constraint
 The poloidal angle-like coordinate is a priori not uniquely defined and needs special care.
-The original VMEC from the STELLOPT repo had essentially two options for this.
+The version of VMEC from the STELLOPT repo had essentially two options for this.
 They were alternatively compiled in via the preprocessor flag `_HBANGLE`.
 
 1. The Hirshman-Breslau explicit spectrally optimized Fourier series (see https://doi.org/10.1063/1.872954 for details) and

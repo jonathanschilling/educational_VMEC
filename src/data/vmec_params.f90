@@ -34,13 +34,16 @@ MODULE vmec_params
   CHARACTER(LEN=*), PARAMETER :: version_ = '8.52'
 
   INTEGER :: ntmax
-  INTEGER :: rcc, rss, rsc, rcs, zsc, zcs, zcc, zss
+
+  INTEGER :: rcc, rss, rsc, rcs, zsc, zcs, zcc, zss ! stacking indices for xc, gc, ...
+
   INTEGER :: mnyq, nnyq
   INTEGER, ALLOCATABLE :: uminus(:)
   REAL(rprec), ALLOCATABLE :: mscale(:) !< array for norming theta-trig functions (internal use only)
                                         !< so that the discrete SUM[cos(mu)*cos(m'u)] = .5 delta(m,m')
   REAL(rprec), ALLOCATABLE :: nscale(:) !< array for norming zeta -trig functions (internal use only)
   REAL(rprec) :: signgs     !< sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)
+
   REAL(rprec) :: lamscale=1
 
   INTEGER, PARAMETER :: m0=0, m1=1, n0=0 !< from totzsp

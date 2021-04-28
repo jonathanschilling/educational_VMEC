@@ -1,0 +1,25 @@
+var vmec__persistent_8f90 =
+[
+    [ "cos01", "d3/dec/vmec__persistent_8f90.html#a7c4e4ea9cd1c9fe28f495bc6b7d6cdbe", null ],
+    [ "cosmu", "d3/dec/vmec__persistent_8f90.html#a534ba6f8704cf69c642b386813e6ee57", null ],
+    [ "cosmui", "d3/dec/vmec__persistent_8f90.html#aa27b57669d50d6db7de6ca5702d6c06e", null ],
+    [ "cosmui3", "d3/dec/vmec__persistent_8f90.html#ad8522b3535f635b6180e8b097b18453c", null ],
+    [ "cosmum", "d3/dec/vmec__persistent_8f90.html#ae02058a570e03e9ffd5e0755d8a1364c", null ],
+    [ "cosmumi", "d3/dec/vmec__persistent_8f90.html#a97e46172b4e60b94cc6cb02b74f707b2", null ],
+    [ "cosmumi3", "d3/dec/vmec__persistent_8f90.html#afa2d17e34b804c56792160dc7208dc67", null ],
+    [ "cosnv", "d3/dec/vmec__persistent_8f90.html#af8956f39ea0977689cf3949c88116394", null ],
+    [ "cosnvn", "d3/dec/vmec__persistent_8f90.html#a16e66269bbd758da71b78cffd123213f", null ],
+    [ "ixm", "d3/dec/vmec__persistent_8f90.html#af7aad46efbcb1acadd4560829f32a47e", null ],
+    [ "jmin3", "d3/dec/vmec__persistent_8f90.html#a7143cae1753a77d4e017a9e8b35fd490", null ],
+    [ "sin01", "d3/dec/vmec__persistent_8f90.html#a2a2d5c44661e223755ba1a550ae166c5", null ],
+    [ "sinmu", "d3/dec/vmec__persistent_8f90.html#a7acdde5979068e45a4809957f1484faa", null ],
+    [ "sinmui", "d3/dec/vmec__persistent_8f90.html#a0e3080920c0ec3ec4b15b1a17e091ace", null ],
+    [ "sinmum", "d3/dec/vmec__persistent_8f90.html#af957abe5ad575039923bf4cc71025ee8", null ],
+    [ "sinmumi", "d3/dec/vmec__persistent_8f90.html#a324d0ac0190524116746abb13c36663b", null ],
+    [ "sinnv", "d3/dec/vmec__persistent_8f90.html#ac18340e426f03e76a966013fe59922ba", null ],
+    [ "sinnvn", "d3/dec/vmec__persistent_8f90.html#a089580db16863a1057c82e824ab2a104", null ],
+    [ "xm", "d3/dec/vmec__persistent_8f90.html#a8adb4d2d0eee976d6f9d12ce597df3fa", null ],
+    [ "xm_nyq", "d3/dec/vmec__persistent_8f90.html#a2343c34daf5f9fbe42876c102af03969", null ],
+    [ "xn", "d3/dec/vmec__persistent_8f90.html#ac34bd92912d03515a98c1bba1d87dc15", null ],
+    [ "xn_nyq", "d3/dec/vmec__persistent_8f90.html#ad8a48d11e32f1e23eabecc1dbdae95d3", null ]
+];

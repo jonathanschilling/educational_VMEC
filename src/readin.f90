@@ -1,4 +1,10 @@
 !> \file
+!> \brief Read the input file.
+
+!> \brief Read the input file.
+!>
+!> @param input_file input file to read from
+!> @param ier_flag error flag
   SUBROUTINE readin(input_file, ier_flag)
   USE vmec_main
   USE vmec_params

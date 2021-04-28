@@ -1,4 +1,6 @@
 !> \file
+!> \brief Parameterizations of profiles for rotational transform, toroidal current and pressure/mass.
+
 !  File profile_functions.f contains
 !    FUNCTION pcurr
 !    FUNCTION piota

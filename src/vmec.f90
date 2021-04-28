@@ -2,7 +2,14 @@
 !> \brief Main program of VMEC
 
 !> \brief Main program of VMEC
-PROGRAM vmec
+PROGRAM xvmec
+
+  call run_vmec
+
+end program xvmec
+
+!> \brief Main driver for VMEC
+subroutine vmec
 
   USE vmec_input
   USE safe_open_mod
@@ -223,4 +230,4 @@ PROGRAM vmec
     ! close threed1 file
   IF (nthreed .gt. 0) CLOSE (nthreed)
 
-END PROGRAM vmec
+END subroutine vmec

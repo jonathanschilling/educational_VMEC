@@ -1,4 +1,11 @@
 !> \file
+!> \brief Compute three-dimensional profiles of flux-surface geometry etc.
+
+!> \brief Compute three-dimensional profiles of flux-surface geometry etc.
+!>
+!> @param rmn Fourier coefficients of \f$R\f$
+!> @param zmn Fourier coefficients of \f$R\f$
+!> @param lreset flag to indicate the geometry of the LCFS (and axis ?) should be used to interpolate into the plasma volume
 SUBROUTINE profil3d(rmn, zmn, lreset)
   USE vmec_main
   USE vmec_params

@@ -1,4 +1,11 @@
 !> \file
+!> \brief Read the \c INDATA namelist from a given input file.
+
+!> \brief Read the \c INDATA namelist from a given input file.
+!>
+!> @param in_file input file to read from
+!> @param iunit unit number to use for input file
+!> @param ier_flag error flag
 SUBROUTINE read_indata(in_file, iunit, ier_flag)
   USE vmec_main
   USE vmec_input, ONLY: bloat, ncurr

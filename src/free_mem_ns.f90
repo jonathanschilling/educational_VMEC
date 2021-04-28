@@ -1,4 +1,8 @@
 !> \file
+!> \brief Free memory depending on the number of flux surfaces \c ns
+
+!> \brief Free memory depending on the number of flux surfaces \c ns
+!>
 SUBROUTINE free_mem_ns
   USE vmec_main
   USE realspace

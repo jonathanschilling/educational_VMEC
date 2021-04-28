@@ -1,4 +1,9 @@
 !> \file
+!> \brief Evaluate the three-dimensional MHD energy functional.
+
+!> \brief Evaluate the three-dimensional MHD energy functional.
+!>
+!> @param ier_flag error flag
 SUBROUTINE funct3d (ier_flag)
 
   USE vmec_main

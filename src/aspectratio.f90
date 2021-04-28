@@ -1,4 +1,9 @@
 !> \file
+!> \brief compute aspect-ratio (independent of elongation): \f$A = <R>/\sqrt{<a b>}\f$
+
+!> \brief compute aspect-ratio (independent of elongation): \f$A = <R>/\sqrt{<a b>}\f$
+!>        where \f$\pi <a>^2 = \textrm{Area (toroidally averaged)}\f$
+!>        and   \f$2 \pi <R> \textrm{Area} = \textrm{Volume}\f$
 FUNCTION aspectratio()
   USE vmec_main
   USE realspace
@@ -10,7 +15,7 @@ FUNCTION aspectratio()
 
  ! routine for computing aspect-ratio (independent of elongation):
  ! A = <R>/<ab>**.5
-
+ !
  ! WHERE pi <a>**2 = Area (toroidally averaged)
  !       2*pi * <R> * Area = Volume
  ! Use integration by parts to compute as surface integral (Stoke''s theorem)

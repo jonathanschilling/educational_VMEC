@@ -1,4 +1,8 @@
 !> \file
+!> \brief allocate arrays depending on the number of Fourier coefficients \c nunv
+
+!> \brief allocate arrays depending on the number of Fourier coefficients \c nunv
+!>
 SUBROUTINE allocate_nunv
   USE vmec_main
   USE vmec_params, ONLY: ntmax

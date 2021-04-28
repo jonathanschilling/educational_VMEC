@@ -1,4 +1,11 @@
 !> \file
+!> \brief Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry.
+
+!> \brief Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry.
+!>
+!> @param rmn Fourier coefficients for \f$R\f$
+!> @param zmn Fourier coefficients for \f$Z\f$
+!> @param lmn Fourier coefficients for \f$\lambda\f$
 SUBROUTINE flip_theta(rmn, zmn, lmn)
   USE vmec_main
   USE vmec_params, ONLY: ntmax, rcc, rss, zsc, zcs, zcc, zss, rsc, rcs

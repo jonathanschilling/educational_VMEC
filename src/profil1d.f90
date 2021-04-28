@@ -1,4 +1,11 @@
 !> \file
+!> \brief Compute phip and iota profiles on full grid.
+
+!> \brief Compute phip and iota profiles on full grid.
+!>
+!> @param xc state vector of VMEC, i.e., all Fourier coefficients of \f$R\f$, \f$Z\f$ and \f$\lambda\f$
+!> @param xcdot velocity vector in Fourier space
+!> @param lreset xc will be zeroes if this is true
 SUBROUTINE profil1d(xc, xcdot, lreset)
   USE vmec_main
   USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp

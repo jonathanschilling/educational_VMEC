@@ -1,4 +1,19 @@
 !> \file
+!> \brief Computes br, bphi, bz, bsubs on half-radial mesh.
+
+!> \brief Computes br, bphi, bz, bsubs on half-radial mesh.
+!>
+!> @param r12 \f$R^2\f$
+!> @param rs \f$\partial R / \partial s\f$
+!> @param zs \f$\partial Z / \partial s\f$
+!> @param ru12 \f$\left(\partial R / \partial \theta\right)^2\f$
+!> @param zu12 \f$\left(\partial Z / \partial \theta\right)^2\f$
+!> @param bsubs covariant component of magnetic field \f$B_s\f$
+!> @param bsupu contravariant component of magnetic field \f$B^\theta\f$
+!> @param bsupv contravariant component of magnetic field \f$B^\zeta\f$
+!> @param br   cylindrical component of magnetic field \f$B^R\f$
+!> @param bphi cylindrical component of magnetic field \f$B^\varphi\f$
+!> @param bz   cylindrical component of magnetic field \f$B^Z\f$
 SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
   USE vmec_main
   USE realspace

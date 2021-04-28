@@ -1,4 +1,7 @@
 !> \file
+!> \brief Precomputed table of magnetic field due to confimenent coils
+
+!> \brief Precomputed table of magnetic field due to confimenent coils
       MODULE mgrid_mod
       USE stel_kinds
       USE vmec_input, ONLY: lfreeb

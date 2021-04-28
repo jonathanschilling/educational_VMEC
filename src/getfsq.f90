@@ -1,4 +1,14 @@
 !> \file
+!> \brief Compute total force residual on flux surfaces.
+
+!> \brief Compute total force residual on flux surfaces.
+!>
+!> @param gcr \f$R\f$-component of force
+!> @param gcz \f$Z\f$-component of force
+!> @param gnormr normalized total force residual in \f$R\f$
+!> @param gnormz normalized total force residual in \f$Z\f$
+!> @param gnorm normalization factor for forces
+!> @param medge =0: exclude contribution from LCFS; =1: include LCFS contribution
 SUBROUTINE getfsq(gcr, gcz, gnormr, gnormz, gnorm, medge)
   USE vmec_main, ONLY: rprec, ns, ns1, mnsize
   USE vmec_params, ONLY: ntmax

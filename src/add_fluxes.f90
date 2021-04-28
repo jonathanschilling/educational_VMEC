@@ -1,4 +1,13 @@
 !> \file
+!> \brief Add the magnetic fluxes to the tangential derivatives of \f$\lambda\f$
+!>        to arrive at the contravariant magnetic field components \f$B^\theta\f$ and \f$B^\zeta\f$.
+
+!> \brief Add the magnetic fluxes to the tangential derivatives of \f$\lambda\f$
+!>        to arrive at the contravariant magnetic field components \f$B^\theta\f$ and \f$B^\zeta\f$.
+!>
+!> @param overg \f$1/\sqrt{g}\f$
+!> @param bsupu \f$B^\theta\f$
+!> @param bsupv \f$B^\zeta\f$
 SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   USE vmec_main
   USE realspace, ONLY: wint, guu, guv, chip

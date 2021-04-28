@@ -1,4 +1,8 @@
 !> \file
+!> \brief Free arrays depending on the number of Fourier coefficients \c nunv
+
+!> \brief Free arrays depending on the number of Fourier coefficients \c nunv
+!>
 SUBROUTINE free_mem_nunv
   USE vmec_main
   USE vacmod, only: free_mem_nestor

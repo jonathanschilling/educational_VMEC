@@ -1,4 +1,9 @@
 !> \file
+!> \brief Compute toroidal and poloidal magnetic flux profiles.
+
+!> \brief Compute the radial derivative of the enclosed toroidal magnetic flux.
+!>
+!> @param x evaluation location
 FUNCTION torflux_deriv (x)
   USE stel_kinds
   USE vmec_input, ONLY: tf => aphi
@@ -17,7 +22,9 @@ FUNCTION torflux_deriv (x)
 
 END FUNCTION torflux_deriv
 
-
+!> \brief Compute the radial derivative of the enclosed poloidal magnetic flux.
+!>
+!> @param x evaluation location
 FUNCTION polflux_deriv (x)
   USE stel_kinds
 
@@ -38,7 +45,9 @@ FUNCTION polflux_deriv (x)
 
 END FUNCTION polflux_deriv
 
-
+!> \brief Compute the enclosed toroidal magnetic flux.
+!>
+!> @param x evaluation location
 FUNCTION torflux (x)
   USE stel_kinds
 
@@ -60,7 +69,9 @@ FUNCTION torflux (x)
 
 END FUNCTION torflux
 
-
+!> \brief Compute the enclosed poloidal magnetic flux.
+!>
+!> @param x evaluation location
 FUNCTION polflux (x)
   USE stel_kinds
 

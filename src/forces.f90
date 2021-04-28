@@ -1,4 +1,8 @@
 !> \file
+!> \brief Compute the real-space MHD forces.
+
+!> \brief Compute the real-space MHD forces.
+!>
 SUBROUTINE forces
   USE vmec_main, p5 => cp5
   USE realspace

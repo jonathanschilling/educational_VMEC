@@ -1,4 +1,13 @@
 !> \file
+!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$lambda\f$ on full grid.
+
+!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$lambda\f$ on full grid.
+!>
+!> @param xnew interpolated state vector (nsnew surfaces)
+!> @param xold interpolation basis: old state vector (nsold surfaces)
+!> @param scalxc scaling factors to normalize the new state vector to
+!> @param nsnew new number of flux surfaces
+!> @param nsold old number of flux surfaces
 SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   USE vmec_main, ONLY: dp, rprec, mnsize
   USE vmec_params, ONLY: ntmax

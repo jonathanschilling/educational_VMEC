@@ -1,4 +1,11 @@
 !> \file
+!> \brief Fourier transforms
+
+!> \brief Extends \f$B_s\f$ from \c ntheta2 interval to full \c ntheta3 interval in angle \f$\theta\f$.
+!>
+!> @param bout output \f$B_s\f$
+!> @param bs_s symmetric part of \f$B_s\f$
+!> @param bs_a anti-symmetric part of \f$B_s\f$
 SUBROUTINE fext_fft (bout, bs_s, bs_a)
   USE vmec_main
   IMPLICIT NONE
@@ -23,12 +30,24 @@ SUBROUTINE fext_fft (bout, bs_s, bs_a)
         bout(kz,i) = bs_s(kzr,ir) - bs_a(kzr,ir)
      END DO
   END DO
+END SUBROUTINE fext_fft
 
-  END SUBROUTINE fext_fft
+!> \brief Contract bs,bu,bv from full \c nu interval to half-u interval
+!>        so cos, sin integrals can be performed on half-u interval.
+!>
+!> @param bs output \f$B_s\f$
+!> @param bu output \f$B_\theta\f$
+!> @param bv output \f$B_zeta\f$
+!> @param bs_s symmetric part of \f$B_s\f$
+!> @param bu_s symmetric part of \f$B_\theta\f$
+!> @param bv_s symmetric part of \f$B_\zeta\f$
+!> @param bs_a anti-symmetric part of \f$B_s\f$
+!> @param bu_a anti-symmetric part of \f$B_\theta\f$
+!> @param bv_a anti-symmetric part of \f$B_\zeta\f$
+SUBROUTINE fsym_fft (bs, bu, bv, bs_s, bu_s, bv_s, bs_a, bu_a, bv_a)
 
-
-  SUBROUTINE fsym_fft (bs, bu, bv, bs_s, bu_s, bv_s, bs_a, bu_a, bv_a)
   USE vmec_main
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nzeta,ntheta3), INTENT(in)      :: bs

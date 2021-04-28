@@ -1,4 +1,12 @@
 !> \file
+!> \brief Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.
+
+!> \brief Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.
+!>
+!> @param r1 \f$R\f$
+!> @param z1 \f$Z\f$
+!> @param ru0 \f$\partial R / \partial \theta\f$
+!> @param zu0 \f$\partial Z / \partial \theta\f$
 SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   USE vmec_main
   USE vmec_params, ONLY: nscale, signgs

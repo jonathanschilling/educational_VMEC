@@ -1,4 +1,7 @@
 !> \file
+!> \brief Main program of VMEC
+
+!> \brief Main program of VMEC
 PROGRAM vmec
 
   USE vmec_input

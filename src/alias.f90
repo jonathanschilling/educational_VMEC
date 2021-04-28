@@ -1,4 +1,14 @@
 !> \file
+!> \brief Fourier transform alias force and also return intermediate output
+
+!> \brief Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s)
+!>
+!> @param gcons
+!> @param ztemp
+!> @param gcs
+!> @param gsc
+!> @param gcc
+!> @param gss
 SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
   USE vmec_main
   IMPLICIT NONE

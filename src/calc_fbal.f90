@@ -1,5 +1,12 @@
 !> \file
+!> \brief Compute flux-surface averaged radial force balance \f$\nabla p\, - <\mathbf{j} \times \mathbf{B}>\f$.
+
+!> \brief Compute flux-surface averaged radial force balance \f$\nabla p\, - <\mathbf{j} \times \mathbf{B}>\f$.
+!>
+!> @param bsubu covariant component of magnetic field \f$B_\theta\f$
+!> @param bsubv covariant component of magnetic field \f$B_\zeta\f$
 SUBROUTINE calc_fbal(bsubu, bsubv)
+
   USE vmec_main, ONLY: buco, bvco, equif,             &
                        jcurv, jcuru, chipf, vp, pres, &
                        phipf, vpphi, presgrad, ohs

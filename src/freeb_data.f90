@@ -1,4 +1,14 @@
 !> \file
+!> \brief Write out edge values of fields.
+
+!> \brief Write out edge values of fields.
+!>
+!> @param rmnc stellarator-symmetric Fourier coefficients of \f$R\f$
+!> @param zmns stellarator-symmetric Fourier coefficients of \f$Z\f$
+!> @param rmns non-stellarator-symmetric Fourier coefficients of \f$R\f$
+!> @param zmnc non-stellarator-symmetric Fourier coefficients of \f$Z\f$
+!> @param bmodmn stellarator-symmetric Fourier coefficients of \f$|\mathbf{B}|\f$
+!> @param bmodmn1 non-stellarator-symmetric Fourier coefficients of \f$|\mathbf{B}|\f$
 SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
   USE vmec_main
   USE vacmod, only: brv, bphiv, bzv, bsqvac, potvac, mnpd, xmpot, xnpot

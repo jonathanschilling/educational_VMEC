@@ -1,4 +1,11 @@
 !> \file
+!> \brief Parse the first command-line argument into a filename.
+
+!> \brief Parse the first command-line argument into a filename.
+!>
+!> @param file_to_parse actual filename to read the input for VMEC from
+!> @param file_or_extension first command-line parameter given to VMEC
+!> @param lnc flag to indicate that a netCDF file is given
       SUBROUTINE parse_extension(file_to_parse, file_or_extension, lnc)
       IMPLICIT NONE
 !-----------------------------------------------

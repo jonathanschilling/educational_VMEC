@@ -1,4 +1,24 @@
 !> \file
+!> \brief Evaluate the Mercier stability criterion.
+
+!> \brief Evaluate the Mercier stability criterion.
+!>
+!> @param gsqrt Jacobian \f$\sqrt{g}\f$
+!> @param bsq modulus of magnetic field \f$|\mathbf{B}|\f$
+!> @param bdotj parallel current density \f$\mathbf{B} \cdot \mathbf{j}\f$
+!> @param iotas rotational transform profile
+!> @param wint normalization constant for flux-surface integrals
+!> @param r1 \f$R\f$
+!> @param rt \f$\partial R / \partial \theta\f$
+!> @param rz \f$\partial R / \partial \zeta\f$
+!> @param zt \f$\partial Z / \partial \theta\f$
+!> @param zz \f$\partial Z / \partial \zeta\f$
+!> @param bsubu contravariant component of magnetic field \f$B^\zeta\f$
+!> @param vp radial profile of specific volume \f$\partial V / \partial s\f$
+!> @param phips radial derivative of enclosed toroidal magnetic flux
+!> @param pres pressure profile
+!> @param ns number of flux surfaces
+!> @param nznt number of grid points per flux surface
 SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
                    r1, rt, rz, zt, zz, bsubu, vp, phips, pres, ns, nznt)
   USE safe_open_mod

@@ -1,4 +1,11 @@
 !> \file
+!> \brief Allocates memory for radial arrays and initializes radial profiles.
+
+!> \brief Allocates memory for radial arrays and initializes radial profiles.
+!>
+!> @param nsval new number of flux surfaces
+!> @param ns_old old number of flux surfaces (from previous multi-grid iteration)
+!> @param delt0 time step to be used in the new multi-grid iteration
 SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   USE vmec_main
   USE vmec_params, ONLY: ntmax

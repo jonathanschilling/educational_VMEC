@@ -1,4 +1,21 @@
 !> \file
+!> \brief Program for computing local \f$\mathbf{K} \times \mathbf{B} = \nabla p\f$ force balance.
+
+!> \brief Program for computing local \f$\mathbf{K} \times \mathbf{B} = \nabla p\f$ force balance.
+!>
+!> @param bsupu contravariant component of magnetic field \f$B^\theta\f$
+!> @param bsupv contravariant component of magnetic field \f$B^\tzeta\f$
+!> @param bsubu covariant component of magnetic field \f$B_\theta\f$
+!> @param bsubv covariant component of magnetic field \f$B_\zeta\f$
+!> @param bsubsh covariant component of magnetic field \f$B_s\f$ (on half grid?)
+!> @param bsubsu tangential derivate of covariant component of magnetic field \f$\partial B_s / \partial \theta\f$ (?)
+!> @param bsubsv tangential derivate of covariant component of magnetic field \f$\partial B_s / \partial \zeta\f$  (?)
+!> @param gsqrt Jacobian \f$\sqrt{g}\f$
+!> @param bsq modulus of magnetic field \f$|\mathbf{B}|^2\f$
+!> @param itheta index in poloidal direction
+!> @param izeta index in toroidal direction
+!> @param brho radial component of magnetic field \f$B_\rho\f$ (?)
+!> @param ier_flag error flag
 SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
                     bsubsv, gsqrt, bsq, itheta, izeta, brho, ier_flag)
   USE safe_open_mod

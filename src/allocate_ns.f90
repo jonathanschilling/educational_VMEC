@@ -1,4 +1,10 @@
 !> \file
+!> \brief allocate arrays depending on the number of flux surfaces \c ns
+
+!> \brief allocate arrays depending on the number of flux surfaces \c ns
+!>
+!> @param linterp interpolate from coars to finer mesh?
+!> @param neqs_old previous number of degrees-of-freedom, i.e., Fourier coefficients for \f$R\f$, \f$Z\f$ and \f$\lambda\f$
 SUBROUTINE allocate_ns (linterp, neqs_old)
   USE vmec_main
   USE vmec_params, ONLY: ntmax

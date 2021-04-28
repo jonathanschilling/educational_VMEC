@@ -1,4 +1,10 @@
 !> \file
+!> \brief Extends function from \c ntheta2 to \c ntheta3 range.
+
+!> \brief Extends function from \c ntheta2 to \c ntheta3 range.
+!>
+!> @param bsubsu tangential derivative of covariant magnetic field component \f$\partial B_s / \partial \theta\f$
+!> @param bsubsv tangential derivative of covariant magnetic field component \f$\partial B_s / \partial \zeta\f$
 SUBROUTINE fsym_invfft (bsubsu, bsubsv)
   USE vmec_main, ONLY: rprec, ns, nzeta, ntheta1, ntheta2, ntheta3, ireflect
   IMPLICIT NONE

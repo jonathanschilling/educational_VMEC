@@ -1,4 +1,11 @@
 !> \file
+!> \brief Print iteration progress to screen and \c threed1 output file.
+
+!> \brief Print iteration progress to screen and \c threed1 output file.
+!>
+!> @param i0 current iteration number
+!> @param delt0 current time step
+!> @param w0 current MHD energy
 SUBROUTINE printout(i0, delt0, w0)
   USE vmec_main
   USE realspace

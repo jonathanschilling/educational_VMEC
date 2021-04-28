@@ -1,4 +1,15 @@
 !> \file
+!> \brief Solves the radial force balance \f$\mathbf{B} \cdot B_s = F_s\f$ for \f$B_s\f$ in real space using collocation.
+
+!> \brief Solves the radial force balance \f$\mathbf{B} \cdot B_s = F_s\f$ for \f$B_s\f$ in real space using collocation.
+!>
+!> @param bsubsmn Fourier coefficients of B_s
+!> @param frho Fourier coefficients of radial Force component
+!> @param bsupu contravariant component of magnetic field \f$B^\theta\f$
+!> @param bsupv contravariant component of magnetic field \f$B^\zeta\f$
+!> @param mmax maximum poloidal mode number
+!> @param nmax maximum toroidal mode number
+!> @param info error flag
 SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
   USE stel_kinds
   USE vmec_input, ONLY: nfp, nzeta, lasym
@@ -6,10 +17,13 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
   USE vmec_persistent, ONLY: cosmu, sinmu, cosnv, sinnv
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: mmax, nmax
-  INTEGER, INTENT(out) :: info
   REAL(rprec), INTENT(out) :: bsubsmn(0:mmax, -nmax:nmax, 0:1)
-  REAL(rprec), DIMENSION(nzeta, ntheta3), INTENT(in) :: bsupu, bsupv, frho
+  REAL(rprec), DIMENSION(nzeta, ntheta3), INTENT(in) :: frho
+  REAL(rprec), DIMENSION(nzeta, ntheta3), INTENT(in) :: bsupu
+  REAL(rprec), DIMENSION(nzeta, ntheta3), INTENT(in) :: bsupv
+  INTEGER, INTENT(in) :: mmax
+  INTEGER, INTENT(in) :: nmax
+  INTEGER, INTENT(out) :: info
 
   REAL(rprec), PARAMETER :: p5 = 0.5_dp, one = 1
 

@@ -1,4 +1,8 @@
 !> \file
+!> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
+
+!> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
+!>
 SUBROUTINE jacobian
   USE vmec_main, ONLY: ohs, nrzt, irst
   USE vmec_params, ONLY: meven, modd

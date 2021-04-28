@@ -1,4 +1,9 @@
 !> \file
+!> \brief Iteratively evolve the Fourier coefficients that specify the equilibrium.
+
+!> \brief Iteratively evolve the Fourier coefficients that specify the equilibrium.
+!>
+!> @param ier_flag error flag
 SUBROUTINE eqsolve(ier_flag)
 
   USE vmec_main

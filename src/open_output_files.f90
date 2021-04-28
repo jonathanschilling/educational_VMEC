@@ -1,4 +1,10 @@
 !> \file
+!> \brief Open output files.
+
+!> \brief Open output files.
+!>
+!> @param extension input file "extension": part after \c 'input.' .
+!> @param lfirst flag to indicate if this is the first call to this routine or not
 SUBROUTINE open_output_files (extension, lfirst)
   USE safe_open_mod
   USE vparams, ONLY: nthreed, nthreed0

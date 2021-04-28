@@ -1,4 +1,13 @@
 !> \file
+!> \brief Take a single time step in Fourier space to evolve the Fourier coefficients
+!>        describing the equilibrium towards force balance.
+
+!> \brief Take a single time step in Fourier space to evolve the Fourier coefficients
+!>        describing the equilibrium towards force balance.
+!>
+!> @param time_step step length in parameter space to take
+!> @param ier_flag error flag
+!> @param liter_flag keep running?
 SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   USE vmec_main
   USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,       &

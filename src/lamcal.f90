@@ -1,4 +1,12 @@
 !> \file
+!> \brief Normalization parameters for \f$\lambda\f$
+
+!> \brief Normalization parameters for \f$\lambda\f$
+!>
+!> @param overg inverse of Jacobian \f$1/\sqrt{g}\f$
+!> @param guu metric element \f$g_{\theta \theta}\f$
+!> @param guv metric element \f$g_{\theta \zeta}\f$
+!> @param gvv metric element \f$g_{\zeta \zeta}\f$
 SUBROUTINE lamcal(overg, guu, guv, gvv)
   USE vmec_main
   USE vmec_params, ONLY: ntmax, jlam, lamscale

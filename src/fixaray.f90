@@ -1,7 +1,13 @@
 !> \file
+!> \brief allocate and fill some fixed-size arrays (only depending on Fourier resolution).
+
+!> \brief allocate and fill some fixed-size arrays (only depending on Fourier resolution).
+!>
 SUBROUTINE fixaray
+
   USE vmec_main, p5 => cp5
   USE vmec_params, ONLY: jmin2, mscale, nscale, mnyq, nnyq, signgs
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: two=2, pexp=4

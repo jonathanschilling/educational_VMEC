@@ -1,12 +1,33 @@
 !> \file
+!> \brief Convert internal mode representation to standard form for output
+!>        (coefficients of cos(mu-nv), sin(mu-nv) without internal \c mscale , \c nscale norms).
+
+!> \brief Convert internal mode representation to standard form for output
+!>        (coefficients of cos(mu-nv), sin(mu-nv) without internal \c mscale , \c nscale norms).
+!>
+!> @param rmnc stellarator-symmetric Fourier coefficients of \f$R\f$
+!> @param zmns stellarator-symmetric Fourier coefficients of \f$Z\f$
+!> @param lmns stellarator-symmetric Fourier coefficients of \f$\lambda\f$
+!> @param rmns non-stellarator-symmetric Fourier coefficients of \f$R\f$
+!> @param zmnc non-stellarator-symmetric Fourier coefficients of \f$Z\f$
+!> @param lmnc non-stellarator-symmetric Fourier coefficients of \f$\lambda\f$
+!> @param rzl_array state vector (all Fourier coefficients) of VMEC
+!> @param js index of flux surface at which to do the conversion
 SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
+
   USE vmec_main
   USE vmec_params
+
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: js
-  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: rmnc
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: zmns
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: lmns
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: rmns
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: zmnc
+  REAL(rprec), DIMENSION(mnmax), INTENT(out) :: lmnc
   REAL(rprec), DIMENSION(ns, 0:ntor, 0:mpol1, 3*ntmax), INTENT(in) :: rzl_array
+  INTEGER, INTENT(in) :: js
 
   REAL(rprec), PARAMETER :: p5 = 0.5_dp
 

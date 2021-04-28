@@ -1,4 +1,9 @@
 !> \file
+!> \brief Open output files and print banner message at the top.
+
+!> \brief Open output files and print banner message at the top.
+!>
+!> @param extension input file "extension": part after \c 'input.' .
 SUBROUTINE heading(extension)
   USE vmec_main, ONLY: rprec
   USE vparams, ONLY: nthreed

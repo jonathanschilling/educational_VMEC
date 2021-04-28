@@ -1,4 +1,6 @@
 !> \file
+!> \brief This module containes code to create a profile constructed of line segments.
+
 !*******************************************************************************
 !  File line_segment.f
 !
@@ -8,6 +10,8 @@
 !
 !*******************************************************************************
 
+!> \brief This module containes code to create a profile constructed of line segments.
+!>        These line segments are assumed to be specified such that \f$xx(i) < xx(i + 1)\f$.
       MODULE line_segment
       USE stel_kinds
       USE stel_constants

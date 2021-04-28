@@ -1,4 +1,8 @@
 !> \file
+!> \brief Free memory required by funct3d()
+
+!> \brief Free memory required by funct3d()
+!>
 SUBROUTINE free_mem_funct3d
   USE vmec_main
   USE realspace

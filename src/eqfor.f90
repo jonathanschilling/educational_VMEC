@@ -1,5 +1,19 @@
 !> \file
+!> \brief Basis physics analysis and evaluaton of force balance.
+!>        This is where most of the contents of the \c threed1 output file is computed.
+
+!> \brief Basis physics analysis and evaluaton of force balance.
+!>        This is where most of the contents of the \c threed1 output file is computed.
+!>
+!> @param br cylindrical component of magnetic field \f$B^R\f$
+!> @param bz cylindrical component of magnetic field \f$B^Z\f$
+!> @param bsubu covariant component of magnetic field \f$B_\theta\f$
+!> @param bsubv covariant component of magnetic field \f$B_\zeta\f$
+!> @param tau Jacobian \f$\sqrt{g} = R \tau\f$
+!> @param rzl_array state vector (all Fourier coefficients) of VMEC
+!> @param ier_flag error flag
 SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
+
   USE vmec_main
   USE vmec_params
   USE realspace

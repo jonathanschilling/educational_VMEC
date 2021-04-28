@@ -1,3 +1,7 @@
+!> \file
+!> \brief Main program of stand-alone version of NESTOR
+
+!> \brief Main program of stand-alone version of NESTOR
 program nestor
   use stel_kinds, only: dp
   use vacmod0, only: set_nestor_sizes

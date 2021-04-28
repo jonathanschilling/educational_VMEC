@@ -1,4 +1,10 @@
 !> \file
+!> \brief Compute the covariant components of the magnetic field \f$B_\theta\f$, \f$B_\zeta\f$.
+
+!> \brief Compute the covariant components of the magnetic field \f$B_\theta\f$, \f$B_\zeta\f$.
+!>
+!> @param lu \f$\partial\lambda / \partial\theta\f$
+!> @param lv \f$\partial\lambda / \partial\zeta\f$
 SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
   USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale
@@ -12,7 +18,8 @@ SUBROUTINE bcovar (lu, lv)
   USE fbal
   IMPLICIT NONE
 
-  REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lu, lv
+  REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lu
+  REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lv
 
   ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1) (STORED IN VMEC_PARAMS)
 

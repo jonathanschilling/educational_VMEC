@@ -1,4 +1,24 @@
 !> \file
+!> \brief Compute preconditioning matrix elements for \f$R\f$, \f$Z\f$ force.
+
+!> \brief Compute preconditioning matrix elements for \f$R\f$, \f$Z\f$ force.
+!>
+!> @param lu1
+!> @param bsq
+!> @param gsqrt
+!> @param r12
+!> @param xs
+!> @param xu12
+!> @param xue
+!> @param xuo
+!> @param xodd
+!> @param axm
+!> @param axd
+!> @param bxm
+!> @param bxd
+!> @param cx
+!> @param eqfactor
+!> @param trigmult
 SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,     &
                     xodd, axm, axd, bxm, bxd,                     &
                     cx, eqfactor, trigmult)

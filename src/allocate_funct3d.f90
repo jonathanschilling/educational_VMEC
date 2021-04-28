@@ -1,4 +1,8 @@
 !> \file
+!> \brief allocate arrays required in funct3d()
+
+!> \brief allocate arrays required in funct3d()
+!>
 SUBROUTINE allocate_funct3d
   USE vmec_main
   USE realspace

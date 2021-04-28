@@ -1,4 +1,9 @@
 !> \file
+!> \brief Write the output files.
+
+!> \brief Write the output files.
+!>
+!> @param ier_flag error flag
 SUBROUTINE fileout(ier_flag)
   USE vmec_main
   USE vac_persistent

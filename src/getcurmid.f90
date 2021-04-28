@@ -1,7 +1,17 @@
 !> \file
+!> \brief Get current at midplane (?)
+
+!> \brief Get current at midplane (?)
+!>
+!> @param curmid current at midplane (?)
+!> @param izeta index in toroidal direction
+!> @param gsqrt Jacobian
+!> @param r12 \f$R^2\f$
 SUBROUTINE getcurmid (curmid, izeta, gsqrt, r12)
+
   USE vmec_input, ONLY: rprec, dp, nzeta
   USE vmec_dim, ONLY: ns, ns1, ntheta2
+
   implicit none
 
   REAL(rprec) :: curmid(2*ns)

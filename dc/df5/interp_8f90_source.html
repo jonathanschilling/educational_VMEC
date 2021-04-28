@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <a href="../../dc/df5/interp_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">   11</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a>(xnew, xold, scalxc, nsnew, nsold)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">USE </span>vmec_main, <span class="keywordtype">ONLY</span>: dp, rprec, mnsize</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: ntmax</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span>vmec_persistent, <span class="keywordtype">ONLY</span>: ixm</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, <span class="keywordtype">ONLY</span>: dp, rprec, mnsize</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d74/namespacevmec__params.html">vmec_params</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/d2f/namespacevmec__persistent.html">vmec_persistent</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">ixm</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">intent(in)</span> :: nsnew, nsold</div>
@@ -138,10 +138,10 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="comment">! ON ENTRY, XOLD = X(COARSE MESH) * SCALXC(COARSE MESH)</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">! ON EXIT,  XNEW = X(NEW MESH)   [ NOT SCALED BY 1/SQRTS ]</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">DO</span> ntype = 1, 3*ntmax</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">DO</span> ntype = 1, 3*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     <span class="comment">! extrapolation to axis for odd-m modes (?)</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize), 2) .eq. 1) &amp;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="keywordflow">WHERE</span> (mod(<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">ixm</a>(:mnsize), 2) .eq. 1) &amp;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;       xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="comment">! radial interpolation from old, coarse state vector to new, finer state vector</span></div>
@@ -158,19 +158,24 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;     <span class="comment">! Zero M=1 modes at origin</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize),2) .eq. 1) &amp;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;     <span class="keywordflow">WHERE</span> (mod(<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">ixm</a>(:mnsize),2) .eq. 1) &amp;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        xnew(1,:,ntype) = 0</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">END SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div>
 <div class="ttc" id="ainterp_8f90_html_a5bac7725cb89730c4bd187e158dc36ee"><div class="ttname"><a href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div><div class="ttdeci">subroutine interp(xnew, xold, scalxc, nsnew, nsold)</div><div class="ttdoc">Interpolate ,  and  on full grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df5/interp_8f90_source.html#l00011">interp.f90:12</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_ad3c490e03f80af81375898a02206693c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">vmec_params::ntmax</a></div><div class="ttdeci">integer ntmax</div><div class="ttdoc">number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params.f90:38</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html">vmec_persistent</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00002">vmec_persistent.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html_af7aad46efbcb1acadd4560829f32a47e"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">vmec_persistent::ixm</a></div><div class="ttdeci">integer, dimension(:), allocatable ixm</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00008">vmec_persistent.f90:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/df5/interp_8f90.html">interp.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

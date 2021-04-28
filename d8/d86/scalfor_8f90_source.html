@@ -113,10 +113,10 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 </div><!--header-->
 <div class="contents">
 <a href="../../d8/d86/scalfor_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vmec_params</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vmec_dim, <span class="keywordtype">ONLY</span>: ns</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a>(gcx, axm, bxm, axd, bxd, cx, iflag)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d2/d10/namespacevmec__dim.html">vmec_dim</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">INTENT(in)</span> :: iflag</div>
@@ -133,10 +133,10 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: mult_fac</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="comment">! LOGICAL :: ledge ! improved convergence for free-boundary, see below</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">ALLOCATE</span> (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">ALLOCATE</span> (ax(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,0:ntor,0:mpol1), bx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,0:ntor,0:mpol1), dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,0:ntor,0:mpol1))</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  jmax = ns</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">IF</span> (ivac .lt. 1) jmax = ns1</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  jmax = <a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a> .lt. 1) jmax = ns1</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">! FOR SOME 3D PLASMAS, THIS SOMETIME HELPS (CHOOSE mult_fac =1 otherwise)</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="comment">! TO AVOID JACOBIAN RESETS BY GIVING A SMOOTH TRANSITION FROM FIXED TO FREE ITERATIONS</span></div>
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordflow">DO</span> m = 0, mpol1</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     mp = mod(m,2) + 1</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">DO</span> js = jmin2(m), jmax</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">DO</span> js = <a class="code" href="../../d1/d74/namespacevmec__params.html#a390b1760d50df0bd43a86096b219a5a5">jmin2</a>(m), jmax</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;           ax(js,n,m) = -(axm(js+1,mp) + bxm(js+1,mp)*m**2)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;           bx(js,n,m) = -(axm(js,mp) + bxm(js,mp)*m**2)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;           dx(js,n,m) = -(axd(js,mp) + bxd(js,mp)*m**2 + cx(js)*(n*nfp)**2)</div>
@@ -163,24 +163,24 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">IF</span> (jmax .ge. ns) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">IF</span> (jmax .ge. <a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">! SMALL EDGE PEDESTAL NEEDED TO IMPROVE CONVERGENCE</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">! IN PARTICULAR, NEEDED TO ACCOUNT FOR POTENTIAL ZERO</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">! EIGENVALUE DUE TO NEUMANN (GRADIENT) CONDITION AT EDGE</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;     dx(ns,:,0:1)     = (1+  edge_pedestal)*dx(ns,:,0:1)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     dx(ns,:,2:mpol1) = (1+2*edge_pedestal)*dx(ns,:,2:mpol1)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;     dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,:,0:1)     = (1+  edge_pedestal)*dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,:,0:1)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,:,2:mpol1) = (1+2*edge_pedestal)*dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,:,2:mpol1)</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;     <span class="comment">! STABILIZATION ALGORITHM FOR ZC_00(NS)</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     <span class="comment">! FOR UNSTABLE CASE, HAVE TO FLIP SIGN OF -FAC -&gt; +FAC FOR CONVERGENCE</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     <span class="comment">! COEFFICIENT OF &lt; Ru (R Pvac)&gt; ~ -fac*(z-zeq) WHERE fac (EIGENVALUE, OR</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;     <span class="comment">! FIELD INDEX) DEPENDS ON THE EQUILIBRIUM MAGNETIC FIELD AND CURRENT,</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;     <span class="comment">! AND zeq IS THE EQUILIBRIUM EDGE VALUE OF Z00</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      mult_fac = min(fac, fac*hs*15)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      mult_fac = min(fac, fac*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*15)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keywordflow">IF</span> (iflag .eq. 1) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;         <span class="comment">! METHOD 1: SUBTRACT (INSTABILITY) Pedge ~ fac*z/hs FROM PRECONDITIONER AT EDGE</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;         dx(ns,0,0) = dx(ns,0,0)*(1-mult_fac)/(1+edge_pedestal)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;         dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,0,0) = dx(<a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>,0,0)*(1-mult_fac)/(1+edge_pedestal)</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">      END IF</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">  ENDIF</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
@@ -202,18 +202,28 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">! SOLVES BX(I)*X(I-1)+DX(I)*X(I)+AX(I)*X(I+1)=GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">CALL </span>tridslv (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, ns, ntmax)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db">tridslv</a> (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, <a class="code" href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">ns</a>, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>)</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keyword">DEALLOCATE</span> (ax, bx, dx)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">END SUBROUTINE </span>scalfor</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a></div>
+<div class="ttc" id="anamespacevmec__dim_html"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html">vmec_dim</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00002">vmec_dim.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__dim_html_a55ef707f6235875f5f51ca7d72808dc5"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html#a55ef707f6235875f5f51ca7d72808dc5">vmec_dim::ns</a></div><div class="ttdeci">integer ns</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00017">vmec_dim.f90:17</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_a2f41223cbac50df3309e516d00894c51"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">vmec_main::hs</a></div><div class="ttdeci">real(rprec) hs</div><div class="ttdoc">radial mesh size increment</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00083">vmec_main.f90:83</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_a8fcc8e91c9349bd9a5f248787d5cf5ac"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">vmec_main::ivac</a></div><div class="ttdeci">integer ivac</div><div class="ttdoc">counts number of free-boundary iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00157">vmec_main.f90:157</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a390b1760d50df0bd43a86096b219a5a5"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a390b1760d50df0bd43a86096b219a5a5">vmec_params::jmin2</a></div><div class="ttdeci">integer, dimension(0:mpold), parameter jmin2</div><div class="ttdoc">starting js(m) values for which R,Z are evolved</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00016">vmec_params.f90:16</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_ad3c490e03f80af81375898a02206693c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">vmec_params::ntmax</a></div><div class="ttdeci">integer ntmax</div><div class="ttdoc">number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params.f90:38</a></div></div>
+<div class="ttc" id="ascalfor_8f90_html_a20fb7039b82d05e64d01a2e50431ba5e"><div class="ttname"><a href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a></div><div class="ttdeci">subroutine scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d86/scalfor_8f90_source.html#l00002">scalfor.f90:3</a></div></div>
+<div class="ttc" id="atridslv_8f90_html_abf5399c0154abe7424c54d7fa9eb69db"><div class="ttname"><a href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db">tridslv</a></div><div class="ttdeci">subroutine tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d40/tridslv_8f90_source.html#l00002">tridslv.f90:3</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d86/scalfor_8f90.html">scalfor.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

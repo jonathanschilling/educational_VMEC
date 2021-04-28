@@ -119,20 +119,279 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90.html','../../'); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a169610bcc5544fc8e16ad1e10ac85dcb"><td class="memItemLeft" align="right" valign="top"><a id="a169610bcc5544fc8e16ad1e10ac85dcb"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>symforce</b> (ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)</td></tr>
+<tr class="memitem:a169610bcc5544fc8e16ad1e10ac85dcb"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">symforce</a> (ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)</td></tr>
 <tr class="separator:a169610bcc5544fc8e16ad1e10ac85dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2489a93ca37b283b9dec6888826083ae"><td class="memItemLeft" align="right" valign="top"><a id="a2489a93ca37b283b9dec6888826083ae"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>symoutput</b> (bsq, gsqrt, bsubu, bsubv, bsupu, bsupv, bsubs, bsqa, gsqrta, bsubua, bsubva, bsupua, bsupva, bsubsa)</td></tr>
+<tr class="memitem:a2489a93ca37b283b9dec6888826083ae"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae">symoutput</a> (bsq, gsqrt, bsubu, bsubv, bsupu, bsupv, bsubs, bsqa, gsqrta, bsubua, bsubva, bsupua, bsupva, bsubsa)</td></tr>
 <tr class="separator:a2489a93ca37b283b9dec6888826083ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a169610bcc5544fc8e16ad1e10ac85dcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a169610bcc5544fc8e16ad1e10ac85dcb">&#9670;&nbsp;</a></span>symforce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine symforce </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>ars</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>brs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>crs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>azs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>bzs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>czs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>bls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>cls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>rcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(inout)&#160;</td>
+          <td class="paramname"><em>zcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>ara</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>bra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>cra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>aza</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>bza</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>cza</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>bla</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>cla</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>rca</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>zca</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/df3/symforce_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d4/df3/symforce_8f90_source.html">symforce.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00141">vmec_main::ireflect</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/df3/symforce_8f90_a169610bcc5544fc8e16ad1e10ac85dcb_icgraph.svg" width="524" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a2489a93ca37b283b9dec6888826083ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2489a93ca37b283b9dec6888826083ae">&#9670;&nbsp;</a></span>symoutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine symoutput </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>gsqrt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsubu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsubv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsupu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsupv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(inout)&#160;</td>
+          <td class="paramname"><em>bsubs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsqa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>gsqrta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsubua</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsubva</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsupua</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsupva</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>bsubsa</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/df3/symforce_8f90_source.html#l00081">81</a> of file <a class="el" href="../../d4/df3/symforce_8f90_source.html">symforce.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00141">vmec_main::ireflect</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00003">wrout()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/df3/symforce_8f90_a2489a93ca37b283b9dec6888826083ae_icgraph.svg" width="403" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/df3/symforce_8f90.html">symforce.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

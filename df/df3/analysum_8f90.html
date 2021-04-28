@@ -119,17 +119,123 @@ $(document).ready(function(){initNavTree('df/df3/analysum_8f90.html','../../'); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aa51b1a5786e7b5719fe2ca679efc66b0"><td class="memItemLeft" align="right" valign="top"><a id="aa51b1a5786e7b5719fe2ca679efc66b0"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>analysum</b> (grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)</td></tr>
+<tr class="memitem:aa51b1a5786e7b5719fe2ca679efc66b0"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0">analysum</a> (grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)</td></tr>
 <tr class="separator:aa51b1a5786e7b5719fe2ca679efc66b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aa51b1a5786e7b5719fe2ca679efc66b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51b1a5786e7b5719fe2ca679efc66b0">&#9670;&nbsp;</a></span>analysum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine analysum </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf,nuv2,ndim), intent(inout)&#160;</td>
+          <td class="paramname"><em>grpmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf,ndim), intent(inout)&#160;</td>
+          <td class="paramname"><em>bvec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(nuv2), intent(in)&#160;</td>
+          <td class="paramname"><em>sl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(nuv2), intent(in)&#160;</td>
+          <td class="paramname"><em>tl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ivacskip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical, intent(in)&#160;</td>
+          <td class="paramname"><em>lasym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf), intent(inout)&#160;</td>
+          <td class="paramname"><em>m_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf), intent(inout)&#160;</td>
+          <td class="paramname"><em>n_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf,nuv2), intent(inout)&#160;</td>
+          <td class="paramname"><em>grpmn_m_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:mf,-nf:nf,nuv2), intent(inout)&#160;</td>
+          <td class="paramname"><em>grpmn_n_map</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/df3/analysum_8f90_source.html#l00002">2</a> of file <a class="el" href="../../df/df3/analysum_8f90_source.html">analysum.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00034">vacmod::bexni</a>, and <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00099">vacmod::grpmn</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d73/analyt_8f90_source.html#l00003">analyt()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../df/df3/analysum_8f90_aa51b1a5786e7b5719fe2ca679efc66b0_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../df/df3/analysum_8f90.html">analysum.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

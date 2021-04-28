@@ -113,135 +113,158 @@ $(document).ready(function(){initNavTree('d4/dc8/read__indata_8f90_source.html',
 </div><!--header-->
 <div class="contents">
 <a href="../../d4/dc8/read__indata_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>read_indata(in_file, iunit, ier_flag)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vmec_input, <span class="keywordtype">ONLY</span>: bloat, ncurr</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vmec_params</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">USE </span>vacmod0, <span class="keywordtype">only</span>: set_nestor_sizes</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">USE </span>safe_open_mod</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>vmec_input, <span class="keywordtype">ONLY</span>: read_indata_namelist</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">INTEGER</span> ier_flag, iunit</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span> :: in_file</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">INTEGER</span> :: ireadseq, iosnml = 0</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  iunit = indata0</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">CALL </span>safe_open (iunit, ireadseq, in_file, <span class="stringliteral">&#39;old&#39;</span>, <span class="stringliteral">&#39;formatted&#39;</span>)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">IF</span> (ireadseq .ne. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;     <span class="keyword">WRITE</span> (6, <span class="stringliteral">&#39;(3a,i4)&#39;</span>) <span class="stringliteral">&#39; In VMEC, error opening input file: &#39;</span>,trim(in_file),<span class="stringliteral">&#39;. Iostat = &#39;</span>, ireadseq</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;     ier_flag = input_error_flag</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  iosnml = 0</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  rewind(iunit)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">CALL </span>read_indata_namelist (iunit, iosnml)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">IF</span> (iosnml .ne. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     <span class="keyword">WRITE</span> (6, <span class="stringliteral">&#39;(a,i4)&#39;</span>) <span class="stringliteral">&#39; In VMEC, indata NAMELIST error: iostat = &#39;</span>, iosnml</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     ier_flag = input_error_flag</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">IF</span> (lfreeb .and. mgrid_file.eq.<span class="stringliteral">&#39;NONE&#39;</span>) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="comment">! disable free-boundary mode if mgrid file is not specified</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;     lfreeb = .false.</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordflow">IF</span> (bloat .eq. zero) bloat = one</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">IF</span> ((bloat.ne.one) .and. (ncurr.ne.1)) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="comment">! bloat != 1 is only allowed when ncurr == 1</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     ier_flag = 3 <span class="comment">! &#39;VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.&#39;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7">    9</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7">read_indata</a>(in_file, iunit, ier_flag)</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d8/dbf/namespacevmec__input.html">vmec_input</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d8/dbf/namespacevmec__input.html#a83e5aafbc0ab73e0b5c00f37c601309a">bloat</a>, <a class="code" href="../../d8/dbf/namespacevmec__input.html#af26e121e53eae32bc88ceaade7c767d6">ncurr</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d2/d04/namespacevacmod0.html">vacmod0</a>, <span class="keywordtype">only</span>: <a class="code" href="../../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a">set_nestor_sizes</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d0/d29/namespacesafe__open__mod.html">safe_open_mod</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d8/dbf/namespacevmec__input.html">vmec_input</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0">read_indata_namelist</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">INTEGER</span> ier_flag, iunit</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span> :: in_file</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">INTEGER</span> :: ireadseq, iosnml = 0</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  iunit = indata0</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb">safe_open</a> (iunit, ireadseq, in_file, <span class="stringliteral">&#39;old&#39;</span>, <span class="stringliteral">&#39;formatted&#39;</span>)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">IF</span> (ireadseq .ne. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="keyword">WRITE</span> (6, <span class="stringliteral">&#39;(3a,i4)&#39;</span>) <span class="stringliteral">&#39; In VMEC, error opening input file: &#39;</span>,trim(in_file),<span class="stringliteral">&#39;. Iostat = &#39;</span>, ireadseq</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     ier_flag = <a class="code" href="../../d1/d74/namespacevmec__params.html#a85bdca5125bff330b911768e130765c2">input_error_flag</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  iosnml = 0</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  rewind(iunit)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0">read_indata_namelist</a> (iunit, iosnml)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">IF</span> (iosnml .ne. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;     <span class="keyword">WRITE</span> (6, <span class="stringliteral">&#39;(a,i4)&#39;</span>) <span class="stringliteral">&#39; In VMEC, indata NAMELIST error: iostat = &#39;</span>, iosnml</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     ier_flag = <a class="code" href="../../d1/d74/namespacevmec__params.html#a85bdca5125bff330b911768e130765c2">input_error_flag</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">IF</span> (lfreeb .and. mgrid_file.eq.<span class="stringliteral">&#39;NONE&#39;</span>) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <span class="comment">! disable free-boundary mode if mgrid file is not specified</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     lfreeb = .false.</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">! fixup current profile</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">IF</span> (ncurr.eq.1 .and. all(ac.eq.cbig)) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;     <span class="comment">! previous version input of current profile: via ai (iota profile coeffs)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     <span class="comment">! Old FORMAT: may not be reading in ac</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;     ac = ai</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">WHERE</span> (ac .eq. cbig) ac = zero</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">! COMPUTE NTHETA, NZETA VALUES</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  mpol = abs(mpol)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  ntor = abs(ntor)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">IF</span> (mpol .gt. mpold) stop <span class="stringliteral">&#39;mpol&gt;mpold: lower mpol&#39;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">IF</span> (ntor .gt. ntord) stop <span class="stringliteral">&#39;ntor&gt;ntord: lower ntor&#39;</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  mpol1 = mpol - 1</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  ntor1 = ntor + 1</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">IF</span> (ntheta .lt. 2*mpol+6 ) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">! number of theta grid points (&gt;=2*mpol+6)</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    ntheta = 2*mpol+6</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  ntheta1 = 2*(ntheta/2) <span class="comment">! even (rounded down) ntheta</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">! u = pi</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  ntheta2 = 1 + ntheta1/2 <span class="comment">! odd stellarator-symmetric little-more-than-half of ntheta</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  lthreed = (ntor .gt. 0)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordflow">IF</span> (ntor.eq.0 .and. nzeta.eq.0) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;     <span class="comment">! Tokamak (ntor=0) needs (at least) nzeta=1</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;     <span class="comment">! I think this implies that in principle one could do an axisymmetric run with nzeta&gt;1...</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;     nzeta = 1</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">IF</span> (ntor.gt.0)<span class="keywordflow">then</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">! Stellarator case needs Nyquist criterion fulfilled for nzeta wrt. ntor</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">IF</span> (nzeta .lt. 2*ntor+4) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      nzeta = 2*ntor+4      <span class="comment">!number of zeta grid points (=1 IF ntor=0)</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordflow">    ENDIF</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">IF</span> (bloat .eq. zero) bloat = one</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">IF</span> ((bloat.ne.one) .and. (ncurr.ne.1)) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;     <span class="comment">! bloat != 1 is only allowed when ncurr == 1</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     ier_flag = 3 <span class="comment">! &#39;VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.&#39;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">! fixup current profile</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">IF</span> (ncurr.eq.1 .and. all(ac.eq.cbig)) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;     <span class="comment">! previous version input of current profile: via ai (iota profile coeffs)</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;     <span class="comment">! Old FORMAT: may not be reading in ac</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;     ac = ai</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">WHERE</span> (ac .eq. cbig) ac = zero</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">! COMPUTE NTHETA, NZETA VALUES</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  mpol = abs(mpol)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  ntor = abs(ntor)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">IF</span> (mpol .gt. mpold) stop <span class="stringliteral">&#39;mpol&gt;mpold: lower mpol&#39;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">IF</span> (ntor .gt. ntord) stop <span class="stringliteral">&#39;ntor&gt;ntord: lower ntor&#39;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  mpol1 = mpol - 1</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  ntor1 = ntor + 1</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">IF</span> (ntheta .lt. 2*mpol+6 ) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">! number of theta grid points (&gt;=2*mpol+6)</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    ntheta = 2*mpol+6</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  ntheta1 = 2*(ntheta/2) <span class="comment">! even (rounded down) ntheta</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">! u = pi</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  ntheta2 = 1 + ntheta1/2 <span class="comment">! odd stellarator-symmetric little-more-than-half of ntheta</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a> = (ntor .gt. 0)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">IF</span> (ntor.eq.0 .and. nzeta.eq.0) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="comment">! Tokamak (ntor=0) needs (at least) nzeta=1</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <span class="comment">! I think this implies that in principle one could do an axisymmetric run with nzeta&gt;1...</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     nzeta = 1</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">! SIZE of rmnc,  rmns,  ...</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  mnmax = ntor1 + mpol1*(1 + 2*ntor)</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">! SIZE of rmncc, rmnss, ...</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">! --&gt; m = 0, 1, ..., (mpol-1); n = 0, 1, ..., ntor</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  mnsize = mpol*ntor1</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">IF</span> (ntor.gt.0)<span class="keywordflow">then</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">! Stellarator case needs Nyquist criterion fulfilled for nzeta wrt. ntor</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">IF</span> (nzeta .lt. 2*ntor+4) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      nzeta = 2*ntor+4      <span class="comment">!number of zeta grid points (=1 IF ntor=0)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordflow">    ENDIF</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordflow">  ENDIF</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">! INDEXING FOR PACKED-ARRAY STRUCTURE OF XC, GC</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="comment">! The result of this can be seen in the comment section at the top of data/xstuff.f90 .</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  rcc = 1;  zsc = 1</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  rss = 0;  rsc = 0;  rcs = 0</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  zcc = 0;  zss = 0;  zcs = 0</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">IF</span> (.NOT.lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;     <span class="comment">! can make use of Stellarator symmetry</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;     ntheta3 = ntheta2</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;     <span class="keywordflow">IF</span> (lthreed) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        ntmax = 2</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        rss = 2;  zcs = 2</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;     <span class="keywordflow">ELSE</span> <span class="comment">! lthreed = F</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        ntmax = 1</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">ELSE</span> <span class="comment">! lasym = T</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;     ntheta3 = ntheta1</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;     <span class="keywordflow">IF</span> (lthreed) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;         ntmax = 4</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;         rss = 2;  rsc = 3;  rcs = 4</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;         zcs = 2;  zcc = 3;  zss = 4</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;     <span class="keywordflow">ELSE</span> <span class="comment">! lthreed = F</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;         ntmax = 2</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;         rsc = 2;  zcc = 2</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  nznt = nzeta*ntheta3</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keyword">call </span>set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">END SUBROUTINE </span>read_indata</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">! SIZE of rmnc,  rmns,  ...</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  mnmax = ntor1 + mpol1*(1 + 2*ntor)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">! SIZE of rmncc, rmnss, ...</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">! --&gt; m = 0, 1, ..., (mpol-1); n = 0, 1, ..., ntor</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  mnsize = mpol*ntor1</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">! INDEXING FOR PACKED-ARRAY STRUCTURE OF XC, GC</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">! The result of this can be seen in the comment section at the top of data/xstuff.f90 .</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="../../d1/d74/namespacevmec__params.html#aed80eaad151fb8f1ac522fab2cb675fb">rcc</a> = 1;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a857da7831c9e135f320bf9df9e09e09c">zsc</a> = 1</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a> = 0;  <a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a> = 0;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34">rcs</a> = 0</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a> = 0;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">zss</a> = 0;  <a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a> = 0</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">IF</span> (.NOT.lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     <span class="comment">! can make use of Stellarator symmetry</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;     ntheta3 = ntheta2</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;     <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a> = 2</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a> = 2;  <a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a> = 2</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     <span class="keywordflow">ELSE</span> <span class="comment">! lthreed = F</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a> = 1</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordflow">ELSE</span> <span class="comment">! lasym = T</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;     ntheta3 = ntheta1</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;     <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;         <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a> = 4</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;         <a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a> = 2;  <a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a> = 3;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34">rcs</a> = 4</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;         <a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a> = 2;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a> = 3;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">zss</a> = 4</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     <span class="keywordflow">ELSE</span> <span class="comment">! lthreed = F</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;         <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a> = 2</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;         <a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a> = 2;  <a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a> = 2</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordflow">  END IF</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  nznt = nzeta*ntheta3</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keyword">call </span><a class="code" href="../../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a">set_nestor_sizes</a>(nfp, ntor, mpol, nzeta, ntheta, lasym)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7">read_indata</a></div>
+<div class="ttc" id="anamespacesafe__open__mod_html"><div class="ttname"><a href="../../d0/d29/namespacesafe__open__mod.html">safe_open_mod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d9f/safe__open__mod_8f_source.html#l00002">safe_open_mod.f:2</a></div></div>
+<div class="ttc" id="anamespacesafe__open__mod_html_aab207f9769415b0cccd91260a8382eeb"><div class="ttname"><a href="../../d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb">safe_open_mod::safe_open</a></div><div class="ttdeci">subroutine safe_open(iunit, istat, filename, filestat, fileform, record_in, access_in, delim_in)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d9f/safe__open__mod_8f_source.html#l00011">safe_open_mod.f:13</a></div></div>
+<div class="ttc" id="anamespacevacmod0_html"><div class="ttname"><a href="../../d2/d04/namespacevacmod0.html">vacmod0</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/de2/vacmod0_8f90_source.html#l00002">vacmod0.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod0_html_a4be777018e003400355a27b190d7d39a"><div class="ttname"><a href="../../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a">vacmod0::set_nestor_sizes</a></div><div class="ttdeci">subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de2/vacmod0_8f90_source.html#l00027">vacmod0.f90:28</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html">vmec_input</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00002">vmec_input.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_a02b29863a947531e6c4e8d7c66c5a5e0"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0">vmec_input::read_indata_namelist</a></div><div class="ttdeci">subroutine read_indata_namelist(iunit, istat)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00087">vmec_input.f90:88</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_a83e5aafbc0ab73e0b5c00f37c601309a"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#a83e5aafbc0ab73e0b5c00f37c601309a">vmec_input::bloat</a></div><div class="ttdeci">real(rprec) bloat</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00038">vmec_input.f90:38</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_af26e121e53eae32bc88ceaade7c767d6"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#af26e121e53eae32bc88ceaade7c767d6">vmec_input::ncurr</a></div><div class="ttdeci">integer ncurr</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00016">vmec_input.f90:16</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_ac815c089a079d08356f5740573842c86"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">vmec_main::lthreed</a></div><div class="ttdeci">logical lthreed</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main.f90:136</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a1b2efb0e9bfbb306b1e86cdb4ecabb34"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34">vmec_params::rcs</a></div><div class="ttdeci">integer rcs</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params.f90:43</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a3fbf7f74d050798433a4c9dff3eba6de"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">vmec_params::zcc</a></div><div class="ttdeci">integer zcc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params.f90:46</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a77d85b5e65ece025135fb6f65d4659bb"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">vmec_params::zss</a></div><div class="ttdeci">integer zss</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params.f90:47</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a857da7831c9e135f320bf9df9e09e09c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a857da7831c9e135f320bf9df9e09e09c">vmec_params::zsc</a></div><div class="ttdeci">integer zsc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params.f90:44</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a85bdca5125bff330b911768e130765c2"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a85bdca5125bff330b911768e130765c2">vmec_params::input_error_flag</a></div><div class="ttdeci">integer, parameter input_error_flag</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00022">vmec_params.f90:22</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a97fe667ec67d78d1ff0235e1978e2d34"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">vmec_params::rss</a></div><div class="ttdeci">integer rss</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params.f90:41</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aa24c48d82f06c3475c9e495244bcda33"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">vmec_params::zcs</a></div><div class="ttdeci">integer zcs</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params.f90:45</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_ad3c490e03f80af81375898a02206693c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">vmec_params::ntmax</a></div><div class="ttdeci">integer ntmax</div><div class="ttdoc">number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params.f90:38</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aed80eaad151fb8f1ac522fab2cb675fb"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aed80eaad151fb8f1ac522fab2cb675fb">vmec_params::rcc</a></div><div class="ttdeci">integer rcc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params.f90:40</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aee8e7f84a9d92797c7411048c55ce3e9"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">vmec_params::rsc</a></div><div class="ttdeci">integer rsc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params.f90:42</a></div></div>
+<div class="ttc" id="aread__indata_8f90_html_a93b4b27202925d5f2783e8a4da81a8d7"><div class="ttname"><a href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7">read_indata</a></div><div class="ttdeci">subroutine read_indata(in_file, iunit, ier_flag)</div><div class="ttdoc">Read the INDATA namelist from a given input file.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dc8/read__indata_8f90_source.html#l00009">read_indata.f90:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/dc8/read__indata_8f90.html">read_indata.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

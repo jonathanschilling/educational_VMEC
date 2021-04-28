@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('de/d64/spline__cubic__int_8f_source.ht
 </div><!--header-->
 <div class="contents">
 <a href="../../de/d64/spline__cubic__int_8f.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;      <span class="keyword">subroutine </span>spline_cubic_int(x,y,xx,yy,n,iflag)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;      <span class="keywordtype">USE </span>stel_kinds</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../de/d64/spline__cubic__int_8f.html#ad67b8e5169554dbccb5cf79f069dc055">    2</a></span>&#160;      <span class="keyword">subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#ad67b8e5169554dbccb5cf79f069dc055">spline_cubic_int</a>(x,y,xx,yy,n,iflag)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;      <span class="keywordtype">USE </span><a class="code" href="../../db/dcb/namespacestel__kinds.html">stel_kinds</a></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;      <span class="keywordtype">implicit none</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">!----------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">! iflag = 0   normal return</span></div>
@@ -160,14 +160,14 @@ $(document).ready(function(){initNavTree('de/d64/spline__cubic__int_8f_source.ht
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     &gt;  /(xx(n-2)-xx(n-1))</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      ypn=(yy(n-1)-yy(n))/(xx(n-1)-xx(n))-c*(xx(n-1)-xx(n))</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keyword">call </span>spline_int(xx,yy,n,yp1,ypn,y2)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keyword">call </span>splint_int(xx,yy,y2,n,x,y)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keyword">call </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#a63307cd586733f21daca60330abd56a9">spline_int</a>(xx,yy,n,yp1,ypn,y2)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keyword">call </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#aa733cd2e81ca5dcc5d570cad7f085908">splint_int</a>(xx,yy,y2,n,x,y)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">return</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keyword">contains</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keyword">subroutine </span>spline_int(x,y,n,yp1,ypn,y2)</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="../../de/d64/spline__cubic__int_8f.html#a63307cd586733f21daca60330abd56a9">   56</a></span>&#160;      <span class="keyword">subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#a63307cd586733f21daca60330abd56a9">spline_int</a>(x,y,n,yp1,ypn,y2)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">! taken from numerical recipes f77 and recoded.</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">! Given the arrays x(1:n) and y(1:n) containing the tabulated function</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">! with x(1) &lt; x(2) &lt;...&lt; x(n) and given values yp1 and ypn for the first</span></div>
@@ -214,9 +214,9 @@ $(document).ready(function(){initNavTree('de/d64/spline__cubic__int_8f_source.ht
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        y2(k)=y2(k)*y2(k+1)+u(k)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordflow">      enddo</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keywordflow">return</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keyword">end subroutine </span>spline_int</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keyword">end subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#a63307cd586733f21daca60330abd56a9">spline_int</a></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keyword">subroutine </span>splint_int(xa,ya,y2a,n,x,y)</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="../../de/d64/spline__cubic__int_8f.html#aa733cd2e81ca5dcc5d570cad7f085908">  105</a></span>&#160;      <span class="keyword">subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#aa733cd2e81ca5dcc5d570cad7f085908">splint_int</a>(xa,ya,y2a,n,x,y)</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">! Given the arrays xa(1:n) and ya(1:n) of length n, which tabulate a function</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">! with the xa(i)&#39;s in order), and given the array y2a(1:n), which is the</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">! output from spline above, and given a value of x, this routine returns</span></div>
@@ -261,17 +261,21 @@ $(document).ready(function(){initNavTree('de/d64/spline__cubic__int_8f_source.ht
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;     &gt;    dy2a(klo)*dx**2*(dx**2-2*h**2)/(h*24.d+0)</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      y= y+c</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      <span class="keywordflow">return</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      <span class="keyword">end subroutine </span>splint_int</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      <span class="keyword">end subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#aa733cd2e81ca5dcc5d570cad7f085908">splint_int</a></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keyword">end subroutine </span>spline_cubic_int</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keyword">end subroutine </span><a class="code" href="../../de/d64/spline__cubic__int_8f.html#ad67b8e5169554dbccb5cf79f069dc055">spline_cubic_int</a></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="ttc" id="anamespacestel__kinds_html"><div class="ttname"><a href="../../db/dcb/namespacestel__kinds.html">stel_kinds</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d97/stel__kinds_8f90_source.html#l00002">stel_kinds.f90:2</a></div></div>
+<div class="ttc" id="aspline__cubic__int_8f_html_a63307cd586733f21daca60330abd56a9"><div class="ttname"><a href="../../de/d64/spline__cubic__int_8f.html#a63307cd586733f21daca60330abd56a9">spline_int</a></div><div class="ttdeci">subroutine spline_int(x, y, n, yp1, ypn, y2)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d64/spline__cubic__int_8f_source.html#l00056">spline_cubic_int.f:57</a></div></div>
+<div class="ttc" id="aspline__cubic__int_8f_html_aa733cd2e81ca5dcc5d570cad7f085908"><div class="ttname"><a href="../../de/d64/spline__cubic__int_8f.html#aa733cd2e81ca5dcc5d570cad7f085908">splint_int</a></div><div class="ttdeci">subroutine splint_int(xa, ya, y2a, n, x, y)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d64/spline__cubic__int_8f_source.html#l00105">spline_cubic_int.f:106</a></div></div>
+<div class="ttc" id="aspline__cubic__int_8f_html_ad67b8e5169554dbccb5cf79f069dc055"><div class="ttname"><a href="../../de/d64/spline__cubic__int_8f.html#ad67b8e5169554dbccb5cf79f069dc055">spline_cubic_int</a></div><div class="ttdeci">subroutine spline_cubic_int(x, y, xx, yy, n, iflag)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d64/spline__cubic__int_8f_source.html#l00002">spline_cubic_int.f:3</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/d64/spline__cubic__int_8f.html">spline_cubic_int.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

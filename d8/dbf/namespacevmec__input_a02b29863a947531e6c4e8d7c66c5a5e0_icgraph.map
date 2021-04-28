@@ -1,0 +1,6 @@
+<map id="vmec_input::read_indata_namelist" name="vmec_input::read_indata_namelist">
+<area shape="rect" id="node1" title=" " alt="" coords="351,5,513,47"/>
+<area shape="rect" id="node2" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="213,13,303,39"/>
+<area shape="rect" id="node3" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="108,13,165,39"/>
+<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,13,60,39"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="free_mem_funct3d" name="free_mem_funct3d">
+<area shape="rect" id="node1" title="Free memory required by funct3d()" alt="" coords="564,31,695,57"/>
+<area shape="rect" id="node2" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="399,5,516,32"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node3" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="263,5,351,32"/>
+<area shape="rect" id="node4" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="108,5,215,32"/>
+</map>

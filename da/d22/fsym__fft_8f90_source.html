@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('da/d22/fsym__fft_8f90_source.html','..
 <a href="../../da/d22/fsym__fft_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee">    9</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee">fext_fft</a> (bout, bs_s, bs_a)</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta3)</span>, <span class="keywordtype">INTENT(out)</span> :: bout</div>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('da/d22/fsym__fft_8f90_source.html','..
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">   47</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">fsym_fft</a> (bs, bu, bv, bs_s, bu_s, bv_s, bs_a, bu_a, bv_a)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
@@ -182,13 +182,14 @@ $(document).ready(function(){initNavTree('da/d22/fsym__fft_8f90_source.html','..
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">fsym_fft</a></div>
 <div class="ttc" id="afsym__fft_8f90_html_a019fe7da811a16aec5f0726e33df73ba"><div class="ttname"><a href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">fsym_fft</a></div><div class="ttdeci">subroutine fsym_fft(bs, bu, bv, bs_s, bu_s, bv_s, bs_a, bu_a, bv_a)</div><div class="ttdoc">Contract bs,bu,bv from full nu interval to half-u interval so cos, sin integrals can be performed on ...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d22/fsym__fft_8f90_source.html#l00047">fsym_fft.f90:48</a></div></div>
 <div class="ttc" id="afsym__fft_8f90_html_a5558cd119122c53bb067ab7fc61b9fee"><div class="ttname"><a href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee">fext_fft</a></div><div class="ttdeci">subroutine fext_fft(bout, bs_s, bs_a)</div><div class="ttdoc">Extends  from ntheta2 interval to full ntheta3 interval in angle .</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d22/fsym__fft_8f90_source.html#l00009">fsym_fft.f90:10</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/d22/fsym__fft_8f90.html">fsym_fft.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

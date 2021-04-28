@@ -119,23 +119,215 @@ $(document).ready(function(){initNavTree('d8/d60/spline__cubic_8f.html','../../'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a60e9606a5fa1dcb7f79f9259b8e0d067"><td class="memItemLeft" align="right" valign="top"><a id="a60e9606a5fa1dcb7f79f9259b8e0d067"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spline_cubic</b> (x, y, xx, yy, n, iflag)</td></tr>
+<tr class="memitem:a60e9606a5fa1dcb7f79f9259b8e0d067"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067">spline_cubic</a> (x, y, xx, yy, n, iflag)</td></tr>
 <tr class="separator:a60e9606a5fa1dcb7f79f9259b8e0d067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83fa704212982fff74dee5f6c68b241f"><td class="memItemLeft" align="right" valign="top"><a id="a83fa704212982fff74dee5f6c68b241f"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spline_nr</b> (x, y, n, yp1, ypn, y2)</td></tr>
+<tr class="memitem:a83fa704212982fff74dee5f6c68b241f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d60/spline__cubic_8f.html#a83fa704212982fff74dee5f6c68b241f">spline_nr</a> (x, y, n, yp1, ypn, y2)</td></tr>
 <tr class="separator:a83fa704212982fff74dee5f6c68b241f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d13bcd91bd68259f6dbd2deb9919e6d"><td class="memItemLeft" align="right" valign="top"><a id="a1d13bcd91bd68259f6dbd2deb9919e6d"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>splint_nr</b> (xa, ya, y2a, n, x, y)</td></tr>
+<tr class="memitem:a1d13bcd91bd68259f6dbd2deb9919e6d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d60/spline__cubic_8f.html#a1d13bcd91bd68259f6dbd2deb9919e6d">splint_nr</a> (xa, ya, y2a, n, x, y)</td></tr>
 <tr class="separator:a1d13bcd91bd68259f6dbd2deb9919e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a60e9606a5fa1dcb7f79f9259b8e0d067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60e9606a5fa1dcb7f79f9259b8e0d067">&#9670;&nbsp;</a></span>spline_cubic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spline_cubic </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(out)&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>xx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>yy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>iflag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00002">2</a> of file <a class="el" href="../../d8/d60/spline__cubic_8f_source.html">spline_cubic.f</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00057">spline_nr()</a>, and <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00106">splint_nr()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, and <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d60/spline__cubic_8f_a60e9606a5fa1dcb7f79f9259b8e0d067_cgraph.svg" width="228" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d60/spline__cubic_8f_a60e9606a5fa1dcb7f79f9259b8e0d067_icgraph.svg" width="463" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a83fa704212982fff74dee5f6c68b241f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83fa704212982fff74dee5f6c68b241f">&#9670;&nbsp;</a></span>spline_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spline_cubic::spline_nr </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>yp1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>ypn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(out)&#160;</td>
+          <td class="paramname"><em>y2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00056">56</a> of file <a class="el" href="../../d8/d60/spline__cubic_8f_source.html">spline_cubic.f</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00003">spline_cubic()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d60/spline__cubic_8f_a83fa704212982fff74dee5f6c68b241f_icgraph.svg" width="586" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a1d13bcd91bd68259f6dbd2deb9919e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d13bcd91bd68259f6dbd2deb9919e6d">&#9670;&nbsp;</a></span>splint_nr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spline_cubic::splint_nr </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>xa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>ya</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>y2a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(out)&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00105">105</a> of file <a class="el" href="../../d8/d60/spline__cubic_8f_source.html">spline_cubic.f</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00003">spline_cubic()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d60/spline__cubic_8f_a1d13bcd91bd68259f6dbd2deb9919e6d_icgraph.svg" width="582" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d60/spline__cubic_8f.html">spline_cubic.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

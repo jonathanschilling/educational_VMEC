@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['icurv_382',['icurv',['../de/d7d/vmec__main_8f90.html#afa27ff9660af5f8390fed850ffe7242e',1,'vmec_main']]],
-  ['iequi_383',['iequi',['../de/d7d/vmec__main_8f90.html#a68e1a2561e54d21e792c65aeda66546d',1,'vmec_main']]],
-  ['ijacob_384',['ijacob',['../de/d7d/vmec__main_8f90.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff',1,'vmec_main']]],
-  ['iotas_385',['iotas',['../de/d7d/vmec__main_8f90.html#aeec11c572d79c8b9bdfae7abd05962e4',1,'vmec_main']]],
-  ['ireflect_386',['ireflect',['../de/d7d/vmec__main_8f90.html#ac523d415be1865ef549b6a55a98fdd1a',1,'vmec_main']]],
-  ['irst_387',['irst',['../de/d7d/vmec__main_8f90.html#a8bd32483d10580f6097bb69785152e51',1,'vmec_main']]],
-  ['irzloff_388',['irzloff',['../de/d7d/vmec__main_8f90.html#a0c433ca884dcd789eeca5e0332cefa19',1,'vmec_main']]],
-  ['iter1_389',['iter1',['../de/d7d/vmec__main_8f90.html#a3ef2c519ce424159dd2c7d44a00c463c',1,'vmec_main']]],
-  ['iter2_390',['iter2',['../de/d7d/vmec__main_8f90.html#aed24975620399849c6967823bd798274',1,'vmec_main']]],
-  ['ivac_391',['ivac',['../de/d7d/vmec__main_8f90.html#a8fcc8e91c9349bd9a5f248787d5cf5ac',1,'vmec_main']]]
+  ['equif_1766',['equif',['../d1/d6c/namespacevmec__main.html#a053aa8fd1bf1601d8887afd982e5f83a',1,'vmec_main::equif()'],['../db/dae/namespaceread__wout__mod.html#a453b186e8d4292edb8cf0d6034c3d05c',1,'read_wout_mod::equif()']]],
+  ['extcur_1767',['extcur',['../d8/dbf/namespacevmec__input.html#aabe72ad80fc933f4d79871a7190e8d7e',1,'vmec_input::extcur()'],['../db/dc0/namespacenestor__io.html#a330679b204a7b8de496ab6582864b94d',1,'nestor_io::extcur()'],['../db/dae/namespaceread__wout__mod.html#a26f65896faf7b57ea4fa5aae7f5c0ec1',1,'read_wout_mod::extcur()']]],
+  ['extra1_1768',['extra1',['../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524',1,'realspace']]],
+  ['extra2_1769',['extra2',['../d7/d0e/namespacerealspace.html#ae090572875428770c681f3012ca4e22b',1,'realspace']]],
+  ['extra3_1770',['extra3',['../d7/d0e/namespacerealspace.html#a616383e8d55b1cf412dbe030b2d1f8b0',1,'realspace']]],
+  ['extra4_1771',['extra4',['../d7/d0e/namespacerealspace.html#a653a7aae0ed5dd68e90df07fa58eb49d',1,'realspace']]]
 ];

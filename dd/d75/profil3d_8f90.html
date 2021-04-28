@@ -115,21 +115,85 @@ $(document).ready(function(){initNavTree('dd/d75/profil3d_8f90.html','../../'); 
 </div><!--header-->
 <div class="contents">
 
+<p>Compute three-dimensional profiles of flux-surface geometry etc.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../dd/d75/profil3d_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a67d2774ceac255f1e1f75e54f4679e9c"><td class="memItemLeft" align="right" valign="top"><a id="a67d2774ceac255f1e1f75e54f4679e9c"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>profil3d</b> (rmn, zmn, lreset)</td></tr>
+<tr class="memitem:a67d2774ceac255f1e1f75e54f4679e9c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c">profil3d</a> (rmn, zmn, lreset)</td></tr>
+<tr class="memdesc:a67d2774ceac255f1e1f75e54f4679e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute three-dimensional profiles of flux-surface geometry etc.  <a href="../../dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c">More...</a><br /></td></tr>
 <tr class="separator:a67d2774ceac255f1e1f75e54f4679e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Compute three-dimensional profiles of flux-surface geometry etc. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../dd/d75/profil3d_8f90_source.html">profil3d.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a67d2774ceac255f1e1f75e54f4679e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67d2774ceac255f1e1f75e54f4679e9c">&#9670;&nbsp;</a></span>profil3d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine profil3d </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>rmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>zmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical, intent(in)&#160;</td>
+          <td class="paramname"><em>lreset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute three-dimensional profiles of flux-surface geometry etc. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rmn</td><td>Fourier coefficients of \(R\) </td></tr>
+    <tr><td class="paramname">zmn</td><td>Fourier coefficients of \(R\) </td></tr>
+    <tr><td class="paramname">lreset</td><td>flag to indicate the geometry of the LCFS (and axis ?) should be used to interpolate into the plasma volume </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dd/d75/profil3d_8f90_source.html#l00009">9</a> of file <a class="el" href="../../dd/d75/profil3d_8f90_source.html">profil3d.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d8/df9/realspace_8f90_source.html#l00026">realspace::chip</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00063">vmec_main::chips</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00069">vmec_main::faclam</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00141">vmec_main::ireflect</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00149">vmec_main::irzloff</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00053">vmec_params::mscale</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00055">vmec_params::nscale</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d8/df9/realspace_8f90_source.html#l00025">realspace::phip</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00064">vmec_main::phips</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params::rcc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00115">vmec_main::rmn_bdy</a>, <a class="el" href="../../d5/dad/xstuff_8f90_source.html#l00052">xstuff::scalxc</a>, <a class="el" href="../../d8/df9/realspace_8f90_source.html#l00028">realspace::sqrts</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00052">vmec_params::uminus</a>, <a class="el" href="../../d8/df9/realspace_8f90_source.html#l00029">realspace::wint</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00116">vmec_main::zmn_bdy</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, and <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dd/d75/profil3d_8f90_a67d2774ceac255f1e1f75e54f4679e9c_icgraph.svg" width="331" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dd/d75/profil3d_8f90.html">profil3d.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

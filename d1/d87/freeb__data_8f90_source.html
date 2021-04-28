@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <a href="../../d1/d87/freeb__data_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">   12</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a> (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span>vacmod, <span class="keywordtype">only</span>: brv, bphiv, bzv, bsqvac, potvac, mnpd, xmpot, xnpot</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">USE </span>realspace, <span class="keywordtype">ONLY</span>: r1, z1</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/df2/namespacevacmod.html">vacmod</a>, <span class="keywordtype">only</span>: <a class="code" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>, <a class="code" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>, <a class="code" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>, <a class="code" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>, <a class="code" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, mnpd, xmpot, xnpot</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d7/d0e/namespacerealspace.html">realspace</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(mnmax)</span> :: rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1</div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">! WRITE OUT EDGE VALUES OF FIELDS TO FORT.NEDGE0 (INCLUDE REFLECTED POINT)</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">! NOTE: BR, BPHI, BZ WERE COMPUTED IN BSS, CALLED FROM EQFOR</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">IF</span> (ivac.le.0 .or. .not.lfreeb) <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a>.le.0 .or. .not.lfreeb) <span class="keywordflow">RETURN</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">ALLOCATE</span> (rb(2*nznt), phib(2*nznt), zb(2*nznt), stat=l)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordflow">IF</span> (l .ne. 0) stop <span class="stringliteral">&#39;allocation error in freeb_data&#39;</span></div>
@@ -142,9 +142,9 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        lk = iv + nzeta*(iu-1)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        nl = ns*lk</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        nedge = nedge+1</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        rb(lk)   = r1(nl,0) + r1(nl,1)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        rb(lk)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,1)</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        phib(lk) = zeta</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        zb(lk)   = z1(nl,0) + z1(nl,1)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        zb(lk)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,1)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">! INCLUDE -u,-v POINTS HERE BY STELLARATOR SYMMETRY</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">IF</span> (.not.lasym .and. (iu.ne.1 .and. iu.ne.ntheta2)) <span class="keywordflow">THEN</span></div>
@@ -153,9 +153,9 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;          rb(lkr)   = rb(lk)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;          phib(lkr) =-phib(lk)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          zb(lkr)   =-zb(lk)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;          bredge(lkr) = -bredge(lk)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          bpedge(lkr) =  bpedge(lk)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;          bzedge(lkr) =  bzedge(lk)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;          <a class="code" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lkr) = -<a class="code" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lkr) =  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;          <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lkr) =  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">        ENDIF</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordflow">  END DO</span></div>
@@ -175,21 +175,21 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">IF</span> (iprint .eq. 1) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;           <span class="keywordflow">DO</span> k = 1, ntheta2</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;              lk = l + nzeta*(k - 1)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;              <span class="keyword">WRITE</span> (nthreed, 770) zeta, rb(lk), zb(lk), (bsqsav(lk,n),n=1,3), bsqvac(lk)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;              <span class="keyword">WRITE</span> (nthreed, 770) zeta, rb(lk), zb(lk), (<a class="code" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(lk,n),n=1,3), <a class="code" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(lk)</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordflow">           END DO</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">ELSE</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;           <span class="keywordflow">DO</span> k = 1, ntheta2</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;              lk = l + nzeta*(k - 1)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;              <span class="keyword">WRITE</span> (nthreed, 780) zeta, rb(lk), zb(lk),                &amp;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                                   bredge(lk), bpedge(lk), bzedge(lk),  &amp;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                   brv(lk), bphiv(lk), bzv(lk)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                                   <a class="code" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk), <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk), <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk),  &amp;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                   <a class="code" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>(lk), <a class="code" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>(lk), <a class="code" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>(lk)</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordflow">           END DO</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordflow">        ENDIF</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">! allocated in eqfor</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">DEALLOCATE</span> (rb, phib, zb, bredge, bpedge, bzedge, stat=l)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">DEALLOCATE</span> (rb, phib, zb, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>, stat=l)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;     <span class="keyword">WRITE</span> (nthreed, 900)</div>
@@ -198,8 +198,8 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;              potsin = potvac(mn0)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              potcos = potvac(mn0+mnpd)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;              potsin = <a class="code" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              potcos = <a class="code" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0+mnpd)</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;              <span class="keywordflow">EXIT</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordflow">           END IF</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordflow">        END DO</span></div>
@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;              potsin = potvac(mn0)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;              potsin = <a class="code" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;              <span class="keywordflow">EXIT</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordflow">           END IF</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keywordflow">        END DO</span></div>
@@ -242,13 +242,28 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div>
 <div class="ttc" id="afreeb__data_8f90_html_a71de251d01e145a30e3f710ac705f217"><div class="ttname"><a href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div><div class="ttdeci">subroutine freeb_data(rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)</div><div class="ttdoc">Write out edge values of fields.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d87/freeb__data_8f90_source.html#l00012">freeb_data.f90:13</a></div></div>
+<div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
+<div class="ttc" id="anamespacerealspace_html_a937d85c71022f8871c8cc064655fb046"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">realspace::z1</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable, target z1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00011">realspace.f90:11</a></div></div>
+<div class="ttc" id="anamespacerealspace_html_ab65b4b8100f333047e3cb71a66ca0f6a"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">realspace::r1</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable r1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00008">realspace.f90:8</a></div></div>
+<div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a06909a4b247dc8ec0552ade9a4060cfd"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">vacmod::bsqvac</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bsqvac</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00040">vacmod.f90:40</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a3f50984fae7d8ff213cd113c3a5502c2"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">vacmod::bzv</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bzv</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00038">vacmod.f90:38</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a602a7a7e2e36b0d52efa57de5fabf5ee"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">vacmod::potvac</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable, target potvac</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00026">vacmod.f90:26</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a83e5e95e9786a71e39365724567111e7"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">vacmod::brv</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable brv</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00036">vacmod.f90:36</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ab4c7594357e8ad454a8424d5ad7050aa"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">vacmod::bphiv</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bphiv</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00037">vacmod.f90:37</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_a052fa02a018421af8e190fd988db9b62"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">vmec_main::bredge</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bredge</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00074">vmec_main.f90:74</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_a8fcc8e91c9349bd9a5f248787d5cf5ac"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">vmec_main::ivac</a></div><div class="ttdeci">integer ivac</div><div class="ttdoc">counts number of free-boundary iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00157">vmec_main.f90:157</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_aa03b9c0193141fd8821ab3e370cabcce"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">vmec_main::bsqsav</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable bsqsav</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00072">vmec_main.f90:72</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_aad9451590052e3c7081d6f3ad56673a1"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">vmec_main::bpedge</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bpedge</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00075">vmec_main.f90:75</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_ae0645669e2877c810707fd69f89d4451"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">vmec_main::bzedge</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bzedge</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00076">vmec_main.f90:76</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d1/d87/freeb__data_8f90.html">freeb_data.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

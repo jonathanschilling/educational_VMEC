@@ -115,10 +115,10 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <a href="../../d1/d9b/getbsubs_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">   13</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">getbsubs</a> (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span>stel_kinds</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">USE </span>vmec_input, <span class="keywordtype">ONLY</span>: nfp, nzeta, lasym</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">USE </span>vmec_dim, <span class="keywordtype">ONLY</span>: ntheta2, ntheta3</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">USE </span>vmec_persistent, <span class="keywordtype">ONLY</span>: cosmu, sinmu, cosnv, sinnv</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../db/dcb/namespacestel__kinds.html">stel_kinds</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d8/dbf/namespacevmec__input.html">vmec_input</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d8/dbf/namespacevmec__input.html#ab0cc4e8af292085788e013dffad82886">nfp</a>, <a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, <a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d2/d10/namespacevmec__dim.html">vmec_dim</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../d2/d10/namespacevmec__dim.html#ab918cc49462b258724ae401b04fd8f4b">ntheta2</a>, <a class="code" href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">ntheta3</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/d2f/namespacevmec__persistent.html">vmec_persistent</a>, <span class="keywordtype">ONLY</span>: <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a534ba6f8704cf69c642b386813e6ee57">cosmu</a>, <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a7acdde5979068e45a4809957f1484faa">sinmu</a>, <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af8956f39ea0977689cf3949c88116394">cosnv</a>, <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#ac18340e426f03e76a966013fe59922ba">sinnv</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(out)</span> :: bsubsmn(0:mmax, -nmax:nmax, 0:1)</div>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: ccmn, ssmn, csmn, scmn, dm, dn, termsc, termcs, termcc, termss, amn</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">ALLOCATABLE</span> :: amatrix(:,:), save_matrix(:,:), brhs(:)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">LOGICAL</span> :: lpior0</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">EXTERNAL</span> solver</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">EXTERNAL</span> <a class="code" href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">! Solves the radial force balance B dot bsubs = Fs for bsubs in real space using collocation</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">! Here, Fs = frho(mn) is the Fourier transform SQRT(g)*F (part of radial force</span></div>
@@ -150,11 +150,11 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">! where 0&lt;=m&lt;=mmax and 0&lt;=n&lt;=nmax</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  info = -3</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">IF</span> ((mmax+1 .ne. ntheta2) .or. (nmax .ne. nzeta/2)) <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">IF</span> ((mmax+1 .ne. <a class="code" href="../../d2/d10/namespacevmec__dim.html#ab918cc49462b258724ae401b04fd8f4b">ntheta2</a>) .or. (nmax .ne. <a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2)) <span class="keywordflow">RETURN</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  nmax1 = max(0,nmax-1)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  itotal = ntheta3*nzeta</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">IF</span> (.not.lasym) itotal = itotal - 2*nmax1</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  itotal = <a class="code" href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">ntheta3</a>*<a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">IF</span> (.not.<a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) itotal = itotal - 2*nmax1</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">ALLOCATE</span> (amatrix(itotal, itotal), brhs(itotal), save_matrix(itotal, itotal), stat=m)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">IF</span> (m .ne. 0) stop <span class="stringliteral">&#39;Allocation error in getbsubs&#39;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
@@ -166,23 +166,23 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  ijtot = 0</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  brhs = 0</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">DO</span> i = 1, ntheta3</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;     <span class="keywordflow">DO</span> j = 1, nzeta</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">DO</span> i = 1, <a class="code" href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">ntheta3</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;     <span class="keywordflow">DO</span> j = 1, <a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">! IGNORE u=0,pi POINTS FOR v &gt; pi: REFLECTIONAL SYMMETRY</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        lpior0 = ((i.eq.1 .or. i.eq.ntheta2) .and. (j.gt.nzeta/2+1))</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">IF</span> (lpior0 .and. .not. lasym) cycle</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        lpior0 = ((i.eq.1 .or. i.eq.<a class="code" href="../../d2/d10/namespacevmec__dim.html#ab918cc49462b258724ae401b04fd8f4b">ntheta2</a>) .and. (j.gt.<a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2+1))</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">IF</span> (lpior0 .and. .not. <a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        ijtot = ijtot + 1</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        brhs(ijtot) = frho(j,i)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        mntot = 0</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">DO</span> m = 0, mmax</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;           <span class="keywordflow">DO</span> n = 0, nmax</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;              <span class="keywordflow">IF</span> (mntot .ge. itotal) <span class="keywordflow">EXIT</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              <span class="keywordflow">IF</span> (m.eq.0 .and. n.eq.0 .and. lasym) cycle</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              <span class="keywordflow">IF</span> (m.eq.0 .and. n.eq.0 .and. <a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;              mntot = mntot+1</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;              ccmn = cosmu(i,m)*cosnv(j,n)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;              ssmn = sinmu(i,m)*sinnv(j,n)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;              ccmn = <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a534ba6f8704cf69c642b386813e6ee57">cosmu</a>(i,m)*<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af8956f39ea0977689cf3949c88116394">cosnv</a>(j,n)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;              ssmn = <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a7acdde5979068e45a4809957f1484faa">sinmu</a>(i,m)*<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#ac18340e426f03e76a966013fe59922ba">sinnv</a>(j,n)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;              dm = m * bsupu(j,i)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;              dn = n * bsupv(j,i) * nfp</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;              dn = n * bsupv(j,i) * <a class="code" href="../../d8/dbf/namespacevmec__input.html#ab0cc4e8af292085788e013dffad82886">nfp</a></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;              termsc = dm*ccmn - dn*ssmn</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;              termcs =-dm*ssmn + dn*ccmn</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;              <span class="keywordflow">IF</span> (n.eq.0 .or. n.eq.nmax) <span class="keywordflow">THEN</span></div>
@@ -205,13 +205,13 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                 amatrix(ijtot,mntot) = termcs</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordflow">              END IF</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;              <span class="keywordflow">IF</span> (.not.lasym) cycle</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;              <span class="keywordflow">IF</span> (.not.<a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;              <span class="keywordflow">IF</span> (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) cycle</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;              <span class="keywordflow">IF</span> (mntot .ge. itotal) <span class="keywordflow">EXIT</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;              mntot = mntot+1</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;              csmn = cosmu(i,m)*sinnv(j,n)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;              scmn = sinmu(i,m)*cosnv(j,n)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;              csmn = <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a534ba6f8704cf69c642b386813e6ee57">cosmu</a>(i,m)*<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#ac18340e426f03e76a966013fe59922ba">sinnv</a>(j,n)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;              scmn = <a class="code" href="../../dd/d2f/namespacevmec__persistent.html#a7acdde5979068e45a4809957f1484faa">sinmu</a>(i,m)*<a class="code" href="../../dd/d2f/namespacevmec__persistent.html#af8956f39ea0977689cf3949c88116394">cosnv</a>(j,n)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;              termcc =-dm*scmn - dn*csmn</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;              termss = dm*csmn + dn*scmn</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
@@ -234,10 +234,10 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  info = -1</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordflow">IF</span> (ijtot .ne. itotal .or. mntot .ne. itotal) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;     print *,<span class="stringliteral">&#39; itotal = &#39;</span>, itotal,<span class="stringliteral">&#39; ijtot = &#39;</span>, ijtot, <span class="stringliteral">&#39; mntot = &#39;</span>, mntot</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;     print *,<span class="stringliteral">&#39; ntheta3: &#39;</span>,ntheta3,<span class="stringliteral">&#39; nzeta: &#39;</span>, nzeta, <span class="stringliteral">&#39; mnyq: &#39;</span>, mmax,<span class="stringliteral">&#39; nnyq: &#39;</span>, nmax</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;     print *,<span class="stringliteral">&#39; ntheta3: &#39;</span>,<a class="code" href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">ntheta3</a>,<span class="stringliteral">&#39; nzeta: &#39;</span>, <a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, <span class="stringliteral">&#39; mnyq: &#39;</span>, mmax,<span class="stringliteral">&#39; nnyq: &#39;</span>, nmax</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;     <span class="keywordflow">GOTO</span> 200</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">ELSE</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;     <span class="keyword">CALL </span>solver (amatrix, brhs, itotal, 1, info)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a> (amatrix, brhs, itotal, 1, info)</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;     <span class="keywordflow">IF</span> (info .ne. 0) <span class="keywordflow">GOTO</span> 200</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keywordflow">  END IF</span></div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
@@ -246,10 +246,10 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="comment">! GOTO 100 ! comment this in to skip below test</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  ijtot = 0</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keywordflow">DO</span> i = 1, ntheta3</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;     <span class="keywordflow">DO</span> j = 1, nzeta</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        lpior0 = ((i.eq.1 .or. i.eq.ntheta2) .and. (j.gt.nzeta/2+1))</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">IF</span> (lpior0 .and. .not.lasym) cycle</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keywordflow">DO</span> i = 1, <a class="code" href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">ntheta3</a></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;     <span class="keywordflow">DO</span> j = 1, <a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        lpior0 = ((i.eq.1 .or. i.eq.<a class="code" href="../../d2/d10/namespacevmec__dim.html#ab918cc49462b258724ae401b04fd8f4b">ntheta2</a>) .and. (j.gt.<a class="code" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2+1))</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">IF</span> (lpior0 .and. .not.<a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        ijtot = ijtot + 1</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        amn = sum(save_matrix(ijtot,:)*brhs(:))</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">IF</span> (abs(amn) .lt. 1.e-12_dp) cycle</div>
@@ -270,7 +270,7 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">DO</span> m = 0, mmax</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;     <span class="keywordflow">DO</span> n = 0, nmax</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">IF</span> (mntot .ge. itotal) <span class="keywordflow">EXIT</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">IF</span> (m.eq.0 .and. n.eq.0 .and. lasym) cycle</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">IF</span> (m.eq.0 .and. n.eq.0 .and. <a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        mntot = mntot+1</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">IF</span> (n.eq.0 .or. n.eq.nmax) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;           <span class="keywordflow">IF</span> (m .gt. 0) <span class="keywordflow">THEN</span></div>
@@ -288,7 +288,7 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;           bsubsmn(m,-n,0) = brhs(mntot)</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keywordflow">        END IF</span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">IF</span> (.not.lasym) cycle</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">IF</span> (.not.<a class="code" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) cycle</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">IF</span> (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) cycle</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">IF</span> (mntot .ge. itotal) <span class="keywordflow">EXIT</span></div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        mntot = mntot+1</div>
@@ -312,13 +312,27 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90_source.html','../
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">getbsubs</a></div>
 <div class="ttc" id="agetbsubs_8f90_html_a5090459bbac22499a3c1c6a97740cd1b"><div class="ttname"><a href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">getbsubs</a></div><div class="ttdeci">subroutine getbsubs(bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)</div><div class="ttdoc">Solves the radial force balance  for  in real space using collocation.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d9b/getbsubs_8f90_source.html#l00013">getbsubs.f90:14</a></div></div>
+<div class="ttc" id="anamespacestel__kinds_html"><div class="ttname"><a href="../../db/dcb/namespacestel__kinds.html">stel_kinds</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d97/stel__kinds_8f90_source.html#l00002">stel_kinds.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__dim_html"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html">vmec_dim</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00002">vmec_dim.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__dim_html_a02ad11f279c4d318159ad2d14a523aa9"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html#a02ad11f279c4d318159ad2d14a523aa9">vmec_dim::ntheta3</a></div><div class="ttdeci">integer ntheta3</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00011">vmec_dim.f90:11</a></div></div>
+<div class="ttc" id="anamespacevmec__dim_html_ab918cc49462b258724ae401b04fd8f4b"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html#ab918cc49462b258724ae401b04fd8f4b">vmec_dim::ntheta2</a></div><div class="ttdeci">integer ntheta2</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00010">vmec_dim.f90:10</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html">vmec_input</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00002">vmec_input.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_aa44376c0bdcded8b56e0fe70c11c6553"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">vmec_input::lasym</a></div><div class="ttdeci">logical lasym</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00063">vmec_input.f90:63</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_ab0cc4e8af292085788e013dffad82886"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#ab0cc4e8af292085788e013dffad82886">vmec_input::nfp</a></div><div class="ttdeci">integer nfp</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00015">vmec_input.f90:15</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_acdf327762893b41f2bbe147f5825e396"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">vmec_input::nzeta</a></div><div class="ttdeci">integer nzeta</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00022">vmec_input.f90:22</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html">vmec_persistent</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00002">vmec_persistent.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html_a534ba6f8704cf69c642b386813e6ee57"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html#a534ba6f8704cf69c642b386813e6ee57">vmec_persistent::cosmu</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable cosmu</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00011">vmec_persistent.f90:11</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html_a7acdde5979068e45a4809957f1484faa"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html#a7acdde5979068e45a4809957f1484faa">vmec_persistent::sinmu</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable sinmu</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00012">vmec_persistent.f90:12</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html_ac18340e426f03e76a966013fe59922ba"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html#ac18340e426f03e76a966013fe59922ba">vmec_persistent::sinnv</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable sinnv</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00018">vmec_persistent.f90:18</a></div></div>
+<div class="ttc" id="anamespacevmec__persistent_html_af8956f39ea0977689cf3949c88116394"><div class="ttname"><a href="../../dd/d2f/namespacevmec__persistent.html#af8956f39ea0977689cf3949c88116394">vmec_persistent::cosnv</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable cosnv</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/vmec__persistent_8f90_source.html#l00017">vmec_persistent.f90:17</a></div></div>
+<div class="ttc" id="asolver_8f90_html_a1e815013ed24a9dddc80410103f4a220"><div class="ttname"><a href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a></div><div class="ttdeci">subroutine solver(amat, b, m, nrhs, info)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d39/solver_8f90_source.html#l00002">solver.f90:3</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d1/d9b/getbsubs_8f90.html">getbsubs.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

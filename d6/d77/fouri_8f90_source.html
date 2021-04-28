@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="contents">
 <a href="../../d6/d77/fouri_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a>(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vacmod, vm_amatrix =&gt; amatrix, vm_grpmn =&gt; grpmn</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_amatrix =&gt; <a class="code" href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">amatrix</a>, vm_grpmn =&gt; <a class="code" href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">grpmn</a></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(mnpd,nv,nu3,ndim)</span>, <span class="keywordtype">INTENT(in)</span> :: grpmn</div>
@@ -155,25 +155,25 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        k = k + 1</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">! anti-symmetric part</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        source(j,i,1) = gsource(k) - gsource(imirr(k))</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a>(j,i,1) = gsource(k) - gsource(imirr(k))</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">! gsource_sym.dat</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">! print *, i, j, source(j,i,1)</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;           <span class="comment">! symmetric part</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;           source(j,i,2) = gsource(k) + gsource(imirr(k))</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;           <a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a>(j,i,2) = gsource(k) + gsource(imirr(k))</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordflow">        end if</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  source = p5*onp*source <span class="comment">! TODO: why is this required?</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a> = <a class="code" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*<a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a> <span class="comment">! TODO: why is this required?</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">! INITIALIZE RUNNING-SUM ARRAYS</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  bcos = 0</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  bsin = 0</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  actemp = 0</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  astemp = 0</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a> = 0</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a> = 0</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a> = 0</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a> = 0</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  amatrix = 0</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
@@ -183,18 +183,18 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        cosn = cosv(n,kvi)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        sinn = sinv(n,kvi)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">DO</span> isym = 1, ndim</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;           bcos(:,n,isym) = bcos(:,n,isym) + cosn*source(kvi,:,isym)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;           bsin(:,n,isym) = bsin(:,n,isym) + sinn*source(kvi,:,isym)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;           <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(:,n,isym) = <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(:,n,isym) + cosn*<a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a>(kvi,:,isym)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;           <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(:,n,isym) = <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(:,n,isym) + sinn*<a class="code" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a>(kvi,:,isym)</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;           actemp(:,n,:,isym) = actemp(:,n,:,isym) + cosn*grpmn(:,kvi,:,isym)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;           astemp(:,n,:,isym) = astemp(:,n,:,isym) + sinn*grpmn(:,kvi,:,isym)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;           <a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,n,:,isym) = <a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,n,:,isym) + cosn*grpmn(:,kvi,:,isym)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;           <a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,n,:,isym) = <a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,n,:,isym) + sinn*grpmn(:,kvi,:,isym)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;           <span class="keywordflow">IF</span> (n .ne. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;              bcos(:,(-n),isym) =  bcos(:,n,isym)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;              bsin(:,(-n),isym) = -bsin(:,n,isym)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;              <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(:,(-n),isym) =  <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(:,n,isym)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;              <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(:,(-n),isym) = -<a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(:,n,isym)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;              actemp(:,(-n),:,isym) =  actemp(:,n,:,isym)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;              astemp(:,(-n),:,isym) = -astemp(:,n,:,isym)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;              <a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,(-n),:,isym) =  <a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,n,:,isym)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;              <a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,(-n),:,isym) = -<a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,n,:,isym)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordflow">           ENDIF</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordflow">        END DO</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordflow">     END DO</span></div>
@@ -205,9 +205,9 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     <span class="keywordflow">DO</span> kui = 1, nu2</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        cosm = cosui(m,kui)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        sinm = sinui(m,kui)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        bvec(m,-nf:nf,1)    = bvec(m,-nf:nf,1) + bcos(kui,-nf:nf,1)*sinm - bsin(kui,-nf:nf,1)*cosm</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        bvec(m,-nf:nf,1)    = bvec(m,-nf:nf,1) + <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(kui,-nf:nf,1)*sinm - <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(kui,-nf:nf,1)*cosm</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;           bvec(m,-nf:nf,2) = bvec(m,-nf:nf,2) + bcos(kui,-nf:nf,2)*cosm + bsin(kui,-nf:nf,2)*sinm</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;           bvec(m,-nf:nf,2) = bvec(m,-nf:nf,2) + <a class="code" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>(kui,-nf:nf,2)*cosm + <a class="code" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>(kui,-nf:nf,2)*sinm</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordflow">        END IF</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
@@ -219,17 +219,17 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        sinm = sinu(m,kui)*wint(kui*nv)</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">! SIN SIN&#39;</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        amatrix(:,m+1:mnpd:mf1,1) = amatrix(:,m+1:mnpd:mf1,1) + sinm*actemp(:,-nf:nf,kui,1) - cosm*astemp(:,-nf:nf,kui,1)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        amatrix(:,m+1:mnpd:mf1,1) = amatrix(:,m+1:mnpd:mf1,1) + sinm*<a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,-nf:nf,kui,1) - cosm*<a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,-nf:nf,kui,1)</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;           <span class="comment">! SIN COS&#39;</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;           amatrix(:,m+1:mnpd:mf1,2) = amatrix(:,m+1:mnpd:mf1,2) + cosm*actemp(:,-nf:nf,kui,1) + sinm*astemp(:,-nf:nf,kui,1)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;           amatrix(:,m+1:mnpd:mf1,2) = amatrix(:,m+1:mnpd:mf1,2) + cosm*<a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,-nf:nf,kui,1) + sinm*<a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,-nf:nf,kui,1)</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;           <span class="comment">! COS SIN&#39;</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;           amatrix(:,m+1:mnpd:mf1,3) = amatrix(:,m+1:mnpd:mf1,3) + sinm*actemp(:,-nf:nf,kui,2) - cosm*astemp(:,-nf:nf,kui,2)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;           amatrix(:,m+1:mnpd:mf1,3) = amatrix(:,m+1:mnpd:mf1,3) + sinm*<a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,-nf:nf,kui,2) - cosm*<a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,-nf:nf,kui,2)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;           <span class="comment">! COS COS&#39;</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;           amatrix(:,m+1:mnpd:mf1,4) = amatrix(:,m+1:mnpd:mf1,4) + cosm*actemp(:,-nf:nf,kui,2) + sinm*astemp(:,-nf:nf,kui,2)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;           amatrix(:,m+1:mnpd:mf1,4) = amatrix(:,m+1:mnpd:mf1,4) + cosm*<a class="code" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>(:,-nf:nf,kui,2) + sinm*<a class="code" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>(:,-nf:nf,kui,2)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordflow">        end if</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordflow">     END DO</span></div>
@@ -243,7 +243,7 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">! The code below is not related to Fourier transforms anymore,</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="comment">! so it should probably go into the main vacuum routine...</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  amatrix = (pi2*pi2)*amatrix <span class="comment">! TODO: can this be cancelled with some factors of 2*pi in the rest of NESTOR?</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  amatrix = (<a class="code" href="../../dd/df2/namespacevacmod.html#ac7a50ca4435483502a89d24b0523c44e">pi2</a>*<a class="code" href="../../dd/df2/namespacevacmod.html#ac7a50ca4435483502a89d24b0523c44e">pi2</a>)*amatrix <span class="comment">! TODO: can this be cancelled with some factors of 2*pi in the rest of NESTOR?</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
@@ -264,7 +264,7 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="comment">! ADD DIAGONAL TERMS TO AMATRIX [THE FIRST TERM IN EQ(3.2) OF PKM]</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">DO</span> mn = 1, mnpd</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;     amatrix(mn,mn,1) = amatrix(mn,mn,1) + pi3*int_ext</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;     amatrix(mn,mn,1) = amatrix(mn,mn,1) + <a class="code" href="../../dd/df2/namespacevacmod.html#aaab74be9d48c05da931066196d2b17b1">pi3</a>*int_ext</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
@@ -272,11 +272,11 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">! last index == 4 is the lower-right corner of amatrix</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="comment">! and this corner is crossed by the main diagnoal as well</span></div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="comment">! --&gt; no need to touch 2 and 3 (off-diagonal blocks of amatrix)</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        amatrix(mn,mn,4) = amatrix(mn,mn,4) + pi3*int_ext</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        amatrix(mn,mn,4) = amatrix(mn,mn,4) + <a class="code" href="../../dd/df2/namespacevacmod.html#aaab74be9d48c05da931066196d2b17b1">pi3</a>*int_ext</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;     <span class="comment">! COS(0-0) mode *2 (TODO: why is this required ?)</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;     amatrix(mn0,mn0,4) = amatrix(mn0,mn0,4) + pi3*int_ext</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;     amatrix(mn0,mn0,4) = amatrix(mn0,mn0,4) + <a class="code" href="../../dd/df2/namespacevacmod.html#aaab74be9d48c05da931066196d2b17b1">pi3</a>*int_ext</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keywordflow">  END IF</span></div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
@@ -298,13 +298,25 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a></div>
 <div class="ttc" id="afouri_8f90_html_a0f902f8d584a395f9db7175079d273c7"><div class="ttname"><a href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a></div><div class="ttdeci">subroutine fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d77/fouri_8f90_source.html#l00002">fouri.f90:3</a></div></div>
+<div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a56862ddfc7262588ea9e5218cc7d2c2d"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">vacmod::actemp</a></div><div class="ttdeci">real(rprec), dimension(:,:,:,:), allocatable actemp</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00156">vacmod.f90:156</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a58dae2ab36f775e99fffa97ca84e5f10"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">vacmod::grpmn</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable grpmn</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00099">vacmod.f90:99</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a8f10574ed4023a5008247397f6066b6d"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">vacmod::source</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable source</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00154">vacmod.f90:154</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a8febd379da66a08e39544caf44deae64"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">vacmod::bcos</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable bcos</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00152">vacmod.f90:152</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_aaab74be9d48c05da931066196d2b17b1"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#aaab74be9d48c05da931066196d2b17b1">vacmod::pi3</a></div><div class="ttdeci">real(rprec) pi3</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00015">vacmod.f90:15</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_aab13c2987b3e8804fa533adb038158f5"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">vacmod::astemp</a></div><div class="ttdeci">real(rprec), dimension(:,:,:,:), allocatable astemp</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00157">vacmod.f90:157</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ac0e3a298ab117d5f9ed0e82eb72cb212"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">vacmod::p5</a></div><div class="ttdeci">real(rprec), parameter p5</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00010">vacmod.f90:10</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ac7a50ca4435483502a89d24b0523c44e"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ac7a50ca4435483502a89d24b0523c44e">vacmod::pi2</a></div><div class="ttdeci">real(rprec) pi2</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00014">vacmod.f90:14</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_acff5d98c846acd835a5c255af53b65a0"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">vacmod::bsin</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable bsin</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00153">vacmod.f90:153</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ae052cdfe050397e0021f208fadaf98dd"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">vacmod::amatrix</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable amatrix</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00080">vacmod.f90:80</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_af92375b8749db7fad7461ab58d741e09"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">vacmod::onp</a></div><div class="ttdeci">real(rprec) onp</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00021">vacmod.f90:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d6/d77/fouri_8f90.html">fouri.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

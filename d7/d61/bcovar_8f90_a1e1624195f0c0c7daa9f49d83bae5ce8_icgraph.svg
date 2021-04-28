@@ -81,7 +81,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="../../db/d61/vmec_8f90.html#a476ef59cc25fe0996c0f5750d978df25" target="_top" xlink:title="Main program of VMEC.">
+<g id="a_node5"><a xlink:href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" target="_top" xlink:title="Main driver for VMEC.">
 <polygon fill="white" stroke="black" points="0,-19.5 0,-38.5 41,-38.5 41,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="20.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
 </a>

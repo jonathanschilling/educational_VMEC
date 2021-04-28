@@ -119,17 +119,99 @@ $(document).ready(function(){initNavTree('d6/d03/surface_8f90.html','../../'); i
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:ad7b6446e720a806f41f10dd1eb0b6f88"><td class="memItemLeft" align="right" valign="top"><a id="ad7b6446e720a806f41f10dd1eb0b6f88"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>surface</b> (rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)</td></tr>
+<tr class="memitem:ad7b6446e720a806f41f10dd1eb0b6f88"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88">surface</a> (rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)</td></tr>
 <tr class="separator:ad7b6446e720a806f41f10dd1eb0b6f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ad7b6446e720a806f41f10dd1eb0b6f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7b6446e720a806f41f10dd1eb0b6f88">&#9670;&nbsp;</a></span>surface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine surface </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>rc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>rs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>zs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>zc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>xm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(in)&#160;</td>
+          <td class="paramname"><em>xn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>mnmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical, intent(in)&#160;</td>
+          <td class="paramname"><em>lasym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>signgs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d6/d03/surface_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d6/d03/surface_8f90_source.html">surface.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00053">vacmod::auu</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00054">vacmod::auv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00055">vacmod::avv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00061">vacmod::drv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00063">vacmod::guu_b</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00064">vacmod::guv_b</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00065">vacmod::gvv_b</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00021">vacmod::onp</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00022">vacmod::onp2</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00010">vacmod::p5</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00042">vacmod::r1b</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00069">vacmod::rcosuv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00070">vacmod::rsinuv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00043">vacmod::rub</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00083">vacmod::ruu</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00084">vacmod::ruv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00044">vacmod::rvb</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00085">vacmod::rvv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00067">vacmod::rzb2</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00057">vacmod::snr</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00058">vacmod::snv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00059">vacmod::snz</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00045">vacmod::z1b</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00046">vacmod::zub</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00086">vacmod::zuu</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00087">vacmod::zuv</a>, <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00047">vacmod::zvb</a>, and <a class="el" href="../../d4/dce/vacmod_8f90_source.html#l00088">vacmod::zvv</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/d6d/vacuum_8f90_source.html#l00006">vacuum()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d6/d03/surface_8f90_ad7b6446e720a806f41f10dd1eb0b6f88_icgraph.svg" width="631" height="114"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d6/d03/surface_8f90.html">surface.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

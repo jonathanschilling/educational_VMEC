@@ -1,0 +1,6 @@
+<map id="spectrum" name="spectrum">
+<area shape="rect" id="node1" title=" " alt="" coords="336,5,412,32"/>
+<area shape="rect" id="node2" href="$d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797" title="Print iteration progress to screen and threed1 output file." alt="" coords="223,5,288,32"/>
+<area shape="rect" id="node3" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="108,5,175,32"/>
+<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,5,60,32"/>
+</map>

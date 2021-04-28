@@ -115,27 +115,124 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f.html','..
 </div><!--header-->
 <div class="contents">
 
+<p>Parameterizations of profiles for rotational transform, toroidal current and pressure/mass.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../da/dc8/profile__functions_8f_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a5bfa30ed89583073252fb965b7cf69e0"><td class="memItemLeft" align="right" valign="top"><a id="a5bfa30ed89583073252fb965b7cf69e0"></a>
-real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><b>pcurr</b> (xx)</td></tr>
+<tr class="memitem:a5bfa30ed89583073252fb965b7cf69e0"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> (xx)</td></tr>
 <tr class="separator:a5bfa30ed89583073252fb965b7cf69e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a437348e2a0ee2ababaeca2205a78b85c"><td class="memItemLeft" align="right" valign="top"><a id="a437348e2a0ee2ababaeca2205a78b85c"></a>
-real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><b>piota</b> (x)</td></tr>
+<tr class="memitem:a437348e2a0ee2ababaeca2205a78b85c"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c">piota</a> (x)</td></tr>
 <tr class="separator:a437348e2a0ee2ababaeca2205a78b85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba5b7c2601ef5c209acc084c9a42ff6d"><td class="memItemLeft" align="right" valign="top"><a id="aba5b7c2601ef5c209acc084c9a42ff6d"></a>
-real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><b>pmass</b> (xx)</td></tr>
+<tr class="memitem:aba5b7c2601ef5c209acc084c9a42ff6d"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d">pmass</a> (xx)</td></tr>
 <tr class="separator:aba5b7c2601ef5c209acc084c9a42ff6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Parameterizations of profiles for rotational transform, toroidal current and pressure/mass. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../da/dc8/profile__functions_8f_source.html">profile_functions.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a5bfa30ed89583073252fb965b7cf69e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bfa30ed89583073252fb965b7cf69e0">&#9670;&nbsp;</a></span>pcurr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(rprec) function pcurr </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec)&#160;</td>
+          <td class="paramname"><em>xx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00011">11</a> of file <a class="el" href="../../da/dc8/profile__functions_8f_source.html">profile_functions.f</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">vmec_input::ac</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00055">vmec_input::ac_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">vmec_input::ac_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">vmec_input::bloat</a>, <a class="el" href="../../d0/d19/line__segment_8f_source.html#l00032">line_segment::line_seg()</a>, <a class="el" href="../../d0/d19/line__segment_8f_source.html#l00075">line_segment::line_seg_int()</a>, <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00017">stel_constants::one</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">vmec_input::pcurr_type</a>, <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00012">stel_constants::pi</a>, <a class="el" href="../../d6/dec/spline__akima_8f_source.html#l00003">spline_akima()</a>, <a class="el" href="../../d1/d95/spline__akima__int_8f_source.html#l00003">spline_akima_int()</a>, <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00003">spline_cubic()</a>, <a class="el" href="../../de/d64/spline__cubic__int_8f_source.html#l00003">spline_cubic_int()</a>, <a class="el" href="../../d1/d4a/tolower_8f90_source.html#l00003">tolower()</a>, and <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00018">stel_constants::zero</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/profile__functions_8f_a5bfa30ed89583073252fb965b7cf69e0_cgraph.svg" width="388" height="358"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a437348e2a0ee2ababaeca2205a78b85c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a437348e2a0ee2ababaeca2205a78b85c">&#9670;&nbsp;</a></span>piota()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(rprec) function piota </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec)&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00323">323</a> of file <a class="el" href="../../da/dc8/profile__functions_8f_source.html">profile_functions.f</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">vmec_input::ai</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00053">vmec_input::ai_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">vmec_input::ai_aux_s</a>, <a class="el" href="../../d0/d19/line__segment_8f_source.html#l00032">line_segment::line_seg()</a>, <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00017">stel_constants::one</a>, <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00012">stel_constants::pi</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">vmec_input::piota_type</a>, <a class="el" href="../../d6/dec/spline__akima_8f_source.html#l00003">spline_akima()</a>, <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00003">spline_cubic()</a>, <a class="el" href="../../d1/d4a/tolower_8f90_source.html#l00003">tolower()</a>, and <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00018">stel_constants::zero</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00029">polflux_deriv()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/profile__functions_8f_a437348e2a0ee2ababaeca2205a78b85c_cgraph.svg" width="386" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/profile__functions_8f_a437348e2a0ee2ababaeca2205a78b85c_icgraph.svg" width="310" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aba5b7c2601ef5c209acc084c9a42ff6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5b7c2601ef5c209acc084c9a42ff6d">&#9670;&nbsp;</a></span>pmass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(rprec) function pmass </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec)&#160;</td>
+          <td class="paramname"><em>xx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00464">464</a> of file <a class="el" href="../../da/dc8/profile__functions_8f_source.html">profile_functions.f</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">vmec_input::am</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00051">vmec_input::am_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">vmec_input::am_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">vmec_input::bloat</a>, <a class="el" href="../../d0/d19/line__segment_8f_source.html#l00032">line_segment::line_seg()</a>, <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00017">stel_constants::one</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">vmec_input::pmass_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">vmec_input::pres_scale</a>, <a class="el" href="../../d6/dec/spline__akima_8f_source.html#l00003">spline_akima()</a>, <a class="el" href="../../d8/d60/spline__cubic_8f_source.html#l00003">spline_cubic()</a>, <a class="el" href="../../d1/d4a/tolower_8f90_source.html#l00003">tolower()</a>, and <a class="el" href="../../dd/ddd/stel__constants_8f90_source.html#l00018">stel_constants::zero</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/profile__functions_8f_aba5b7c2601ef5c209acc084c9a42ff6d_cgraph.svg" width="396" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/dc8/profile__functions_8f.html">profile_functions.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

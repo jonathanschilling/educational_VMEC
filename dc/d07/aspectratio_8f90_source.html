@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('dc/d07/aspectratio_8f90_source.html','
 <a href="../../dc/d07/aspectratio_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">    7</a></span>&#160;<span class="keyword">FUNCTION </span><a class="code" href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">aspectratio</a>()</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span>vmec_io</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d7/d0e/namespacerealspace.html">realspace</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../db/d2d/namespacevmec__io.html">vmec_io</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">INTEGER</span> :: lk, l</div>
@@ -134,34 +134,44 @@ $(document).ready(function(){initNavTree('dc/d07/aspectratio_8f90_source.html','
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">! Compute Volume and Mean (toroidally averaged) Cross Section Area</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  volume_p = 0</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  cross_area_p = 0</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a> = 0</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a> = 0</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordflow">DO</span> lk = 1, nznt</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     l = ns*lk</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     rb  = r1(l,0) + r1(l,1)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     zub = zu(l,0) + zu(l,1)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     t1  = rb*zub*wint(l)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     volume_p = volume_p + rb*t1</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     cross_area_p = cross_area_p + t1</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     rb  = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,1)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     zub = <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(l,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(l,1)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     t1  = rb*zub*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(l)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     <a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a> = <a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a> + rb*t1</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a> = <a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a> + t1</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  volume_p = 2*pi*pi*abs(volume_p)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  cross_area_p = 2*pi*abs(cross_area_p)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a> = 2*pi*pi*abs(<a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a> = 2*pi*abs(<a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a>)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  rmajor_p = volume_p/(2*pi*cross_area_p)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  aminor_p = sqrt(cross_area_p/pi)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#af22dc91573f42d7ba2947829f545339f">rmajor_p</a> = <a class="code" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>/(2*pi*<a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a>)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="../../db/d2d/namespacevmec__io.html#a5ba4b4ac91359f8c4923cfda85e99fd4">aminor_p</a> = sqrt(<a class="code" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a>/pi)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">aspectratio</a> = rmajor_p/aminor_p</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">aspectratio</a> = <a class="code" href="../../db/d2d/namespacevmec__io.html#af22dc91573f42d7ba2947829f545339f">rmajor_p</a>/<a class="code" href="../../db/d2d/namespacevmec__io.html#a5ba4b4ac91359f8c4923cfda85e99fd4">aminor_p</a></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">END FUNCTION </span><a class="code" href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">aspectratio</a></div>
 <div class="ttc" id="aaspectratio_8f90_html_aec215c0aa63470f24540d789f33b6bab"><div class="ttname"><a href="../../dc/d07/aspectratio_8f90.html#aec215c0aa63470f24540d789f33b6bab">aspectratio</a></div><div class="ttdeci">real(rprec) function aspectratio()</div><div class="ttdoc">compute aspect-ratio (independent of elongation):  where  and</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d07/aspectratio_8f90_source.html#l00007">aspectratio.f90:8</a></div></div>
+<div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
+<div class="ttc" id="anamespacerealspace_html_a37d15ca10ad42849859a4f3177c66010"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">realspace::wint</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable wint</div><div class="ttdoc">two-dimensional array for normalizing angle integrations</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00029">realspace.f90:29</a></div></div>
+<div class="ttc" id="anamespacerealspace_html_ab65b4b8100f333047e3cb71a66ca0f6a"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">realspace::r1</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable r1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00008">realspace.f90:8</a></div></div>
+<div class="ttc" id="anamespacerealspace_html_af8378578827f607a3c17e16ca9d17d9e"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">realspace::zu</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable zu</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00012">realspace.f90:12</a></div></div>
+<div class="ttc" id="anamespacevmec__io_html"><div class="ttname"><a href="../../db/d2d/namespacevmec__io.html">vmec_io</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df7/vmec__io_8f90_source.html#l00002">vmec_io.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__io_html_a5ba4b4ac91359f8c4923cfda85e99fd4"><div class="ttname"><a href="../../db/d2d/namespacevmec__io.html#a5ba4b4ac91359f8c4923cfda85e99fd4">vmec_io::aminor_p</a></div><div class="ttdeci">real(rprec) aminor_p</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df7/vmec__io_8f90_source.html#l00010">vmec_io.f90:10</a></div></div>
+<div class="ttc" id="anamespacevmec__io_html_aa6b324659fff402e01aed1eabe75e6e0"><div class="ttname"><a href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">vmec_io::cross_area_p</a></div><div class="ttdeci">real(rprec) cross_area_p</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df7/vmec__io_8f90_source.html#l00018">vmec_io.f90:18</a></div></div>
+<div class="ttc" id="anamespacevmec__io_html_ae723f39387867a3647dbd5ed91fe5c9f"><div class="ttname"><a href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">vmec_io::volume_p</a></div><div class="ttdeci">real(rprec) volume_p</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df7/vmec__io_8f90_source.html#l00017">vmec_io.f90:17</a></div></div>
+<div class="ttc" id="anamespacevmec__io_html_af22dc91573f42d7ba2947829f545339f"><div class="ttname"><a href="../../db/d2d/namespacevmec__io.html#af22dc91573f42d7ba2947829f545339f">vmec_io::rmajor_p</a></div><div class="ttdeci">real(rprec) rmajor_p</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df7/vmec__io_8f90_source.html#l00011">vmec_io.f90:11</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/d07/aspectratio_8f90.html">aspectratio.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

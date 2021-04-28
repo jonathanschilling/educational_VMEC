@@ -119,20 +119,207 @@ $(document).ready(function(){initNavTree('d0/d6f/tomnsp_8f90.html','../../'); in
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aec4b11e4f55e18c6bfc0348c263e31db"><td class="memItemLeft" align="right" valign="top"><a id="aec4b11e4f55e18c6bfc0348c263e31db"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>tomnsps</b> (frzl_array, armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon)</td></tr>
+<tr class="memitem:aec4b11e4f55e18c6bfc0348c263e31db"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db">tomnsps</a> (frzl_array, armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon)</td></tr>
 <tr class="separator:aec4b11e4f55e18c6bfc0348c263e31db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c7345c0aa0f13f311650d9633e6ecf8"><td class="memItemLeft" align="right" valign="top"><a id="a6c7345c0aa0f13f311650d9633e6ecf8"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>tomnspa</b> (frzl_array, armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon)</td></tr>
+<tr class="memitem:a6c7345c0aa0f13f311650d9633e6ecf8"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8">tomnspa</a> (frzl_array, armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon)</td></tr>
 <tr class="separator:a6c7345c0aa0f13f311650d9633e6ecf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a6c7345c0aa0f13f311650d9633e6ecf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7345c0aa0f13f311650d9633e6ecf8">&#9670;&nbsp;</a></span>tomnspa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine tomnspa </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,3*ntmax), intent(inout), target&#160;</td>
+          <td class="paramname"><em>frzl_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>armn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>brmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>crmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>azmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>bzmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>czmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>blmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>clmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>arcon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>azcon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00120">120</a> of file <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html">tomnsp.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00157">vmec_main::ivac</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00016">vmec_params::jmin2</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params::zss</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d6f/tomnsp_8f90_a6c7345c0aa0f13f311650d9633e6ecf8_icgraph.svg" width="522" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aec4b11e4f55e18c6bfc0348c263e31db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4b11e4f55e18c6bfc0348c263e31db">&#9670;&nbsp;</a></span>tomnsps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine tomnsps </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,3*ntmax), intent(out), target&#160;</td>
+          <td class="paramname"><em>frzl_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>armn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>brmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>crmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>azmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>bzmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>czmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>blmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>clmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>arcon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>azcon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html">tomnsp.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00157">vmec_main::ivac</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00016">vmec_params::jmin2</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params::rcc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params::zsc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d6f/tomnsp_8f90_aec4b11e4f55e18c6bfc0348c263e31db_icgraph.svg" width="522" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d0/d6f/tomnsp_8f90.html">tomnsp.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

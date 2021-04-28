@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['lflip_395',['lflip',['../de/d7d/vmec__main_8f90.html#ae046e355769fd9cd301ec342dfaee24c',1,'vmec_main']]]
+  ['g1_1794',['g1',['../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824',1,'vacmod']]],
+  ['g2_1795',['g2',['../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723',1,'vacmod']]],
+  ['ga1_1796',['ga1',['../dd/df2/namespacevacmod.html#a0ec82b38a7b4f2ada7aa91089f58f2fd',1,'vacmod']]],
+  ['ga2_1797',['ga2',['../dd/df2/namespacevacmod.html#a2321515e30323900ad01fbcf30e30cc7',1,'vacmod']]],
+  ['gamma_1798',['gamma',['../d8/dbf/namespacevmec__input.html#a4f4ad4130df6b89923c091874fc7d65f',1,'vmec_input::gamma()'],['../db/dae/namespaceread__wout__mod.html#aeaa4786077d44288e48105f58c66a6b2',1,'read_wout_mod::gamma()']]],
+  ['gc_1799',['gc',['../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36',1,'xstuff']]],
+  ['gcon_1800',['gcon',['../d7/d0e/namespacerealspace.html#a8d71f537dce83b5613df52d76a55c3bc',1,'realspace']]],
+  ['gmnc_1801',['gmnc',['../db/dae/namespaceread__wout__mod.html#a3c3afa570b7badb71efcfef19ab51cd0',1,'read_wout_mod']]],
+  ['gmns_1802',['gmns',['../db/dae/namespaceread__wout__mod.html#afaed63121bbb327c900c0052ba3b2315',1,'read_wout_mod']]],
+  ['green_1803',['green',['../dd/df2/namespacevacmod.html#ab766b336ec81c8f0d27aa13b9bdba274',1,'vacmod']]],
+  ['greenp_1804',['greenp',['../dd/df2/namespacevacmod.html#a26b95db143dc2adfbbda4a91fb69ddd6',1,'vacmod']]],
+  ['grpmn_1805',['grpmn',['../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10',1,'vacmod']]],
+  ['grpmn_5fm_5fmap_5fwrt_1806',['grpmn_m_map_wrt',['../dd/df2/namespacevacmod.html#a2afad0012a40cb75bc7d362c9ccc2d89',1,'vacmod']]],
+  ['grpmn_5fn_5fmap_5fwrt_1807',['grpmn_n_map_wrt',['../dd/df2/namespacevacmod.html#a8d2f8a28e80df79db1fbd35d0912a636',1,'vacmod']]],
+  ['gsave_1808',['gsave',['../dd/df2/namespacevacmod.html#a35c8656639d9f180bd62bca9bb2e7408',1,'vacmod']]],
+  ['gstore_1809',['gstore',['../dd/df2/namespacevacmod.html#a8b6d744766264148b33258d21962f488',1,'vacmod']]],
+  ['guu_1810',['guu',['../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc',1,'realspace']]],
+  ['guu_5fb_1811',['guu_b',['../dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7',1,'vacmod']]],
+  ['guv_1812',['guv',['../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f',1,'realspace']]],
+  ['guv_5fb_1813',['guv_b',['../dd/df2/namespacevacmod.html#ac3d5effce915731468aaee36482541e9',1,'vacmod']]],
+  ['gvv_1814',['gvv',['../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e',1,'realspace']]],
+  ['gvv_5fb_1815',['gvv_b',['../dd/df2/namespacevacmod.html#ab8dcbab065f715e5d306b0ddf0c42146',1,'vacmod']]]
 ];

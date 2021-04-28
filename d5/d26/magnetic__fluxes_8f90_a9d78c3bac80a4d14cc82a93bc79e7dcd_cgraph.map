@@ -1,6 +1,13 @@
 <map id="polflux" name="polflux">
-<area shape="rect" id="node1" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,31,64,57"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,31,205,57"/>
-<area shape="rect" id="node3" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="253,5,309,32"/>
-<area shape="rect" id="node4" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="357,31,448,57"/>
+<area shape="rect" id="node1" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,157,64,184"/>
+<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,157,205,184"/>
+<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="256,107,307,133"/>
+<area shape="rect" id="node10" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="253,157,309,184"/>
+<area shape="rect" id="node11" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="389,208,479,235"/>
+<area shape="rect" id="node4" href="$d2/dcb/namespaceline__segment.html#aa63bfde0ff39e19622f7f5fe150e8b59" title=" " alt="" coords="357,5,511,32"/>
+<area shape="rect" id="node5" href="$d6/dec/spline__akima_8f.html#a7517a5f00e408c447a9dd0e438f60e52" title=" " alt="" coords="385,56,483,83"/>
+<area shape="rect" id="node6" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="387,107,481,133"/>
+<area shape="rect" id="node9" href="$d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571" title=" " alt="" coords="402,157,466,184"/>
+<area shape="rect" id="node7" href="$d8/d60/spline__cubic_8f.html#a83fa704212982fff74dee5f6c68b241f" title=" " alt="" coords="559,81,633,108"/>
+<area shape="rect" id="node8" href="$d8/d60/spline__cubic_8f.html#a1d13bcd91bd68259f6dbd2deb9919e6d" title=" " alt="" coords="561,132,631,159"/>
 </map>

@@ -113,9 +113,9 @@ $(document).ready(function(){initNavTree('df/df3/analysum_8f90_source.html','../
 </div><!--header-->
 <div class="contents">
 <a href="../../df/df3/analysum_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map, &amp;</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0">analysum</a>(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map, &amp;</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                    grpmn_m_map, grpmn_n_map)</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vacmod, vm_grpmn =&gt; grpmn</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_grpmn =&gt; <a class="code" href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">grpmn</a></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">INTENT(in)</span> :: m, n, l, ivacskip</div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('df/df3/analysum_8f90_source.html','../
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     grpmn(m,n,i,1) = grpmn(m,n,i,1)  + cmns(l,m,n) *          sl(i)*sinp</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordflow">     end if</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     bvec(m,n,1)   = bvec(m,n,1)    + cmns(l,m,n) * bexni(i)*tl(i)*sinp</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     bvec(m,n,1)   = bvec(m,n,1)    + cmns(l,m,n) * <a class="code" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*tl(i)*sinp</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">!     if (m.eq.1 .and. n.eq.0) then</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">!       print *, &quot;cmns=&quot;,cmns(l,m,n),&quot; sinp(&quot;,i,&quot;) = &quot;,sinp,&quot; in=&quot;,bexni(i)*tl(i),&quot; =&gt; bvec(1,0)=&quot;, bvec(m,n,1)</span></div>
@@ -173,18 +173,22 @@ $(document).ready(function(){initNavTree('df/df3/analysum_8f90_source.html','../
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;           grpmn(m,n,i,2) = grpmn(m,n,i,2)  + sl(i)*cmns(l,m,n)*cosp</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordflow">        end if</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        bvec(m,n,2) = bvec(m,n,2) + tl(i)*cmns(l,m,n)*bexni(i)*cosp</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        bvec(m,n,2) = bvec(m,n,2) + tl(i)*cmns(l,m,n)*<a class="code" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*cosp</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordflow">     END IF</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">END SUBROUTINE </span>analysum</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0">analysum</a></div>
+<div class="ttc" id="aanalysum_8f90_html_aa51b1a5786e7b5719fe2ca679efc66b0"><div class="ttname"><a href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0">analysum</a></div><div class="ttdeci">subroutine analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/df3/analysum_8f90_source.html#l00002">analysum.f90:4</a></div></div>
+<div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a3d1039669dace5ef57e13514a59e7eab"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">vacmod::bexni</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bexni</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00034">vacmod.f90:34</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a58dae2ab36f775e99fffa97ca84e5f10"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">vacmod::grpmn</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable grpmn</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00099">vacmod.f90:99</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../df/df3/analysum_8f90.html">analysum.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

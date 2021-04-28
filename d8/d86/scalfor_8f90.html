@@ -119,17 +119,93 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90.html','../../'); i
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a20fb7039b82d05e64d01a2e50431ba5e"><td class="memItemLeft" align="right" valign="top"><a id="a20fb7039b82d05e64d01a2e50431ba5e"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>scalfor</b> (gcx, axm, bxm, axd, bxd, cx, iflag)</td></tr>
+<tr class="memitem:a20fb7039b82d05e64d01a2e50431ba5e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a> (gcx, axm, bxm, axd, bxd, cx, iflag)</td></tr>
 <tr class="separator:a20fb7039b82d05e64d01a2e50431ba5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a20fb7039b82d05e64d01a2e50431ba5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20fb7039b82d05e64d01a2e50431ba5e">&#9670;&nbsp;</a></span>scalfor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine scalfor </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>gcx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns+1,2), intent(in)&#160;</td>
+          <td class="paramname"><em>axm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns+1,2), intent(in)&#160;</td>
+          <td class="paramname"><em>bxm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns+1,2), intent(in)&#160;</td>
+          <td class="paramname"><em>axd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns+1,2), intent(in)&#160;</td>
+          <td class="paramname"><em>bxd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns), intent(in)&#160;</td>
+          <td class="paramname"><em>cx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>iflag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d86/scalfor_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d8/d86/scalfor_8f90_source.html">scalfor.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00083">vmec_main::hs</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00157">vmec_main::ivac</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00016">vmec_params::jmin2</a>, <a class="el" href="../../d8/d05/vmec__dim_8f90_source.html#l00017">vmec_dim::ns</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, and <a class="el" href="../../db/d40/tridslv_8f90_source.html#l00003">tridslv()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d5a/residue_8f90_source.html#l00003">residue()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d86/scalfor_8f90_a20fb7039b82d05e64d01a2e50431ba5e_cgraph.svg" width="178" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d86/scalfor_8f90_a20fb7039b82d05e64d01a2e50431ba5e_icgraph.svg" width="623" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d86/scalfor_8f90.html">scalfor.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

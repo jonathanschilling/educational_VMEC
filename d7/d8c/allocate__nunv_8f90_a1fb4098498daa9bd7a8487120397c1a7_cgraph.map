@@ -1,0 +1,6 @@
+<map id="allocate_nunv" name="allocate_nunv">
+<area shape="rect" id="node1" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="5,31,108,57"/>
+<area shape="rect" id="node2" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="156,5,319,32"/>
+<area shape="rect" id="node3" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="180,56,295,83"/>
+<area shape="rect" id="node4" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="367,56,541,83"/>
+</map>

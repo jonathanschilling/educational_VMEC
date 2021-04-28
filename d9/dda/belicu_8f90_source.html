@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 </div><!--header-->
 <div class="contents">
 <a href="../../d9/dda/belicu_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vacmod, vm_bz =&gt; bz</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d">belicu</a>(torcur, bx, by, bz, cos1, sin1, rp, zp)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_bz =&gt; <a class="code" href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">bz</a></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(in)</span> :: torcur</div>
@@ -139,9 +139,9 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  bz = 0</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">! first point (at index 0) is equal to last point --&gt; closed curve</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  xpts(1, 0) = raxis_nestor(nv)*(cosper(nvper)*cosuv(nv) - sinper(nvper)*sinuv(nv))</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  xpts(2, 0) = raxis_nestor(nv)*(sinper(nvper)*cosuv(nv) + cosper(nvper)*sinuv(nv))</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  xpts(3, 0) = zaxis_nestor(nv)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, 0) = <a class="code" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(nv)*(cosper(nvper)*cosuv(nv) - sinper(nvper)*sinuv(nv))</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, 0) = <a class="code" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(nv)*(sinper(nvper)*cosuv(nv) + cosper(nvper)*sinuv(nv))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, 0) = <a class="code" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(nv)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">! loops over source geometry</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  i = 1</div>
@@ -149,12 +149,12 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="keywordflow">DO</span> kv = 1, nv</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">! xpts == xpt of _s_ource (current filament)</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        xpts(1, i) = raxis_nestor(kv)*(cosper(kper)*cosuv(kv) - sinper(kper)*sinuv(kv))</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        xpts(2, i) = raxis_nestor(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        xpts(3, i) = zaxis_nestor(kv)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, i) = <a class="code" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(cosper(kper)*cosuv(kv) - sinper(kper)*sinuv(kv))</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, i) = <a class="code" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, i) = <a class="code" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(kv)</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">! filament geometry: from previous point (R_i == xpts(:,i)) to current point (R_f == xpts(:,i-1))</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        dvec = xpts(:,i)-xpts(:,i-1)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        dvec = <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i)-<a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i-1)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        l = norm2(dvec)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">! loop over evaluation points</span></div>
@@ -164,9 +164,9 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;           xpt(2) = rp(j) * sin1(j)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;           xpt(3) = zp(j)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;           ri_vec = xpt - xpts(:,i-1)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;           ri_vec = xpt - <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i-1)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;           ri = norm2(ri_vec)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;           rf = norm2(xpt - xpts(:,i))</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;           rf = norm2(xpt - <a class="code" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i))</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;           ri_p_rf = ri + rf</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;           <span class="comment">! 1.0e-7 == mu0/4 pi</span></div>
@@ -182,14 +182,20 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">END SUBROUTINE </span>belicu</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d">belicu</a></div>
+<div class="ttc" id="abelicu_8f90_html_a53e6f162ca96069b8d93e131069ddf5d"><div class="ttname"><a href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d">belicu</a></div><div class="ttdeci">subroutine belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dda/belicu_8f90_source.html#l00002">belicu.f90:3</a></div></div>
+<div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a5688359d2d2154dbe51196432264c23f"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">vacmod::xpts</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable xpts</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00096">vacmod.f90:96</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a98a42b167c483260928b42669c98b448"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">vacmod::raxis_nestor</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable raxis_nestor</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00072">vacmod.f90:72</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ab8640908fd03f2f712f053753c6ad13c"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">vacmod::zaxis_nestor</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable zaxis_nestor</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00073">vacmod.f90:73</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ad472475fd1a6b3a1c886ed1c309b0855"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">vacmod::bz</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bz</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00093">vacmod.f90:93</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d9/dda/belicu_8f90.html">belicu.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

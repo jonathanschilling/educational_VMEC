@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 </div><!--header-->
 <div class="contents">
 <a href="../../d0/d1c/fourp_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>fourp (grpmn, grp)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vacmod, vm_grpmn =&gt; grpmn</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a> (grpmn, grp)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_grpmn =&gt; <a class="code" href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">grpmn</a></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(inout)</span> :: grpmn(0:mf,-nf:nf,nuv2,ndim)</div>
@@ -126,8 +126,8 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordflow">IF</span> (ndim .GT. 2) stop <span class="stringliteral">&#39;NDIM &gt; 2&#39;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordflow">DO</span> ku = 1,nu2</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;     g1 = 0</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;     g2 = 0</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;     <a class="code" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a> = 0</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;     <a class="code" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a> = 0</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;     <span class="comment">! PERFORM KV (TOROIDAL ANGLE) TRANSFORM (OVER UNPRIMED MESH IN EQ. 2.14)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;     <span class="comment">! THUS, THE (m,n) INDEX HERE CORRESPONDS TO THE FIRST INDEX OF AMATRIX</span></div>
@@ -138,8 +138,8 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <span class="comment">! THE 3rd INDEX OF GRPMN IS THE PRIMED U,V MESH COORDINATE</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;     <span class="keywordflow">DO</span> kv = 1,nv</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">DO</span> n = 0,nf</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;           cosn = p5*onp*cosv(n,kv)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;           sinn = p5*onp*sinv(n,kv)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;           cosn = <a class="code" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*cosv(n,kv)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;           sinn = <a class="code" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*sinv(n,kv)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;           iuv = kv+nv*(ku-1)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;           ireflect = imirr(iuv)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;           <span class="keywordflow">DO</span> isym = 1, ndim <span class="comment">! ndim == 1 for stellarator-symmetry, 2 for asymmetric (lasym=T)</span></div>
@@ -165,8 +165,8 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                 g1(ip,n,isym)=g1(ip,n,isym) + cosn*kernel</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                 g2(ip,n,isym)=g2(ip,n,isym) + sinn*kernel</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                 <a class="code" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)=<a class="code" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym) + cosn*kernel</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                 <a class="code" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)=<a class="code" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym) + sinn*kernel</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordflow">              END DO</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordflow">           END DO</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordflow">        END DO</span></div>
@@ -184,8 +184,8 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">           END IF</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;           <span class="keywordflow">DO</span> n= 0,nf</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;             <span class="keywordflow">DO</span> ip = 1,nuv2</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                 gcos = g1(ip,n,isym)*sinm</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                 gsin = g2(ip,n,isym)*cosm</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                 gcos = <a class="code" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)*sinm</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                 gsin = <a class="code" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)*cosm</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                 grpmn(m, n,ip,isym)    = grpmn(m, n,ip,isym) + gcos + gsin</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                 <span class="keywordflow">IF</span> (n .NE. 0) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    grpmn(m,-n,ip,isym) = grpmn(m,-n,ip,isym) + gcos - gsin</div>
@@ -197,14 +197,21 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">END SUBROUTINE </span>fourp</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a></div>
+<div class="ttc" id="afourp_8f90_html_add725dd420251115fd60182dc992503c"><div class="ttname"><a href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a></div><div class="ttdeci">subroutine fourp(grpmn, grp)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d1c/fourp_8f90_source.html#l00002">fourp.f90:3</a></div></div>
+<div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a25445f363d4484905826ad5f7a2a7824"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">vacmod::g1</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable g1</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00148">vacmod.f90:148</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a37c388409e5eab7adac7ce36f7ade723"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">vacmod::g2</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable g2</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00149">vacmod.f90:149</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a58dae2ab36f775e99fffa97ca84e5f10"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">vacmod::grpmn</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable grpmn</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00099">vacmod.f90:99</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_ac0e3a298ab117d5f9ed0e82eb72cb212"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">vacmod::p5</a></div><div class="ttdeci">real(rprec), parameter p5</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00010">vacmod.f90:10</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_af92375b8749db7fad7461ab58d741e09"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">vacmod::onp</a></div><div class="ttdeci">real(rprec) onp</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00021">vacmod.f90:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d0/d1c/fourp_8f90.html">fourp.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

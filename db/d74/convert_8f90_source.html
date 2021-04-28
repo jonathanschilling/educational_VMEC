@@ -116,8 +116,8 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">   16</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a>(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">USE </span>vmec_params</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
@@ -139,36 +139,36 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">! CONVERTS INTERNAL MODE REPRESENTATION TO STANDARD</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">! FORM FOR OUTPUT (COEFFICIENTS OF COS(mu-nv), SIN(mu-nv) WITHOUT internal mscale,nscale norms)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  rmncc = rcc</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  rmnss = rss</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  rmnsc = rsc</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  rmncs = rcs</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  zmnsc = zsc + ntmax</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  zmncc = zcc + ntmax</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  zmncs = zcs + ntmax</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  zmnss = zss + ntmax</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  lmnsc = zsc + 2*ntmax</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  lmncc = zcc + 2*ntmax</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  lmncs = zcs + 2*ntmax</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  lmnss = zss + 2*ntmax</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  rmncc = <a class="code" href="../../d1/d74/namespacevmec__params.html#aed80eaad151fb8f1ac522fab2cb675fb">rcc</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  rmnss = <a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  rmnsc = <a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  rmncs = <a class="code" href="../../d1/d74/namespacevmec__params.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34">rcs</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  zmnsc = <a class="code" href="../../d1/d74/namespacevmec__params.html#a857da7831c9e135f320bf9df9e09e09c">zsc</a> + <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  zmncc = <a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a> + <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  zmncs = <a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a> + <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  zmnss = <a class="code" href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">zss</a> + <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  lmnsc = <a class="code" href="../../d1/d74/namespacevmec__params.html#a857da7831c9e135f320bf9df9e09e09c">zsc</a> + 2*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  lmncc = <a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a> + 2*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  lmncs = <a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a> + 2*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  lmnss = <a class="code" href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">zss</a> + 2*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">! DO M = 0 MODES SEPARATELY (ONLY KEEP N &gt;= 0 HERE: COS(-NV), SIN(-NV))</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  mn = 0; m = 0</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  zmns(1:ntor+1) = 0;  lmns(1:ntor+1) = 0</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     t1 = mscale(m)*nscale(n)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     t1 = <a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;     mn = mn + 1</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;     rmnc(mn) = t1*rzl_array(js,n,m,rmncc)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     <span class="keywordflow">IF</span> (.not. lthreed) cycle</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     <span class="keywordflow">IF</span> (.not. <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) cycle</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     zmns(mn) =-t1*rzl_array(js,n,m,zmncs)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;     lmns(mn) =-t1*rzl_array(js,n,m,lmncs)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">IF</span> (lthreed .and. js.eq.1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a> .and. js.eq.1) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;     <span class="comment">! extrapolate to axis if 3D</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;     mn = 0</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        t1 = mscale(m)*nscale(n)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        t1 = <a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        mn = mn + 1</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        lmns(mn) =-t1*(2*rzl_array(2,n,m,lmncs) - rzl_array(3,n,m,lmncs))</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordflow">     END DO</span></div>
@@ -180,7 +180,7 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">DO</span> m = 1, mpol1</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     <span class="keywordflow">DO</span> n = -ntor, ntor</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        n1 = abs(n)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        t1 = mscale(m)*nscale(n1)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        t1 = <a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n1)</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        mn = mn + 1</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">IF</span> (n .eq. 0) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;           rmnc(mn) = t1*rzl_array(js,n,m,rmncc)</div>
@@ -188,7 +188,7 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;           lmns(mn) = t1*rzl_array(js,n,m,lmnsc)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (js .gt. 1) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;           sign0 = n/n1</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;           <span class="keywordflow">IF</span> (.not.lthreed) sign0 = 0</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;           <span class="keywordflow">IF</span> (.not.<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) sign0 = 0</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;           rmnc(mn) = p5*t1*(rzl_array(js,n1,m,rmncc)+sign0*rzl_array(js,n1,m,rmnss))</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;           zmns(mn) = p5*t1*(rzl_array(js,n1,m,zmnsc)-sign0*rzl_array(js,n1,m,zmncs))</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;           lmns(mn) = p5*t1*(rzl_array(js,n1,m,lmnsc)-sign0*rzl_array(js,n1,m,lmncs))</div>
@@ -214,18 +214,18 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  mn = 0; m = 0</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  rmns(1:ntor+1) = 0</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;     t1 = mscale(m)*nscale(n)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;     t1 = <a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;     mn = mn + 1</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;     zmnc(mn) = t1*rzl_array(js,n,m,zmncc)</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;     lmnc(mn) = t1*rzl_array(js,n,m,lmncc)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     <span class="keywordflow">IF</span> (.not.lthreed) cycle</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     <span class="keywordflow">IF</span> (.not.<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) cycle</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;     rmns(mn) =-t1*rzl_array(js,n,m,rmncs)                           <span class="comment">!ers-fixed sign</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordflow">DO</span> m = 1, mpol1</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;     <span class="keywordflow">DO</span> n = -ntor, ntor</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        n1 = abs(n)</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        t1 = mscale(m)*nscale(n1)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        t1 = <a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n1)</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        mn = mn + 1</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">IF</span> (n .eq. 0) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;           rmns(mn) = t1*rzl_array(js,n,m,rmnsc)</div>
@@ -247,13 +247,27 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90_source.html','../.
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a></div>
 <div class="ttc" id="aconvert_8f90_html_ae6d3862ea21a8d39210a79c6955b5b75"><div class="ttname"><a href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a></div><div class="ttdeci">subroutine convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</div><div class="ttdoc">Convert internal mode representation to standard form for output (coefficients of cos(mu-nv),...</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d74/convert_8f90_source.html#l00016">convert.f90:17</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_ac815c089a079d08356f5740573842c86"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">vmec_main::lthreed</a></div><div class="ttdeci">logical lthreed</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main.f90:136</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a1b2efb0e9bfbb306b1e86cdb4ecabb34"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34">vmec_params::rcs</a></div><div class="ttdeci">integer rcs</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params.f90:43</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a3fbf7f74d050798433a4c9dff3eba6de"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">vmec_params::zcc</a></div><div class="ttdeci">integer zcc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params.f90:46</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a55aab435b8ab31d43f83825d371a75fe"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">vmec_params::mscale</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable mscale</div><div class="ttdoc">array for norming theta-trig functions (internal use only) so that the discrete SUM[cos(mu)*cos(m'u)]...</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00053">vmec_params.f90:53</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a77d85b5e65ece025135fb6f65d4659bb"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a77d85b5e65ece025135fb6f65d4659bb">vmec_params::zss</a></div><div class="ttdeci">integer zss</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params.f90:47</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a857da7831c9e135f320bf9df9e09e09c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a857da7831c9e135f320bf9df9e09e09c">vmec_params::zsc</a></div><div class="ttdeci">integer zsc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params.f90:44</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_a97fe667ec67d78d1ff0235e1978e2d34"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">vmec_params::rss</a></div><div class="ttdeci">integer rss</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params.f90:41</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aa24c48d82f06c3475c9e495244bcda33"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">vmec_params::zcs</a></div><div class="ttdeci">integer zcs</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params.f90:45</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_acb07091c2a3d31fe07129dd42c2bd733"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">vmec_params::nscale</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable nscale</div><div class="ttdoc">array for norming zeta -trig functions (internal use only)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00055">vmec_params.f90:55</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_ad3c490e03f80af81375898a02206693c"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">vmec_params::ntmax</a></div><div class="ttdeci">integer ntmax</div><div class="ttdoc">number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params.f90:38</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aed80eaad151fb8f1ac522fab2cb675fb"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aed80eaad151fb8f1ac522fab2cb675fb">vmec_params::rcc</a></div><div class="ttdeci">integer rcc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params.f90:40</a></div></div>
+<div class="ttc" id="anamespacevmec__params_html_aee8e7f84a9d92797c7411048c55ce3e9"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">vmec_params::rsc</a></div><div class="ttdeci">integer rsc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params.f90:42</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d74/convert_8f90.html">convert.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

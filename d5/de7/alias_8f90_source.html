@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <a href="../../d5/de7/alias_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">   12</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">alias</a>(gcons, ztemp, gcs, gsc, gcc, gss)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns*nzeta,ntheta3)</span>, <span class="keywordtype">INTENT(out)</span> :: gcons</div>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;           ir = ntheta1 + 2 - i</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;           <span class="keywordflow">IF</span> (i .eq. 1) ir = 1</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;           <span class="keywordflow">DO</span> jk = 1, ns*nzeta</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;              jka = ireflect(jk)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;              jka = <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">ireflect</a>(jk)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;              work(jk,3) = work(jk,3) + ztemp(jka,ir)*cosmui(i,m)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;              work(jk,4) = work(jk,4) + ztemp(jka,ir)*sinmui(i,m)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">           END DO</span></div>
@@ -161,15 +161,15 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;           l = ns*(k-1)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;           <span class="keywordflow">IF</span> (.not.lasym) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;              <span class="keywordflow">DO</span> js = 2,ns</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                 gcs(js,n,m) = gcs(js,n,m) + tcon(js)*work(js+l,1)*sinnv(k,n)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                 gsc(js,n,m) = gsc(js,n,m) + tcon(js)*work(js+l,2)*cosnv(k,n)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                 gcs(js,n,m) = gcs(js,n,m) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*work(js+l,1)*sinnv(k,n)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                 gsc(js,n,m) = gsc(js,n,m) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*work(js+l,2)*cosnv(k,n)</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordflow">              END DO</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;           <span class="keywordflow">ELSE</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;              <span class="keywordflow">DO</span> js = 2,ns</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                 gcs(js,n,m) = gcs(js,n,m) + p5*tcon(js)*sinnv(k,n)*(work(js+l,1)-work(js+l,3))</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                 gsc(js,n,m) = gsc(js,n,m) + p5*tcon(js)*cosnv(k,n)*(work(js+l,2)-work(js+l,4))</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                 gss(js,n,m) = gss(js,n,m) + p5*tcon(js)*sinnv(k,n)*(work(js+l,2)+work(js+l,4))</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                 gcc(js,n,m) = gcc(js,n,m) + p5*tcon(js)*cosnv(k,n)*(work(js+l,1)+work(js+l,3))</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                 gcs(js,n,m) = gcs(js,n,m) + p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*sinnv(k,n)*(work(js+l,1)-work(js+l,3))</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                 gsc(js,n,m) = gsc(js,n,m) + p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*cosnv(k,n)*(work(js+l,2)-work(js+l,4))</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                 gss(js,n,m) = gss(js,n,m) + p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*sinnv(k,n)*(work(js+l,2)+work(js+l,4))</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                 gcc(js,n,m) = gcc(js,n,m) + p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js)*cosnv(k,n)*(work(js+l,1)+work(js+l,3))</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordflow">              END DO</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">           END IF</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">        END DO</span></div>
@@ -195,11 +195,11 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordflow">     END DO</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <span class="keywordflow">DO</span> i = 1, ntheta2</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">DO</span> jk = 1, ns*nzeta</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;           gcons(jk,i) = gcons(jk,i) + (work(jk,3)*cosmu(i,m) + work(jk,4)*sinmu(i,m))*faccon(m)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;           gcons(jk,i) = gcons(jk,i) + (work(jk,3)*cosmu(i,m) + work(jk,4)*sinmu(i,m))*<a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(m)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordflow">        END DO</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;           <span class="keywordflow">DO</span> jk = 1, ns*nzeta</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              gcona(jk,i) = gcona(jk,i) + (work(jk,1)*cosmu(i,m) + work(jk,2)*sinmu(i,m))*faccon(m)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              gcona(jk,i) = gcona(jk,i) + (work(jk,1)*cosmu(i,m) + work(jk,2)*sinmu(i,m))*<a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(m)</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordflow">           END DO</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordflow">        end if</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordflow">     END DO</span></div>
@@ -211,7 +211,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     <span class="keywordflow">DO</span> i = 1 + ntheta2, ntheta1</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        ir = ntheta1 + 2 - i</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">DO</span> jk = 1, ns*nzeta</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;           jka = ireflect(jk)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;           jka = <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">ireflect</a>(jk)</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;           gcons(jk,i) = -gcons(jka,ir) + gcona(jka,ir)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordflow">        END DO</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keywordflow">     END DO</span></div>
@@ -225,13 +225,17 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">alias</a></div>
 <div class="ttc" id="aalias_8f90_html_a971bf2e3997d8e5ed08c060b651c88c4"><div class="ttname"><a href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">alias</a></div><div class="ttdeci">subroutine alias(gcons, ztemp, gcs, gsc, gcc, gss)</div><div class="ttdoc">Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,...</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/de7/alias_8f90_source.html#l00012">alias.f90:13</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_ac523d415be1865ef549b6a55a98fdd1a"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">vmec_main::ireflect</a></div><div class="ttdeci">integer, dimension(:), allocatable ireflect</div><div class="ttdoc">two-dimensional array for computing 2pi-v angle</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00141">vmec_main.f90:141</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_ae4673c06c7bea73380d1705bfc8bb8e3"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">vmec_main::faccon</a></div><div class="ttdeci">real(rprec), dimension(0:mpol1d) faccon</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00081">vmec_main.f90:81</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_af2f8b72c0bb03e67c6470e393b412289"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">vmec_main::tcon</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable tcon</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00037">vmec_main.f90:37</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/de7/alias_8f90.html">alias.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:35:18 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:43:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

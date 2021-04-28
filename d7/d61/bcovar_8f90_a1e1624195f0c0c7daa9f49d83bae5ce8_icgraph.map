@@ -4,5 +4,5 @@
 <area shape="rect" id="node3" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="223,5,283,32"/>
 <area shape="rect" id="node6" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="113,56,169,83"/>
 <area shape="rect" id="node4" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="108,5,175,32"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a476ef59cc25fe0996c0f5750d978df25" title="Main program of VMEC." alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,31,60,57"/>
 </map>

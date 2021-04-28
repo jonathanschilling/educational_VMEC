@@ -711,20 +711,20 @@ var namespaces_dup =
       [ "safe_open", "d2/d9f/safe__open__mod_8f.html#aab207f9769415b0cccd91260a8382eeb", null ]
     ] ],
     [ "stel_constants", null, [
-      [ "degree", "d8/d64/stel__constants_8f.html#a4f6b93c1a5e49de3ce2f4ca5e2840e28", null ],
-      [ "mu0", "d8/d64/stel__constants_8f.html#aacc15e6304f57f2e3348130567ad1931", null ],
-      [ "one", "d8/d64/stel__constants_8f.html#af26b3cceb76b3b524b8d710321f5d476", null ],
-      [ "pi", "d8/d64/stel__constants_8f.html#a2fb1f735b8ff5f0b6244f18e7ad55ca9", null ],
-      [ "pio2", "d8/d64/stel__constants_8f.html#a0f6cbede455d09712ff4c4a733611397", null ],
-      [ "sqrt2", "d8/d64/stel__constants_8f.html#a043e83c5fb38e8771d7c9a46d0fba17b", null ],
-      [ "twopi", "d8/d64/stel__constants_8f.html#a24f1215d41cba993a117bf8a60bd35f1", null ],
-      [ "zero", "d8/d64/stel__constants_8f.html#af3e1192258fe53b2791b692a9505ca08", null ]
+      [ "degree", "dd/ddd/stel__constants_8f90.html#a4f6b93c1a5e49de3ce2f4ca5e2840e28", null ],
+      [ "mu0", "dd/ddd/stel__constants_8f90.html#aacc15e6304f57f2e3348130567ad1931", null ],
+      [ "one", "dd/ddd/stel__constants_8f90.html#af26b3cceb76b3b524b8d710321f5d476", null ],
+      [ "pi", "dd/ddd/stel__constants_8f90.html#a2fb1f735b8ff5f0b6244f18e7ad55ca9", null ],
+      [ "pio2", "dd/ddd/stel__constants_8f90.html#a0f6cbede455d09712ff4c4a733611397", null ],
+      [ "sqrt2", "dd/ddd/stel__constants_8f90.html#a043e83c5fb38e8771d7c9a46d0fba17b", null ],
+      [ "twopi", "dd/ddd/stel__constants_8f90.html#a24f1215d41cba993a117bf8a60bd35f1", null ],
+      [ "zero", "dd/ddd/stel__constants_8f90.html#af3e1192258fe53b2791b692a9505ca08", null ]
     ] ],
     [ "stel_kinds", null, [
-      [ "cprec", "d1/d1e/stel__kinds_8f.html#aff0fc4842e52573b546233bdc9938de1", null ],
-      [ "dp", "d1/d1e/stel__kinds_8f.html#a1b8eb9b17bcf3eddadaa1754b9d0c165", null ],
-      [ "iprec", "d1/d1e/stel__kinds_8f.html#ab7dad4b77b2e8aa5c04356e7c77639e3", null ],
-      [ "rprec", "d1/d1e/stel__kinds_8f.html#ad5ec246eb6bc70cd89f4e3209ba62b2d", null ]
+      [ "cprec", "d7/d97/stel__kinds_8f90.html#aff0fc4842e52573b546233bdc9938de1", null ],
+      [ "dp", "d7/d97/stel__kinds_8f90.html#a1b8eb9b17bcf3eddadaa1754b9d0c165", null ],
+      [ "iprec", "d7/d97/stel__kinds_8f90.html#ab7dad4b77b2e8aa5c04356e7c77639e3", null ],
+      [ "rprec", "d7/d97/stel__kinds_8f90.html#ad5ec246eb6bc70cd89f4e3209ba62b2d", null ]
     ] ],
     [ "vac_persistent", null, [
       [ "bsubu_sur", "db/d5c/vac__persistent_8f90.html#a1270492ca4432e395b70da9cd63bce76", null ],

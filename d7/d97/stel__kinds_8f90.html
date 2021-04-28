@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VMEC: src/data/stel_kinds.f Source File</title>
+<title>VMEC: src/data/stel_kinds.f90 File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -89,7 +89,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('d1/d1e/stel__kinds_8f_source.html','../../'); initResizable(); });
+$(document).ready(function(){initNavTree('d7/d97/stel__kinds_8f90.html','../../'); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -108,32 +108,37 @@ $(document).ready(function(){initNavTree('d1/d1e/stel__kinds_8f_source.html','..
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">stel_kinds.f</div>  </div>
+<div class="title">stel_kinds.f90 File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d1/d1e/stel__kinds_8f.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">MODULE</span> stel_kinds</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">implicit none</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">!----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">!  Kind specifications</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">!----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: rprec = selected_real_kind(12,100)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: iprec = selected_int_kind(8)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: cprec = kind((1.0_rprec,1.0_rprec))</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: dp = rprec</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">END MODULE </span>stel_kinds</div>
-</div><!-- fragment --></div><!-- contents -->
+
+<p><a href="../../d7/d97/stel__kinds_8f90_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad5ec246eb6bc70cd89f4e3209ba62b2d"><td class="memItemLeft" align="right" valign="top"><a id="ad5ec246eb6bc70cd89f4e3209ba62b2d"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>stel_kinds::rprec</b> = SELECTED_REAL_KIND(12, 100)</td></tr>
+<tr class="separator:ad5ec246eb6bc70cd89f4e3209ba62b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7dad4b77b2e8aa5c04356e7c77639e3"><td class="memItemLeft" align="right" valign="top"><a id="ab7dad4b77b2e8aa5c04356e7c77639e3"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>stel_kinds::iprec</b> = SELECTED_INT_KIND(8)</td></tr>
+<tr class="separator:ab7dad4b77b2e8aa5c04356e7c77639e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff0fc4842e52573b546233bdc9938de1"><td class="memItemLeft" align="right" valign="top"><a id="aff0fc4842e52573b546233bdc9938de1"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>stel_kinds::cprec</b> = KIND((1.0_rprec, 1.0_rprec))</td></tr>
+<tr class="separator:aff0fc4842e52573b546233bdc9938de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8eb9b17bcf3eddadaa1754b9d0c165"><td class="memItemLeft" align="right" valign="top"><a id="a1b8eb9b17bcf3eddadaa1754b9d0c165"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>stel_kinds::dp</b> = rprec</td></tr>
+<tr class="separator:a1b8eb9b17bcf3eddadaa1754b9d0c165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_c1be8d27e7f84178e95f152701110b19.html">data</a></li><li class="navelem"><a class="el" href="../../d1/d1e/stel__kinds_8f.html">stel_kinds.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_c1be8d27e7f84178e95f152701110b19.html">data</a></li><li class="navelem"><a class="el" href="../../d7/d97/stel__kinds_8f90.html">stel_kinds.f90</a></li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:35:19 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

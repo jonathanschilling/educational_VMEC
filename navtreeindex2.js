@@ -1,5 +1,16 @@
 var NAVTREEINDEX2 =
 {
+"d4/dce/vacmod_8f90.html#a1e5b20af640eec900b5025b65b4e9862":[1,0,11,92],
+"d4/dce/vacmod_8f90.html#a1e5b20af640eec900b5025b65b4e9862":[3,0,0,1,0,2,92],
+"d4/dce/vacmod_8f90.html#a211fe869a96f62692add6fc4d2521a6f":[1,0,11,107],
+"d4/dce/vacmod_8f90.html#a211fe869a96f62692add6fc4d2521a6f":[3,0,0,1,0,2,107],
+"d4/dce/vacmod_8f90.html#a2321515e30323900ad01fbcf30e30cc7":[1,0,11,46],
+"d4/dce/vacmod_8f90.html#a2321515e30323900ad01fbcf30e30cc7":[3,0,0,1,0,2,46],
+"d4/dce/vacmod_8f90.html#a25445f363d4484905826ad5f7a2a7824":[1,0,11,43],
+"d4/dce/vacmod_8f90.html#a25445f363d4484905826ad5f7a2a7824":[3,0,0,1,0,2,43],
+"d4/dce/vacmod_8f90.html#a25a2b10afc2b3bd8fe092619eb71465c":[1,0,11,26],
+"d4/dce/vacmod_8f90.html#a25a2b10afc2b3bd8fe092619eb71465c":[3,0,0,1,0,2,26],
+"d4/dce/vacmod_8f90.html#a26b95db143dc2adfbbda4a91fb69ddd6":[1,0,11,48],
 "d4/dce/vacmod_8f90.html#a26b95db143dc2adfbbda4a91fb69ddd6":[3,0,0,1,0,2,48],
 "d4/dce/vacmod_8f90.html#a2aad94b3e591cedefb8d1b262192b747":[1,0,11,64],
 "d4/dce/vacmod_8f90.html#a2aad94b3e591cedefb8d1b262192b747":[3,0,0,1,0,2,64],
@@ -238,16 +249,5 @@ var NAVTREEINDEX2 =
 "d6/dec/spline__akima_8f.html":[3,0,0,60],
 "d6/dec/spline__akima_8f.html#a7517a5f00e408c447a9dd0e438f60e52":[3,0,0,60,0],
 "d6/dec/spline__akima_8f_source.html":[3,0,0,60],
-"d6/df3/getcurmid_8f90.html":[3,0,0,30],
-"d6/df3/getcurmid_8f90.html#a39a36917e25d2b08b93cac4a10d3d5aa":[3,0,0,30,0],
-"d6/df3/getcurmid_8f90_source.html":[3,0,0,30],
-"d7/d29/vmec__params_8f90.html":[3,0,0,0,9],
-"d7/d29/vmec__params_8f90.html#a018426cc3eda4610b598954a4cff8097":[1,0,18,31],
-"d7/d29/vmec__params_8f90.html#a018426cc3eda4610b598954a4cff8097":[3,0,0,0,9,31],
-"d7/d29/vmec__params_8f90.html#a0f58bad0fe5e0ba7f89bf76270c8c901":[1,0,18,29],
-"d7/d29/vmec__params_8f90.html#a0f58bad0fe5e0ba7f89bf76270c8c901":[3,0,0,0,9,29],
-"d7/d29/vmec__params_8f90.html#a1b03181cb863861ace0116ff9c0fc1b9":[1,0,18,0],
-"d7/d29/vmec__params_8f90.html#a1b03181cb863861ace0116ff9c0fc1b9":[3,0,0,0,9,0],
-"d7/d29/vmec__params_8f90.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34":[1,0,18,28],
-"d7/d29/vmec__params_8f90.html#a1b2efb0e9bfbb306b1e86cdb4ecabb34":[3,0,0,0,9,28]
+"d6/df3/getcurmid_8f90.html":[3,0,0,30]
 };

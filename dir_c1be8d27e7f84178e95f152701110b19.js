@@ -2,8 +2,8 @@ var dir_c1be8d27e7f84178e95f152701110b19 =
 [
     [ "fbal.f90", "d3/d9f/fbal_8f90.html", "d3/d9f/fbal_8f90" ],
     [ "realspace.f90", "d8/df9/realspace_8f90.html", "d8/df9/realspace_8f90" ],
-    [ "stel_constants.f", "d8/d64/stel__constants_8f.html", "d8/d64/stel__constants_8f" ],
-    [ "stel_kinds.f", "d1/d1e/stel__kinds_8f.html", "d1/d1e/stel__kinds_8f" ],
+    [ "stel_constants.f90", "dd/ddd/stel__constants_8f90.html", "dd/ddd/stel__constants_8f90" ],
+    [ "stel_kinds.f90", "d7/d97/stel__kinds_8f90.html", "d7/d97/stel__kinds_8f90" ],
     [ "vforces.f90", "dc/d6d/vforces_8f90.html", "dc/d6d/vforces_8f90" ],
     [ "vmec_dim.f90", "d8/d05/vmec__dim_8f90.html", "d8/d05/vmec__dim_8f90" ],
     [ "vmec_input.f90", "d1/d59/vmec__input_8f90.html", "d1/d59/vmec__input_8f90" ],

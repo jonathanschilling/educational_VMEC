@@ -4,7 +4,7 @@
 !> \brief Program for computing local \f$\mathbf{K} \times \mathbf{B} = \nabla p\f$ force balance.
 !>
 !> @param bsupu contravariant component of magnetic field \f$B^\theta\f$
-!> @param bsupv contravariant component of magnetic field \f$B^\tzeta\f$
+!> @param bsupv contravariant component of magnetic field \f$B^\zeta\f$
 !> @param bsubu covariant component of magnetic field \f$B_\theta\f$
 !> @param bsubv covariant component of magnetic field \f$B_\zeta\f$
 !> @param bsubsh covariant component of magnetic field \f$B_s\f$ (on half grid?)

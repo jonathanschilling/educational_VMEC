@@ -25,6 +25,8 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   USE vmercier
   USE vmec_input, ONLY: input_extension
   USE vparams, ONLY: one, zero, twopi, nmercier0
+  use stel_kinds, only: dp
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ns, nznt

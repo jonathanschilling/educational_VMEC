@@ -16,6 +16,31 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+<script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/color', '[tex]/cancel']
+  },
+  tex: {
+      tags: "ams",
+      packages: {'[+]': ['noerrors'],
+                 '[+]': ['color'],
+                 '[+]': ['verb'],
+                 '[+]': ['cancel']
+      }
+      macros: { bm: ["{\\boldsymbol #1}",1]
+      }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.0/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -366,7 +391,7 @@ character(len=1)&#160;</td><td class="memItemRight" valign="bottom"><b>mgrid_mod
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d2/d01/mgrid__mod_8f.html">mgrid_mod.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:36:49 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 10:49:25 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

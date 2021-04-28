@@ -113,79 +113,81 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 </div><!--header-->
 <div class="contents">
 <a href="../../d8/d7d/add__fluxes_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>add_fluxes(overg, bsupu, bsupv)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>realspace, <span class="keywordtype">ONLY</span>: wint, guu, guv, chip</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(in)</span>    :: overg</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(inout)</span> :: bsupu, bsupv</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5=0.5_dp, c1p5=1.5_dp</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: iotaped = 0.10</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">INTEGER</span> :: js, l</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: top, bot</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">   11</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a>(overg, bsupu, bsupv)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span>realspace, <span class="keywordtype">ONLY</span>: wint, guu, guv, chip</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="comment">! I think this is the &quot;zero-current algorithm&quot; published in section 2.3 of</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">! Hirshman, Hogan, &quot;ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code&quot; (1986), J. Comp. Phys. 63 (2), 329-352</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="comment">! https://doi.org/10.1016/0021-9991(86)90197-X</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="comment">! ADD MAGNETIC FLUX (CHIP, PHIP) TERMS TO BSUPU=-OVERG*LAM_V, BSUPV=OVERG*LAM_U</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">! COMPUTE FLUX FROM ITOR = &lt;B_u&gt;, ITOR(s) = integrated toroidal current (icurv)</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">IF</span> (ncurr .eq. 1) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <span class="comment">! given current profile and lcurrent set --&gt; compute fluxes, iota consistent with given current profile</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment">! solve Eqn. (11) of the ORMEC paper for each flux surface</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        top = icurv(js) <span class="comment">! offset: this makes the zero-current algorithm a constrained-current algorithm</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        bot = 0</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;           <span class="comment">! bsupu contains -d(lambda)/d(zeta)*lamscale on entry (?)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;           <span class="comment">! bsupv contains  d(lambda)/d(theta)*lamscale on entry (?)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;           top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;           bot = bot + wint(l)* guu(l)*overg(l)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordflow">        END DO</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">IF</span> (bot .ne. zero) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;           chips(js) = top/bot</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordflow">        end if</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">IF</span> (phips(js) .ne. zero) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;           iotas(js) = chips(js)/phips(js)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordflow">        end if</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">else</span> <span class="comment">! ncurr .eq. 0</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     <span class="comment">! given iota profile: compute chips from iotas, phips</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     chips = iotas*phips</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">! distribute chips (ns-sized array) into larger chip array (over full surface) (?)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     chip(js:nrzt:ns) = chips(js)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">! half-grid to full-grid for chi-prime and iota below</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  chipf(ns)    = 2*chips(ns)-chips(ns1)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">! Do not compute iota too near origin</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  iotaf(1)  = c1p5*iotas(2) - p5*iotas(3)     <span class="comment">!zero gradient near axis</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  iotaf(ns) = c1p5*iotas(ns) - p5*iotas(ns-1)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns-1</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     iotaf(js) = p5*(iotas(js) + iotas(js+1))</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">END SUBROUTINE </span>add_fluxes</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(in)</span>    :: overg</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(inout)</span> :: bsupu, bsupv</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5=0.5_dp, c1p5=1.5_dp</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: iotaped = 0.10</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">INTEGER</span> :: js, l</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: top, bot</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">! I think this is the &quot;zero-current algorithm&quot; published in section 2.3 of</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">! Hirshman, Hogan, &quot;ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code&quot; (1986), J. Comp. Phys. 63 (2), 329-352</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="comment">! https://doi.org/10.1016/0021-9991(86)90197-X</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">! ADD MAGNETIC FLUX (CHIP, PHIP) TERMS TO BSUPU=-OVERG*LAM_V, BSUPV=OVERG*LAM_U</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">! COMPUTE FLUX FROM ITOR = &lt;B_u&gt;, ITOR(s) = integrated toroidal current (icurv)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">IF</span> (ncurr .eq. 1) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <span class="comment">! given current profile and lcurrent set --&gt; compute fluxes, iota consistent with given current profile</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="comment">! solve Eqn. (11) of the ORMEC paper for each flux surface</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        top = icurv(js) <span class="comment">! offset: this makes the zero-current algorithm a constrained-current algorithm</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        bot = 0</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;           <span class="comment">! bsupu contains -d(lambda)/d(zeta)*lamscale on entry (?)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;           <span class="comment">! bsupv contains  d(lambda)/d(theta)*lamscale on entry (?)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;           top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;           bot = bot + wint(l)* guu(l)*overg(l)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordflow">        END DO</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">IF</span> (bot .ne. zero) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;           chips(js) = top/bot</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordflow">        end if</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">IF</span> (phips(js) .ne. zero) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;           iotas(js) = chips(js)/phips(js)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordflow">        end if</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">else</span> <span class="comment">! ncurr .eq. 0</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;     <span class="comment">! given iota profile: compute chips from iotas, phips</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;     chips = iotas*phips</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">  END IF</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">! distribute chips (ns-sized array) into larger chip array (over full surface) (?)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     chip(js:nrzt:ns) = chips(js)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">! half-grid to full-grid for chi-prime and iota below</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  chipf(ns)    = 2*chips(ns)-chips(ns1)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">! Do not compute iota too near origin</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  iotaf(1)  = c1p5*iotas(2) - p5*iotas(3)     <span class="comment">!zero gradient near axis</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  iotaf(ns) = c1p5*iotas(ns) - p5*iotas(ns-1)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns-1</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;     iotaf(js) = p5*(iotas(js) + iotas(js+1))</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div>
+<div class="ttc" id="aadd__fluxes_8f90_html_a988e7013ef02301b9cfbde5b8068d5af"><div class="ttname"><a href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div><div class="ttdeci">subroutine add_fluxes(overg, bsupu, bsupv)</div><div class="ttdoc">Add the magnetic fluxes to the tangential derivatives of  to arrive at the contravariant magnetic fie...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7d/add__fluxes_8f90_source.html#l00011">add_fluxes.f90:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d7d/add__fluxes_8f90.html">add_fluxes.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

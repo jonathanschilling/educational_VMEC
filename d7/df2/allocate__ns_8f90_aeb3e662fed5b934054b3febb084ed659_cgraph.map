@@ -1,0 +1,6 @@
+<map id="allocate_ns" name="allocate_ns">
+<area shape="rect" id="node1" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="5,31,93,57"/>
+<area shape="rect" id="node2" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="141,5,259,32"/>
+<area shape="rect" id="node4" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="149,56,251,83"/>
+<area shape="rect" id="node3" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="307,5,437,32"/>
+</map>

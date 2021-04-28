@@ -113,64 +113,66 @@ $(document).ready(function(){initNavTree('d9/d30/free__mem__ns_8f90_source.html'
 </div><!--header-->
 <div class="contents">
 <a href="../../d9/d30/free__mem__ns_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>free_mem_ns</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vforces</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">USE </span>xstuff</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">USE </span>fbal</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1 = 0, istat2 = 0, istat3 = 0, istat4 = 0, &amp;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;             istat5 = 0, istat6 = 0, istat7 = 0, istat8 = 0, &amp;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;             istat9 = 0, istat10 = 0</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">    6</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">free_mem_ns</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span>vforces</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span>xstuff</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">USE </span>fbal</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(phip)) &amp;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">DEALLOCATE</span> (phip, chip, shalf, sqrts, wint, stat=istat3)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(ireflect)) &amp;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">DEALLOCATE</span> (ireflect, stat=istat4)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(ard)) &amp;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">DEALLOCATE</span> (ard,arm,brd,brm,crd,azd,azm,bzd,bzm, sm,sp, bmin, bmax,stat=istat7)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(iotaf)) &amp;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">DEALLOCATE</span> (iotaf,mass,phi,presf,jcuru,jcurv,jdotb,buco,bvco,   &amp;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;       bucof, bvcof, chi,                                           &amp;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;       bdotgradv,equif,specw,tcon,psi,yellip,yinden,                &amp;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;       ytrian,yshift,ygeo,overr,faclam,iotas,phips,chips,pres,vp,   &amp;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;       beta_vol, jperp2, jpar2, bdotb, clam, blam, dlam, phipf,     &amp;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;       chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,   &amp;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;       presgrad, bdamp, stat=istat8)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(gc)) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">DEALLOCATE</span> (gc, xsave, xstore, xcdot, stat=istat10)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1 = 0, istat2 = 0, istat3 = 0, istat4 = 0, &amp;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;             istat5 = 0, istat6 = 0, istat7 = 0, istat8 = 0, &amp;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;             istat9 = 0, istat10 = 0</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(phip)) &amp;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">DEALLOCATE</span> (phip, chip, shalf, sqrts, wint, stat=istat3)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(ireflect)) &amp;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">DEALLOCATE</span> (ireflect, stat=istat4)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(ard)) &amp;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">DEALLOCATE</span> (ard,arm,brd,brm,crd,azd,azm,bzd,bzm, sm,sp, bmin, bmax,stat=istat7)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(iotaf)) &amp;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">DEALLOCATE</span> (iotaf,mass,phi,presf,jcuru,jcurv,jdotb,buco,bvco,   &amp;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;       bucof, bvcof, chi,                                           &amp;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;       bdotgradv,equif,specw,tcon,psi,yellip,yinden,                &amp;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;       ytrian,yshift,ygeo,overr,faclam,iotas,phips,chips,pres,vp,   &amp;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;       beta_vol, jperp2, jpar2, bdotb, clam, blam, dlam, phipf,     &amp;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;       chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,   &amp;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;       presgrad, bdamp, stat=istat8)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(xc)) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">DEALLOCATE</span> (xc, scalxc)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(gc)) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">DEALLOCATE</span> (gc, xsave, xstore, xcdot, stat=istat10)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0 .or. istat2.ne.0 .or. istat3.ne.0 .or. &amp;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      istat4.ne.0 .or. istat5.ne.0 .or. istat6.ne.0 .or. &amp;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      istat7.ne.0 .or. istat8.ne.0 .or. istat9.ne.0 .or. istat10.ne.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(xc)) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">DEALLOCATE</span> (xc, scalxc)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      print *,<span class="stringliteral">&#39; deallocation problem in free_mem_ns&#39;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      print *,<span class="stringliteral">&#39; istat1 = &#39;</span>,istat1,<span class="stringliteral">&#39; istat2 = &#39;</span>,istat2</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      print *,<span class="stringliteral">&#39; istat3 = &#39;</span>,istat3,<span class="stringliteral">&#39; istat4 = &#39;</span>,istat4</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      print *,<span class="stringliteral">&#39; istat5 = &#39;</span>,istat5,<span class="stringliteral">&#39; istat6 = &#39;</span>,istat6</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      print *,<span class="stringliteral">&#39; istat7 = &#39;</span>,istat7,<span class="stringliteral">&#39; istat8 = &#39;</span>,istat8</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      print *,<span class="stringliteral">&#39; istat9 = &#39;</span>,istat9,<span class="stringliteral">&#39; istat10= &#39;</span>,istat10</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">END SUBROUTINE </span>free_mem_ns</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0 .or. istat2.ne.0 .or. istat3.ne.0 .or. &amp;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      istat4.ne.0 .or. istat5.ne.0 .or. istat6.ne.0 .or. &amp;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      istat7.ne.0 .or. istat8.ne.0 .or. istat9.ne.0 .or. istat10.ne.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      print *,<span class="stringliteral">&#39; deallocation problem in free_mem_ns&#39;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      print *,<span class="stringliteral">&#39; istat1 = &#39;</span>,istat1,<span class="stringliteral">&#39; istat2 = &#39;</span>,istat2</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      print *,<span class="stringliteral">&#39; istat3 = &#39;</span>,istat3,<span class="stringliteral">&#39; istat4 = &#39;</span>,istat4</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      print *,<span class="stringliteral">&#39; istat5 = &#39;</span>,istat5,<span class="stringliteral">&#39; istat6 = &#39;</span>,istat6</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      print *,<span class="stringliteral">&#39; istat7 = &#39;</span>,istat7,<span class="stringliteral">&#39; istat8 = &#39;</span>,istat8</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      print *,<span class="stringliteral">&#39; istat9 = &#39;</span>,istat9,<span class="stringliteral">&#39; istat10= &#39;</span>,istat10</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">free_mem_ns</a></div>
+<div class="ttc" id="afree__mem__ns_8f90_html_a467551106b66f531d5dd780bd24a2d37"><div class="ttname"><a href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">free_mem_ns</a></div><div class="ttdeci">subroutine free_mem_ns</div><div class="ttdoc">Free memory depending on the number of flux surfaces ns.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d30/free__mem__ns_8f90_source.html#l00006">free_mem_ns.f90:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/d30/free__mem__ns_8f90.html">free_mem_ns.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

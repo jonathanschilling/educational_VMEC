@@ -115,20 +115,31 @@ $(document).ready(function(){initNavTree('d5/d26/magnetic__fluxes_8f90.html','..
 </div><!--header-->
 <div class="contents">
 
+<p>Compute toroidal and poloidal magnetic flux profiles.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d5/d26/magnetic__fluxes_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a909f811a00045c6fef3c379defc1ed09"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09">torflux_deriv</a> (x)</td></tr>
+<tr class="memdesc:a909f811a00045c6fef3c379defc1ed09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the radial derivative of the enclosed toroidal magnetic flux.  <a href="../../d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09">More...</a><br /></td></tr>
 <tr class="separator:a909f811a00045c6fef3c379defc1ed09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5e5642d688664c85a181c2d1fd6497f"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f">polflux_deriv</a> (x)</td></tr>
+<tr class="memdesc:ad5e5642d688664c85a181c2d1fd6497f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the radial derivative of the enclosed poloidal magnetic flux.  <a href="../../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f">More...</a><br /></td></tr>
 <tr class="separator:ad5e5642d688664c85a181c2d1fd6497f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a017a13ebb77985454dd008ccdb9f4402"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">torflux</a> (x)</td></tr>
+<tr class="memdesc:a017a13ebb77985454dd008ccdb9f4402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the enclosed toroidal magnetic flux.  <a href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">More...</a><br /></td></tr>
 <tr class="separator:a017a13ebb77985454dd008ccdb9f4402"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d78c3bac80a4d14cc82a93bc79e7dcd"><td class="memItemLeft" align="right" valign="top">real(rprec) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">polflux</a> (x)</td></tr>
+<tr class="memdesc:a9d78c3bac80a4d14cc82a93bc79e7dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the enclosed poloidal magnetic flux.  <a href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">More...</a><br /></td></tr>
 <tr class="separator:a9d78c3bac80a4d14cc82a93bc79e7dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Compute toroidal and poloidal magnetic flux profiles. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a9d78c3bac80a4d14cc82a93bc79e7dcd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d78c3bac80a4d14cc82a93bc79e7dcd">&#9670;&nbsp;</a></span>polflux()</h2>
 
@@ -144,14 +155,19 @@ Functions/Subroutines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the enclosed poloidal magnetic flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>evaluation location </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00064">64</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00075">75</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00029">polflux_deriv()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -176,15 +192,22 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the radial derivative of the enclosed poloidal magnetic flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>evaluation location </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>polflux_deriv == d(chi)/dx = iota(TF(x)) * torflux_deriv(x) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00021">21</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00028">28</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00052">torflux()</a>, and <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00008">torflux_deriv()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00076">polflux()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -215,14 +238,21 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the enclosed toroidal magnetic flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>evaluation location </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00042">42</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00051">51</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00008">torflux_deriv()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00029">polflux_deriv()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -253,14 +283,19 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the radial derivative of the enclosed toroidal magnetic flux. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>evaluation location </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00007">7</a> of file <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html">magnetic_fluxes.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00029">polflux_deriv()</a>, and <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00052">torflux()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -276,7 +311,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html">magnetic_fluxes.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -115,21 +115,111 @@ $(document).ready(function(){initNavTree('d1/d9b/getbsubs_8f90.html','../../'); 
 </div><!--header-->
 <div class="contents">
 
+<p>Solves the radial force balance \(\mathbf{B} \cdot B_s = F_s\) for \(B_s\) in real space using collocation.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d1/d9b/getbsubs_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a5090459bbac22499a3c1c6a97740cd1b"><td class="memItemLeft" align="right" valign="top"><a id="a5090459bbac22499a3c1c6a97740cd1b"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>getbsubs</b> (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)</td></tr>
+<tr class="memitem:a5090459bbac22499a3c1c6a97740cd1b"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">getbsubs</a> (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)</td></tr>
+<tr class="memdesc:a5090459bbac22499a3c1c6a97740cd1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the radial force balance \(\mathbf{B} \cdot B_s = F_s\) for \(B_s\) in real space using collocation.  <a href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b">More...</a><br /></td></tr>
 <tr class="separator:a5090459bbac22499a3c1c6a97740cd1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Solves the radial force balance \(\mathbf{B} \cdot B_s = F_s\) for \(B_s\) in real space using collocation. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html">getbsubs.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a5090459bbac22499a3c1c6a97740cd1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5090459bbac22499a3c1c6a97740cd1b">&#9670;&nbsp;</a></span>getbsubs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine getbsubs </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(0:mmax, -nmax:nmax, 0:1), intent(out)&#160;</td>
+          <td class="paramname"><em>bsubsmn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(nzeta, ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>frho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(nzeta, ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>bsupu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(nzeta, ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>bsupv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>mmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>nmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solves the radial force balance \(\mathbf{B} \cdot B_s = F_s\) for \(B_s\) in real space using collocation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bsubsmn</td><td>Fourier coefficients of B_s </td></tr>
+    <tr><td class="paramname">frho</td><td>Fourier coefficients of radial Force component </td></tr>
+    <tr><td class="paramname">bsupu</td><td>contravariant component of magnetic field \(B^\theta\) </td></tr>
+    <tr><td class="paramname">bsupv</td><td>contravariant component of magnetic field \(B^\zeta\) </td></tr>
+    <tr><td class="paramname">mmax</td><td>maximum poloidal mode number </td></tr>
+    <tr><td class="paramname">nmax</td><td>maximum toroidal mode number </td></tr>
+    <tr><td class="paramname">info</td><td>error flag </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00013">13</a> of file <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html">getbsubs.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00021">jxbforce()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d9b/getbsubs_8f90_a5090459bbac22499a3c1c6a97740cd1b_icgraph.svg" width="506" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d1/d9b/getbsubs_8f90.html">getbsubs.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

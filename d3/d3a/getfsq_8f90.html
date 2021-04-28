@@ -115,21 +115,96 @@ $(document).ready(function(){initNavTree('d3/d3a/getfsq_8f90.html','../../'); in
 </div><!--header-->
 <div class="contents">
 
+<p>Compute total force residual on flux surfaces.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d3/d3a/getfsq_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a7b636db95ff23aaea849bd65fba7aa2e"><td class="memItemLeft" align="right" valign="top"><a id="a7b636db95ff23aaea849bd65fba7aa2e"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>getfsq</b> (gcr, gcz, gnormr, gnormz, gnorm, medge)</td></tr>
+<tr class="memitem:a7b636db95ff23aaea849bd65fba7aa2e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, gnormr, gnormz, gnorm, medge)</td></tr>
+<tr class="memdesc:a7b636db95ff23aaea849bd65fba7aa2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute total force residual on flux surfaces.  <a href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">More...</a><br /></td></tr>
 <tr class="separator:a7b636db95ff23aaea849bd65fba7aa2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Compute total force residual on flux surfaces. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d3/d3a/getfsq_8f90_source.html">getfsq.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a7b636db95ff23aaea849bd65fba7aa2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b636db95ff23aaea849bd65fba7aa2e">&#9670;&nbsp;</a></span>getfsq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine getfsq </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,mnsize*ntmax), intent(in)&#160;</td>
+          <td class="paramname"><em>gcr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,mnsize*ntmax), intent(in)&#160;</td>
+          <td class="paramname"><em>gcz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(out)&#160;</td>
+          <td class="paramname"><em>gnormr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(out)&#160;</td>
+          <td class="paramname"><em>gnormz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>gnorm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>medge</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute total force residual on flux surfaces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gcr</td><td>\(R\)-component of force </td></tr>
+    <tr><td class="paramname">gcz</td><td>\(Z\)-component of force </td></tr>
+    <tr><td class="paramname">gnormr</td><td>normalized total force residual in \(R\) </td></tr>
+    <tr><td class="paramname">gnormz</td><td>normalized total force residual in \(Z\) </td></tr>
+    <tr><td class="paramname">gnorm</td><td>normalization factor for forces </td></tr>
+    <tr><td class="paramname">medge</td><td>=0: exclude contribution from LCFS; =1: include LCFS contribution </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d3a/getfsq_8f90_source.html#l00012">12</a> of file <a class="el" href="../../d3/d3a/getfsq_8f90_source.html">getfsq.f90</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d3a/getfsq_8f90.html">getfsq.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

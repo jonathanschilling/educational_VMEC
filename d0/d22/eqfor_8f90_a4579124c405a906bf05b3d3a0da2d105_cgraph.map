@@ -1,0 +1,13 @@
+<map id="eqfor" name="eqfor">
+<area shape="rect" id="node1" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="5,107,56,133"/>
+<area shape="rect" id="node2" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="107,5,182,32"/>
+<area shape="rect" id="node3" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="123,56,166,83"/>
+<area shape="rect" id="node4" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="107,107,182,133"/>
+<area shape="rect" id="node5" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="104,157,185,184"/>
+<area shape="rect" id="node6" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="111,208,178,235"/>
+<area shape="rect" id="node7" href="$da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="245,107,307,133"/>
+<area shape="rect" id="node8" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="242,157,310,184"/>
+<area shape="rect" id="node9" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="233,208,319,235"/>
+<area shape="rect" id="node10" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="239,259,313,285"/>
+<area shape="rect" id="node11" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="243,309,309,336"/>
+</map>

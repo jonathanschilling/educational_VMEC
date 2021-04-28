@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;  <span class="keyword">SUBROUTINE </span>readin(input_file, ier_flag)</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vmec_params</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>mgrid_mod, <span class="keywordtype">ONLY</span>: nextcur, curlabel, read_mgrid, &amp;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a>, <span class="keywordtype">ONLY</span>: nextcur, curlabel, read_mgrid, &amp;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;                       nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">! Open output files here, print out heading to threed1 file</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">CALL </span>heading(input_extension)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">heading</a>(input_extension)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordflow">IF</span> (lfreeb) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <span class="comment">! READ IN AND STORE (FOR SEQUENTIAL RUNNING) MAGNETIC FIELD DATA FROM MGRID_FILE</span></div>
@@ -330,7 +330,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="keywordflow">  ENDIF</span></div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="comment">! ALLOCATE MEMORY FOR NU, NV, MPOL, NTOR SIZED ARRAYS</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keyword">CALL </span>allocate_nunv</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">allocate_nunv</a></div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="comment">! CONVERT TO INTERNAL REPRESENTATION OF MODES</span></div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="comment">!</span></div>
@@ -480,14 +480,17 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  currv = mu0*curtor</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="keyword">END SUBROUTINE </span>readin</div>
-<div class="ttc" id="aflip__theta_8f90_html_a16e285a484c4af6298538139aa2312b7"><div class="ttname"><a href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7">flip_theta</a></div><div class="ttdeci">subroutine flip_theta(rmn, zmn, lmn)</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d36/flip__theta_8f90_source.html#l00002">flip_theta.f90:3</a></div></div>
+<div class="ttc" id="aallocate__nunv_8f90_html_a1fb4098498daa9bd7a8487120397c1a7"><div class="ttname"><a href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">allocate_nunv</a></div><div class="ttdeci">subroutine allocate_nunv</div><div class="ttdoc">allocate arrays depending on the number of Fourier coefficients nunv</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d8c/allocate__nunv_8f90_source.html#l00006">allocate_nunv.f90:7</a></div></div>
+<div class="ttc" id="aflip__theta_8f90_html_a16e285a484c4af6298538139aa2312b7"><div class="ttname"><a href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7">flip_theta</a></div><div class="ttdeci">subroutine flip_theta(rmn, zmn, lmn)</div><div class="ttdoc">Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d36/flip__theta_8f90_source.html#l00009">flip_theta.f90:10</a></div></div>
+<div class="ttc" id="aheading_8f90_html_aacf288f9cc770199b74d2e6fcc374450"><div class="ttname"><a href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">heading</a></div><div class="ttdeci">subroutine heading(extension)</div><div class="ttdoc">Open output files and print banner message at the top.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d4c/heading_8f90_source.html#l00007">heading.f90:8</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/da3/readin_8f90.html">readin.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

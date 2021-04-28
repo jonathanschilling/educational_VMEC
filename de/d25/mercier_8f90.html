@@ -115,21 +115,174 @@ $(document).ready(function(){initNavTree('de/d25/mercier_8f90.html','../../'); i
 </div><!--header-->
 <div class="contents">
 
+<p>Evaluate the Mercier stability criterion.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../de/d25/mercier_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a6635929818286c4cff963bd148261208"><td class="memItemLeft" align="right" valign="top"><a id="a6635929818286c4cff963bd148261208"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>mercier</b> (gsqrt, bsq, bdotj, iotas, wint, r1, rt, rz, zt, zz, bsubu, vp, phips, pres, ns, nznt)</td></tr>
+<tr class="memitem:a6635929818286c4cff963bd148261208"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208">mercier</a> (gsqrt, bsq, bdotj, iotas, wint, r1, rt, rz, zt, zz, bsubu, vp, phips, pres, ns, nznt)</td></tr>
+<tr class="memdesc:a6635929818286c4cff963bd148261208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the Mercier stability criterion.  <a href="../../de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208">More...</a><br /></td></tr>
 <tr class="separator:a6635929818286c4cff963bd148261208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Evaluate the Mercier stability criterion. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../de/d25/mercier_8f90_source.html">mercier.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a6635929818286c4cff963bd148261208"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6635929818286c4cff963bd148261208">&#9670;&nbsp;</a></span>mercier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine mercier </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>gsqrt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(inout)&#160;</td>
+          <td class="paramname"><em>bdotj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns), intent(in)&#160;</td>
+          <td class="paramname"><em>iotas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>wint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>r1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>rt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>rz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>zt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>zz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsubu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns), intent(in)&#160;</td>
+          <td class="paramname"><em>vp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns), intent(in)&#160;</td>
+          <td class="paramname"><em>phips</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns), intent(in)&#160;</td>
+          <td class="paramname"><em>pres</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>nznt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluate the Mercier stability criterion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gsqrt</td><td>Jacobian \(\sqrt{g}\) </td></tr>
+    <tr><td class="paramname">bsq</td><td>modulus of magnetic field \(|\mathbf{B}|\) </td></tr>
+    <tr><td class="paramname">bdotj</td><td>parallel current density \(\mathbf{B} \cdot \mathbf{j}\) </td></tr>
+    <tr><td class="paramname">iotas</td><td>rotational transform profile </td></tr>
+    <tr><td class="paramname">wint</td><td>normalization constant for flux-surface integrals </td></tr>
+    <tr><td class="paramname">r1</td><td>\(R\) </td></tr>
+    <tr><td class="paramname">rt</td><td>\(\partial R / \partial \theta\) </td></tr>
+    <tr><td class="paramname">rz</td><td>\(\partial R / \partial \zeta\) </td></tr>
+    <tr><td class="paramname">zt</td><td>\(\partial Z / \partial \theta\) </td></tr>
+    <tr><td class="paramname">zz</td><td>\(\partial Z / \partial \zeta\) </td></tr>
+    <tr><td class="paramname">bsubu</td><td>contravariant component of magnetic field \(B^\zeta\) </td></tr>
+    <tr><td class="paramname">vp</td><td>radial profile of specific volume \(\partial V / \partial s\) </td></tr>
+    <tr><td class="paramname">phips</td><td>radial derivative of enclosed toroidal magnetic flux </td></tr>
+    <tr><td class="paramname">pres</td><td>pressure profile </td></tr>
+    <tr><td class="paramname">ns</td><td>number of flux surfaces </td></tr>
+    <tr><td class="paramname">nznt</td><td>number of grid points per flux surface </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d25/mercier_8f90_source.html#l00022">22</a> of file <a class="el" href="../../de/d25/mercier_8f90_source.html">mercier.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00021">jxbforce()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d25/mercier_8f90_a6635929818286c4cff963bd148261208_icgraph.svg" width="496" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/d25/mercier_8f90.html">mercier.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

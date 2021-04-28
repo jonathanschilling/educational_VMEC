@@ -115,21 +115,104 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90.html','../../'); ini
 </div><!--header-->
 <div class="contents">
 
+<p>Fourier transform alias force and also return intermediate output.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d5/de7/alias_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a971bf2e3997d8e5ed08c060b651c88c4"><td class="memItemLeft" align="right" valign="top"><a id="a971bf2e3997d8e5ed08c060b651c88c4"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>alias</b> (gcons, ztemp, gcs, gsc, gcc, gss)</td></tr>
+<tr class="memitem:a971bf2e3997d8e5ed08c060b651c88c4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">alias</a> (gcons, ztemp, gcs, gsc, gcc, gss)</td></tr>
+<tr class="memdesc:a971bf2e3997d8e5ed08c060b651c88c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s)  <a href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">More...</a><br /></td></tr>
 <tr class="separator:a971bf2e3997d8e5ed08c060b651c88c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fourier transform alias force and also return intermediate output. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d5/de7/alias_8f90_source.html">alias.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a971bf2e3997d8e5ed08c060b651c88c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971bf2e3997d8e5ed08c060b651c88c4">&#9670;&nbsp;</a></span>alias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine alias </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(out)&#160;</td>
+          <td class="paramname"><em>gcons</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>ztemp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1), intent(inout)&#160;</td>
+          <td class="paramname"><em>gcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1), intent(inout)&#160;</td>
+          <td class="paramname"><em>gsc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1), intent(inout)&#160;</td>
+          <td class="paramname"><em>gcc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1), intent(inout)&#160;</td>
+          <td class="paramname"><em>gss</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gcons</td><td></td></tr>
+    <tr><td class="paramname">ztemp</td><td></td></tr>
+    <tr><td class="paramname">gcs</td><td></td></tr>
+    <tr><td class="paramname">gsc</td><td></td></tr>
+    <tr><td class="paramname">gcc</td><td></td></tr>
+    <tr><td class="paramname">gss</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/de7/alias_8f90_source.html#l00012">12</a> of file <a class="el" href="../../d5/de7/alias_8f90_source.html">alias.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d5/de7/alias_8f90_a971bf2e3997d8e5ed08c060b651c88c4_icgraph.svg" width="499" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/de7/alias_8f90.html">alias.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

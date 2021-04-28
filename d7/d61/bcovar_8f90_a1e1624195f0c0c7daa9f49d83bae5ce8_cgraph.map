@@ -1,0 +1,7 @@
+<map id="bcovar" name="bcovar">
+<area shape="rect" id="node1" title="Compute the covariant components of the magnetic field , ." alt="" coords="5,81,67,108"/>
+<area shape="rect" id="node2" href="$d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie..." alt="" coords="115,5,197,32"/>
+<area shape="rect" id="node3" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="119,56,193,83"/>
+<area shape="rect" id="node4" href="$d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" title="Normalization parameters for ." alt="" coords="126,107,186,133"/>
+<area shape="rect" id="node5" href="$d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c" title="Compute preconditioning matrix elements for , &#160;force." alt="" coords="119,157,193,184"/>
+</map>

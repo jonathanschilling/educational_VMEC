@@ -113,62 +113,64 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 </div><!--header-->
 <div class="contents">
 <a href="../../dc/df5/interp_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>interp(xnew, xold, scalxc, nsnew, nsold)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main, <span class="keywordtype">ONLY</span>: dp, rprec, mnsize</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: ntmax</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vmec_persistent, <span class="keywordtype">ONLY</span>: ixm</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">intent(in)</span> :: nsnew, nsold</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsnew,mnsize,3*ntmax)</span>, <span class="keywordtype">INTENT(out)</span>   :: xnew</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsnew,mnsize,3*ntmax)</span>, <span class="keywordtype">INTENT(in)</span>    :: scalxc</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsold,mnsize,3*ntmax)</span>, <span class="keywordtype">intent(inout)</span> :: xold</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero=0, one=1</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">INTEGER</span> :: ntype, js, js1, js2</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: hsold, sj, s1, xint</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">IF</span> (nsold .le. 0) <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  hsold = one/(nsold - 1)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">   11</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a>(xnew, xold, scalxc, nsnew, nsold)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">USE </span>vmec_main, <span class="keywordtype">ONLY</span>: dp, rprec, mnsize</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: ntmax</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">USE </span>vmec_persistent, <span class="keywordtype">ONLY</span>: ixm</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">intent(in)</span> :: nsnew, nsold</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsnew,mnsize,3*ntmax)</span>, <span class="keywordtype">INTENT(out)</span>   :: xnew</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsnew,mnsize,3*ntmax)</span>, <span class="keywordtype">INTENT(in)</span>    :: scalxc</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsold,mnsize,3*ntmax)</span>, <span class="keywordtype">intent(inout)</span> :: xold</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">! INTERPOLATE R,Z AND LAMBDA ON FULL GRID</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="comment">! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="comment">! ON ENTRY, XOLD = X(COARSE MESH) * SCALXC(COARSE MESH)</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">! ON EXIT,  XNEW = X(NEW MESH)   [ NOT SCALED BY 1/SQRTS ]</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">DO</span> ntype = 1, 3*ntmax</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     <span class="comment">! extrapolation to axis for odd-m modes (?)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize), 2) .eq. 1) &amp;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;       xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     <span class="comment">! radial interpolation from old, coarse state vector to new, finer state vector</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <span class="keywordflow">DO</span> js = 1, nsnew</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        sj = real(js - 1, rprec)/(nsnew - 1)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        js1 = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        js2 = min(js1 + 1, nsold)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        s1 = (js1 - 1)*hsold</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        xint = (sj - s1)/hsold</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        xint = min(one,xint)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        xint = max(zero,xint)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype) &amp;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                             +        xint *xold(js2,:,ntype)   )/scalxc(js,:,1)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     <span class="comment">! Zero M=1 modes at origin</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize),2) .eq. 1) &amp;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        xnew(1,:,ntype) = 0</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">END SUBROUTINE </span>interp</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero=0, one=1</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">INTEGER</span> :: ntype, js, js1, js2</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: hsold, sj, s1, xint</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">IF</span> (nsold .le. 0) <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  hsold = one/(nsold - 1)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">! INTERPOLATE R,Z AND LAMBDA ON FULL GRID</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="comment">! ON ENTRY, XOLD = X(COARSE MESH) * SCALXC(COARSE MESH)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">! ON EXIT,  XNEW = X(NEW MESH)   [ NOT SCALED BY 1/SQRTS ]</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">DO</span> ntype = 1, 3*ntmax</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     <span class="comment">! extrapolation to axis for odd-m modes (?)</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize), 2) .eq. 1) &amp;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;       xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="comment">! radial interpolation from old, coarse state vector to new, finer state vector</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <span class="keywordflow">DO</span> js = 1, nsnew</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        sj = real(js - 1, rprec)/(nsnew - 1)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        js1 = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        js2 = min(js1 + 1, nsold)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        s1 = (js1 - 1)*hsold</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        xint = (sj - s1)/hsold</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        xint = min(one,xint)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        xint = max(zero,xint)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype) &amp;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                             +        xint *xold(js2,:,ntype)   )/scalxc(js,:,1)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;     <span class="comment">! Zero M=1 modes at origin</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;     <span class="keywordflow">WHERE</span> (mod(ixm(:mnsize),2) .eq. 1) &amp;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        xnew(1,:,ntype) = 0</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">END SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div>
+<div class="ttc" id="ainterp_8f90_html_a5bac7725cb89730c4bd187e158dc36ee"><div class="ttname"><a href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div><div class="ttdeci">subroutine interp(xnew, xold, scalxc, nsnew, nsold)</div><div class="ttdoc">Interpolate ,  and  on full grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df5/interp_8f90_source.html#l00011">interp.f90:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/df5/interp_8f90.html">interp.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

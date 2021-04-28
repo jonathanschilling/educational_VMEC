@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('df/d61/read__wout__mod_8f_source.html'
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">!                         for the computed equilibrium</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">!</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keywordtype">USE </span>stel_kinds</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      <span class="keywordtype">USE </span>mgrid_mod</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      <span class="keywordtype">USE </span><a class="code" href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">C-----------------------------------------------</span></div>
@@ -381,7 +381,7 @@ $(document).ready(function(){initNavTree('df/d61/read__wout__mod_8f_source.html'
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">!     MAKE SURE wout IS NOT EMBEDDED IN THE NAME (PERVERSE USER...)</span></div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">!</span></div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      filename = <span class="stringliteral">&#39;wout&#39;</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <span class="keyword">CALL </span>parse_extension(filename, file_or_extension, isnc)</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <span class="keyword">CALL </span><a class="code" href="../../d8/d44/parse__extension_8f.html#ad4ed46c7b1d3501caaad403df4838a0b">parse_extension</a>(filename, file_or_extension, isnc)</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      <span class="keyword">CALL </span>flush(6)</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      <span class="keywordflow">IF</span> (isnc) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;         <span class="keyword">CALL </span>read_wout_nc(filename, ierr)</div>
@@ -1259,13 +1259,15 @@ $(document).ready(function(){initNavTree('df/d61/read__wout__mod_8f_source.html'
 <div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160;      <span class="keyword">END MODULE </span>read_wout_mod</div>
 <div class="line"><a name="l01146"></a><span class="lineno"> 1146</span>&#160; </div>
 <div class="ttc" id="ainterfaceread__wout__mod_1_1read__wout__file_html"><div class="ttname"><a href="../../d7/d93/interfaceread__wout__mod_1_1read__wout__file.html">read_wout_mod::read_wout_file</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d61/read__wout__mod_8f_source.html#l00236">read_wout_mod.f:236</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
+<div class="ttc" id="aparse__extension_8f_html_ad4ed46c7b1d3501caaad403df4838a0b"><div class="ttname"><a href="../../d8/d44/parse__extension_8f.html#ad4ed46c7b1d3501caaad403df4838a0b">parse_extension</a></div><div class="ttdeci">subroutine parse_extension(file_to_parse, file_or_extension, lnc)</div><div class="ttdoc">Parse the first command-line argument into a filename.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d44/parse__extension_8f_source.html#l00009">parse_extension.f:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../df/d61/read__wout__mod_8f.html">read_wout_mod.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

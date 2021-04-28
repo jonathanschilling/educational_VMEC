@@ -1,5 +1,13 @@
 <map id="funct3d" name="funct3d">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,71,57"/>
-<area shape="rect" id="node2" href="$d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" title=" " alt="" coords="120,5,181,32"/>
-<area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" title=" " alt="" coords="119,56,183,83"/>
+<area shape="rect" id="node1" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="5,157,71,184"/>
+<area shape="rect" id="node2" href="$d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4" title="Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,..." alt="" coords="129,31,179,57"/>
+<area shape="rect" id="node3" href="$d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" title="Compute the covariant components of the magnetic field , ." alt="" coords="123,81,185,108"/>
+<area shape="rect" id="node8" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="121,132,187,159"/>
+<area shape="rect" id="node9" href="$de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0" title="Compute the real&#45;space MHD forces." alt="" coords="125,183,183,209"/>
+<area shape="rect" id="node10" href="$d8/dc3/jacobian_8f90.html#af346f65d2aa225d9ede6e0f23add6142" title="Evaulate the Jacobian of the transform from flux&#45; to cylindrical coordinates." alt="" coords="119,233,189,260"/>
+<area shape="rect" id="node11" href="$dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" title=" " alt="" coords="122,284,186,311"/>
+<area shape="rect" id="node4" href="$d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie..." alt="" coords="237,5,320,32"/>
+<area shape="rect" id="node5" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="241,56,316,83"/>
+<area shape="rect" id="node6" href="$d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" title="Normalization parameters for ." alt="" coords="249,107,309,133"/>
+<area shape="rect" id="node7" href="$d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c" title="Compute preconditioning matrix elements for , &#160;force." alt="" coords="241,157,316,184"/>
 </map>

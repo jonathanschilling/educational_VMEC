@@ -1,0 +1,7 @@
+<map id="fsym_fft" name="fsym_fft">
+<area shape="rect" id="node1" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="425,5,493,32"/>
+<area shape="rect" id="node2" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="311,5,377,32"/>
+<area shape="rect" id="node3" href="$d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="212,5,263,32"/>
+<area shape="rect" id="node4" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="108,5,164,32"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a476ef59cc25fe0996c0f5750d978df25" title="Main program of VMEC." alt="" coords="5,5,60,32"/>
+</map>

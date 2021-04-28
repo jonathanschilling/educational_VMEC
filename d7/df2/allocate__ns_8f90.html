@@ -115,21 +115,84 @@ $(document).ready(function(){initNavTree('d7/df2/allocate__ns_8f90.html','../../
 </div><!--header-->
 <div class="contents">
 
+<p>allocate arrays depending on the number of flux surfaces <code>ns</code>  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d7/df2/allocate__ns_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aeb3e662fed5b934054b3febb084ed659"><td class="memItemLeft" align="right" valign="top"><a id="aeb3e662fed5b934054b3febb084ed659"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>allocate_ns</b> (linterp, neqs_old)</td></tr>
+<tr class="memitem:aeb3e662fed5b934054b3febb084ed659"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">allocate_ns</a> (linterp, neqs_old)</td></tr>
+<tr class="memdesc:aeb3e662fed5b934054b3febb084ed659"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate arrays depending on the number of flux surfaces <code>ns</code>  <a href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">More...</a><br /></td></tr>
 <tr class="separator:aeb3e662fed5b934054b3febb084ed659"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>allocate arrays depending on the number of flux surfaces <code>ns</code> </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d7/df2/allocate__ns_8f90_source.html">allocate_ns.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aeb3e662fed5b934054b3febb084ed659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3e662fed5b934054b3febb084ed659">&#9670;&nbsp;</a></span>allocate_ns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine allocate_ns </td>
+          <td>(</td>
+          <td class="paramtype">logical, intent(in)&#160;</td>
+          <td class="paramname"><em>linterp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>neqs_old</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate arrays depending on the number of flux surfaces <code>ns</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">linterp</td><td>interpolate from coars to finer mesh? </td></tr>
+    <tr><td class="paramname">neqs_old</td><td>previous number of degrees-of-freedom, i.e., Fourier coefficients for \(R\), \(Z\) and \(\lambda\) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/df2/allocate__ns_8f90_source.html#l00008">8</a> of file <a class="el" href="../../d7/df2/allocate__ns_8f90_source.html">allocate_ns.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d2/d6a/allocate__funct3d_8f90_source.html#l00007">allocate_funct3d()</a>, and <a class="el" href="../../d9/d30/free__mem__ns_8f90_source.html#l00007">free_mem_ns()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d7/df2/allocate__ns_8f90_aeb3e662fed5b934054b3febb084ed659_cgraph.svg" width="443" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d7/df2/allocate__ns_8f90_aeb3e662fed5b934054b3febb084ed659_icgraph.svg" width="356" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/df2/allocate__ns_8f90.html">allocate_ns.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

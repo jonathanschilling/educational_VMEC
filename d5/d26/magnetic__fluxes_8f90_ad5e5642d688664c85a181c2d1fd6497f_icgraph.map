@@ -1,4 +1,4 @@
 <map id="polflux_deriv" name="polflux_deriv">
-<area shape="rect" id="node1" title=" " alt="" coords="112,5,205,32"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title=" " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node1" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,5,205,32"/>
+<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,5,64,32"/>
 </map>

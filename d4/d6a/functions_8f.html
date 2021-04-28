@@ -115,27 +115,137 @@ $(document).ready(function(){initNavTree('d4/d6a/functions_8f.html','../../'); i
 </div><!--header-->
 <div class="contents">
 
+<p>This module containes functions used by the profiles.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d4/d6a/functions_8f_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a518699207ca1e12189357365cbd4cecc"><td class="memItemLeft" align="right" valign="top"><a id="a518699207ca1e12189357365cbd4cecc"></a>
-real(rprec) function, public&#160;</td><td class="memItemRight" valign="bottom"><b>functions::two_power</b> (x, b)</td></tr>
+<tr class="memitem:a518699207ca1e12189357365cbd4cecc"><td class="memItemLeft" align="right" valign="top">real(rprec) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d6a/functions_8f.html#a518699207ca1e12189357365cbd4cecc">functions::two_power</a> (x, b)</td></tr>
+<tr class="memdesc:a518699207ca1e12189357365cbd4cecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile function for the <code>two_power</code> profile. \(b(0) * (1 - x^{b(1)})^{b(2)}\).  <a href="../../d4/d6a/functions_8f.html#a518699207ca1e12189357365cbd4cecc">More...</a><br /></td></tr>
 <tr class="separator:a518699207ca1e12189357365cbd4cecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc11e343e0f1425203ffbbcaaf684593"><td class="memItemLeft" align="right" valign="top"><a id="abc11e343e0f1425203ffbbcaaf684593"></a>
-real(rprec) function, public&#160;</td><td class="memItemRight" valign="bottom"><b>functions::two_power_gs</b> (x, b)</td></tr>
+<tr class="memitem:abc11e343e0f1425203ffbbcaaf684593"><td class="memItemLeft" align="right" valign="top">real(rprec) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d6a/functions_8f.html#abc11e343e0f1425203ffbbcaaf684593">functions::two_power_gs</a> (x, b)</td></tr>
+<tr class="memdesc:abc11e343e0f1425203ffbbcaaf684593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profile function for the <code>two_power_gs</code> profile. \(\texttt{two\_power}(x)*(1 + \sum\left[b(i)*\exp(-(x - b(i+1))/b(i+2))^2\right])\).  <a href="../../d4/d6a/functions_8f.html#abc11e343e0f1425203ffbbcaaf684593">More...</a><br /></td></tr>
 <tr class="separator:abc11e343e0f1425203ffbbcaaf684593"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8a7a9050ac08bc732ab08c620621024"><td class="memItemLeft" align="right" valign="top"><a id="ac8a7a9050ac08bc732ab08c620621024"></a>
-logical function&#160;</td><td class="memItemRight" valign="bottom"><b>functions::function_test</b> ()</td></tr>
+<tr class="memitem:ac8a7a9050ac08bc732ab08c620621024"><td class="memItemLeft" align="right" valign="top">logical function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d6a/functions_8f.html#ac8a7a9050ac08bc732ab08c620621024">functions::function_test</a> ()</td></tr>
+<tr class="memdesc:ac8a7a9050ac08bc732ab08c620621024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main test function.  <a href="../../d4/d6a/functions_8f.html#ac8a7a9050ac08bc732ab08c620621024">More...</a><br /></td></tr>
 <tr class="separator:ac8a7a9050ac08bc732ab08c620621024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This module containes functions used by the profiles. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d4/d6a/functions_8f_source.html">functions.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ac8a7a9050ac08bc732ab08c620621024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8a7a9050ac08bc732ab08c620621024">&#9670;&nbsp;</a></span>function_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">logical function functions::function_test</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main test function. </p>
+<p>Test <code>two_power</code> function for x = 0, b = {1,10,2} is 1</p>
+<p>Test <code>two_power</code> function for x = 1, b = {1,10,2} is 0</p>
+<p>Test <code>two_power</code> function for x = 0.5, b = {1,1,1} is 0.5</p>
+<p>Test <code>two_power</code> function for x = 0.5, b = {1,1,2} is 0.25</p>
+<p>Test <code>two_power_gs</code> function for x = 0.4, b = {1,1,1,0,0,1} is two_power(x,b)</p>
+<p>Test <code>two_power_gs</code> function for x = 0.8, b = {1,1,0,1,0.8,0.1} is 2</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d6a/functions_8f_source.html#l00051">51</a> of file <a class="el" href="../../d4/d6a/functions_8f_source.html">functions.f</a>.</p>
+
+</div>
+</div>
+<a id="a518699207ca1e12189357365cbd4cecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a518699207ca1e12189357365cbd4cecc">&#9670;&nbsp;</a></span>two_power()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(rprec) function, public functions::two_power </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:20), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Profile function for the <code>two_power</code> profile. \(b(0) * (1 - x^{b(1)})^{b(2)}\). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>evaluation location </td></tr>
+    <tr><td class="paramname">b</td><td>parameter vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d6a/functions_8f_source.html#l00020">20</a> of file <a class="el" href="../../d4/d6a/functions_8f_source.html">functions.f</a>.</p>
+
+</div>
+</div>
+<a id="abc11e343e0f1425203ffbbcaaf684593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc11e343e0f1425203ffbbcaaf684593">&#9670;&nbsp;</a></span>two_power_gs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(rprec) function, public functions::two_power_gs </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(0:20), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Profile function for the <code>two_power_gs</code> profile. \(\texttt{two\_power}(x)*(1 + \sum\left[b(i)*\exp(-(x - b(i+1))/b(i+2))^2\right])\). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>evaluation location </td></tr>
+    <tr><td class="paramname">b</td><td>parameter vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d6a/functions_8f_source.html#l00034">34</a> of file <a class="el" href="../../d4/d6a/functions_8f_source.html">functions.f</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/d6a/functions_8f.html">functions.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

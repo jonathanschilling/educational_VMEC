@@ -115,21 +115,161 @@ $(document).ready(function(){initNavTree('d6/d53/jxbforce_8f90.html','../../'); 
 </div><!--header-->
 <div class="contents">
 
+<p>Program for computing local \(\mathbf{K} \times \mathbf{B} = \nabla p\) force balance.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d6/d53/jxbforce_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aef04f343b688724d6ec0ee8f2a9db7c1"><td class="memItemLeft" align="right" valign="top"><a id="aef04f343b688724d6ec0ee8f2a9db7c1"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>jxbforce</b> (bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu, bsubsv, gsqrt, bsq, itheta, izeta, brho, ier_flag)</td></tr>
+<tr class="memitem:aef04f343b688724d6ec0ee8f2a9db7c1"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1">jxbforce</a> (bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu, bsubsv, gsqrt, bsq, itheta, izeta, brho, ier_flag)</td></tr>
+<tr class="memdesc:aef04f343b688724d6ec0ee8f2a9db7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program for computing local \(\mathbf{K} \times \mathbf{B} = \nabla p\) force balance.  <a href="../../d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1">More...</a><br /></td></tr>
 <tr class="separator:aef04f343b688724d6ec0ee8f2a9db7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Program for computing local \(\mathbf{K} \times \mathbf{B} = \nabla p\) force balance. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d6/d53/jxbforce_8f90_source.html">jxbforce.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aef04f343b688724d6ec0ee8f2a9db7c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef04f343b688724d6ec0ee8f2a9db7c1">&#9670;&nbsp;</a></span>jxbforce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine jxbforce </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsupu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsupv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(inout), target&#160;</td>
+          <td class="paramname"><em>bsubu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1), intent(inout), target&#160;</td>
+          <td class="paramname"><em>bsubv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsubsh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1)&#160;</td>
+          <td class="paramname"><em>bsubsu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt,0:1)&#160;</td>
+          <td class="paramname"><em>bsubsv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>gsqrt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(in)&#160;</td>
+          <td class="paramname"><em>bsq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(out)&#160;</td>
+          <td class="paramname"><em>itheta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(out)&#160;</td>
+          <td class="paramname"><em>izeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nznt), intent(out)&#160;</td>
+          <td class="paramname"><em>brho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ier_flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Program for computing local \(\mathbf{K} \times \mathbf{B} = \nabla p\) force balance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bsupu</td><td>contravariant component of magnetic field \(B^\theta\) </td></tr>
+    <tr><td class="paramname">bsupv</td><td>contravariant component of magnetic field \(B^\zeta\) </td></tr>
+    <tr><td class="paramname">bsubu</td><td>covariant component of magnetic field \(B_\theta\) </td></tr>
+    <tr><td class="paramname">bsubv</td><td>covariant component of magnetic field \(B_\zeta\) </td></tr>
+    <tr><td class="paramname">bsubsh</td><td>covariant component of magnetic field \(B_s\) (on half grid?) </td></tr>
+    <tr><td class="paramname">bsubsu</td><td>tangential derivate of covariant component of magnetic field \(\partial B_s / \partial \theta\) (?) </td></tr>
+    <tr><td class="paramname">bsubsv</td><td>tangential derivate of covariant component of magnetic field \(\partial B_s / \partial \zeta\) (?) </td></tr>
+    <tr><td class="paramname">gsqrt</td><td>Jacobian \(\sqrt{g}\) </td></tr>
+    <tr><td class="paramname">bsq</td><td>modulus of magnetic field \(|\mathbf{B}|^2\) </td></tr>
+    <tr><td class="paramname">itheta</td><td>index in poloidal direction </td></tr>
+    <tr><td class="paramname">izeta</td><td>index in toroidal direction </td></tr>
+    <tr><td class="paramname">brho</td><td>radial component of magnetic field \(B_\rho\) (?) </td></tr>
+    <tr><td class="paramname">ier_flag</td><td>error flag </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00019">19</a> of file <a class="el" href="../../d6/d53/jxbforce_8f90_source.html">jxbforce.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../da/d22/fsym__fft_8f90_source.html#l00010">fext_fft()</a>, <a class="el" href="../../da/d22/fsym__fft_8f90_source.html#l00048">fsym_fft()</a>, <a class="el" href="../../d4/d23/fsym__invfft_8f90_source.html#l00009">fsym_invfft()</a>, <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, and <a class="el" href="../../de/d25/mercier_8f90_source.html#l00024">mercier()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/eqfor_8f90_source.html#l00016">eqfor()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d6/d53/jxbforce_8f90_aef04f343b688724d6ec0ee8f2a9db7c1_cgraph.svg" width="211" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d6/d53/jxbforce_8f90_aef04f343b688724d6ec0ee8f2a9db7c1_icgraph.svg" width="383" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d6/d53/jxbforce_8f90.html">jxbforce.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

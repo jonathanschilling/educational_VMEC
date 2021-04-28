@@ -115,21 +115,91 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90.html','
 </div><!--header-->
 <div class="contents">
 
+<p>Allocates memory for radial arrays and initializes radial profiles.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d9/da6/initialize__radial_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a187faea543d3a42bc748511f04b5b7d5"><td class="memItemLeft" align="right" valign="top"><a id="a187faea543d3a42bc748511f04b5b7d5"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>initialize_radial</b> (nsval, ns_old, delt0)</td></tr>
+<tr class="memitem:a187faea543d3a42bc748511f04b5b7d5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a> (nsval, ns_old, delt0)</td></tr>
+<tr class="memdesc:a187faea543d3a42bc748511f04b5b7d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates memory for radial arrays and initializes radial profiles.  <a href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">More...</a><br /></td></tr>
 <tr class="separator:a187faea543d3a42bc748511f04b5b7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Allocates memory for radial arrays and initializes radial profiles. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html">initialize_radial.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a187faea543d3a42bc748511f04b5b7d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a187faea543d3a42bc748511f04b5b7d5">&#9670;&nbsp;</a></span>initialize_radial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine initialize_radial </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>nsval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>ns_old</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(out)&#160;</td>
+          <td class="paramname"><em>delt0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates memory for radial arrays and initializes radial profiles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nsval</td><td>new number of flux surfaces </td></tr>
+    <tr><td class="paramname">ns_old</td><td>old number of flux surfaces (from previous multi-grid iteration) </td></tr>
+    <tr><td class="paramname">delt0</td><td>time step to be used in the new multi-grid iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00009">9</a> of file <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html">initialize_radial.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d7/df2/allocate__ns_8f90_source.html#l00009">allocate_ns()</a>, <a class="el" href="../../dc/df5/interp_8f90_source.html#l00012">interp()</a>, and <a class="el" href="../../d7/d61/profil1d_8f90_source.html#l00010">profil1d()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d61/vmec_8f90_source.html#l00005">vmec()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/da6/initialize__radial_8f90_a187faea543d3a42bc748511f04b5b7d5_cgraph.svg" width="598" height="164"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/da6/initialize__radial_8f90_a187faea543d3a42bc748511f04b5b7d5_icgraph.svg" width="220" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/da6/initialize__radial_8f90.html">initialize_radial.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

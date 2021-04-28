@@ -115,21 +115,118 @@ $(document).ready(function(){initNavTree('db/d74/convert_8f90.html','../../'); i
 </div><!--header-->
 <div class="contents">
 
+<p>Convert internal mode representation to standard form for output (coefficients of cos(mu-nv), sin(mu-nv) without internal <code>mscale</code> , <code>nscale</code> norms).  
+<a href="#details">More...</a></p>
+
 <p><a href="../../db/d74/convert_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:ae6d3862ea21a8d39210a79c6955b5b75"><td class="memItemLeft" align="right" valign="top"><a id="ae6d3862ea21a8d39210a79c6955b5b75"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</td></tr>
+<tr class="memitem:ae6d3862ea21a8d39210a79c6955b5b75"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a> (rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</td></tr>
+<tr class="memdesc:ae6d3862ea21a8d39210a79c6955b5b75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert internal mode representation to standard form for output (coefficients of cos(mu-nv), sin(mu-nv) without internal <code>mscale</code> , <code>nscale</code> norms).  <a href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">More...</a><br /></td></tr>
 <tr class="separator:ae6d3862ea21a8d39210a79c6955b5b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Convert internal mode representation to standard form for output (coefficients of cos(mu-nv), sin(mu-nv) without internal <code>mscale</code> , <code>nscale</code> norms). </p>
+
+<p class="definition">Definition in file <a class="el" href="../../db/d74/convert_8f90_source.html">convert.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ae6d3862ea21a8d39210a79c6955b5b75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6d3862ea21a8d39210a79c6955b5b75">&#9670;&nbsp;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine convert </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>rmnc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>zmns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>lmns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>rmns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>zmnc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(mnmax), intent(out)&#160;</td>
+          <td class="paramname"><em>lmnc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns, 0:ntor, 0:mpol1, 3*ntmax), intent(in)&#160;</td>
+          <td class="paramname"><em>rzl_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>js</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert internal mode representation to standard form for output (coefficients of cos(mu-nv), sin(mu-nv) without internal <code>mscale</code> , <code>nscale</code> norms). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rmnc</td><td>stellarator-symmetric Fourier coefficients of \(R\) </td></tr>
+    <tr><td class="paramname">zmns</td><td>stellarator-symmetric Fourier coefficients of \(Z\) </td></tr>
+    <tr><td class="paramname">lmns</td><td>stellarator-symmetric Fourier coefficients of \(\lambda\) </td></tr>
+    <tr><td class="paramname">rmns</td><td>non-stellarator-symmetric Fourier coefficients of \(R\) </td></tr>
+    <tr><td class="paramname">zmnc</td><td>non-stellarator-symmetric Fourier coefficients of \(Z\) </td></tr>
+    <tr><td class="paramname">lmnc</td><td>non-stellarator-symmetric Fourier coefficients of \(\lambda\) </td></tr>
+    <tr><td class="paramname">rzl_array</td><td>state vector (all Fourier coefficients) of VMEC </td></tr>
+    <tr><td class="paramname">js</td><td>index of flux surface at which to do the conversion </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d74/convert_8f90_source.html#l00016">16</a> of file <a class="el" href="../../db/d74/convert_8f90_source.html">convert.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d74/convert_8f90_ae6d3862ea21a8d39210a79c6955b5b75_icgraph.svg" width="515" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d74/convert_8f90.html">convert.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

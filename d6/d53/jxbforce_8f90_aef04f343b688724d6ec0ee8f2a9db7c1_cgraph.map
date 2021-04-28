@@ -1,0 +1,8 @@
+<map id="jxbforce" name="jxbforce">
+<area shape="rect" id="node1" title="Program for computing local &#160;force balance." alt="" coords="5,107,72,133"/>
+<area shape="rect" id="node2" href="$da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="132,5,193,32"/>
+<area shape="rect" id="node3" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="129,56,197,83"/>
+<area shape="rect" id="node4" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="120,107,205,133"/>
+<area shape="rect" id="node5" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="125,157,200,184"/>
+<area shape="rect" id="node6" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="130,208,195,235"/>
+</map>

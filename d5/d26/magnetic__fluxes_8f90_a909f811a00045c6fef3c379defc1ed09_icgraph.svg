@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute the radial derivative of the enclosed toroidal magnetic flux.">
 <polygon fill="#bfbfbf" stroke="black" points="264,-19.5 264,-38.5 332,-38.5 332,-19.5 264,-19.5"/>
 <text text-anchor="middle" x="298" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">torflux_deriv</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" target="_top" xlink:title="Compute the radial derivative of the enclosed poloidal magnetic flux.">
 <polygon fill="white" stroke="black" points="80,-19.5 80,-38.5 150,-38.5 150,-19.5 80,-19.5"/>
 <text text-anchor="middle" x="115" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">polflux_deriv</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" target="_top" xlink:title="Compute the enclosed toroidal magnetic flux.">
 <polygon fill="white" stroke="black" points="186,-0.5 186,-19.5 228,-19.5 228,-0.5 186,-0.5"/>
 <text text-anchor="middle" x="207" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">torflux</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" target="_top" xlink:title="Compute the enclosed poloidal magnetic flux.">
 <polygon fill="white" stroke="black" points="0,-19.5 0,-38.5 44,-38.5 44,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="22" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">polflux</text>
 </a>

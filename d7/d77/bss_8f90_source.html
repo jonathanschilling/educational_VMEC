@@ -113,44 +113,46 @@ $(document).ready(function(){initNavTree('d7/d77/bss_8f90_source.html','../../')
 </div><!--header-->
 <div class="contents">
 <a href="../../d7/d77/bss_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(in)</span>  :: r12, rs, zs, ru12, zu12, bsupu, bsupv</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(out)</span> :: br, bphi, bz, bsubs</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p25 = p5*p5</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">INTEGER</span> :: l</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: rv12, zv12, gsu, gsv, dshalfds=p25, rs12, zs12</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="comment">! Computes br, bphi, bz, bsubs on HALF-RADIAL mesh</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="comment">! bsubs will be averaged onto the FULL-RADIAL mesh in jxbforce before output to WOUT file</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordflow">DO</span> l = 2, nrzt</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;     rv12 = p5*(rv(l,0)+rv(l-1,0) + shalf(l)*(rv(l,1) + rv(l-1,1)))</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;     zv12 = p5*(zv(l,0)+zv(l-1,0) + shalf(l)*(zv(l,1) + zv(l-1,1)))</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     rs12 = rs(l) + dshalfds*(r1(l,1) + r1(l-1,1))/shalf(l)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     zs12 = zs(l) + dshalfds*(z1(l,1) + z1(l-1,1))/shalf(l)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     gsu  = rs12*ru12(l) + zs12*zu12(l)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;     gsv  = rs12*rv12    + zs12*zv12</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     br(l)    = bsupu(l)*ru12(l) + bsupv(l)*rv12</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     bphi(l)  = bsupv(l)*r12(l)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     bz(l)    = bsupu(l)*zu12(l) + bsupv(l)*zv12</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     bsubs(l) = bsupu(l)*gsu + bsupv(l)*gsv</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">END SUBROUTINE </span>bss</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">   17</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a>(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(in)</span>  :: r12, rs, zs, ru12, zu12, bsupu, bsupv</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nrzt)</span>, <span class="keywordtype">INTENT(out)</span> :: br, bphi, bz, bsubs</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p25 = p5*p5</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">INTEGER</span> :: l</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: rv12, zv12, gsu, gsv, dshalfds=p25, rs12, zs12</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">! Computes br, bphi, bz, bsubs on HALF-RADIAL mesh</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">! bsubs will be averaged onto the FULL-RADIAL mesh in jxbforce before output to WOUT file</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">DO</span> l = 2, nrzt</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     rv12 = p5*(rv(l,0)+rv(l-1,0) + shalf(l)*(rv(l,1) + rv(l-1,1)))</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;     zv12 = p5*(zv(l,0)+zv(l-1,0) + shalf(l)*(zv(l,1) + zv(l-1,1)))</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     rs12 = rs(l) + dshalfds*(r1(l,1) + r1(l-1,1))/shalf(l)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     zs12 = zs(l) + dshalfds*(z1(l,1) + z1(l-1,1))/shalf(l)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     gsu  = rs12*ru12(l) + zs12*zu12(l)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;     gsv  = rs12*rv12    + zs12*zv12</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     br(l)    = bsupu(l)*ru12(l) + bsupv(l)*rv12</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     bphi(l)  = bsupv(l)*r12(l)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     bz(l)    = bsupu(l)*zu12(l) + bsupv(l)*zv12</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     bsubs(l) = bsupu(l)*gsu + bsupv(l)*gsv</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div>
+<div class="ttc" id="abss_8f90_html_acdfd6dccfb28d75e1de40c6822f5736b"><div class="ttname"><a href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div><div class="ttdeci">subroutine bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)</div><div class="ttdoc">Computes br, bphi, bz, bsubs on half-radial mesh.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d77/bss_8f90_source.html#l00017">bss.f90:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d77/bss_8f90.html">bss.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

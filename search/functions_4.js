@@ -1,6 +1,17 @@
 var searchData=
 [
-  ['torflux_271',['torflux',['../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402',1,'magnetic_fluxes.f90']]],
-  ['torflux_5fderiv_272',['torflux_deriv',['../d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09',1,'magnetic_fluxes.f90']]],
-  ['totzsps_273',['totzsps',['../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21',1,'totzsp.f90']]]
+  ['fext_5ffft_335',['fext_fft',['../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee',1,'fsym_fft.f90']]],
+  ['fileout_336',['fileout',['../d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af',1,'fileout.f90']]],
+  ['fixaray_337',['fixaray',['../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3',1,'fixaray.f90']]],
+  ['flip_5ftheta_338',['flip_theta',['../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7',1,'flip_theta.f90']]],
+  ['forces_339',['forces',['../de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0',1,'forces.f90']]],
+  ['fouri_340',['fouri',['../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7',1,'fouri.f90']]],
+  ['free_5fmem_5ffunct3d_341',['free_mem_funct3d',['../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289',1,'free_mem_funct3d.f90']]],
+  ['free_5fmem_5fns_342',['free_mem_ns',['../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37',1,'free_mem_ns.f90']]],
+  ['free_5fmem_5fnunv_343',['free_mem_nunv',['../de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226',1,'free_mem_nunv.f90']]],
+  ['freeb_5fdata_344',['freeb_data',['../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217',1,'freeb_data.f90']]],
+  ['fsym_5ffft_345',['fsym_fft',['../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba',1,'fsym_fft.f90']]],
+  ['fsym_5finvfft_346',['fsym_invfft',['../d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b',1,'fsym_invfft.f90']]],
+  ['funct3d_347',['funct3d',['../d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547',1,'funct3d.f90']]],
+  ['function_5ftest_348',['function_test',['../d4/d6a/functions_8f.html#ac8a7a9050ac08bc732ab08c620621024',1,'functions']]]
 ];

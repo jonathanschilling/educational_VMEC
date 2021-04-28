@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VMEC: Main Page</title>
+<title>VMEC: Educational VMEC</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,17 +107,54 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">VMEC Documentation</div>  </div>
+<div class="title">Educational VMEC </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> This is a heavily stripped-down version of the serial implementation of VMEC 8.52. It is forked from the <code>v251</code> branch of the <a href="https://github.com/PrincetonUniversity/STELLOPT">STELLOPT</a> repository.</p>
+<p>The goal of this project is to have a version of VMEC which only computes the Stellarator MHD equilibrium and nothing more.</p>
+<p>The <code>cmake</code> build system for stand-alone VMEC is borrowed from <a href="https://github.com/hiddenSymmetries/VMEC2000">hiddenSymmetries/VMEC2000</a> and from <a href="https://github.com/ORNL-Fusion/LIBSTELL">ORNL-Fusion/LIBSTELL</a>.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Building</h1>
+<p>This is a fairly standard CMake setup, if you are used to it. Here is how it works:</p><ul>
+<li>Create a directory <code>build</code> in the main folder: <code>mkdir build</code></li>
+<li>Go into the <code>build</code> directory: <code>cd build</code></li>
+<li>Run CMake: <code>cmake ..</code></li>
+<li>Execute the actual build process: <code>make</code> (optional multi-threaded build: <code>make -j</code>)</li>
+<li>The VMEC executable <code>xvmec</code> is then located in <code>build/bin</code> with respect to the main folder.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Example Execution</h1>
+<ul>
+<li>Change into the <code>test</code> dir: <code>cd test</code></li>
+<li>Run the <a href="https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--">Solov'ev test case</a>: <code>../build/bin/xvmec input.solovev</code></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+External NESTOR</h1>
+<p>The free-boundary part of VMEC is the Neumann Solver for Toroidal Systems (NESTOR). Its source code is in a separate folder <a href="src/NESTOR"><code>NESTOR</code></a>. The appropriate reference is <a href="https://doi.org/10.1016/0021-9991(86)90055-0">https://doi.org/10.1016/0021-9991(86)90055-0</a> .</p>
+<p>This version of NESTOR can be run stand-alone. It reads its inputs from a netCDF file and writes its outputs into another netCDF file. The main executable of this stand-alone version of NESTOR is <a href="src/NESTOR/nestor_main.f90"><code>nestor_main.f90</code></a>. The input and output files are read and written in <a href="src/NESTOR/data/nestor_io.f90"><code>nestor_io.f90</code></a>.</p>
+<p>This version of VMEC can be configured to dump the corresponding input and output files, but still run the compiled-in version of NESTOR. This is enabled via the logical flag <code>ldump_vacuum_ref</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>.</p>
+<p>Also, an external NESTOR implementation can be called instead of using the compiled-in version of NESTOR. This is enabled via the logical flag <code>lexternal_nestor</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>. The corresponding system call to execute the external NESTOR implementation has to be specified in <code>nestor_executable</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Angle Constraint</h1>
+<p>The poloidal angle-like coordinate is a priori not uniquely defined and needs special care. The version of VMEC from the STELLOPT repo had essentially two options for this. They were alternatively compiled in via the preprocessor flag <code>_HBANGLE</code>.</p>
+<ol type="1">
+<li>The Hirshman-Breslau explicit spectrally optimized Fourier series (see <a href="https://doi.org/10.1063/1.872954">https://doi.org/10.1063/1.872954</a> for details) and</li>
+<li>an unknown mixture of several constraints of the <code>m=1</code> Fourier coefficients (the logical <code>lconm1</code> is true for this constraint).</li>
+</ol>
+<p>By default, the <code>_HBANGLE</code> preprocessor flag is not active and thus, the "old" <code>m=1</code> constraint is active.</p>
+<p>This version of VMEC has most, if not all, of its preprocessor flags explicitly expanded. It became clear that it is nevertheless useful to have at least a vague idea of what parts of the code are related to the angle constraint. Therefore, those parts of VMEC related to the <code>m=1</code>constraint are marked to start with</p>
+<div class="fragment"><div class="line">! #ifndef _hbangle</div>
+</div><!-- fragment --><p>and end with</p>
+<div class="fragment"><div class="line">! #<span class="keyword">end </span>/* ndef _HBANGLE */</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:02 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

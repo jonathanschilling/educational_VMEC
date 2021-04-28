@@ -115,21 +115,97 @@ $(document).ready(function(){initNavTree('d9/d25/bextrema_8f90.html','../../'); 
 </div><!--header-->
 <div class="contents">
 
+<p>Computes minimum and maximum \(|\mathbf{B}|\) along \(\zeta\) between two angle lines ( \(\theta = 0, \pi\)).  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d9/d25/bextrema_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aba3f90e7c94f19661c0eea471f1e05a5"><td class="memItemLeft" align="right" valign="top"><a id="aba3f90e7c94f19661c0eea471f1e05a5"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>bextrema</b> (modb, bmin, bmax, nzeta, ntheta)</td></tr>
+<tr class="memitem:aba3f90e7c94f19661c0eea471f1e05a5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5">bextrema</a> (modb, bmin, bmax, nzeta, ntheta)</td></tr>
+<tr class="memdesc:aba3f90e7c94f19661c0eea471f1e05a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes minimum and maximum \(|\mathbf{B}|\) along \(\zeta\) between two angle lines ( \(\theta = 0, \pi\)).  <a href="../../d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5">More...</a><br /></td></tr>
 <tr class="separator:aba3f90e7c94f19661c0eea471f1e05a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computes minimum and maximum \(|\mathbf{B}|\) along \(\zeta\) between two angle lines ( \(\theta = 0, \pi\)). </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d9/d25/bextrema_8f90_source.html">bextrema.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aba3f90e7c94f19661c0eea471f1e05a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba3f90e7c94f19661c0eea471f1e05a5">&#9670;&nbsp;</a></span>bextrema()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine bextrema </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(nzeta,ntheta), intent(in)&#160;</td>
+          <td class="paramname"><em>modb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ntheta), intent(out)&#160;</td>
+          <td class="paramname"><em>bmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ntheta), intent(out)&#160;</td>
+          <td class="paramname"><em>bmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>nzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ntheta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes minimum and maximum \(|\mathbf{B}|\) along \(\zeta\) between two angle lines ( \(\theta = 0, \pi\)). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modb</td><td>magnitude of magnetic field \(|\mathbf{B}|\) </td></tr>
+    <tr><td class="paramname">bmin</td><td>minimum value of \(|\mathbf{B}|\) </td></tr>
+    <tr><td class="paramname">bmax</td><td>maximum value of \(|\mathbf{B}|\) </td></tr>
+    <tr><td class="paramname">nzeta</td><td>number of grid points in toroidal direction </td></tr>
+    <tr><td class="paramname">ntheta</td><td>number of grid points in poloidal direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d25/bextrema_8f90_source.html#l00011">11</a> of file <a class="el" href="../../d9/d25/bextrema_8f90_source.html">bextrema.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/eqfor_8f90_source.html#l00016">eqfor()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/d25/bextrema_8f90_aba3f90e7c94f19661c0eea471f1e05a5_icgraph.svg" width="391" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/d25/bextrema_8f90.html">bextrema.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('de/d3f/wrout_8f90_source.html','../../
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ln_bsupvmns, ln_rbc, ln_zbs, ln_rbs, ln_zbc, ln_potvac</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">USE </span>safe_open_mod</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">USE </span>mgrid_mod</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">INTENT(in)</span> :: ier_flag</div>
@@ -543,7 +543,7 @@ $(document).ready(function(){initNavTree('de/d3f/wrout_8f90_source.html','../../
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  <span class="comment">! IF B^v ~ phip + lamu, MUST DIVIDE BY phipf(js) below to maintain old-style format</span></div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  radius1: <span class="keywordflow">DO</span> js = 1, ns</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;     <span class="keyword">CALL </span>convert (rmnc1, zmns1, lmns1, rmns1, zmnc1, lmnc1, xfinal, js)</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a> (rmnc1, zmns1, lmns1, rmns1, zmnc1, lmnc1, xfinal, js)</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;     rmnc(:,js) = rmnc1(:)</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;     zmns(:,js) = zmns1(:)</div>
@@ -817,18 +817,21 @@ $(document).ready(function(){initNavTree('de/d3f/wrout_8f90_source.html','../../
 <div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                                   bsubsmn, bsupumn, bsupvmn, stat=istat)</div>
 <div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160; </div>
 <div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;  <span class="comment">! FREE BOUNDARY DATA</span></div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;  <span class="keyword">CALL </span>freeb_data(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a>(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)</div>
 <div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; </div>
 <div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;  rzl_array = 0</div>
 <div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; </div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="keyword">END SUBROUTINE </span>wrout</div>
+<div class="ttc" id="aconvert_8f90_html_ae6d3862ea21a8d39210a79c6955b5b75"><div class="ttname"><a href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a></div><div class="ttdeci">subroutine convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</div><div class="ttdoc">Convert internal mode representation to standard form for output (coefficients of cos(mu-nv),...</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d74/convert_8f90_source.html#l00016">convert.f90:17</a></div></div>
+<div class="ttc" id="afreeb__data_8f90_html_a71de251d01e145a30e3f710ac705f217"><div class="ttname"><a href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div><div class="ttdeci">subroutine freeb_data(rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)</div><div class="ttdoc">Write out edge values of fields.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d87/freeb__data_8f90_source.html#l00012">freeb_data.f90:13</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/d3f/wrout_8f90.html">wrout.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

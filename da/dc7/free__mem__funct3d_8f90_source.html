@@ -113,34 +113,36 @@ $(document).ready(function(){initNavTree('da/dc7/free__mem__funct3d_8f90_source.
 </div><!--header-->
 <div class="contents">
 <a href="../../da/dc7/free__mem__funct3d_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>free_mem_funct3d</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vforces</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1 = 0</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(armn)) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;     <span class="keyword">DEALLOCATE</span> (armn, azmn, brmn, bzmn, crmn, czmn, blmn, clmn,    &amp;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        r1, ru, rv, z1, zu, zv, gcon, rcon, zcon, ru0, zu0,         &amp;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        rcon0, zcon0, guu, guv, gvv, stat=istat1)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordflow">IF</span> (istat1 .ne. 0) stop <span class="stringliteral">&#39;deallocation error#1 in funct3d&#39;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(extra1)) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;     <span class="keyword">DEALLOCATE</span> (extra1, extra2, extra3, extra4, stat=istat1)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;     <span class="keywordflow">IF</span> (istat1 .ne. 0) stop <span class="stringliteral">&#39;deallocation error#3 in funct3d&#39;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">END SUBROUTINE </span>free_mem_funct3d</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">    6</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">free_mem_funct3d</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>realspace</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span>vforces</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1 = 0</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(armn)) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;     <span class="keyword">DEALLOCATE</span> (armn, azmn, brmn, bzmn, crmn, czmn, blmn, clmn,    &amp;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        r1, ru, rv, z1, zu, zv, gcon, rcon, zcon, ru0, zu0,         &amp;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        rcon0, zcon0, guu, guv, gvv, stat=istat1)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">IF</span> (istat1 .ne. 0) stop <span class="stringliteral">&#39;deallocation error#1 in funct3d&#39;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(extra1)) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="keyword">DEALLOCATE</span> (extra1, extra2, extra3, extra4, stat=istat1)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     <span class="keywordflow">IF</span> (istat1 .ne. 0) stop <span class="stringliteral">&#39;deallocation error#3 in funct3d&#39;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">free_mem_funct3d</a></div>
+<div class="ttc" id="afree__mem__funct3d_8f90_html_ad59355935b77a3f3674383e74d424289"><div class="ttname"><a href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">free_mem_funct3d</a></div><div class="ttdeci">subroutine free_mem_funct3d</div><div class="ttdoc">Free memory required by funct3d()</div><div class="ttdef"><b>Definition:</b> <a href="../../da/dc7/free__mem__funct3d_8f90_source.html#l00006">free_mem_funct3d.f90:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/dc7/free__mem__funct3d_8f90.html">free_mem_funct3d.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

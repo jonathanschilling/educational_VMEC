@@ -115,21 +115,90 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90.html','../../'
 </div><!--header-->
 <div class="contents">
 
+<p>Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d5/dfd/guess__axis_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a375e34fe4656d4c51d5013939bf5617e"><td class="memItemLeft" align="right" valign="top"><a id="a375e34fe4656d4c51d5013939bf5617e"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>guess_axis</b> (r1, z1, ru0, zu0)</td></tr>
+<tr class="memitem:a375e34fe4656d4c51d5013939bf5617e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">guess_axis</a> (r1, z1, ru0, zu0)</td></tr>
+<tr class="memdesc:a375e34fe4656d4c51d5013939bf5617e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.  <a href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">More...</a><br /></td></tr>
 <tr class="separator:a375e34fe4656d4c51d5013939bf5617e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d5/dfd/guess__axis_8f90_source.html">guess_axis.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a375e34fe4656d4c51d5013939bf5617e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a375e34fe4656d4c51d5013939bf5617e">&#9670;&nbsp;</a></span>guess_axis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine guess_axis </td>
+          <td>(</td>
+          <td class="paramtype">real(rprec), dimension(ns,nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>r1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nzeta,ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>ru0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns,nzeta,ntheta3), intent(in)&#160;</td>
+          <td class="paramname"><em>zu0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r1</td><td>\(R\) </td></tr>
+    <tr><td class="paramname">z1</td><td>\(Z\) </td></tr>
+    <tr><td class="paramname">ru0</td><td>\(\partial R / \partial \theta\) </td></tr>
+    <tr><td class="paramname">zu0</td><td>\(\partial Z / \partial \theta\) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/dfd/guess__axis_8f90_source.html#l00010">10</a> of file <a class="el" href="../../d5/dfd/guess__axis_8f90_source.html">guess_axis.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d5/dfd/guess__axis_8f90_a375e34fe4656d4c51d5013939bf5617e_icgraph.svg" width="315" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/dfd/guess__axis_8f90.html">guess_axis.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

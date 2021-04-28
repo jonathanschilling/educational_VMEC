@@ -1,16 +1,20 @@
 var searchData=
 [
-  ['parse_5fextension_2ef_94',['parse_extension.f',['../d8/d44/parse__extension_8f.html',1,'']]],
-  ['phiedge_95',['phiedge',['../d1/d59/vmec__input_8f90.html#aaf5b17af6d3386548606873e6889886c',1,'vmec_input']]],
-  ['phip_96',['phip',['../d8/df9/realspace_8f90.html#aebe004046e295dc9a4f149de810309b7',1,'realspace']]],
-  ['phips_97',['phips',['../de/d7d/vmec__main_8f90.html#ad18165373a8f8b0a4a939cefceb654cf',1,'vmec_main']]],
-  ['polflux_98',['polflux',['../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd',1,'magnetic_fluxes.f90']]],
-  ['polflux_5fderiv_99',['polflux_deriv',['../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f',1,'magnetic_fluxes.f90']]],
-  ['precal_2ef90_100',['precal.f90',['../dd/d98/precal_8f90.html',1,'']]],
-  ['precondn_2ef90_101',['precondn.f90',['../d4/da9/precondn_8f90.html',1,'']]],
-  ['presf_102',['presf',['../de/d7d/vmec__main_8f90.html#a4fe56c216cd983e7e579dfab8738d9fd',1,'vmec_main']]],
-  ['printout_2ef90_103',['printout.f90',['../d7/dc9/printout_8f90.html',1,'']]],
-  ['profil1d_2ef90_104',['profil1d.f90',['../d7/d61/profil1d_8f90.html',1,'']]],
-  ['profil3d_2ef90_105',['profil3d.f90',['../dd/d75/profil3d_8f90.html',1,'']]],
-  ['profile_5ffunctions_2ef_106',['profile_functions.f',['../da/dc8/profile__functions_8f.html',1,'']]]
+  ['parse_5fextension_138',['parse_extension',['../d8/d44/parse__extension_8f.html#ad4ed46c7b1d3501caaad403df4838a0b',1,'parse_extension.f']]],
+  ['parse_5fextension_2ef_139',['parse_extension.f',['../d8/d44/parse__extension_8f.html',1,'']]],
+  ['phiedge_140',['phiedge',['../d1/d59/vmec__input_8f90.html#aaf5b17af6d3386548606873e6889886c',1,'vmec_input']]],
+  ['phip_141',['phip',['../d8/df9/realspace_8f90.html#aebe004046e295dc9a4f149de810309b7',1,'realspace']]],
+  ['phips_142',['phips',['../de/d7d/vmec__main_8f90.html#ad18165373a8f8b0a4a939cefceb654cf',1,'vmec_main']]],
+  ['polflux_143',['polflux',['../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd',1,'magnetic_fluxes.f90']]],
+  ['polflux_5fderiv_144',['polflux_deriv',['../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f',1,'magnetic_fluxes.f90']]],
+  ['precal_2ef90_145',['precal.f90',['../dd/d98/precal_8f90.html',1,'']]],
+  ['precondn_146',['precondn',['../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c',1,'precondn.f90']]],
+  ['precondn_2ef90_147',['precondn.f90',['../d4/da9/precondn_8f90.html',1,'']]],
+  ['presf_148',['presf',['../de/d7d/vmec__main_8f90.html#a4fe56c216cd983e7e579dfab8738d9fd',1,'vmec_main']]],
+  ['printout_149',['printout',['../d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797',1,'printout.f90']]],
+  ['printout_2ef90_150',['printout.f90',['../d7/dc9/printout_8f90.html',1,'']]],
+  ['profil1d_151',['profil1d',['../d7/d61/profil1d_8f90.html#ab378195ac5fc3be3e3ec3bcddf7c72f9',1,'profil1d.f90']]],
+  ['profil1d_2ef90_152',['profil1d.f90',['../d7/d61/profil1d_8f90.html',1,'']]],
+  ['profil3d_2ef90_153',['profil3d.f90',['../dd/d75/profil3d_8f90.html',1,'']]],
+  ['profile_5ffunctions_2ef_154',['profile_functions.f',['../da/dc8/profile__functions_8f.html',1,'']]]
 ];

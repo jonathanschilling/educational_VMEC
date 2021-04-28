@@ -113,37 +113,40 @@ $(document).ready(function(){initNavTree('d7/d8c/allocate__nunv_8f90_source.html
 </div><!--header-->
 <div class="contents">
 <a href="../../d7/d8c/allocate__nunv_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>allocate_nunv</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: ntmax</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vacmod, <span class="keywordtype">only</span>: allocate_nestor, nuv2</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">CALL </span>free_mem_nunv</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">    6</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">allocate_nunv</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keywordtype">USE </span>vmec_main</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: ntmax</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span>vacmod, <span class="keywordtype">only</span>: allocate_nestor, nuv2</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">ALLOCATE</span> (bsubu0(nznt), rbsq(nznt), dbsq(nznt), stat=istat1)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0) stop <span class="stringliteral">&#39;allocation error #1 in allocate_nunv&#39;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">ALLOCATE</span> (rmn_bdy(0:ntor,0:mpol1,ntmax), zmn_bdy(0:ntor,0:mpol1,ntmax), stat=istat1)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0) stop <span class="stringliteral">&#39;allocation error #2 in allocate_nunv&#39;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">! PERSISTENT ARRAYS (DURATION OF PROGRAM) for NESTOR</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordflow">IF</span> (lfreeb) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;     <span class="keyword">call </span>allocate_nestor</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">INTEGER</span> :: istat1</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226">free_mem_nunv</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">ALLOCATE</span> (bsubu0(nznt), rbsq(nznt), dbsq(nznt), stat=istat1)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0) stop <span class="stringliteral">&#39;allocation error #1 in allocate_nunv&#39;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">ALLOCATE</span> (rmn_bdy(0:ntor,0:mpol1,ntmax), zmn_bdy(0:ntor,0:mpol1,ntmax), stat=istat1)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">IF</span> (istat1.ne.0) stop <span class="stringliteral">&#39;allocation error #2 in allocate_nunv&#39;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="keyword">ALLOCATE</span>(bsqsav(nuv2,3))</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">END SUBROUTINE </span>allocate_nunv</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">! PERSISTENT ARRAYS (DURATION OF PROGRAM) for NESTOR</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">IF</span> (lfreeb) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <span class="keyword">call </span>allocate_nestor</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="keyword">ALLOCATE</span>(bsqsav(nuv2,3))</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">allocate_nunv</a></div>
+<div class="ttc" id="aallocate__nunv_8f90_html_a1fb4098498daa9bd7a8487120397c1a7"><div class="ttname"><a href="../../d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7">allocate_nunv</a></div><div class="ttdeci">subroutine allocate_nunv</div><div class="ttdoc">allocate arrays depending on the number of Fourier coefficients nunv</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d8c/allocate__nunv_8f90_source.html#l00006">allocate_nunv.f90:7</a></div></div>
+<div class="ttc" id="afree__mem__nunv_8f90_html_af9db130c860b00078874db28a8805226"><div class="ttname"><a href="../../de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226">free_mem_nunv</a></div><div class="ttdeci">subroutine free_mem_nunv</div><div class="ttdoc">Free arrays depending on the number of Fourier coefficients nunv.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dd6/free__mem__nunv_8f90_source.html#l00006">free_mem_nunv.f90:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d8c/allocate__nunv_8f90.html">allocate_nunv.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

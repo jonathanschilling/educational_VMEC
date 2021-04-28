@@ -113,45 +113,48 @@ $(document).ready(function(){initNavTree('d0/d4c/heading_8f90_source.html','../.
 </div><!--header-->
 <div class="contents">
 <a href="../../d0/d4c/heading_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">SUBROUTINE </span>heading(extension)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span>vmec_main, <span class="keywordtype">ONLY</span>: rprec</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span>vparams, <span class="keywordtype">ONLY</span>: nthreed</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: version_</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">CHARACTER(LEN=50)</span>, <span class="keywordtype">PARAMETER</span> :: banner     = <span class="stringliteral">&#39; THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION &#39;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span>,  <span class="keywordtype">PARAMETER</span> :: VersionID1 = <span class="stringliteral">&#39; Lambda: Full Radial Mesh. L-Force: hybrid full/half.&#39;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">intent(in)</span> :: extension</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">    7</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">heading</a>(extension)</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">USE </span>vmec_main, <span class="keywordtype">ONLY</span>: rprec</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span>vparams, <span class="keywordtype">ONLY</span>: nthreed</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span>vmec_params, <span class="keywordtype">ONLY</span>: version_</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">CHARACTER(LEN=50)</span> :: Version</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">LOGICAL</span> :: lfirst</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">CHARACTER(LEN=50)</span>, <span class="keywordtype">PARAMETER</span> :: banner     = <span class="stringliteral">&#39; THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION &#39;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span>,  <span class="keywordtype">PARAMETER</span> :: VersionID1 = <span class="stringliteral">&#39; Lambda: Full Radial Mesh. L-Force: hybrid full/half.&#39;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">CHARACTER(LEN=100)</span> :: computer, os, os_release</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">intent(in)</span> :: extension</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">!     Open output files</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">CALL </span>open_output_files (extension, lfirst)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">CHARACTER(LEN=50)</span> :: Version</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">LOGICAL</span> :: lfirst</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordflow">IF</span> (lfirst) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="keyword">WRITE</span> (*,<span class="stringliteral">&#39;(2a)&#39;</span>) <span class="stringliteral">&#39;  PROCESSING INPUT.&#39;</span>, trim(extension)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     version = trim(adjustl(version_))</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">CHARACTER(LEN=100)</span> :: computer, os, os_release</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="comment">!     Open output files</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc">open_output_files</a> (extension, lfirst)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="comment">! SAL some weird error about file not being ready</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     <span class="keyword">CALL </span>flush(nthreed)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">IF</span> (lfirst) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     <span class="keyword">WRITE</span> (*,<span class="stringliteral">&#39;(2a)&#39;</span>) <span class="stringliteral">&#39;  PROCESSING INPUT.&#39;</span>, trim(extension)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     <span class="keyword">WRITE</span>(nthreed,<span class="stringliteral">&#39;(a,1x,a,/,a,/)&#39;</span>) trim(banner), trim(version), trim(versionid1)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     <span class="keyword">WRITE</span> (*,<span class="stringliteral">&#39;(1x,a,1x,a,/,1x,a,/)&#39;</span>) trim(banner), trim(version), trim(versionid1)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">END SUBROUTINE </span>heading</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     version = trim(adjustl(version_))</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <span class="comment">! SAL some weird error about file not being ready</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     <span class="keyword">CALL </span>flush(nthreed)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     <span class="keyword">WRITE</span>(nthreed,<span class="stringliteral">&#39;(a,1x,a,/,a,/)&#39;</span>) trim(banner), trim(version), trim(versionid1)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="keyword">WRITE</span> (*,<span class="stringliteral">&#39;(1x,a,1x,a,/,1x,a,/)&#39;</span>) trim(banner), trim(version), trim(versionid1)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">heading</a></div>
+<div class="ttc" id="aheading_8f90_html_aacf288f9cc770199b74d2e6fcc374450"><div class="ttname"><a href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450">heading</a></div><div class="ttdeci">subroutine heading(extension)</div><div class="ttdoc">Open output files and print banner message at the top.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d4c/heading_8f90_source.html#l00007">heading.f90:8</a></div></div>
+<div class="ttc" id="aopen__output__files_8f90_html_a8e2e97aad77c7099fa003f98f48d4dfc"><div class="ttname"><a href="../../d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc">open_output_files</a></div><div class="ttdeci">subroutine open_output_files(extension, lfirst)</div><div class="ttdoc">Open output files.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dc3/open__output__files_8f90_source.html#l00008">open_output_files.f90:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d0/d4c/heading_8f90.html">heading.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

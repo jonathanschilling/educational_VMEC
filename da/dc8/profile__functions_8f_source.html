@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keywordtype">USE </span>stel_kinds</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordtype">USE </span>stel_constants, <span class="keywordtype">ONLY</span>: zero, one, pi</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keywordtype">USE </span>vmec_input, <span class="keywordtype">ONLY</span>: ac, bloat, pcurr_type, ac_aux_s, ac_aux_f</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keywordtype">USE </span>line_segment</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keywordtype">USE </span><a class="code" href="../../d2/dcb/namespaceline__segment.html">line_segment</a></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordtype">USE </span>functions</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">! ac assumed to be dimensioned (0:n), with n &gt;= 20</span></div>
@@ -460,7 +460,7 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;      <span class="keywordtype">USE </span>stel_kinds</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;      <span class="keywordtype">USE </span>stel_constants, <span class="keywordtype">ONLY</span>: zero, one, pi</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;      <span class="keywordtype">USE </span>vmec_input, <span class="keywordtype">ONLY</span>: ai, piota_type, ai_aux_s, ai_aux_f</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keywordtype">USE </span>line_segment</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keywordtype">USE </span><a class="code" href="../../d2/dcb/namespaceline__segment.html">line_segment</a></div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">! ai assumed to be dimensioned (0:n), with n &gt;= 20</span></div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">!-----------------------------------------------</span></div>
@@ -607,7 +607,7 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;     &amp;   am_aux_s, am_aux_f</div>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">!  am is assumed to be dimensioned starting at zero.</span></div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;      <span class="keywordtype">USE </span>vparams, <span class="keywordtype">ONLY</span>: mu0</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;      <span class="keywordtype">USE </span>line_segment</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;      <span class="keywordtype">USE </span><a class="code" href="../../d2/dcb/namespaceline__segment.html">line_segment</a></div>
 <div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;      <span class="keywordtype">USE </span>functions</div>
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;      <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">!-----------------------------------------------</span></div>
@@ -740,13 +740,14 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;      pmass = mu0*pres_scale*pmass</div>
 <div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
 <div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;      <span class="keyword">END FUNCTION </span>pmass</div>
+<div class="ttc" id="anamespaceline__segment_html"><div class="ttname"><a href="../../d2/dcb/namespaceline__segment.html">line_segment</a></div><div class="ttdoc">This module containes code to create a profile constructed of line segments. These line segments are ...</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d19/line__segment_8f_source.html#l00015">line_segment.f:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/dc8/profile__functions_8f.html">profile_functions.f</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 10:53:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Apr 28 2021 15:29:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

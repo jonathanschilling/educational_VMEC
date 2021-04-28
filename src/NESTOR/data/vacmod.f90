@@ -1,5 +1,6 @@
 !> \file
 MODULE vacmod
+
   USE vacmod0
   USE vac_persistent
   USE vparams, ONLY: zero, one, c2p0, cp5, mu0
@@ -23,7 +24,9 @@ MODULE vacmod
   logical :: precal_done
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: potvac
-  real(rprec), dimension(:), allocatable :: m_map_wrt, n_map_wrt
+
+  real(rprec), dimension(:), allocatable :: m_map_wrt
+  real(rprec), dimension(:), allocatable :: n_map_wrt
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvecsav
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: amatsav
@@ -70,44 +73,88 @@ MODULE vacmod
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: zaxis_nestor
 
   ! from vacuum
-  REAL(rprec), ALLOCATABLE :: bsubu(:), bsubv(:), potu(:), potv(:)
+  REAL(rprec), ALLOCATABLE :: bsubu(:)
+  REAL(rprec), ALLOCATABLE :: bsubv(:)
+  REAL(rprec), ALLOCATABLE :: potu(:)
+  REAL(rprec), ALLOCATABLE :: potv(:)
   REAL(rprec), ALLOCATABLE :: amatrix(:)
 
   ! from surface
-  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruu, ruv, rvv, zuu, zuv, zvv
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruu
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: ruv
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: rvv
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: zuu
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: zuv
+  REAL(rprec), ALLOCATABLE, DIMENSION(:) :: zvv
 
   ! from bextern
-  REAL(rprec), ALLOCATABLE :: brad(:), bphi(:), bz(:)
+  REAL(rprec), ALLOCATABLE :: brad(:)
+  REAL(rprec), ALLOCATABLE :: bphi(:)
+  REAL(rprec), ALLOCATABLE :: bz(:)
 
   ! from tolicu
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: xpts
 
   ! from scalpot
   REAL(rprec), ALLOCATABLE :: grpmn(:)
-  real(rprec), dimension(:), allocatable :: grpmn_m_map_wrt, grpmn_n_map_wrt
+  real(rprec), dimension(:), allocatable :: grpmn_m_map_wrt
+  real(rprec), dimension(:), allocatable :: grpmn_n_map_wrt
 
-  REAL(rprec), ALLOCATABLE :: gstore(:), green(:,:), greenp(:,:)
+  REAL(rprec), ALLOCATABLE :: gstore(:)
+  REAL(rprec), ALLOCATABLE :: green(:,:)
+  REAL(rprec), ALLOCATABLE :: greenp(:,:)
 
   ! from analyt
-  REAL(rprec), DIMENSION(:), ALLOCATABLE ::                         &
-     r0p, r1p, r0m, r1m, sqrtc, sqrta, tlp2, tlp1, tlp, tlm2,       &
-     tlm1, tlm, adp, adm, cma, ra1p, ra1m, slm, slp, tlpm, slpm,    &
-     delt1u, azp1u, azm1u, cma11u, sqad1u, sqad2u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: r0p
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: r1p
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: r0m
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: r1m
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sqrtc
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sqrta
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlp2
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlp1
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlm2
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlm1
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: adp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: adm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: cma
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ra1p
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ra1m
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: slm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: slp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tlpm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: slpm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: delt1u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: azp1u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: azm1u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: cma11u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sqad1u
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sqad2u
 
-  real(rprec), dimension(:,:), allocatable :: &
-     all_tlp, all_tlm, all_slp, all_slm
+  real(rprec), dimension(:,:), allocatable :: all_tlp
+  real(rprec), dimension(:,:), allocatable :: all_tlm
+  real(rprec), dimension(:,:), allocatable :: all_slp
+  real(rprec), dimension(:,:), allocatable :: all_slm
 
   ! from greenf
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave, ga1, ga2, dsave
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ga1
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ga2
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: dsave
 
   ! from fourp
-  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: g1, g2
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: g1
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: g2
 
   ! from fouri
-  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: bcos, bsin, source
-  REAL(rprec), ALLOCATABLE :: actemp(:,:,:,:), astemp(:,:,:,:)
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: bcos
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: bsin
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: source
 
-
+  REAL(rprec), ALLOCATABLE :: actemp(:,:,:,:)
+  REAL(rprec), ALLOCATABLE :: astemp(:,:,:,:)
 
 contains
 

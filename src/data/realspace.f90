@@ -1,10 +1,18 @@
 !> \file
 MODULE realspace
+
   USE stel_kinds
+
   IMPLICIT NONE
 
-  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: r1, ru, rv, zu, zv, rcon, zcon
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: r1
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ru
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: rv
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: z1
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: zu
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: zv
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: rcon
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: zcon
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: guu
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: guv
@@ -20,6 +28,9 @@ MODULE realspace
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: sqrts !< sqrt(s), two-dimensional array on full-grid
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: wint  !< two-dimensional array for normalizing angle integrations
 
-  REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: extra1, extra2, extra3, extra4
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: extra1
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: extra2
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: extra3
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE, TARGET :: extra4
 
 END MODULE realspace

@@ -51,7 +51,8 @@ xvmec2v690
 xvmec2xgc
 
 build/
-docs/
+docs/html/*
+docs/latex/*
 
 # temporary..
 test/input*

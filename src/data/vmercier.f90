@@ -1,6 +1,8 @@
 !> \file
 MODULE vmercier
-  USE vparams, ONLY: nsd, rprec, dp
+
+  USE vparams, ONLY: nsd, rprec
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nsd) :: Dshear

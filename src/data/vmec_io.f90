@@ -1,6 +1,8 @@
 !> \file
 MODULE vmec_io
+
   USE stel_kinds
+
   IMPLICIT NONE
 
   REAL(rprec) :: VolAvgB
@@ -20,4 +22,5 @@ MODULE vmec_io
   REAL(rprec) :: rmax_surf
   REAL(rprec) :: rmin_surf
   REAL(rprec) :: zmax_surf
+
 END MODULE vmec_io

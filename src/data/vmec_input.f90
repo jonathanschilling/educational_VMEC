@@ -1,7 +1,9 @@
 !> \file
 MODULE vmec_input
+
   USE vparams, ONLY: rprec, dp, mpol1d, ntord, ndatafmax
   USE vsvd0
+
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: mpol_default = 6
@@ -9,7 +11,6 @@ MODULE vmec_input
   INTEGER, PARAMETER :: ns_default   = 31
   INTEGER, PARAMETER :: niter_default   = 100
   REAL(rprec), PARAMETER :: ftol_default = 1.E-10_dp
-
 
   INTEGER :: nfp
   INTEGER :: ncurr
@@ -26,7 +27,10 @@ MODULE vmec_input
   INTEGER, DIMENSION(100) :: niter_array
   REAL(rprec), DIMENSION(100) :: ftol_array
 
-  REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbs, zbc, rbc, zbs
+  REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbc
+  REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: zbs
+  REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbs
+  REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: zbc
   REAL(rprec) :: curtor
   REAL(rprec) :: delt
   REAL(rprec) :: tcon0
@@ -43,11 +47,17 @@ MODULE vmec_input
   CHARACTER(len=20) :: pcurr_type  !  len=12 -> len=20 J Hanson 2010-03-16
   CHARACTER(len=20) :: piota_type
   CHARACTER(len=20) :: pmass_type
-  REAL(rprec), DIMENSION(ndatafmax) :: am_aux_s, am_aux_f
-  REAL(rprec), DIMENSION(ndatafmax) :: ai_aux_s, ai_aux_f
-  REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_s, ac_aux_f
+  REAL(rprec), DIMENSION(ndatafmax) :: am_aux_s
+  REAL(rprec), DIMENSION(ndatafmax) :: am_aux_f
+  REAL(rprec), DIMENSION(ndatafmax) :: ai_aux_s
+  REAL(rprec), DIMENSION(ndatafmax) :: ai_aux_f
+  REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_s
+  REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_f
 
-  REAL(rprec), DIMENSION(0:ntord) :: raxis_cc, raxis_cs, zaxis_cc, zaxis_cs
+  REAL(rprec), DIMENSION(0:ntord) :: raxis_cc
+  REAL(rprec), DIMENSION(0:ntord) :: raxis_cs
+  REAL(rprec), DIMENSION(0:ntord) :: zaxis_cc
+  REAL(rprec), DIMENSION(0:ntord) :: zaxis_cs
   REAL(rprec), DIMENSION(nigroup) :: extcur
   LOGICAL :: lfreeb
   LOGICAL :: lasym

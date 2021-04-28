@@ -1,7 +1,10 @@
 !> \file
 MODULE vmec_params
-  USE stel_kinds, ONLY: rprec, dp
+
+  USE stel_kinds, ONLY: rprec
   USE vparams, ONLY: mpold
+
+  implicit none
 
   INTEGER, PARAMETER :: meven = 0  !< parity selection label for even poloidal modes of R and Z
   INTEGER, PARAMETER :: modd = 1   !< parity selection label for  odd poloidal modes of R and Z
@@ -9,10 +12,9 @@ MODULE vmec_params
   INTEGER, PARAMETER :: ns4 = 25
 
   INTEGER, PRIVATE :: ink
-  INTEGER, PARAMETER, DIMENSION(0:mpold) :: &
-    jmin1 = (/ 1,1,(2,ink=2,mpold) /),      & !starting js(m) values where R,Z are non-zero
-    jmin2 = (/ 1,2,(2,ink=2,mpold) /),      & !starting js(m) values for which R,Z are evolved
-    jlam  = (/ 2,2,(2,ink=2,mpold) /)         !starting js(m) values for which Lambda is evolved
+  INTEGER, PARAMETER, DIMENSION(0:mpold) :: jmin1 = (/ 1,1,(2,ink=2,mpold) /) !< starting js(m) values where R,Z are non-zero
+  INTEGER, PARAMETER, DIMENSION(0:mpold) :: jmin2 = (/ 1,2,(2,ink=2,mpold) /) !< starting js(m) values for which R,Z are evolved
+  INTEGER, PARAMETER, DIMENSION(0:mpold) :: jlam  = (/ 2,2,(2,ink=2,mpold) /) !< starting js(m) values for which Lambda is evolved
 
   INTEGER, PARAMETER :: norm_term_flag       =  0
   INTEGER, PARAMETER :: bad_jacobian_flag    =  1
@@ -35,9 +37,18 @@ MODULE vmec_params
 
   INTEGER :: ntmax !< number of contributing Fourier basis function (can be 1, 2 or 4); assigned in read_indata()
 
-  INTEGER :: rcc, rss, rsc, rcs, zsc, zcs, zcc, zss ! stacking indices for xc, gc, ...
+  INTEGER :: rcc
+  INTEGER :: rss
+  INTEGER :: rsc
+  INTEGER :: rcs
+  INTEGER :: zsc
+  INTEGER :: zcs
+  INTEGER :: zcc
+  INTEGER :: zss ! stacking indices for xc, gc, ...
 
-  INTEGER :: mnyq, nnyq
+  INTEGER :: mnyq
+  INTEGER :: nnyq
+
   INTEGER, ALLOCATABLE :: uminus(:)
   REAL(rprec), ALLOCATABLE :: mscale(:) !< array for norming theta-trig functions (internal use only)
                                         !< so that the discrete SUM[cos(mu)*cos(m'u)] = .5 delta(m,m')
@@ -46,6 +57,8 @@ MODULE vmec_params
 
   REAL(rprec) :: lamscale=1
 
-  INTEGER, PARAMETER :: m0=0, m1=1, n0=0 !< from totzsp
+  INTEGER, PARAMETER :: m0=0 !< from totzsp
+  INTEGER, PARAMETER :: m1=1 !< from totzsp
+  INTEGER, PARAMETER :: n0=0 !< from totzsp
 
 END MODULE vmec_params

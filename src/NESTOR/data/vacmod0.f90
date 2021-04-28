@@ -87,8 +87,6 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
 
   nvp = nv*nvper
 
-
-
   ! in the end:
   ! nu  = ntheta1
   ! nu2 = ntheta2

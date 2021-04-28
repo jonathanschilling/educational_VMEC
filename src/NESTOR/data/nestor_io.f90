@@ -5,31 +5,48 @@ IMPLICIT NONE
   character(len=255) :: input_extension
   character(len=255) :: mgrid_file
   real(dp), dimension(:), ALLOCATABLE :: extcur
-  real(dp), dimension(:), ALLOCATABLE :: raxis, zaxis
-  real(dp), dimension(:), ALLOCATABLE :: xm, xn, rmnc, zmns, rmns, zmnc
+  real(dp), dimension(:), ALLOCATABLE :: raxis
+  real(dp), dimension(:), ALLOCATABLE :: zaxis
+  real(dp), dimension(:), ALLOCATABLE :: xm
+  real(dp), dimension(:), ALLOCATABLE :: xn
+  real(dp), dimension(:), ALLOCATABLE :: rmnc
+  real(dp), dimension(:), ALLOCATABLE :: zmns
+  real(dp), dimension(:), ALLOCATABLE :: rmns
+  real(dp), dimension(:), ALLOCATABLE :: zmnc
   real(dp), dimension(:), ALLOCATABLE :: wint
 
-  integer :: nfp, ntor, mpol, ntheta, nzeta, nextcur
+  integer :: nfp
+  integer :: ntor
+  integer :: mpol
+  integer :: ntheta
+  integer :: nzeta
+  integer :: nextcur
+  integer :: ier_flag
+  integer :: ivac
+  integer :: ivacskip
+  integer :: mnmax
+  integer :: vacuum_calls
+
   logical :: lasym
-  integer  :: ier_flag, ivac, ivacskip, mnmax, vacuum_calls
-  real(dp) :: ctor, rbtor, signgs
+
+  real(dp) :: ctor
+  real(dp) :: rbtor
+  real(dp) :: signgs
 
   integer :: mnpd2_nestor
-  real(dp), dimension(:), ALLOCATABLE :: amatsav_nestor, bvecsav_nestor
+  real(dp), dimension(:), ALLOCATABLE :: amatsav_nestor
+  real(dp), dimension(:), ALLOCATABLE :: bvecsav_nestor
   real(dp) :: bsubvvac_nestor
 
-  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: &
-     mn1dim = (/'mn_mode'/), &
-     mnpotdim = (/'mn_mode_pot'/), &
-     nzntdim = (/'nznt'/), &
-     nzetadim = (/'nzeta'/), &
-     nextcurim = (/'nextcur'/), &
-     bvecsavdim =(/'mnpd2'/), &
-     amatsavdim =(/'mnpd2_times_mnpd2'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: mn1dim = (/'mn_mode'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: mnpotdim = (/'mn_mode_pot'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: nzntdim = (/'nznt'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: nzetadim = (/'nzeta'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: nextcurim = (/'nextcur'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: bvecsavdim =(/'mnpd2'/)
+  CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: amatsavdim =(/'mnpd2_times_mnpd2'/)
 
-
-  CHARACTER(LEN=*), DIMENSION(2), PARAMETER :: &
-     r2dim = (/'mn_mode','radius '/)
+  CHARACTER(LEN=*), DIMENSION(2), PARAMETER :: r2dim = (/'mn_mode','radius '/)
 
   character(len=*), parameter :: &
      vn_vacuum_calls = 'vacuum_calls', &

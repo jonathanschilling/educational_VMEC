@@ -1,7 +1,9 @@
 !> \file
 MODULE vparams
+
   USE stel_kinds
-  USE stel_constants, ONLY: zero,twopi,mu0,one
+  USE stel_constants, ONLY: zero, twopi, mu0, one
+
   IMPLICIT NONE
 
   ! MAXIMUM PARAMETERS FOR VMEC CODE (FOR READING INPUT)
@@ -17,14 +19,13 @@ MODULE vparams
   INTEGER, PARAMETER :: mpol1d = mpold - 1
   INTEGER, PARAMETER :: ntor1d = ntord + 1
 
-
   ! file units
-  INTEGER, PARAMETER :: nthreed0=9
-  INTEGER, PARAMETER :: indata0=nthreed0+2
-  INTEGER, PARAMETER :: nwout0 =nthreed0+3
-  INTEGER, PARAMETER :: jxbout0=nthreed0+4
-  INTEGER, PARAMETER :: nfort18=18
-  INTEGER, PARAMETER :: nmercier0=52
+  INTEGER, PARAMETER :: nthreed0  = 9
+  INTEGER, PARAMETER :: indata0   = nthreed0 + 2
+  INTEGER, PARAMETER :: nwout0    = nthreed0 + 3
+  INTEGER, PARAMETER :: jxbout0   = nthreed0 + 4
+  INTEGER, PARAMETER :: nfort18   = 18
+  INTEGER, PARAMETER :: nmercier0 = 52
   INTEGER            :: nthreed
 
   ! MISCELLANEOUS PARAMETERS

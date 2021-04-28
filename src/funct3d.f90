@@ -1,5 +1,6 @@
 !> \file
 SUBROUTINE funct3d (ier_flag)
+
   USE vmec_main
   USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2, bsubvvac
   use nestor_io, only: write_nestor_outputs
@@ -8,6 +9,7 @@ SUBROUTINE funct3d (ier_flag)
   USE vforces
   USE xstuff
   USE vparams, ONLY: twopi
+
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag

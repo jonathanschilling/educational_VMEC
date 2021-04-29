@@ -4,16 +4,16 @@
 !> \brief Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space
 !>
 !> @param rzl_array
-!> @param r11
-!> @param ru1
-!> @param rv1
-!> @param z11
-!> @param zu1
-!> @param zv1
-!> @param lu1
-!> @param lv1
-!> @param rcn1
-!> @param zcn1
+!> @param r11 R
+!> @param ru1 dR/dTheta
+!> @param rv1 dR/dZeta
+!> @param z11 Z
+!> @param zu1 dZ/dTheta
+!> @param zv1 dZ/dZeta
+!> @param lu1 dLambda/dTheta
+!> @param lv1 -dLambda/dZeta
+!> @param rcn1 TODO: what is this?
+!> @param zcn1 TODO: what is this?
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
 
   USE vmec_main
@@ -23,16 +23,16 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: r11  !< R
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: ru1  !< dR/dTheta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rv1  !< dR/dZeta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: z11  !< Z
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zu1  !< dZ/dTheta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zv1  !< dZ/dZeta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lu1  !< dLambda/dTheta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lv1  !< -dLambda/dZeta
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rcn1 !< TODO: what is this?
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zcn1 !< TODO: what is this?
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: r11
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: ru1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rv1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: z11
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zu1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zv1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lu1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: lv1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: rcn1
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(out) :: zcn1
 
   INTEGER :: n, m, mparity, k, i, j1, l, j1l, nsl
   INTEGER :: ioff, joff, mj, ni, nsz

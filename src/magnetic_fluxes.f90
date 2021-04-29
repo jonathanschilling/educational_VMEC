@@ -3,12 +3,12 @@
 
 !> \brief Compute the radial derivative of the enclosed toroidal magnetic flux.
 !>
-!> @param x evaluation location
+!> @param x evaluation location; radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
 FUNCTION torflux_deriv (x)
   USE stel_kinds
   USE vmec_input, ONLY: tf => aphi
 
-  REAL(rprec), INTENT(IN) :: x !< radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
+  REAL(rprec), INTENT(IN) :: x
   REAL(rprec) :: torflux_deriv
   INTEGER     :: i
 
@@ -24,13 +24,15 @@ END FUNCTION torflux_deriv
 
 !> \brief Compute the radial derivative of the enclosed poloidal magnetic flux.
 !>
-!> @param x evaluation location
+!> polflux_deriv == d(chi)/dx = iota(TF(x)) * torflux_deriv(x)
+!>
+!> @param x evaluation location; radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
 FUNCTION polflux_deriv (x)
   USE stel_kinds
 
-  REAL(rprec), INTENT(IN) :: x !< radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
+  REAL(rprec), INTENT(IN) :: x
   REAL(rprec) :: tf
-  REAL(rprec) :: polflux_deriv !< polflux_deriv == d(chi)/dx = iota(TF(x)) * torflux_deriv(x)
+  REAL(rprec) :: polflux_deriv
   REAL(rprec), EXTERNAL :: torflux, torflux_deriv, piota
 
   ! TOKAMAK/STELLARATOR: dchi/ds = iota * dphi/ds
@@ -47,11 +49,11 @@ END FUNCTION polflux_deriv
 
 !> \brief Compute the enclosed toroidal magnetic flux.
 !>
-!> @param x evaluation location
+!> @param x evaluation location; radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
 FUNCTION torflux (x)
   USE stel_kinds
 
-  REAL(rprec), INTENT(IN)  :: x !< radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
+  REAL(rprec), INTENT(IN)  :: x
   REAL(rprec) :: torflux, h, xi
   REAL(rprec), EXTERNAL :: torflux_deriv
   INTEGER     :: i
@@ -71,11 +73,11 @@ END FUNCTION torflux
 
 !> \brief Compute the enclosed poloidal magnetic flux.
 !>
-!> @param x evaluation location
+!> @param x evaluation location; radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
 FUNCTION polflux (x)
   USE stel_kinds
 
-  REAL(rprec), INTENT(IN) :: x !< radial flux variable (=TOROIDAL FLUX ONLY IF APHI=1)
+  REAL(rprec), INTENT(IN) :: x
   REAL(rprec) :: polflux, h, xi
   REAL(rprec), EXTERNAL :: polflux_deriv
   INTEGER     :: i

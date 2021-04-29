@@ -1,4 +1,15 @@
 !> \file
+!> \brief Compute Fourier integrals and build amatrix.
+
+!> \brief Compute Fourier integrals and build amatrix.
+!>
+!> @param grpmn
+!> @param gsource
+!> @param amatrix
+!> @param amatsq
+!> @param bvec
+!> @param wint
+!> @param lasym
 SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
   IMPLICIT NONE

@@ -1,6 +1,21 @@
 !> \file
+!> \brief Solve a tridiagonal system of equations.
+
+!> \brief Solve a tridiagonal system of equations.
+!>
+!> @param a
+!> @param d
+!> @param b
+!> @param c
+!> @param jmin
+!> @param jmax
+!> @param mnd1
+!> @param ns
+!> @param nrhs
 SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
+
   USE stel_kinds
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: jmax, mnd1, ns, nrhs

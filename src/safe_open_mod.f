@@ -1,4 +1,7 @@
 !> \file
+!> \brief fault-tolerant file opening routines
+
+!> \brief fault-tolerant file opening routines
       MODULE safe_open_mod
 !
 !     Module for performing a "safe" open of a file for
@@ -34,7 +37,7 @@
 !      CALL safe_open(iou,istat,my_output_file_name,'replace',
 !     &   'formatted',delim_in='none')
 
-!  JDH 08-30-2004. 
+!  JDH 08-30-2004.
 !     Based on Steve Hirshman's original safe_open routine
 !     Rearranged comments, continuation lines, some statement ordering.
 !     Should be NO change in functionality.
@@ -59,8 +62,8 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      CHARACTER(LEN=*), PARAMETER :: cdelim = "apostrophe", 
-     1     cform="formatted", cunform="unformatted", 
+      CHARACTER(LEN=*), PARAMETER :: cdelim = "apostrophe",
+     1     cform="formatted", cunform="unformatted",
      2     cscratch="scratch", cseq="sequential"
       CHARACTER(LEN=10) :: acc_type
       CHARACTER(LEN=10) :: delim_type
@@ -84,7 +87,7 @@
          iunit = iunit + 1
       END DO
 
-!  JDH 08-24-2004 This next IF(Present) clause seems to be duplicated below. 
+!  JDH 08-24-2004 This next IF(Present) clause seems to be duplicated below.
 !  I think one of the two should be eliminated, for clarity.
 
       IF (PRESENT(access_in)) THEN
@@ -96,7 +99,7 @@
 !  Why not call this variable lscratch?
       lexist = (filestat(1:1).eq.'s') .or. (filestat(1:1).eq.'S')        !Scratch file
 
-!  JDH 08-24-2004 Below is nearly exact duplicate of IF(Present) clause 
+!  JDH 08-24-2004 Below is nearly exact duplicate of IF(Present) clause
 !  from above
 
       IF (PRESENT(access_in)) THEN
@@ -123,19 +126,19 @@
       SELECT CASE (fileform(1:1))
       CASE ('u', 'U')
          IF (PRESENT(record_in)) THEN
-            IF (lexist) THEN     ! unformatted, record length specified, scratch 
+            IF (lexist) THEN     ! unformatted, record length specified, scratch
                OPEN(unit=iunit, form=cunform, status=cscratch,                 &
      &              recl=record_in, access=acc_type, iostat=istat)
-            ELSE             ! unformatted, record length specified, non-scratch 
+            ELSE             ! unformatted, record length specified, non-scratch
                OPEN(unit=iunit, file=TRIM(filename), form=cunform,             &
      &              status=TRIM(filestat), recl=record_in,                     &
      &              access=acc_type, iostat=istat)
             END IF
          ELSE
-            IF (lexist) THEN   ! unformatted, record length unspecified, scratch 
+            IF (lexist) THEN   ! unformatted, record length unspecified, scratch
                OPEN(unit=iunit, form=cunform, status=cscratch,                 &
      &              access=acc_type, iostat=istat)
-            ELSE           ! unformatted, record length unspecified, non-scratch 
+            ELSE           ! unformatted, record length unspecified, non-scratch
                OPEN(unit=iunit, file=TRIM(filename), form=cunform,             &
      &              status=TRIM(filestat), access=acc_type,iostat=istat)
             END IF
@@ -143,21 +146,21 @@
 
       CASE DEFAULT
          IF (PRESENT(record_in)) THEN
-            IF (lexist) THEN       ! formatted, record length specified, scratch 
+            IF (lexist) THEN       ! formatted, record length specified, scratch
                OPEN(unit=iunit, form=cform, status=cscratch,                   &
      &              delim=TRIM(delim_type), recl=record_in,                    &
      &              access=acc_type, iostat=istat)
-            ELSE               ! formatted, record length specified, non-scratch 
+            ELSE               ! formatted, record length specified, non-scratch
                OPEN(unit=iunit, file=TRIM(filename), form=cform,               &
      &              status=TRIM(filestat), delim=TRIM(delim_type),             &
      &              recl=record_in, access=acc_type, iostat=istat)
             END IF
          ELSE
-            IF (lexist) THEN     ! formatted, record length unspecified, scratch 
+            IF (lexist) THEN     ! formatted, record length unspecified, scratch
                OPEN(unit=iunit, form=cform, status=cscratch,                   &
      &              delim=TRIM(delim_type), access=acc_type,                   &
      &              iostat=istat)
-            ELSE             ! formatted, record length unspecified, non-scratch 
+            ELSE             ! formatted, record length unspecified, non-scratch
                OPEN(unit=iunit, file=TRIM(filename), form=cform,               &
      &             status=TRIM(filestat), delim=TRIM(delim_type),              &
      &             access=acc_type, iostat=istat)

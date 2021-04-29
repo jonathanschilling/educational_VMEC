@@ -1,11 +1,17 @@
 !> \file
+!> \brief Reset some flow-control parameters to their default values.
+
+!> \brief Reset some flow-control parameters to their default values.
+!>
 SUBROUTINE reset_params
+
   USE vmec_main, ONLY: ivac, ftolv, fsqr, fsqz, fsq,      &
                        res0, delt0r, iter1, iter2, ijacob, irst, &
                        lconm1, z00, vacuum_calls
   USE vmec_input, ONLY: delt
   USE stel_constants, only: zero
   USE mgrid_mod, ONLY: nextcur, mgrid_mode
+
   IMPLICIT NONE
 
   ivac  = -1

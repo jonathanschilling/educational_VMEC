@@ -1,17 +1,31 @@
 !> \file
+!> \brief Compute invariant residuals
+
+!> \brief Compute invariant residuals
+!>
+!> @param gcr \f$R\f$-component of forces
+!> @param gcz \f$Z\f$-component of forces
+!> @param gcl \f$\lambda\f$-component of forces
 SUBROUTINE residue (gcr, gcz, gcl)
+
   USE vmec_main, p5 => cp5
-  USE vmec_params, ONLY: rss, zcs, rsc, zcc,                        &
-                         meven, modd, ntmax
+  USE vmec_params, ONLY: rss, zcs, rsc, zcc, meven, modd, ntmax
   USE xstuff
+
   IMPLICIT NONE
 
-  REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcr, gcz, gcl
+  REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcr
+  REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcz
+  REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcl
 
-  INTEGER, PARAMETER :: n0=0, m0=0, m1=1
-  INTEGER, PARAMETER :: n3d=0, nasym=1
+  INTEGER, PARAMETER :: n0=0
+  INTEGER, PARAMETER :: m0=0
+  INTEGER, PARAMETER :: m1=1
+  INTEGER, PARAMETER :: n3d=0
+  INTEGER, PARAMETER :: nasym=1
 
-  INTEGER :: jedge, delIter
+  INTEGER :: jedge
+  INTEGER :: delIter
   REAL(rprec) :: r1
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
@@ -77,9 +91,14 @@ SUBROUTINE residue (gcr, gcz, gcl)
 
 END SUBROUTINE residue
 
-
+!> \brief Compute internal \c gr , \c gz required for \f$m=1\f$ constraint
+!>
+!> @param gcr \f$R\f$-component of forces
+!> @param gcz \f$Z\f$-component of forces
 SUBROUTINE constrain_m1(gcr, gcz)
+
   USE vmec_main, p5 => cp5
+
   IMPLICIT NONE
 
   REAL(dp), DIMENSION(ns,0:ntor), INTENT(inout) :: gcr, gcz
@@ -101,9 +120,14 @@ SUBROUTINE constrain_m1(gcr, gcz)
 
 END SUBROUTINE constrain_m1
 
-
+!> \brief Compute internal \c gr , \c gz required for \f$m=1\f$ constraint
+!>
+!> @param gcr \f$R\f$-component of forces
+!> @param gcz \f$Z\f$-component of forces
 SUBROUTINE scale_m1(gcr, gcz)
+
   USE vmec_main
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor), INTENT(inout) :: gcr, gcz
@@ -112,18 +136,20 @@ SUBROUTINE scale_m1(gcr, gcz)
   INTEGER :: n
   REAL(rprec) :: fac(ns)
 
-  IF (.not.lconm1) RETURN
+  IF (lconm1) then
 
-  fac =  (ard(:ns,nodd)+brd(:ns,nodd)                            )      &
-        /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
-  DO n = 0, ntor
-     gcr(:,n) = fac*gcr(:,n)
-  END DO
+     fac =  (ard(:ns,nodd)+brd(:ns,nodd)                            )      &
+           /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
+     DO n = 0, ntor
+        gcr(:,n) = fac*gcr(:,n)
+     END DO
 
-  fac =  (                            azd(:ns,nodd)+bzd(:ns,nodd))      &
-        /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
-  DO n = 0, ntor
-     gcz(:,n) = fac*gcz(:,n)
-  END DO
+     fac =  (                            azd(:ns,nodd)+bzd(:ns,nodd))      &
+           /(ard(:ns,nodd)+brd(:ns,nodd)+azd(:ns,nodd)+bzd(:ns,nodd))
+     DO n = 0, ntor
+        gcz(:,n) = fac*gcz(:,n)
+     END DO
+
+  end if
 
 END SUBROUTINE scale_m1

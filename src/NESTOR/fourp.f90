@@ -1,4 +1,10 @@
 !> \file
+!> \brief Perform Fourier integrals of Green's function kernel.
+
+!> \brief Perform Fourier integrals of Green's function kernel.
+!>
+!> @param grpmn
+!> @param grp
 SUBROUTINE fourp (grpmn, grp)
   USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE

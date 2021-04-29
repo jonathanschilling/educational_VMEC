@@ -1,4 +1,16 @@
 !> \file
+!> \brief Compute the analytical-and-numerical 4D Fourier integrals over the equivalently-singular functions.
+
+!> \brief Compute the analytical-and-numerical 4D Fourier integrals over the equivalently-singular functions.
+!>
+!> @param grpmn
+!> @param bvec
+!> @param ivacskip
+!> @param lasym
+!> @param m_map
+!> @param n_map
+!> @param grpmn_m_map
+!> @param grpmn_n_map
 SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)
   USE vacmod, vm_grpmn => grpmn
   IMPLICIT NONE

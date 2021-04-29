@@ -1,4 +1,10 @@
 !> \file
+!> Compute the total magnetic field due to external coils and the net toroidal plasma current.
+
+!> Compute the total magnetic field due to external coils and the net toroidal plasma current.
+!>
+!> @param plascur
+!> @param wint
 SUBROUTINE bextern(plascur, wint)
   USE vacmod
   USE mgrid_mod, ONLY: bvac

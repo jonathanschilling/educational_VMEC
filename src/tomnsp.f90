@@ -1,4 +1,19 @@
 !> \file
+!> \brief Fourier-transform forces from real space to Fourier space
+
+!> \brief Fourier-transform symmetric forces from real space to Fourier space
+!>
+!> @param frzl_array
+!> @param armn
+!> @param brmn
+!> @param crmn
+!> @param azmn
+!> @param bzmn
+!> @param czmn
+!> @param blmn
+!> @param clmn
+!> @param arcon
+!> @param azcon
 SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
                    bzmn, czmn, blmn, clmn, arcon, azcon)
   USE vmec_main
@@ -116,7 +131,19 @@ SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
 
 END SUBROUTINE tomnsps
 
-
+!> \brief Fourier-transform anti-symmetric forces from real space to Fourier space
+!>
+!> @param frzl_array
+!> @param armn
+!> @param brmn
+!> @param crmn
+!> @param azmn
+!> @param bzmn
+!> @param czmn
+!> @param blmn
+!> @param clmn
+!> @param arcon
+!> @param azcon
 SUBROUTINE tomnspa(frzl_array, armn, brmn, crmn, azmn, bzmn, &
                    czmn, blmn, clmn, arcon, azcon)
   USE vmec_main

@@ -1,4 +1,19 @@
 !> \file
+!> \brief Compute the (m>0 and n>0) part of the DFT of the analytical Fourier transforms of the equivalently-singular integrals.
+
+!> \brief Compute the (m>0 and n>0) part of the DFT of the analytical Fourier transforms of the equivalently-singular integrals.
+!>
+!> @param grpmn
+!> @param bvec
+!> @param m
+!> @param n
+!> @param l
+!> @param ivacskip
+!> @param lasym
+!> @param m_map
+!> @param n_map
+!> @param grpmn_m_map
+!> @param grpmn_n_map
 SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map, &
                     grpmn_m_map, grpmn_n_map)
   USE vacmod, vm_grpmn => grpmn

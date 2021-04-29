@@ -1,4 +1,8 @@
 !> \file
+!> \brief Pre-compute constant terms required for NESTOR.
+
+!> \brief Pre-compute constant terms required for NESTOR.
+!>
 SUBROUTINE precal
   USE vacmod
   IMPLICIT NONE

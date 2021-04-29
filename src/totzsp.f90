@@ -1,8 +1,25 @@
 !> \file
+!> \brief Inverse-Fourier-transform geometry from Fourier space to real space
+
+!> \brief Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space
+!>
+!> @param rzl_array
+!> @param r11
+!> @param ru1
+!> @param rv1
+!> @param z11
+!> @param zu1
+!> @param zv1
+!> @param lu1
+!> @param lv1
+!> @param rcn1
+!> @param zcn1
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
+
   USE vmec_main
   USE stel_kinds, only: rprec
   USE vmec_params, ONLY: jmin1, jlam, ntmax, rcc, rss, zsc, zcs, m0, m1, n0
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
@@ -166,11 +183,16 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
 END SUBROUTINE totzsps
 
-
+!> \brief Convert from internal representation to "physical" rmnss, zmncs Fourier form.
+!>
+!> @param rmnss
+!> @param zmncs
 SUBROUTINE convert_sym(rmnss, zmncs)
+
   USE vmec_main
   USE vmec_params, only: m1
   USE stel_kinds, only: rprec
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1), INTENT(inout) :: rmnss, zmncs
@@ -179,21 +201,37 @@ SUBROUTINE convert_sym(rmnss, zmncs)
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSS, ZMNCS FOURIER FORM
   ! rmnss = .5(RMNSS+ZMNCS), zmnss = .5(RMNSS-ZMNCS) -> 0
-  IF (.NOT.lconm1) RETURN
+  IF (lconm1) then
 
-  ! This essentially reverts the operation performed at the end of readin().
+     ! This essentially reverts the operation performed at the end of readin().
 
-  temp(:,:) = rmnss(:,:,m1)                  !This is internal
-  rmnss(:,:,m1) = temp(:,:) + zmncs(:,:,m1)  !Now these are physical
-  zmncs(:,:,m1) = temp(:,:) - zmncs(:,:,m1)
+     temp(:,:) = rmnss(:,:,m1)                  !This is internal
+     rmnss(:,:,m1) = temp(:,:) + zmncs(:,:,m1)  !Now these are physical
+     zmncs(:,:,m1) = temp(:,:) - zmncs(:,:,m1)
+
+  end if
 
 END SUBROUTINE convert_sym
 
-
+!> \brief Inverse-Fourier-transform anti-symmetric part of geometry from Fourier space to real space
+!>
+!> @param rzl_array
+!> @param r11
+!> @param ru1
+!> @param rv1
+!> @param z11
+!> @param zu1
+!> @param zv1
+!> @param lu1
+!> @param lv1
+!> @param rcn1
+!> @param zcn1
 SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
+
   USE vmec_main
   USE stel_kinds, only: rprec
   USE vmec_params, ONLY: jmin1, jlam, ntmax, rcs, rsc, zcc, zss, m0, m1, n0
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: rzl_array
@@ -306,10 +344,15 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
 END SUBROUTINE totzspa
 
-
+!> \brief Convert from internal representation to "physical" rmnsc, zmncc Fourier form.
+!>
+!> @param rmnsc
+!> @param zmncc
 SUBROUTINE convert_asym(rmnsc, zmncc)
+
   USE vmec_main
   USE stel_kinds, only: rprec
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1), INTENT(inout) :: rmnsc, zmncc
@@ -319,10 +362,12 @@ SUBROUTINE convert_asym(rmnsc, zmncc)
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSC, ZMNCC FOURIER FORM
   ! rmnsc(in) = .5(RMNSC+ZMNCC), zmncc(in) = .5(RMNSC+ZMNCC) -> 0
 
-  IF (.NOT.lconm1) RETURN
+  IF (lconm1) then
 
-  temp(:,:) = rmnsc(:,:,1)                   !THIS IS INTERNAL
-  rmnsc(:,:,1) = temp(:,:) + zmncc(:,:,1)    !NOW THE rmnsc,zmncc ARE PHYSICAL
-  zmncc(:,:,1) = temp(:,:) - zmncc(:,:,1)
+     temp(:,:) = rmnsc(:,:,1)                   !THIS IS INTERNAL
+     rmnsc(:,:,1) = temp(:,:) + zmncc(:,:,1)    !NOW THE rmnsc,zmncc ARE PHYSICAL
+     zmncc(:,:,1) = temp(:,:) - zmncc(:,:,1)
+
+  end if
 
 END SUBROUTINE convert_asym

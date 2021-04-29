@@ -1,4 +1,15 @@
 !> \file
+!> \brief Compute all required terms for solving for the scalar magnetic potential
+
+!> \brief Compute all required terms for solving for the scalar magnetic potential
+!>
+!> @param bvec
+!> @param amatrix
+!> @param wint
+!> @param ivacskip
+!> @param lasym
+!> @param m_map
+!> @param n_map
 SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    USE vacmod, vm_amatrix => amatrix
    IMPLICIT NONE

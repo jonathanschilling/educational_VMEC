@@ -1,6 +1,17 @@
 !> \file
+!> Solve a linear system of equations using \c dgesv
+
+!> Solve a linear system of equations using \c dgesv
+!>
+!> @param amat coefficient matrix, size (m x m)
+!> @param b right-hand side(s), size (m x nrhs)
+!> @param m number of free parameters (=number of rows, cols in amat)
+!> @param nrhs number of right-hand sides to solve simultaneously
+!> @param info error flag
 SUBROUTINE solver(amat, b, m, nrhs, info)
+
   USE stel_kinds
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in)  :: m, nrhs

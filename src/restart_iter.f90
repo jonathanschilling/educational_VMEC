@@ -1,7 +1,14 @@
 !> \file
+!> \brief Save current or restore previous good state vector and reduce time step.
+
+!> \brief Save current or restore previous good state vector and reduce time step.
+!>
+!> @param time_step time step to be modified if convergence is bad
 SUBROUTINE restart_iter(time_step)
+
   USE vmec_main
   USE xstuff
+
   IMPLICIT NONE
 
   REAL(rprec), intent(inout) :: time_step

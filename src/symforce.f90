@@ -1,4 +1,30 @@
 !> \file
+!> \brief Symmetrize forces on restricted \f$\theta\f$ interval \f$(0 \leq \theta \leq \pi \f$
+!>        so cos, sin integrals can be performed.
+
+!> \brief Symmetrize forces on restricted \f$\theta\f$ interval \f$(0 \leq \theta \leq \pi \f$
+!>        so cos, sin integrals can be performed.
+!>
+!> @param ars
+!> @param brs
+!> @param crs
+!> @param azs
+!> @param bzs
+!> @param czs
+!> @param bls
+!> @param cls
+!> @param rcs
+!> @param zcs
+!> @param ara
+!> @param bra
+!> @param cra
+!> @param aza
+!> @param bza
+!> @param cza
+!> @param bla
+!> @param cla
+!> @param rca
+!> @param zca
 SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, &
                     rcs, zcs, ara, bra, cra, aza, bza, cza, &
                     bla, cla, rca, zca)
@@ -77,11 +103,27 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, &
 
 END SUBROUTINE symforce
 
-
+!> \brief Symmetrize some quantities so that they can be output (?)
+!>
+!> @param bsq
+!> @param gsqrt
+!> @param bsubu
+!> @param bsubv
+!> @param bsupu
+!> @param bsupv
+!> @param bsubs
+!> @param bsqa
+!> @param gsqrta
+!> @param bsubua
+!> @param bsubva
+!> @param bsupua
+!> @param bsupva
+!> @param bsubsa
 SUBROUTINE symoutput (bsq , gsqrt , bsubu , bsubv ,bsupu,  bsupv , bsubs , &
                       bsqa, gsqrta, bsubua, bsubva,bsupua, bsupva, bsubsa   )
 
   USE vmec_main, p5 => cp5
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns*nzeta,ntheta3), INTENT(inout) :: &

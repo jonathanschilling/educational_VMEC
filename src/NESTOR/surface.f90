@@ -1,4 +1,17 @@
 !> \file
+!> \brief Evaluate the geometry of the LCFS and tangential derivatives.
+
+!> \brief Evaluate the geometry of the LCFS and tangential derivatives.
+!>
+!> @param rc
+!> @param rs
+!> @param zs
+!> @param zc
+!> @param xm
+!> @param xn
+!> @param mnmax
+!> @param lasym
+!> @param signgs
 SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   USE vacmod
   IMPLICIT NONE

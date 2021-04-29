@@ -1,6 +1,20 @@
 !> \file
+!> \brief Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.
+
+!> \brief Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.
+!>
+!> @param torcur
+!> @param bx
+!> @param by
+!> @param bz
+!> @param cos1
+!> @param sin1
+!> @param rp
+!> @param zp
 SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
+
   USE vacmod, vm_bz => bz
+
   IMPLICIT NONE
 
   REAL(rprec), INTENT(in) :: torcur
@@ -16,7 +30,7 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
 
   ! B_External due to LIne CUrrent
 
-  ! net toroidal plasma current in A (?)
+  ! net toroidal plasma current in A
   current = torcur/mu0
 
   ! initialize target array

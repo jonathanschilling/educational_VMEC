@@ -1,7 +1,33 @@
 !> \file
+!> \brief Symmetrize \f$R\f$, \f$Z\f$ and \f$\lambda\f$.
+
+!> \brief Symmetrize \f$R\f$, \f$Z\f$ and \f$\lambda\f$.
+!>
+!> @param r1s
+!> @param rus
+!> @param rvs
+!> @param z1s
+!> @param zus
+!> @param zvs
+!> @param lus
+!> @param lvs
+!> @param rcons
+!> @param zcons
+!> @param r1a
+!> @param rua
+!> @param rva
+!> @param z1a
+!> @param zua
+!> @param zva
+!> @param lua
+!> @param lva
+!> @param rcona
+!> @param zcona
 SUBROUTINE symrzl(r1s, rus, rvs, z1s, zus, zvs, lus, lvs, rcons, zcons, &
                   r1a, rua, rva, z1a, zua, zva, lua, lva, rcona, zcona    )
+
   USE vmec_main
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(inout) :: &

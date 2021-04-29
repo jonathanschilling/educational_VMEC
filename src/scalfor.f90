@@ -1,8 +1,21 @@
 !> \file
+!> \brief Build forces from different contributions
+
+!> \brief Build forces from different contributions
+!>
+!> @param gcx force output
+!> @param axm force contribution input
+!> @param bxm force contribution input
+!> @param axd force contribution input
+!> @param bxd force contribution input
+!> @param cx force contribution input
+!> @param iflag subtract edge instability from preconditioner
 SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
+
   USE vmec_main
   USE vmec_params
   USE vmec_dim, ONLY: ns
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: iflag
@@ -28,6 +41,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! TO AVOID JACOBIAN RESETS BY GIVING A SMOOTH TRANSITION FROM FIXED TO FREE ITERATIONS
   !  mult_fac = 1._dp/(1._dp + 10*(fsqr+fsqz))
   !  gcx(ns,:,:,:) = mult_fac*gcx(ns,:,:,:)
+
   DO m = 0, mpol1
      mp = MOD(m,2) + 1
      DO n = 0, ntor

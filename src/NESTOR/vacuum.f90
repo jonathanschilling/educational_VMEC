@@ -1,4 +1,25 @@
 !> \file
+!> \brief Compute the vacuum contribution to the free-boundary energy functional.
+
+!> \brief Compute the vacuum contribution to the free-boundary energy functional.
+!>
+!> @param rmnc
+!> @param rmns
+!> @param zmns
+!> @param zmnc
+!> @param xm
+!> @param xn
+!> @param plascur
+!> @param rbtor
+!> @param wint
+!> @param ivac_skip
+!> @param ivac
+!> @param mnmax
+!> @param ier_flag
+!> @param lasym
+!> @param signgs
+!> @param raxis
+!> @param zaxis
 SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
                   plascur, rbtor, wint, ivac_skip, ivac,  &
                   mnmax, ier_flag, lasym, signgs,             &

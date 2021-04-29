@@ -1,8 +1,21 @@
 !> \file
+!> \brief Compute the cylindrical components of the magnetic field due to external coils
+!>        by bi-linear interpolation of the \c mgrid file.
+
+!> \brief Compute the cylindrical components of the magnetic field due to external coils.
+!>        by bi-linear interpolation of the \c mgrid file.
+!>
+!> @param rad \f$R\f$ at which to evaluate the external magnetic field
+!> @param zee \f$Z\f$ at which to evaluate the external magnetic field
+!> @param brvac cylindrical component of external magnetic field \f$B^R\f$
+!> @param bpvac cylindrical component of external magnetic field \f$B^\varphi\f$
+!> @param bzvac cylindrical component of external magnetic field \f$B^Z\f$
 SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
+
   ! USE vparams, ONLY: nthreed
   USE vacmod
   USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: rad, zee

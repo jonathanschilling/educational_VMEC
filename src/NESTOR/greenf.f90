@@ -1,4 +1,11 @@
 !> \file
+!> \brief Compute the regularized evaluation of the Green's function and the source term.
+
+!> \brief Compute the regularized evaluation of the Green's function and the source term.
+!>
+!> @param delgr
+!> @param delgrp
+!> @param ip
 SUBROUTINE greenf(delgr, delgrp, ip)
   USE vacmod
   IMPLICIT NONE

@@ -1,4 +1,18 @@
 !> \file
+!> \brief Write the output files of VMEC
+
+!> \brief Write the output files of VMEC
+!>
+!> @param bsq
+!> @param gsqrt
+!> @param bsubu
+!> @param bsubv
+!> @param bsubs
+!> @param bsupv
+!> @param bsupu
+!> @param rzl_array
+!> @param gc_array
+!> @param ier_flag error flag
 SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_array, ier_flag)
   USE vmec_main
   USE vparams, p5 => cp5, two => c2p0

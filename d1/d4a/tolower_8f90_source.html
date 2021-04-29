@@ -113,30 +113,32 @@ $(document).ready(function(){initNavTree('d1/d4a/tolower_8f90_source.html','../.
 </div><!--header-->
 <div class="contents">
 <a href="../../d1/d4a/tolower_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">    2</a></span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a>(string)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">! convert a string to lower case</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">! note: string should NOT be a parameter (constant) or this seg faults</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;      <span class="keywordtype">CHARACTER (len=*)</span> , <span class="keywordtype">INTENT(inout)</span> :: string </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;      <span class="keywordtype">INTEGER</span> :: i,ic,nlen,icLow,icHigh,icDel</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;      </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;      iclow = ichar(<span class="stringliteral">&#39;A&#39;</span>)</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;      ichigh = ichar(<span class="stringliteral">&#39;Z&#39;</span>)</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;      icdel = ichar(<span class="stringliteral">&#39;a&#39;</span>) - ichar(<span class="stringliteral">&#39;A&#39;</span>)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;      nlen = len(string) </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;      <span class="keywordflow">DO</span> i=1,nlen</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;         ic = ichar(string(i:i))</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;         <span class="keywordflow">IF</span> (ic &gt;= iclow .and. ic &lt; ichigh) string(i:i) = char(ic+icdel)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordflow">      END DO</span> </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;      <span class="keyword">END SUBROUTINE </span><a class="code" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a></div>
-<div class="ttc" id="atolower_8f90_html_af0b4b410165cce4c9f0e5e6d82d21571"><div class="ttname"><a href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a></div><div class="ttdeci">subroutine tolower(string)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d4a/tolower_8f90_source.html#l00002">tolower.f90:3</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">    9</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a>(string)</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordtype">CHARACTER (len=*)</span> , <span class="keywordtype">INTENT(inout)</span> :: string</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">INTEGER</span> :: i, ic, nlen, icLow, icHigh, icDel</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  iclow = ichar(<span class="stringliteral">&#39;A&#39;</span>)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  ichigh = ichar(<span class="stringliteral">&#39;Z&#39;</span>)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  icdel = ichar(<span class="stringliteral">&#39;a&#39;</span>) - ichar(<span class="stringliteral">&#39;A&#39;</span>)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  nlen = len(string)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">DO</span> i=1,nlen</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;     ic = ichar(string(i:i))</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="keywordflow">IF</span> (ic &gt;= iclow .and. ic &lt; ichigh) string(i:i) = char(ic+icdel)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a></div>
+<div class="ttc" id="atolower_8f90_html_af0b4b410165cce4c9f0e5e6d82d21571"><div class="ttname"><a href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571">tolower</a></div><div class="ttdeci">subroutine tolower(string)</div><div class="ttdoc">Convert a string to lower case.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d4a/tolower_8f90_source.html#l00009">tolower.f90:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d1/d4a/tolower_8f90.html">tolower.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 29 2021 11:22:45 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

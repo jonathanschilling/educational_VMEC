@@ -1,5 +1,5 @@
 <map id="spectrum" name="spectrum">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,81,57"/>
-<area shape="rect" id="node2" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title=" " alt="" coords="129,5,232,32"/>
-<area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title=" " alt="" coords="133,56,229,83"/>
+<area shape="rect" id="node1" title="Compute the spectral width of the surface geometry Fourier coefficients." alt="" coords="5,31,81,57"/>
+<area shape="rect" id="node2" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="129,5,232,32"/>
+<area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="133,56,229,83"/>
 </map>

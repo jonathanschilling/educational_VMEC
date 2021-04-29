@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute all required terms for solving for the scalar magnetic potential.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-57.5 0,-76.5 48,-76.5 48,-57.5 0,-57.5"/>
 <text text-anchor="middle" x="24" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalpot</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions.">
 <polygon fill="white" stroke="black" points="85,-114.5 85,-133.5 127,-133.5 127,-114.5 85,-114.5"/>
 <text text-anchor="middle" x="106" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">analyt</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title="Compute Fourier integrals and build amatrix.">
 <polygon fill="white" stroke="black" points="88.5,-76.5 88.5,-95.5 123.5,-95.5 123.5,-76.5 88.5,-76.5"/>
 <text text-anchor="middle" x="106" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">fouri</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title="Perform Fourier integrals of Green&#39;s function kernel.">
 <polygon fill="white" stroke="black" points="87,-38.5 87,-57.5 125,-57.5 125,-38.5 87,-38.5"/>
 <text text-anchor="middle" x="106" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">fourp</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title="Compute the regularized evaluation of the Green&#39;s function and the source term.">
 <polygon fill="white" stroke="black" points="84,-0.5 84,-19.5 128,-19.5 128,-0.5 84,-0.5"/>
 <text text-anchor="middle" x="106" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">greenf</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin...">
 <polygon fill="white" stroke="black" points="166.5,-133.5 166.5,-152.5 224.5,-152.5 224.5,-133.5 166.5,-133.5"/>
 <text text-anchor="middle" x="195.5" y="-140.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum</text>
 </a>
@@ -96,7 +96,7 @@
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si...">
 <polygon fill="white" stroke="black" points="164,-95.5 164,-114.5 227,-114.5 227,-95.5 164,-95.5"/>
 <text text-anchor="middle" x="195.5" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum2</text>
 </a>

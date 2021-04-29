@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute the total magnetic field due to external coils and the net toroidal plasma current.">
 <polygon fill="#bfbfbf" stroke="black" points="416,-19.5 416,-38.5 464,-38.5 464,-19.5 416,-19.5"/>
 <text text-anchor="middle" x="440" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextern</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title="Compute the vacuum contribution to the free&#45;boundary energy functional.">
 <polygon fill="white" stroke="black" points="329,-19.5 329,-38.5 380,-38.5 380,-19.5 329,-19.5"/>
 <text text-anchor="middle" x="354.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vacuum</text>
 </a>

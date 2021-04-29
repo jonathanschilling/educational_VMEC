@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute the total magnetic field due to external coils and the net toroidal plasma current.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 48,-38.5 48,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="24" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextern</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol...">
 <polygon fill="white" stroke="black" points="84,-38.5 84,-57.5 126,-57.5 126,-38.5 84,-38.5"/>
 <text text-anchor="middle" x="105" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">becoil</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.">
 <polygon fill="white" stroke="black" points="84,-0.5 84,-19.5 126,-19.5 126,-0.5 84,-0.5"/>
 <text text-anchor="middle" x="105" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">belicu</text>
 </a>

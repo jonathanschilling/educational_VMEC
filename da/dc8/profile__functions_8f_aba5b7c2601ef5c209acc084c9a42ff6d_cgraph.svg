@@ -66,7 +66,7 @@
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="../../d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571" target="_top" xlink:title="Convert a string to lower case.">
 <polygon fill="white" stroke="black" points="115.5,-0.5 115.5,-19.5 163.5,-19.5 163.5,-0.5 115.5,-0.5"/>
 <text text-anchor="middle" x="139.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">tolower</text>
 </a>

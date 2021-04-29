@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" target="_top" xlink:title="Compute the spectral width of the surface geometry Fourier coefficients.">
 <polygon fill="white" stroke="black" points="85,-19.5 85,-38.5 142,-38.5 142,-19.5 85,-19.5"/>
 <text text-anchor="middle" x="113.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">spectrum</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form.">
 <polygon fill="white" stroke="black" points="178,-38.5 178,-57.5 255,-57.5 255,-38.5 178,-38.5"/>
 <text text-anchor="middle" x="216.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_asym</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
 <polygon fill="white" stroke="black" points="180.5,-0.5 180.5,-19.5 252.5,-19.5 252.5,-0.5 180.5,-0.5"/>
 <text text-anchor="middle" x="216.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>

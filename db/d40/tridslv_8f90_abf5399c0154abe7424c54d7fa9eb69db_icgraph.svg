@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Solve a tridiagonal system of equations.">
 <polygon fill="#bfbfbf" stroke="black" points="495,-19.5 495,-38.5 538,-38.5 538,-19.5 495,-19.5"/>
 <text text-anchor="middle" x="516.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">tridslv</text>
 </a>
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" target="_top" xlink:title="Build forces from different contributions.">
 <polygon fill="white" stroke="black" points="413,-19.5 413,-38.5 459,-38.5 459,-19.5 413,-19.5"/>
 <text text-anchor="middle" x="436" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalfor</text>
 </a>
@@ -82,7 +82,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="329,-19.5 329,-38.5 377,-38.5 377,-19.5 329,-19.5"/>
 <text text-anchor="middle" x="353" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
 </a>

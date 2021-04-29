@@ -1,7 +1,7 @@
 <map id="solver" name="solver">
-<area shape="rect" id="node1" title=" " alt="" coords="568,31,625,57"/>
+<area shape="rect" id="node1" title="Solve a linear system of equations using dgesv." alt="" coords="568,31,625,57"/>
 <area shape="rect" id="node2" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="445,5,520,32"/>
-<area shape="rect" id="node7" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title=" " alt="" coords="449,56,517,83"/>
+<area shape="rect" id="node7" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="449,56,517,83"/>
 <area shape="rect" id="node3" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="331,5,397,32"/>
 <area shape="rect" id="node4" href="$d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="227,5,278,32"/>
 <area shape="rect" id="node5" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="113,56,169,83"/>

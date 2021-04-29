@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Write the output files of VMEC.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-76.5 0,-95.5 41,-95.5 41,-76.5 0,-76.5"/>
 <text text-anchor="middle" x="20.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">wrout</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form.">
 <polygon fill="white" stroke="black" points="77,-114.5 77,-133.5 154,-133.5 154,-114.5 77,-114.5"/>
 <text text-anchor="middle" x="115.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_asym</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
 <polygon fill="white" stroke="black" points="79.5,-76.5 79.5,-95.5 151.5,-95.5 151.5,-76.5 79.5,-76.5"/>
 <text text-anchor="middle" x="115.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae" target="_top" xlink:title="Symmetrize some quantities so that they can be output (?)">
 <polygon fill="white" stroke="black" points="84.5,-0.5 84.5,-19.5 146.5,-19.5 146.5,-0.5 84.5,-0.5"/>
 <text text-anchor="middle" x="115.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">symoutput</text>
 </a>

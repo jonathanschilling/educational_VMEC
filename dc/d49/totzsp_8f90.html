@@ -115,20 +115,31 @@ $(document).ready(function(){initNavTree('dc/d49/totzsp_8f90.html','../../'); in
 </div><!--header-->
 <div class="contents">
 
+<p>Inverse-Fourier-transform geometry from Fourier space to real space.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../dc/d49/totzsp_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ac4756c0f66a5a01d9c08334a98a61b21"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21">totzsps</a> (rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)</td></tr>
+<tr class="memdesc:ac4756c0f66a5a01d9c08334a98a61b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space.  <a href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21">More...</a><br /></td></tr>
 <tr class="separator:ac4756c0f66a5a01d9c08334a98a61b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3264ce8fefaa7ede632c4147049aadc5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5">convert_sym</a> (rmnss, zmncs)</td></tr>
+<tr class="memdesc:a3264ce8fefaa7ede632c4147049aadc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from internal representation to "physical" rmnss, zmncs Fourier form.  <a href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5">More...</a><br /></td></tr>
 <tr class="separator:a3264ce8fefaa7ede632c4147049aadc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c3f89c23a3be79d0f993c5031f7eab5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5">totzspa</a> (rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)</td></tr>
+<tr class="memdesc:a8c3f89c23a3be79d0f993c5031f7eab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse-Fourier-transform anti-symmetric part of geometry from Fourier space to real space.  <a href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5">More...</a><br /></td></tr>
 <tr class="separator:a8c3f89c23a3be79d0f993c5031f7eab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff13f873fb632d486fdffc6ee97857c6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6">convert_asym</a> (rmnsc, zmncc)</td></tr>
+<tr class="memdesc:aff13f873fb632d486fdffc6ee97857c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from internal representation to "physical" rmnsc, zmncc Fourier form.  <a href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6">More...</a><br /></td></tr>
 <tr class="separator:aff13f873fb632d486fdffc6ee97857c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Inverse-Fourier-transform geometry from Fourier space to real space. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="aff13f873fb632d486fdffc6ee97857c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff13f873fb632d486fdffc6ee97857c6">&#9670;&nbsp;</a></span>convert_asym()</h2>
 
@@ -155,11 +166,20 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00310">310</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+<p>Convert from internal representation to "physical" rmnsc, zmncc Fourier form. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rmnsc</td><td></td></tr>
+    <tr><td class="paramname">zmncc</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00351">351</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
 
 <p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00137">vmec_main::lconm1</a>, and <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/daf/spectrum_8f90_source.html#l00003">spectrum()</a>, <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00194">totzspa()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00003">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/daf/spectrum_8f90_source.html#l00009">spectrum()</a>, <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00230">totzspa()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -195,11 +215,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00170">170</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+<p>Convert from internal representation to "physical" rmnss, zmncs Fourier form. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rmnss</td><td></td></tr>
+    <tr><td class="paramname">zmncs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00190">190</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
 
 <p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00137">vmec_main::lconm1</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00061">vmec_params::m1</a>, and <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/daf/spectrum_8f90_source.html#l00003">spectrum()</a>, <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00003">totzsps()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00003">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/daf/spectrum_8f90_source.html#l00009">spectrum()</a>, <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00018">totzsps()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -289,9 +318,27 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00193">193</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+<p>Inverse-Fourier-transform anti-symmetric part of geometry from Fourier space to real space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rzl_array</td><td></td></tr>
+    <tr><td class="paramname">r11</td><td></td></tr>
+    <tr><td class="paramname">ru1</td><td></td></tr>
+    <tr><td class="paramname">rv1</td><td></td></tr>
+    <tr><td class="paramname">z11</td><td></td></tr>
+    <tr><td class="paramname">zu1</td><td></td></tr>
+    <tr><td class="paramname">zv1</td><td></td></tr>
+    <tr><td class="paramname">lu1</td><td></td></tr>
+    <tr><td class="paramname">lv1</td><td></td></tr>
+    <tr><td class="paramname">rcn1</td><td></td></tr>
+    <tr><td class="paramname">zcn1</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="reference">References <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00311">convert_asym()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00015">vmec_params::jmin1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00060">vmec_params::m0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00061">vmec_params::m1</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00062">vmec_params::n0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params::zss</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00229">229</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00352">convert_asym()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00015">vmec_params::jmin1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00060">vmec_params::m0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00061">vmec_params::m1</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00062">vmec_params::n0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params::zss</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
 <div class="dynheader">
@@ -388,25 +435,28 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">r11</td><td>R</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ru1</td><td>dR/dTheta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">rv1</td><td>dR/dZeta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">z11</td><td>Z</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">zu1</td><td>dZ/dTheta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">zv1</td><td>dZ/dZeta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">lu1</td><td>dLambda/dTheta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">lv1</td><td>-dLambda/dZeta</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">rcn1</td><td>TODO: what is this?</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">zcn1</td><td>TODO: what is this? </td></tr>
+    <tr><td class="paramname">rzl_array</td><td></td></tr>
+    <tr><td class="paramname">r11</td><td>R </td></tr>
+    <tr><td class="paramname">ru1</td><td>dR/dTheta </td></tr>
+    <tr><td class="paramname">rv1</td><td>dR/dZeta </td></tr>
+    <tr><td class="paramname">z11</td><td>Z </td></tr>
+    <tr><td class="paramname">zu1</td><td>dZ/dTheta </td></tr>
+    <tr><td class="paramname">zv1</td><td>dZ/dZeta </td></tr>
+    <tr><td class="paramname">lu1</td><td>dLambda/dTheta </td></tr>
+    <tr><td class="paramname">lv1</td><td>-dLambda/dZeta </td></tr>
+    <tr><td class="paramname">rcn1</td><td>TODO: what is this? </td></tr>
+    <tr><td class="paramname">zcn1</td><td>TODO: what is this? </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00002">2</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00017">17</a> of file <a class="el" href="../../dc/d49/totzsp_8f90_source.html">totzsp.f90</a>.</p>
 
-<p class="reference">References <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00171">convert_sym()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00015">vmec_params::jmin1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00060">vmec_params::m0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00061">vmec_params::m1</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00062">vmec_params::n0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params::rcc</a>, <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params::zsc</a>.</p>
+<p class="reference">References <a class="el" href="../../dc/d49/totzsp_8f90_source.html#l00191">convert_sym()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00015">vmec_params::jmin1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00136">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00060">vmec_params::m0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00061">vmec_params::m1</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00062">vmec_params::n0</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params::rcc</a>, <a class="el" href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds::rprec</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params::zsc</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00008">funct3d()</a>.</p>
 <div class="dynheader">
@@ -430,7 +480,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/d49/totzsp_8f90.html">totzsp.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 29 2021 11:22:46 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

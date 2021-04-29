@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" target="_top" xlink:title="Solve a linear system of equations using dgesv.">
 <polygon fill="white" stroke="black" points="92,-0.5 92,-19.5 135,-19.5 135,-0.5 92,-0.5"/>
 <text text-anchor="middle" x="113.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">solver</text>
 </a>

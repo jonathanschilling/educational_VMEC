@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Build forces from different contributions.">
 <polygon fill="#bfbfbf" stroke="black" points="413,-19.5 413,-38.5 459,-38.5 459,-19.5 413,-19.5"/>
 <text text-anchor="middle" x="436" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalfor</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="329,-19.5 329,-38.5 377,-38.5 377,-19.5 329,-19.5"/>
 <text text-anchor="middle" x="353" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
 </a>

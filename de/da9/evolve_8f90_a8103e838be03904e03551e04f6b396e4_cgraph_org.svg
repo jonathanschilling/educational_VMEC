@@ -126,7 +126,7 @@
 <!-- Node13 -->
 <g id="node13" class="node">
 <title>Node13</title>
-<g id="a_node13"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="199,-418.5 199,-437.5 247,-437.5 247,-418.5 199,-418.5"/>
 <text text-anchor="middle" x="223" y="-425.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
 </a>
@@ -141,7 +141,7 @@
 <!-- Node19 -->
 <g id="node19" class="node">
 <title>Node19</title>
-<g id="a_node19"><a xlink:href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" target="_top" xlink:title=" ">
+<g id="a_node19"><a xlink:href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" target="_top" xlink:title="Save current or restore previous good state vector and reduce time step.">
 <polygon fill="white" stroke="black" points="191.5,-380.5 191.5,-399.5 254.5,-399.5 254.5,-380.5 191.5,-380.5"/>
 <text text-anchor="middle" x="223" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">restart_iter</text>
 </a>
@@ -156,7 +156,7 @@
 <!-- Node20 -->
 <g id="node20" class="node">
 <title>Node20</title>
-<g id="a_node20"><a xlink:href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" target="_top" xlink:title=" ">
+<g id="a_node20"><a xlink:href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" target="_top" xlink:title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed.">
 <polygon fill="white" stroke="black" points="195,-342.5 195,-361.5 251,-361.5 251,-342.5 195,-342.5"/>
 <text text-anchor="middle" x="223" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">symforce</text>
 </a>
@@ -171,7 +171,7 @@
 <!-- Node21 -->
 <g id="node21" class="node">
 <title>Node21</title>
-<g id="a_node21"><a xlink:href="../../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" target="_top" xlink:title=" ">
+<g id="a_node21"><a xlink:href="../../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" target="_top" xlink:title="Symmetrize , &#160;and .">
 <polygon fill="white" stroke="black" points="201,-304.5 201,-323.5 245,-323.5 245,-304.5 201,-304.5"/>
 <text text-anchor="middle" x="223" y="-311.5" font-family="Helvetica,sans-Serif" font-size="10.00">symrzl</text>
 </a>
@@ -186,7 +186,7 @@
 <!-- Node22 -->
 <g id="node22" class="node">
 <title>Node22</title>
-<g id="a_node22"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" target="_top" xlink:title=" ">
+<g id="a_node22"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" target="_top" xlink:title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space.">
 <polygon fill="white" stroke="black" points="196,-266.5 196,-285.5 250,-285.5 250,-266.5 196,-266.5"/>
 <text text-anchor="middle" x="223" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnspa</text>
 </a>
@@ -201,7 +201,7 @@
 <!-- Node23 -->
 <g id="node23" class="node">
 <title>Node23</title>
-<g id="a_node23"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" target="_top" xlink:title=" ">
+<g id="a_node23"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" target="_top" xlink:title="Fourier&#45;transform symmetric forces from real space to Fourier space.">
 <polygon fill="white" stroke="black" points="196,-228.5 196,-247.5 250,-247.5 250,-228.5 196,-228.5"/>
 <text text-anchor="middle" x="223" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnsps</text>
 </a>
@@ -216,7 +216,7 @@
 <!-- Node24 -->
 <g id="node24" class="node">
 <title>Node24</title>
-<g id="a_node24"><a xlink:href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" target="_top" xlink:title=" ">
+<g id="a_node24"><a xlink:href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space.">
 <polygon fill="white" stroke="black" points="199,-190.5 199,-209.5 247,-209.5 247,-190.5 199,-190.5"/>
 <text text-anchor="middle" x="223" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzspa</text>
 </a>
@@ -231,7 +231,7 @@
 <!-- Node26 -->
 <g id="node26" class="node">
 <title>Node26</title>
-<g id="a_node26"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title=" ">
+<g id="a_node26"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space.">
 <polygon fill="white" stroke="black" points="199,-152.5 199,-171.5 247,-171.5 247,-152.5 199,-152.5"/>
 <text text-anchor="middle" x="223" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzsps</text>
 </a>
@@ -246,7 +246,7 @@
 <!-- Node28 -->
 <g id="node28" class="node">
 <title>Node28</title>
-<g id="a_node28"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title=" ">
+<g id="a_node28"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title="Compute the vacuum contribution to the free&#45;boundary energy functional.">
 <polygon fill="white" stroke="black" points="197.5,-114.5 197.5,-133.5 248.5,-133.5 248.5,-114.5 197.5,-114.5"/>
 <text text-anchor="middle" x="223" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">vacuum</text>
 </a>
@@ -352,7 +352,7 @@
 <!-- Node14 -->
 <g id="node14" class="node">
 <title>Node14</title>
-<g id="a_node14"><a xlink:href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c" target="_top" xlink:title=" ">
+<g id="a_node14"><a xlink:href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c" target="_top" xlink:title="Compute internal gr , gz required for &#160;constraint.">
 <polygon fill="white" stroke="black" points="317,-475.5 317,-494.5 392,-494.5 392,-475.5 317,-475.5"/>
 <text text-anchor="middle" x="354.5" y="-482.5" font-family="Helvetica,sans-Serif" font-size="10.00">constrain_m1</text>
 </a>
@@ -382,7 +382,7 @@
 <!-- Node16 -->
 <g id="node16" class="node">
 <title>Node16</title>
-<g id="a_node16"><a xlink:href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" target="_top" xlink:title=" ">
+<g id="a_node16"><a xlink:href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" target="_top" xlink:title="Compute internal gr , gz required for &#160;constraint.">
 <polygon fill="white" stroke="black" points="325,-399.5 325,-418.5 384,-418.5 384,-399.5 325,-399.5"/>
 <text text-anchor="middle" x="354.5" y="-406.5" font-family="Helvetica,sans-Serif" font-size="10.00">scale_m1</text>
 </a>
@@ -397,7 +397,7 @@
 <!-- Node17 -->
 <g id="node17" class="node">
 <title>Node17</title>
-<g id="a_node17"><a xlink:href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" target="_top" xlink:title=" ">
+<g id="a_node17"><a xlink:href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" target="_top" xlink:title="Build forces from different contributions.">
 <polygon fill="white" stroke="black" points="331.5,-361.5 331.5,-380.5 377.5,-380.5 377.5,-361.5 331.5,-361.5"/>
 <text text-anchor="middle" x="354.5" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalfor</text>
 </a>
@@ -412,7 +412,7 @@
 <!-- Node18 -->
 <g id="node18" class="node">
 <title>Node18</title>
-<g id="a_node18"><a xlink:href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" target="_top" xlink:title=" ">
+<g id="a_node18"><a xlink:href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" target="_top" xlink:title="Solve a tridiagonal system of equations.">
 <polygon fill="white" stroke="black" points="429.5,-361.5 429.5,-380.5 472.5,-380.5 472.5,-361.5 429.5,-361.5"/>
 <text text-anchor="middle" x="451" y="-368.5" font-family="Helvetica,sans-Serif" font-size="10.00">tridslv</text>
 </a>
@@ -427,7 +427,7 @@
 <!-- Node25 -->
 <g id="node25" class="node">
 <title>Node25</title>
-<g id="a_node25"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title=" ">
+<g id="a_node25"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form.">
 <polygon fill="white" stroke="black" points="316,-228.5 316,-247.5 393,-247.5 393,-228.5 316,-228.5"/>
 <text text-anchor="middle" x="354.5" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_asym</text>
 </a>
@@ -442,7 +442,7 @@
 <!-- Node27 -->
 <g id="node27" class="node">
 <title>Node27</title>
-<g id="a_node27"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title=" ">
+<g id="a_node27"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
 <polygon fill="white" stroke="black" points="318.5,-190.5 318.5,-209.5 390.5,-209.5 390.5,-190.5 318.5,-190.5"/>
 <text text-anchor="middle" x="354.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>
@@ -457,7 +457,7 @@
 <!-- Node29 -->
 <g id="node29" class="node">
 <title>Node29</title>
-<g id="a_node29"><a xlink:href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" target="_top" xlink:title=" ">
+<g id="a_node29"><a xlink:href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" target="_top" xlink:title="Compute the total magnetic field due to external coils and the net toroidal plasma current.">
 <polygon fill="white" stroke="black" points="330.5,-152.5 330.5,-171.5 378.5,-171.5 378.5,-152.5 330.5,-152.5"/>
 <text text-anchor="middle" x="354.5" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextern</text>
 </a>
@@ -472,7 +472,7 @@
 <!-- Node32 -->
 <g id="node32" class="node">
 <title>Node32</title>
-<g id="a_node32"><a xlink:href="../../dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" target="_top" xlink:title=" ">
+<g id="a_node32"><a xlink:href="../../dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" target="_top" xlink:title="Pre&#45;compute constant terms required for NESTOR.">
 <polygon fill="white" stroke="black" points="333,-114.5 333,-133.5 376,-133.5 376,-114.5 333,-114.5"/>
 <text text-anchor="middle" x="354.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">precal</text>
 </a>
@@ -487,7 +487,7 @@
 <!-- Node33 -->
 <g id="node33" class="node">
 <title>Node33</title>
-<g id="a_node33"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title=" ">
+<g id="a_node33"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title="Compute all required terms for solving for the scalar magnetic potential.">
 <polygon fill="white" stroke="black" points="330.5,-76.5 330.5,-95.5 378.5,-95.5 378.5,-76.5 330.5,-76.5"/>
 <text text-anchor="middle" x="354.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalpot</text>
 </a>
@@ -502,7 +502,7 @@
 <!-- Node40 -->
 <g id="node40" class="node">
 <title>Node40</title>
-<g id="a_node40"><a xlink:href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" target="_top" xlink:title=" ">
+<g id="a_node40"><a xlink:href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" target="_top" xlink:title="Solve a linear system of equations using dgesv.">
 <polygon fill="white" stroke="black" points="333,-38.5 333,-57.5 376,-57.5 376,-38.5 333,-38.5"/>
 <text text-anchor="middle" x="354.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">solver</text>
 </a>
@@ -517,7 +517,7 @@
 <!-- Node41 -->
 <g id="node41" class="node">
 <title>Node41</title>
-<g id="a_node41"><a xlink:href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" target="_top" xlink:title=" ">
+<g id="a_node41"><a xlink:href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" target="_top" xlink:title="Evaluate the geometry of the LCFS and tangential derivatives.">
 <polygon fill="white" stroke="black" points="330,-0.5 330,-19.5 379,-19.5 379,-0.5 330,-0.5"/>
 <text text-anchor="middle" x="354.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">surface</text>
 </a>
@@ -532,7 +532,7 @@
 <!-- Node30 -->
 <g id="node30" class="node">
 <title>Node30</title>
-<g id="a_node30"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title=" ">
+<g id="a_node30"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol...">
 <polygon fill="white" stroke="black" points="430,-190.5 430,-209.5 472,-209.5 472,-190.5 430,-190.5"/>
 <text text-anchor="middle" x="451" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">becoil</text>
 </a>
@@ -547,7 +547,7 @@
 <!-- Node31 -->
 <g id="node31" class="node">
 <title>Node31</title>
-<g id="a_node31"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title=" ">
+<g id="a_node31"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.">
 <polygon fill="white" stroke="black" points="430,-152.5 430,-171.5 472,-171.5 472,-152.5 430,-152.5"/>
 <text text-anchor="middle" x="451" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">belicu</text>
 </a>
@@ -562,7 +562,7 @@
 <!-- Node34 -->
 <g id="node34" class="node">
 <title>Node34</title>
-<g id="a_node34"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title=" ">
+<g id="a_node34"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions.">
 <polygon fill="white" stroke="black" points="430,-114.5 430,-133.5 472,-133.5 472,-114.5 430,-114.5"/>
 <text text-anchor="middle" x="451" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">analyt</text>
 </a>
@@ -577,7 +577,7 @@
 <!-- Node37 -->
 <g id="node37" class="node">
 <title>Node37</title>
-<g id="a_node37"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title=" ">
+<g id="a_node37"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title="Compute Fourier integrals and build amatrix.">
 <polygon fill="white" stroke="black" points="433.5,-76.5 433.5,-95.5 468.5,-95.5 468.5,-76.5 433.5,-76.5"/>
 <text text-anchor="middle" x="451" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">fouri</text>
 </a>
@@ -592,7 +592,7 @@
 <!-- Node38 -->
 <g id="node38" class="node">
 <title>Node38</title>
-<g id="a_node38"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title=" ">
+<g id="a_node38"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title="Perform Fourier integrals of Green&#39;s function kernel.">
 <polygon fill="white" stroke="black" points="432,-38.5 432,-57.5 470,-57.5 470,-38.5 432,-38.5"/>
 <text text-anchor="middle" x="451" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">fourp</text>
 </a>
@@ -607,7 +607,7 @@
 <!-- Node39 -->
 <g id="node39" class="node">
 <title>Node39</title>
-<g id="a_node39"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title=" ">
+<g id="a_node39"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title="Compute the regularized evaluation of the Green&#39;s function and the source term.">
 <polygon fill="white" stroke="black" points="429,-0.5 429,-19.5 473,-19.5 473,-0.5 429,-0.5"/>
 <text text-anchor="middle" x="451" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">greenf</text>
 </a>
@@ -622,7 +622,7 @@
 <!-- Node35 -->
 <g id="node35" class="node">
 <title>Node35</title>
-<g id="a_node35"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title=" ">
+<g id="a_node35"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin...">
 <polygon fill="white" stroke="black" points="511.5,-133.5 511.5,-152.5 569.5,-152.5 569.5,-133.5 511.5,-133.5"/>
 <text text-anchor="middle" x="540.5" y="-140.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum</text>
 </a>
@@ -637,7 +637,7 @@
 <!-- Node36 -->
 <g id="node36" class="node">
 <title>Node36</title>
-<g id="a_node36"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title=" ">
+<g id="a_node36"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si...">
 <polygon fill="white" stroke="black" points="509,-95.5 509,-114.5 572,-114.5 572,-95.5 509,-95.5"/>
 <text text-anchor="middle" x="540.5" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum2</text>
 </a>

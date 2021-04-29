@@ -115,14 +115,22 @@ $(document).ready(function(){initNavTree('d7/d39/solver_8f90.html','../../'); in
 </div><!--header-->
 <div class="contents">
 
+<p>Solve a linear system of equations using <code>dgesv</code>.  
+<a href="#details">More...</a></p>
+
 <p><a href="../../d7/d39/solver_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a1e815013ed24a9dddc80410103f4a220"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a> (amat, b, m, nrhs, info)</td></tr>
+<tr class="memdesc:a1e815013ed24a9dddc80410103f4a220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system of equations using <code>dgesv</code>.  <a href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">More...</a><br /></td></tr>
 <tr class="separator:a1e815013ed24a9dddc80410103f4a220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Solve a linear system of equations using <code>dgesv</code>. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d7/d39/solver_8f90_source.html">solver.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a1e815013ed24a9dddc80410103f4a220"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e815013ed24a9dddc80410103f4a220">&#9670;&nbsp;</a></span>solver()</h2>
 
@@ -167,9 +175,21 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d39/solver_8f90_source.html#l00002">2</a> of file <a class="el" href="../../d7/d39/solver_8f90_source.html">solver.f90</a>.</p>
+<p>Solve a linear system of equations using <code>dgesv</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amat</td><td>coefficient matrix, size (m x m) </td></tr>
+    <tr><td class="paramname">b</td><td>right-hand side(s), size (m x nrhs) </td></tr>
+    <tr><td class="paramname">m</td><td>number of free parameters (=number of rows, cols in amat) </td></tr>
+    <tr><td class="paramname">nrhs</td><td>number of right-hand sides to solve simultaneously </td></tr>
+    <tr><td class="paramname">info</td><td>error flag </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, and <a class="el" href="../../dd/d6d/vacuum_8f90_source.html#l00006">vacuum()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d39/solver_8f90_source.html#l00011">11</a> of file <a class="el" href="../../d7/d39/solver_8f90_source.html">solver.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, and <a class="el" href="../../dd/d6d/vacuum_8f90_source.html#l00027">vacuum()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -185,7 +205,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d39/solver_8f90.html">solver.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 29 2021 11:22:46 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

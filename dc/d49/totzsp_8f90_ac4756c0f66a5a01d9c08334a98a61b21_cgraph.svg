@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 48,-19.5 48,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="24" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzsps</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
 <polygon fill="white" stroke="black" points="84,-0.5 84,-19.5 156,-19.5 156,-0.5 84,-0.5"/>
 <text text-anchor="middle" x="120" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>

@@ -113,51 +113,54 @@ $(document).ready(function(){initNavTree('d5/d6e/restart__iter_8f90_source.html'
 </div><!--header-->
 <div class="contents">
 <a href="../../d5/d6e/restart__iter_8f90.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">    2</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a>(time_step)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d9/d3c/namespacexstuff.html">xstuff</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">intent(inout)</span> :: time_step</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">    7</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a>(time_step)</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: c1p03 = 1.03_dp</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: cp90  = 0.90_dp</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d9/d3c/namespacexstuff.html">xstuff</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordflow">SELECT CASE</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordflow">CASE</span> (2:3)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;     <span class="comment">! restore previous good state</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = zero</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">intent(inout)</span> :: time_step</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: c1p03 = 1.03_dp</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: cp90  = 0.90_dp</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;     <span class="comment">! ---- reduce time step ----</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;     <span class="comment">! this is only executed when irst ==2 or ==3</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;     <span class="comment">! first case: irst == 2:</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="comment">!  =&gt; irst-2 == 0</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     <span class="comment">!  =&gt; 3-irst == 1</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step *= 0.9  (reduce time step)</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;     <span class="comment">! second case: irst == 3:</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="comment">!  =&gt; irst-2 == 1</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     <span class="comment">!  =&gt; 3-irst == 0</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step /= 1.03 (reduce time step)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     time_step = time_step*(  (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>-2)/c1p03  &amp;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                            + (3-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>)*cp90  )</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a> .eq. 2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> + 1</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a> = 1</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordflow">SELECT CASE</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">CASE</span> (2:3)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="comment">! restore previous good state</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = zero</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="comment">! ---- reduce time step ----</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     <span class="comment">! this is only executed when irst ==2 or ==3</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     <span class="comment">! first case: irst == 2:</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     <span class="comment">!  =&gt; irst-2 == 0</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     <span class="comment">!  =&gt; 3-irst == 1</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step *= 0.9  (reduce time step)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     <span class="comment">! second case: irst == 3:</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <span class="comment">!  =&gt; irst-2 == 1</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     <span class="comment">!  =&gt; 3-irst == 0</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step /= 1.03 (reduce time step)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;     time_step = time_step*(  (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>-2)/c1p03  &amp;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                            + (3-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a>)*cp90  )</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordflow">  CASE DEFAULT</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="comment">! save current state vector</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordflow">  END SELECT</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a> .eq. 2) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> + 1</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a> = 1</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordflow">  CASE DEFAULT</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;     <span class="comment">! save current state vector</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordflow">  END SELECT</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_a3ef2c519ce424159dd2c7d44a00c463c"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">vmec_main::iter1</a></div><div class="ttdeci">integer iter1</div><div class="ttdoc">number of iterations at which the currently active evolution was branched off from</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00155">vmec_main.f90:155</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_a62454a545665bf5259ef3bc2882c02eb"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">vmec_main::neqs</a></div><div class="ttdeci">integer neqs</div><div class="ttdoc">total number of equations to evolve (size of xc)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00148">vmec_main.f90:148</a></div></div>
@@ -168,14 +171,14 @@ $(document).ready(function(){initNavTree('d5/d6e/restart__iter_8f90_source.html'
 <div class="ttc" id="anamespacexstuff_html_a3f67cbc56e41aa2c8c8bf6a0561b0200"><div class="ttname"><a href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xstuff::xc</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable, target xc</div><div class="ttdoc">stacked array of scaled R, Z, Lambda Fourier coefficients (see above for stack order)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dad/xstuff_8f90_source.html#l00042">xstuff.f90:42</a></div></div>
 <div class="ttc" id="anamespacexstuff_html_aed89eab9268cb164541a7843aea332b6"><div class="ttname"><a href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xstuff::xcdot</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable xcdot</div><div class="ttdoc">&quot;velocity&quot;: change of Fourier coefficients per time step</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dad/xstuff_8f90_source.html#l00045">xstuff.f90:45</a></div></div>
 <div class="ttc" id="anamespacexstuff_html_af42b26fc040939348c5d6e2c20cfba3b"><div class="ttname"><a href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstuff::xstore</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable xstore</div><div class="ttdoc">backup copy of last-known-good xc</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dad/xstuff_8f90_source.html#l00050">xstuff.f90:50</a></div></div>
-<div class="ttc" id="arestart__iter_8f90_html_ace7df67e039f0ebf69200f91d3cb16cc"><div class="ttname"><a href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div><div class="ttdeci">subroutine restart_iter(time_step)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d6e/restart__iter_8f90_source.html#l00002">restart_iter.f90:3</a></div></div>
+<div class="ttc" id="arestart__iter_8f90_html_ace7df67e039f0ebf69200f91d3cb16cc"><div class="ttname"><a href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div><div class="ttdeci">subroutine restart_iter(time_step)</div><div class="ttdoc">Save current or restore previous good state vector and reduce time step.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d6e/restart__iter_8f90_source.html#l00007">restart_iter.f90:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/d6e/restart__iter_8f90.html">restart_iter.f90</a></li>
-    <li class="footer">Generated on Wed Apr 28 2021 15:44:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Apr 29 2021 11:22:45 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

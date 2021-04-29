@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
 <polygon fill="#bfbfbf" stroke="black" points="426,-38.5 426,-57.5 498,-57.5 498,-38.5 426,-38.5"/>
 <text text-anchor="middle" x="462" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" target="_top" xlink:title="Compute the spectral width of the surface geometry Fourier coefficients.">
 <polygon fill="white" stroke="black" points="333,-76.5 333,-95.5 390,-95.5 390,-76.5 333,-76.5"/>
 <text text-anchor="middle" x="361.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">spectrum</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space.">
 <polygon fill="white" stroke="black" points="337.5,-38.5 337.5,-57.5 385.5,-57.5 385.5,-38.5 337.5,-38.5"/>
 <text text-anchor="middle" x="361.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzsps</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node10 -->
 <g id="node10" class="node">
 <title>Node10</title>
-<g id="a_node10"><a xlink:href="../../de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="../../de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" target="_top" xlink:title="Write the output files of VMEC.">
 <polygon fill="white" stroke="black" points="252,-0.5 252,-19.5 293,-19.5 293,-0.5 252,-0.5"/>
 <text text-anchor="middle" x="272.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">wrout</text>
 </a>

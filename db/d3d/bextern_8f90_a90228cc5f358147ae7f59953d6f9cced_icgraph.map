@@ -1,6 +1,6 @@
 <map id="bextern" name="bextern">
-<area shape="rect" id="node1" title=" " alt="" coords="560,56,624,83"/>
-<area shape="rect" id="node2" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title=" " alt="" coords="444,56,512,83"/>
+<area shape="rect" id="node1" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="560,56,624,83"/>
+<area shape="rect" id="node2" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="444,56,512,83"/>
 <area shape="rect" id="node3" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="331,31,396,57"/>
 <area shape="rect" id="node8" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="334,81,393,108"/>
 <area shape="rect" id="node4" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="223,5,283,32"/>

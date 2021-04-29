@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute the regularized evaluation of the Green&#39;s function and the source term.">
 <polygon fill="#bfbfbf" stroke="black" points="500,-19.5 500,-38.5 544,-38.5 544,-19.5 500,-19.5"/>
 <text text-anchor="middle" x="522" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">greenf</text>
 </a>
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title="Compute all required terms for solving for the scalar magnetic potential.">
 <polygon fill="white" stroke="black" points="416,-19.5 416,-38.5 464,-38.5 464,-19.5 416,-19.5"/>
 <text text-anchor="middle" x="440" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalpot</text>
 </a>
@@ -82,7 +82,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title="Compute the vacuum contribution to the free&#45;boundary energy functional.">
 <polygon fill="white" stroke="black" points="329,-19.5 329,-38.5 380,-38.5 380,-19.5 329,-19.5"/>
 <text text-anchor="middle" x="354.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vacuum</text>
 </a>

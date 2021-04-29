@@ -1,5 +1,5 @@
 <map id="symforce" name="symforce">
-<area shape="rect" id="node1" title=" " alt="" coords="444,31,519,57"/>
+<area shape="rect" id="node1" title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed." alt="" coords="444,31,519,57"/>
 <area shape="rect" id="node2" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="331,31,396,57"/>
 <area shape="rect" id="node3" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="223,5,283,32"/>
 <area shape="rect" id="node6" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="113,56,169,83"/>

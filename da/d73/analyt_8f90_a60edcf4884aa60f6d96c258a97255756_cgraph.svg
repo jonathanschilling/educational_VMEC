@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 42,-38.5 42,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="21" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">analyt</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin...">
 <polygon fill="white" stroke="black" points="80.5,-38.5 80.5,-57.5 138.5,-57.5 138.5,-38.5 80.5,-38.5"/>
 <text text-anchor="middle" x="109.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si...">
 <polygon fill="white" stroke="black" points="78,-0.5 78,-19.5 141,-19.5 141,-0.5 78,-0.5"/>
 <text text-anchor="middle" x="109.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum2</text>
 </a>

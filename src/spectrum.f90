@@ -27,8 +27,8 @@ SUBROUTINE spectrum(rmn, zmn)
          DO js = 2,ns
             t1(js) =(rmn(js,n,m,ntype)**2 + zmn(js,n,m,ntype)**2)*scale_fac
          END DO
-         dnumer(2:ns) = dnumer(2:ns) + t1(2:ns)*xmpq(m,3)
-         denom (2:ns) = denom (2:ns) + t1(2:ns)*xmpq(m,2)
+         dnumer(2:ns) = dnumer(2:ns) + t1(2:ns)*xmpq(m,3) ! xmpq(m,3) = m**(pexp+1) ! pexp=4
+         denom (2:ns) = denom (2:ns) + t1(2:ns)*xmpq(m,2) ! xmpq(m,2) = m**pexp     ! => p=4, q=1
       END DO
     END DO
   ENDDO

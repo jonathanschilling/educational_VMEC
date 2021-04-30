@@ -24,6 +24,8 @@ SUBROUTINE printout(i0, delt0, w0)
 
   betav = wp/wb
   w = w0*twopi*twopi
+
+  ! evaluate spectral width
   den = zero
   specw(1) = one
 
@@ -33,6 +35,8 @@ SUBROUTINE printout(i0, delt0, w0)
   den = SUM(vp(2:ns))
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))
   avm = 0.5_dp*avm/den
+
+
   IF (ivac .ge. 1 .and. iter2.gt.1) then
      delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
   end if

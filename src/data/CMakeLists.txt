@@ -1,8 +1,8 @@
 
 list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/realspace.f90
-	${CMAKE_CURRENT_SOURCE_DIR}/stel_constants.f
-	${CMAKE_CURRENT_SOURCE_DIR}/stel_kinds.f
+	${CMAKE_CURRENT_SOURCE_DIR}/stel_constants.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/stel_kinds.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/vforces.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/vmec_dim.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/vmec_input.f90

@@ -1,7 +1,8 @@
 <map id="vacmod0::set_nestor_sizes" name="vacmod0::set_nestor_sizes">
-<area shape="rect" id="node1" title=" " alt="" coords="351,23,493,65"/>
-<area shape="rect" id="node2" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="229,5,287,32"/>
-<area shape="rect" id="node3" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="213,56,303,83"/>
-<area shape="rect" id="node4" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="108,56,165,83"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,56,60,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="459,23,601,65"/>
+<area shape="rect" id="node2" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="337,5,395,32"/>
+<area shape="rect" id="node3" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="321,56,411,83"/>
+<area shape="rect" id="node4" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,56,273,83"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,56,168,83"/>
+<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,56,65,83"/>
 </map>

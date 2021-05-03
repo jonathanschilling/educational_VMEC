@@ -1,8 +1,9 @@
 <map id="read_nestor_outputs" name="read_nestor_outputs">
-<area shape="rect" id="node1" title=" " alt="" coords="444,31,584,57"/>
-<area shape="rect" id="node2" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="331,31,396,57"/>
-<area shape="rect" id="node3" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="223,5,283,32"/>
-<area shape="rect" id="node6" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="113,56,169,83"/>
-<area shape="rect" id="node4" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="108,5,175,32"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node1" title=" " alt="" coords="552,31,692,57"/>
+<area shape="rect" id="node2" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="439,31,504,57"/>
+<area shape="rect" id="node3" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="331,5,391,32"/>
+<area shape="rect" id="node7" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="221,56,277,83"/>
+<area shape="rect" id="node4" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="216,5,283,32"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,168,57"/>
+<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,57"/>
 </map>

@@ -1,5 +1,6 @@
 <map id="allocate_nunv" name="allocate_nunv">
-<area shape="rect" id="node1" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="213,5,316,32"/>
-<area shape="rect" id="node2" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="108,5,165,32"/>
-<area shape="rect" id="node3" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="321,5,424,32"/>
+<area shape="rect" id="node2" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,5,273,32"/>
+<area shape="rect" id="node3" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,168,32"/>
+<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,32"/>
 </map>

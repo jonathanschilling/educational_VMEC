@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 525;
+var viewWidth = 606;
 var viewHeight = 47;
 var sectionId = 'dynsection-0';
 </script>
@@ -54,13 +54,13 @@ var sectionId = 'dynsection-0';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>free_mem_funct3d</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-43 521,-43 521,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-43 602,-43 602,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title="Free memory required by funct3d()">
-<polygon fill="#bfbfbf" stroke="black" points="419,-0.5 419,-19.5 517,-19.5 517,-0.5 419,-0.5"/>
-<text text-anchor="middle" x="468" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">free_mem_funct3d</text>
+<polygon fill="#bfbfbf" stroke="black" points="500,-0.5 500,-19.5 598,-19.5 598,-0.5 500,-0.5"/>
+<text text-anchor="middle" x="549" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">free_mem_funct3d</text>
 </a>
 </g>
 </g>
@@ -68,67 +68,82 @@ var sectionId = 'dynsection-0';
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="../../d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" target="_top" xlink:title="allocate arrays required in funct3d()">
-<polygon fill="white" stroke="black" points="295,-19.5 295,-38.5 383,-38.5 383,-19.5 295,-19.5"/>
-<text text-anchor="middle" x="339" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">allocate_funct3d</text>
+<polygon fill="white" stroke="black" points="376,-19.5 376,-38.5 464,-38.5 464,-19.5 376,-19.5"/>
+<text text-anchor="middle" x="420" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">allocate_funct3d</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M408.89,-18.69C400.2,-19.99 391.38,-21.31 383.07,-22.56"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="409.61,-22.12 418.99,-17.18 408.58,-15.2 409.61,-22.12"/>
+<path fill="none" stroke="midnightblue" d="M489.89,-18.69C481.2,-19.99 472.38,-21.31 464.07,-22.56"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="490.61,-22.12 499.99,-17.18 489.58,-15.2 490.61,-22.12"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" target="_top" xlink:title="Main driver for VMEC.">
-<polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 41,-19.5 41,-0.5 0,-0.5"/>
-<text text-anchor="middle" x="20.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
+<polygon fill="white" stroke="black" points="81,-0.5 81,-19.5 122,-19.5 122,-0.5 81,-0.5"/>
+<text text-anchor="middle" x="101.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node5 -->
-<g id="edge5" class="edge">
+<g id="edge6" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M408.88,-10C308.07,-10 105.41,-10 41.37,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="408.9,-13.5 418.9,-10 408.9,-6.5 408.9,-13.5"/>
+<path fill="none" stroke="midnightblue" d="M489.88,-10C389.07,-10 186.41,-10 122.37,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="489.9,-13.5 499.9,-10 489.9,-6.5 489.9,-13.5"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" target="_top" xlink:title="allocate arrays depending on the number of flux surfaces ns">
-<polygon fill="white" stroke="black" points="193,-19.5 193,-38.5 259,-38.5 259,-19.5 193,-19.5"/>
-<text text-anchor="middle" x="226" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">allocate_ns</text>
+<polygon fill="white" stroke="black" points="274,-19.5 274,-38.5 340,-38.5 340,-19.5 274,-19.5"/>
+<text text-anchor="middle" x="307" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">allocate_ns</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M284.67,-29C275.99,-29 267.25,-29 259.29,-29"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="284.77,-32.5 294.77,-29 284.77,-25.5 284.77,-32.5"/>
+<path fill="none" stroke="midnightblue" d="M365.67,-29C356.99,-29 348.25,-29 340.29,-29"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="365.77,-32.5 375.77,-29 365.77,-25.5 365.77,-32.5"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" target="_top" xlink:title="Allocates memory for radial arrays and initializes radial profiles.">
-<polygon fill="white" stroke="black" points="77,-19.5 77,-38.5 157,-38.5 157,-19.5 77,-19.5"/>
-<text text-anchor="middle" x="117" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">initialize_radial</text>
+<polygon fill="white" stroke="black" points="158,-19.5 158,-38.5 238,-38.5 238,-19.5 158,-19.5"/>
+<text text-anchor="middle" x="198" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">initialize_radial</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M182.87,-29C174.43,-29 165.6,-29 157.27,-29"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="182.9,-32.5 192.9,-29 182.9,-25.5 182.9,-32.5"/>
+<path fill="none" stroke="midnightblue" d="M263.87,-29C255.43,-29 246.6,-29 238.27,-29"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="263.9,-32.5 273.9,-29 263.9,-25.5 263.9,-32.5"/>
 </g>
 <!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M66.87,-19.12C57.75,-17.29 48.72,-15.47 41.15,-13.95"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="66.25,-22.57 76.74,-21.11 67.63,-15.7 66.25,-22.57"/>
+<path fill="none" stroke="midnightblue" d="M147.87,-19.12C138.75,-17.29 129.72,-15.47 122.15,-13.95"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="147.25,-22.57 157.74,-21.11 148.63,-15.7 147.25,-22.57"/>
+</g>
+<!-- Node6 -->
+<g id="node6" class="node">
+<title>Node6</title>
+<g id="a_node6"><a xlink:href="../../db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" target="_top" xlink:title="Main program of VMEC.">
+<polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 45,-19.5 45,-0.5 0,-0.5"/>
+<text text-anchor="middle" x="22.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">xvmec</text>
+</a>
+</g>
+</g>
+<!-- Node5&#45;&gt;Node6 -->
+<g id="edge5" class="edge">
+<title>Node5&#45;&gt;Node6</title>
+<path fill="none" stroke="midnightblue" d="M70.42,-10C61.99,-10 52.99,-10 45.16,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="70.67,-13.5 80.67,-10 70.67,-6.5 70.67,-13.5"/>
 </g>
 </g>
 </svg>

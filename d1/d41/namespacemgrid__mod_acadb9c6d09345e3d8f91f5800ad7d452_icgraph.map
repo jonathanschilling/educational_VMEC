@@ -1,8 +1,9 @@
 <map id="mgrid_mod::assign_bptrs" name="mgrid_mod::assign_bptrs">
-<area shape="rect" id="node1" title=" " alt="" coords="513,42,680,69"/>
-<area shape="rect" id="node2" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="309,42,465,69"/>
-<area shape="rect" id="node3" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="112,5,261,47"/>
-<area shape="rect" id="node5" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="158,71,215,98"/>
-<area shape="rect" id="node4" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="5,13,64,39"/>
-<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="7,71,62,98"/>
+<area shape="rect" id="node1" title=" " alt="" coords="621,42,788,69"/>
+<area shape="rect" id="node2" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="417,42,573,69"/>
+<area shape="rect" id="node3" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="220,5,369,47"/>
+<area shape="rect" id="node5" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="266,71,323,98"/>
+<area shape="rect" id="node4" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="113,13,172,39"/>
+<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="115,71,170,98"/>
+<area shape="rect" id="node7" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,71,65,98"/>
 </map>

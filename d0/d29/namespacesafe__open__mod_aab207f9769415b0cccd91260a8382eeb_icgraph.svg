@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 608;
+var viewWidth = 689;
 var viewHeight = 104;
 var sectionId = 'dynsection-0';
 </script>
@@ -54,13 +54,13 @@ var sectionId = 'dynsection-0';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>safe_open_mod::safe_open</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-100 604,-100 604,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-100 685,-100 685,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="465,-38.5 465,-57.5 600,-57.5 600,-38.5 465,-38.5"/>
-<text text-anchor="middle" x="532.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">safe_open_mod::safe_open</text>
+<polygon fill="#bfbfbf" stroke="black" points="546,-38.5 546,-57.5 681,-57.5 681,-38.5 546,-38.5"/>
+<text text-anchor="middle" x="613.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">safe_open_mod::safe_open</text>
 </a>
 </g>
 </g>
@@ -68,148 +68,163 @@ var sectionId = 'dynsection-0';
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="../../de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" target="_top" xlink:title="Evaluate the Mercier stability criterion.">
-<polygon fill="white" stroke="black" points="358.5,-76.5 358.5,-95.5 407.5,-95.5 407.5,-76.5 358.5,-76.5"/>
-<text text-anchor="middle" x="383" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">mercier</text>
+<polygon fill="white" stroke="black" points="439.5,-76.5 439.5,-95.5 488.5,-95.5 488.5,-76.5 439.5,-76.5"/>
+<text text-anchor="middle" x="464" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">mercier</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M484.41,-60.13C458.88,-66.71 428.43,-74.55 407.81,-79.87"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="485.47,-63.47 494.28,-57.59 483.72,-56.69 485.47,-63.47"/>
+<path fill="none" stroke="midnightblue" d="M565.41,-60.13C539.88,-66.71 509.43,-74.55 488.81,-79.87"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="566.47,-63.47 575.28,-57.59 564.72,-56.69 566.47,-63.47"/>
 </g>
-<!-- Node7 -->
-<g id="node7" class="node">
-<title>Node7</title>
-<g id="a_node7"><a xlink:href="../../d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" target="_top" xlink:title="Open output files.">
-<polygon fill="white" stroke="black" points="337,-38.5 337,-57.5 429,-57.5 429,-38.5 337,-38.5"/>
-<text text-anchor="middle" x="383" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">open_output_files</text>
+<!-- Node8 -->
+<g id="node8" class="node">
+<title>Node8</title>
+<g id="a_node8"><a xlink:href="../../d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" target="_top" xlink:title="Open output files.">
+<polygon fill="white" stroke="black" points="418,-38.5 418,-57.5 510,-57.5 510,-38.5 418,-38.5"/>
+<text text-anchor="middle" x="464" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">open_output_files</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node7 -->
-<g id="edge6" class="edge">
-<title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M454.46,-48C445.78,-48 437.16,-48 429.08,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="454.66,-51.5 464.66,-48 454.66,-44.5 454.66,-51.5"/>
+<!-- Node1&#45;&gt;Node8 -->
+<g id="edge7" class="edge">
+<title>Node1&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M535.46,-48C526.78,-48 518.16,-48 510.08,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="535.66,-51.5 545.66,-48 535.66,-44.5 535.66,-51.5"/>
 </g>
-<!-- Node10 -->
-<g id="node10" class="node">
-<title>Node10</title>
-<g id="a_node10"><a xlink:href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" target="_top" xlink:title="Read the INDATA namelist from a given input file.">
-<polygon fill="white" stroke="black" points="234,-0.5 234,-19.5 301,-19.5 301,-0.5 234,-0.5"/>
-<text text-anchor="middle" x="267.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">read_indata</text>
+<!-- Node11 -->
+<g id="node11" class="node">
+<title>Node11</title>
+<g id="a_node11"><a xlink:href="../../d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" target="_top" xlink:title="Read the INDATA namelist from a given input file.">
+<polygon fill="white" stroke="black" points="315,-0.5 315,-19.5 382,-19.5 382,-0.5 315,-0.5"/>
+<text text-anchor="middle" x="348.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">read_indata</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node10 -->
-<g id="edge10" class="edge">
-<title>Node1&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M473.74,-36.61C459.17,-33.93 443.54,-31.21 429,-29 384.89,-22.31 333.66,-16.6 301.17,-13.23"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="473.16,-40.06 483.64,-38.46 474.45,-33.18 473.16,-40.06"/>
+<!-- Node1&#45;&gt;Node11 -->
+<g id="edge11" class="edge">
+<title>Node1&#45;&gt;Node11</title>
+<path fill="none" stroke="midnightblue" d="M554.74,-36.61C540.17,-33.93 524.54,-31.21 510,-29 465.89,-22.31 414.66,-16.6 382.17,-13.23"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="554.16,-40.06 564.64,-38.46 555.45,-33.18 554.16,-40.06"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="../../d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" target="_top" xlink:title="Program for computing local &#160;force balance.">
-<polygon fill="white" stroke="black" points="242.5,-76.5 242.5,-95.5 292.5,-95.5 292.5,-76.5 242.5,-76.5"/>
-<text text-anchor="middle" x="267.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">jxbforce</text>
+<polygon fill="white" stroke="black" points="323.5,-76.5 323.5,-95.5 373.5,-95.5 373.5,-76.5 323.5,-76.5"/>
+<text text-anchor="middle" x="348.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">jxbforce</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M348.46,-86C330.59,-86 309.01,-86 292.77,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="348.48,-89.5 358.48,-86 348.48,-82.5 348.48,-89.5"/>
+<path fill="none" stroke="midnightblue" d="M429.46,-86C411.59,-86 390.01,-86 373.77,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="429.48,-89.5 439.48,-86 429.48,-82.5 429.48,-89.5"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="../../d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" target="_top" xlink:title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre...">
-<polygon fill="white" stroke="black" points="157.5,-76.5 157.5,-95.5 195.5,-95.5 195.5,-76.5 157.5,-76.5"/>
-<text text-anchor="middle" x="176.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">eqfor</text>
+<polygon fill="white" stroke="black" points="238.5,-76.5 238.5,-95.5 276.5,-95.5 276.5,-76.5 238.5,-76.5"/>
+<text text-anchor="middle" x="257.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">eqfor</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M232.08,-86C219.63,-86 206.07,-86 195.58,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="232.18,-89.5 242.18,-86 232.18,-82.5 232.18,-89.5"/>
+<path fill="none" stroke="midnightblue" d="M313.08,-86C300.63,-86 287.07,-86 276.58,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="313.18,-89.5 323.18,-86 313.18,-82.5 313.18,-89.5"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="../../d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" target="_top" xlink:title="Write the output files.">
-<polygon fill="white" stroke="black" points="77,-76.5 77,-95.5 119,-95.5 119,-76.5 77,-76.5"/>
-<text text-anchor="middle" x="98" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">fileout</text>
+<polygon fill="white" stroke="black" points="158,-76.5 158,-95.5 200,-95.5 200,-76.5 158,-76.5"/>
+<text text-anchor="middle" x="179" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">fileout</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M147.32,-86C137.97,-86 127.77,-86 119.15,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="147.37,-89.5 157.37,-86 147.37,-82.5 147.37,-89.5"/>
+<path fill="none" stroke="midnightblue" d="M228.32,-86C218.97,-86 208.77,-86 200.15,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="228.37,-89.5 238.37,-86 228.37,-82.5 228.37,-89.5"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" target="_top" xlink:title="Main driver for VMEC.">
-<polygon fill="white" stroke="black" points="0,-57.5 0,-76.5 41,-76.5 41,-57.5 0,-57.5"/>
-<text text-anchor="middle" x="20.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
+<polygon fill="white" stroke="black" points="81,-57.5 81,-76.5 122,-76.5 122,-57.5 81,-57.5"/>
+<text text-anchor="middle" x="101.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
 </a>
 </g>
 </g>
 <!-- Node5&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node5&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M66.91,-78.43C58.19,-76.23 48.9,-73.89 41.01,-71.91"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="66.22,-81.86 76.77,-80.91 67.92,-75.07 66.22,-81.86"/>
+<path fill="none" stroke="midnightblue" d="M147.91,-78.43C139.19,-76.23 129.9,-73.89 122.01,-71.91"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="147.22,-81.86 157.77,-80.91 148.92,-75.07 147.22,-81.86"/>
 </g>
-<!-- Node8 -->
-<g id="node8" class="node">
-<title>Node8</title>
-<g id="a_node8"><a xlink:href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" target="_top" xlink:title="Open output files and print banner message at the top.">
-<polygon fill="white" stroke="black" points="242.5,-38.5 242.5,-57.5 292.5,-57.5 292.5,-38.5 242.5,-38.5"/>
-<text text-anchor="middle" x="267.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">heading</text>
+<!-- Node7 -->
+<g id="node7" class="node">
+<title>Node7</title>
+<g id="a_node7"><a xlink:href="../../db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" target="_top" xlink:title="Main program of VMEC.">
+<polygon fill="white" stroke="black" points="0,-57.5 0,-76.5 45,-76.5 45,-57.5 0,-57.5"/>
+<text text-anchor="middle" x="22.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">xvmec</text>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node8 -->
-<g id="edge7" class="edge">
-<title>Node7&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M326.8,-48C314.8,-48 302.7,-48 292.66,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="326.82,-51.5 336.82,-48 326.82,-44.5 326.82,-51.5"/>
+<!-- Node6&#45;&gt;Node7 -->
+<g id="edge6" class="edge">
+<title>Node6&#45;&gt;Node7</title>
+<path fill="none" stroke="midnightblue" d="M70.42,-67C61.99,-67 52.99,-67 45.16,-67"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="70.67,-70.5 80.67,-67 70.67,-63.5 70.67,-70.5"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
 <title>Node9</title>
-<g id="a_node9"><a xlink:href="../../d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" target="_top" xlink:title="Read the input file.">
-<polygon fill="white" stroke="black" points="155,-38.5 155,-57.5 198,-57.5 198,-38.5 155,-38.5"/>
-<text text-anchor="middle" x="176.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">readin</text>
+<g id="a_node9"><a xlink:href="../../d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" target="_top" xlink:title="Open output files and print banner message at the top.">
+<polygon fill="white" stroke="black" points="323.5,-38.5 323.5,-57.5 373.5,-57.5 373.5,-38.5 323.5,-38.5"/>
+<text text-anchor="middle" x="348.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">heading</text>
 </a>
 </g>
 </g>
 <!-- Node8&#45;&gt;Node9 -->
 <g id="edge8" class="edge">
 <title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M232.03,-48C220.6,-48 208.23,-48 198.17,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="232.18,-51.5 242.18,-48 232.18,-44.5 232.18,-51.5"/>
+<path fill="none" stroke="midnightblue" d="M407.8,-48C395.8,-48 383.7,-48 373.66,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="407.82,-51.5 417.82,-48 407.82,-44.5 407.82,-51.5"/>
 </g>
-<!-- Node9&#45;&gt;Node6 -->
+<!-- Node10 -->
+<g id="node10" class="node">
+<title>Node10</title>
+<g id="a_node10"><a xlink:href="../../d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" target="_top" xlink:title="Read the input file.">
+<polygon fill="white" stroke="black" points="236,-38.5 236,-57.5 279,-57.5 279,-38.5 236,-38.5"/>
+<text text-anchor="middle" x="257.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">readin</text>
+</a>
+</g>
+</g>
+<!-- Node9&#45;&gt;Node10 -->
 <g id="edge9" class="edge">
-<title>Node9&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M144.57,-51.82C113.84,-55.61 67.63,-61.31 41.45,-64.54"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="145.23,-55.26 154.73,-50.56 144.38,-48.31 145.23,-55.26"/>
+<title>Node9&#45;&gt;Node10</title>
+<path fill="none" stroke="midnightblue" d="M313.03,-48C301.6,-48 289.23,-48 279.17,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="313.18,-51.5 323.18,-48 313.18,-44.5 313.18,-51.5"/>
 </g>
-<!-- Node10&#45;&gt;Node9 -->
-<g id="edge11" class="edge">
-<title>Node10&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M234.66,-23.59C222.5,-28.79 208.97,-34.56 198.12,-39.2"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="236.22,-26.73 244.04,-19.59 233.47,-20.3 236.22,-26.73"/>
+<!-- Node10&#45;&gt;Node6 -->
+<g id="edge10" class="edge">
+<title>Node10&#45;&gt;Node6</title>
+<path fill="none" stroke="midnightblue" d="M225.57,-51.82C194.84,-55.61 148.63,-61.31 122.45,-64.54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="226.23,-55.26 235.73,-50.56 225.38,-48.31 226.23,-55.26"/>
+</g>
+<!-- Node11&#45;&gt;Node10 -->
+<g id="edge12" class="edge">
+<title>Node11&#45;&gt;Node10</title>
+<path fill="none" stroke="midnightblue" d="M315.66,-23.59C303.5,-28.79 289.97,-34.56 279.12,-39.2"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="317.22,-26.73 325.04,-19.59 314.47,-20.3 317.22,-26.73"/>
 </g>
 </g>
 </svg>

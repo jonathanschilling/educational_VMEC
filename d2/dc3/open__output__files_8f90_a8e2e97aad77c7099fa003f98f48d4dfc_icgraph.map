@@ -1,6 +1,7 @@
 <map id="open_output_files" name="open_output_files">
-<area shape="rect" id="node1" title="Open output files." alt="" coords="328,5,451,32"/>
-<area shape="rect" id="node2" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="213,5,280,32"/>
-<area shape="rect" id="node3" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="108,5,165,32"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" title="Open output files." alt="" coords="436,5,559,32"/>
+<area shape="rect" id="node2" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="321,5,388,32"/>
+<area shape="rect" id="node3" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,5,273,32"/>
+<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,168,32"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,32"/>
 </map>

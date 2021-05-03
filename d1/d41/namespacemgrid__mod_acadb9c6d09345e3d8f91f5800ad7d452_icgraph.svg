@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 514;
+var viewWidth = 595;
 var viewHeight = 78;
 var sectionId = 'dynsection-0';
 </script>
@@ -54,13 +54,13 @@ var sectionId = 'dynsection-0';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>mgrid_mod::assign_bptrs</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-73.5 510,-73.5 510,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-73.5 591,-73.5 591,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="381,-22.5 381,-41.5 506,-41.5 506,-22.5 381,-22.5"/>
-<text text-anchor="middle" x="443.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">mgrid_mod::assign_bptrs</text>
+<polygon fill="#bfbfbf" stroke="black" points="462,-22.5 462,-41.5 587,-41.5 587,-22.5 462,-22.5"/>
+<text text-anchor="middle" x="524.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">mgrid_mod::assign_bptrs</text>
 </a>
 </g>
 </g>
@@ -68,77 +68,92 @@ var sectionId = 'dynsection-0';
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="../../d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="228,-22.5 228,-41.5 345,-41.5 345,-22.5 228,-22.5"/>
-<text text-anchor="middle" x="286.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">mgrid_mod::read_mgrid</text>
+<polygon fill="white" stroke="black" points="309,-22.5 309,-41.5 426,-41.5 426,-22.5 309,-22.5"/>
+<text text-anchor="middle" x="367.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">mgrid_mod::read_mgrid</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M370.52,-32C362.04,-32 353.47,-32 345.22,-32"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="370.79,-35.5 380.79,-32 370.79,-28.5 370.79,-35.5"/>
+<path fill="none" stroke="midnightblue" d="M451.52,-32C443.04,-32 434.47,-32 426.22,-32"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="451.79,-35.5 461.79,-32 451.79,-28.5 451.79,-35.5"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="../../db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="80,-39 80,-69 192,-69 192,-39 80,-39"/>
-<text text-anchor="start" x="88" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">nestor_io::read_nestor</text>
-<text text-anchor="middle" x="136" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">_inputs</text>
+<polygon fill="white" stroke="black" points="161,-39 161,-69 273,-69 273,-39 161,-39"/>
+<text text-anchor="start" x="169" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">nestor_io::read_nestor</text>
+<text text-anchor="middle" x="217" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">_inputs</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M217.66,-42.05C209.07,-43.32 200.36,-44.61 192.01,-45.85"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="218.28,-45.5 227.66,-40.57 217.26,-38.57 218.28,-45.5"/>
+<path fill="none" stroke="midnightblue" d="M298.66,-42.05C290.07,-43.32 281.36,-44.61 273.01,-45.85"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="299.28,-45.5 308.66,-40.57 298.26,-38.57 299.28,-45.5"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="../../d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" target="_top" xlink:title="Read the input file.">
-<polygon fill="white" stroke="black" points="114.5,-0.5 114.5,-19.5 157.5,-19.5 157.5,-0.5 114.5,-0.5"/>
-<text text-anchor="middle" x="136" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">readin</text>
+<polygon fill="white" stroke="black" points="195.5,-0.5 195.5,-19.5 238.5,-19.5 238.5,-0.5 195.5,-0.5"/>
+<text text-anchor="middle" x="217" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">readin</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node2&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M217.75,-21.96C196.02,-18.74 173.54,-15.41 157.83,-13.09"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="217.26,-25.43 227.66,-23.43 218.28,-18.5 217.26,-25.43"/>
+<path fill="none" stroke="midnightblue" d="M298.75,-21.96C277.02,-18.74 254.54,-15.41 238.83,-13.09"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="298.26,-25.43 308.66,-23.43 299.28,-18.5 298.26,-25.43"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="../../d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" target="_top" xlink:title="Main program of stand&#45;alone version of NESTOR.">
-<polygon fill="white" stroke="black" points="0,-44.5 0,-63.5 44,-63.5 44,-44.5 0,-44.5"/>
-<text text-anchor="middle" x="22" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">nestor</text>
+<polygon fill="white" stroke="black" points="81,-44.5 81,-63.5 125,-63.5 125,-44.5 81,-44.5"/>
+<text text-anchor="middle" x="103" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">nestor</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M69.88,-54C60.65,-54 51.75,-54 44.24,-54"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="69.98,-57.5 79.98,-54 69.98,-50.5 69.98,-57.5"/>
+<path fill="none" stroke="midnightblue" d="M150.88,-54C141.65,-54 132.75,-54 125.24,-54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="150.98,-57.5 160.98,-54 150.98,-50.5 150.98,-57.5"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" target="_top" xlink:title="Main driver for VMEC.">
-<polygon fill="white" stroke="black" points="1.5,-0.5 1.5,-19.5 42.5,-19.5 42.5,-0.5 1.5,-0.5"/>
-<text text-anchor="middle" x="22" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
+<polygon fill="white" stroke="black" points="82.5,-0.5 82.5,-19.5 123.5,-19.5 123.5,-0.5 82.5,-0.5"/>
+<text text-anchor="middle" x="103" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vmec</text>
 </a>
 </g>
 </g>
 <!-- Node5&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node5&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M104.44,-10C84.75,-10 59.74,-10 42.66,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="104.46,-13.5 114.46,-10 104.46,-6.5 104.46,-13.5"/>
+<path fill="none" stroke="midnightblue" d="M185.44,-10C165.75,-10 140.74,-10 123.66,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.46,-13.5 195.46,-10 185.46,-6.5 185.46,-13.5"/>
+</g>
+<!-- Node7 -->
+<g id="node7" class="node">
+<title>Node7</title>
+<g id="a_node7"><a xlink:href="../../db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" target="_top" xlink:title="Main program of VMEC.">
+<polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 45,-19.5 45,-0.5 0,-0.5"/>
+<text text-anchor="middle" x="22.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">xvmec</text>
+</a>
+</g>
+</g>
+<!-- Node6&#45;&gt;Node7 -->
+<g id="edge6" class="edge">
+<title>Node6&#45;&gt;Node7</title>
+<path fill="none" stroke="midnightblue" d="M72.13,-10C63.19,-10 53.55,-10 45.24,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="72.19,-13.5 82.19,-10 72.19,-6.5 72.19,-13.5"/>
 </g>
 </g>
 </svg>

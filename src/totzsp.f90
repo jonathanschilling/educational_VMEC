@@ -51,13 +51,13 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! WHEN COMPUTING HESSIAN FOR FREE BOUNDARY (rmnss, zmncs at JS=NS needed in vacuum call)
   !
   ! WHEN COMPUTING PRECONDITIONER, USE FASTER HESSIAN VERSION (totzsps_hess) INSTEAD.
-  rmncc => rzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
-  zmnsc => rzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
-  lmnsc => rzl_array(:,:,:,zsc+2*ntmax)       !!SIN(mu) COS(nv)
+  rmncc => rzl_array(:,:,:,rcc)               ! COS(mu) COS(nv)
+  zmnsc => rzl_array(:,:,:,zsc+ntmax)         ! SIN(mu) COS(nv)
+  lmnsc => rzl_array(:,:,:,zsc+2*ntmax)       ! SIN(mu) COS(nv)
   IF (lthreed) THEN
-     rmnss => rzl_array(:,:,:,rss)            !!SIN(mu) SIN(nv)
-     zmncs => rzl_array(:,:,:,zcs+ntmax)      !!COS(mu) SIN(nv)
-     lmncs => rzl_array(:,:,:,zcs+2*ntmax)    !!COS(mu) SIN(nv)
+     rmnss => rzl_array(:,:,:,rss)            ! SIN(mu) SIN(nv)
+     zmncs => rzl_array(:,:,:,zcs+ntmax)      ! COS(mu) SIN(nv)
+     lmncs => rzl_array(:,:,:,zcs+2*ntmax)    ! COS(mu) SIN(nv)
 
 ! #ifndef _HBANGLE
      CALL convert_sym (rmnss, zmncs)
@@ -74,6 +74,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   !       FOR R,Z. HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE
   !       TRI-DIAG 2D PRECONDITIONER
   rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! constant extrapolation to axis (?)
+
   ioff = LBOUND(rmncc,2)
   joff = LBOUND(rmncc,3)
 
@@ -103,7 +104,10 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         ni = n+ioff
         DO k = 1, nzeta
            l = ns*(k-1)
-           j1l = j1+l;  nsl = ns+l
+
+           j1l = j1+l
+           nsl = ns+l
+
            work1(j1l:nsl,1) = work1(j1l:nsl,1) + rmncc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,6) = work1(j1l:nsl,6) + zmnsc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,10) = work1(j1l:nsl,10) + lmnsc(j1:ns,ni,mj)*cosnv(k,n)

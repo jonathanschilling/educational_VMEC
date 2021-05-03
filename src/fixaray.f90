@@ -10,7 +10,9 @@ SUBROUTINE fixaray
 
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: two=2, pexp=4
+  REAL(rprec), PARAMETER :: two=2
+
+  REAL(rprec), PARAMETER :: pexp=4 ! for <M> spectral width screen diagnostic
 
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
@@ -94,9 +96,11 @@ SUBROUTINE fixaray
   mn = 0
   mn1 = 0
   DO m = 0, mpol1
-     xmpq(m,1) = m*(m - 1)  ! used for spectral constraint force --> m^2-m
-     xmpq(m,2) = m**pexp
-     xmpq(m,3) = m**(pexp+1)
+     xmpq(m,1) = m*(m - 1)   ! used for spectral constraint force --> m^2-m
+
+     ! xmpq(m,2:3) are ONLY used for screen diagnostic <M> !!!
+     xmpq(m,2) = m**pexp     ! m^p     with p = pexp = 4
+     xmpq(m,3) = m**(pexp+1) ! m^(p+q) with q = 1
 
      ! compute ixm == _i_nteger version of xm
      DO n = 0, ntor
@@ -147,7 +151,7 @@ SUBROUTINE fixaray
      END DO
   END DO
 
-  ! what is this?
+  ! _fac_tor for _con_straint
   faccon(0) = zero
   faccon(mpol1) = zero
   faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2

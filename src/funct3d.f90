@@ -40,7 +40,7 @@ SUBROUTINE funct3d (ier_flag)
     "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .true.
+  logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.
@@ -97,17 +97,22 @@ SUBROUTINE funct3d (ier_flag)
   ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)
   zu0(:nrzt)    = zu(:nrzt,0)   + zu(:nrzt,1)*sqrts(:nrzt)
 
-  ! COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
-  ! SCALE BY POWER OF SQRTS, RATHER THAN USE rcon0 = rcon, etc.
-  ! THIS PREVENTS A DISCONTINUITY WHEN RESTARTING FIXED BOUNDARY WITH NEW RCON0....
-  !
-  ! NOTE: IN ORDER TO MAKE INITIAL CONSTRAINT FORCES SAME FOR FREE/FIXED
-  ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
-  ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
 
 ! #ifndef _HBANGLE
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
-     ! immediately before first vacuum call (?)
+
+     print *, "rcon0 <-- (rcon * s) into volume"
+     ! iter2 == iter1 is true at start of a new multi-grid iteration
+     ! ivac .le. 0 is always true for fixed-boundary,
+     ! but only true for first iteration in free-boundary (?)
+
+     ! COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
+     ! SCALE BY POWER OF SQRTS, RATHER THAN USE rcon0 = rcon, etc.
+     ! THIS PREVENTS A DISCONTINUITY WHEN RESTARTING FIXED BOUNDARY WITH NEW RCON0....
+     !
+     ! NOTE: IN ORDER TO MAKE INITIAL CONSTRAINT FORCES SAME FOR FREE/FIXED
+     ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
+     ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
      DO l = 1, ns
         ! value of rcon(ns) is scaled into the volume proportional to s
         rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
@@ -267,7 +272,7 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
 
            ! total pressure (?) at LCFS
-           ! (gcon(l) is probably only used as a temporary variable here,
+           ! (gcon(l) is only used as a temporary variable here,
            !  since it immediately gets overwritten when entering alias())
            gcon(l)      = bsqvac(lk) + presf_ns
 

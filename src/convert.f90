@@ -36,8 +36,9 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
   INTEGER :: mn, m, n, n1
   REAL(rprec) :: t1, sign0
 
-  ! CONVERTS INTERNAL MODE REPRESENTATION TO STANDARD
-  ! FORM FOR OUTPUT (COEFFICIENTS OF COS(mu-nv), SIN(mu-nv) WITHOUT internal mscale,nscale norms)
+  ! CONVERTS INTERNAL MODE REPRESENTATION TO STANDARD FORM FOR OUTPUT
+  ! (COEFFICIENTS OF COS(mu-nv), SIN(mu-nv) WITHOUT internal mscale,nscale norms)
+
   rmncc = rcc
   rmnss = rss
   rmnsc = rsc
@@ -51,9 +52,13 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
   lmncs = zcs + 2*ntmax
   lmnss = zss + 2*ntmax
 
+  ! init to zero, since not assigned if .not. lthreed
+  zmns(1:ntor+1) = 0
+  lmns(1:ntor+1) = 0
+
   ! DO M = 0 MODES SEPARATELY (ONLY KEEP N >= 0 HERE: COS(-NV), SIN(-NV))
-  mn = 0; m = 0
-  zmns(1:ntor+1) = 0;  lmns(1:ntor+1) = 0
+  mn = 0
+  m = 0
   DO n = 0, ntor
      t1 = mscale(m)*nscale(n)
      mn = mn + 1

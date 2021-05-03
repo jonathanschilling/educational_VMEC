@@ -48,11 +48,14 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   PRINT 10, ns, mnmax, ftolv, niterv
 10 FORMAT(/'  NS = ',i4,' NO. FOURIER MODES = ',i4,' FTOLV = ',1p,e10.3,' NITER = ',i6)
 
-  ! ALLOCATE NS-DEPENDENT ARRAYS
   lreset_internal = .true.
+
+  ! check that interpolating from coarse to fine mesh
+  ! and that old solution is available
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
 
   IF (ns_old .ne. ns) then
+     ! ALLOCATE NS-DEPENDENT ARRAYS
      CALL allocate_ns(linterp, neqs_old)
 
      ! SAVE THIS FOR INTERPOLATION

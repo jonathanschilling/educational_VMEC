@@ -24,8 +24,10 @@ SUBROUTINE spectrum(rmn, zmn)
   REAL(rprec), DIMENSION(ns) :: dnumer
   REAL(rprec), DIMENSION(ns) :: denom
 
-  ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(at rsc) = .5(rsc + zcc),
-  ! R-(at zcc) = .5(rsc - zcc), TO REQUIRED rsc, zcc FORMS
+  ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES,
+  ! R+(at rsc) = .5(rsc + zcc),
+  ! R-(at zcc) = .5(rsc - zcc),
+  ! TO REQUIRED rsc, zcc FORMS
 
 ! #ifndef _HBANGLE
   IF (lthreed) CALL convert_sym  (rmn(:,:,:,rss), zmn(:,:,:,zcs))

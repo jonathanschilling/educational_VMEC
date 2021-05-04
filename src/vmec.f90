@@ -118,6 +118,7 @@ subroutine vmec
         ! if the first ns value from ns_array gave a bad jacobian
         ITERATIONS: DO igrid = 1-jacob_off, multi_ns_grid
 
+           ! retrieve settings for (ns, ftol, niter) for current multi-grid iteration
            IF (igrid .lt. 1) THEN
               ! igrid .lt. 1 can only happen when jacob_off == 1 (then igrid==0)
 

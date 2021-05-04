@@ -72,52 +72,113 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   ! COMPUTE INITIAL R AND Z FOURIER COEFFICIENTS FROM SCALED BOUNDARY VALUES
   ! AND
   ! SCALXC ARRAY (1/SQRTS FACTOR FOR ODD M VALUES)
+
+  print *, "initial guess for R_mn, Z_mn in profil3d"
+
   DO js = 1, ns
-     si = sqrts(js)*sqrts(js)
-     sm0 = one - si
+
+     si = sqrts(js)*sqrts(js) !   s(js) --> ==1 at boundary
+     sm0 = one - si           ! 1-s(js) --> ==1 at magn. axis
+
      DO ntype = 1, ntmax
         DO m = 0, mpol1
            DO n = 0, ntor
-              t1 = one/(mscale(m)*nscale(n))
 
-              mn = n + ntor1*m
-              l = js + ns*mn + (ntype - 1)*mns
+
+              !-----------------------!
+              ! compute scalxc(js, m) !
+              !-----------------------!
+              mn = n + ntor1*m ! linear index over Fourier modes
+              l = js + ns*mn + (ntype - 1)*mns ! linear index over all Fourier coefficents on all surfaces
               IF (MOD(m,2) .eq. 0) THEN
                  ! m is even
                  scalxc(l) = one
               ELSE
                  ! m is odd
 
-                 ! make sure to use at least sqrts(2)==1/(ns-1) as normalization/scaling factor, since sqrts(1)==0 (see profil1d)
-                 scalxc(l) = one/MAX(sqrts(js),sqrts(2))
+                 ! make sure to use at least sqrts(2)==1/(ns-1) as normalization/scaling factor,
+                 ! since sqrts(1)==0 (see profil1d)
+                 scalxc(l) = one/MAX(sqrts(js), sqrts(2))
               ENDIF
+
+
+
+              ! ----------------------------------------------------------!
+              ! extrapolate R_mn, Z_mn from axis and boundary into volume !
+              ! ----------------------------------------------------------!
+              t1 = one/(mscale(m)*nscale(n)) ! --> divide out mscale, nscale from user input
 
               ! Do not overwrite r,z if read in from wout file AND in free bdy mode
               ! For fixed boundary, edge values MAY have been perturbed, so must execute this loop
               IF (.not.lreset .and. lfreeb) CYCLE
 
-
               ! below code segment does the extrapolation
               ! of the boundary Fourier coefficients into the plasma volume
 
               IF (m .eq. 0) THEN
+
                  IF (.not.lreset) CYCLE        !Freeze axis if read in from wout file
-                 rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + si*(rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))
-                 zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + si*(zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))
-                 IF (js .eq. 1) THEN
-                    rold(n,ntype) = rmn(1,n,0,ntype)
-                    zold(n,ntype) = zmn(1,n,0,ntype)
-                 ENDIF
+                 ! above instruction cycles all n for m=0 --> skip axis, as said above!
+
+                 ! subtraction of the edge value of rmn, zmn is probably left-over
+                 ! from the restart feature from a previous wout file
+                 !if (abs(rmn(ns,n,m,ntype)) .ne. zero) then
+                 !  print *, "spurious remnant in rmn: ", rmn(ns,n,m,ntype)
+                 if (abs(rmn(js,n,m,ntype)) .ne. zero) then
+                   print *, "spurious remnant in rmn: ", rmn(js,n,m,ntype)
+                   stop
+                 end if
+                 !if (abs(zmn(ns,n,m,ntype)) .ne. zero) then
+                 !  print *, "spurious remnant in zmn: ", zmn(ns,n,m,ntype)
+                 if (abs(zmn(js,n,m,ntype)) .ne. zero) then
+                   print *, "spurious remnant in zmn: ", zmn(js,n,m,ntype)
+                   stop
+                 end if
+                 !rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + si*(rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))
+                 !zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + si*(zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))
+
+                 ! first contribution: boundary scaled into volume
+                 rmn(js,n,m,ntype) = si * rmn_bdy(n,m,ntype)*t1
+                 zmn(js,n,m,ntype) = si * zmn_bdy(n,m,ntype)*t1
+
+                 !IF (js .eq. 1) THEN
+                 !   ! rold, zold will be subtracted
+                 !   ! --> this zeroes out any contribution as extrapolated from the boundary ?
+                 !   ! since js=1 is handled first, this gets assigned once and is available then
+                 !   ! on the other hand, there should be nothing in here (as checked in above spurious... tests)
+                 !   ! --> ignore!
+                 !   ! --> also for js=1, there is no contribution from above, since si=0 for js=1 !
+                 !   rold(n,ntype) = rmn(1,n,0,ntype)
+                 !   zold(n,ntype) = zmn(1,n,0,ntype)
+                 !
+                 !   if (abs(rold(n,ntype)) .ne. zero) then
+                 !     print *, "remnant in rold: ", rold(n,ntype)
+                 !     stop
+                 !   end if
+                 !
+                 !   if (abs(zold(n,ntype)) .ne. zero) then
+                 !     print *, "remnant in zold: ", zold(n,ntype)
+                 !     stop
+                 !   end if
+                 !
+                 !ENDIF
+
                  IF (ntype .eq. rcc) rax1 = raxis_cc(n)
                  IF (ntype .eq. zcs) zax1 =-zaxis_cs(n)
                  IF (ntype .eq. rcs) rax1 =-raxis_cs(n)
                  IF (ntype .eq. zcc) zax1 = zaxis_cc(n)
+
+                 ! second contribution: axis scaled towards boundary
                  IF (ntype.eq.rcc .or. ntype.eq.rcs) THEN
-                    rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + sm0*(rax1*t1 - rold(n,ntype))
+                    !rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + sm0*(rax1*t1 - rold(n,ntype))
+                    rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + sm0 * rax1*t1
                  END IF
+
                  IF (ntype.eq.zcs .or. ntype.eq.zcc) THEN
-                    zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0*(zax1*t1 - zold(n,ntype))
+                    !zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0*(zax1*t1 - zold(n,ntype))
+                    zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0 * zax1*t1
                  END IF
+
               ELSE ! m != 0
                  ! TURN OFF BELOW LINES IF THIS ONE ACTIVATED
                  facj = sqrts(js)**m
@@ -128,8 +189,25 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
                  !    facj = sqrts(js)**MIN(m,3)
                  ! END IF
 
-                 rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + (rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))*facj
-                 zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + (zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))*facj
+                 ! subtraction of the edge value of rmn, zmn is probably left-over
+                 ! from the restart feature from a previous wout file
+                 !if (abs(rmn(ns,n,m,ntype)) .ne. zero) then
+                 !  print *, "spurious remnant in rmn: ", rmn(ns,n,m,ntype)
+                 if (abs(rmn(js,n,m,ntype)) .ne. zero) then
+                   print *, "spurious remnant in rmn: ", rmn(js,n,m,ntype)
+                   stop
+                 end if
+                 !if (abs(zmn(ns,n,m,ntype)) .ne. zero) then
+                 !  print *, "spurious remnant in zmn: ", zmn(ns,n,m,ntype)
+                 if (abs(zmn(js,n,m,ntype)) .ne. zero) then
+                   print *, "spurious remnant in zmn: ", zmn(js,n,m,ntype)
+                   stop
+                 end if
+                 !rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + (rmn_bdy(n,m,ntype)*t1 - rmn(ns,n,m,ntype))*facj
+                 !zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + (zmn_bdy(n,m,ntype)*t1 - zmn(ns,n,m,ntype))*facj
+
+                 rmn(js,n,m,ntype) = facj * rmn_bdy(n,m,ntype)*t1
+                 zmn(js,n,m,ntype) = facj * zmn_bdy(n,m,ntype)*t1
               ENDIF
 
            END DO
@@ -137,10 +215,10 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
      END DO
   END DO
 
-  ! copy scalxc content from R to Z-components
-  scalxc(1+irzloff:2*irzloff)   = scalxc(:irzloff)
+  ! distribute scalxc content from R to Z     components
+  scalxc(1+  irzloff:2*irzloff) = scalxc(:irzloff)
 
-  ! copy scalxc content from R to Lamda-components
+  ! distribute scalxc content from R to Lamda components
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
 
 END SUBROUTINE profil3d

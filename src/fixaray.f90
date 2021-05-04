@@ -10,7 +10,9 @@ SUBROUTINE fixaray
 
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: two=2, pexp=4
+  REAL(rprec), PARAMETER :: two=2
+
+  REAL(rprec), PARAMETER :: pexp=4 ! for <M> spectral width screen diagnostic
 
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
@@ -19,9 +21,11 @@ SUBROUTINE fixaray
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT
  ! NOTE: NEED 2 X NYQUIST FOR FAST HESSIAN CALCULATIONS
-  mnyq0  = ntheta1/2
+  mnyq0  = ntheta1/2 ! maximum mode numbers supported by grid
   nnyq0  = nzeta/2
 
+  ! make sure that mnyq, nnyq are at least twice mpol-1, ntor
+  ! or large enough to fully represent the information held in realspace (mnyq0, nnyq0)
   mnyq = MAX(0, 2*mnyq0, 2*mpol1)
   nnyq = MAX(0, 2*nnyq0, 2*ntor)
 
@@ -45,9 +49,12 @@ SUBROUTINE fixaray
   dnorm = one/(nzeta*(ntheta2-1))
   IF (lasym) dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
 
+  ! (from vmec_params)
+  ! array for norming theta-trig functions (internal use only)
+  ! so that the discrete SUM[cos(mu)*cos(m'u)] = .5 delta(m,m')
+  ! and analogously for zeta/v
   mscale(0) = 1
   nscale(0) = 1
-
   mscale(1:mnyq) = mscale(0)/osqrt2
   nscale(1:nnyq) = nscale(0)/osqrt2
 
@@ -70,6 +77,7 @@ SUBROUTINE fixaray
            ! cosmui3 was preset from cosmui above,
            ! but in previous check cosmui could have changed,
            ! so update cosmui3 again in case it matters
+           ! this is for stellarator symmetry, so lasym==.false.
            cosmui3(i,m) = cosmui(i,m)
         end if
         cosmum(i,m) = cosmu(i,m)*(m)
@@ -86,7 +94,7 @@ SUBROUTINE fixaray
         arg = argj*(n)
         cosnv(j,n) = COS(arg)*nscale(n)
         sinnv(j,n) = SIN(arg)*nscale(n)
-        cosnvn(j,n) = cosnv(j,n)*(n*nfp)
+        cosnvn(j,n) =  cosnv(j,n)*(n*nfp)
         sinnvn(j,n) = -sinnv(j,n)*(n*nfp)
      END DO
   END DO
@@ -95,13 +103,15 @@ SUBROUTINE fixaray
   mn = 0
   mn1 = 0
   DO m = 0, mpol1
-     xmpq(m,1) = m*(m - 1)  ! used for spectral constraint force --> m^2-m
-     xmpq(m,2) = m**pexp
-     xmpq(m,3) = m**(pexp+1)
+     xmpq(m,1) = m*(m - 1)   ! used for spectral constraint force --> m^2-m
+
+     ! xmpq(m,2:3) are ONLY used for screen diagnostic <M> !!!
+     xmpq(m,2) = m**pexp     ! m^p     with p = pexp = 4
+     xmpq(m,3) = m**(pexp+1) ! m^(p+q) with q = 1
 
      ! compute ixm == _i_nteger version of xm
      DO n = 0, ntor
-        jmin3(mn) = jmin2(m) ! what is this?
+        jmin3(mn) = jmin2(m) ! vmec_params: starting js(m) values for which R,Z are evolved
         mn = mn + 1
         ixm(mn) = m
      END DO
@@ -138,7 +148,10 @@ SUBROUTINE fixaray
   IF (mn1 .ne. mnmax_nyq) STOP 'mn1 != mnmax_nyq'
 
   ! cos01 and sin01 are used as trigmult for precondn in bcovar
-  mn = 0
+  ! cos01:  m*cos(m u - n v) for m=1, n=0 --> d(sin(mu))/du
+  ! sin01: -m*sin(m u - n v) for m=1, n=0 --> d(cos(mu))/du
+  ! evaluated on (ntheta3 x nzeta) grid
+  mn = 0 ! mn is re-used as linear grid index here
   m = 1
   DO i = 1, ntheta3
      argi = twopi*(i - 1)/ntheta1
@@ -149,9 +162,10 @@ SUBROUTINE fixaray
      END DO
   END DO
 
-  ! what is this?
+  ! _fac_tor for _con_straint
   faccon(0) = zero
-  faccon(mpol1) = zero
   faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
+  faccon(mpol1) = zero
+
 
 END SUBROUTINE fixaray

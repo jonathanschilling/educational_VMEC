@@ -12,41 +12,41 @@ MODULE vmec_input
   INTEGER, PARAMETER :: niter_default   = 100
   REAL(rprec), PARAMETER :: ftol_default = 1.E-10_dp
 
-  INTEGER :: nfp
-  INTEGER :: ncurr
-  INTEGER :: nstep
-  INTEGER :: nvacskip
-  INTEGER :: mpol
-  INTEGER :: ntor
-  INTEGER :: ntheta
-  INTEGER :: nzeta
-  INTEGER :: mfilter_fbdy
-  INTEGER :: nfilter_fbdy
+  INTEGER                           :: nfp
+  INTEGER                           :: ncurr
+  INTEGER                           :: nstep
+  INTEGER                           :: nvacskip
+  INTEGER                           :: mpol
+  INTEGER                           :: ntor
+  INTEGER                           :: ntheta
+  INTEGER                           :: nzeta
+  INTEGER                           :: mfilter_fbdy
+  INTEGER                           :: nfilter_fbdy
 
-  INTEGER, DIMENSION(100) :: ns_array
-  INTEGER, DIMENSION(100) :: niter_array
-  REAL(rprec), DIMENSION(100) :: ftol_array
+  INTEGER,     DIMENSION(100)       :: ns_array
+  INTEGER,     DIMENSION(100)       :: niter_array
+  REAL(rprec), DIMENSION(100)       :: ftol_array
 
   REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbc
   REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: zbs
   REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: rbs
   REAL(rprec), DIMENSION(-ntord:ntord,0:mpol1d) :: zbc
-  REAL(rprec) :: curtor
-  REAL(rprec) :: delt
-  REAL(rprec) :: tcon0
-  REAL(rprec) :: gamma
-  REAL(rprec) :: bloat
-  REAL(rprec) :: pres_scale
-  REAL(rprec) :: spres_ped !< value of s beyond which pressure profile is flat (pedestal)
-  REAL(rprec) :: phiedge   !< value of real toroidal flux at plasma edge (s=1)
-  REAL(rprec), DIMENSION(0:20) :: am !< array of coefficients in phi-series for mass (NWT/m**2)
-  REAL(rprec), DIMENSION(0:20) :: ai !< array of coefficients in phi-series for iota (ncurr=0)
-  REAL(rprec), DIMENSION(0:20) :: ac !< array of coefficients in phi-series for the quantity d(Icurv)/ds = toroidal
-                                     !< current density * Vprime, so Icurv(s) = Itor(s) (used for ncurr=1)
-  REAL(rprec), DIMENSION(1:20) :: aphi
-  CHARACTER(len=20) :: pcurr_type  !  len=12 -> len=20 J Hanson 2010-03-16
-  CHARACTER(len=20) :: piota_type
-  CHARACTER(len=20) :: pmass_type
+  REAL(rprec)                       :: curtor
+  REAL(rprec)                       :: delt
+  REAL(rprec)                       :: tcon0
+  REAL(rprec)                       :: gamma
+  REAL(rprec)                       :: bloat
+  REAL(rprec)                       :: pres_scale
+  REAL(rprec)                       :: spres_ped !< value of s beyond which pressure profile is flat (pedestal)
+  REAL(rprec)                       :: phiedge   !< value of real toroidal flux at plasma edge (s=1)
+  REAL(rprec), DIMENSION(0:20)      :: am        !< array of coefficients in phi-series for mass (NWT/m**2)
+  REAL(rprec), DIMENSION(0:20)      :: ai        !< array of coefficients in phi-series for iota (ncurr=0)
+  REAL(rprec), DIMENSION(0:20)      :: ac        !< array of coefficients in phi-series for the quantity d(Icurv)/ds = toroidal
+                                                 !< current density * Vprime, so Icurv(s) = Itor(s) (used for ncurr=1)
+  REAL(rprec), DIMENSION(1:20)      :: aphi
+  CHARACTER(len=20)                 :: pcurr_type
+  CHARACTER(len=20)                 :: piota_type
+  CHARACTER(len=20)                 :: pmass_type
   REAL(rprec), DIMENSION(ndatafmax) :: am_aux_s
   REAL(rprec), DIMENSION(ndatafmax) :: am_aux_f
   REAL(rprec), DIMENSION(ndatafmax) :: ai_aux_s
@@ -54,13 +54,13 @@ MODULE vmec_input
   REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_s
   REAL(rprec), DIMENSION(ndatafmax) :: ac_aux_f
 
-  REAL(rprec), DIMENSION(0:ntord) :: raxis_cc
-  REAL(rprec), DIMENSION(0:ntord) :: raxis_cs
-  REAL(rprec), DIMENSION(0:ntord) :: zaxis_cc
-  REAL(rprec), DIMENSION(0:ntord) :: zaxis_cs
-  REAL(rprec), DIMENSION(nigroup) :: extcur
-  LOGICAL :: lfreeb
-  LOGICAL :: lasym
+  REAL(rprec), DIMENSION(0:ntord)   :: raxis_cc
+  REAL(rprec), DIMENSION(0:ntord)   :: raxis_cs
+  REAL(rprec), DIMENSION(0:ntord)   :: zaxis_cc
+  REAL(rprec), DIMENSION(0:ntord)   :: zaxis_cs
+  REAL(rprec), DIMENSION(nigroup)   :: extcur
+  LOGICAL                           :: lfreeb
+  LOGICAL                           :: lasym
 
   ! RESET lbsubs DEFAULT FLAG TO FALSE TO CAPTURE CURRENT SHEETS!
   ! LOGICAL, PARAMETER :: lbsubs = .false. ! False to use (correct)  bsubs calculation (from metrics)
@@ -68,51 +68,115 @@ MODULE vmec_input
   ! lbsubs is now a namelist input variable, so user can change.
   ! LOGICAL, PARAMETER :: lbsubs = .true.  ! True  to use NEW bsubs calculation (from mag. diff. eq.)
   !                                        ! False to use OLD bsubs calculation (from metrics)
-  LOGICAL :: lbsubs
+  LOGICAL                           :: lbsubs
 
-  CHARACTER(len=200) :: mgrid_file
-  CHARACTER(len=100) :: input_extension
+  CHARACTER(len=200)                :: mgrid_file
+  CHARACTER(len=100)                :: input_extension
 
-  NAMELIST /indata/ mgrid_file, nfp, ncurr,                         &
-     nstep, nvacskip, delt, gamma, am, ai, ac, aphi,   &
-     pcurr_type, pmass_type, piota_type, bloat,                     &
-     am_aux_s, am_aux_f, ai_aux_s, ai_aux_f, ac_aux_s, ac_aux_f,    &
-     rbc, zbs, rbs, zbc, spres_ped, pres_scale, raxis_cc, zaxis_cs, &
-     raxis_cs, zaxis_cc, mpol, ntor, ntheta, nzeta, mfilter_fbdy,   &
-     nfilter_fbdy, niter_array, ns_array, ftol_array, tcon0,        &
-     curtor, extcur, phiedge, lfreeb, lasym, lbsubs
+  NAMELIST /indata/ &
+     mgrid_file,    &
+     nfp,           &
+     ncurr,         &
+     nstep,         &
+     nvacskip,      &
+     delt,          &
+     gamma,         &
+     am,            &
+     ai,            &
+     ac,            &
+     aphi,          &
+     pcurr_type,    &
+     pmass_type,    &
+     piota_type,    &
+     bloat,         &
+     am_aux_s,      &
+     am_aux_f,      &
+     ai_aux_s,      &
+     ai_aux_f,      &
+     ac_aux_s,      &
+     ac_aux_f,      &
+     rbc,           &
+     zbs,           &
+     rbs,           &
+     zbc,           &
+     spres_ped,     &
+     pres_scale,    &
+     raxis_cc,      &
+     zaxis_cs,      &
+     raxis_cs,      &
+     zaxis_cc,      &
+     mpol,          &
+     ntor,          &
+     ntheta,        &
+     nzeta,         &
+     mfilter_fbdy,  &
+     nfilter_fbdy,  &
+     niter_array,   &
+     ns_array,      &
+     ftol_array,    &
+     tcon0,         &
+     curtor,        &
+     extcur,        &
+     phiedge,       &
+     lfreeb,        &
+     lasym,         &
+     lbsubs
 
 CONTAINS
 
 SUBROUTINE read_indata_namelist (iunit, istat)
-  INTEGER :: iunit, istat
+  INTEGER, intent(in)    :: iunit
+  INTEGER, intent(inout) :: istat
+
+  character(len=1000) :: line
 
   ! INITIALIZATIONS
   gamma = 0
   spres_ped = 1
   mpol = mpol_default
   ntor = ntor_default
-  ntheta = 0;  nzeta = 0
+  ntheta = 0
+  nzeta = 0
 
      ns_array =  0;    ns_array(1) =    ns_default
    ftol_array =  0;  ftol_array(1) =  ftol_default
   niter_array = -1; niter_array(1) = niter_default
 
   bloat = 1
-  rbc = 0;  rbs = 0; zbs = 0; zbc = 0
+  rbc = 0
+  rbs = 0
+  zbs = 0
+  zbc = 0
   nfp = 1
   ncurr = 0
   nstep = 10
   nvacskip = 1
   delt = 1
-  am = 0; ai = 0; ac = 0; aphi = 0; aphi(1) = 1
+
+  am = 0
+  ai = 0
+  ac = 0
+
+  aphi = 0
+  aphi(1) = 1
+
   pres_scale = 1
-  raxis_cc = 0; zaxis_cs = 0; raxis_cs = 0; zaxis_cc = 0
-  mfilter_fbdy = -1; nfilter_fbdy = -1
+
+  raxis_cc = 0
+  zaxis_cs = 0
+  raxis_cs = 0
+  zaxis_cc = 0
+
+  mfilter_fbdy = -1
+  nfilter_fbdy = -1
+
   tcon0 = 1
-  curtor = 0;
-  extcur = 0;  phiedge = 1
+  curtor = 0
+  extcur = 0
+  phiedge = 1
+
   mgrid_file = 'NONE'
+
   lfreeb = .true.
   lasym = .false.
   lbsubs = .false.
@@ -126,6 +190,12 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   ai_aux_s(:) = -1
 
   READ (iunit, nml=indata, iostat=istat)
+
+  if (istat .ne. 0) then
+    backspace(iunit)
+    read(iunit,fmt='(A)') line
+    write(*,'(A)') 'Invalid line in namelist: '//trim(line)
+  end if
 
 END SUBROUTINE read_indata_namelist
 

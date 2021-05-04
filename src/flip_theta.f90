@@ -20,8 +20,15 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
 
   ! FLIP THETA -> PI - THETA (INITIALLY, TO MAKE JACOBIAN < 0)
   mul1=-1
+
+  ! logical flag to indicate that lambda coeffs shall be flipped as well
   l_lmn = PRESENT(lmn)
+
   DO m=1,mpol1
+
+     ! here, mul1 == (-1)**mod(m, 2)
+     ! --> m even: mul1 == +1
+     ! --> m odd:  mul1 == -1
 
      DO n=0,ntor
 
@@ -50,6 +57,7 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
         END IF
      END DO
 
+     ! flip mul1
      mul1 = -mul1
 
   END DO

@@ -3,17 +3,32 @@
 
 !> \brief Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space
 !>
-!> @param rzl_array
-!> @param r11 R
-!> @param ru1 dR/dTheta
-!> @param rv1 dR/dZeta
-!> @param z11 Z
-!> @param zu1 dZ/dTheta
-!> @param zv1 dZ/dZeta
-!> @param lu1 dLambda/dTheta
-!> @param lv1 -dLambda/dZeta
-!> @param rcn1 TODO: what is this?
-!> @param zcn1 TODO: what is this?
+!>  Forier transforms between Fourier space and real space. Computes quantities
+!>  for R, dR/du, dR/dv, Z, dZ/du, dZ/dv, dlambda/du and dlambda/dv. Non
+!>  derivative quantities are trans formed via
+!>
+!>    A_real = A_mnc*cos(mu - nv) + A_mns*sin(mu - nv)                       (1)
+!>
+!>  Derivatives with respect to u are transformed as
+!>
+!>    dA_real/du = -m*A_mnc*sin(mu - nv) + m*A_mns*cos(mu - nv)              (2)
+!>
+!>  Derivatives with respect to v are transformed as
+!>
+!>    dA_real/dv = n*A_mnc*sin(mu - nv) - m*A_mns*cos(mu - nv)               (3)
+!>
+!>  @param rzl_array Fourier amplitudes for Rmnc, Zmns and Lmns for lasym false.
+!>                   When lasym is true, this also contains Rmns, Zmnc, Lmnc.
+!>  @paran r11       Real space R
+!>  @param ru1       Real space dR/du
+!>  @param rv1       Real space dR/dz
+!>  @param z11       Real space Z
+!>  @param zu1       Real space dZ/du
+!>  @param zv1       Real space dZ/dv
+!>  @param lu1       Real space dlambda/du
+!>  @param lv1       Real space -dlambda/dv
+!>  @param rcn1      related to spectral constraint; m(m-1)*R*cos(mu-nv)
+!>  @param zcn1      related to spectral constraint; m(m-1)*Z*sin(mu-nv)
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
 
   USE vmec_main
@@ -46,13 +61,18 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! This is the inverse Fourier transform from the (odd-m-scaled-by-1/sqrt(s))-xc
   ! given in rzl_array to real space. Tangential derivatives are also computed.
 
-  rmncc => rzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
-  zmnsc => rzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
-  lmnsc => rzl_array(:,:,:,zsc+2*ntmax)       !!SIN(mu) COS(nv)
+  ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(stored at rss) = .5(rss + zcs),
+  ! R-(stored at zcs) = .5(rss - zcs), TO EXTERNAL ("PHYSICAL") rss, zcs FORMS. NEED THIS EVEN
+  ! WHEN COMPUTING HESSIAN FOR FREE BOUNDARY (rmnss, zmncs at JS=NS needed in vacuum call)
+  !
+  ! WHEN COMPUTING PRECONDITIONER, USE FASTER HESSIAN VERSION (totzsps_hess) INSTEAD.
+  rmncc => rzl_array(:,:,:,rcc)               ! COS(mu) COS(nv)
+  zmnsc => rzl_array(:,:,:,zsc+ntmax)         ! SIN(mu) COS(nv)
+  lmnsc => rzl_array(:,:,:,zsc+2*ntmax)       ! SIN(mu) COS(nv)
   IF (lthreed) THEN
-     rmnss => rzl_array(:,:,:,rss)            !!SIN(mu) SIN(nv)
-     zmncs => rzl_array(:,:,:,zcs+ntmax)      !!COS(mu) SIN(nv)
-     lmncs => rzl_array(:,:,:,zcs+2*ntmax)    !!COS(mu) SIN(nv)
+     rmnss => rzl_array(:,:,:,rss)            ! SIN(mu) SIN(nv)
+     zmncs => rzl_array(:,:,:,zcs+ntmax)      ! COS(mu) SIN(nv)
+     lmncs => rzl_array(:,:,:,zcs+2*ntmax)    ! COS(mu) SIN(nv)
 
 ! #ifndef _HBANGLE
      ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(stored at rss) = .5(rss + zcs),
@@ -68,13 +88,14 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! v8.51  Restore hs dependence (1:ns, not just ns)
   !     fnorm1 = one/SUM(rzl_array(1:ns,:,m1:,1:2*ntmax)**2)
 
-  ! constant EXTRAPOLATION to the ORIGIN (JS=1) FOR M=1 MODES
+  ! ORIGIN EXTRAPOLATION (JS=1) FOR M=1 MODES
+  ! --> TODO: why? quantities on axis should not have a poloidal dependence ???
   ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION FOR R,Z.
   !       HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE TRI-DIAG 2D PRECONDITIONER.
-  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:)
+  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! now this is a constant extrapolation to the axis (????)
 
-  ioff = LBOUND(rmncc,2) ! start index of Z (?)
-  joff = LBOUND(rmncc,3) ! start index of lambda (?)
+  ioff = LBOUND(rmncc,2) ! starting index along n
+  joff = LBOUND(rmncc,3) ! starting index along m
 
   ! ORIGIN EXTRAPOLATION OF M=0 MODES FOR LAMBDA
   IF (lthreed .and. jlam(m0).gt.1) then
@@ -95,6 +116,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      mparity = MOD(m,2)
      mj = m+joff
      work1 = 0
+
+     ! m>1 contributions start at js=2, not 1 (axis)
+     ! TODO: why has the axis even an m=1 contribution?
      j1 = jmin1(m)
 
      ! INVERSE TRANSFORM IN N-ZETA, FOR FIXED M
@@ -129,11 +153,14 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      ! INVERSE TRANSFORM IN M-THETA, FOR ALL RADIAL, ZETA VALUES
      l = 0
      DO i = 1, ntheta2
+
+        ! start and end indices of poloidal slice of current flux surface
         j1l = l+1
-        nsl = nsz+l ! start and end indices of poloidal slice of current flux surface
+        nsl = nsz+l
 
         l = l + nsz
 
+        ! basis functions for spectral constraint
         cosmux = xmpq(m,1)*cosmu(i,m)
         sinmux = xmpq(m,1)*sinmu(i,m)
 
@@ -177,8 +204,8 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
                                                       + work1(1:nsz,8)*sinmu(i,m)
 
         lu1(j1l:nsl,mparity)  = lu1(j1l:nsl,mparity)  + work1(1:nsz,9)*sinmum(i,m)
-        lv1(j1l:nsl,mparity)  = lv1(j1l:nsl,mparity)  - (work1(1:nsz,11)*cosmu(i,m) &
-                                                      +  work1(1:nsz,12)*sinmu(i,m))
+        lv1(j1l:nsl,mparity)  = lv1(j1l:nsl,mparity)  - (  work1(1:nsz,11)*cosmu(i,m) &
+                                                         + work1(1:nsz,12)*sinmu(i,m)  )
      END DO
 
   END DO
@@ -364,8 +391,7 @@ SUBROUTINE convert_asym(rmnsc, zmncc)
   REAL(rprec), DIMENSION(ns,0:ntor) :: temp
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSC, ZMNCC FOURIER FORM
-  ! rmnsc(in) = (RMNSC+ZMNCC), zmncc(in) = (RMNSC+ZMNCC)
-
+  ! rmnsc(in) = .5(RMNSC+ZMNCC), zmncc(in) = .5(RMNSC-ZMNCC) -> 0
   IF (lconm1) then
 
      temp(:,:) = rmnsc(:,:,1)                   !THIS IS INTERNAL

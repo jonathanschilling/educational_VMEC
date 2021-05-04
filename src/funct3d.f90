@@ -83,6 +83,7 @@ SUBROUTINE funct3d (ier_flag)
   ENDIF
 
   ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
+  ! --> at ns, sqrt(s)==1 --> no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore
 
   router = r1(ns,0) + r1(ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
 
@@ -102,21 +103,26 @@ SUBROUTINE funct3d (ier_flag)
   zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
+  ! Assemble dR/du and dZ/du, since they are needed for arnorm, aznorm in bcovar().
+  ! Must store them in separate arrays ru0, zu0 since separation into even-m and odd-m
+  ! must be kept for e.g jacobian and metric elements (I guess...).
   ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)
   zu0(:nrzt)    = zu(:nrzt,0)   + zu(:nrzt,1)*sqrts(:nrzt)
 
-! #ifndef _HBANGLE
-
-  ! COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
-  ! SCALE BY POWER OF SQRTS, RATHER THAN USE rcon0 = rcon, etc.
-  ! THIS PREVENTS A DISCONTINUITY WHEN RESTARTING FIXED BOUNDARY WITH NEW RCON0....
-  !
-  ! NOTE: IN ORDER TO MAKE INITIAL CONSTRAINT FORCES SAME FOR FREE/FIXED
-  ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
-  ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
-
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
-     ! immediately before first vacuum call (?)
+
+     print *, "rcon0 <-- (rcon * s) into volume"
+     ! iter2 == iter1 is true at start of a new multi-grid iteration
+     ! ivac .le. 0 is always true for fixed-boundary,
+     ! but only true for first iteration in free-boundary (?)
+
+     ! COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
+     ! SCALE BY POWER OF SQRTS, RATHER THAN USE rcon0 = rcon, etc.
+     ! THIS PREVENTS A DISCONTINUITY WHEN RESTARTING FIXED BOUNDARY WITH NEW RCON0....
+     !
+     ! NOTE: IN ORDER TO MAKE INITIAL CONSTRAINT FORCES SAME FOR FREE/FIXED
+     ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
+     ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
      DO l = 1, ns
         ! value of rcon(ns) is scaled into the volume proportional to s
         rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
@@ -128,7 +134,7 @@ SUBROUTINE funct3d (ier_flag)
   ! COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
   CALL jacobian
   IF (irst.eq.2 .and. iequi.eq.0) then
-     ! bad jacobian --> need to restart
+     ! bad jacobian and not final iteration yet (would be indicated by iequi.eq.1) --> need to restart
      ! except when computing output file --> ignore bad jacobian
      return
   end if
@@ -282,7 +288,7 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(lk,3) = 1.5_dp*bzmn_o(l) - 0.5_dp*bzmn_o(l-1)
 
            ! total pressure (?) at LCFS
-           ! (gcon(l) is probably only used as a temporary variable here,
+           ! (gcon(l) is only used as a temporary variable here,
            !  since it immediately gets overwritten when entering alias())
            gcon(l)      = bsqvac(lk) + presf_ns
 

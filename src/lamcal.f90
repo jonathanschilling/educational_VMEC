@@ -20,15 +20,15 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   INTEGER :: m,n,js
   REAL(rprec) :: tnn, tnm, tmm, power, pfactor0, pfactor
 
-  blam(:ns) = SUM(guu*overg, dim=2)
-  clam(:ns) = SUM(gvv*overg, dim=2)
-  dlam(:ns) = SUM(guv*overg, dim=2)
-  blam(1) = blam(2)
-  clam(1) = clam(2)
-  dlam(1) = dlam(2)
-  blam(ns+1) =  0
-  clam(ns+1) =  0
-  dlam(ns+1) =  0
+  blam(:ns) = SUM(guu*overg, dim=2) ! over surface
+  clam(:ns) = SUM(gvv*overg, dim=2) ! over surface
+  dlam(:ns) = SUM(guv*overg, dim=2) ! over surface
+  blam(1) = blam(2) ! constant extrapolation to axis
+  clam(1) = clam(2) ! constant extrapolation to axis
+  dlam(1) = dlam(2) ! constant extrapolation to axis
+  blam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
+  clam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
+  dlam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
   DO js = 2, ns
      blam(js) = cp5*(blam(js) + blam(js+1))
      clam(js) = cp5*(clam(js) + clam(js+1))
@@ -52,6 +52,11 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
         tnn = (n*nfp)**2
         tnm = 2*m*n*nfp
         DO js = jlam(m), ns
+
+           ! b: coupling between n and n ?
+           ! d: coupling between n and m ?
+           ! c: coupling between m and m ?
+
            faclam(js,n,m,1) = (blam(js)*tnn + SIGN(dlam(js),blam(js))*tnm + clam(js)*tmm)
            IF (faclam(js,n,m,1) .eq. zero) then
                faclam(js,n,m,1) = -1.E-10_dp

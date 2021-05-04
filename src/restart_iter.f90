@@ -37,6 +37,9 @@ SUBROUTINE restart_iter(time_step)
                             + (3-irst)*cp90  )
 
      IF (irst .eq. 2) THEN
+
+        print *, "bad jacobian --> restart_iter"
+
         ijacob = ijacob + 1
         iter1 = iter2
      END IF
@@ -45,7 +48,7 @@ SUBROUTINE restart_iter(time_step)
 
      RETURN
   CASE DEFAULT
-     ! save current state vector
+     ! save current state vector, e.g. irst=1
      xstore(:neqs) = xc(:neqs)
      RETURN
   END SELECT

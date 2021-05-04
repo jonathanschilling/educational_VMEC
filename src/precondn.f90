@@ -43,7 +43,7 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd, &
   ! COMPUTE PRECONDITIONING MATRIX ELEMENTS FOR R,Z FORCE.
   ! NOTE THAT THE NORMALIZATION IS:
   !
-  ! AX(off-diag) ~ <(cosmui cosmu cosnv cosnv) 2(R**2*Xu**2*bsq/gsqrt)>
+  ! AX(off-diag) ~ <(cosmui cosmu cosnv cosnv) 2(R**2 * Xu**2 * bsq/gsqrt)>
   ! Factor of 2 arising from 1/gsqrt**2 in bsq
   !
   ! Now, cosmui cosmu ~ mscale(0)**2, cosnv**2 ~ nscale(0)**2

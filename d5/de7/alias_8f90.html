@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90.html','../../'); ini
 </div><!--header-->
 <div class="contents">
 
-<p>Fourier transform alias force and also return intermediate output.  
+<p>Fourier-space bandpass filter on constraint force for spectral condensation.  
 <a href="#details">More...</a></p>
 
 <p><a href="../../d5/de7/alias_8f90_source.html">Go to the source code of this file.</a></p>
@@ -123,11 +123,11 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90.html','../../'); ini
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a971bf2e3997d8e5ed08c060b651c88c4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">alias</a> (gcons, ztemp, gcs, gsc, gcc, gss)</td></tr>
-<tr class="memdesc:a971bf2e3997d8e5ed08c060b651c88c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s)  <a href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">More...</a><br /></td></tr>
+<tr class="memdesc:a971bf2e3997d8e5ed08c060b651c88c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier-space bandpass filter on constraint force for spectral condensation.  <a href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4">More...</a><br /></td></tr>
 <tr class="separator:a971bf2e3997d8e5ed08c060b651c88c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Fourier transform alias force and also return intermediate output. </p>
+<div class="textblock"><p>Fourier-space bandpass filter on constraint force for spectral condensation. </p>
 
 <p class="definition">Definition in file <a class="el" href="../../d5/de7/alias_8f90_source.html">alias.f90</a>.</p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
@@ -181,11 +181,12 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s) </p>
+<p>Fourier-space bandpass filter on constraint force for spectral condensation. </p>
+<p>Eliminates contributions to gcon from m=1 and m=mpol1-1=mpol-2 poloidal mode numbers.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">gcons</td><td>! output: Fourier-transform of alias (=spectral condensation) force </td></tr>
-    <tr><td class="paramname">ztemp</td><td>! input: rcon, zcon real-space constraint force </td></tr>
+    <tr><td class="paramname">gcons</td><td>! output: Fourier-filtered spectral condensation force gcon </td></tr>
+    <tr><td class="paramname">ztemp</td><td>! input: full-m gcon in real-space constraint force </td></tr>
     <tr><td class="paramname">gcs</td><td>! temporary storage </td></tr>
     <tr><td class="paramname">gsc</td><td>! temporary storage </td></tr>
     <tr><td class="paramname">gcc</td><td>! temporary storage </td></tr>
@@ -194,7 +195,7 @@ Functions/Subroutines</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/de7/alias_8f90_source.html#l00012">12</a> of file <a class="el" href="../../d5/de7/alias_8f90_source.html">alias.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/de7/alias_8f90_source.html#l00014">14</a> of file <a class="el" href="../../d5/de7/alias_8f90_source.html">alias.f90</a>.</p>
 
 <p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00081">vmec_main::faccon</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00141">vmec_main::ireflect</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00037">vmec_main::tcon</a>.</p>
 
@@ -214,7 +215,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/de7/alias_8f90.html">alias.f90</a></li>
-    <li class="footer">Generated on Tue May 4 2021 04:59:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 4 2021 06:55:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

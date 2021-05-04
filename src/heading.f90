@@ -32,7 +32,7 @@ SUBROUTINE heading(extension)
      CALL FLUSH(nthreed)
 
      WRITE(nthreed,'(a,1x,a,/,a,/)') TRIM(banner), TRIM(Version), TRIM(VersionID1)
-     WRITE (*,'(1x,a,1x,a,/,1x,a,/)') TRIM(banner), TRIM(Version), TRIM(VersionID1)
+     WRITE(*,'(1x,a,1x,a,/,1x,a,/)') TRIM(banner), TRIM(Version), TRIM(VersionID1)
   end if
 
 END SUBROUTINE heading

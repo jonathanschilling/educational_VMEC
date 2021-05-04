@@ -59,6 +59,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
      CALL allocate_ns(linterp, neqs_old)
 
      ! SAVE THIS FOR INTERPOLATION
+     ! gc is re-used here for old, scaled xc
      IF (neqs_old.gt.0 .and. linterp) THEN
         gc(1:neqs_old)=scalxc(1:neqs_old)*xstore(1:neqs_old)
      END IF

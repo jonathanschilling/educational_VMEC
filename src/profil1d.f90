@@ -113,7 +113,10 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
      si = hs*(i-1)
      sqrts(i:nrzt:ns) = SQRT(si)
 
-     ! TODO: what is this?
+     ! TODO: what is this _exactly_?
+     ! just observing, this is a linear profile on the half-grid
+     ! which is at 2*pdamp == 0.1 at the axis
+     ! and at              ca. 0  at the LCFS
      bdamp(i) = 2*pdamp*(1-si)
   END DO
 
@@ -122,6 +125,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   shalf(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of shalf (see ndim in allocate_ns)
   sqrts(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of sqrts (see ndim in allocate_ns)
 
+  ! sm, sp used mainly in 1d preconditioner?
   DO i = 2,ns
      sm(i) = shalf(i)/sqrts(i)
      sp(i) = shalf(i+1)/sqrts(i)

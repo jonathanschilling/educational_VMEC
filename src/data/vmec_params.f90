@@ -11,7 +11,7 @@ MODULE vmec_params
   INTEGER, PARAMETER :: ndamp = 10 !< number of iterations over which damping is averaged
   INTEGER, PARAMETER :: ns4 = 25
 
-  INTEGER, PRIVATE :: ink
+  INTEGER, PRIVATE :: ink                            ! 0,1, 2,3,...,mpold
   INTEGER, PARAMETER, DIMENSION(0:mpold) :: jmin1 = (/ 1,1,(2,ink=2,mpold) /) !< starting js(m) values where R,Z are non-zero
   INTEGER, PARAMETER, DIMENSION(0:mpold) :: jmin2 = (/ 1,2,(2,ink=2,mpold) /) !< starting js(m) values for which R,Z are evolved
   INTEGER, PARAMETER, DIMENSION(0:mpold) :: jlam  = (/ 2,2,(2,ink=2,mpold) /) !< starting js(m) values for which Lambda is evolved
@@ -53,7 +53,8 @@ MODULE vmec_params
   REAL(rprec), ALLOCATABLE :: mscale(:) !< array for norming theta-trig functions (internal use only)
                                         !< so that the discrete SUM[cos(mu)*cos(m'u)] = .5 delta(m,m')
   REAL(rprec), ALLOCATABLE :: nscale(:) !< array for norming zeta -trig functions (internal use only)
-  REAL(rprec) :: signgs     !< sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)
+
+  REAL(rprec)              :: signgs    !< sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)
 
   REAL(rprec) :: lamscale=1
 

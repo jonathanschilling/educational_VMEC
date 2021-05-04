@@ -48,7 +48,7 @@ SUBROUTINE restart_iter(time_step)
 
      RETURN
   CASE DEFAULT
-     ! save current state vector
+     ! save current state vector, e.g. irst=1
      xstore(:neqs) = xc(:neqs)
      RETURN
   END SELECT

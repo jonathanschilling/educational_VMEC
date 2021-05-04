@@ -4,7 +4,7 @@
 !> \brief Compute the covariant components of the magnetic field \f$B_\theta\f$, \f$B_\zeta\f$.
 !>
 !> @param lu \f$\partial\lambda / \partial\theta\f$
-!> @param lv \f$\partial\lambda / \partial\zeta\f$
+!> @param lv \f$- \partial\lambda / \partial\zeta\f$
 SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
   USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale
@@ -86,6 +86,7 @@ SUBROUTINE bcovar (lu, lv)
   r12sq(1:nrzt) = r1(1:nrzt,0)*r1(1:nrzt,0) + r12sq(1:nrzt)*        &
                   r1(1:nrzt,1)*r1(1:nrzt,1)
 
+  ! TODO: why need to do this in reverse order?
   DO l = nrzt, 2, -1
      guu(l) = p5*(guu(l) + guu(l-1) + shalf(l)*(luu(l) + luu(l-1)))
 
@@ -102,7 +103,8 @@ SUBROUTINE bcovar (lu, lv)
 
   tau(1:nrzt) = gsqrt(1:nrzt)
   gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt)
-  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns)
+
+  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) ! constant extrapolation towards axis
 
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
@@ -144,7 +146,7 @@ SUBROUTINE bcovar (lu, lv)
   bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
                                      + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
 
-  ! TODO: what is this?
+  ! TODO: what is this? (m,n)=(0,0)-mode on axis?
   bsupu(1)=0
   bsupv(1)=0
 
@@ -228,27 +230,32 @@ SUBROUTINE bcovar (lu, lv)
   ! This computes the net toroidal current enclosed by the LCFS (ctor).
   ctor = signgs*twopi*(c1p5*buco(ns) - p5*buco(ns1))
 
-  ! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
-  ! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS
   DO l=1,ns
-     lvv(l:nrzt:ns) = bdamp(l) ! what is this exactly ??? related to time-step algorithm...
+     lvv(l:nrzt:ns) = bdamp(l) ! --> profil1d()
+     ! blending parameter: 0.1 at the axis, ca. 0 at the LCFS
+     ! TODO: is it intentional that this is linked to pdamp (time-step algorithm) ?
   END DO
 
   ! COMMENTED OUT BY SAL --> why does this check hurt ?
   ! IF (ANY(bsubuh(1:ndim:ns) .ne. zero)) STOP 'BSUBUH != 0 AT JS=1'
   ! IF (ANY(bsubvh(1:ndim:ns) .ne. zero)) STOP 'BSUBVH != 0 AT JS=1'
 
-  bsubu_e(1:nrzt) = p5*(bsubuh(1:nrzt) + bsubuh(2:ndim))
-  bsubv_e(1:nrzt) = bsubv_e(1:nrzt)*lvv(1:nrzt) + p5*(1-lvv(1:nrzt)) &
-                  *(bsubvh(1:nrzt) + bsubvh(2:ndim))
+  ! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
+  ! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS
+  bsubu_e(1:nrzt) =  p5*                (bsubuh(1:nrzt) + bsubuh(2:ndim))
+  bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
+                   + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
+
+!   ! NOTE THAT lu=>czmn, lv=>crmn externally
+!   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
+!   IF (iequi .EQ. 1) THEN
+!      ! only executed at end of equilibrium
+!      lu(:nrzt,0) = bsupv(:nrzt)
+!      lv(:nrzt,0) = bsupu(:nrzt)
+!   END IF
 
   ! COMPUTE R,Z AND LAMBDA PRE-CONDITIONING MATRIX
-  ! ELEMENTS AND FORCE NORMS: NOTE THAT lu=>czmn, lv=>crmn externally
-  ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
-  IF (iequi .EQ. 1) THEN
-     lu(:nrzt,0) = bsupv(:nrzt)
-     lv(:nrzt,0) = bsupu(:nrzt)
-  END IF
+  ! ELEMENTS AND FORCE NORMS:
 
   ! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS
   ! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
@@ -259,13 +266,11 @@ SUBROUTINE bcovar (lu, lv)
 
      CALL lamcal(phipog, guu, guv, gvv)
 
-     CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1), &
-                   z1(1,1),arm,ard,brm,brd,                &
-                   crd,rzu_fac,cos01)
+     CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1), z1(1,1), &
+                   arm,ard,brm,brd, crd,rzu_fac,cos01)
 
-     CALL precondn(bsupv,bsq,gsqrt,r12,rs,ru12,ru,ru(1,1), &
-                   r1(1,1),azm,azd,bzm,bzd, &
-                   crd,rru_fac,sin01)
+     CALL precondn(bsupv,bsq,gsqrt,r12,rs,ru12,ru,ru(1,1), r1(1,1), &
+                   azm,azd,bzm,bzd, crd,rru_fac,sin01)
 
      rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
      rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
@@ -324,11 +329,42 @@ SUBROUTINE bcovar (lu, lv)
      IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-  ENDIF
+   ENDIF ! MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0
+
+   if (iequi .eq. 0) then
+     ! iequi != 1 --> normal iterations
+
+     ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
+     bsubu_e = -lamscale*bsubu_e
+     bsubv_e = -lamscale*bsubv_e
+     bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
+     bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
+
+     ! STORE LU * LV COMBINATIONS USED IN FORCES
+     lvv(2:nrzt)  = gsqrt(2:nrzt)
+     guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
+     guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+     gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+     lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
+     lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
+
+
+   ELSE ! (iequi .eq. 0)
+     ! iequi == 1 --> final iter for fileout()
+
+
+  ! NOTE THAT lu=>czmn, lv=>crmn externally
+  ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
+!   IF (iequi .EQ. 1) THEN
+     ! only executed at end of equilibrium
+     lu(:nrzt,0) = bsupv(:nrzt)
+     lv(:nrzt,0) = bsupu(:nrzt)
+!  END IF
 
   ! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH
   ! FOR FORCE BALANCE AND RETURN (IEQUI=1)
-  IF (iequi .eq. 1) THEN
+!  IF (iequi .eq. 1) THEN
+
      ! final call from fileout --> compute additional stuff
      DO js = ns-1,2,-1
         DO l = js, nrzt, ns
@@ -350,22 +386,22 @@ SUBROUTINE bcovar (lu, lv)
      bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
      bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-  else
-     ! iequi != 1 --> normal iterations
-
-     ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
-     bsubu_e = -lamscale*bsubu_e
-     bsubv_e = -lamscale*bsubv_e
-     bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
-     bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
-
-     ! STORE LU * LV COMBINATIONS USED IN FORCES
-     lvv(2:nrzt)  = gsqrt(2:nrzt)
-     guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
-     guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-     gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-     lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
-     lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
+!   else
+!      ! iequi != 1 --> normal iterations
+!
+!      ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
+!      bsubu_e = -lamscale*bsubu_e
+!      bsubv_e = -lamscale*bsubv_e
+!      bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
+!      bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
+!
+!      ! STORE LU * LV COMBINATIONS USED IN FORCES
+!      lvv(2:nrzt)  = gsqrt(2:nrzt)
+!      guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
+!      guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+!      gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
+!      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
+!      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
   END IF
 
 END SUBROUTINE bcovar

@@ -21,6 +21,10 @@
   REAL(rprec), ALLOCATABLE :: temp(:)
   CHARACTER(LEN=100) :: line, line2
 
+  ! dump rbcc, ... into 'input_coeffs.dat' and stop
+  !logical :: dump_input_coeffs = .true.
+  logical :: dump_input_coeffs = .false.
+
   ier_flag_init = ier_flag
   ier_flag      = norm_term_flag
 
@@ -38,7 +42,8 @@
      CALL read_mgrid (mgrid_file, extcur, nzeta, nfp, .true., ier_flag)
 
      ! check again for lfreeb
-     ! --> might have been reset to .false. if mgrid file was not found
+     ! --> might have been reset to .false. by read_mgrid
+     !     if mgrid file was not found / could not be opened
      IF (lfreeb) THEN
         IF (ier_flag .ne. norm_term_flag) then
            RETURN
@@ -210,10 +215,12 @@
      IF (delta .ne. zero) THEN
        DO m = 0,mpol1
          DO n = -ntor,ntor
-           trc = rbc(n,m)*COS(m*delta) + rbs(n,m)*SIN(m*delta)
+
+           trc      = rbc(n,m)*COS(m*delta) + rbs(n,m)*SIN(m*delta)
            rbs(n,m) = rbs(n,m)*COS(m*delta) - rbc(n,m)*SIN(m*delta)
            rbc(n,m) = trc
-           tzc = zbc(n,m)*COS(m*delta) + zbs(n,m)*SIN(m*delta)
+
+           tzc      = zbc(n,m)*COS(m*delta) + zbs(n,m)*SIN(m*delta)
            zbs(n,m) = zbs(n,m)*COS(m*delta) - zbc(n,m)*SIN(m*delta)
            zbc(n,m) = tzc
          ENDDO
@@ -231,9 +238,7 @@
   ! Z =   ZBCS*COS(M*U)*SIN(N*V) + ZBSC*SIN(M*U)*COS(N*V)
   !     + ZBCC*COS(M*U)*COS(N*V) + ZBSS*SIN(M*U)*SIN(N*V)
   !
-  !
-  ! POINTER ASSIGNMENTS (NOTE: INDICES START AT 1, NOT 0, FOR POINTERS, EVEN THOUGH
-  !                      THEY START AT ZERO FOR RMN_BDY)
+  ! POINTER ASSIGNMENTS
   ! ARRAY STACKING ORDER DETERMINED HERE
   rbcc => rmn_bdy(:,:,rcc)
   zbsc => zmn_bdy(:,:,zsc)
@@ -251,14 +256,18 @@
      END IF
   ENDIF
 
-  rmn_bdy = 0;  zmn_bdy = 0
+  rmn_bdy = 0
+  zmn_bdy = 0
 
-  ioff = LBOUND(rbcc,1)
-  joff = LBOUND(rbcc,2)
+  ! NOTE: INDICES START AT 1, NOT 0, FOR POINTERS,
+  !       EVEN THOUGH THEY START AT ZERO FOR RMN_BDY
+  ioff = LBOUND(rbcc,1) ! index offset in dimension 1, which is n
+  joff = LBOUND(rbcc,2) ! index offset in dimension 2, which is m
 
   ! go over all mode number combinations that could be specified in input file for given Fourier resolution
   DO m=0,mpol1
 
+     ! target index in rbcc, ... along m --> m
      mj = m+joff
 
      ! in free-boundary, skip initial guess with Fourier mode number m larger than mfilter_fbdy
@@ -269,7 +278,10 @@
         ! in free-boundary, skip initial guess with Fourier mode number n larger than nfilter_fbdy
         IF (lfreeb .and. (nfilter_fbdy.gt.0 .and. ABS(n).gt.nfilter_fbdy)) CYCLE
 
+        ! target index in rbcc, ... along n --> |n|
         ni = ABS(n) + ioff
+
+        ! these two loops over m and n simply go over the full Rbc, ... arrays
 
         ! rbc, zbs etc are defined for the full 2d Fourier kernel with possibly negative n
         ! this sign is used to convert it to positive-only Fourier numbers
@@ -299,6 +311,13 @@
            END IF
         END IF
 
+
+
+        ! Fourier coefficient assigments are done here,
+        ! only diagnostics below in this loop
+
+
+
         ! TODO: why exit only here or is this leftover from something else?
         IF (ier_flag_init .ne. norm_term_flag) then
            print *, "skip printing of initial guess for geometry, since ier_flag_init = ",ier_flag_init
@@ -306,6 +325,7 @@
         end if
 
         ! compute sum of quantities to be printed below
+        ! --> check if any of rbc, ..., zbs is != 0 for current m,n values
         trc = ABS(rbc(n,m)) + ABS(rbs(n,m)) + ABS(zbc(n,m)) + ABS(zbs(n,m))
 
         IF (m .eq. 0) THEN
@@ -343,7 +363,10 @@
   ztest = SUM(zbsc(1:ntor1,mj))
   lflip=(rtest*ztest .lt. zero)
   signgs = -1
-  IF (lflip) CALL flip_theta(rmn_bdy, zmn_bdy)
+  IF (lflip) then
+     ! (rtest*ztest < 0) means that rtest and ztest have different signs
+     CALL flip_theta(rmn_bdy, zmn_bdy)
+  end if
 
   ! CONVERT TO INTERNAL FORM FOR (CONSTRAINED) m=1 MODES
   ! INTERNALLY, FOR m=1: XC(rss) = .5(RSS+ZCS), XC(zcs) = .5(RSS-ZCS)
@@ -352,21 +375,81 @@
   ! WITH XC(zss) -> 0 FOR POLAR CONSTRAINT
   ! (see convert_sym, convert_asym in totzsp.f90 file)
   IF (lconm1 .AND. (lthreed.OR.lasym)) THEN
+     ! the length could be also defined as ntor+1
+     ! (which would be more explicit, but who needs this ...?)
      ALLOCATE (temp(SIZE(rbcc,1)))
      IF (lthreed) THEN
-        mj = 1+joff ! index of n=0, m=1 modes
+        mj = 1+joff ! index of m=1 modes for all n
         temp = rbss(:,mj)
         rbss(:,mj) = cp5*(temp(:) + zbcs(:,mj))
         zbcs(:,mj) = cp5*(temp(:) - zbcs(:,mj))
      END IF
      IF (lasym) THEN
-        mj = 1+joff ! index of n=0, m=1 modes
+        mj = 1+joff ! index of m=1 modes for all n
         temp = rbsc(:,mj)
         rbsc(:,mj) = cp5*(temp(:) + zbcc(:,mj))
         zbcc(:,mj) = cp5*(temp(:) - zbcc(:,mj))
      END IF
      DEALLOCATE (temp)
   END IF
+
+  if (dump_input_coeffs) then
+    open(unit=42, file="input_coeffs.dat", status="unknown")
+
+    ! write header
+    if (.not. lasym) then
+    IF (.not. lthreed) THEN
+      ! not lasym, not lthreed
+      write(42,*) "# not lasym, not lthreed"
+      write(42,*) "# m |n| rbcc zbsc"
+    else ! lthreed == .true.
+      ! not lasym, lthreed
+      write(42,*) "# not lasym, lthreed"
+      write(42,*) "# m |n| rbcc zbsc rbss zbcs"
+    end if
+  else ! lasym == .true.
+    IF (.not. lthreed) THEN
+      ! lasym, not lthreed
+      write(42,*) "# lasym, not lthreed"
+      write(42,*) "# m |n| rbcc zbsc rbsc zbcc"
+    else ! lthreed == .true.
+      ! lasym, lthreed
+      write(42,*) "# lasym, lthreed"
+      write(42,*) "# m |n| rbcc zbsc rbss zbcs rbsc zbcc rbcs zbss"
+    end if
+  end if
+
+    ! write data
+    DO m=0,mpol1
+      mj = m+joff
+      DO n=0,ntor
+        ni = n + ioff
+
+        if (.not. lasym) then
+          IF (.not. lthreed) THEN
+            ! not lasym, not lthreed
+            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj)
+          else ! lthreed == .true.
+            ! not lasym, lthreed
+            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbss(ni,mj), zbcs(ni,mj)
+          end if ! lthreed
+        else ! lasym == .true.
+          IF (.not. lthreed) THEN
+            ! lasym, not lthreed
+            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbsc(ni,mj), zbcc(ni,mj)
+          else ! lthreed == .true.
+            ! lasym, lthreed
+            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbss(ni,mj), zbcs(ni,mj), &
+                              rbsc(ni,mj), zbcc(ni,mj), rbcs(ni,mj), zbss(ni,mj)
+          end if ! lthreed
+        end if ! lasym
+      end do ! n
+    end do ! m
+
+    close(42)
+
+    stop "boundary coeffs dumped to input_coeffs.dat"
+  end if
 
   ! Convert to Internal units
   currv = mu0*curtor

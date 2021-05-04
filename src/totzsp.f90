@@ -3,17 +3,32 @@
 
 !> \brief Inverse-Fourier-transform symmetric part of geometry from Fourier space to real space
 !>
-!> @param rzl_array
-!> @param r11 R
-!> @param ru1 dR/dTheta
-!> @param rv1 dR/dZeta
-!> @param z11 Z
-!> @param zu1 dZ/dTheta
-!> @param zv1 dZ/dZeta
-!> @param lu1 dLambda/dTheta
-!> @param lv1 -dLambda/dZeta
-!> @param rcn1 TODO: what is this?
-!> @param zcn1 TODO: what is this?
+!>  Forier transforms between Fourier space and real space. Computes quantities
+!>  for R, dR/du, dR/dv, Z, dZ/du, dZ/dv, dlambda/du and dlambda/dv. Non
+!>  derivative quantities are trans formed via
+!>
+!>    A_real = A_mnc*cos(mu - nv) + A_mns*sin(mu - nv)                       (1)
+!>
+!>  Derivatives with respect to u are transformed as
+!>
+!>    dA_real/du = -m*A_mnc*sin(mu - nv) + m*A_mns*cos(mu - nv)              (2)
+!>
+!>  Derivatives with respect to v are transformed as
+!>
+!>    dA_real/dv = n*A_mnc*sin(mu - nv) - m*A_mns*cos(mu - nv)               (3)
+!>
+!>  @param rzl_array Fourier amplitudes for Rmnc, Zmns and Lmns for lasym false.
+!>                   When lasym is true, this also contains Rmns, Zmnc, Lmnc.
+!>  @paran r11       Real space R
+!>  @param ru1       Real space dR/du
+!>  @param rv1       Real space dR/dz
+!>  @param z11       Real space Z
+!>  @param zu1       Real space dZ/du
+!>  @param zv1       Real space dZ/dv
+!>  @param lu1       Real space dlambda/du
+!>  @param lv1       Real space -dlambda/dv
+!>  @param rcn1      related to spectral constraint; m(m-1)*R*cos(mu-nv)
+!>  @param zcn1      related to spectral constraint; m(m-1)*Z*sin(mu-nv)
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
 
   USE vmec_main
@@ -70,13 +85,13 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   !     fnorm1 = one/SUM(rzl_array(1:ns,:,m1:,1:2*ntmax)**2)
 
   ! ORIGIN EXTRAPOLATION (JS=1) FOR M=1 MODES
-  ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION
-  !       FOR R,Z. HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE
-  !       TRI-DIAG 2D PRECONDITIONER
-  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! constant extrapolation to axis (?)
+  ! --> TODO: why? quantities on axis should not have a poloidal dependence ???
+  ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION FOR R,Z.
+  !       HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE TRI-DIAG 2D PRECONDITIONER.
+  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! now this is a constant extrapolation to the axis (????)
 
-  ioff = LBOUND(rmncc,2)
-  joff = LBOUND(rmncc,3)
+  ioff = LBOUND(rmncc,2) ! starting index along n
+  joff = LBOUND(rmncc,3) ! starting index along m
 
   ! ORIGIN EXTRAPOLATION OF M=0 MODES FOR LAMBDA
   IF (lthreed .and. jlam(m0).gt.1) then
@@ -97,6 +112,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      mparity = MOD(m,2)
      mj = m+joff
      work1 = 0
+
+     ! m>1 contributions start at js=2, not 1 (axis)
+     ! TODO: why has the axis even an m=1 contribution?
      j1 = jmin1(m)
 
      ! INVERSE TRANSFORM IN N-ZETA, FOR FIXED M
@@ -108,22 +126,22 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
            j1l = j1+l
            nsl = ns+l
 
-           work1(j1l:nsl,1) = work1(j1l:nsl,1) + rmncc(j1:ns,ni,mj)*cosnv(k,n)
-           work1(j1l:nsl,6) = work1(j1l:nsl,6) + zmnsc(j1:ns,ni,mj)*cosnv(k,n)
+           work1(j1l:nsl, 1) = work1(j1l:nsl, 1) + rmncc(j1:ns,ni,mj)*cosnv(k,n)
+           work1(j1l:nsl, 6) = work1(j1l:nsl, 6) + zmnsc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,10) = work1(j1l:nsl,10) + lmnsc(j1:ns,ni,mj)*cosnv(k,n)
 
            IF (.not.lthreed) CYCLE
 
-           work1(j1l:nsl,4) = work1(j1l:nsl,4)   + rmnss(j1:ns,ni,mj)*cosnvn(k,n)
-           work1(j1l:nsl,7) = work1(j1l:nsl,7)   + zmncs(j1:ns,ni,mj)*cosnvn(k,n)
+           work1(j1l:nsl, 4) = work1(j1l:nsl, 4) + rmnss(j1:ns,ni,mj)*cosnvn(k,n)
+           work1(j1l:nsl, 7) = work1(j1l:nsl, 7) + zmncs(j1:ns,ni,mj)*cosnvn(k,n)
            work1(j1l:nsl,11) = work1(j1l:nsl,11) + lmncs(j1:ns,ni,mj)*cosnvn(k,n)
 
-           work1(j1l:nsl,2) = work1(j1l:nsl,2)   + rmnss(j1:ns,ni,mj)*sinnv(k,n)
-           work1(j1l:nsl,5) = work1(j1l:nsl,5)   + zmncs(j1:ns,ni,mj)*sinnv(k,n)
-           work1(j1l:nsl,9) = work1(j1l:nsl,9)   + lmncs(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 2) = work1(j1l:nsl, 2) + rmnss(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 5) = work1(j1l:nsl, 5) + zmncs(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 9) = work1(j1l:nsl, 9) + lmncs(j1:ns,ni,mj)*sinnv(k,n)
 
-           work1(j1l:nsl,3) = work1(j1l:nsl,3)   + rmncc(j1:ns,ni,mj)*sinnvn(k,n)
-           work1(j1l:nsl,8) = work1(j1l:nsl,8)   + zmnsc(j1:ns,ni,mj)*sinnvn(k,n)
+           work1(j1l:nsl, 3) = work1(j1l:nsl, 3) + rmncc(j1:ns,ni,mj)*sinnvn(k,n)
+           work1(j1l:nsl, 8) = work1(j1l:nsl, 8) + zmnsc(j1:ns,ni,mj)*sinnvn(k,n)
            work1(j1l:nsl,12) = work1(j1l:nsl,12) + lmnsc(j1:ns,ni,mj)*sinnvn(k,n)
         END DO
      END DO
@@ -131,9 +149,14 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      ! INVERSE TRANSFORM IN M-THETA, FOR ALL RADIAL, ZETA VALUES
      l = 0
      DO i = 1, ntheta2
-        j1l = l+1;  nsl = nsz+l ! start and end indices of poloidal slice of current flux surface
+
+        ! start and end indices of poloidal slice of current flux surface
+        j1l = l+1
+        nsl = nsz+l
+
         l = l + nsz
 
+        ! basis functions for spectral constraint
         cosmux = xmpq(m,1)*cosmu(i,m)
         sinmux = xmpq(m,1)*sinmu(i,m)
 
@@ -177,8 +200,8 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
                                                       + work1(1:nsz,8)*sinmu(i,m)
 
         lu1(j1l:nsl,mparity)  = lu1(j1l:nsl,mparity)  + work1(1:nsz,9)*sinmum(i,m)
-        lv1(j1l:nsl,mparity)  = lv1(j1l:nsl,mparity)  - (work1(1:nsz,11)*cosmu(i,m) &
-                                                      +  work1(1:nsz,12)*sinmu(i,m))
+        lv1(j1l:nsl,mparity)  = lv1(j1l:nsl,mparity)  - (  work1(1:nsz,11)*cosmu(i,m) &
+                                                         + work1(1:nsz,12)*sinmu(i,m)  )
      END DO
 
   END DO
@@ -364,7 +387,7 @@ SUBROUTINE convert_asym(rmnsc, zmncc)
   REAL(rprec), DIMENSION(ns,0:ntor) :: temp
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSC, ZMNCC FOURIER FORM
-  ! rmnsc(in) = .5(RMNSC+ZMNCC), zmncc(in) = .5(RMNSC+ZMNCC) -> 0
+  ! rmnsc(in) = .5(RMNSC+ZMNCC), zmncc(in) = .5(RMNSC-ZMNCC) -> 0
 
   IF (lconm1) then
 

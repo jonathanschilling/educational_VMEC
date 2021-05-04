@@ -28,6 +28,8 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
      RETURN
   ENDIF
 
+  ! set indata parameters to default values and
+  ! overwrite with whatever is declared in the input file in namelist /indata/
   iosnml = 0
   REWIND (iunit)
   CALL read_indata_namelist (iunit, iosnml)
@@ -45,7 +47,7 @@ SUBROUTINE read_indata(in_file, iunit, ier_flag)
 
   IF (bloat .eq. zero) bloat = one
   IF ((bloat.ne.one) .and. (ncurr.ne.1)) THEN
-     ! bloat != 1 is only allowed when ncurr == 1
+     ! bloat != 1 is only allowed when ncurr == 1 (constrained toroidal current)
      ier_flag = 3 ! 'VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.'
      RETURN
   ENDIF

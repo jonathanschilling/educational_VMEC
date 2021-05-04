@@ -52,7 +52,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
      END DO
 
      ! Zero M=1 modes at origin
-     WHERE (MOD(ixm(:mnsize),2) .eq. 1) &
+     WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
         xnew(1,:,ntype) = 0
   END DO
 

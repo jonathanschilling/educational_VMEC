@@ -3,6 +3,8 @@
 
 !> \brief Compute preconditioning matrix elements for \f$R\f$, \f$Z\f$ force.
 !>
+!> Note that in the parameters, x=r or z
+!>
 !> @param lu1
 !> @param bsq
 !> @param gsqrt
@@ -19,9 +21,8 @@
 !> @param cx
 !> @param eqfactor
 !> @param trigmult
-SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,     &
-                    xodd, axm, axd, bxm, bxd,                     &
-                    cx, eqfactor, trigmult)
+SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd, &
+                    axm, axd, bxm, bxd, cx, eqfactor, trigmult)
   USE vmec_main
   USE vmec_params, ONLY: signgs
   USE realspace
@@ -42,7 +43,7 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo,     &
   ! COMPUTE PRECONDITIONING MATRIX ELEMENTS FOR R,Z FORCE.
   ! NOTE THAT THE NORMALIZATION IS:
   !
-  ! AX(off-diag) ~ <(cosmui cosmu cosnv cosnv) 2(R**2*Xu**2*bsq/gsqrt)>
+  ! AX(off-diag) ~ <(cosmui cosmu cosnv cosnv) 2(R**2 * Xu**2 * bsq/gsqrt)>
   ! Factor of 2 arising from 1/gsqrt**2 in bsq
   !
   ! Now, cosmui cosmu ~ mscale(0)**2, cosnv**2 ~ nscale(0)**2

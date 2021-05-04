@@ -21,9 +21,14 @@ SUBROUTINE eqsolve(ier_flag)
 
   REAL(rprec) :: w0
   LOGICAL :: liter_flag
-  LOGICAL :: lreset_internal ! TODO: initial value of lreset_internal is undefined!
+
+  ! TODO: initial value of lreset_internal was undefined! --> now set to false
+  LOGICAL :: lreset_internal
 
   print *, " eqsolve"
+
+  ! need to do this before jump label 20 to allow restart_iter to do its magic
+  lreset_internal = .false.
 
   liter_flag = iter2 .eq. 1 ! true at startup of program
 
@@ -121,10 +126,12 @@ SUBROUTINE eqsolve(ier_flag)
         res0 = fsq
      end if
 
+     ! res0 is the best force residual we got so far
      res0 = MIN(res0,fsq)
 
      IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
         ! Store current state (irst=1)
+        ! --> was able to reduce force consistenly over at least 10 iterations
         CALL restart_iter(delt0r)
      ELSE IF (fsq.gt.100*res0 .and. iter2.gt.iter1) THEN
         ! Residuals are growing in time, reduce time step
@@ -132,6 +139,9 @@ SUBROUTINE eqsolve(ier_flag)
      ELSE IF (iter2-iter1 .gt. ns4/2 .and.                              &
               iter2       .gt. 2*ns4 .and.                              &
               fsqr+fsqz   .gt. c1pm2       ) THEN ! 1.0e-2
+
+        ! quite some iterations and quite large forces
+        ! --> restart with different timestep
 
         irst = 3
      ENDIF

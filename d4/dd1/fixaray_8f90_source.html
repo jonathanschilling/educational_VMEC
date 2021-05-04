@@ -258,27 +258,28 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordflow">IF</span> (mn1 .ne. mnmax_nyq) stop <span class="stringliteral">&#39;mn1 != mnmax_nyq&#39;</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="comment">! cos01:  m*cos(m u - n v) for m=1, n=0 --&gt; d(sin(mu))/du</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="comment">! sin01: -m*sin(m u - n v) for m=1, n=0 --&gt; d(cos(mu))/du</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="comment">! evaluated on (ntheta3 x nzeta) grid</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  mn = 0 <span class="comment">! mn is re-used as linear grid index here</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  m = 1</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordflow">DO</span> i = 1, ntheta3</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;     argi = twopi*(i - 1)/ntheta1</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;     <span class="keywordflow">DO</span> j = 1, nzeta</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        mn = mn + 1</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        cos01(mn) = m*cos(m*argi)*<a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        sin01(mn) =-m*sin(m*argi)*<a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">! _fac_tor for _con_straint</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(0) = zero</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(1:mpol1-1) = -0.25_dp*<a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>/<a class="code" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(2:mpol1,1)**2</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(mpol1) = zero</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="comment">! cos01 and sin01 are used as trigmult for precondn in bcovar</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="comment">! cos01:  m*cos(m u - n v) for m=1, n=0 --&gt; d(sin(mu))/du</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="comment">! sin01: -m*sin(m u - n v) for m=1, n=0 --&gt; d(cos(mu))/du</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="comment">! evaluated on (ntheta3 x nzeta) grid</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  mn = 0 <span class="comment">! mn is re-used as linear grid index here</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  m = 1</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">DO</span> i = 1, ntheta3</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;     argi = twopi*(i - 1)/ntheta1</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;     <span class="keywordflow">DO</span> j = 1, nzeta</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        mn = mn + 1</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        cos01(mn) = m*cos(m*argi)*<a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        sin01(mn) =-m*sin(m*argi)*<a class="code" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">! _fac_tor for _con_straint</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(0) = zero</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(1:mpol1-1) = -0.25_dp*<a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>/<a class="code" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(2:mpol1,1)**2</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(mpol1) = zero</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3">fixaray</a></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3">fixaray</a></div>
 <div class="ttc" id="afixaray_8f90_html_aca9a4c886a9423b95e8a9336071de2e3"><div class="ttname"><a href="../../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3">fixaray</a></div><div class="ttdeci">subroutine fixaray</div><div class="ttdoc">allocate and fill some fixed-size arrays (only depending on Fourier resolution).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dd1/fixaray_8f90_source.html#l00006">fixaray.f90:7</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ab7337be528b5a288510f31052f7d5061"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">vmec_main::xmpq</a></div><div class="ttdeci">real(rprec), dimension(0:mpol1d, 3) xmpq</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00080">vmec_main.f90:80</a></div></div>
@@ -297,7 +298,7 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/dd1/fixaray_8f90.html">fixaray.f90</a></li>
-    <li class="footer">Generated on Tue May 4 2021 03:49:14 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 4 2021 04:59:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

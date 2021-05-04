@@ -1,7 +1,7 @@
 <map id="fileout" name="fileout">
 <area shape="rect" id="node1" title="Write the output files." alt="" coords="5,360,61,387"/>
 <area shape="rect" id="node2" href="$d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="117,132,167,159"/>
-<area shape="rect" id="node15" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional." alt="" coords="109,857,175,884"/>
+<area shape="rect" id="node15" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="109,857,175,884"/>
 <area shape="rect" id="node55" href="$de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" title="Write the output files of VMEC." alt="" coords="115,360,169,387"/>
 <area shape="rect" id="node3" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="261,56,336,83"/>
 <area shape="rect" id="node4" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="277,107,320,133"/>

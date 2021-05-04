@@ -172,7 +172,7 @@ var sectionId = 'dynsection-0';
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="../../d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" target="_top" xlink:title="Evaluate the three&#45;dimensional MHD energy functional.">
+<g id="a_node8"><a xlink:href="../../d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" target="_top" xlink:title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells...">
 <polygon fill="white" stroke="black" points="329,-38.5 329,-57.5 378,-57.5 378,-38.5 329,-38.5"/>
 <text text-anchor="middle" x="353.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">funct3d</text>
 </a>

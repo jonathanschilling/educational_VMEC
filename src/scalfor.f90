@@ -3,6 +3,8 @@
 
 !> \brief Build forces from different contributions
 !>
+!> In below parameter names, x=R or Z.
+!>
 !> @param gcx force output
 !> @param axm force contribution input
 !> @param bxm force contribution input
@@ -101,7 +103,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! END IF
 
 
-  ! SOLVES BX(I)*X(I-1)+DX(I)*X(I)+AX(I)*X(I+1)=GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)
+  ! SOLVES AX(I)*X(I+1) + DX(I)*X(I) + BX(I)*X(I-1) = GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)
   CALL tridslv (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, ns, ntmax)
 
   DEALLOCATE (ax, bx, dx)

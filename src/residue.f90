@@ -116,7 +116,12 @@ SUBROUTINE constrain_m1(gcr, gcz)
   END IF
 
   !v8.50: ADD iter2<2 so reset=<WOUT_FILE> works
-  IF (fsqz.LT.FThreshold .OR. iter2.LT.2) gcz = 0
+  IF (fsqz.LT.FThreshold .OR. iter2.LT.2) then
+     ! ensure that the m=1 constraint is satisfied exactly
+     ! --> the corresponding m=1 coeffs of R,Z are constrained to be zero
+     !     and thus must not be "forced" (by the time evol using gc) away from zero
+     gcz = 0
+  end if
 
 END SUBROUTINE constrain_m1
 

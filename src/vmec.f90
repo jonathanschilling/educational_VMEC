@@ -4,7 +4,9 @@
 !> \brief Main program of VMEC
 PROGRAM xvmec
 
-  call run_vmec
+  implicit none
+
+  call vmec
 
 end program xvmec
 
@@ -53,12 +55,6 @@ subroutine vmec
      PRINT *
      PRINT *,' For example: '
      PRINT *,'    xvmec input.tftr OR xvmec tftr OR xvmec ../input.tftr'
-     PRINT *
-     PRINT *,' Additional (optional) command arguments are allowed:'
-     PRINT *
-     PRINT *,'  xvmec <filename> [noscreen]'
-     PRINT *
-     PRINT *,' noscreen: supresses all output to screen (default, or "screen", displays output)'
 
      STOP
   END IF
@@ -76,8 +72,6 @@ subroutine vmec
      input_extension = TRIM(arg)
      input_file = 'input.'//TRIM(input_extension)
   END IF
-
-
 
 
   ier_flag = norm_term_flag

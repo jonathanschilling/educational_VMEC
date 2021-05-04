@@ -1,7 +1,7 @@
 !> \file
-!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$lambda\f$ on full grid.
+!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$\lambda\f$ on full grid.
 
-!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$lambda\f$ on full grid.
+!> \brief Interpolate \f$R\f$, \f$Z\f$ and \f$\lambda\f$ on full grid.
 !>
 !> @param xnew interpolated state vector (nsnew surfaces)
 !> @param xold interpolation basis: old state vector (nsold surfaces)

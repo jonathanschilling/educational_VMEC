@@ -1,7 +1,13 @@
 !> \file
 !> \brief Evaluate the three-dimensional MHD energy functional.
+!>        Think of this as the "forward model" that
+!>        tells you the MHD forces in Fourier space
+!>        given the Fourier coefficients of the flux surface geometry.
 
 !> \brief Evaluate the three-dimensional MHD energy functional.
+!>        Think of this as the "forward model" that
+!>        tells you the MHD forces in Fourier space
+!>        given the Fourier coefficients of the flux surface geometry.
 !>
 !> @param ier_flag error flag
 SUBROUTINE funct3d (ier_flag)
@@ -40,7 +46,7 @@ SUBROUTINE funct3d (ier_flag)
     "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .true.
+  logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.
@@ -78,16 +84,18 @@ SUBROUTINE funct3d (ier_flag)
 
   ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
 
-  router = r1(  ns,0) + r1(  ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
+  router = r1(ns,0) + r1(ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
 
   ! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
   rinner = r1(l0pi,0) + r1(l0pi,1)
 
-  r00 = r1(1,0)
-  z00 = z1(1,0)
+  r00 = r1(1,0) ! contrib from only even m
+  z00 = z1(1,0) ! contrib from only even m
 
   ! COMPUTE CONSTRAINT RCON, ZCON
+
+  ! --> see Hirshman, Schwenn & Nührenberg
 
 ! #ifndef _HBANGLE
   rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt) ! odd-m entries need to be scaled appropriately
@@ -97,6 +105,8 @@ SUBROUTINE funct3d (ier_flag)
   ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)
   zu0(:nrzt)    = zu(:nrzt,0)   + zu(:nrzt,1)*sqrts(:nrzt)
 
+! #ifndef _HBANGLE
+
   ! COMPUTE RCON0, ZCON0 FOR FIXED BOUNDARY BY SCALING EDGE VALUES
   ! SCALE BY POWER OF SQRTS, RATHER THAN USE rcon0 = rcon, etc.
   ! THIS PREVENTS A DISCONTINUITY WHEN RESTARTING FIXED BOUNDARY WITH NEW RCON0....
@@ -105,7 +115,6 @@ SUBROUTINE funct3d (ier_flag)
   ! BOUNDARY, WE SET RCON0,ZCON0 THE SAME INITIALLY, BUT TURN THEM OFF
   ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
 
-! #ifndef _HBANGLE
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
      ! immediately before first vacuum call (?)
      DO l = 1, ns
@@ -123,6 +132,12 @@ SUBROUTINE funct3d (ier_flag)
      ! except when computing output file --> ignore bad jacobian
      return
   end if
+
+
+
+  ! NOTE: up to here, only worked on geometry so far...
+
+
 
   ! COMPUTE COVARIANT COMPONENTS OF B, MAGNETIC AND KINETIC PRESSURE,
   ! AND METRIC ELEMENTS ON HALF-GRID
@@ -312,6 +327,8 @@ SUBROUTINE funct3d (ier_flag)
      END IF
 
      ! FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
+     ! Note that gc is immediately zeroed on entry,
+     ! so above use of gc is only for temporary values inside alias() !
      CALL tomnsps (gc,               &
                    armn, brmn, crmn, &
                    azmn, bzmn, czmn, &

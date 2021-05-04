@@ -37,20 +37,15 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   INTEGER :: n, m, mparity, k, i, j1, l, j1l, nsl
   INTEGER :: ioff, joff, mj, ni, nsz
   REAL(rprec), DIMENSION(:,:,:), POINTER :: rmncc, rmnss, zmncs, zmnsc, lmncs, lmnsc
+
+  ! WORK1 Array of inverse transforms in toroidal angle (zeta), for all radial positions
+  ! NOTE: ORDERING OF LAST INDEX IS DIFFERENT HERE THAN IN PREVIOUS VMEC2000 VERSIONS
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
   REAL(rprec) :: cosmux, sinmux
 
   ! This is the inverse Fourier transform from the (odd-m-scaled-by-1/sqrt(s))-xc
   ! given in rzl_array to real space. Tangential derivatives are also computed.
 
-  ! WORK1 Array of inverse transforms in toroidal angle (zeta), for all radial positions
-  ! NOTE: ORDERING OF LAST INDEX IS DIFFERENT HERE THAN IN PREVIOUS VMEC2000 VERSIONS
-  !
-  ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(stored at rss) = .5(rss + zcs),
-  ! R-(stored at zcs) = .5(rss - zcs), TO EXTERNAL ("PHYSICAL") rss, zcs FORMS. NEED THIS EVEN
-  ! WHEN COMPUTING HESSIAN FOR FREE BOUNDARY (rmnss, zmncs at JS=NS needed in vacuum call)
-  !
-  ! WHEN COMPUTING PRECONDITIONER, USE FASTER HESSIAN VERSION (totzsps_hess) INSTEAD.
   rmncc => rzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   zmnsc => rzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
   lmnsc => rzl_array(:,:,:,zsc+2*ntmax)       !!SIN(mu) COS(nv)
@@ -60,6 +55,10 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      lmncs => rzl_array(:,:,:,zcs+2*ntmax)    !!COS(mu) SIN(nv)
 
 ! #ifndef _HBANGLE
+     ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(stored at rss) = .5(rss + zcs),
+     ! R-(stored at zcs) = .5(rss - zcs), TO EXTERNAL ("PHYSICAL") rss, zcs FORMS. NEED THIS EVEN
+     ! WHEN COMPUTING HESSIAN FOR FREE BOUNDARY (rmnss, zmncs at JS=NS needed in vacuum call)
+
      CALL convert_sym (rmnss, zmncs)
 ! #end /* ndef _HBANGLE */
 
@@ -69,13 +68,13 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! v8.51  Restore hs dependence (1:ns, not just ns)
   !     fnorm1 = one/SUM(rzl_array(1:ns,:,m1:,1:2*ntmax)**2)
 
-  ! ORIGIN EXTRAPOLATION (JS=1) FOR M=1 MODES
-  ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION
-  !       FOR R,Z. HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE
-  !       TRI-DIAG 2D PRECONDITIONER
-  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! constant extrapolation to axis (?)
-  ioff = LBOUND(rmncc,2)
-  joff = LBOUND(rmncc,3)
+  ! constant EXTRAPOLATION to the ORIGIN (JS=1) FOR M=1 MODES
+  ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION FOR R,Z.
+  !       HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE TRI-DIAG 2D PRECONDITIONER.
+  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:)
+
+  ioff = LBOUND(rmncc,2) ! start index of Z (?)
+  joff = LBOUND(rmncc,3) ! start index of lambda (?)
 
   ! ORIGIN EXTRAPOLATION OF M=0 MODES FOR LAMBDA
   IF (lthreed .and. jlam(m0).gt.1) then
@@ -103,23 +102,26 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         ni = n+ioff
         DO k = 1, nzeta
            l = ns*(k-1)
-           j1l = j1+l;  nsl = ns+l
-           work1(j1l:nsl,1) = work1(j1l:nsl,1) + rmncc(j1:ns,ni,mj)*cosnv(k,n)
-           work1(j1l:nsl,6) = work1(j1l:nsl,6) + zmnsc(j1:ns,ni,mj)*cosnv(k,n)
+
+           j1l = j1+l
+           nsl = ns+l
+
+           work1(j1l:nsl, 1) = work1(j1l:nsl, 1) + rmncc(j1:ns,ni,mj)*cosnv(k,n)
+           work1(j1l:nsl, 6) = work1(j1l:nsl, 6) + zmnsc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,10) = work1(j1l:nsl,10) + lmnsc(j1:ns,ni,mj)*cosnv(k,n)
 
            IF (.not.lthreed) CYCLE
 
-           work1(j1l:nsl,4) = work1(j1l:nsl,4)   + rmnss(j1:ns,ni,mj)*cosnvn(k,n)
-           work1(j1l:nsl,7) = work1(j1l:nsl,7)   + zmncs(j1:ns,ni,mj)*cosnvn(k,n)
+           work1(j1l:nsl, 4) = work1(j1l:nsl, 4) + rmnss(j1:ns,ni,mj)*cosnvn(k,n)
+           work1(j1l:nsl, 7) = work1(j1l:nsl, 7) + zmncs(j1:ns,ni,mj)*cosnvn(k,n)
            work1(j1l:nsl,11) = work1(j1l:nsl,11) + lmncs(j1:ns,ni,mj)*cosnvn(k,n)
 
-           work1(j1l:nsl,2) = work1(j1l:nsl,2)   + rmnss(j1:ns,ni,mj)*sinnv(k,n)
-           work1(j1l:nsl,5) = work1(j1l:nsl,5)   + zmncs(j1:ns,ni,mj)*sinnv(k,n)
-           work1(j1l:nsl,9) = work1(j1l:nsl,9)   + lmncs(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 2) = work1(j1l:nsl, 2) + rmnss(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 5) = work1(j1l:nsl, 5) + zmncs(j1:ns,ni,mj)*sinnv(k,n)
+           work1(j1l:nsl, 9) = work1(j1l:nsl, 9) + lmncs(j1:ns,ni,mj)*sinnv(k,n)
 
-           work1(j1l:nsl,3) = work1(j1l:nsl,3)   + rmncc(j1:ns,ni,mj)*sinnvn(k,n)
-           work1(j1l:nsl,8) = work1(j1l:nsl,8)   + zmnsc(j1:ns,ni,mj)*sinnvn(k,n)
+           work1(j1l:nsl, 3) = work1(j1l:nsl, 3) + rmncc(j1:ns,ni,mj)*sinnvn(k,n)
+           work1(j1l:nsl, 8) = work1(j1l:nsl, 8) + zmnsc(j1:ns,ni,mj)*sinnvn(k,n)
            work1(j1l:nsl,12) = work1(j1l:nsl,12) + lmnsc(j1:ns,ni,mj)*sinnvn(k,n)
         END DO
      END DO
@@ -127,7 +129,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      ! INVERSE TRANSFORM IN M-THETA, FOR ALL RADIAL, ZETA VALUES
      l = 0
      DO i = 1, ntheta2
-        j1l = l+1;  nsl = nsz+l ! start and end indices of poloidal slice of current flux surface
+        j1l = l+1
+        nsl = nsz+l ! start and end indices of poloidal slice of current flux surface
+
         l = l + nsz
 
         cosmux = xmpq(m,1)*cosmu(i,m)
@@ -200,7 +204,7 @@ SUBROUTINE convert_sym(rmnss, zmncs)
   REAL(rprec), DIMENSION(ns,0:ntor) :: temp
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSS, ZMNCS FOURIER FORM
-  ! rmnss = .5(RMNSS+ZMNCS), zmnss = .5(RMNSS-ZMNCS) -> 0
+  ! rmnss = (RMNSS+ZMNCS), zmncs = (RMNSS-ZMNCS)
   IF (lconm1) then
 
      ! This essentially reverts the operation performed at the end of readin().
@@ -360,7 +364,7 @@ SUBROUTINE convert_asym(rmnsc, zmncc)
   REAL(rprec), DIMENSION(ns,0:ntor) :: temp
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSC, ZMNCC FOURIER FORM
-  ! rmnsc(in) = .5(RMNSC+ZMNCC), zmncc(in) = .5(RMNSC+ZMNCC) -> 0
+  ! rmnsc(in) = (RMNSC+ZMNCC), zmncc(in) = (RMNSC+ZMNCC)
 
   IF (lconm1) then
 

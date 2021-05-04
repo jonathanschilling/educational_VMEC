@@ -3,12 +3,12 @@
 
 !> \brief Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s)
 !>
-!> @param gcons
-!> @param ztemp
-!> @param gcs
-!> @param gsc
-!> @param gcc
-!> @param gss
+!> @param gcons ! output: Fourier-transform of alias (=spectral condensation) force
+!> @param ztemp ! input: rcon, zcon real-space constraint force
+!> @param gcs ! temporary storage
+!> @param gsc ! temporary storage
+!> @param gcc ! temporary storage
+!> @param gss ! temporary storage
 SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
   USE vmec_main
   IMPLICIT NONE

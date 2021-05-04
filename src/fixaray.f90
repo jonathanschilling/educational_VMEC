@@ -50,6 +50,7 @@ SUBROUTINE fixaray
 
   mscale(1:mnyq) = mscale(0)/osqrt2
   nscale(1:nnyq) = nscale(0)/osqrt2
+
   r0scale = mscale(0)*nscale(0)
 
   ! GENERALLY, ONLY NEED THIS FROM 1, ntheta2 EXCEPT IN GETBRHO ROUTINE
@@ -136,6 +137,7 @@ SUBROUTINE fixaray
 
   IF (mn1 .ne. mnmax_nyq) STOP 'mn1 != mnmax_nyq'
 
+  ! cos01 and sin01 are used as trigmult for precondn in bcovar
   mn = 0
   m = 1
   DO i = 1, ntheta3

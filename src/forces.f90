@@ -40,7 +40,7 @@ SUBROUTINE forces
   !
   ! GUU, GUV: VARIATION OF Ru, Rv, Zu, Zv IN guu, guv
 
-  ndim = 1+nrzt
+  ndim = 1+nrzt ! TODO: remove this; one extra element at the end of a large vector sound like reconstruction stuff...
 
   ! POINTER ALIASES
   bsqr => extra1(:,1)

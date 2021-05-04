@@ -1,10 +1,12 @@
 !> \file
-!> \brief Fourier transform alias force and also return intermediate output
+!> \brief Fourier-space bandpass filter on constraint force for spectral condensation
 
-!> \brief Fourier transform alias force from ztemp to gcons and also return intermediate output in g(c,s)(c,s)
+!> \brief Fourier-space bandpass filter on constraint force for spectral condensation
 !>
-!> @param gcons ! output: Fourier-transform of alias (=spectral condensation) force
-!> @param ztemp ! input: rcon, zcon real-space constraint force
+!> Eliminates contributions to gcon from m=1 and m=mpol1-1=mpol-2 poloidal mode numbers.
+!>
+!> @param gcons ! output: Fourier-filtered spectral condensation force gcon
+!> @param ztemp ! input: full-m gcon in real-space constraint force
 !> @param gcs ! temporary storage
 !> @param gsc ! temporary storage
 !> @param gcc ! temporary storage
@@ -33,6 +35,8 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
   gcs = 0;  gsc = 0
   gcc = 0;  gss = 0
 
+  ! The start of this loop at m=1 and its end at mpol1-1=mpol-2
+  ! is what makes this routine a Fourier-space bandpass filter.
   DO m = 1, mpol1-1
      work = 0
      DO i = 1, ntheta2
@@ -51,7 +55,7 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
         end if
      END DO
 
-     DO n = 0, ntor
+     DO n = 0, ntor ! retain full toroidal resolution
         DO k = 1, nzeta
            l = ns*(k-1)
            IF (.not.lasym) THEN

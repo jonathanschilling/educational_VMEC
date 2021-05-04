@@ -14,8 +14,12 @@
 !> @param clmn
 !> @param arcon
 !> @param azcon
-SUBROUTINE tomnsps(frzl_array, armn, brmn, crmn, azmn, &
-                   bzmn, czmn, blmn, clmn, arcon, azcon)
+SUBROUTINE tomnsps(frzl_array, &
+                   armn, brmn, crmn, &
+                   azmn, bzmn, czmn, &
+                         blmn, clmn, &
+                   arcon, &
+                   azcon)
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
   IMPLICIT NONE

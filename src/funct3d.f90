@@ -317,6 +317,7 @@ SUBROUTINE funct3d (ier_flag)
      ! COMPUTE CONSTRAINT FORCE
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
                      + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
+     ! Fourier-space filter: only retain m=1, ..., (mpol1-1)==mpol-2 in gcon
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1))
 ! #end /* ndef _HBANGLE */
 
@@ -353,7 +354,7 @@ SUBROUTINE funct3d (ier_flag)
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
          ! first iteration and gigantic force residuals --> what is going one here?
-         irst = 4
+         irst = 4 ! fatal error
      end if
 
 !  ELSE

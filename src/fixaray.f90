@@ -18,7 +18,9 @@ SUBROUTINE fixaray
   INTEGER :: mnyq0, nnyq0
   REAL(rprec):: argi, arg, argj, dnorm
 
-  logical, parameter :: dump_fixaray = .true.
+  logical, parameter :: dump_fixaray = .false.
+  logical, parameter :: dump_spectral_constraint = .true.
+
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT
@@ -200,17 +202,17 @@ SUBROUTINE fixaray
       END DO
     END DO
 
-    write(42, *) "# mn xm xn"
+    write(42, *) "# mn1 xm xn"
     DO mn1 = 1, mnmax
       write(42, *) mn1, xm(mn1), xn(mn1)
     END DO
 
-    write(42, *) "# mn ixm"
+    write(42, *) "# m n mn ixm"
     mn = 0
     DO m = 0, mpol1
       DO n = 0, ntor
         mn = mn + 1
-        write(42, *) mn, ixm(mn)
+        write(42, *) m, n, mn, ixm(mn)
       END DO
     end do
 
@@ -231,6 +233,21 @@ SUBROUTINE fixaray
 
     close(42)
     stop "fixaray output dumped to fixaray.<ext>"
+  end if
+
+  if (dump_spectral_constraint) then
+    open(unit=42, file="spectral_constraint."//trim(input_extension), status="unknown")
+
+    write(42, *) "# mpol1"
+    write(42, *) mpol1
+
+    write(42, *) "# m xmpq(m,1) xmpq(m,2) xmpq(m,3) faccon"
+    do m = 0, mpol1
+      write(42, *) m, xmpq(m,1), xmpq(m,2), xmpq(m,3), faccon(m)
+    end do
+
+    close(42)
+    stop "spectral constraint output dumped to spectral_constraint.<ext>"
   end if
 
 END SUBROUTINE fixaray

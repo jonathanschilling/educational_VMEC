@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keywordtype">CHARACTER(LEN=100)</span> :: line, line2</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="comment">! dump rbcc, ... into &#39;input_coeffs.dat&#39; and stop</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">!logical :: dump_input_coeffs = .true.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">!  logical :: dump_input_coeffs = .true.</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">logical</span> :: dump_input_coeffs = .false.</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ier_flag_init = ier_flag</div>
@@ -479,9 +479,9 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  <span class="comment">! CONVERT TO INTERNAL FORM FOR (CONSTRAINED) m=1 MODES</span></div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  <span class="comment">! INTERNALLY, FOR m=1: XC(rss) = .5(RSS+ZCS), XC(zcs) = .5(RSS-ZCS)</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="comment">! WITH XC(zcs) -&gt; 0 FOR POLAR CONSTRAINT ! TODO: jons: maybe XC(zsc) -&gt; 0 is meant here ?</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="comment">! WITH XC(zcs) -&gt; 0 FOR POLAR CONSTRAINT</span></div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  <span class="comment">! FOR ASYMMETRIC CASE, XC(rsc) = .5(RSC+ZCC), XC(zcc) = .5(RSC-ZCC)</span></div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  <span class="comment">! WITH XC(zss) -&gt; 0 FOR POLAR CONSTRAINT</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  <span class="comment">! WITH XC(zss) -&gt; 0 FOR POLAR CONSTRAINT ! TODO: (jons) maybe XC(zcc)--&gt;0 is meant here?</span></div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;  <span class="comment">! (see convert_sym, convert_asym in totzsp.f90 file)</span></div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb">lconm1</a> .AND. (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>.OR.lasym)) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;     <span class="comment">! the length could be also defined as ntor+1</span></div>
@@ -503,7 +503,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="keywordflow">  END IF</span></div>
 <div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;  <span class="keywordflow">if</span> (dump_input_coeffs) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keyword">open</span>(unit=42, file=<span class="stringliteral">&quot;input_coeffs.dat&quot;</span>, status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keyword">open</span>(unit=42, file=<span class="stringliteral">&quot;coeffs_input.&quot;</span>//trim(input_extension), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
 <div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="comment">! write header</span></div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keywordflow">if</span> (.not. lasym) <span class="keywordflow">then</span></div>
@@ -557,7 +557,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keyword">close</span>(42)</div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    stop <span class="stringliteral">&quot;boundary coeffs dumped to input_coeffs.dat&quot;</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    stop <span class="stringliteral">&quot;boundary coeffs dumped to coeffs_input.&lt;ext&gt;&quot;</span></div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;  <span class="comment">! Convert to Internal units</span></div>
@@ -605,7 +605,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/da3/readin_8f90.html">readin.f90</a></li>
-    <li class="footer">Generated on Mon May 10 2021 10:51:43 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 11 2021 19:04:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

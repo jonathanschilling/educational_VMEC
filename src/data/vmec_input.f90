@@ -192,6 +192,8 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   READ (iunit, nml=indata, iostat=istat)
 
   if (istat .ne. 0) then
+    ! help to debug invalid inputs:
+    ! re-read last line that lead to error and print it to screen
     backspace(iunit)
     read(iunit,fmt='(A)') line
     write(*,'(A)') 'Invalid line in namelist: '//trim(line)

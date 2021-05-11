@@ -18,6 +18,8 @@ SUBROUTINE fixaray
   INTEGER :: mnyq0, nnyq0
   REAL(rprec):: argi, arg, argj, dnorm
 
+  logical, parameter :: dump_fixaray = .true.
+
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT
  ! NOTE: NEED 2 X NYQUIST FOR FAST HESSIAN CALCULATIONS
@@ -38,7 +40,7 @@ SUBROUTINE fixaray
            sinmui(ntheta3,0:mnyq), sinmumi(ntheta3,0:mnyq),         &
            cosnv(nzeta,0:nnyq),    sinnv(nzeta,0:nnyq),             &
            cosnvn(nzeta,0:nnyq),   sinnvn(nzeta,0:nnyq),            &
-           cos01(nznt), sin01(nznt), stat=istat1 )
+           cos01(nznt),            sin01(nznt),            stat=istat1 )
   ALLOCATE(xm(mnmax), xn(mnmax), ixm(mnsize), jmin3(0:mnsize-1),    &
            xm_nyq(mnmax_nyq), xn_nyq(mnmax_nyq),                    &
            mscale(0:mnyq), nscale(0:nnyq), stat=istat2)
@@ -167,5 +169,68 @@ SUBROUTINE fixaray
   faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
   faccon(mpol1) = zero
 
+  if (dump_fixaray) then
+    open(unit=42, file="fixaray."//trim(input_extension), status="unknown")
+
+    write(42, *) "# ntheta3 mnyq nzeta nnyq nznt mnmax mnsize mnmax_nyq"
+    write(42, *) ntheta3, mnyq, nzeta, nnyq, nznt, mnmax, mnsize, mnmax_nyq
+
+    write(42, *) "# i m cosmu sinmu cosmum sinmum cosmui sinmui cosmui3 cosmumi sinmumi cosmumi3"
+    DO i = 1, ntheta3
+      DO m = 0, mnyq
+        write (42, *) i, m, cosmu(i,m), sinmu(i,m), cosmum(i,m), sinmum(i,m), &
+                      cosmui(i,m), sinmui(i,m), cosmui3(i,m), &
+                      cosmumi(i,m), sinmumi(i,m), cosmumi3(i,m)
+      end do
+    end do
+
+    write(42, *) "# j n cosnv sinnv cosnvn sinnvn"
+    DO j = 1, nzeta
+      DO n = 0, nnyq
+        write(42, *) j, n, cosnv(j,n), sinnv(j,n), cosnvn(j,n), sinnvn(j,n)
+      END DO
+    END DO
+
+    write(42, *) "# i j mn cos01 sin01"
+    mn = 0 ! mn is re-used as linear grid index here
+    DO i = 1, ntheta3
+      DO j = 1, nzeta
+        mn = mn + 1
+        write(42, *) i, j, mn, cos01(mn), sin01(mn)
+      END DO
+    END DO
+
+    write(42, *) "# mn xm xn"
+    DO mn1 = 1, mnmax
+      write(42, *) mn1, xm(mn1), xn(mn1)
+    END DO
+
+    write(42, *) "# mn ixm"
+    mn = 0
+    DO m = 0, mpol1
+      DO n = 0, ntor
+        mn = mn + 1
+        write(42, *) mn, ixm(mn)
+      END DO
+    end do
+
+    write(42, *) "# mn1 xm_nyq xn_nyq"
+    DO mn1 = 1, mnmax_nyq
+        write(42, *) mn1, xm_nyq(mn1), xn_nyq(mn1)
+     END DO
+
+    write(42, *) "# m mscale"
+    DO m = 0, mnyq
+      write(42, *) m, mscale(m)
+    end do
+
+    write(42, *) "# n nscale"
+    DO n = 0, nnyq
+      write(42, *) n, nscale(n)
+    end do
+
+    close(42)
+    stop "fixaray output dumped to fixaray.<ext>"
+  end if
 
 END SUBROUTINE fixaray

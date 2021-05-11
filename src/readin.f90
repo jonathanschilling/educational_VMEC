@@ -22,7 +22,7 @@
   CHARACTER(LEN=100) :: line, line2
 
   ! dump rbcc, ... into 'input_coeffs.dat' and stop
-  !logical :: dump_input_coeffs = .true.
+!  logical :: dump_input_coeffs = .true.
   logical :: dump_input_coeffs = .false.
 
   ier_flag_init = ier_flag
@@ -370,9 +370,9 @@
 
   ! CONVERT TO INTERNAL FORM FOR (CONSTRAINED) m=1 MODES
   ! INTERNALLY, FOR m=1: XC(rss) = .5(RSS+ZCS), XC(zcs) = .5(RSS-ZCS)
-  ! WITH XC(zcs) -> 0 FOR POLAR CONSTRAINT ! TODO: jons: maybe XC(zsc) -> 0 is meant here ?
+  ! WITH XC(zcs) -> 0 FOR POLAR CONSTRAINT
   ! FOR ASYMMETRIC CASE, XC(rsc) = .5(RSC+ZCC), XC(zcc) = .5(RSC-ZCC)
-  ! WITH XC(zss) -> 0 FOR POLAR CONSTRAINT
+  ! WITH XC(zss) -> 0 FOR POLAR CONSTRAINT ! TODO: (jons) maybe XC(zcc)-->0 is meant here?
   ! (see convert_sym, convert_asym in totzsp.f90 file)
   IF (lconm1 .AND. (lthreed.OR.lasym)) THEN
      ! the length could be also defined as ntor+1
@@ -394,7 +394,7 @@
   END IF
 
   if (dump_input_coeffs) then
-    open(unit=42, file="input_coeffs.dat", status="unknown")
+    open(unit=42, file="coeffs_input."//trim(input_extension), status="unknown")
 
     ! write header
     if (.not. lasym) then
@@ -448,7 +448,7 @@
 
     close(42)
 
-    stop "boundary coeffs dumped to input_coeffs.dat"
+    stop "boundary coeffs dumped to coeffs_input.<ext>"
   end if
 
   ! Convert to Internal units

@@ -75,7 +75,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   ! FACTOR OF SIGNGS NEEDED HERE, SINCE MATCH IS MADE TO LINE
   ! INTEGRAL OF BSUBU (IN GETIOTA) ~ SIGNGS * CURTOR
   pedge = pcurr(one) ! pcurr gives current enclosed between axis and given parameter
-  ! --> pedge is radial integral over current density profile (still in Amperes)
+  ! --> pedge is temporarily re-used to store the radial integral over current density profile (still in Amperes)
   Itor = 0
   ! TODO: what is this? might have something to do with preventing division-by-zero
   ! when computing scaled toroidal current profile from pcurr and curtor...

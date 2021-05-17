@@ -81,6 +81,9 @@
 
   ns_maxval = nsmin
 
+  ! Convert to Internal units
+  currv = mu0*curtor
+
   ! WRITE OUT DATA TO THREED1 FILE
 
   !SPH121912 - SCALING TO RENDER LAMSCALE=1
@@ -450,8 +453,5 @@
 
     stop "boundary coeffs dumped to coeffs_input.<ext>"
   end if
-
-  ! Convert to Internal units
-  currv = mu0*curtor
 
 END SUBROUTINE readin

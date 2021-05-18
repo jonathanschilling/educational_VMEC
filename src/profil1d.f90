@@ -23,6 +23,9 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   REAL(rprec), EXTERNAL :: pcurr, pmass, piota, &
                            torflux, torflux_deriv, polflux, polflux_deriv
 
+  character(len=255) :: dump_filename
+  logical, parameter :: dump_profil1d = .true.
+
   ! COMPUTE PHIP, IOTA PROFILES ON FULL-GRID
   ! COMPUTE MASS PROFILE ON HALF-GRID BY READING INPUT COEFFICIENTS.
   ! PRESSURE CONVERTED TO INTERNAL UNITS BY MULTIPLICATION BY mu0 = 4*pi*10**-7
@@ -30,6 +33,7 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   torflux_edge = signgs * phiedge / twopi
   si = torflux(one)
   IF (si .ne. zero) torflux_edge = torflux_edge/si
+
   polflux_edge = torflux_edge
   si = polflux(one)
   IF (si .ne. zero) polflux_edge = polflux_edge/si
@@ -51,10 +55,10 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
      iotas(i) = piota(tf) ! evaluate iota profile
      icurv(i) = pcurr(tf) ! evaluate current profile
   END DO
+  phips(ns+1) = 2*phips(ns)-phips(ns-1) ! virtual point outside the LCFS
 
   ! Compute lamscale factor for "normalizing" lambda (needed for scaling hessian)
   lamscale = SQRT(hs*SUM(phips(2:ns)**2))
-  phips(ns+1) = 2*phips(ns)-phips(ns-1) ! virtual point outside the LCFS
   IF (lamscale .EQ. 0) STOP 'PHIP == 0: ERROR!'
 
   IF (lflip) THEN
@@ -139,5 +143,60 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   IF (lreset) THEN
     xc = 0
   END IF
+
+  ! dump all relevant output to a text file
+  if (dump_profil1d) then
+    write(dump_filename, 999) ns, trim(input_extension)
+999 format('profil1d_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# torflux_edge polflux_edge r00 lamscale"
+    write(42, *) torflux_edge, polflux_edge, r00, lamscale
+
+    write(42, *) "# currv Itor"
+    write(42, *) currv, Itor
+
+    write(42, *) "# shalf"
+    write(42, *) shalf(:ns)
+
+    write(42, *) "# phips"
+    write(42, *) phips
+
+    write(42, *) "# chips"
+    write(42, *) chips
+
+    write(42, *) "# iotas"
+    write(42, *) iotas
+
+    write(42, *) "# icurv"
+    write(42, *) icurv
+
+    write(42, *) "# mass"
+    write(42, *) mass
+
+    write(42, *) "# sqrts"
+    write(42, *) sqrts(:ns)
+
+    write(42, *) "# phipf"
+    write(42, *) phipf
+
+    write(42, *) "# chipf"
+    write(42, *) chipf
+
+    write(42, *) "# iotaf"
+    write(42, *) iotaf
+
+    write(42, *) "# bdamp"
+    write(42, *) bdamp
+
+    write(42, *) "# sm"
+    write(42, *) sm
+
+    write(42, *) "# sp"
+    write(42, *) sp
+
+    close(42)
+  end if
 
 END SUBROUTINE profil1d

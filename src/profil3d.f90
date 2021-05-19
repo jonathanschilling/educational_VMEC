@@ -212,6 +212,8 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
                  zmn(js,n,m,ntype) = facj * zmn_bdy(n,m,ntype)*t1
               ENDIF
 
+
+
            END DO
         END DO
      END DO
@@ -225,8 +227,8 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
   ! dump all relevant output to a text file
   if (dump_profil3d) then
-    write(dump_filename, 999) ns, trim(input_extension)
-999 format('profil3d_',i5.5,'.',a)
+    write(dump_filename, 999) ns, profil3d_calls, trim(input_extension)
+999 format('profil3d_',i5.5,'_',i2.2,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -252,9 +254,6 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
       DO ntype = 1, ntmax
         DO m = 0, mpol1
           DO n = 0, ntor
-            mn = n + ntor1*m
-            l = js + ns*mn + (ntype - 1)*mns
-
             write (42, *) js, ntype, m, n, &
                           rmn(js,n,m,ntype), zmn(js,n,m,ntype)
           end do
@@ -267,5 +266,8 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
     print *, "dumped profil3d output to '"//trim(dump_filename)//"'"
 
   end if
+
+
+  profil3d_calls = profil3d_calls + 1
 
 END SUBROUTINE profil3d

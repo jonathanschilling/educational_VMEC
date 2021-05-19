@@ -94,6 +94,10 @@ SUBROUTINE funct3d (ier_flag)
   r00 = r1(1,0) ! contrib from only even m
   z00 = z1(1,0) ! contrib from only even m
 
+  ! TODO: can dump real-space quantities (R, Z, lambda) here
+
+
+
   ! COMPUTE CONSTRAINT RCON, ZCON
 
   ! --> see Hirshman, Schwenn & Nührenberg

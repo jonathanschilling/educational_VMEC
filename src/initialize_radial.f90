@@ -66,6 +66,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
      ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
      CALL profil1d (xc, xcdot, lreset_internal)
+     profil3d_calls = 0 ! this is the point where the iterations for a given number of flux surfaces starts...
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
 
      irst = 1

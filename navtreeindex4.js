@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8":[1,0,15,51],
 "d8/dbf/namespacevmec__input.html#af019e97d4df380b1fddf256e439122f3":[1,0,15,48],
 "d8/dbf/namespacevmec__input.html#af1cd9999d7f0663a0d310df805aa2d0b":[1,0,15,32],
 "d8/dbf/namespacevmec__input.html#af26e121e53eae32bc88ceaade7c767d6":[1,0,15,27],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "db/da1/nestor__io_8f90.html#a86df2696efc1996a54af2dbe0be7bd36":[3,0,0,1,0,0,54],
 "db/da1/nestor__io_8f90.html#a87c16c49d2da7666979185b911617820":[3,0,0,1,0,0,57],
 "db/da1/nestor__io_8f90.html#a8b3e15532a582a52bb01ad075a27bde8":[3,0,0,1,0,0,112],
-"db/da1/nestor__io_8f90.html#a8d41253e4481ad9040568546cc567b91":[3,0,0,1,0,0,30],
-"db/da1/nestor__io_8f90.html#a8e0d10340b1d9277c0fcba2102c63842":[3,0,0,1,0,0,31]
+"db/da1/nestor__io_8f90.html#a8d41253e4481ad9040568546cc567b91":[3,0,0,1,0,0,30]
 };

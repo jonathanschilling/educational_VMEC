@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"d6/d77/fouri_8f90_source.html":[3,0,0,1,7],
 "d6/dc7/becoil_8f90.html":[3,0,0,1,4],
 "d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb":[3,0,0,1,4,0],
 "d6/dc7/becoil_8f90_source.html":[3,0,0,1,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "d8/dbf/namespacevmec__input.html#ae19a0633d5cb8d41e6059c260d746a7b":[1,0,15,16],
 "d8/dbf/namespacevmec__input.html#ae3eadff8c916355456de0affcbcf9722":[1,0,15,21],
 "d8/dbf/namespacevmec__input.html#ae70a9badb49f3e431418359ad0f4bea4":[1,0,15,37],
-"d8/dbf/namespacevmec__input.html#aeb71421d68cf4292a19b119b9bfb25fe":[1,0,15,34],
-"d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8":[1,0,15,51]
+"d8/dbf/namespacevmec__input.html#aeb71421d68cf4292a19b119b9bfb25fe":[1,0,15,34]
 };

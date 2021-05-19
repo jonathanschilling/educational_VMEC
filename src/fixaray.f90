@@ -19,7 +19,7 @@ SUBROUTINE fixaray
   REAL(rprec):: argi, arg, argj, dnorm
 
   logical, parameter :: dump_fixaray = .false.
-  logical, parameter :: dump_spectral_constraint = .true.
+  logical, parameter :: dump_spectral_constraint = .false.
 
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS

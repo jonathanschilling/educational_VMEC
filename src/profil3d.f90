@@ -21,6 +21,9 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   REAL(rprec) :: sm0, t1, facj, si, rax1, zax1
   INTEGER :: jcount, jk, k
 
+  character(len=255) :: dump_filename
+  logical, parameter :: dump_profil3d = .true.
+
   ! expant to full surface grid
   DO js = 1, ns
      phip(js:nrzt:ns) = phips(js)
@@ -163,17 +166,16 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
                  !
                  !ENDIF
 
-                 IF (ntype .eq. rcc) rax1 = raxis_cc(n)
-                 IF (ntype .eq. zcs) zax1 =-zaxis_cs(n)
-                 IF (ntype .eq. rcs) rax1 =-raxis_cs(n)
-                 IF (ntype .eq. zcc) zax1 = zaxis_cc(n)
-
                  ! second contribution: axis scaled towards boundary
+                 IF (ntype .eq. rcc) rax1 = raxis_cc(n)
+                 IF (ntype .eq. rcs) rax1 =-raxis_cs(n)
                  IF (ntype.eq.rcc .or. ntype.eq.rcs) THEN
                     !rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + sm0*(rax1*t1 - rold(n,ntype))
                     rmn(js,n,m,ntype) = rmn(js,n,m,ntype) + sm0 * rax1*t1
                  END IF
 
+                 IF (ntype .eq. zcs) zax1 =-zaxis_cs(n)
+                 IF (ntype .eq. zcc) zax1 = zaxis_cc(n)
                  IF (ntype.eq.zcs .or. ntype.eq.zcc) THEN
                     !zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0*(zax1*t1 - zold(n,ntype))
                     zmn(js,n,m,ntype) = zmn(js,n,m,ntype) + sm0 * zax1*t1
@@ -220,5 +222,50 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
   ! distribute scalxc content from R to Lamda components
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
+
+  ! dump all relevant output to a text file
+  if (dump_profil3d) then
+    write(dump_filename, 999) ns, trim(input_extension)
+999 format('profil3d_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntmax mpol ntor"
+    write(42, *) ns, ntmax, mpol, ntor
+
+    write(42, *) "# js ntype m n mn l scalxc"
+    DO js = 1, ns
+      DO ntype = 1, ntmax
+        DO m = 0, mpol1
+          DO n = 0, ntor
+            mn = n + ntor1*m
+            l = js + ns*mn + (ntype - 1)*mns
+
+            write (42, *) js, ntype, m, n, mn, l, scalxc(l)
+          end do
+        end do
+      end do
+    end do
+
+    write(42, *) "# js ntype m n rmn zmn"
+    DO js = 1, ns
+      DO ntype = 1, ntmax
+        DO m = 0, mpol1
+          DO n = 0, ntor
+            mn = n + ntor1*m
+            l = js + ns*mn + (ntype - 1)*mns
+
+            write (42, *) js, ntype, m, n, &
+                          rmn(js,n,m,ntype), zmn(js,n,m,ntype)
+          end do
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped profil3d output to '"//trim(dump_filename)//"'"
+
+  end if
 
 END SUBROUTINE profil3d

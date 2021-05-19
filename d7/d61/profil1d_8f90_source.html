@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('d7/d61/profil1d_8f90_source.html','../
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                           torflux, torflux_deriv, polflux, polflux_deriv</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">logical</span>, <span class="keywordtype">parameter</span> :: dump_profil1d = .true.</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">logical</span>, <span class="keywordtype">parameter</span> :: dump_profil1d = .false.</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">! COMPUTE PHIP, IOTA PROFILES ON FULL-GRID</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">! COMPUTE MASS PROFILE ON HALF-GRID BY READING INPUT COEFFICIENTS.</span></div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('d7/d61/profil1d_8f90_source.html','../
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">! FACTOR OF SIGNGS NEEDED HERE, SINCE MATCH IS MADE TO LINE</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">! INTEGRAL OF BSUBU (IN GETIOTA) ~ SIGNGS * CURTOR</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  pedge = pcurr(one) <span class="comment">! pcurr gives current enclosed between axis and given parameter</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">! --&gt; pedge is radial integral over current density profile (still in Amperes)</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">! --&gt; pedge is temporarily re-used to store the radial integral over current density profile (still in Amperes)</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  itor = 0</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">! TODO: what is this? might have something to do with preventing division-by-zero</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">! when computing scaled toroidal current profile from pcurr and curtor...</span></div>
@@ -305,9 +305,11 @@ $(document).ready(function(){initNavTree('d7/d61/profil1d_8f90_source.html','../
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">write</span>(42, *) <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1d5fe1984da8208d574364e875ea8d38">sp</a></div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d61/profil1d_8f90.html#ab378195ac5fc3be3e3ec3bcddf7c72f9">profil1d</a></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    print *, <span class="stringliteral">&quot;dumped profil1d output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d61/profil1d_8f90.html#ab378195ac5fc3be3e3ec3bcddf7c72f9">profil1d</a></div>
 <div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a55ec65e5e208dfe01a4d2fa5ce52efdb"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">realspace::sqrts</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable sqrts</div><div class="ttdoc">sqrt(s), two-dimensional array on full-grid</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00032">realspace.f90:32</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a7d8443013667c86adb97cb957c8b5d35"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">realspace::shalf</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable shalf</div><div class="ttdoc">sqrt(s) ,two-dimensional array on half-grid</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00031">realspace.f90:31</a></div></div>
@@ -341,7 +343,7 @@ $(document).ready(function(){initNavTree('d7/d61/profil1d_8f90_source.html','../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/profil1d_8f90.html">profil1d.f90</a></li>
-    <li class="footer">Generated on Tue May 18 2021 21:37:30 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 19 2021 12:39:46 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

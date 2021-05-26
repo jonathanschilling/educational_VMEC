@@ -315,7 +315,8 @@ SUBROUTINE totzspa(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
         ni = n+ioff
         DO k = 1, nzeta
            l = ns*(k-1)
-           j1l = j1+l;  nsl = ns+l
+           j1l = j1+l
+           nsl = ns+l
            work1(j1l:nsl,1) = work1(j1l:nsl,1)   + rmnsc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,6) = work1(j1l:nsl,6)   + zmncc(j1:ns,ni,mj)*cosnv(k,n)
            work1(j1l:nsl,10) = work1(j1l:nsl,10) + lmncc(j1:ns,ni,mj)*cosnv(k,n)

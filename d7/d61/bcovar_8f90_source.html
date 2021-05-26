@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: c1p5 = (one + p5)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">INTEGER</span> :: l, js, ndim</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">INTEGER</span> :: l, js, ndim, lk, ku</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: r2, volume, curpol_temp</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
@@ -144,372 +144,426 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">POINTER</span>, <span class="keywordtype">DIMENSION(:)</span> :: luu, luv, lvv, tau</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">POINTER</span> :: bsupu, bsubuh, bsupv, bsubvh, r12sq</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ndim = 1+nrzt <span class="comment">! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">! POINTER ALIAS ASSIGNMENTS</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  tau =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524">extra1</a>(:,1)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  luu =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#ae090572875428770c681f3012ca4e22b">extra2</a>(:,1)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  luv =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a616383e8d55b1cf412dbe030b2d1f8b0">extra3</a>(:,1)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  lvv =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a653a7aae0ed5dd68e90df07fa58eb49d">extra4</a>(:,1)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  bsupu  =&gt; luu</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  bsupv  =&gt; luv</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  bsubuh =&gt; bsubu_o</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  bsubvh =&gt; bsubv_o</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  r12sq  =&gt; bsq</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(ndim) = 0 <span class="comment">! TODO: can probably go away if last element is not used anyway...</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a> = 0</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a> = 0</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">! COMPUTE METRIC ELEMENTS GIJ ON HALF MESH</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">! FIRST, GIJ = EVEN PART (ON FULL MESH), LIJ = ODD PART (ON FULL MESH)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">! THEN, GIJ(HALF) = &lt; GIJ(even)&gt; + SHALF &lt; GIJ(odd) &gt;</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  r12sq(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(1:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(1:nrzt)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)                         &amp;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;               + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0) + r12sq(1:nrzt)*         &amp;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;               ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)                          &amp;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;             +   <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1))</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  luu(1:nrzt)   = (<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)                        &amp;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                +  <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1))*2</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  phipog(1:nrzt)= 2*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1) <span class="comment">! temporary re-use of phipog for 2*R^2 ???</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0) + r12sq(1:nrzt)*     &amp;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                   ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1) )</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;     luv(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1)                      &amp;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0) + r12sq(1:nrzt)*     &amp;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                   ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1) )</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     lvv(1:nrzt)   =(<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1))*2</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  r12sq(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0) + r12sq(1:nrzt)*        &amp;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                  <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">logical</span>            :: dump_metric = .true.</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ndim = 1+nrzt <span class="comment">! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">! POINTER ALIAS ASSIGNMENTS</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  tau =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524">extra1</a>(:,1)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  luu =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#ae090572875428770c681f3012ca4e22b">extra2</a>(:,1)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  luv =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a616383e8d55b1cf412dbe030b2d1f8b0">extra3</a>(:,1)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  lvv =&gt; <a class="code" href="../../d7/d0e/namespacerealspace.html#a653a7aae0ed5dd68e90df07fa58eb49d">extra4</a>(:,1)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  bsupu  =&gt; luu</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  bsupv  =&gt; luv</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  bsubuh =&gt; bsubu_o</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  bsubvh =&gt; bsubv_o</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  r12sq  =&gt; bsq</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(ndim) = 0 <span class="comment">! TODO: can probably go away if last element is not used anyway...</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a> = 0</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a> = 0</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">! COMPUTE METRIC ELEMENTS GIJ ON HALF MESH</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">! FIRST, GIJ = EVEN PART (ON FULL MESH), LIJ = ODD PART (ON FULL MESH)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">! THEN, GIJ(HALF) = &lt; GIJ(even)&gt; + SHALF &lt; GIJ(odd) &gt;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  r12sq(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(1:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(1:nrzt)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)                         &amp;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;               + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0) + r12sq(1:nrzt)*         &amp;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;               ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)                          &amp;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;             +   <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1))</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  luu(1:nrzt)   = (<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)                        &amp;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                +  <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1))*2</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  phipog(1:nrzt)= 2*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1) <span class="comment">! temporary re-use of phipog for 2*R^2 ???</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0) + r12sq(1:nrzt)*     &amp;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                   ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1) )</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     luv(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1)                      &amp;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(1:nrzt)   = <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)                      &amp;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0) + r12sq(1:nrzt)*     &amp;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                   ( <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1) )</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;     lvv(1:nrzt)   =(<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(1:nrzt,1)                      &amp;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                   + <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(1:nrzt,1))*2</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordflow">  END IF</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">! TODO: why need to do this in reverse order?</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">DO</span> l = nrzt, 2, -1</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(luu(l) + luu(l-1)))</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;     <span class="comment">! r12sq = r12**2</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     r12sq(l) = p5*( r12sq(l) + r12sq(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(phipog(l) + phipog(l-1)) )</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;     <span class="keywordflow">DO</span> l = nrzt, 2, -1</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(luv(l) + luv(l-1)))</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(lvv(l) + lvv(l-1)))</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  tau(1:nrzt) = gsqrt(1:nrzt)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  r12sq(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,0) + r12sq(1:nrzt)*        &amp;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                  <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1:nrzt,1)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">! TODO: why need to do this in reverse order?</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">DO</span> l = nrzt, 2, -1</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(luu(l) + luu(l-1)))</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     <span class="comment">! r12sq = r12**2</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;     r12sq(l) = p5*( r12sq(l) + r12sq(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(phipog(l) + phipog(l-1)) )</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;     <span class="keywordflow">DO</span> l = nrzt, 2, -1</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(luv(l) + luv(l-1)))</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l) = p5*(<a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l-1) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(lvv(l) + lvv(l-1)))</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordflow">  END IF</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) <span class="comment">! constant extrapolation towards axis</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) + r12sq(2:nrzt)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">! this is where phipog == 1/sqrt(g) is actually assigned</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">! note that the phip factor in phipog is gone... (see comment below)</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">WHERE</span> (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  phipog(1:ndim:ns) = 0 <span class="comment">! magnetic axis (?)</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">! compute plasma volume profile (vp) and total volume (voli)</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(1) = 0</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(ns+1) = 0</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(js) = <a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*sum(gsqrt(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a> .eq. 1) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53d16cdb91d2537f8548dd541a438ae3">voli</a> = twopi*twopi*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns))</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="comment">! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="comment">! NOTE: LU = LAMU == d(LAM)/du, LV = -LAMV == -d(LAM)/dv COMING INTO THIS ROUTINE.</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">! CHIP will be added IN CALL TO ADD_FLUXES.</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="comment">! THE NET BSUPU, BSUPV ARE (PHIPOG=1/GSQRT AS NOTED ABOVE):</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="comment">!      BSUPU = PHIPOG*(chip - LAMV*LAMSCALE),</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">!      BSUPV = PHIPOG*(phip + LAMU*LAMSCALE)</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  lu = lu*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  lv = lv*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="keywordflow">DO</span> js=1,ns</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;     lu(js:nrzt:ns,0) = lu(js:nrzt:ns,0) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#af25579de1c0c445f09c2efc505991a3b">phipf</a>(js)</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  bsupu(2:nrzt) = p5*phipog(2:nrzt)*(                 lv(2:nrzt,0) + lv(1:nrzt-1,0)  &amp;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                                     + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1))  )</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &amp;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                     + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="comment">! TODO: what is this? (m,n)=(0,0)-mode on axis?</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  bsupu(1)=0</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  bsupv(1)=0</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="comment">! v8.49: add ndim points --&gt; TODO: likely not needed anymore, reconstruction-related?</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  bsupu(ndim)=0</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  bsupv(ndim)=0</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  tau(1:nrzt) = gsqrt(1:nrzt)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) <span class="comment">! constant extrapolation towards axis</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) + r12sq(2:nrzt)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">! check metric coefficients</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">if</span> (dump_metric) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <span class="keyword">write</span>(dump_filename, 998) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntheta3 nzeta&quot;</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      <span class="keyword">write</span>(42, *) ns, ntheta3, nzeta</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordflow">if</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;         <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js ku lv guu r12sq guv gvv gsqrt&quot;</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;         <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;           <span class="keywordflow">DO</span> ku = 1, ntheta3</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;             <span class="keywordflow">DO</span> lk = 1, nzeta</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                 l = ((ku-1)*nzeta+(lk-1))*ns+js</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                 <span class="keyword">write</span> (42, *) js, ku, lk, &amp;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                               <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l), r12sq(l), <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(l), &amp;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                               <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l), gsqrt(l)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keywordflow">             end do</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keywordflow">           end do</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keywordflow">         end do</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;         <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js ku lv guu r12sq gvv gsqrt&quot;</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;         <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;           <span class="keywordflow">DO</span> ku = 1, ntheta3</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;             <span class="keywordflow">DO</span> lk = 1, nzeta</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                 l = ((ku-1)*nzeta+(lk-1))*ns+js</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                 <span class="keyword">write</span> (42, *) js, ku, lk, &amp;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                               <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(l), r12sq(l), &amp;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                               <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(l), gsqrt(l)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordflow">             end do</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keywordflow">           end do</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordflow">         end do</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keywordflow">      end if</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      print *, <span class="stringliteral">&quot;dumped metric elements output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      stop</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;998 <span class="keyword">format</span>(<span class="stringliteral">&#39;metric_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="comment">! UPDATE IOTA EITHER OF TWO WAYS:</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="comment">! 1)  FOR ictrl_prec2d = 0, SOLVE THE LINEAR ALGEBRAIC EQUATION &lt;Bsubu&gt; = icurv FOR iotas</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="comment">! 2)  FOR ictrl_prec2d &gt; 0, EVOLVE IOTAS IN TIME, USING Force-iota  = &lt;Bsubu&gt; - icurv.</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="comment">! NEED TO DO IT WAY (#2) TO EASILY COMPUTE THE HESSIAN ELEMENTS DUE TO LAMBDA-VARIATIONS.</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="comment">! IOTAS IS &quot;STORED&quot; AT LOCATION LAMBDA-SC(0,0) IN XC-ARRAY [USE THIS COMPONENT SO IT</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">! WILL WORK EVEN FOR 2D PLASMA], ALTHOUGH ITS VARIATION IS LIKE THAT OF LV-CS(0,0),</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">! WITH N -&gt; 1 IN THE HESSIAN CALCULATION ROUTINES (Compute_Hessian_Flam_lam, etc.)</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="comment">! COMPUTE (IF NEEDED) AND ADD CHIP TO BSUPU</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a>(phipog, bsupu, bsupv)</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">! COMPUTE COVARIANT B COMPONENT bsubu,v (LAMBDA FORCE KERNELS) ON RADIAL HALF-MESH</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  bsubuh(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)*bsupu(1:nrzt) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)*bsupv(1:nrzt)</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  bsubvh(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)*bsupu(1:nrzt) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(1:nrzt)*bsupv(1:nrzt)</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="comment">! v8.49 --&gt; TODO: likely not needed anymore, reconstruction-related?</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  bsubuh(ndim) = 0</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  bsubvh(ndim) = 0</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="comment">! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="comment">! bsq = |B|^2/2 = 0.5*(B^u*B_u + B^v*B_v)</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  bsq(:nrzt) = p5*(bsupu(:nrzt)*bsubuh(:nrzt) + bsupv(:nrzt)*bsubvh(:nrzt))</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(2:ns) = <a class="code" href="../../d1/d6c/namespacevmec__main.html#ad705d16d5a83c0cd5aa7b6c537c78f1d">mass</a>(2:ns)/<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns)**gamma</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">! this is where phipog == 1/sqrt(g) is actually assigned</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="comment">! note that the phip factor in phipog is gone... (see comment below)</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordflow">WHERE</span> (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  phipog(1:ndim:ns) = 0 <span class="comment">! magnetic axis (?)</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="comment">! compute plasma volume profile (vp) and total volume (voli)</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(1) = 0</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(ns+1) = 0</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(js) = <a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*sum(gsqrt(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a> .eq. 1) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53d16cdb91d2537f8548dd541a438ae3">voli</a> = twopi*twopi*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns))</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">! magnetic energy</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad2ae36db8ad549bbb2a0e931ea0cc85">wb</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*abs(sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(:nrzt)*gsqrt(:nrzt)*bsq(:nrzt)))</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="comment">! kinetic == thermal enery</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f2ff7fefa481523f175f845bedb5c28">wp</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns)*<a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(2:ns))</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">! ADD KINETIC PRESSURE TO MAGNETIC PRESSURE</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordflow">DO</span> js=2,ns</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;     bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(js)</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="comment">! COMPUTE LAMBDA FULL MESH FORCES</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="comment">! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  lvv = phipog(:ndim)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="comment">! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="comment">! NOTE: LU = LAMU == d(LAM)/du, LV = -LAMV == -d(LAM)/dv COMING INTO THIS ROUTINE.</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="comment">! CHIP will be added IN CALL TO ADD_FLUXES.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <span class="comment">! THE NET BSUPU, BSUPV ARE (PHIPOG=1/GSQRT AS NOTED ABOVE):</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="comment">!      BSUPU = PHIPOG*(chip - LAMV*LAMSCALE),</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="comment">!      BSUPV = PHIPOG*(phip + LAMU*LAMSCALE)</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  lu = lu*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  lv = lv*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordflow">DO</span> js=1,ns</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;     lu(js:nrzt:ns,0) = lu(js:nrzt:ns,0) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#af25579de1c0c445f09c2efc505991a3b">phipf</a>(js)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  lvv = lvv*<a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  bsubu_e(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(:nrzt)*bsupu(:nrzt)</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  bsubu_e(ndim) = 0</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  bsubv_e(1:nrzt) = bsubv_e(1:nrzt)                                 &amp;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;              + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &amp;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;              +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="comment">! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6">calc_fbal</a>(bsubuh, bsubvh)</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">! fpsi is simply an alias to bvco (which is filled in calc_fbal)</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="comment">! --&gt; why not use bvco here ???</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="comment">! This computes the poloidal current close to the axis (rbtor0)</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="comment">! and the poloidal current at the boundary (rbtor).</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9c615df93ea15a7ba9bfdb12531b82b7">rbtor0</a>= c1p5*fpsi(2)  - p5*fpsi(3)</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a> = c1p5*fpsi(ns) - p5*fpsi(ns-1)</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="comment">! (SPH:08/19/04)</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="comment">! MUST AVOID BREAKING TRI-DIAGONAL RADIAL COUPLING AT EDGE WHEN USING PRECONDITIONER</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="comment">! CTOR IS PASSED TO VACUUM TO COMPUTE EDGE BSQVAC, SO IT CAN ONLY DEPEND ON NS, NS-1</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="comment">! THUS, CTOR ~ buco(ns) WORKS, WITH REMAINDER A FIXED CONSTANT.</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="comment">! ALSO, IF USING FAST SWEEP IN COMPUTE_BLOCKS, MUST MAKE CTOR CONSTANT</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="comment">! TO AVOID BREAKING SYMMETRY OF A+(ns-1) AND B-(ns) HESSIAN ELEMENTS</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="comment">! TO GET CORRECT HESSIAN, USE THE CTOR=ctor_prec2d +... ASSIGNMENT</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="comment">! FOR ictrl_prec2d.ne.0 (replace ictrl_prec2d.gt.1 with ictrl_prec2d.ne.0 in IF test below)</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="comment">! NEXT COMPUTE COVARIANT BSUBV COMPONENT ~ lvv ON FULL RADIAL MESH BY AVERAGING HALF-MESH METRICS</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="comment">! NOTE: EDGE VALUES AT JS=NS DOWN BY 1/2</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="comment">! THIS IS NEEDED FOR NUMERICAL STABILITY</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="comment">! This computes the net toroidal current enclosed by the LCFS (ctor).</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4d9aed752dd570500c028c7b690311a3">ctor</a> = <a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*twopi*(c1p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a1931375beb9e1551a594e0c3bd626e0c">buco</a>(ns) - p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a1931375beb9e1551a594e0c3bd626e0c">buco</a>(ns1))</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  <span class="keywordflow">DO</span> l=1,ns</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;     lvv(l:nrzt:ns) = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a59074f021f7e834f0fa1e7ba67cd3054">bdamp</a>(l) <span class="comment">! --&gt; profil1d()</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;     <span class="comment">! blending parameter: 0.1 at the axis, ca. 0 at the LCFS</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;     <span class="comment">! TODO: is it intentional that this is linked to pdamp (time-step algorithm) ?</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  bsupu(2:nrzt) = p5*phipog(2:nrzt)*(                 lv(2:nrzt,0) + lv(1:nrzt-1,0)  &amp;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                                     + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1))  )</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &amp;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                                     + <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">! TODO: what is this? (m,n)=(0,0)-mode on axis?</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  bsupu(1)=0</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  bsupv(1)=0</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="comment">! v8.49: add ndim points --&gt; TODO: likely not needed anymore, reconstruction-related?</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  bsupu(ndim)=0</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  bsupv(ndim)=0</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="comment">! UPDATE IOTA EITHER OF TWO WAYS:</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="comment">! 1)  FOR ictrl_prec2d = 0, SOLVE THE LINEAR ALGEBRAIC EQUATION &lt;Bsubu&gt; = icurv FOR iotas</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="comment">! 2)  FOR ictrl_prec2d &gt; 0, EVOLVE IOTAS IN TIME, USING Force-iota  = &lt;Bsubu&gt; - icurv.</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="comment">! NEED TO DO IT WAY (#2) TO EASILY COMPUTE THE HESSIAN ELEMENTS DUE TO LAMBDA-VARIATIONS.</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="comment">! IOTAS IS &quot;STORED&quot; AT LOCATION LAMBDA-SC(0,0) IN XC-ARRAY [USE THIS COMPONENT SO IT</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="comment">! WILL WORK EVEN FOR 2D PLASMA], ALTHOUGH ITS VARIATION IS LIKE THAT OF LV-CS(0,0),</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="comment">! WITH N -&gt; 1 IN THE HESSIAN CALCULATION ROUTINES (Compute_Hessian_Flam_lam, etc.)</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="comment">! COMPUTE (IF NEEDED) AND ADD CHIP TO BSUPU</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a>(phipog, bsupu, bsupv)</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="comment">! COMPUTE COVARIANT B COMPONENT bsubu,v (LAMBDA FORCE KERNELS) ON RADIAL HALF-MESH</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  bsubuh(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)*bsupu(1:nrzt) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)*bsupv(1:nrzt)</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  bsubvh(1:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(1:nrzt)*bsupu(1:nrzt) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(1:nrzt)*bsupv(1:nrzt)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="comment">! v8.49 --&gt; TODO: likely not needed anymore, reconstruction-related?</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  bsubuh(ndim) = 0</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  bsubvh(ndim) = 0</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="comment">! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="comment">! bsq = |B|^2/2 = 0.5*(B^u*B_u + B^v*B_v)</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  bsq(:nrzt) = p5*(bsupu(:nrzt)*bsubuh(:nrzt) + bsupv(:nrzt)*bsubvh(:nrzt))</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(2:ns) = <a class="code" href="../../d1/d6c/namespacevmec__main.html#ad705d16d5a83c0cd5aa7b6c537c78f1d">mass</a>(2:ns)/<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns)**gamma</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  <span class="comment">! magnetic energy</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aad2ae36db8ad549bbb2a0e931ea0cc85">wb</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*abs(sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(:nrzt)*gsqrt(:nrzt)*bsq(:nrzt)))</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="comment">! COMMENTED OUT BY SAL --&gt; why does this check hurt ?</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="comment">! IF (ANY(bsubuh(1:ndim:ns) .ne. zero)) STOP &#39;BSUBUH != 0 AT JS=1&#39;</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="comment">! IF (ANY(bsubvh(1:ndim:ns) .ne. zero)) STOP &#39;BSUBVH != 0 AT JS=1&#39;</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="comment">! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="comment">! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  bsubu_e(1:nrzt) =  p5*                (bsubuh(1:nrzt) + bsubuh(2:ndim))</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &amp;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                   + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">!   ! NOTE THAT lu=&gt;czmn, lv=&gt;crmn externally</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">!   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">!   IF (iequi .EQ. 1) THEN</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">!      ! only executed at end of equilibrium</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">!      lu(:nrzt,0) = bsupv(:nrzt)</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">!      lv(:nrzt,0) = bsupu(:nrzt)</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">!   END IF</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="comment">! COMPUTE R,Z AND LAMBDA PRE-CONDITIONING MATRIX</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="comment">! ELEMENTS AND FORCE NORMS:</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="comment">! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <span class="comment">! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <span class="keywordflow">IF</span> (mod(<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a>,<a class="code" href="../../d1/d74/namespacevmec__params.html#a92d5f29dab8191fb5f28ea0c78c9d2b5">ns4</a>).eq.0 .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d">iequi</a>.eq.0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;     <span class="comment">! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;     phipog(:nrzt) = phipog(:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(:nrzt) <span class="comment">! remember that actually phipog == 1/sqrt(g)</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096">lamcal</a>(phipog, <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>)</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="comment">! kinetic == thermal enery</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f2ff7fefa481523f175f845bedb5c28">wp</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns)*<a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(2:ns))</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="comment">! ADD KINETIC PRESSURE TO MAGNETIC PRESSURE</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keywordflow">DO</span> js=2,ns</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;     bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa30504d0f70ecaa3951159e389d46e87">pres</a>(js)</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="comment">! COMPUTE LAMBDA FULL MESH FORCES</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="comment">! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  lvv = phipog(:ndim)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  lvv = lvv*<a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  bsubu_e(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(:nrzt)*bsupu(:nrzt)</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  bsubu_e(ndim) = 0</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  bsubv_e(1:nrzt) = bsubv_e(1:nrzt)                                 &amp;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;              + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &amp;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;              +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="comment">! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6">calc_fbal</a>(bsubuh, bsubvh)</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <span class="comment">! fpsi is simply an alias to bvco (which is filled in calc_fbal)</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  <span class="comment">! --&gt; why not use bvco here ???</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="comment">! This computes the poloidal current close to the axis (rbtor0)</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  <span class="comment">! and the poloidal current at the boundary (rbtor).</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9c615df93ea15a7ba9bfdb12531b82b7">rbtor0</a>= c1p5*fpsi(2)  - p5*fpsi(3)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a> = c1p5*fpsi(ns) - p5*fpsi(ns-1)</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c">precondn</a>(bsupv,bsq,gsqrt,r12,zs,zu12,<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>,<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1,1), <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(1,1), &amp;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                   <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>,<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>,cos01)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c">precondn</a>(bsupv,bsq,gsqrt,r12,rs,ru12,<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>,<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1,1), <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1,1), &amp;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                   <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>,<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>,sin01)</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(2:ns-1)*<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1)</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(2:ns-1)*<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1)</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ab5c754bcc9f66b0acd7642a15b0fe080">frcc_fac</a>(2:ns-1) = one/<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1)</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a070e7c18aa156afb4135415ecf8802b7">fzsc_fac</a>(2:ns-1) =-one/<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1)</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a> = <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>/2</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a> = <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>/2</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;     volume = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns))</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  <span class="comment">! (SPH:08/19/04)</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="comment">! MUST AVOID BREAKING TRI-DIAGONAL RADIAL COUPLING AT EDGE WHEN USING PRECONDITIONER</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="comment">! CTOR IS PASSED TO VACUUM TO COMPUTE EDGE BSQVAC, SO IT CAN ONLY DEPEND ON NS, NS-1</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="comment">! THUS, CTOR ~ buco(ns) WORKS, WITH REMAINDER A FIXED CONSTANT.</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="comment">! ALSO, IF USING FAST SWEEP IN COMPUTE_BLOCKS, MUST MAKE CTOR CONSTANT</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <span class="comment">! TO AVOID BREAKING SYMMETRY OF A+(ns-1) AND B-(ns) HESSIAN ELEMENTS</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="comment">! TO GET CORRECT HESSIAN, USE THE CTOR=ctor_prec2d +... ASSIGNMENT</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="comment">! FOR ictrl_prec2d.ne.0 (replace ictrl_prec2d.gt.1 with ictrl_prec2d.ne.0 in IF test below)</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="comment">! NEXT COMPUTE COVARIANT BSUBV COMPONENT ~ lvv ON FULL RADIAL MESH BY AVERAGING HALF-MESH METRICS</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <span class="comment">! NOTE: EDGE VALUES AT JS=NS DOWN BY 1/2</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="comment">! THIS IS NEEDED FOR NUMERICAL STABILITY</span></div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;     r2 = max(<a class="code" href="../../d1/d6c/namespacevmec__main.html#aad2ae36db8ad549bbb2a0e931ea0cc85">wb</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f2ff7fefa481523f175f845bedb5c28">wp</a>)/volume <span class="comment">! energy density ???</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(:nrzt)*r12(:nrzt)**2</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> = one/(sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(1:nrzt))*(r2*r2))</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#aba95b570f41162c5cf0d25846ec13d31">fnorm1</a> = one/sum(<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1+ns:2*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a>)**2)</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a> = one/(sum((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(1:nrzt))*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>**2)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;     <span class="comment">! r3 = one/(2*r0scale)**2</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;     <span class="comment">! &gt; Norm for preconditioned Lambda force</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;     <span class="comment">! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4)</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;     <span class="comment">! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;     <span class="comment">! OVERRIDE USER INPUT VALUE HERE</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;     r2 = ns <span class="comment">! temporary re-use of variable for floating-point version of ns</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;     <span class="comment">! ignore large tcon0 from old-style files</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;     tcon0 = min(abs(tcon0), one)</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="comment">! This computes the net toroidal current enclosed by the LCFS (ctor).</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4d9aed752dd570500c028c7b690311a3">ctor</a> = <a class="code" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*twopi*(c1p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a1931375beb9e1551a594e0c3bd626e0c">buco</a>(ns) - p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a1931375beb9e1551a594e0c3bd626e0c">buco</a>(ns1))</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordflow">DO</span> l=1,ns</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;     lvv(l:nrzt:ns) = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a59074f021f7e834f0fa1e7ba67cd3054">bdamp</a>(l) <span class="comment">! --&gt; profil1d()</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;     <span class="comment">! blending parameter: 0.1 at the axis, ca. 0 at the LCFS</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;     <span class="comment">! TODO: is it intentional that this is linked to pdamp (time-step algorithm) ?</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="comment">! COMMENTED OUT BY SAL --&gt; why does this check hurt ?</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <span class="comment">! IF (ANY(bsubuh(1:ndim:ns) .ne. zero)) STOP &#39;BSUBUH != 0 AT JS=1&#39;</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  <span class="comment">! IF (ANY(bsubvh(1:ndim:ns) .ne. zero)) STOP &#39;BSUBVH != 0 AT JS=1&#39;</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <span class="comment">! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="comment">! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  bsubu_e(1:nrzt) =  p5*                (bsubuh(1:nrzt) + bsubuh(2:ndim))</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &amp;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                   + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">!   ! NOTE THAT lu=&gt;czmn, lv=&gt;crmn externally</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">!   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">!   IF (iequi .EQ. 1) THEN</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">!      ! only executed at end of equilibrium</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">!      lu(:nrzt,0) = bsupv(:nrzt)</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">!      lv(:nrzt,0) = bsupu(:nrzt)</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">!   END IF</span></div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;     <span class="comment">! some parabola in ns, but why these specific values of the parameters ?</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  <span class="comment">! COMPUTE R,Z AND LAMBDA PRE-CONDITIONING MATRIX</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="comment">! ELEMENTS AND FORCE NORMS:</span></div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;     tcon_mul = tcon_mul/((4*<a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>**2)**2)           <span class="comment">! Scaling of ard, azd (2*r0scale**2);</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                                                       <span class="comment">! Scaling of cos**2 in alias (4*r0scale**2)</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns-1</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;       arnorm = sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a8c1dec7050f35ebbd2480dbc2c40362a">ru0</a>(js:nrzt:ns)**2)</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;       aznorm = sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(js:nrzt:ns)**2)</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;       <span class="keywordflow">IF</span> (arnorm.eq.zero .or. aznorm.eq.zero) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;          stop <span class="stringliteral">&#39;arnorm or aznorm=0 in bcovar&#39;</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keywordflow">       end if</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;       <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js) = min(abs(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(js,1)/arnorm), abs(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(js,1)/aznorm)) * tcon_mul*(32*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>)**2</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(ns) = p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(ns-1)</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <span class="comment">! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  <span class="comment">! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  <span class="keywordflow">IF</span> (mod(<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a>,<a class="code" href="../../d1/d74/namespacevmec__params.html#a92d5f29dab8191fb5f28ea0c78c9d2b5">ns4</a>).eq.0 .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d">iequi</a>.eq.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;     <span class="comment">! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;     phipog(:nrzt) = phipog(:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(:nrzt) <span class="comment">! remember that actually phipog == 1/sqrt(g)</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096">lamcal</a>(phipog, <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>)</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c">precondn</a>(bsupv,bsq,gsqrt,r12,zs,zu12,<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>,<a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(1,1), <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(1,1), &amp;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                   <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>,<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>,cos01)</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c">precondn</a>(bsupv,bsq,gsqrt,r12,rs,ru12,<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>,<a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(1,1), <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1,1), &amp;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                   <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>,<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>,sin01)</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;     <span class="keywordflow">IF</span> (lasym) <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a> = p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="keywordflow">   ENDIF</span> <span class="comment">! MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d">iequi</a> .eq. 0) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;     <span class="comment">! iequi != 1 --&gt; normal iterations</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;     <span class="comment">! MINUS SIGN =&gt; HESSIAN DIAGONALS ARE POSITIVE</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;     bsubu_e = -<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>*bsubu_e</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;     bsubv_e = -<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>*bsubv_e</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;     bsubu_o(:nrzt)  = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(:nrzt)*bsubu_e(:nrzt)</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;     bsubv_o(:nrzt)  = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(:nrzt)*bsubv_e(:nrzt)</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(2:ns-1)*<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1)</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(2:ns-1)*<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1)</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ab5c754bcc9f66b0acd7642a15b0fe080">frcc_fac</a>(2:ns-1) = one/<a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>(2:ns-1)</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a070e7c18aa156afb4135415ecf8802b7">fzsc_fac</a>(2:ns-1) =-one/<a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>(2:ns-1)</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a> = <a class="code" href="../../df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5">rzu_fac</a>/2</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;     <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a> = <a class="code" href="../../df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52">rru_fac</a>/2</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;     volume = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a107d8d70ddc3399a96d4d0ef4df6d5b1">vp</a>(2:ns))</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;     r2 = max(<a class="code" href="../../d1/d6c/namespacevmec__main.html#aad2ae36db8ad549bbb2a0e931ea0cc85">wb</a>,<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f2ff7fefa481523f175f845bedb5c28">wp</a>)/volume <span class="comment">! energy density ???</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(:nrzt)*r12(:nrzt)**2</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;     <span class="comment">! STORE LU * LV COMBINATIONS USED IN FORCES</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;     lvv(2:nrzt)  = gsqrt(2:nrzt)</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;     lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;     lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> = one/(sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(1:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(1:nrzt))*(r2*r2))</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#aba95b570f41162c5cf0d25846ec13d31">fnorm1</a> = one/sum(<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1+ns:2*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a>)**2)</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a> = one/(sum((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(1:nrzt))*<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>**2)</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;   <span class="keywordflow">ELSE</span> <span class="comment">! (iequi .eq. 0)</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;     <span class="comment">! iequi == 1 --&gt; final iter for fileout()</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;     <span class="comment">! r3 = one/(2*r0scale)**2</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;     <span class="comment">! &gt; Norm for preconditioned Lambda force</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;     <span class="comment">! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4)</span></div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  <span class="comment">! NOTE THAT lu=&gt;czmn, lv=&gt;crmn externally</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  <span class="comment">! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">!   IF (iequi .EQ. 1) THEN</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;     <span class="comment">! only executed at end of equilibrium</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;     lu(:nrzt,0) = bsupv(:nrzt)</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;     lv(:nrzt,0) = bsupu(:nrzt)</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">!  END IF</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="comment">! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="comment">! FOR FORCE BALANCE AND RETURN (IEQUI=1)</span></div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">!  IF (iequi .eq. 1) THEN</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;     <span class="comment">! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;     <span class="comment">! OVERRIDE USER INPUT VALUE HERE</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;     r2 = ns <span class="comment">! temporary re-use of variable for floating-point version of ns</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;     <span class="comment">! ignore large tcon0 from old-style files</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;     tcon0 = min(abs(tcon0), one)</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;     <span class="comment">! some parabola in ns, but why these specific values of the parameters ?</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;     <span class="comment">! final call from fileout --&gt; compute additional stuff</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;     <span class="keywordflow">DO</span> js = ns-1,2,-1</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;           bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keywordflow">        END DO</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;     <span class="comment">! ADJUST &lt;bsubvh&gt; AFTER MESH-BLENDING</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        curpol_temp = fpsi(js) - sum(bsubvh(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;           bsubvh(l) = bsubvh(l) + curpol_temp</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="keywordflow">        END DO</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;     tcon_mul = tcon_mul/((4*<a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>**2)**2)           <span class="comment">! Scaling of ard, azd (2*r0scale**2);</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                                                       <span class="comment">! Scaling of cos**2 in alias (4*r0scale**2)</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns-1</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;       arnorm = sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a8c1dec7050f35ebbd2480dbc2c40362a">ru0</a>(js:nrzt:ns)**2)</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;       aznorm = sum(<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(js:nrzt:ns)**2)</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;       <span class="keywordflow">IF</span> (arnorm.eq.zero .or. aznorm.eq.zero) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;          stop <span class="stringliteral">&#39;arnorm or aznorm=0 in bcovar&#39;</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="keywordflow">       end if</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;       <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(js) = min(abs(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(js,1)/arnorm), abs(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(js,1)/aznorm)) * tcon_mul*(32*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>)**2</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(ns) = p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a>(ns-1)</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;     bsubu_e(:nrzt) = bsubuh(:nrzt)</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;     bsubv_e(:nrzt) = bsubvh(:nrzt)</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;     <span class="keywordflow">IF</span> (lasym) <a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a> = p5*<a class="code" href="../../d1/d6c/namespacevmec__main.html#af2f8b72c0bb03e67c6470e393b412289">tcon</a></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;     bsubu_o(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubu_e(:nrzt)</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;     bsubv_o(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubv_e(:nrzt)</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">!   else</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">!      ! iequi != 1 --&gt; normal iterations</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">!</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">!      ! MINUS SIGN =&gt; HESSIAN DIAGONALS ARE POSITIVE</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">!      bsubu_e = -lamscale*bsubu_e</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">!      bsubv_e = -lamscale*bsubv_e</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">!      bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">!      bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">!</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">!      ! STORE LU * LV COMBINATIONS USED IN FORCES</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">!      lvv(2:nrzt)  = gsqrt(2:nrzt)</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">!      guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">!      guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">!      gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</span></div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">!      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">!      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="keywordflow">   ENDIF</span> <span class="comment">! MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d">iequi</a> .eq. 0) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;     <span class="comment">! iequi != 1 --&gt; normal iterations</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;     <span class="comment">! MINUS SIGN =&gt; HESSIAN DIAGONALS ARE POSITIVE</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;     bsubu_e = -<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>*bsubu_e</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;     bsubv_e = -<a class="code" href="../../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43">lamscale</a>*bsubv_e</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;     bsubu_o(:nrzt)  = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(:nrzt)*bsubu_e(:nrzt)</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;     bsubv_o(:nrzt)  = <a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(:nrzt)*bsubv_e(:nrzt)</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;     <span class="comment">! STORE LU * LV COMBINATIONS USED IN FORCES</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;     lvv(2:nrzt)  = gsqrt(2:nrzt)</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#acb5f3a608e5b019d7c7abdbbbda955bc">guu</a>(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a62cb0f27cc2c1732dc37864c169a541f">guv</a>(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;     <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;     lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;     lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;   <span class="keywordflow">ELSE</span> <span class="comment">! (iequi .eq. 0)</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;     <span class="comment">! iequi == 1 --&gt; final iter for fileout()</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  <span class="comment">! NOTE THAT lu=&gt;czmn, lv=&gt;crmn externally</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  <span class="comment">! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">!   IF (iequi .EQ. 1) THEN</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;     <span class="comment">! only executed at end of equilibrium</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;     lu(:nrzt,0) = bsupv(:nrzt)</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;     lv(:nrzt,0) = bsupu(:nrzt)</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">!  END IF</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  <span class="comment">! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  <span class="comment">! FOR FORCE BALANCE AND RETURN (IEQUI=1)</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">!  IF (iequi .eq. 1) THEN</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;     <span class="comment">! final call from fileout --&gt; compute additional stuff</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;     <span class="keywordflow">DO</span> js = ns-1,2,-1</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;           bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="keywordflow">        END DO</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;     <span class="comment">! ADJUST &lt;bsubvh&gt; AFTER MESH-BLENDING</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;     <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        curpol_temp = fpsi(js) - sum(bsubvh(js:nrzt:ns)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;           bsubvh(l) = bsubvh(l) + curpol_temp</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="keywordflow">        END DO</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;     bsubu_e(:nrzt) = bsubuh(:nrzt)</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;     bsubv_e(:nrzt) = bsubvh(:nrzt)</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;     bsubu_o(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubu_e(:nrzt)</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;     bsubv_o(:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubv_e(:nrzt)</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">!   else</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">!      ! iequi != 1 --&gt; normal iterations</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">!</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">!      ! MINUS SIGN =&gt; HESSIAN DIAGONALS ARE POSITIVE</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">!      bsubu_e = -lamscale*bsubu_e</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">!      bsubv_e = -lamscale*bsubv_e</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">!      bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">!      bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">!</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">!      ! STORE LU * LV COMBINATIONS USED IN FORCES</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">!      lvv(2:nrzt)  = gsqrt(2:nrzt)</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">!      guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">!      guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">!      gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">!      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">!      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="keywordflow">  END IF</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div>
 <div class="ttc" id="aadd__fluxes_8f90_html_a988e7013ef02301b9cfbde5b8068d5af"><div class="ttname"><a href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div><div class="ttdeci">subroutine add_fluxes(overg, bsupu, bsupv)</div><div class="ttdoc">Add the magnetic fluxes to the tangential derivatives of  to arrive at the contravariant magnetic fie...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7d/add__fluxes_8f90_source.html#l00011">add_fluxes.f90:12</a></div></div>
 <div class="ttc" id="abcovar_8f90_html_a1e1624195f0c0c7daa9f49d83bae5ce8"><div class="ttname"><a href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div><div class="ttdeci">subroutine bcovar(lu, lv)</div><div class="ttdoc">Compute the covariant components of the magnetic field , .</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d61/bcovar_8f90_source.html#l00008">bcovar.f90:9</a></div></div>
 <div class="ttc" id="acalc__fbal_8f90_html_a6cdc3d21c48f66aeaff8ab5e639641b6"><div class="ttname"><a href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6">calc_fbal</a></div><div class="ttdeci">subroutine calc_fbal(bsubu, bsubv)</div><div class="ttdoc">Compute flux-surface averaged radial force balance .</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dff/calc__fbal_8f90_source.html#l00008">calc_fbal.f90:9</a></div></div>
@@ -599,7 +653,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/bcovar_8f90.html">bcovar.f90</a></li>
-    <li class="footer">Generated on Wed May 26 2021 01:23:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 26 2021 16:57:42 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

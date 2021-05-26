@@ -27,8 +27,8 @@
 !>  @param zv1       Real space dZ/dv
 !>  @param lu1       Real space dlambda/du
 !>  @param lv1       Real space -dlambda/dv
-!>  @param rcn1      related to spectral constraint; m(m-1)*R*cos(mu-nv)
-!>  @param zcn1      related to spectral constraint; m(m-1)*Z*sin(mu-nv)
+!>  @param rcn1      related to spectral constraint; sum_mn[m(m-1)*Rmn*cos(mu-nv)]
+!>  @param zcn1      related to spectral constraint; sum_mn[m(m-1)*Zmn*sin(mu-nv)]
 SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1)
 
   USE vmec_main
@@ -92,7 +92,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! --> TODO: why? quantities on axis should not have a poloidal dependence ???
   ! NOTE: PREVIOUS VERSIONS OF VMEC USED TWO-POINT EXTRAPOLATION FOR R,Z.
   !       HOWEVER,THIS CAN NOT BE USED TO COMPUTE THE TRI-DIAG 2D PRECONDITIONER.
-  rzl_array(1,:,m1,:)  = rzl_array(2,:,m1,:) ! now this is a constant extrapolation to the axis (????)
+  rzl_array(1,:,m1,:) = rzl_array(2,:,m1,:) ! now this is a constant extrapolation to the axis (????)
 
   ioff = LBOUND(rmncc,2) ! starting index along n
   joff = LBOUND(rmncc,3) ! starting index along m
@@ -172,7 +172,6 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 ! #end /* ndef _HBANGLE */
 
         z11(j1l:nsl,mparity)  = z11(j1l:nsl,mparity)  + work1(1:nsz,6)*sinmu(i,m)
-
         zu1(j1l:nsl,mparity)  = zu1(j1l:nsl,mparity)  + work1(1:nsz,6)*cosmum(i,m)
 
 ! #ifndef _HBANGLE

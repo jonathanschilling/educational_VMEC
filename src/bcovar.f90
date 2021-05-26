@@ -36,7 +36,7 @@ SUBROUTINE bcovar (lu, lv)
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
 
   character(len=255) :: dump_filename
-  logical            :: dump_metric = .true.
+  logical            :: dump_metric = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -111,7 +111,7 @@ SUBROUTINE bcovar (lu, lv)
 
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
-! check metric coefficients
+  ! check metric coefficients
   if (dump_metric) then
       write(dump_filename, 998) ns, iter2, trim(input_extension)
       open(unit=42, file=trim(dump_filename), status="unknown")

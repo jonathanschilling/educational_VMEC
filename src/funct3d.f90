@@ -137,7 +137,7 @@ SUBROUTINE funct3d (ier_flag)
   zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
-  ! Assemble dR/du and dZ/du, since they are needed for arnorm, aznorm in bcovar().
+  ! Assemble dR/du and dZ/du, since they are needed for arnorm, aznorm in bcovar() and for guess_axis().
   ! Must store them in separate arrays ru0, zu0 since separation into even-m and odd-m
   ! must be kept for e.g jacobian and metric elements (I guess...).
   ru0(:nrzt)    = ru(:nrzt,0)   + ru(:nrzt,1)*sqrts(:nrzt)

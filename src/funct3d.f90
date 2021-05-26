@@ -85,18 +85,6 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
-  ! --> at ns, sqrt(s)==1 --> no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore
-
-  router = r1(ns,0) + r1(ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
-
-  ! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)
-  l0pi = ns*(1 + nzeta*(ntheta2 - 1))
-  rinner = r1(l0pi,0) + r1(l0pi,1)
-
-  r00 = r1(1,0) ! contrib from only even m
-  z00 = z1(1,0) ! contrib from only even m
-
   ! TODO: can dump real-space quantities (R, Z, lambda) here
   if (dump_geometry) then
       write(dump_filename, 999) ns, iter2, trim(input_extension)
@@ -115,7 +103,7 @@ SUBROUTINE funct3d (ier_flag)
               write (42, *) js, ku, lk, m, &
                             r1(l,m), ru(l,m), rv(l,m), &
                             z1(l,m), zu(l,m), zv(l,m), &
-                            lu(l+(m-1)*nrzt), lv(l+(m-1)*nrzt), &
+                            lu(l+m*nrzt), lv(l+m*nrzt), &
                             rcon(l,m), zcon(l,m)
            end do
           end do
@@ -125,15 +113,27 @@ SUBROUTINE funct3d (ier_flag)
       close(42)
 
       print *, "dumped geometry output to '"//trim(dump_filename)//"'"
-
-    stop
+      stop
   end if
 999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a)
+
+  ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
+  ! --> at ns, sqrt(s)==1 --> no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore
+
+  router = r1(ns,0) + r1(ns,1) ! index ns corresponds to (u=0, v=0, js=ns)
+
+  ! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)
+  l0pi = ns*(1 + nzeta*(ntheta2 - 1))
+  rinner = r1(l0pi,0) + r1(l0pi,1)
+
+  r00 = r1(1,0) ! contrib from only even m
+  z00 = z1(1,0) ! contrib from only even m
+
 
 
   ! COMPUTE CONSTRAINT RCON, ZCON
 
-  ! --> see Hirshman, Schwenn & Nührenberg
+  ! --> see Hirshman, Schwenn & Nührenberg: summation of even-m and odd-m*sqrt(s)
 
 ! #ifndef _HBANGLE
   rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt) ! odd-m entries need to be scaled appropriately

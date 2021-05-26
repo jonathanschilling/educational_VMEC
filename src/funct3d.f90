@@ -25,7 +25,7 @@ SUBROUTINE funct3d (ier_flag)
 
   INTEGER, INTENT(inout) :: ier_flag
 
-  INTEGER :: l0pi, l, lk, ivacskip
+  INTEGER :: l0pi, l, lk, ivacskip, js, ku, m
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
@@ -50,6 +50,9 @@ SUBROUTINE funct3d (ier_flag)
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.
+
+  character(len=255) :: dump_filename
+  logical            :: dump_geometry = .true.
 
 
 
@@ -95,7 +98,37 @@ SUBROUTINE funct3d (ier_flag)
   z00 = z1(1,0) ! contrib from only even m
 
   ! TODO: can dump real-space quantities (R, Z, lambda) here
+  if (dump_geometry) then
+      write(dump_filename, 999) ns, iter2, trim(input_extension)
+      open(unit=42, file=trim(dump_filename), status="unknown")
 
+      write(42, *) "# ns ntheta3 nzeta"
+      write(42, *) ns, ntheta3, nzeta
+
+      write(42, *) "# js ku lv m%2 r1 ru rv z1 zu zv lu lv rcon zcon"
+      DO js = 1, ns
+        DO ku = 1, ntheta3
+          DO lk = 1, nzeta
+            DO m=0,1
+              !l = ((lk-1)*ntheta3+(ku-1))*ns+js
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, ku, lk, m, &
+                            r1(l,m), ru(l,m), rv(l,m), &
+                            z1(l,m), zu(l,m), zv(l,m), &
+                            lu(l+(m-1)*nrzt), lv(l+(m-1)*nrzt), &
+                            rcon(l,m), zcon(l,m)
+           end do
+          end do
+        end do
+      end do
+
+      close(42)
+
+      print *, "dumped geometry output to '"//trim(dump_filename)//"'"
+
+    stop
+  end if
+999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a)
 
 
   ! COMPUTE CONSTRAINT RCON, ZCON

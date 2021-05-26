@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">POINTER</span> :: bsupu, bsubuh, bsupv, bsubvh, r12sq</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">logical</span>            :: dump_metric = .true.</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">logical</span>            :: dump_metric = .false.</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ndim = 1+nrzt <span class="comment">! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
@@ -220,7 +220,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a3e7366c41b6cebbfaca80ba6be47630e">gvv</a>(2:nrzt) + r12sq(2:nrzt)</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">! check metric coefficients</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">! check metric coefficients</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">if</span> (dump_metric) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <span class="keyword">write</span>(dump_filename, 998) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
@@ -653,7 +653,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/bcovar_8f90.html">bcovar.f90</a></li>
-    <li class="footer">Generated on Wed May 26 2021 16:57:42 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 26 2021 22:55:13 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

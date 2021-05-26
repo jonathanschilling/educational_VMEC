@@ -25,7 +25,7 @@ SUBROUTINE bcovar (lu, lv)
 
   REAL(rprec), PARAMETER :: c1p5 = (one + p5)
 
-  INTEGER :: l, js, ndim
+  INTEGER :: l, js, ndim, lk, ku
   REAL(rprec) :: r2, volume, curpol_temp
 
 ! #ifndef _HBANGLE
@@ -34,6 +34,9 @@ SUBROUTINE bcovar (lu, lv)
 
   REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
+
+  character(len=255) :: dump_filename
+  logical            :: dump_metric = .true.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -107,6 +110,57 @@ SUBROUTINE bcovar (lu, lv)
   gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) ! constant extrapolation towards axis
 
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
+
+! check metric coefficients
+  if (dump_metric) then
+      write(dump_filename, 998) ns, iter2, trim(input_extension)
+      open(unit=42, file=trim(dump_filename), status="unknown")
+
+      write(42, *) "# ns ntheta3 nzeta"
+      write(42, *) ns, ntheta3, nzeta
+
+      if (lthreed) then
+         write(42, *) "# js ku lv guu r12sq guv gvv gsqrt"
+         DO js = 2, ns
+           DO ku = 1, ntheta3
+             DO lk = 1, nzeta
+                 l = ((ku-1)*nzeta+(lk-1))*ns+js
+                 write (42, *) js, ku, lk, &
+                               guu(l), r12sq(l), guv(l), &
+                               gvv(l), gsqrt(l)
+             end do
+           end do
+         end do
+      else
+         write(42, *) "# js ku lv guu r12sq gvv gsqrt"
+         DO js = 2, ns
+           DO ku = 1, ntheta3
+             DO lk = 1, nzeta
+                 l = ((ku-1)*nzeta+(lk-1))*ns+js
+                 write (42, *) js, ku, lk, &
+                               guu(l), r12sq(l), &
+                               gvv(l), gsqrt(l)
+             end do
+           end do
+         end do
+      end if
+
+      close(42)
+
+      print *, "dumped metric elements output to '"//trim(dump_filename)//"'"
+      stop
+  end if
+998 format('metric_',i5.5,'_',i6.6,'.',a)
+
+
+
+
+
+
+
+
+
+
 
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
 

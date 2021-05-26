@@ -4,18 +4,23 @@
 !> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
 !>
 SUBROUTINE jacobian
-  USE vmec_main, ONLY: ohs, nrzt, irst
+  USE vmec_main, ONLY: ohs, nrzt, irst, iter2
   USE vmec_params, ONLY: meven, modd
+  use vmec_input, only: input_extension, nzeta
   USE realspace
-  USE vmec_dim, ONLY: ns
+  USE vmec_dim, ONLY: ns, ntheta3
   USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e, &
                rs => bzmn_e, zs => brmn_e, tau => azmn_o
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: zero=0, p5=0.5_dp, p25=p5*p5
 
-  INTEGER :: l
+  INTEGER :: l, js, ku, lk
   REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns)
+
+  character(len=255) :: dump_filename
+  logical            :: dump_jacobian = .false.
+
 
   ! (RS, ZS)=(R, Z) SUB S, (RU12, ZU12)=(R, Z) SUB THETA(=U)
   ! AND TAU=SQRT(G)/R ARE DIFFERENCED ON HALF MESH
@@ -29,11 +34,13 @@ SUBROUTINE jacobian
   irst = 1
 
   DO l = 2,nrzt
-    zs(l)   = ohs*( z1(l,meven) - z1(l-1,meven) + shalf(l)*(z1(l,modd)  - z1(l-1,modd)) ) ! dZ/ds on half grid (?)
-    rs(l)   = ohs*( r1(l,meven) - r1(l-1,meven) + shalf(l)*(r1(l,modd)  - r1(l-1,modd)) ) ! dR/ds on half grid (?)
-    r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! 0.5*R on half grid (?)
-    ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) ) ! 0.5*dR/du on half grid (?)
-    zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) ) ! 0.5*dZ/du on half grid (?)
+    r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! R on half grid
+
+    ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) ) ! dR/du on half grid
+    zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) ) ! dZ/du on half grid
+
+    rs(l)   = ohs*( r1(l,meven) - r1(l-1,meven) + shalf(l)*(r1(l,modd)  - r1(l-1,modd)) ) ! dR/ds on half grid
+    zs(l)   = ohs*( z1(l,meven) - z1(l-1,meven) + shalf(l)*(z1(l,modd)  - z1(l-1,modd)) ) ! dZ/ds on half grid
 
     ! TODO: the lower four lines of below expression could be split off into some separate variables...
     tau(l)  = ru12(l)*zs(l) - rs(l)*zu12(l) + dshalfds*                               &
@@ -43,14 +50,45 @@ SUBROUTINE jacobian
                    - zu(l,meven)*r1(l,modd) - zu(l-1,meven)*r1(l-1,modd) )/shalf(l) )
   END DO
 
-  ! TEST FOR SIGN CHANGE IN JACOBIAN
+  ! extrapolate as constant to axis
   temp(:) = tau(2:nrzt:ns)
   tau(1:nrzt:ns) = temp(:)
+
+  ! check output from jacobian()
+  if (dump_jacobian) then
+      write(dump_filename, 998) ns, iter2, trim(input_extension)
+      open(unit=42, file=trim(dump_filename), status="unknown")
+
+      write(42, *) "# ns ntheta3 nzeta"
+      write(42, *) ns, ntheta3, nzeta
+
+      write(42, *) "# js ku lv r12 ru12 zu12 rs zs tau"
+      DO js = 2, ns
+        DO ku = 1, ntheta3
+          DO lk = 1, nzeta
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, ku, lk, &
+                            r12(l), ru12(l), zu12(l), &
+                            rs(l), zs(l), tau(l)
+          end do
+        end do
+      end do
+
+      close(42)
+
+      print *, "dumped jacobian output to '"//trim(dump_filename)//"'"
+      stop
+  end if
+998 format('jacobian_',i5.5,'_',i6.6,'.',a)
+
+
+! TEST FOR SIGN CHANGE IN JACOBIAN
   taumax = MAXVAL(tau(2:nrzt))
   taumin = MINVAL(tau(2:nrzt))
   IF (taumax*taumin .lt. zero) then
      ! bad jacobian !
      irst = 2
   end if
+
 
 END SUBROUTINE jacobian

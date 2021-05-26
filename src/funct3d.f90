@@ -52,9 +52,7 @@ SUBROUTINE funct3d (ier_flag)
   logical :: ldump_vacuum_ref = .false.
 
   character(len=255) :: dump_filename
-  logical            :: dump_geometry = .true.
-
-
+  logical            :: dump_geometry = .false.
 
 
 
@@ -85,7 +83,6 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  ! TODO: can dump real-space quantities (R, Z, lambda) here
   if (dump_geometry) then
       write(dump_filename, 999) ns, iter2, trim(input_extension)
       open(unit=42, file=trim(dump_filename), status="unknown")

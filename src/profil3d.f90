@@ -22,7 +22,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   INTEGER :: jcount, jk, k
 
   character(len=255) :: dump_filename
-  logical, parameter :: dump_profil3d = .true.
+  logical, parameter :: dump_profil3d = .false.
 
   ! expant to full surface grid
   DO js = 1, ns

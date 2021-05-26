@@ -187,55 +187,55 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                  <a class="code" href="../../d8/d09/namespacevforces.html#a49cef3a435a0c39bc19038b033cfc72d">armn</a>, <a class="code" href="../../d8/d09/namespacevforces.html#a268209c5d8f0c1e75bddaac47420e4e3">brmn</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a616383e8d55b1cf412dbe030b2d1f8b0">extra3</a>, <a class="code" href="../../d8/d09/namespacevforces.html#a1056fc7ac073704a122547f6b5803bba">azmn</a>, <a class="code" href="../../d8/d09/namespacevforces.html#ae96507c5dd963deef14c712b94eedca3">bzmn</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a653a7aae0ed5dd68e90df07fa58eb49d">extra4</a>, <a class="code" href="../../d8/d09/namespacevforces.html#a48b3bc2c966679f8397850a8f7c7d13a">blmn</a>, <a class="code" href="../../d8/d09/namespacevforces.html#a0b9c131f4ce7f8514cf1bafd43661f3d">clmn</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524">extra1</a>, <a class="code" href="../../d7/d0e/namespacerealspace.html#ae090572875428770c681f3012ca4e22b">extra2</a>    )</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordflow">  ENDIF</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">! --&gt; at ns, sqrt(s)==1 --&gt; no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a70ef71be9bbd8a818e998d4851254858">router</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(ns,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(ns,1) <span class="comment">! index ns corresponds to (u=0, v=0, js=ns)</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">! TODO: can dump real-space quantities (R, Z, lambda) here</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordflow">if</span> (dump_geometry) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keyword">write</span>(dump_filename, 999) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  l0pi = ns*(1 + nzeta*(ntheta2 - 1))</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3fbe8ae1c186a7d41d252c37ed93468">rinner</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l0pi,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l0pi,1)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8ec64fc964c5e9fe763cd9a220683643">r00</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1,0) <span class="comment">! contrib from only even m</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a749c44c3b79ebe175adb7c68bc757a87">z00</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(1,0) <span class="comment">! contrib from only even m</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">! TODO: can dump real-space quantities (R, Z, lambda) here</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> (dump_geometry) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keyword">write</span>(dump_filename, 999) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntheta3 nzeta&quot;</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keyword">write</span>(42, *) ns, ntheta3, nzeta</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js ku lv m%2 r1 ru rv z1 zu zv lu lv rcon zcon&quot;</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      <span class="keywordflow">DO</span> js = 1, ns</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">DO</span> ku = 1, ntheta3</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;          <span class="keywordflow">DO</span> lk = 1, nzeta</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">DO</span> m=0,1</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;              <span class="comment">!l = ((lk-1)*ntheta3+(ku-1))*ns+js</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;              l = ((ku-1)*nzeta+(lk-1))*ns+js</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;              <span class="keyword">write</span> (42, *) js, ku, lk, m, &amp;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,m), &amp;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,m), &amp;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            lu(l+(m-1)*nrzt), lv(l+(m-1)*nrzt), &amp;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#a94ff4749c081afd2fee454d3c29ab01e">rcon</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a39f59e47dae921143abccc9d5edfdc63">zcon</a>(l,m)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordflow">           end do</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordflow">          end do</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordflow">        end do</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntheta3 nzeta&quot;</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keyword">write</span>(42, *) ns, ntheta3, nzeta</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js ku lv m%2 r1 ru rv z1 zu zv lu lv rcon zcon&quot;</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">DO</span> js = 1, ns</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">DO</span> ku = 1, ntheta3</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;          <span class="keywordflow">DO</span> lk = 1, nzeta</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">DO</span> m=0,1</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;              <span class="comment">!l = ((lk-1)*ntheta3+(ku-1))*ns+js</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;              l = ((ku-1)*nzeta+(lk-1))*ns+js</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;              <span class="keyword">write</span> (42, *) js, ku, lk, m, &amp;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a3cd31a100acd13d901b14b6d4589ef54">ru</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,m), &amp;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#af8378578827f607a3c17e16ca9d17d9e">zu</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,m), &amp;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                            lu(l+m*nrzt), lv(l+m*nrzt), &amp;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                            <a class="code" href="../../d7/d0e/namespacerealspace.html#a94ff4749c081afd2fee454d3c29ab01e">rcon</a>(l,m), <a class="code" href="../../d7/d0e/namespacerealspace.html#a39f59e47dae921143abccc9d5edfdc63">zcon</a>(l,m)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordflow">           end do</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordflow">          end do</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      print *, <span class="stringliteral">&quot;dumped geometry output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      stop</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;999 <span class="keyword">format</span>(<span class="stringliteral">&#39;funct3d_geometry_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="comment">! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="comment">! --&gt; at ns, sqrt(s)==1 --&gt; no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a70ef71be9bbd8a818e998d4851254858">router</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(ns,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(ns,1) <span class="comment">! index ns corresponds to (u=0, v=0, js=ns)</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      print *, <span class="stringliteral">&quot;dumped geometry output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">! l0pi is the index corresponding to (u = pi, v = 0, js = ns) (?)</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  l0pi = ns*(1 + nzeta*(ntheta2 - 1))</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3fbe8ae1c186a7d41d252c37ed93468">rinner</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l0pi,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l0pi,1)</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    stop</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;999 <span class="keyword">format</span>(<span class="stringliteral">&#39;funct3d_geometry_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8ec64fc964c5e9fe763cd9a220683643">r00</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(1,0) <span class="comment">! contrib from only even m</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a749c44c3b79ebe175adb7c68bc757a87">z00</a> = <a class="code" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(1,0) <span class="comment">! contrib from only even m</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="comment">! COMPUTE CONSTRAINT RCON, ZCON</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">! --&gt; see Hirshman, Schwenn &amp; Nührenberg</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">! --&gt; see Hirshman, Schwenn &amp; Nührenberg: summation of even-m and odd-m*sqrt(s)</span></div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <a class="code" href="../../d7/d0e/namespacerealspace.html#a94ff4749c081afd2fee454d3c29ab01e">rcon</a>(:nrzt,0) = <a class="code" href="../../d7/d0e/namespacerealspace.html#a94ff4749c081afd2fee454d3c29ab01e">rcon</a>(:nrzt,0) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a94ff4749c081afd2fee454d3c29ab01e">rcon</a>(:nrzt,1)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(:nrzt) <span class="comment">! odd-m entries need to be scaled appropriately</span></div>
@@ -593,7 +593,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d4f/funct3d_8f90.html">funct3d.f90</a></li>
-    <li class="footer">Generated on Wed May 26 2021 00:06:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 26 2021 01:23:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

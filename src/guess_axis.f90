@@ -31,7 +31,6 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   character(len=255) :: dump_filename
   logical            :: dump_guess_axis = .true.
 
-
   ! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS
   ! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID
   ! SEARCH (irgrid, izgrid) IN EACH PHI-PLANE FOR POINTS WHICH
@@ -39,6 +38,17 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   ! CHOOSES THE AXIS POSITION SO THE MIN VALUE OF THE JACOBIAN IS MAXIMIZED
 
   ns12 = (ns+1)/2
+
+  ! debugging output from guess_axis
+  if (dump_guess_axis) then
+    write(dump_filename, 998) trim(input_extension)
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# nzeta ntheta1, ns12"
+    write(42, *) nzeta, ntheta1, ns12
+
+    write(42, *) "# iv iu r1b z1b rub zub r12 z12 rs zs tau ru12 zu12 tau0"
+  end if
 
   planes: DO iv = 1, nzeta
 
@@ -124,6 +134,15 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         END DO
      END DO
 
+     if (dump_guess_axis) then
+       do iu = 1, ntheta1
+         write(42, *) iv, iu,                                    &
+           r1b(iu), z1b(iu), rub(iu), zub(iu),                   &
+           r12(iu), z12(iu),                                     &
+           rs(iu), zs(iu), tau(iu), ru12(iu), zu12(iu), tau0(iu)
+       end do
+     end if
+
   END DO planes
 
   ! FOURIER TRANSFORM RCOM, ZCOM
@@ -139,18 +158,16 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
      END IF
   END DO
 
-
-
-  ! check new initial guess for axis
   if (dump_guess_axis) then
-    write(dump_filename, 998) ns, iter2, trim(input_extension)
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    write(42, *) "# iv rcom zcom"
+    do iv=1, nzeta
+      write(42, *) iv, rcom(iv), zcom(iv)
+    end do
 
-
-
-
-
-
+    write(42, *) "# n raxis_cc zaxis_cs raxis_cs zaxis_cc"
+    DO n = 0, ntor
+      write(42, *) n, raxis_cc(n), zaxis_cs(n), raxis_cs(n), zaxis_cc(n)
+    end do
 
     close(42)
 

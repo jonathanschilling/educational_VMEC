@@ -36,7 +36,7 @@ SUBROUTINE bcovar (lu, lv)
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
 
   character(len=255) :: dump_filename
-  logical            :: dump_metric = .true.
+  logical            :: dump_metric = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -59,7 +59,7 @@ SUBROUTINE bcovar (lu, lv)
   ! COMPUTE METRIC ELEMENTS GIJ ON HALF MESH
   ! FIRST, GIJ = EVEN PART (ON FULL MESH), LIJ = ODD PART (ON FULL MESH)
   ! THEN, GIJ(HALF) = < GIJ(even)> + SHALF < GIJ(odd) >
-  r12sq(1:nrzt) = sqrts(1:nrzt)*sqrts(1:nrzt)
+  r12sq(1:nrzt) = sqrts(1:nrzt)*sqrts(1:nrzt) ! s on full grid
   guu(1:nrzt)   =   ru(1:nrzt,0)*ru(1:nrzt,0)                         &
                   + zu(1:nrzt,0)*zu(1:nrzt,0) + r12sq(1:nrzt)*         &
                  (  ru(1:nrzt,1)*ru(1:nrzt,1)                          &
@@ -67,18 +67,7 @@ SUBROUTINE bcovar (lu, lv)
 
   luu(1:nrzt)   = (ru(1:nrzt,0)*ru(1:nrzt,1)                        &
                 +  zu(1:nrzt,0)*zu(1:nrzt,1))*2
-  phipog(1:nrzt)= 2*r1(1:nrzt,0)*r1(1:nrzt,1) ! temporary re-use of phipog for 2*R^2 ???
-
-!   write(*,*) "#### js ku lk l guu_even, guu_odd, contributions"
-!   DO ku = 1, 1 ! ntheta3
-!     DO lk = 1, 1 ! nzeta
-!       DO js = 2, 2 ! ns
-!         l = ((ku-1)*nzeta+(lk-1))*ns+js
-!         write(*,*) js, ku, lk, l, &
-!           guu(l), luu(l), ru(l,0), zu(l,0), ru(l,1), zu(l,1)
-!       end do
-!     end do
-!   end do
+  phipog(1:nrzt)= 2*r1(1:nrzt,0)*r1(1:nrzt,1) ! temporary re-use of phipog
 
   IF (lthreed) THEN
      guv(1:nrzt)   = ru(1:nrzt,0)*rv(1:nrzt,0)                      &
@@ -89,25 +78,6 @@ SUBROUTINE bcovar (lu, lv)
                    + ru(1:nrzt,1)*rv(1:nrzt,0)                      &
                    + zu(1:nrzt,0)*zv(1:nrzt,1)                      &
                    + zu(1:nrzt,1)*zv(1:nrzt,0)
-
-     write(*,*) "#### js ku lk l guv_even, guv_odd ; contributions"
-     l=1
-     DO ku = 1, ntheta3
-       DO lk = 1, nzeta
-         DO js = 1, ns
-        !   l = ((ku-1)*nzeta+(lk-1))*ns+js
-
-          if (js.eq.2 .and. lk.eq.1 .and. ku.eq.1) then
-           write(*,*) js, ku, lk, l, guv(l), luv(l)
-           write(*,*) ru(l,0), zu(l,0), ru(l,1), zu(l,1), &
-                      rv(l,0), zv(l,0), rv(l,1), zv(l,1)
-           end if
-           l = l+1
-         end do
-       end do
-     end do
-
-
 
      gvv(1:nrzt)   = rv(1:nrzt,0)*rv(1:nrzt,0)                      &
                    + zv(1:nrzt,0)*zv(1:nrzt,0) + r12sq(1:nrzt)*     &
@@ -120,7 +90,8 @@ SUBROUTINE bcovar (lu, lv)
   r12sq(1:nrzt) = r1(1:nrzt,0)*r1(1:nrzt,0) + r12sq(1:nrzt)*        &
                   r1(1:nrzt,1)*r1(1:nrzt,1)
 
-  ! TODO: why need to do this in reverse order?
+  ! need to do this in reverse order since guu and r12sq were re-used
+  ! for their full-grid even-m contributions
   DO l = nrzt, 2, -1
      guu(l) = p5*(guu(l) + guu(l-1) + shalf(l)*(luu(l) + luu(l-1)))
 
@@ -130,31 +101,9 @@ SUBROUTINE bcovar (lu, lv)
 
   IF (lthreed) THEN
      DO l = nrzt, 2, -1
-
-        if (l.eq.2) then
-          write(*,*) p5*(guv(l) + guv(l-1)), shalf(l), p5*(luv(l) + luv(l-1))
-        end if
-
         guv(l) = p5*(guv(l) + guv(l-1) + shalf(l)*(luv(l) + luv(l-1)))
-
-        if (l.eq.2) then
-          write(*,*) "-->", guv(l)
-        end if
-
-
-
         gvv(l) = p5*(gvv(l) + gvv(l-1) + shalf(l)*(lvv(l) + lvv(l-1)))
      END DO
-
-!      write(*,*) "#### js ku lk l guv gvv"
-!      DO ku = 1, ntheta3
-!        DO lk = 1, nzeta
-!          DO js = 2, ns
-!            l = ((ku-1)*nzeta+(lk-1))*ns+js
-!            write(*,*) js, ku, lk, l, guv(l), gvv(l)
-!          end do
-!        end do
-!      end do
   END IF
 
   tau(1:nrzt) = gsqrt(1:nrzt)

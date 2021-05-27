@@ -209,9 +209,6 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
   END DO
 
-  write(*,*) "zv:", zv1(2, 0)
-
-
   DEALLOCATE (work1)
 
 END SUBROUTINE totzsps

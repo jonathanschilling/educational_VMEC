@@ -37,6 +37,7 @@ SUBROUTINE bcovar (lu, lv)
 
   character(len=255) :: dump_filename
   logical            :: dump_metric = .false.
+  logical            :: dump_volume = .true.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -173,7 +174,8 @@ SUBROUTINE bcovar (lu, lv)
   ! this is where phipog == 1/sqrt(g) is actually assigned
   ! note that the phip factor in phipog is gone... (see comment below)
   WHERE (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)
-  phipog(1:ndim:ns) = 0 ! magnetic axis (?)
+
+  phipog(1:ndim:ns) = 0 ! 1/sqrt(g) is zero(since undefined) at the magnetic axis
 
   ! compute plasma volume profile (vp) and total volume (voli)
   vp(1) = 0
@@ -184,6 +186,32 @@ SUBROUTINE bcovar (lu, lv)
   IF (iter2 .eq. 1) then
     voli = twopi*twopi*hs*SUM(vp(2:ns))
   end if
+
+  ! check plasma volume computation
+  if (dump_volume) then
+    write(dump_filename, 997) ns, trim(input_extension)
+997 format('volume_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns"
+    write(42, *) ns
+
+    write(42, *) "# js vp"
+    DO js = 2, ns
+      write(42,*) js, vp(js)
+    end do
+
+    write(42,*) "# voli"
+    write(42, *) voli
+
+    close(42)
+
+    print *, "dumped plasma volume to '"//trim(dump_filename)//"'"
+    stop
+  end if
+
+
 
   ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.
   ! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!

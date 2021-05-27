@@ -41,7 +41,7 @@ SUBROUTINE eqsolve(ier_flag)
   IF (irst .EQ. 2) THEN
      xc = 0
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
-     irst = 1
+     irst = 1 ! tells restart_iter to store current xc in xstore
      IF (liter_flag) then
         ! Note that at this point, liter_flag could also simply contain (iter2 .eq. 1) (see above).
         ! (OFF IN v8.50)

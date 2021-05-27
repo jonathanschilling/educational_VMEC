@@ -156,7 +156,7 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
 
         ! start and end indices of poloidal slice of current flux surface
         j1l = l+1
-        nsl = nsz+l
+        nsl = l+nsz
 
         l = l + nsz
 
@@ -208,6 +208,9 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
      END DO
 
   END DO
+
+  write(*,*) "zv:", zv1(2, 0)
+
 
   DEALLOCATE (work1)
 

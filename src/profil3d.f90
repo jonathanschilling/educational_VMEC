@@ -22,7 +22,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   INTEGER :: jcount, jk, k
 
   character(len=255) :: dump_filename
-  logical, parameter :: dump_profil3d = .false.
+  logical, parameter :: dump_profil3d = .true.
 
   ! expant to full surface grid
   DO js = 1, ns
@@ -77,6 +77,20 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   ! SCALXC ARRAY (1/SQRTS FACTOR FOR ODD M VALUES)
 
   print *, "initial guess for R_mn, Z_mn in profil3d"
+
+!   write(*,*) "raxis_cc(0)=",raxis_cc(0)
+!   DO m = 0, mpol1
+!      DO n = 0, ntor
+!        if (abs(rmn_bdy(n,m,rcc)) .gt. 1.0e-12_dp) then
+!          write(*,*) n, m, rmn_bdy(n,m,rcc)
+!        end if
+!        if (abs(zmn_bdy(n,m,zcs)) .gt. 1.0e-12_dp) then
+!          write(*,*) n, m, zmn_bdy(n,m,zcs)
+!        end if
+!      end do
+!    end do
+
+
 
   DO js = 1, ns
 

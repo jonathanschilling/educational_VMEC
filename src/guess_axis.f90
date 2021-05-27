@@ -29,7 +29,7 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   REAL(rprec) :: ds, mintau, mintemp
 
   character(len=255) :: dump_filename
-  logical            :: dump_guess_axis = .true.
+  logical            :: dump_guess_axis = .false.
 
   ! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS
   ! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID

@@ -91,18 +91,19 @@ SUBROUTINE funct3d (ier_flag)
       write(42, *) ns, ntheta3, nzeta
 
       write(42, *) "# js ku lv m%2 r1 ru rv z1 zu zv lu lv rcon zcon"
-      DO js = 1, ns
-        DO ku = 1, ntheta3
-          DO lk = 1, nzeta
+      l = 1
+      DO ku = 1, ntheta3
+        DO lk = 1, nzeta
+          DO js = 1, ns
             DO m=0,1
-              !l = ((lk-1)*ntheta3+(ku-1))*ns+js
-              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              !l = ((ku-1)*nzeta+(lk-1))*ns+js
               write (42, *) js, ku, lk, m, &
-                            r1(l,m), ru(l,m), rv(l,m), &
-                            z1(l,m), zu(l,m), zv(l,m), &
+                            r1(l,m), ru(l,m), rv(l,m),  &
+                            z1(l,m), zu(l,m), zv(l,m),  &
                             lu(l+m*nrzt), lv(l+m*nrzt), &
                             rcon(l,m), zcon(l,m)
-           end do
+            end do
+            l = l+1
           end do
         end do
       end do

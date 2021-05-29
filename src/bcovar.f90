@@ -37,7 +37,9 @@ SUBROUTINE bcovar (lu, lv)
 
   character(len=255) :: dump_filename
   logical            :: dump_metric = .false.
-  logical            :: dump_volume = .true.
+  logical            :: dump_volume = .false.
+  logical            :: dump_bcontrav = .false.
+  logical            :: dump_bcov = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -159,16 +161,6 @@ SUBROUTINE bcovar (lu, lv)
   end if
 998 format('metric_',i5.5,'_',i6.6,'.',a)
 
-
-
-
-
-
-
-
-
-
-
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
 
   ! this is where phipog == 1/sqrt(g) is actually assigned
@@ -211,8 +203,6 @@ SUBROUTINE bcovar (lu, lv)
     stop
   end if
 
-
-
   ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.
   ! THE OVERALL PHIP FACTOR (PRIOR TO v8.46) HAS BEEN REMOVED FROM PHIPOG, SO NOW PHIPOG == 1/GSQRT!
   !
@@ -229,18 +219,43 @@ SUBROUTINE bcovar (lu, lv)
      lu(js:nrzt:ns,0) = lu(js:nrzt:ns,0) + phipf(js)
   END DO
 
-  bsupu(2:nrzt) = p5*phipog(2:nrzt)*(                 lv(2:nrzt,0) + lv(1:nrzt-1,0)  &
-                                     + shalf(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1))  )
-  bsupv(2:nrzt) = p5*phipog(2:nrzt)*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
-                                     + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
+  bsupu(2:nrzt) = phipog(2:nrzt) * p5*(                 lv(2:nrzt,0) + lv(1:nrzt-1,0)  &
+                                       + shalf(2:nrzt)*(lv(2:nrzt,1) + lv(1:nrzt-1,1))  )
+  bsupv(2:nrzt) = phipog(2:nrzt) * p5*(                 lu(2:nrzt,0) + lu(1:nrzt-1,0)  &
+                                       + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
 
-  ! TODO: what is this? (m,n)=(0,0)-mode on axis?
+  ! first point at (u,v)=(0,0) on axis
   bsupu(1)=0
   bsupv(1)=0
 
   ! v8.49: add ndim points --> TODO: likely not needed anymore, reconstruction-related?
   bsupu(ndim)=0
   bsupv(ndim)=0
+
+  if (dump_bcontrav) then
+    write(dump_filename, 996) ns, trim(input_extension)
+996 format('bcontrav_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns nzeta ntheta3"
+    write(42, *) ns, nzeta, ntheta3
+
+    write(42, *) "# js lk ku bsupu bsupv"
+    DO js = 2, ns
+      DO lk = 1, nzeta
+        DO ku = 1, ntheta3
+          l = ((ku-1)*nzeta+(lk-1))*ns+js
+          write (42, *) js, lk, ku, bsupu(l), bsupv(l)
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped bsup(u,v) to '"//trim(dump_filename)//"'"
+    stop
+  end if
 
   ! UPDATE IOTA EITHER OF TWO WAYS:
   ! 1)  FOR ictrl_prec2d = 0, SOLVE THE LINEAR ALGEBRAIC EQUATION <Bsubu> = icurv FOR iotas
@@ -273,10 +288,46 @@ SUBROUTINE bcovar (lu, lv)
   ! kinetic == thermal enery
   wp = hs*SUM(vp(2:ns)*pres(2:ns))
 
+!   write(*,*) "magnetic energy: ", wb
+!   write(*,*) "kinetic energy: ", wp
+
   ! ADD KINETIC PRESSURE TO MAGNETIC PRESSURE
   DO js=2,ns
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
+
+  if (dump_bcov) then
+    write(dump_filename, 994) ns, trim(input_extension)
+994 format('bcov_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns nzeta ntheta3"
+    write(42, *) ns, nzeta, ntheta3
+
+    write(42, *) "# js lk ku bsubuh bsubvh bsq"
+    DO js = 2, ns
+      DO lk = 1, nzeta
+        DO ku = 1, ntheta3
+          l = ((ku-1)*nzeta+(lk-1))*ns+js
+          write (42, *) js, lk, ku, bsubuh(l), bsubvh(l), bsq(l)
+        end do
+      end do
+    end do
+
+    write(42, *) "# js pres"
+    DO js = 1, ns
+      write(42, *) js, pres(js)
+    end do
+
+    write(42, *) "# wb wp"
+    write(42, *) wb, wp
+
+    close(42)
+
+    print *, "dumped bsub(u,v)h to '"//trim(dump_filename)//"'"
+    stop
+  end if
 
   ! COMPUTE LAMBDA FULL MESH FORCES
   ! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)

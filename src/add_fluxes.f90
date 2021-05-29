@@ -20,8 +20,11 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   REAL(rprec), PARAMETER :: p5=0.5_dp, c1p5=1.5_dp
   REAL(rprec), PARAMETER :: iotaped = 0.10
 
-  INTEGER :: js, l
+  INTEGER :: js, l, ku, lk
   REAL(rprec) :: top, bot
+
+  character(len=255) :: dump_filename
+  logical            :: dump_add_fluxes = .false.
 
   ! I think this is the "zero-current algorithm" published in section 2.3 of
   ! Hirshman, Hogan, "ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code" (1986), J. Comp. Phys. 63 (2), 329-352
@@ -36,7 +39,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
         top = icurv(js) ! offset: this makes the zero-current algorithm a constrained-current algorithm
         bot = 0
         DO l = js, nrzt, ns
-           ! bsupu contains -d(lambda)/d(zeta)*lamscale on entry (?)
+           ! bsupu contains -d(lambda)/d(zeta)*lamscale+phipf on entry (?)
            ! bsupv contains  d(lambda)/d(theta)*lamscale on entry (?)
            top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))
            bot = bot + wint(l)* guu(l)*overg(l)
@@ -72,5 +75,37 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
 
   ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.
   bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)
+
+  if (dump_add_fluxes) then
+    write(dump_filename, 995) ns, trim(input_extension)
+995 format('add_fluxes_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns nzeta ntheta3"
+    write(42, *) ns, nzeta, ntheta3
+
+    write(42, *) "# js chips iotas chipf iotaf"
+    DO js = 1, ns
+      write(42, *) js, chips(js), iotas(js), chipf(js), iotaf(js)
+    end do
+
+    write(42, *) "# js lk ku bsupu"
+    DO js = 2, ns
+      DO lk = 1, nzeta
+        DO ku = 1, ntheta3
+          l = ((ku-1)*nzeta+(lk-1))*ns+js
+          write (42, *) js, lk, ku, bsupu(l)
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped add_fluxes output to '"//trim(dump_filename)//"'"
+    stop
+  end if
+
+
 
 END SUBROUTINE add_fluxes

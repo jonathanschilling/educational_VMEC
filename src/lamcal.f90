@@ -20,6 +20,9 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   INTEGER :: m,n,js
   REAL(rprec) :: tnn, tnm, tmm, power, pfactor0, pfactor
 
+  character(len=255) :: dump_filename
+  logical            :: dump_lamcal = .true.
+
   blam(:ns) = SUM(guu*overg, dim=2) ! over surface
   clam(:ns) = SUM(gvv*overg, dim=2) ! over surface
   dlam(:ns) = SUM(guv*overg, dim=2) ! over surface
@@ -69,6 +72,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
      END DO
   END DO
 
+  ! extend to rest of Fourier basis
   DO n = 2, ntmax
      faclam(:ns,0:ntor,0:mpol1,n) = faclam(:ns,0:ntor,0:mpol1,1)
   END DO
@@ -77,5 +81,38 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   DO js = 1, ns
      faclam(js,0,0,1) = (pfactor0*lamscale**2)/blam(js)
   END DO
+
+  ! check lamcal output
+  if (dump_lamcal) then
+      write(dump_filename, 998) ns, trim(input_extension)
+998 format('lamcal_',i5.5,'.',a)
+
+      open(unit=42, file=trim(dump_filename), status="unknown")
+
+      write(42, *) "# ns mpol1 ntor"
+      write(42, *) ns, mpol1, ntor
+
+      write(42, *) "# pfactor0"
+      write(42, *) pfactor0
+
+      write(42, *) "# js blam clam dlam"
+      DO js = 2, ns
+        write(42, *) js, blam(js), clam(js), dlam(js)
+      end do
+
+      write(42, *) "# m n js faclam(js,n,m,1)"
+      DO m = 0, mpol1
+        DO n = 0, ntor
+          DO js = 1, ns
+            write(42, *) m, n, js, faclam(js,n,m,1)
+          end do
+        end do
+      end do
+
+      close(42)
+
+      print *, "dumped lamcal output to '"//trim(dump_filename)//"'"
+      stop
+  end if
 
 END SUBROUTINE lamcal

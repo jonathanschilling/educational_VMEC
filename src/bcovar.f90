@@ -41,6 +41,7 @@ SUBROUTINE bcovar (lu, lv)
   logical            :: dump_bcontrav = .false.
   logical            :: dump_bcov = .false.
   logical            :: dump_lambda_forces = .false.
+  logical            :: dump_bcov_full = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -367,8 +368,6 @@ SUBROUTINE bcovar (lu, lv)
     stop
   end if
 
-
-
   ! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
   CALL calc_fbal(bsubuh, bsubvh)
 
@@ -413,6 +412,41 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
+  if (dump_bcov_full) then
+    write(dump_filename, 990) ns, trim(input_extension)
+990 format('bcov_full_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns nzeta ntheta3"
+    write(42, *) ns, nzeta, ntheta3
+
+    write(42, *) "# rbtor0 rbtor ctor"
+    write(42, *) rbtor0, rbtor, ctor
+
+    write(42, *) "# js bdamp"
+    DO js = 1, ns
+      write(42,*) js, bdamp(js)
+    end do
+
+    write(42, *) "# js lk ku bsubu_e bsubv_e"
+    DO js = 1, ns
+      DO lk = 1, nzeta
+        DO ku = 1, ntheta3
+          l = ((ku-1)*nzeta+(lk-1))*ns+js
+          write (42, *) js, lk, ku, bsubu_e(l), bsubv_e(l)
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped bsub(u,v) on full grid to '"//trim(dump_filename)//"'"
+    stop
+  end if
+
+
+
 !   ! NOTE THAT lu=>czmn, lv=>crmn externally
 !   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
 !   IF (iequi .EQ. 1) THEN
@@ -428,6 +462,8 @@ SUBROUTINE bcovar (lu, lv)
   ! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
   IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
      ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
+
+     write(*,*) "update 1d preconditioner"
 
      phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
 

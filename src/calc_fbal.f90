@@ -3,13 +3,14 @@
 
 !> \brief Compute flux-surface averaged radial force balance \f$\nabla p\, - <\mathbf{j} \times \mathbf{B}>\f$.
 !>
-!> @param bsubu covariant component of magnetic field \f$B_\theta\f$ on full mesh
-!> @param bsubv covariant component of magnetic field \f$B_\zeta\f$  on full mesh
+!> @param bsubu covariant component of magnetic field \f$B_\theta\f$ on half mesh
+!> @param bsubv covariant component of magnetic field \f$B_\zeta\f$  on half mesh
 SUBROUTINE calc_fbal(bsubu, bsubv)
 
   USE vmec_main, ONLY: buco, bvco, equif,             &
                        jcurv, jcuru, chipf, vp, pres, &
-                       phipf, vpphi, presgrad, ohs
+                       phipf, vpphi, presgrad, ohs,   &
+                       input_extension
   USE vmec_params, ONLY: signgs
   USE vmec_dim, ONLY: ns, nrzt, ns1
   USE realspace, ONLY: wint
@@ -21,6 +22,10 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   REAL(dp), INTENT(in) :: bsubv(1:nrzt)
 
   INTEGER  :: js
+
+  character(len=255) :: dump_filename
+  logical            :: dump_calc_fbal = .false.
+
 
   ! compute flux-surface averages of covariant magnetic field components
   DO js = 2, ns
@@ -48,5 +53,28 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
 
   equif(1) = 0
   equif(ns) = 0
+
+
+  ! check calc_fbal output
+  if (dump_calc_fbal) then
+    write(dump_filename, 998) ns, trim(input_extension)
+998 format('calc_fbal_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns"
+    write(42, *) ns
+
+    write(42, *) "# js buco bvco jcurv jcuru vpphi presgrad equif"
+    DO js = 1, ns
+      write(42,*) js, buco(js), bvco(js), jcurv(js), jcuru(js), &
+                      vpphi(js), presgrad(js), equif(js)
+    end do
+
+    close(42)
+
+    print *, "dumped calc_fbal output to '"//trim(dump_filename)//"'"
+    stop
+  end if
 
 END SUBROUTINE calc_fbal

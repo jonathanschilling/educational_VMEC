@@ -40,6 +40,7 @@ SUBROUTINE bcovar (lu, lv)
   logical            :: dump_volume = .false.
   logical            :: dump_bcontrav = .false.
   logical            :: dump_bcov = .false.
+  logical            :: dump_lambda_forces = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -341,6 +342,33 @@ SUBROUTINE bcovar (lu, lv)
               + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &
               +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))
 
+   if (dump_lambda_forces) then
+    write(dump_filename, 993) ns, trim(input_extension)
+993 format('lambda_forces_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns nzeta ntheta3"
+    write(42, *) ns, nzeta, ntheta3
+
+    write(42, *) "# js lk ku lvv lu(even-m) bsubu_e bsubv_e"
+    DO js = 1, ns
+      DO lk = 1, nzeta
+        DO ku = 1, ntheta3
+          l = ((ku-1)*nzeta+(lk-1))*ns+js
+          write (42, *) js, lk, ku, lvv(l), lu(l,0), bsubu_e(l), bsubv_e(l)
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped lambda forces to '"//trim(dump_filename)//"'"
+    stop
+  end if
+
+
+
   ! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
   CALL calc_fbal(bsubuh, bsubvh)
 
@@ -487,10 +515,9 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-
    ELSE ! (iequi .eq. 0)
-     ! iequi == 1 --> final iter for fileout()
 
+     ! iequi == 1 --> final iter for fileout()
 
   ! NOTE THAT lu=>czmn, lv=>crmn externally
   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e

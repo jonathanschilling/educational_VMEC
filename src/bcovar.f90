@@ -42,6 +42,7 @@ SUBROUTINE bcovar (lu, lv)
   logical            :: dump_bcov = .false.
   logical            :: dump_lambda_forces = .false.
   logical            :: dump_bcov_full = .false.
+  logical            :: dump_precondn = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -469,11 +470,36 @@ SUBROUTINE bcovar (lu, lv)
 
      CALL lamcal(phipog, guu, guv, gvv)
 
-     CALL precondn(bsupv,bsq,gsqrt,r12,zs,zu12,zu,zu(1,1), z1(1,1), &
-                   arm,ard,brm,brd, crd,rzu_fac,cos01)
+     CALL precondn(bsupv, bsq, gsqrt, r12, &
+                   zs, zu12, zu, zu(1,1), z1(1,1), &
+                   arm, ard, brm, brd, crd, rzu_fac, cos01)
 
-     CALL precondn(bsupv,bsq,gsqrt,r12,rs,ru12,ru,ru(1,1), r1(1,1), &
-                   azm,azd,bzm,bzd, crd,rru_fac,sin01)
+     CALL precondn(bsupv, bsq, gsqrt, r12, &
+                   rs, ru12, ru, ru(1,1), r1(1,1), &
+                   azm, azd, bzm, bzd, crd, rru_fac, sin01)
+
+     ! check preconditioner output
+     if (dump_precondn) then
+       write(dump_filename, 991) ns, trim(input_extension)
+991 format('precondn_',i5.5,'.',a)
+       open(unit=42, file=trim(dump_filename), status="unknown")
+
+       write(42, *) "# ns"
+       write(42, *) ns
+
+       write(42, *) "# js arm ard brm brd crd rzu_fac" // &
+         " azm azd bzm bzd rru_fac"
+       DO js = 1, ns
+         write(42, *) js, &
+           arm(js,:), ard(js,:), brm(js,:), brd(js,:), crd(js), rzu_fac(js), &
+           azm(js,:), azd(js,:), bzm(js,:), bzd(js,:), rru_fac(js)
+       end do
+
+       close(42)
+
+       print *, "dumped preconditioner output to '"//trim(dump_filename)//"'"
+       stop
+     end if
 
      rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
      rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)

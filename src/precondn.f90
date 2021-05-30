@@ -21,7 +21,8 @@
 !> @param cx
 !> @param eqfactor
 !> @param trigmult
-SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd, &
+SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
+                    xs, xu12, xue, xuo, xodd, &
                     axm, axd, bxm, bxd, cx, eqfactor, trigmult)
   USE vmec_main
   USE vmec_params, ONLY: signgs
@@ -91,7 +92,9 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd, &
     END DO
   end do
 
-  temp(1)=0; temp(2:ns)=temp(2:ns)/vp(2:ns); temp(ns+1)=0
+  temp(1)=0
+  temp(2:ns)=temp(2:ns)/vp(2:ns)
+  temp(ns+1)=0
   DO js = 1,ns
     axm(js,1) =-ax(js,1)
     axd(js,1) = ax(js,1) + ax(js+1,1)
@@ -106,9 +109,12 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd, &
   END DO
 
   eqfactor(2:ns-1) = axd(2:ns-1,2)*hs*hs/temp(2:ns-1)
-  eqfactor(1) = 0;  eqfactor(ns) = 0
-  axm(ns+1,:) = 0;  axd(ns+1,:) = 0
-  bxm(ns+1,:) = 0;  bxd(ns+1,:) = 0
+  eqfactor(1) = 0
+  eqfactor(ns) = 0
+  axm(ns+1,:) = 0
+  axd(ns+1,:) = 0
+  bxm(ns+1,:) = 0
+  bxd(ns+1,:) = 0
 
   DEALLOCATE (ax, bx, ptau, ptau2)
 

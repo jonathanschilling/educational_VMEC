@@ -21,7 +21,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   REAL(rprec) :: tnn, tnm, tmm, power, pfactor0, pfactor
 
   character(len=255) :: dump_filename
-  logical            :: dump_lamcal = .true.
+  logical            :: dump_lamcal = .false.
 
   blam(:ns) = SUM(guu*overg, dim=2) ! over surface
   clam(:ns) = SUM(gvv*overg, dim=2) ! over surface

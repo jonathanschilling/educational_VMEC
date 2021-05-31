@@ -44,6 +44,7 @@ SUBROUTINE bcovar (lu, lv)
   logical            :: dump_bcov_full = .false.
   logical            :: dump_precondn = .false.
   logical            :: dump_forceNorms_tcon = .false.
+  logical            :: dump_lulv_comb = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -447,188 +448,175 @@ SUBROUTINE bcovar (lu, lv)
     stop
   end if
 
+  if (iequi .eq. 0) then
+    ! COMPUTE R,Z AND LAMBDA PRE-CONDITIONING MATRIX ELEMENTS AND FORCE NORMS:
 
+    ! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS
+    ! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
+    IF (MOD(iter2-iter1,ns4).eq.0) THEN
+       ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
 
-!   ! NOTE THAT lu=>czmn, lv=>crmn externally
-!   ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
-!   IF (iequi .EQ. 1) THEN
-!      ! only executed at end of equilibrium
-!      lu(:nrzt,0) = bsupv(:nrzt)
-!      lv(:nrzt,0) = bsupu(:nrzt)
-!   END IF
+       !write(*,*) "update 1d preconditioner"
 
-  ! COMPUTE R,Z AND LAMBDA PRE-CONDITIONING MATRIX
-  ! ELEMENTS AND FORCE NORMS:
+       phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
 
-  ! COMPUTE PRECONDITIONING (1D) AND SCALING PARAMETERS
-  ! NO NEED TO RECOMPUTE WHEN 2D-PRECONDITIONER ON
-  IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
-     ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
+       CALL lamcal(phipog, guu, guv, gvv)
 
-     !write(*,*) "update 1d preconditioner"
+       CALL precondn(bsupv, bsq, gsqrt, r12, &
+                     zs, zu12, zu, zu(1,1), z1(1,1), &
+                     arm, ard, brm, brd, crd, rzu_fac, cos01)
 
-     phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
+       CALL precondn(bsupv, bsq, gsqrt, r12, &
+                     rs, ru12, ru, ru(1,1), r1(1,1), &
+                     azm, azd, bzm, bzd, crd, rru_fac, sin01)
 
-     CALL lamcal(phipog, guu, guv, gvv)
-
-     CALL precondn(bsupv, bsq, gsqrt, r12, &
-                   zs, zu12, zu, zu(1,1), z1(1,1), &
-                   arm, ard, brm, brd, crd, rzu_fac, cos01)
-
-     CALL precondn(bsupv, bsq, gsqrt, r12, &
-                   rs, ru12, ru, ru(1,1), r1(1,1), &
-                   azm, azd, bzm, bzd, crd, rru_fac, sin01)
-
-     ! check preconditioner output
-     if (dump_precondn) then
-       write(dump_filename, 991) ns, trim(input_extension)
+       ! check preconditioner output
+       if (dump_precondn) then
+         write(dump_filename, 991) ns, trim(input_extension)
 991 format('precondn_',i5.5,'.',a)
-       open(unit=42, file=trim(dump_filename), status="unknown")
+         open(unit=42, file=trim(dump_filename), status="unknown")
 
-       write(42, *) "# ns"
-       write(42, *) ns
+         write(42, *) "# ns"
+         write(42, *) ns
 
-       write(42, *) "# js arm ard brm brd crd rzu_fac" // &
-         " azm azd bzm bzd rru_fac"
-       DO js = 1, ns
-         write(42, *) js, &
-           arm(js,:), ard(js,:), brm(js,:), brd(js,:), crd(js), rzu_fac(js), &
-           azm(js,:), azd(js,:), bzm(js,:), bzd(js,:), rru_fac(js)
-       end do
+         write(42, *) "# js arm ard brm brd crd rzu_fac" // &
+           " azm azd bzm bzd rru_fac"
+         DO js = 1, ns
+           write(42, *) js, &
+             arm(js,:), ard(js,:), brm(js,:), brd(js,:), crd(js), rzu_fac(js), &
+             azm(js,:), azd(js,:), bzm(js,:), bzd(js,:), rru_fac(js)
+         end do
 
-       close(42)
+         close(42)
 
-       print *, "dumped preconditioner output to '"//trim(dump_filename)//"'"
-       stop
-     end if
-
-     rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
-     rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
-     frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1)
-     fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1)
-     rzu_fac = rzu_fac/2
-     rru_fac = rru_fac/2
-
-     volume = hs*SUM(vp(2:ns))
-
-     r2 = MAX(wb,wp)/volume ! energy density ???
-
-     !> R12 from RP in force
-     guu(:nrzt) = guu(:nrzt)*r12(:nrzt)**2
-
-     !> Norm, unpreconditioned R,Z forces
-     fnorm = one/(SUM(guu(1:nrzt)*wint(1:nrzt))*(r2*r2))
-
-     !> Norm for preconditioned R,Z forces
-     fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)
-
-     !> Norm for unpreconditioned Lambda force
-     fnormL = one/(SUM((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*wint(1:nrzt))*lamscale**2)
-
-     ! r3 = one/(2*r0scale)**2
-     ! > Norm for preconditioned Lambda force
-     ! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4)
-
-     ! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
-     ! OVERRIDE USER INPUT VALUE HERE
-
-! #ifndef _HBANGLE
-     r2 = ns ! temporary re-use of variable for floating-point version of ns
-
-     ! ignore large tcon0 from old-style files
-     tcon0 = MIN(ABS(tcon0), one)
-
-     ! some parabola in ns, but why these specific values of the parameters ?
-     tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
-
-     tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
-                                                       ! Scaling of cos**2 in alias (4*r0scale**2)
-
-     DO js = 2, ns-1
-       arnorm = SUM(wint(js:nrzt:ns)*ru0(js:nrzt:ns)**2)
-       aznorm = SUM(wint(js:nrzt:ns)*zu0(js:nrzt:ns)**2)
-       IF (arnorm.eq.zero .or. aznorm.eq.zero) then
-          STOP 'arnorm or aznorm=0 in bcovar'
+         print *, "dumped preconditioner output to '"//trim(dump_filename)//"'"
+         stop
        end if
 
-       tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
-     END DO
+       rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
+       rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
+       frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1)
+       fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1)
+       rzu_fac = rzu_fac/2
+       rru_fac = rru_fac/2
 
-     tcon(ns) = p5*tcon(ns-1)
+       volume = hs*SUM(vp(2:ns))
 
-     IF (lasym) tcon = p5*tcon
+       r2 = MAX(wb,wp)/volume ! energy density ???
+
+       !> R12 from RP in force
+       guu(:nrzt) = guu(:nrzt)*r12(:nrzt)**2
+
+       !> Norm, unpreconditioned R,Z forces
+       fnorm = one/(SUM(guu(1:nrzt)*wint(1:nrzt))*(r2*r2))
+
+       !> Norm for preconditioned R,Z forces
+       fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)
+
+       !> Norm for unpreconditioned Lambda force
+       fnormL = one/(SUM((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*wint(1:nrzt))*lamscale**2)
+
+       ! r3 = one/(2*r0scale)**2
+       ! > Norm for preconditioned Lambda force
+       ! fnorm2 = one/MAX(SUM(xc(2*irzloff+1:3*irzloff)**2),r3/4)
+
+       ! COMPUTE CONSTRAINT FORCE SCALING FACTOR (TCON)
+       ! OVERRIDE USER INPUT VALUE HERE
+
+! #ifndef _HBANGLE
+       r2 = ns ! temporary re-use of variable for floating-point version of ns
+
+       ! ignore large tcon0 from old-style files
+       tcon0 = MIN(ABS(tcon0), one)
+
+       ! some parabola in ns, but why these specific values of the parameters ?
+       tcon_mul = tcon0*(1 + r2*(one/60 + r2/(200*120)))
+
+       tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
+                                                         ! Scaling of cos**2 in alias (4*r0scale**2)
+
+       DO js = 2, ns-1
+         arnorm = SUM(wint(js:nrzt:ns)*ru0(js:nrzt:ns)**2)
+         aznorm = SUM(wint(js:nrzt:ns)*zu0(js:nrzt:ns)**2)
+         IF (arnorm.eq.zero .or. aznorm.eq.zero) then
+            STOP 'arnorm or aznorm=0 in bcovar'
+         end if
+
+         tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
+       END DO
+
+       tcon(ns) = p5*tcon(ns-1)
+
+       IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-     if (dump_forceNorms_tcon) then
-       write(dump_filename, 989) ns, trim(input_extension)
+       if (dump_forceNorms_tcon) then
+         write(dump_filename, 989) ns, trim(input_extension)
 989 format('forceNorms_tcon_',i5.5,'.',a)
-       open(unit=42, file=trim(dump_filename), status="unknown")
+         open(unit=42, file=trim(dump_filename), status="unknown")
 
-       write(42, *) "# ns nzeta ntheta3"
-       write(42, *) ns, nzeta, ntheta3
+         write(42, *) "# ns nzeta ntheta3"
+         write(42, *) ns, nzeta, ntheta3
 
-       write(42, *) "# volume"
-       write(42, *) volume
+         write(42, *) "# volume"
+         write(42, *) volume
 
-       write(42, *) "# r2"
-       write(42, *) MAX(wb,wp)/volume
+         write(42, *) "# r2"
+         write(42, *) MAX(wb,wp)/volume
 
-       write(42, *) "# js ku lv guu"
-       DO js = 1, ns
-         DO ku = 1, ntheta3
-           DO lk = 1, nzeta
-               l = ((ku-1)*nzeta+(lk-1))*ns+js
-               write (42, *) js, ku, lk, guu(l)
+         write(42, *) "# js ku lv guu"
+         DO js = 1, ns
+           DO ku = 1, ntheta3
+             DO lk = 1, nzeta
+                 l = ((ku-1)*nzeta+(lk-1))*ns+js
+                 write (42, *) js, ku, lk, guu(l)
+             end do
            end do
          end do
-       end do
 
-       write(42, *) "# fnorm"
-       write(42, *) fnorm
+         write(42, *) "# fnorm"
+         write(42, *) fnorm
 
-       write(42, *) "# rzl js n m rcc xc"
-       l=0
-       do rzl=1,2
-         do lk=1, ntmax
-           do m=0, mpol1
-             do n=0, ntor
-               do js=1, ns
-                 l = l+1
-                 write(42, *) rzl, js, n, m, lk, xc(l)
+         write(42, *) "# rzl js n m rcc xc"
+         l=0
+         do rzl=1,2
+           do lk=1, ntmax
+             do m=0, mpol1
+               do n=0, ntor
+                 do js=1, ns
+                   l = l+1
+                   write(42, *) rzl, js, n, m, lk, xc(l)
+                 end do
                end do
              end do
            end do
          end do
-       end do
 
-       write(42, *) "# fnorm1"
-       write(42, *) fnorm1
+         write(42, *) "# fnorm1"
+         write(42, *) fnorm1
 
-       write(42, *) "# fnormL"
-       write(42, *) fnormL
+         write(42, *) "# fnormL"
+         write(42, *) fnormL
 
-       write(42, *) "# tcon0"
-       write(42, *) tcon0
+         write(42, *) "# tcon0"
+         write(42, *) tcon0
 
-       write(42, *) "# tcon_mul"
-       write(42, *) tcon_mul
+         write(42, *) "# tcon_mul"
+         write(42, *) tcon_mul
 
-       write(42, *) "# js rzu_fac rru_fac frcc_fac fzsc_fac tcon"
-       DO js = 1, ns
-         write(42, *) js, rzu_fac(js), rru_fac(js), &
-           frcc_fac(js), fzsc_fac(js), tcon(js)
-       end do
+         write(42, *) "# js rzu_fac rru_fac frcc_fac fzsc_fac tcon"
+         DO js = 1, ns
+           write(42, *) js, rzu_fac(js), rru_fac(js), &
+             frcc_fac(js), fzsc_fac(js), tcon(js)
+         end do
 
-       close(42)
+         close(42)
 
-       print *, "dumped force norms and tcon output to '"//trim(dump_filename)//"'"
-       stop
-     end if
+         print *, "dumped force norms and tcon output to '"//trim(dump_filename)//"'"
+         stop
+       end if
 
-   ENDIF ! MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0
-
-   if (iequi .eq. 0) then
-     ! iequi != 1 --> normal iterations
+     ENDIF ! MOD(iter2-iter1,ns4).eq.0
 
      ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
      bsubu_e = -lamscale*bsubu_e
@@ -644,59 +632,68 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-   ELSE ! (iequi .eq. 0)
+     if (dump_lulv_comb) then
+       write(dump_filename, 988) ns, trim(input_extension)
+988 format('lulv_comb_',i5.5,'.',a)
+       open(unit=42, file=trim(dump_filename), status="unknown")
 
-     ! iequi == 1 --> final iter for fileout()
+       write(42, *) "# ns nzeta ntheta3"
+       write(42, *) ns, nzeta, ntheta3
 
-  ! NOTE THAT lu=>czmn, lv=>crmn externally
-  ! SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
-!   IF (iequi .EQ. 1) THEN
-     ! only executed at end of equilibrium
-     lu(:nrzt,0) = bsupv(:nrzt)
-     lv(:nrzt,0) = bsupu(:nrzt)
-!  END IF
+       write(42, *) "# js ku lv bsubu_e bsubv_e bsubu_o bsubv_o" // &
+                    " lvv guu guv gvv lv lu"
+       DO js = 1, ns
+         DO ku = 1, ntheta3
+           DO lk = 1, nzeta
+               l = ((ku-1)*nzeta+(lk-1))*ns+js
+               if (l.ge.2) then
+                 write (42, *) js, ku, lk, &
+                   bsubu_e(l), bsubv_e(l), bsubu_o(l), bsubv_o(l), &
+                   lvv(l), guu(l), guv(l), gvv(l), lv(l, 0), lu(l, 0)
+               end if
+           end do
+         end do
+       end do
 
-  ! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH
-  ! FOR FORCE BALANCE AND RETURN (IEQUI=1)
-!  IF (iequi .eq. 1) THEN
+       close(42)
 
-     ! final call from fileout --> compute additional stuff
-     DO js = ns-1,2,-1
-        DO l = js, nrzt, ns
-           bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)
-        END DO
-     END DO
+       print *, "dumped lu*lv combinations to '"//trim(dump_filename)//"'"
+       stop
+     end if
 
-     ! ADJUST <bsubvh> AFTER MESH-BLENDING
-     DO js = 2, ns
-        curpol_temp = fpsi(js) - SUM(bsubvh(js:nrzt:ns)*wint(js:nrzt:ns))
-        DO l = js, nrzt, ns
-           bsubvh(l) = bsubvh(l) + curpol_temp
-        END DO
-     END DO
+  ELSE ! (iequi .eq. 0)
 
-     bsubu_e(:nrzt) = bsubuh(:nrzt)
-     bsubv_e(:nrzt) = bsubvh(:nrzt)
+    ! iequi == 1 --> final iter for fileout()
 
-     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
-     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
+    ! NOTE THAT lu=>czmn, lv=>crmn externally
+    !   SO THIS STORES bsupv in czmn_e, bsupu in crmn_e
+    ! only executed at end of equilibrium
+    lu(:nrzt,0) = bsupv(:nrzt)
+    lv(:nrzt,0) = bsupu(:nrzt)
 
-!   else
-!      ! iequi != 1 --> normal iterations
-!
-!      ! MINUS SIGN => HESSIAN DIAGONALS ARE POSITIVE
-!      bsubu_e = -lamscale*bsubu_e
-!      bsubv_e = -lamscale*bsubv_e
-!      bsubu_o(:nrzt)  = sqrts(:nrzt)*bsubu_e(:nrzt)
-!      bsubv_o(:nrzt)  = sqrts(:nrzt)*bsubv_e(:nrzt)
-!
-!      ! STORE LU * LV COMBINATIONS USED IN FORCES
-!      lvv(2:nrzt)  = gsqrt(2:nrzt)
-!      guu(2:nrzt)  = bsupu(2:nrzt)*bsupu(2:nrzt)*lvv(2:nrzt)
-!      guv(2:nrzt)  = bsupu(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-!      gvv(2:nrzt)  = bsupv(2:nrzt)*bsupv(2:nrzt)*lvv(2:nrzt)
-!      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
-!      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
-  END IF
+    ! COMPUTE COVARIANT BSUBU,V (EVEN, ODD) ON HALF RADIAL MESH
+    ! FOR FORCE BALANCE AND RETURN (IEQUI=1)
+
+    ! final call from fileout --> compute additional stuff
+    DO js = ns-1,2,-1
+       DO l = js, nrzt, ns
+          bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)
+       END DO
+    END DO
+
+    ! ADJUST <bsubvh> AFTER MESH-BLENDING
+    DO js = 2, ns
+       curpol_temp = fpsi(js) - SUM(bsubvh(js:nrzt:ns)*wint(js:nrzt:ns))
+       DO l = js, nrzt, ns
+          bsubvh(l) = bsubvh(l) + curpol_temp
+       END DO
+    END DO
+
+    bsubu_e(:nrzt) = bsubuh(:nrzt)
+    bsubv_e(:nrzt) = bsubvh(:nrzt)
+
+    bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
+    bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
+  END IF ! (iequi .eq. 0)
 
 END SUBROUTINE bcovar

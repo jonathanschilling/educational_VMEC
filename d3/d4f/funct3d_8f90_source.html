@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">logical</span>            :: dump_geometry = .false.</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">logical</span>            :: dump_constraint_force = .true.</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">logical</span>            :: dump_constraint_force = .false.</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
@@ -460,8 +460,8 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;     <span class="keywordflow">if</span> (dump_constraint_force) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;       <span class="keyword">write</span>(dump_filename, 998) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;998 <span class="keyword">format</span>(<span class="stringliteral">&#39;constraint_force_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;       <span class="keyword">write</span>(dump_filename, 998) ns, trim(input_extension)</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;998 <span class="keyword">format</span>(<span class="stringliteral">&#39;constraint_force_&#39;</span>,i5.5,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;       <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
@@ -480,13 +480,13 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keywordflow">       end do</span></div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;       <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js n m gcs gsc gcc gss&quot;</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;       lk=0</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;       l=0</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;       <span class="keywordflow">DO</span> m = 0, mpol1</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;         <span class="keywordflow">DO</span> n = 0, ntor</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;           <span class="keywordflow">DO</span> js = 1, ns</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;             lk = lk+1</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;             l = l+1</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;             <span class="keyword">write</span> (42, *) js, n, m, &amp;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                           <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(l), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(1+mns+l), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(1+2*mns+l), <a class="code" href="../../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524">extra1</a>(l,1)</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                           <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(l), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(mns+l), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(2*mns+l), <a class="code" href="../../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524">extra1</a>(l,1)</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="keywordflow">           end do</span></div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="keywordflow">         end do</span></div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="keywordflow">       end do</span></div>
@@ -630,7 +630,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d4f/funct3d_8f90.html">funct3d.f90</a></li>
-    <li class="footer">Generated on Mon May 31 2021 15:14:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon May 31 2021 17:23:02 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

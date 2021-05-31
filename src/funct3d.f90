@@ -416,8 +416,9 @@ SUBROUTINE funct3d (ier_flag)
                          blmn, clmn, &
                    rcon, zcon         )
      IF (lasym) then
-        CALL tomnspa (gc, r1, ru, rv, &
-                          z1, zu, zv, &
+        CALL tomnspa (gc,             &
+                      r1, ru, rv,     &
+                      z1, zu, zv,     &
                       extra3, extra4, &
                       extra1, extra2)
      end if

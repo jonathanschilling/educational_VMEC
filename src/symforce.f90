@@ -25,9 +25,8 @@
 !> @param cla
 !> @param rca
 !> @param zca
-SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, &
-                    rcs, zcs, ara, bra, cra, aza, bza, cza, &
-                    bla, cla, rca, zca)
+SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
+                    ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)
   USE vmec_main, p5 => cp5
   IMPLICIT NONE
 
@@ -36,7 +35,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, &
   REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(out) ::   &
      ara, bra, cra, aza, bza, cza, bla, cla, rca, zca
 
-     INTEGER :: mpar, ir, i, jk, jka
+  INTEGER :: mpar, ir, i, jk, jka
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ars_0, brs_0, azs_0, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
 

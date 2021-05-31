@@ -14,12 +14,11 @@
 !> @param clmn
 !> @param arcon
 !> @param azcon
-SUBROUTINE tomnsps(frzl_array, &
+SUBROUTINE tomnsps(frzl_array,       &
                    armn, brmn, crmn, &
                    azmn, bzmn, czmn, &
-                         blmn, clmn, &
-                   arcon, &
-                   azcon)
+                   blmn, clmn,       &
+                   arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
   IMPLICIT NONE
@@ -148,8 +147,11 @@ END SUBROUTINE tomnsps
 !> @param clmn
 !> @param arcon
 !> @param azcon
-SUBROUTINE tomnspa(frzl_array, armn, brmn, crmn, azmn, bzmn, &
-                   czmn, blmn, clmn, arcon, azcon)
+SUBROUTINE tomnspa(frzl_array,       &
+                   armn, brmn, crmn, &
+                   azmn, bzmn, czmn, &
+                         blmn, clmn, &
+                   arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
   IMPLICIT NONE

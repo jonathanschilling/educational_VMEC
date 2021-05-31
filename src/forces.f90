@@ -15,12 +15,15 @@ SUBROUTINE forces
   REAL(rprec), PARAMETER :: p25 = p5*p5
   REAL(rprec), PARAMETER :: dshalfds=p25
 
-  INTEGER :: l
+  INTEGER :: l, js, lk, ku
   INTEGER :: ndim
   REAL(rprec), DIMENSION(:), POINTER :: bsqr
   REAL(rprec), DIMENSION(:), POINTER :: gvvs
   REAL(rprec), DIMENSION(:), POINTER :: guvs
   REAL(rprec), DIMENSION(:), POINTER :: guus
+
+  character(len=255) :: dump_filename
+  logical            :: dump_forces = .false.
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)
@@ -40,33 +43,93 @@ SUBROUTINE forces
   !
   ! GUU, GUV: VARIATION OF Ru, Rv, Zu, Zv IN guu, guv
 
+  ! inputs:
+  ! lu_e, lv_e
+  ! guu, guv, gvv
+  ! ru12, zu12
+  ! brmn_e, bzmn_e
+  ! r1, z1, ru, zu, ru0, zu0
+  ! rcon, zcon, rcon0, zcon0, gcon
+  ! if lthreed:
+  !  rv, zv
+
+  if (dump_forces) then
+    write(dump_filename, 999) ns, trim(input_extension)
+999 format('forces_',i5.5,'.',a)
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntheta3 nzeta"
+    write(42, *) ns, ntheta3, nzeta
+
+    if (lthreed) then
+      write(42, *) "# js lv ku" // &
+        " lu_e lv_e guu guv gvv ru12 zu12 brmn_e bzmn_e" // &
+        " r1 z1 ru zu ru0 zu0 rcon zcon rcon0 zcon0 gcon rv zv"
+      DO js = 1, ns
+        DO lk = 1, nzeta
+          DO ku = 1, ntheta3
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, ku, lk, &
+                lu_e(l), lv_e(l), &
+                guu(l), guv(l), gvv(l), &
+                ru12(l), zu12(l), &
+                brmn_e(l), bzmn_e(l), &
+                r1(l,:), z1(l,:), ru(l,:), zu(l,:), ru0(l), zu0(l), &
+                rcon(l,0), zcon(l,0), rcon0(l), zcon0(l), gcon(l), &
+                rv(l,:), zv(l,:)
+          end do
+        end do
+      end do
+    else ! lthreed
+      write(42, *) "# js lv ku" // &
+        " lu_e lv_e guu guv gvv ru12 zu12 brmn_e bzmn_e" // &
+        " r1 z1 ru zu ru0 zu0 rcon zcon rcon0 zcon0 gcon"
+      DO js = 1, ns
+        DO lk = 1, nzeta
+          DO ku = 1, ntheta3
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, lk, ku, &
+                lu_e(l), lv_e(l), &
+                guu(l), guv(l), gvv(l), &
+                ru12(l), zu12(l), &
+                brmn_e(l), bzmn_e(l), &
+                r1(l,:), z1(l,:), ru(l,:), zu(l,:), ru0(l), zu0(l), &
+                rcon(l,0), zcon(l,0), rcon0(l), zcon0(l), gcon(l)
+          end do
+        end do
+      end do
+    end if ! lthreed
+  end if ! dump_forces
+
   ndim = 1+nrzt ! TODO: remove this; one extra element at the end of a large vector sound like reconstruction stuff...
 
   ! POINTER ALIASES
-  bsqr => extra1(:,1)
-  gvvs => extra2(:,1)
-  guvs => extra3(:,1)
-  guus => extra4(:,1)
+  bsqr => extra1(:,1) ! output or temp
+  gvvs => extra2(:,1) ! output or temp
+  guvs => extra3(:,1) ! output or temp
+  guus => extra4(:,1) ! output or temp
 
-  lu_e(1:ndim:ns) = 0
-  lv_e(1:ndim:ns) = 0
-  guu(1:ndim:ns)  = 0
-  guv(1:ndim:ns)  = 0
-  gvv(1:ndim:ns) = 0
-  guus = guu*shalf
-  guvs = guv*shalf
-  gvvs = gvv*shalf
+  ! zero values at axis
+  lu_e(1:ndim:ns) = 0 ! fixup input
+  lv_e(1:ndim:ns) = 0 ! fixup input
+  guu(1:ndim:ns) = 0 ! fixup input
+  guv(1:ndim:ns) = 0 ! fixup input
+  gvv(1:ndim:ns) = 0 ! fixup input
 
-  armn_e  = ohs*zu12 * lu_e
-  azmn_e  =-ohs*ru12 * lu_e
-  brmn_e  = brmn_e * lu_e
-  bzmn_e  =-bzmn_e * lu_e
-  bsqr    = dshalfds*lu_e/shalf
+  guus = guu*shalf ! output or temp
+  guvs = guv*shalf ! output or temp
+  gvvs = gvv*shalf ! output or temp
 
-  armn_o(1:ndim)  = armn_e(1:ndim) *shalf
-  azmn_o(1:ndim)  = azmn_e(1:ndim) *shalf
-  brmn_o(1:ndim)  = brmn_e(1:ndim) *shalf
-  bzmn_o(1:ndim)  = bzmn_e(1:ndim) *shalf
+  armn_e  = ohs*zu12 * lu_e ! output or temp
+  azmn_e  =-ohs*ru12 * lu_e ! output or temp
+  brmn_e  = brmn_e * lu_e ! output or temp
+  bzmn_e  =-bzmn_e * lu_e ! output or temp
+  bsqr    = dshalfds*lu_e/shalf ! output or temp
+
+  armn_o(1:ndim)  = armn_e(1:ndim) *shalf ! output or temp
+  azmn_o(1:ndim)  = azmn_e(1:ndim) *shalf ! output or temp
+  brmn_o(1:ndim)  = brmn_e(1:ndim) *shalf ! output or temp
+  bzmn_o(1:ndim)  = bzmn_e(1:ndim) *shalf ! output or temp
 
   ! CONSTRUCT CYLINDRICAL FORCE KERNELS
   ! NOTE: presg(ns+1) == 0, AND WILL BE "FILLED IN" AT EDGE FOR FREE-BOUNDARY BY RBSQ
@@ -114,7 +177,7 @@ SUBROUTINE forces
      bzmn_e(:nrzt) = bzmn_e(:nrzt) - (guv(:nrzt)*zv(:nrzt,0) + guvs(:nrzt)*zv(:nrzt,1))
      crmn_e(:nrzt) = guv(:nrzt) *ru(:nrzt,0) + gvv(:nrzt) *rv(:nrzt,0) + gvvs(:nrzt)*rv(:nrzt,1) + guvs(:nrzt)*ru(:nrzt,1)
      czmn_e(:nrzt) = guv(:nrzt) *zu(:nrzt,0) + gvv(:nrzt) *zv(:nrzt,0) + gvvs(:nrzt)*zv(:nrzt,1) + guvs(:nrzt)*zu(:nrzt,1)
-     guv(:nrzt) = guv(:nrzt) *sqrts(:nrzt)*sqrts(:nrzt)
+     guv(:nrzt) = guv(:nrzt) * sqrts(:nrzt)*sqrts(:nrzt)
      brmn_o(:nrzt) = brmn_o(:nrzt) - (guvs(:nrzt)*rv(:nrzt,0) + guv(:nrzt)*rv(:nrzt,1))
      bzmn_o(:nrzt) = bzmn_o(:nrzt) - (guvs(:nrzt)*zv(:nrzt,0) + guv(:nrzt)*zv(:nrzt,1))
      crmn_o(:nrzt) = guvs(:nrzt)*ru(:nrzt,0) + gvvs(:nrzt)*rv(:nrzt,0) + bsqr(:nrzt)*rv(:nrzt,1) + guv(:nrzt) *ru(:nrzt,1)
@@ -144,5 +207,53 @@ SUBROUTINE forces
   rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)
   zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
+
+  if (dump_forces) then
+
+    if (lthreed) then
+      write(42, *) "# js lv ku" // &
+        " armn_e armn_o brmn_e brmn_o crmn_e crmn_o" // &
+        " azmn_e azmn_o bzmn_e bzmn_o czmn_e czmn_o" // &
+        " guu guus guv guvs gvv gvvs" // &
+        " bsqr lu_o lv_e rcon zcon"
+      l = 1
+      DO js = 1, ns
+        DO lk = 1, nzeta
+          DO ku = 1, ntheta3
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, lk, ku, &
+                armn_e(l), armn_o(l), brmn_e(l), brmn_o(l), crmn_e(l), crmn_o(l), &
+                azmn_e(l), azmn_o(l), bzmn_e(l), bzmn_o(l), czmn_e(l), czmn_o(l), &
+                guu(l), guus(l), guv(l), guvs(l), gvv(l), gvvs(l), &
+                bsqr(l), lu_o(l), lv_e(l), rcon(l,:), zcon(l,:)
+          end do
+        end do
+      end do
+    else ! lthreed
+      write(42, *) "# js lv ku" // &
+        " armn_e armn_o brmn_e brmn_o" // &
+        " azmn_e azmn_o bzmn_e bzmn_o" // &
+        " guu guus guv guvs gvv gvvs" // &
+        " bsqr lu_o lv_e rcon zcon"
+      l = 1
+      DO js = 1, ns
+        DO lk = 1, nzeta
+          DO ku = 1, ntheta3
+              l = ((ku-1)*nzeta+(lk-1))*ns+js
+              write (42, *) js, lk, ku, &
+                armn_e(l), armn_o(l), brmn_e(l), brmn_o(l), &
+                azmn_e(l), azmn_o(l), bzmn_e(l), bzmn_o(l), &
+                guu(l), guus(l), guv(l), guvs(l), gvv(l), gvvs(l), &
+                bsqr(l), lu_o(l), lv_e(l), rcon(l,:), zcon(l,:)
+          end do
+        end do
+      end do
+    end if ! lthreed
+
+    close(42)
+
+    print *, "dumped forces to '"//trim(dump_filename)//"'"
+    stop
+  end if
 
 END SUBROUTINE forces

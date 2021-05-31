@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['xc_2544',['xc',['../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200',1,'xstuff']]],
-  ['xcdot_2545',['xcdot',['../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6',1,'xstuff']]],
-  ['xcl0_2546',['xcl0',['../d1/d6c/namespacevmec__main.html#ad5a00dbf3cdeba085029db93bb9c452f',1,'vmec_main']]],
-  ['xm_2547',['xm',['../dd/d2f/namespacevmec__persistent.html#a8adb4d2d0eee976d6f9d12ce597df3fa',1,'vmec_persistent::xm()'],['../db/dc0/namespacenestor__io.html#add3ece0f298d27a3d6d500225b4551c0',1,'nestor_io::xm()'],['../db/dae/namespaceread__wout__mod.html#a68a2fc107dd93b88eb1bcabaa2d9f56d',1,'read_wout_mod::xm()']]],
-  ['xm_5fnyq_2548',['xm_nyq',['../dd/d2f/namespacevmec__persistent.html#a2343c34daf5f9fbe42876c102af03969',1,'vmec_persistent::xm_nyq()'],['../db/dae/namespaceread__wout__mod.html#a5ca976022e2448c38e1525ac1be06b32',1,'read_wout_mod::xm_nyq()']]],
-  ['xmpot_2549',['xmpot',['../df/dd0/namespacevac__persistent.html#a73bcb72aa358cee51a3cfd60f2ca8d57',1,'vac_persistent']]],
-  ['xmpq_2550',['xmpq',['../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061',1,'vmec_main']]],
-  ['xn_2551',['xn',['../dd/d2f/namespacevmec__persistent.html#ac34bd92912d03515a98c1bba1d87dc15',1,'vmec_persistent::xn()'],['../db/dae/namespaceread__wout__mod.html#a3ef9b0948cdaba4508214612779dd39a',1,'read_wout_mod::xn()'],['../db/dc0/namespacenestor__io.html#ada5632f9eef0e68e7be38466d34731e6',1,'nestor_io::xn()']]],
-  ['xn_5fnyq_2552',['xn_nyq',['../dd/d2f/namespacevmec__persistent.html#ad8a48d11e32f1e23eabecc1dbdae95d3',1,'vmec_persistent::xn_nyq()'],['../db/dae/namespaceread__wout__mod.html#a3516c9576080b69c22fe2f317b0ba59a',1,'read_wout_mod::xn_nyq()']]],
-  ['xnpot_2553',['xnpot',['../df/dd0/namespacevac__persistent.html#a35e8628c4420010c7a8aa0f190568247',1,'vac_persistent']]],
-  ['xobser_2554',['xobser',['../d1/d41/namespacemgrid__mod.html#a06eb8652a3b2079ff4ac3823b47990bd',1,'mgrid_mod']]],
-  ['xobsqr_2555',['xobsqr',['../d1/d41/namespacemgrid__mod.html#ab5a7d8b67c10d5e23479c0194a1b3db4',1,'mgrid_mod']]],
-  ['xpts_2556',['xpts',['../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f',1,'vacmod']]],
-  ['xsave_2557',['xsave',['../d9/d3c/namespacexstuff.html#a9d19ed1ddf03c5182fd69e16d4315be2',1,'xstuff']]],
-  ['xstore_2558',['xstore',['../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b',1,'xstuff']]]
+  ['xc_2520',['xc',['../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200',1,'xstuff']]],
+  ['xcdot_2521',['xcdot',['../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6',1,'xstuff']]],
+  ['xcl0_2522',['xcl0',['../d1/d6c/namespacevmec__main.html#ad5a00dbf3cdeba085029db93bb9c452f',1,'vmec_main']]],
+  ['xm_2523',['xm',['../dd/d2f/namespacevmec__persistent.html#a8adb4d2d0eee976d6f9d12ce597df3fa',1,'vmec_persistent::xm()'],['../db/dc0/namespacenestor__io.html#add3ece0f298d27a3d6d500225b4551c0',1,'nestor_io::xm()'],['../db/dae/namespaceread__wout__mod.html#a68a2fc107dd93b88eb1bcabaa2d9f56d',1,'read_wout_mod::xm()']]],
+  ['xm_5fnyq_2524',['xm_nyq',['../dd/d2f/namespacevmec__persistent.html#a2343c34daf5f9fbe42876c102af03969',1,'vmec_persistent::xm_nyq()'],['../db/dae/namespaceread__wout__mod.html#a5ca976022e2448c38e1525ac1be06b32',1,'read_wout_mod::xm_nyq()']]],
+  ['xmpot_2525',['xmpot',['../df/dd0/namespacevac__persistent.html#a73bcb72aa358cee51a3cfd60f2ca8d57',1,'vac_persistent']]],
+  ['xmpq_2526',['xmpq',['../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061',1,'vmec_main']]],
+  ['xn_2527',['xn',['../dd/d2f/namespacevmec__persistent.html#ac34bd92912d03515a98c1bba1d87dc15',1,'vmec_persistent::xn()'],['../db/dae/namespaceread__wout__mod.html#a3ef9b0948cdaba4508214612779dd39a',1,'read_wout_mod::xn()'],['../db/dc0/namespacenestor__io.html#ada5632f9eef0e68e7be38466d34731e6',1,'nestor_io::xn()']]],
+  ['xn_5fnyq_2528',['xn_nyq',['../dd/d2f/namespacevmec__persistent.html#ad8a48d11e32f1e23eabecc1dbdae95d3',1,'vmec_persistent::xn_nyq()'],['../db/dae/namespaceread__wout__mod.html#a3516c9576080b69c22fe2f317b0ba59a',1,'read_wout_mod::xn_nyq()']]],
+  ['xnpot_2529',['xnpot',['../df/dd0/namespacevac__persistent.html#a35e8628c4420010c7a8aa0f190568247',1,'vac_persistent']]],
+  ['xobser_2530',['xobser',['../d1/d41/namespacemgrid__mod.html#a06eb8652a3b2079ff4ac3823b47990bd',1,'mgrid_mod']]],
+  ['xobsqr_2531',['xobsqr',['../d1/d41/namespacemgrid__mod.html#ab5a7d8b67c10d5e23479c0194a1b3db4',1,'mgrid_mod']]],
+  ['xpts_2532',['xpts',['../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f',1,'vacmod']]],
+  ['xsave_2533',['xsave',['../d9/d3c/namespacexstuff.html#a9d19ed1ddf03c5182fd69e16d4315be2',1,'xstuff']]],
+  ['xstore_2534',['xstore',['../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b',1,'xstuff']]]
 ];

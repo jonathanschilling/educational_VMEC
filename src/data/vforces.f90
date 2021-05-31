@@ -18,20 +18,20 @@ MODULE vforces
 
   REAL(rprec), POINTER, DIMENSION(:) :: armn_e
   REAL(rprec), POINTER, DIMENSION(:) :: armn_o
-  REAL(rprec), POINTER, DIMENSION(:) :: azmn_e
-  REAL(rprec), POINTER, DIMENSION(:) :: azmn_o
-
   REAL(rprec), POINTER, DIMENSION(:) :: brmn_e
   REAL(rprec), POINTER, DIMENSION(:) :: brmn_o
-  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_e
-  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_o
-  REAL(rprec), POINTER, DIMENSION(:) :: blmn_e
-  REAL(rprec), POINTER, DIMENSION(:) :: blmn_o
-
   REAL(rprec), POINTER, DIMENSION(:) :: crmn_e
   REAL(rprec), POINTER, DIMENSION(:) :: crmn_o
+
+  REAL(rprec), POINTER, DIMENSION(:) :: azmn_e
+  REAL(rprec), POINTER, DIMENSION(:) :: azmn_o
+  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_e
+  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_o
   REAL(rprec), POINTER, DIMENSION(:) :: czmn_e
   REAL(rprec), POINTER, DIMENSION(:) :: czmn_o
+
+  REAL(rprec), POINTER, DIMENSION(:) :: blmn_e
+  REAL(rprec), POINTER, DIMENSION(:) :: blmn_o
   REAL(rprec), POINTER, DIMENSION(:) :: clmn_e
   REAL(rprec), POINTER, DIMENSION(:) :: clmn_o
 

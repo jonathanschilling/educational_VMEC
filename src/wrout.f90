@@ -29,7 +29,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   USE ezcdf
   USE read_wout_mod, ONLY: vn_version, vn_extension, vn_mgrid,      &
     vn_magen, vn_therm, vn_gam, vn_maxr, vn_minr, vn_maxz, vn_fp,   &
-    vn_radnod, vn_polmod, vn_tormod, vn_maxmod, vn_maxit, vn_actit, &
+    vn_radnod, vn_polmod, vn_tormod, vn_maxmod, vn_maxit,           &
     vn_asym, vn_free, vn_error, vn_aspect, vn_beta,                 &
     vn_pbeta, vn_tbeta, vn_abeta, vn_b0, vn_rbt0, vn_maxmod_nyq,    &
     vn_rbt1, vn_sgs, vn_lar, vn_modB, vn_ctor, vn_amin, vn_Rmaj,    &
@@ -52,7 +52,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
     vn_bsupvmns, vn_rbc, vn_zbs, vn_rbs, vn_zbc, vn_potvac,         &
     ln_version, ln_extension, ln_mgrid,                             &
     ln_magen, ln_therm, ln_gam, ln_maxr, ln_minr, ln_maxz, ln_fp,   &
-    ln_radnod, ln_polmod, ln_tormod, ln_maxmod, ln_maxit, ln_actit, &
+    ln_radnod, ln_polmod, ln_tormod, ln_maxmod, ln_maxit,           &
     ln_asym, ln_free, ln_error, ln_aspect, ln_beta,                 &
     ln_pbeta, ln_tbeta, ln_abeta, ln_b0, ln_rbt0, ln_maxmod_nyq,    &
     ln_rbt1, ln_sgs, ln_lar, ln_modB, ln_ctor, ln_amin, ln_Rmaj,    &
@@ -200,7 +200,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_maxmod, mnmax)
   CALL cdf_define(nwout, vn_maxmod_nyq, mnmax_nyq)
   CALL cdf_define(nwout, vn_maxit, iter2)
-  CALL cdf_define(nwout, vn_actit, itfsq)
   CALL cdf_define(nwout, vn_asym, lasym)
   CALL cdf_define(nwout, vn_free, lfreeb)
   CALL cdf_define(nwout, vn_error, ier_flag)
@@ -389,7 +388,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_maxmod, mnmax)
   CALL cdf_write(nwout, vn_maxmod_nyq, mnmax_nyq)
   CALL cdf_write(nwout, vn_maxit, iter2)
-  CALL cdf_write(nwout, vn_actit, itfsq)
   CALL cdf_write(nwout, vn_asym, lasym)
   CALL cdf_write(nwout, vn_free, lfreeb)
   CALL cdf_write(nwout, vn_error, ier_flag)

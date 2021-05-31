@@ -9,6 +9,10 @@ MODULE vmec_main
 
   IMPLICIT NONE
 
+  ! 1d-preconditioner-related
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: blam
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: clam
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: dlam
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ard
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: arm
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: brd
@@ -17,24 +21,30 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: azm
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bzd
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bzm
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: crd
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sm !< shalf(i)/sfull(i)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sp !< shalf(i+1)/sfull(i)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bdamp !< radial mesh-blending factor
+  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam
+  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam0
+
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bmin
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bmax
 
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: crd
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: iotaf
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: phipf
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: chipf
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: phi
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: iotaf !< rotational transform (full grid)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: phipf !< radial derivative of toroidal magnetic flux (full grid)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: chipf !< radial derivative of poloidal magnetic flux (full grid)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: phi !< toroidal magnetic flux
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: beta_vol
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: jcuru
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: jcurv
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: jcuru !< poloidal current density
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: jcurv !< toroidal current density
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: jdotb
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: buco
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvco
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: buco !< enclosed toroidal current profile
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvco !< enclosed poloidal current profile
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bdotgradv
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: equif
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: specw
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tcon
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: equif !< radial force balance error: grad(p) - <j x B>
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: specw !< spectral width (diagnostic)
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: tcon !< constraint-force multiplier
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: psi
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: yellip
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: yinden
@@ -42,22 +52,16 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: yshift
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ygeo
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: overr
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sm
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: sp
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: pres
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: vp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: pres !< pressure profile
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: vp !< radial derivative of enclosed volume
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: jpar2
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: jperp2
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bdotb
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: blam
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: clam
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: dlam
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: vpphi
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: presgrad
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: bdamp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: presgrad !< pressure gradient: dp/ds
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bucof
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: bvcof
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: chi
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: chi !< poloidal magnetic flux
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: presf !< pressure profile on full-grid, mass/phip**gamma
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: chips !< poloidal flux (same as chip), one-dimensional array
@@ -65,9 +69,6 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: iotas !< rotational transform , on half radial mesh
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: icurv !< (-)toroidal current inside flux surface (vanishes like s)
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: mass  !< mass profile on half-grid
-
-  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam
-  REAL(rprec), DIMENSION(:,:,:,:), ALLOCATABLE :: faclam0
 
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: bsqsav
 
@@ -77,14 +78,14 @@ MODULE vmec_main
 
   REAL(rprec), ALLOCATABLE :: xcl0(:)
 
-  REAL(rprec), DIMENSION(0:mpol1d,3) :: xmpq
-  REAL(rprec), DIMENSION(0:mpol1d) :: faccon
+  REAL(rprec), DIMENSION(0:mpol1d,3) :: xmpq !< spectral condensation weighting factors
+  REAL(rprec), DIMENSION(0:mpol1d) :: faccon !< factor for spectral constraint
 
   REAL(rprec) :: hs !< radial mesh size increment
-  REAL(rprec) :: currv
+  REAL(rprec) :: currv !< toroidal current (?)
   REAL(rprec) :: aspect
   REAL(rprec) :: ohs
-  REAL(rprec) :: voli
+  REAL(rprec) :: voli !< total plasma volume in m^3
   REAL(rprec) :: r00
   REAL(rprec) :: r0scale
   REAL(rprec) :: z00
@@ -100,8 +101,8 @@ MODULE vmec_main
   REAL(rprec) :: fsql1
   REAL(rprec) :: fsq
   REAL(rprec) :: fedge
-  REAL(rprec) :: wb
-  REAL(rprec) :: wp
+  REAL(rprec) :: wb !< magnetic energy: volume integral over B^2/2
+  REAL(rprec) :: wp !< kinetic/thermal energy (from pressure)
 
   REAL(rprec) :: router
   REAL(rprec) :: rinner
@@ -119,19 +120,12 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: dbsq
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: rbsq
 
-  REAL(rprec) :: rbtor
-  REAL(rprec) :: rbtor0
-  REAL(rprec) :: ctor
+  REAL(rprec) :: rbtor !< poloidal current at LCFS
+  REAL(rprec) :: rbtor0 !< poloidal current at magnetic axis
+  REAL(rprec) :: ctor !< toroidal current (?)
   REAL(rprec) :: delbsq
   REAL(rprec) :: res0
   REAL(rprec) :: delt0r
-
-  REAL(rprec), DIMENSION(ndatafmax) :: spfa
-  REAL(rprec), DIMENSION(ndatafmax) :: spfa2
-  REAL(rprec), DIMENSION(ndatafmax) :: hp
-  REAL(rprec), DIMENSION(ndatafmax) :: sifa
-  REAL(rprec), DIMENSION(ndatafmax) :: sifa2
-  REAL(rprec), DIMENSION(ndatafmax) :: hi
 
   LOGICAL :: lthreed
   LOGICAL :: lconm1
@@ -140,9 +134,7 @@ MODULE vmec_main
 
   INTEGER, DIMENSION(:), ALLOCATABLE :: ireflect !< two-dimensional array for computing 2pi-v angle
   INTEGER :: multi_ns_grid
-  INTEGER :: itfsq
-  INTEGER :: ndatap
-  INTEGER :: ndatai
+
   integer :: niterv  !< max iterations for current multi-grid iteration
 
   integer :: neqs    !< total number of equations to evolve (size of xc)

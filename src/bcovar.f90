@@ -7,7 +7,7 @@
 !> @param lv \f$- \partial\lambda / \partial\zeta\f$
 SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
-  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale
+  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale, ntmax
   USE realspace
   USE vforces, r12 => armn_o, ru12 => azmn_e, gsqrt => azmn_o,      &
                rs => bzmn_e, zs => brmn_e, zu12 => armn_e,          &
@@ -25,7 +25,7 @@ SUBROUTINE bcovar (lu, lv)
 
   REAL(rprec), PARAMETER :: c1p5 = (one + p5)
 
-  INTEGER :: l, js, ndim, lk, ku
+  INTEGER :: l, js, ndim, lk, ku, m, n, rzl
   REAL(rprec) :: r2, volume, curpol_temp
 
 ! #ifndef _HBANGLE
@@ -43,6 +43,7 @@ SUBROUTINE bcovar (lu, lv)
   logical            :: dump_lambda_forces = .false.
   logical            :: dump_bcov_full = .false.
   logical            :: dump_precondn = .false.
+  logical            :: dump_forceNorms_tcon = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -464,7 +465,7 @@ SUBROUTINE bcovar (lu, lv)
   IF (MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0) THEN
      ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
 
-     write(*,*) "update 1d preconditioner"
+     !write(*,*) "update 1d preconditioner"
 
      phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
 
@@ -557,6 +558,72 @@ SUBROUTINE bcovar (lu, lv)
 
      IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
+
+     if (dump_forceNorms_tcon) then
+       write(dump_filename, 989) ns, trim(input_extension)
+989 format('forceNorms_tcon_',i5.5,'.',a)
+       open(unit=42, file=trim(dump_filename), status="unknown")
+
+       write(42, *) "# ns nzeta ntheta3"
+       write(42, *) ns, nzeta, ntheta3
+
+       write(42, *) "# volume"
+       write(42, *) volume
+
+       write(42, *) "# r2"
+       write(42, *) MAX(wb,wp)/volume
+
+       write(42, *) "# js ku lv guu"
+       DO js = 1, ns
+         DO ku = 1, ntheta3
+           DO lk = 1, nzeta
+               l = ((ku-1)*nzeta+(lk-1))*ns+js
+               write (42, *) js, ku, lk, guu(l)
+           end do
+         end do
+       end do
+
+       write(42, *) "# fnorm"
+       write(42, *) fnorm
+
+       write(42, *) "# rzl js n m rcc xc"
+       l=0
+       do rzl=1,2
+         do lk=1, ntmax
+           do m=0, mpol1
+             do n=0, ntor
+               do js=1, ns
+                 l = l+1
+                 write(42, *) rzl, js, n, m, lk, xc(l)
+               end do
+             end do
+           end do
+         end do
+       end do
+
+       write(42, *) "# fnorm1"
+       write(42, *) fnorm1
+
+       write(42, *) "# fnormL"
+       write(42, *) fnormL
+
+       write(42, *) "# tcon0"
+       write(42, *) tcon0
+
+       write(42, *) "# tcon_mul"
+       write(42, *) tcon_mul
+
+       write(42, *) "# js rzu_fac rru_fac frcc_fac fzsc_fac tcon"
+       DO js = 1, ns
+         write(42, *) js, rzu_fac(js), rru_fac(js), &
+           frcc_fac(js), fzsc_fac(js), tcon(js)
+       end do
+
+       close(42)
+
+       print *, "dumped force norms and tcon output to '"//trim(dump_filename)//"'"
+       stop
+     end if
 
    ENDIF ! MOD(iter2-iter1,ns4).eq.0 .and. iequi.eq.0
 

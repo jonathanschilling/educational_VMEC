@@ -36,7 +36,7 @@ C-----------------------------------------------
      4  vn_maxr = 'rmax_surf', vn_minr = 'rmin_surf',
      5  vn_maxz = 'zmax_surf', vn_fp = 'nfp',
      6  vn_radnod = 'ns', vn_polmod = 'mpol', vn_tormod = 'ntor',
-     7  vn_maxmod = 'mnmax', vn_maxit = 'niter', vn_actit = 'itfsq',
+     7  vn_maxmod = 'mnmax', vn_maxit = 'niter',
      8  vn_asym = 'lasym', vn_free = 'lfreeb',
      9  vn_error = 'ier_flag', vn_aspect = 'aspect',
      A  vn_maxmod_nyq = 'mnmax_nyq',
@@ -101,7 +101,7 @@ C-----------------------------------------------
      7  ln_radnod = 'Radial nodes', ln_polmod = 'Poloidal modes',
      8  ln_tormod = 'Toroidal modes', ln_maxmod = 'Fourier modes',
      8  ln_maxmod_nyq = 'Fourier modes (Nyquist)',
-     9  ln_maxit = 'Max iterations', ln_actit = 'Actual iterations',
+     9  ln_maxit = 'Max iterations',
      1  ln_asym = 'Asymmetry', ln_recon = 'Reconstruction',
      1  ln_free = 'Free boundary',
      2  ln_error = 'Error flag', ln_aspect = 'Aspect ratio',
@@ -198,8 +198,8 @@ C-----------------------------------------------
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
-      INTEGER :: nfp, ns, mpol, ntor, mnmax, mnmax_nyq, itfsq, niter,
-     1    iasym, ierr_vmec, imse, itse, nstore_seq,
+      INTEGER :: nfp, ns, mpol, ntor, mnmax, mnmax_nyq, niter,
+     1    iasym, ierr_vmec, imse, itse,
      2    isnodes, ipnodes, imatch_phiedge, isigng, mnyq, nnyq, ntmax
       REAL(rprec) :: wb, wp, gamma, pfac, rmax_surf, rmin_surf,
      1    zmax_surf, aspect, betatot, betapol, betator, betaxis, b0,
@@ -344,7 +344,6 @@ C-----------------------------------------------
       mnmax_nyq = -1
       CALL cdf_read(nwout, vn_maxmod_nyq, mnmax_nyq)
       CALL cdf_read(nwout, vn_maxit, niter)
-      CALL cdf_read(nwout, vn_actit, itfsq)
       CALL cdf_read(nwout, vn_asym, lasym)
       IF (lasym) iasym = 1
       CALL cdf_read(nwout, vn_free, lfreeb)

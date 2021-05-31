@@ -53,7 +53,7 @@ SUBROUTINE funct3d (ier_flag)
 
   character(len=255) :: dump_filename
   logical            :: dump_geometry = .false.
-  logical            :: dump_constraint_force = .true.
+  logical            :: dump_constraint_force = .false.
 
 
 
@@ -358,8 +358,8 @@ SUBROUTINE funct3d (ier_flag)
 ! #end /* ndef _HBANGLE */
 
      if (dump_constraint_force) then
-       write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('constraint_force_',i5.5,'_',i6.6,'.',a)
+       write(dump_filename, 998) ns, trim(input_extension)
+998 format('constraint_force_',i5.5,'.',a)
 
        open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -378,13 +378,13 @@ SUBROUTINE funct3d (ier_flag)
        end do
 
        write(42, *) "# js n m gcs gsc gcc gss"
-       lk=0
+       l=0
        DO m = 0, mpol1
          DO n = 0, ntor
            DO js = 1, ns
-             lk = lk+1
+             l = l+1
              write (42, *) js, n, m, &
-                           gc(l), gc(1+mns+l), gc(1+2*mns+l), extra1(l,1)
+                           gc(l), gc(mns+l), gc(2*mns+l), extra1(l,1)
            end do
          end do
        end do

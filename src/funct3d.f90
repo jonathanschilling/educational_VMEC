@@ -25,7 +25,7 @@ SUBROUTINE funct3d (ier_flag)
 
   INTEGER, INTENT(inout) :: ier_flag
 
-  INTEGER :: l0pi, l, lk, ivacskip, js, ku, m
+  INTEGER :: l0pi, l, lk, ivacskip, js, ku, m, n
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
@@ -53,6 +53,7 @@ SUBROUTINE funct3d (ier_flag)
 
   character(len=255) :: dump_filename
   logical            :: dump_geometry = .false.
+  logical            :: dump_constraint_force = .true.
 
 
 
@@ -353,8 +354,46 @@ SUBROUTINE funct3d (ier_flag)
      extra1(:nrzt,0) = (rcon(:nrzt,0) - rcon0(:nrzt))*ru0(:nrzt) &
                      + (zcon(:nrzt,0) - zcon0(:nrzt))*zu0(:nrzt)
      ! Fourier-space filter: only retain m=1, ..., (mpol1-1)==mpol-2 in gcon
-     CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1))
+     CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
+
+     if (dump_constraint_force) then
+       write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('constraint_force_',i5.5,'_',i6.6,'.',a)
+
+       open(unit=42, file=trim(dump_filename), status="unknown")
+
+       write(42, *) "# ns ntheta3 nzeta mpol1 ntor"
+       write(42, *) ns, ntheta3, nzeta, mpol1, ntor
+
+       write(42, *) "# js ku lv extra1(:,0) gcons"
+       DO js = 1, ns
+         DO lk = 1, nzeta
+           DO ku = 1, ntheta3
+             l = ((ku-1)*nzeta+(lk-1))*ns+js
+             write (42, *) js, ku, lk, &
+                           extra1(l,0), gcon(l)
+           end do
+         end do
+       end do
+
+       write(42, *) "# js n m gcs gsc gcc gss"
+       lk=0
+       DO m = 0, mpol1
+         DO n = 0, ntor
+           DO js = 1, ns
+             lk = lk+1
+             write (42, *) js, n, m, &
+                           gc(l), gc(1+mns+l), gc(1+2*mns+l), extra1(l,1)
+           end do
+         end do
+       end do
+
+       close(42)
+
+       print *, "dumped constraint force to '"//trim(dump_filename)//"'"
+       stop
+     end if
 
      ! COMPUTE MHD FORCES ON INTEGER-MESH
      CALL forces

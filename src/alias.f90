@@ -92,6 +92,7 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
            end if
         END DO
      END DO
+
      DO i = 1, ntheta2
         DO jk = 1, ns*nzeta
            gcons(jk,i) = gcons(jk,i) + (work(jk,3)*cosmu(i,m) + work(jk,4)*sinmu(i,m))*faccon(m)
@@ -102,6 +103,7 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
            END DO
         end if
      END DO
+
   END DO
 
   IF (lasym) THEN

@@ -399,7 +399,7 @@ SUBROUTINE funct3d (ier_flag)
      ! SYMMETRIZE FORCES (in u-v space): NOTE - gc IS SMALL BY FACTOR 2 IF lasym=T
      IF (lasym) THEN
         CALL symforce (armn, brmn, crmn, azmn, bzmn, czmn,   blmn,   clmn,   rcon,   zcon, &
-                         r1,   ru,   rv,   z1,   zu,   zv, extra3, extra4, extra1, extra2    )
+                         r1,   ru,   rv,   z1,   zu,   zv, extra3, extra4, extra1, extra2   )
 
         ! NOT NECESSARY (EVEN THOUGH CORRECT) --> why?
         ! gc = 2*gc
@@ -411,14 +411,12 @@ SUBROUTINE funct3d (ier_flag)
      CALL tomnsps (gc,               &
                    armn, brmn, crmn, &
                    azmn, bzmn, czmn, &
-                         blmn, clmn, &
-                   rcon, zcon         )
+                   blmn, clmn, rcon, zcon)
      IF (lasym) then
         CALL tomnspa (gc,             &
                       r1, ru, rv,     &
                       z1, zu, zv,     &
-                      extra3, extra4, &
-                      extra1, extra2)
+                      extra3, extra4, extra1, extra2)
      end if
 
      ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)

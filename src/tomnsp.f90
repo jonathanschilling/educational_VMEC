@@ -63,17 +63,22 @@ SUBROUTINE tomnsps(frzl_array,       &
   !
   ! NOTE: sinmumi = -m sin(mu),  sinnvn = -n sin(nv)
   DO m = 0, mpol1
+
      mparity = MOD(m,2)
      mj = m+joff
+
      j2 = jmin2(m)
      jl = jlam(m)
+
      work1 = 0
 
      ! DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 < U < PI)
      l = 0
      DO i = 1, ntheta2
-        jll = l+1;  nsl = nsz+l
-        l = l+nsz
+        jll = l+1   ! start of poloidal slice
+        nsl = l+nsz ! end of poloidal slice
+        l   = l+nsz ! jump to next poloidal slice
+
         tempr(:) = armn(jll:nsl,mparity) &
 ! #ifndef _HBANGLE
             + xmpq(m,1)*arcon(jll:nsl,mparity)
@@ -108,8 +113,14 @@ SUBROUTINE tomnsps(frzl_array,       &
         ni = n+ioff
         l = 0
         DO k = 1, nzeta
-           j2l = j2+l; jmaxl = jmax+l; jll = jl+l; nsl = ns+l
-           l = l+ns
+           j2l   = l+j2   ! start of radial slice for R,Z
+           jmaxl = l+jmax ! end of radial slice for R,Z
+
+           jll   = l+jl ! start of radial slice for lambda
+           nsl   = l+ns ! end of radial slice for lambda
+
+           l = l+ns ! jump to next radial slice
+
            frcc(j2:jmax,ni,mj) = frcc(j2:jmax,ni,mj) + work1(j2l:jmaxl,1)*cosnv(k,n)
            fzsc(j2:jmax,ni,mj) = fzsc(j2:jmax,ni,mj) + work1(j2l:jmaxl,7)*cosnv(k,n)
            flsc(jl:ns,ni,mj) = flsc(jl:ns,ni,mj) + work1(jll:nsl,11)*cosnv(k,n)
@@ -188,13 +199,15 @@ SUBROUTINE tomnspa(frzl_array,       &
   ! BEGIN FOURIER TRANSFORM
   DO m = 0, mpol1
      mparity = MOD(m,2)
+
      mj = m+joff
+
      j2 = jmin2(m)
      jl = jlam(m)
+
      work1 = 0
 
      ! DO THETA (U) TRANSFORM FIRST
-
      DO i = 1, ntheta2
         temp1(:) = armn(:,i,mparity) &
 ! #ifndef _HBANGLE
@@ -227,8 +240,14 @@ SUBROUTINE tomnspa(frzl_array,       &
      DO n = 0, ntor
         ni = n+ioff
         DO k = 1, nzeta
-           l = ns*(k-1)
-           j2l = j2+l; jmaxl = jmax+l; jll = jl+l; nsl = ns+l
+           l = ns*(k-1) ! current slice offset
+
+           j2l   = j2+l   ! start of radial slice for R,Z
+           jmaxl = jmax+l ! end of radial slice for R,Z
+
+           jll = jl+l ! start of radial slice for lambda
+           nsl = ns+l ! end of radial slice for lambda
+
            frsc(j2:jmax,ni,mj) = frsc(j2:jmax,ni,mj) + work1(j2l:jmaxl,3)*cosnv(k,n)
            fzcc(j2:jmax,ni,mj) = fzcc(j2:jmax,ni,mj) + work1(j2l:jmaxl,5)*cosnv(k,n)
            flcc(jl:ns,ni,mj) = flcc(jl:ns,ni,mj) + work1(jll:nsl,9)*cosnv(k,n)

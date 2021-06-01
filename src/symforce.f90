@@ -35,13 +35,45 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(out) ::   &
      ara, bra, cra, aza, bza, cza, bla, cla, rca, zca
 
-  INTEGER :: mpar, ir, i, jk, jka
+  INTEGER :: mpar, ir, i, jk, jka, j, k
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ars_0, brs_0, azs_0, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
+
+  character(len=255) :: dump_filename
+  logical            :: dump_symforce = .false.
 
   i = ns*nzeta
   ALLOCATE (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &
             rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)
+
+
+  if (dump_symforce) then
+    write(dump_filename, 997) ns, trim(input_extension)
+997 format('symforce_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntheta1 ntheta2 ntheta3 nzeta"
+    write(42, *) ns, ntheta1, ntheta2, ntheta3, nzeta
+
+    ! inputs to symforce()
+    write(42, *) "# js lv ku m" // &
+      " ars brs crs azs bzs czs bls cls rcs zcs"
+    DO j = 1, ns
+      do k = 1, nzeta
+        jk = (k-1)*ns+j
+        DO i = 1, ntheta3
+          DO mpar = 0, 1
+            write (42, *) j, k, i, mpar, &
+              ars(jk,i,mpar), brs(jk,i,mpar), crs(jk,i,mpar), &
+              azs(jk,i,mpar), bzs(jk,i,mpar), czs(jk,i,mpar), &
+              bls(jk,i,mpar), cls(jk,i,mpar), &
+              rcs(jk,i,mpar), zcs(jk,i,mpar)
+          end do
+        end do
+      end do
+    end do
+  end if ! dump_symforce
 
   ! SYMMETRIZE FORCES ON RESTRICTED THETA INTERVAL (0 <= u <= pi)
   ! SO COS,SIN INTEGRALS CAN BE PERFORMED. FOR EXAMPLE,
@@ -50,26 +82,36 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   ! ARA(v,u) = .5*( ARS(v,u) - ARS(-v,-u) )     ! * SIN(mu - nv)
   DO mpar = 0, 1
      DO i = 1, ntheta2
+
+        ! (ntheta1 + 1) - (i-1)
         ir = ntheta1 + 2 - i                 !-theta
         IF (i .eq. 1) ir = 1
+
+
         DO jk = 1, ns*nzeta
            jka = ireflect(jk)                !-zeta
+
            ara(jk,i,mpar) = p5*(ars(jk,i,mpar)-ars(jka,ir,mpar))
            ars_0(jk)      = p5*(ars(jk,i,mpar)+ars(jka,ir,mpar))
            bra(jk,i,mpar) = p5*(brs(jk,i,mpar)+brs(jka,ir,mpar))
            brs_0(jk)      = p5*(brs(jk,i,mpar)-brs(jka,ir,mpar))
+
            aza(jk,i,mpar) = p5*(azs(jk,i,mpar)+azs(jka,ir,mpar))
            azs_0(jk)      = p5*(azs(jk,i,mpar)-azs(jka,ir,mpar))
            bza(jk,i,mpar) = p5*(bzs(jk,i,mpar)-bzs(jka,ir,mpar))
            bzs_0(jk)      = p5*(bzs(jk,i,mpar)+bzs(jka,ir,mpar))
+
            bla(jk,i,mpar) = p5*(bls(jk,i,mpar)-bls(jka,ir,mpar))
            bls_0(jk)      = p5*(bls(jk,i,mpar)+bls(jka,ir,mpar))
+
            rca(jk,i,mpar) = p5*(rcs(jk,i,mpar)-rcs(jka,ir,mpar))
            rcs_0(jk)      = p5*(rcs(jk,i,mpar)+rcs(jka,ir,mpar))
            zca(jk,i,mpar) = p5*(zcs(jk,i,mpar)+zcs(jka,ir,mpar))
            zcs_0(jk)      = p5*(zcs(jk,i,mpar)-zcs(jka,ir,mpar))
         END DO
 
+        ! need to store symmetric part in temp array,
+        ! since reflected indices must not be overwritten above!
         ars(:,i,mpar) = ars_0(:)
         brs(:,i,mpar) = brs_0(:)
         azs(:,i,mpar) = azs_0(:)
@@ -81,10 +123,13 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
         IF (lthreed) THEN
            DO jk = 1, ns*nzeta
               jka = ireflect(jk)
+
               cra(jk,i,mpar) = p5*(crs(jk,i,mpar)+crs(jka,ir,mpar))
               crs_0(jk)      = p5*(crs(jk,i,mpar)-crs(jka,ir,mpar))
+
               cza(jk,i,mpar) = p5*(czs(jk,i,mpar)-czs(jka,ir,mpar))
               czs_0(jk)      = p5*(czs(jk,i,mpar)+czs(jka,ir,mpar))
+
               cla(jk,i,mpar) = p5*(cls(jk,i,mpar)-cls(jka,ir,mpar))
               cls_0(jk)      = p5*(cls(jk,i,mpar)+cls(jka,ir,mpar))
            END DO
@@ -99,6 +144,36 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
 
   DEALLOCATE (ars_0, brs_0, azs_0, bzs_0, bls_0,          &
               rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)
+
+  if (dump_symforce) then
+    ! outputs from symforce()
+    write(42, *) "# js lv ku m" // &
+      " ars brs crs azs bzs czs bls cls rcs zcs" // &
+      " ara bra cra aza bza cza bla cla rca zca"
+    DO j = 1, ns
+      do k = 1, nzeta
+        jk = (k-1)*ns+j
+        DO i = 1, ntheta2
+          DO mpar = 0, 1
+            write (42, *) j, k, i, mpar, &
+              ars(jk,i,mpar), brs(jk,i,mpar), crs(jk,i,mpar), &
+              azs(jk,i,mpar), bzs(jk,i,mpar), czs(jk,i,mpar), &
+              bls(jk,i,mpar), cls(jk,i,mpar), &
+              rcs(jk,i,mpar), zcs(jk,i,mpar), &
+              ara(jk,i,mpar), bra(jk,i,mpar), cra(jk,i,mpar), &
+              aza(jk,i,mpar), bza(jk,i,mpar), cza(jk,i,mpar), &
+              bla(jk,i,mpar), cla(jk,i,mpar), &
+              rca(jk,i,mpar), zca(jk,i,mpar)
+          end do
+        end do
+      end do
+    end do
+
+    close(42)
+
+    print *, "dumped symforce output to '"//trim(dump_filename)//"'"
+    stop
+  end if ! dump_symforce
 
 END SUBROUTINE symforce
 

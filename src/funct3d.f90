@@ -55,8 +55,6 @@ SUBROUTINE funct3d (ier_flag)
   logical            :: dump_geometry = .false.
   logical            :: dump_constraint_force = .false.
 
-
-
   ! POINTER ALIASES
   lu => czmn
   lv => crmn

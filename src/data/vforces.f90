@@ -6,14 +6,14 @@ MODULE vforces
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: armn
-  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: azmn
-
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: brmn
-  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: bzmn
-  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: blmn
-
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: crmn
+
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: azmn
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: bzmn
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: czmn
+
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: blmn
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: clmn
 
   REAL(rprec), POINTER, DIMENSION(:) :: armn_e

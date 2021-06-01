@@ -6,9 +6,13 @@
 SUBROUTINE forces
   USE vmec_main, p5 => cp5
   USE realspace
-  USE vforces, ru12 => azmn_e, zu12 => armn_e, &
+
+  ! I guess these double aliases are intended to show at which point in the code
+  ! the respective arrays hold what quantity...
+  ! E.g., ru12 gets filled by jacobian() and is overwritten with the force component azmn_e here.
+  USE vforces,   ru12 => azmn_e,   zu12 => armn_e, &
                azmn_e => azmn_e, armn_e => armn_e, &
-               lv_e => crmn_e, lu_e => czmn_e, lu_o => czmn_o, &
+                 lv_e => crmn_e,   lu_e => czmn_e,   lu_o => czmn_o, &
                crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
   IMPLICIT NONE
 
@@ -177,7 +181,9 @@ SUBROUTINE forces
      bzmn_e(:nrzt) = bzmn_e(:nrzt) - (guv(:nrzt)*zv(:nrzt,0) + guvs(:nrzt)*zv(:nrzt,1))
      crmn_e(:nrzt) = guv(:nrzt) *ru(:nrzt,0) + gvv(:nrzt) *rv(:nrzt,0) + gvvs(:nrzt)*rv(:nrzt,1) + guvs(:nrzt)*ru(:nrzt,1)
      czmn_e(:nrzt) = guv(:nrzt) *zu(:nrzt,0) + gvv(:nrzt) *zv(:nrzt,0) + gvvs(:nrzt)*zv(:nrzt,1) + guvs(:nrzt)*zu(:nrzt,1)
+
      guv(:nrzt) = guv(:nrzt) * sqrts(:nrzt)*sqrts(:nrzt)
+
      brmn_o(:nrzt) = brmn_o(:nrzt) - (guvs(:nrzt)*rv(:nrzt,0) + guv(:nrzt)*rv(:nrzt,1))
      bzmn_o(:nrzt) = bzmn_o(:nrzt) - (guvs(:nrzt)*zv(:nrzt,0) + guv(:nrzt)*zv(:nrzt,1))
      crmn_o(:nrzt) = guvs(:nrzt)*ru(:nrzt,0) + gvvs(:nrzt)*rv(:nrzt,0) + bsqr(:nrzt)*rv(:nrzt,1) + guv(:nrzt) *ru(:nrzt,1)

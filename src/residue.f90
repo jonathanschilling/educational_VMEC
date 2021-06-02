@@ -30,7 +30,8 @@ SUBROUTINE residue (gcr, gcz, gcl)
 
   character(len=255) :: dump_filename
   logical            :: dump_physical_gc = .false.
-
+  logical            :: dump_fsq = .false.
+  logical            :: dump_scale_m1 = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -52,7 +53,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
 ! #end /* ndef _HBANGLE */
 
-  ! TODO: dump physical forces here!
+  ! dump physical forces
   if (dump_physical_gc) then
     write(dump_filename, 998) trim(input_extension)
 998 format('phys_gc.',a)
@@ -102,12 +103,60 @@ SUBROUTINE residue (gcr, gcz, gcl)
   fsql = fnormL*SUM(gcl*gcl)
   fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
+  if (dump_fsq) then
+    write(dump_filename, 997) trim(input_extension)
+997 format('fsq.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# r0scale r1 fnorm fnormL jedge fsqr fsqz fsql fedge"
+    write(42, *) r0scale, r1, fnorm, fnormL, jedge, fsqr, fsqz, fsql, fedge
+
+    print *, "dumped fsq to '"//trim(dump_filename)//"'"
+    close(42)
+
+    stop
+  end if
+
   ! PERFORM PRECONDITIONING AND COMPUTE RESIDUES
 
 ! #ifndef _HBANGLE
   ! m = 1 constraint scaling
   IF (lthreed) CALL scale_m1(gcr(:,:,1,rss), gcz(:,:,1,zcs))
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
+
+  ! dump forces after scale_m1 has been applied
+  if ((lthreed .or. lasym) .and. dump_scale_m1) then
+    write(dump_filename, 996) trim(input_extension)
+996 format('scale_m1.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntor mpol1 ntmax"
+    write(42, *) ns, ntor, mpol1, ntmax
+
+    write(42, *) "# j n m ntmax gcr gcz"
+    do j=1, ns
+      do n=0, ntor
+        do m=0, mpol1
+          do i=1, ntmax
+            write(42, *) j, n, m, i, &
+              gcr(j, n, m, i), &
+              gcz(j, n, m, i)
+          end do
+        end do
+      end do
+    end do
+
+    print *, "dumped scale_m1 output to '"//trim(dump_filename)//"'"
+    close(42)
+
+    stop
+  end if
+
+
+
+
 
   jedge = 0
   CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)

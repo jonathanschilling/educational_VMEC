@@ -24,9 +24,13 @@ SUBROUTINE residue (gcr, gcz, gcl)
   INTEGER, PARAMETER :: n3d=0
   INTEGER, PARAMETER :: nasym=1
 
-  INTEGER :: jedge
+  INTEGER :: jedge, j, n, m, i
   INTEGER :: delIter
   REAL(rprec) :: r1
+
+  character(len=255) :: dump_filename
+  logical            :: dump_physical_gc = .false.
+
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -49,15 +53,34 @@ SUBROUTINE residue (gcr, gcz, gcl)
 ! #end /* ndef _HBANGLE */
 
   ! TODO: dump physical forces here!
+  if (dump_physical_gc) then
+    write(dump_filename, 998) trim(input_extension)
+998 format('phys_gc.',a)
 
+    open(unit=42, file=trim(dump_filename), status="unknown")
 
+    write(42, *) "# ns ntor mpol1 ntmax"
+    write(42, *) ns, ntor, mpol1, ntmax
 
+    write(42, *) "# j n m ntmax gcr gcz gcl"
+    do j=1, ns
+      do n=0, ntor
+        do m=0, mpol1
+          do i=1, ntmax
+            write(42, *) j, n, m, i, &
+              gcr(j, n, m, i), &
+              gcz(j, n, m, i), &
+              gcl(j, n, m, i)
+          end do
+        end do
+      end do
+    end do
 
+    print *, "dumped physical gc to '"//trim(dump_filename)//"'"
+    close(42)
 
-
-
-
-
+    stop
+  end if
 
   ! COMPUTE INVARIANT RESIDUALS
   r1 = one/(2*r0scale)**2 ! --> actually look at r1*fnorm --> scaling factor for forces (?)

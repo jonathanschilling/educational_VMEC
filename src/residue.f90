@@ -255,6 +255,8 @@ SUBROUTINE constrain_m1(gcr, gcz)
 
   !v8.50: ADD iter2<2 so reset=<WOUT_FILE> works
   IF (fsqz.LT.FThreshold .OR. iter2.LT.2) then
+    write(*,*) "zero z-force in constrain_m1"
+
      ! ensure that the m=1 constraint is satisfied exactly
      ! --> the corresponding m=1 coeffs of R,Z are constrained to be zero
      !     and thus must not be "forced" (by the time evol using gc) away from zero

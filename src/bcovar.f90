@@ -456,7 +456,7 @@ SUBROUTINE bcovar (lu, lv)
     IF (MOD(iter2-iter1,ns4).eq.0) THEN
        ! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)
 
-       !write(*,*) "update 1d preconditioner"
+       write(*,*) "update 1d preconditioner"
 
        phipog(:nrzt) = phipog(:nrzt)*wint(:nrzt) ! remember that actually phipog == 1/sqrt(g)
 

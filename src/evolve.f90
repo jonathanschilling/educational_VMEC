@@ -63,6 +63,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
      ! fsq is 1 (first iteration) or fsq1 from previous iteration
 
      ! fsq1/fsq is y_n assuming monotonic decrease of energy
+     ! dtau is temporarily re-used for something else here...
      dtau = MIN(ABS(LOG(fsq1/fsq)), cp15)
   end if
 

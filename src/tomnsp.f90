@@ -28,10 +28,13 @@ SUBROUTINE tomnsps(frzl_array,       &
      armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon
 
   INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-  INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl
+  INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl, js
   REAL(rprec), DIMENSION(:,:,:), POINTER :: frcc, frss, fzcs, fzsc, flcs, flsc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
+
+  character(len=255) :: dump_filename
+  logical            :: dump_tomnsps = .false.
 
   frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
@@ -143,6 +146,45 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
+  if (dump_tomnsps) then
+      write(dump_filename, 999) trim(input_extension)
+999 format('tomnsps.',a)
+      open(unit=42, file=trim(dump_filename), status="unknown")
+
+      write(42, *) "# ns ntor mpol1"
+      write(42, *) ns, ntor, mpol1
+
+      if (lthreed) then
+        write(42, *) "# js n m frcc frss fzsc fzcs flsc flcs"
+        DO js = 1, ns
+          do n=0, ntor
+            do m=0, mpol1
+              write(42, *) js, n, m, &
+                frcc(js,n,m), frss(js,n,m), &
+                fzsc(js,n,m), fzcs(js,n,m), &
+                flsc(js,n,m), flcs(js,n,m)
+            end do
+          end do
+        end do
+      else ! lthreed
+        write(42, *) "# js n m frcc fzsc flsc"
+        DO js = 1, ns
+          do n=0, ntor
+            do m=0, mpol1
+              write(42, *) js, n, m, &
+                frcc(js,n,m), fzsc(js,n,m), flsc(js,n,m)
+            end do
+          end do
+        end do
+
+      end if ! lthreed
+
+      close(42)
+
+      print *, "dumped tomnsps output to '"//trim(dump_filename)//"'"
+      stop
+  end if
+
 END SUBROUTINE tomnsps
 
 !> \brief Fourier-transform anti-symmetric forces from real space to Fourier space
@@ -172,10 +214,13 @@ SUBROUTINE tomnspa(frzl_array,       &
      armn, brmn, crmn, azmn, bzmn, czmn, blmn, clmn, arcon, azcon
 
   INTEGER :: jmax, m, mparity, i, n, k, l, nsz
-  INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl
+  INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl, js
   REAL(rprec), DIMENSION(:,:,:), POINTER :: frcs, frsc, fzcc, fzss, flcc, flss
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: temp1, temp3
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
+
+  character(len=255) :: dump_filename
+  logical            :: dump_tomnspa = .false.
 
   frsc => frzl_array(:,:,:,rsc)               !!R-SIN(mu) COS(nv)
   fzcc => frzl_array(:,:,:,zcc+ntmax)         !!Z-COS(mu) COS(nv)
@@ -268,5 +313,44 @@ SUBROUTINE tomnspa(frzl_array,       &
   END DO
 
   DEALLOCATE (work1, temp1, temp3)
+
+  if (dump_tomnspa) then
+      write(dump_filename, 998) trim(input_extension)
+998 format('tomnspa.',a)
+      open(unit=42, file=trim(dump_filename), status="unknown")
+
+      write(42, *) "# ns ntor mpol1"
+      write(42, *) ns, ntor, mpol1
+
+      if (lthreed) then
+        write(42, *) "# js n m frsc frcs fzcc fzss flcc flss"
+        DO js = 1, ns
+          do n=0, ntor
+            do m=0, mpol1
+              write(42, *) js, n, m, &
+                frsc(js,n,m), frcs(js,n,m), &
+                fzcc(js,n,m), fzss(js,n,m), &
+                flcc(js,n,m), flss(js,n,m)
+            end do
+          end do
+        end do
+      else ! lthreed
+        write(42, *) "# js n m frcc frss fzsc"
+        DO js = 1, ns
+          do n=0, ntor
+            do m=0, mpol1
+              write(42, *) js, n, m, &
+                frsc(js,n,m), fzcc(js,n,m), flcc(js,n,m)
+            end do
+          end do
+        end do
+
+      end if ! lthreed
+
+      close(42)
+
+      print *, "dumped tomnspa output to '"//trim(dump_filename)//"'"
+      stop
+  end if
 
 END SUBROUTINE tomnspa

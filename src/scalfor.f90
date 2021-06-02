@@ -34,7 +34,15 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec) :: mult_fac
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
 
+  character(len=255) :: dump_filename
+  logical            :: dump_scalfor = .true.
+
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
+
+  ! clean state since not all entries are assigned
+  ax = 0
+  dx = 0
+  bx = 0
 
   jmax = ns
   IF (ivac .lt. 1) jmax = ns1
@@ -102,6 +110,46 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   !    dx(ns,1:,1:) = 3*dx(ns,1:,1:)
   ! END IF
 
+  ! check scalfor state == inputs to tridslv
+  if (dump_scalfor) then
+
+    ! prior knowledge about how this is called:
+    ! iflag=0 --> R
+    ! iflag=1 --> Z
+
+    if (iflag.eq.0) then
+      write(dump_filename, 995) trim(input_extension)
+    elseif (iflag.eq.1) then
+      write(dump_filename, 996) trim(input_extension)
+    end if
+995 format('scalfor_R.',a)
+996 format('scalfor_Z.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntor mpol1"
+    write(42, *) ns, ntor, mpol1
+
+    write(42, *) "# j n m ax dx bx"
+    do js=1, ns
+      do n=0, ntor
+        do m=0, mpol1
+          write(42, *) js, n, m, &
+            ax(js, n, m), &
+            dx(js, n, m), &
+            bx(js, n, m)
+        end do
+      end do
+    end do
+
+    print *, "dumped scalfor state to '"//trim(dump_filename)//"'"
+    close(42)
+
+    ! should only stop after also Z has been dumped
+    if (iflag.eq.1) then
+      stop
+    end if
+  end if
 
   ! SOLVES AX(I)*X(I+1) + DX(I)*X(I) + BX(I)*X(I-1) = GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)
   CALL tridslv (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, ns, ntmax)

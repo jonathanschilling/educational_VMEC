@@ -32,6 +32,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   logical            :: dump_physical_gc = .false.
   logical            :: dump_fsq = .false.
   logical            :: dump_scale_m1 = .false.
+  logical            :: dump_scalfor_out = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -154,15 +155,54 @@ SUBROUTINE residue (gcr, gcz, gcl)
     stop
   end if
 
-
-
-
-
   jedge = 0
   CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
   jedge = 1
   CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
 ! #end /* ndef _HBANGLE */
+
+  ! dump forces after scalfor has been applied
+  if (dump_scalfor_out) then
+    write(dump_filename, 995) trim(input_extension)
+995 format('scalfor_out.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntor mpol1 ntmax"
+    write(42, *) ns, ntor, mpol1, ntmax
+
+    write(42, *) "# j arm brm ard brd" // &
+      " azm bzm azd bzd crd"
+    do j=1, ns
+      write(42, *) j, &
+        arm(j,:), brm(j,:), ard(j,:), brd(j,:), &
+        azm(j,:), bzm(j,:), azd(j,:), bzd(j,:), crd(j)
+    end do
+    j=ns+1 ! extra entry in a.., b..
+    write(42, *) j, &
+      arm(j,:), brm(j,:), ard(j,:), brd(j,:), &
+      azm(j,:), bzm(j,:), azd(j,:), bzd(j,:), 0.0
+
+    write(42, *) "# j n m ntmax gcr gcz"
+    do j=1, ns
+      do n=0, ntor
+        do m=0, mpol1
+          do i=1, ntmax
+            write(42, *) j, n, m, i, &
+              gcr(j, n, m, i), &
+              gcz(j, n, m, i)
+          end do
+        end do
+      end do
+    end do
+
+    print *, "dumped scalfor output to '"//trim(dump_filename)//"'"
+    close(42)
+
+    stop
+  end if
+
+
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
   CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1) ! m1 is simply == 1 --> include edge

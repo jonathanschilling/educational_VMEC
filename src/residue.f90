@@ -48,6 +48,17 @@ SUBROUTINE residue (gcr, gcz, gcl)
   IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
 ! #end /* ndef _HBANGLE */
 
+  ! TODO: dump physical forces here!
+
+
+
+
+
+
+
+
+
+
   ! COMPUTE INVARIANT RESIDUALS
   r1 = one/(2*r0scale)**2 ! --> actually look at r1*fnorm --> scaling factor for forces (?)
   jedge = 0
@@ -59,6 +70,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   ! Coding for VMEC2000 run stand-alone
   IF (delIter.lt.50 .and. (fsqr+fsqz).lt.1.E-6_dp) then
      ! include edge contribution only if converged well enough fast enough (?)
+!      print *, "include edge force in residue"
      jedge = 1
   end if
 

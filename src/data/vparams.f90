@@ -28,8 +28,8 @@ MODULE vparams
   INTEGER            :: nthreed
 
   ! MISCELLANEOUS PARAMETERS
-  REAL(rprec), PARAMETER :: c1pm2  =  1.e-2_dp
-  REAL(rprec), PARAMETER :: cp15   =  0.15_dp
+  REAL(rprec), PARAMETER :: c1pm2  = 1.e-2_dp
+  REAL(rprec), PARAMETER :: cp15   = 0.15_dp
   REAL(rprec), PARAMETER :: cp25   = 0.25_dp
   REAL(rprec), PARAMETER :: cp5    = 0.50_dp
   REAL(rprec), PARAMETER :: c1pm8  = 1.0e-8_dp
@@ -38,6 +38,6 @@ MODULE vparams
   REAL(rprec), PARAMETER :: c3p0   = 3
   REAL(rprec), PARAMETER :: cp05   = 0.05_dp
   REAL(rprec), PARAMETER :: c1pm13 = 1.0e-13_dp
-  REAL(rprec), PARAMETER :: osqrt2 = 0.707106781186547462_dp
+  REAL(rprec), PARAMETER :: osqrt2 = 0.707106781186547462_dp !< 1/sqrt(2)
 
 END MODULE vparams

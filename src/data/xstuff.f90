@@ -33,8 +33,6 @@ MODULE xstuff
 !                                                    lmncc
 !                                                    lmnss
 
-
-
   !> stacked array of R, Z, Lambda Spectral force coefficients (see above for stack order)
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: gc
 

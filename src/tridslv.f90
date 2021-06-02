@@ -11,7 +11,7 @@
 !> @param jmax
 !> @param mnd1
 !> @param ns
-!> @param nrhs
+!> @param nrhs ! number of right-hand sides for which to compute the solution
 SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
 
   USE stel_kinds

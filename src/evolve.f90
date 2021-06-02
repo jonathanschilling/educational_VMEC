@@ -20,9 +20,12 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   INTEGER, INTENT(inout) :: ier_flag
   LOGICAL, INTENT(inout) :: liter_flag
 
-
+  integer :: i
   CHARACTER(LEN=*), PARAMETER :: fcn_message = "External calls to FUNCT3D: "
   REAL(rprec) :: fsq1, dtau, b1, fac
+
+  character(len=255) :: dump_filename
+  logical            :: dump_evolve = .true.
 
   ! COMPUTE MHD FORCES
   CALL funct3d (ier_flag)
@@ -82,10 +85,42 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   b1  = one - dtau
   fac = one/(one + dtau)
 
+  ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
+  if (iter2 .gt. 10) then
+    ! only for first 10 iterations ...
+    dump_evolve = .false.
+  else
+    ! ... but reset for next multi-grid iteration
+    dump_evolve = .true.
+  end if
+
+  if (dump_evolve) then
+    write(dump_filename, 999) ns, iter2, trim(input_extension)
+999 format('evolve_',i5.5,'_',i6.6,'.',a)
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# ns ntor mpol1"
+    write(42, *) ns, ntor, mpol1
+
+    write(42, *) "# before timestep: i xc xcdot gc"
+    do i=1, neqs
+      write(42, *) i, xc(i), xcdot(i), gc(i)
+    end do
+  end if
+
   ! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE
   ! GRADIENT METHOD, WITHOUT THE LINE SEARCHES (FLETCHER-REEVES),
   ! BASED ON A METHOD GIVEN BY P. GARABEDIAN
   xcdot = fac*(b1*xcdot + time_step*gc) ! update velocity
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
+
+  if (dump_evolve) then
+    write(42, *) "# after timestep: i xc xcdot"
+    do i=1, neqs
+      write(42, *) i, xc(i), xcdot(i)
+    end do
+
+    close(42)
+  end if
 
 END SUBROUTINE evolve

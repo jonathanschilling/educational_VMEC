@@ -3,15 +3,15 @@
 
 !> \brief Solve a tridiagonal system of equations.
 !>
-!> @param a
-!> @param d
-!> @param b
-!> @param c
-!> @param jmin
-!> @param jmax
-!> @param mnd1
-!> @param ns
-!> @param nrhs ! number of right-hand sides for which to compute the solution
+!> @param a    sup-diagonal coefficients
+!> @param d        diagonal coefficients
+!> @param b    sub-diagonal coefficients
+!> @param c    on entry: right-hand side; on exit: solution
+!> @param jmin minimum index in radial direction for which to solve
+!> @param jmax maximum index in radial direction for which to solve
+!> @param mnd1 number of Fourier modes for which to solve this SIMULTANEOUSLY
+!> @param ns   total radial size (ca. jmax-jmin)
+!> @param nrhs number of right-hand sides for which to compute the solution
 SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
 
   USE stel_kinds
@@ -39,13 +39,18 @@ SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
   ALLOCATE (alf(ns,0:mnd1), stat = in)
   IF (in .ne. 0) STOP 'Allocation error in tridslv'
 
+  ! globally minimum radial index
   in = MINVAL(jmin)
+!   print *, "in=", in     !  1 for solovev case
+!   print *, "mnd1=", mnd1 ! 11 for solovev case
+!   print *, "nrhs=", nrhs !  1 for solovev case
 
   ! FILL IN MN BELOW MAX(JMIN) WITH DUMMY VALUES
   ! TO ALLOW VECTORIZATION ON MN INDEX
   DO mn = 0, mnd1
      in1 = jmin(mn)-1
      IF (in1 .ge. in) THEN
+!         print *, "in1 >= i", in1, " at ", mn
         d(in:in1, mn) = 1
         c(in:in1, mn, 1:nrhs) = 0
         b(in:in1, mn) = 0
@@ -53,7 +58,7 @@ SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
      END IF
   END DO
 
-  in1 = in + 1
+  in1 = in + 1 ! 2 for solovev case
 
   psi0(:)= d(in,:)
   IF (ANY(psi0 .eq. zero)) STOP 'psi0 == 0 error in tridslv'

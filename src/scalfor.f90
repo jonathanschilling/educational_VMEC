@@ -35,7 +35,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
 
   character(len=255) :: dump_filename
-  logical            :: dump_scalfor = .true.
+  logical            :: dump_scalfor = .false.
 
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
 

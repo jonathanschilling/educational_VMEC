@@ -33,6 +33,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   logical            :: dump_fsq = .false.
   logical            :: dump_scale_m1 = .false.
   logical            :: dump_scalfor_out = .false.
+  logical            :: dump_fsq1 = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -202,8 +203,6 @@ SUBROUTINE residue (gcr, gcz, gcl)
     stop
   end if
 
-
-
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
   CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1) ! m1 is simply == 1 --> include edge
 
@@ -212,6 +211,21 @@ SUBROUTINE residue (gcr, gcz, gcl)
   gcl = faclam*gcl
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
+
+  if (dump_fsq1) then
+    write(dump_filename, 994) trim(input_extension)
+994 format('fsq1.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# fnorm1 fsqr1 fsqz1 fsql1"
+    write(42, *) fnorm1, fsqr1, fsqz1, fsql1
+
+    print *, "dumped fsq1 to '"//trim(dump_filename)//"'"
+    close(42)
+
+    stop
+  end if
 
 END SUBROUTINE residue
 

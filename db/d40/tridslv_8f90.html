@@ -202,15 +202,15 @@ Functions/Subroutines</h2></td></tr>
 <p>Solve a tridiagonal system of equations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td></td></tr>
-    <tr><td class="paramname">d</td><td></td></tr>
-    <tr><td class="paramname">b</td><td></td></tr>
-    <tr><td class="paramname">c</td><td></td></tr>
-    <tr><td class="paramname">jmin</td><td></td></tr>
-    <tr><td class="paramname">jmax</td><td></td></tr>
-    <tr><td class="paramname">mnd1</td><td></td></tr>
-    <tr><td class="paramname">ns</td><td></td></tr>
-    <tr><td class="paramname">nrhs</td><td>! number of right-hand sides for which to compute the solution </td></tr>
+    <tr><td class="paramname">a</td><td>sup-diagonal coefficients </td></tr>
+    <tr><td class="paramname">d</td><td>diagonal coefficients </td></tr>
+    <tr><td class="paramname">b</td><td>sub-diagonal coefficients </td></tr>
+    <tr><td class="paramname">c</td><td>on entry: right-hand side; on exit: solution </td></tr>
+    <tr><td class="paramname">jmin</td><td>minimum index in radial direction for which to solve </td></tr>
+    <tr><td class="paramname">jmax</td><td>maximum index in radial direction for which to solve </td></tr>
+    <tr><td class="paramname">mnd1</td><td>number of Fourier modes for which to solve this SIMULTANEOUSLY </td></tr>
+    <tr><td class="paramname">ns</td><td>total radial size (ca. jmax-jmin) </td></tr>
+    <tr><td class="paramname">nrhs</td><td>number of right-hand sides for which to compute the solution </td></tr>
   </table>
   </dd>
 </dl>
@@ -233,7 +233,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d40/tridslv_8f90.html">tridslv.f90</a></li>
-    <li class="footer">Generated on Wed Jun 2 2021 20:09:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 2 2021 22:05:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

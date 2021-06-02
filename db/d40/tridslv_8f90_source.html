@@ -141,50 +141,55 @@ $(document).ready(function(){initNavTree('db/d40/tridslv_8f90_source.html','../.
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">ALLOCATE</span> (alf(ns,0:mnd1), stat = in)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">IF</span> (in .ne. 0) stop <span class="stringliteral">&#39;Allocation error in tridslv&#39;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  in = minval(jmin)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">! FILL IN MN BELOW MAX(JMIN) WITH DUMMY VALUES</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">! TO ALLOW VECTORIZATION ON MN INDEX</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">DO</span> mn = 0, mnd1</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     in1 = jmin(mn)-1</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;     <span class="keywordflow">IF</span> (in1 .ge. in) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        d(in:in1, mn) = 1</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        c(in:in1, mn, 1:nrhs) = 0</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        b(in:in1, mn) = 0</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        a(in:in1, mn) = 0</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  in1 = in + 1</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  psi0(:)= d(in,:)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">IF</span> (any(psi0 .eq. zero)) stop <span class="stringliteral">&#39;psi0 == 0 error in tridslv&#39;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  psi0 = one/psi0</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">DO</span> jrhs = 1, nrhs</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     c(in,:,jrhs) = c(in,:,jrhs)*psi0(:)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">DO</span> i0 = in1,jmax</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;     alf(i0-1,:) = a(i0-1,:)*psi0(:)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;     psi0 = d(i0,:) - b(i0,:)*alf(i0-1,:)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;     <span class="keywordflow">IF</span> (any(abs(psi0) .le. 1.e-8_dp*abs(d(i0,:)))) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;         stop <span class="stringliteral">&#39;psi0/d(i0) &lt; 1.E-8: possible singularity in tridslv&#39;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">     end if</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;     psi0  = one/psi0</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;     <span class="keywordflow">DO</span> jrhs = 1, nrhs</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        c(i0,:,jrhs) = (c(i0,:,jrhs) - b(i0,:)*c(i0-1,:,jrhs)) * psi0</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">DO</span> i0 = jmax - 1, in, -1</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;     <span class="keywordflow">DO</span> jrhs = 1,nrhs</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        c(i0,:,jrhs) = c(i0,:,jrhs) - alf(i0,:)*c(i0+1,:,jrhs)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordflow">  END DO</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">DEALLOCATE</span> (alf)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db">tridslv</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">! globally minimum radial index</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  in = minval(jmin)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">!   print *, &quot;in=&quot;, in     !  1 for solovev case</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">!   print *, &quot;mnd1=&quot;, mnd1 ! 11 for solovev case</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">!   print *, &quot;nrhs=&quot;, nrhs !  1 for solovev case</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">! FILL IN MN BELOW MAX(JMIN) WITH DUMMY VALUES</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">! TO ALLOW VECTORIZATION ON MN INDEX</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">DO</span> mn = 0, mnd1</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;     in1 = jmin(mn)-1</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;     <span class="keywordflow">IF</span> (in1 .ge. in) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">!         print *, &quot;in1 &gt;= i&quot;, in1, &quot; at &quot;, mn</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        d(in:in1, mn) = 1</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        c(in:in1, mn, 1:nrhs) = 0</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        b(in:in1, mn) = 0</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        a(in:in1, mn) = 0</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  in1 = in + 1 <span class="comment">! 2 for solovev case</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  psi0(:)= d(in,:)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">IF</span> (any(psi0 .eq. zero)) stop <span class="stringliteral">&#39;psi0 == 0 error in tridslv&#39;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  psi0 = one/psi0</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">DO</span> jrhs = 1, nrhs</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;     c(in,:,jrhs) = c(in,:,jrhs)*psi0(:)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">DO</span> i0 = in1,jmax</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;     alf(i0-1,:) = a(i0-1,:)*psi0(:)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;     psi0 = d(i0,:) - b(i0,:)*alf(i0-1,:)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;     <span class="keywordflow">IF</span> (any(abs(psi0) .le. 1.e-8_dp*abs(d(i0,:)))) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;         stop <span class="stringliteral">&#39;psi0/d(i0) &lt; 1.E-8: possible singularity in tridslv&#39;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordflow">     end if</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;     psi0  = one/psi0</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     <span class="keywordflow">DO</span> jrhs = 1, nrhs</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        c(i0,:,jrhs) = (c(i0,:,jrhs) - b(i0,:)*c(i0-1,:,jrhs)) * psi0</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">DO</span> i0 = jmax - 1, in, -1</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     <span class="keywordflow">DO</span> jrhs = 1,nrhs</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        c(i0,:,jrhs) = c(i0,:,jrhs) - alf(i0,:)*c(i0+1,:,jrhs)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordflow">  END DO</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keyword">DEALLOCATE</span> (alf)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db">tridslv</a></div>
 <div class="ttc" id="anamespacestel__kinds_html"><div class="ttname"><a href="../../db/dcb/namespacestel__kinds.html">stel_kinds</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d97/stel__kinds_8f90_source.html#l00002">stel_kinds.f90:2</a></div></div>
 <div class="ttc" id="atridslv_8f90_html_abf5399c0154abe7424c54d7fa9eb69db"><div class="ttname"><a href="../../db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db">tridslv</a></div><div class="ttdeci">subroutine tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)</div><div class="ttdoc">Solve a tridiagonal system of equations.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d40/tridslv_8f90_source.html#l00015">tridslv.f90:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -193,7 +198,7 @@ $(document).ready(function(){initNavTree('db/d40/tridslv_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d40/tridslv_8f90.html">tridslv.f90</a></li>
-    <li class="footer">Generated on Wed Jun 2 2021 20:09:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 2 2021 22:05:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

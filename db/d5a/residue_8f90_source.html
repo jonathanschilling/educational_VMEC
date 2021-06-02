@@ -140,208 +140,262 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">logical</span>            :: dump_physical_gc = .false.</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">logical</span>            :: dump_fsq = .false.</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">logical</span>            :: dump_scale_m1 = .false.</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="comment">! (ZCS = RSS, ZSS = RCS ARE THE CORRECT POLAR RELATIONS)</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="comment">! SYMMETRIC PERTURBATIONS (BASED ON POLAR RELATIONS):</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">!    RSS(n) = ZCS(n), n != 0</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">! ASYMMETRIC PERTURBATIONS:</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">!    RSC(n) = ZCC(n), ALL n</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">!</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">! INTERNALLY:</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">!    XC(rss) = .5*(Rss + Zcs), XC(zcs) = .5*(Rss - Zcs) -&gt; 0</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">!    XC(rsc) = .5*(Rsc + Zcc), XC(zcc) = .5*(Rsc - Zcc) -&gt; 0</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">! THIS IMPLIES THE CONSTRAINT</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">!    3D ONLY : GC(zcs) = 0;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">!    ASYM:     GC(zcc) = 0</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a>), gcz(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a>))</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">IF</span> (lasym)   <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a>), gcz(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a>))</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">! dump physical forces</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">if</span> (dump_physical_gc) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">write</span>(dump_filename, 998) trim(input_extension)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;998 <span class="keyword">format</span>(<span class="stringliteral">&#39;phys_gc.&#39;</span>,a)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">logical</span>            :: dump_scalfor_out = .false.</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">logical</span>            :: dump_fsq1 = .false.</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="comment">! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">! (ZCS = RSS, ZSS = RCS ARE THE CORRECT POLAR RELATIONS)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">! SYMMETRIC PERTURBATIONS (BASED ON POLAR RELATIONS):</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">!    RSS(n) = ZCS(n), n != 0</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">! ASYMMETRIC PERTURBATIONS:</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">!    RSC(n) = ZCC(n), ALL n</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">!</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">! INTERNALLY:</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">!    XC(rss) = .5*(Rss + Zcs), XC(zcs) = .5*(Rss - Zcs) -&gt; 0</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">!    XC(rsc) = .5*(Rsc + Zcc), XC(zcc) = .5*(Rsc - Zcc) -&gt; 0</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">! THIS IMPLIES THE CONSTRAINT</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">!    3D ONLY : GC(zcs) = 0;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">!    ASYM:     GC(zcc) = 0</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a>), gcz(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a>))</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">IF</span> (lasym)   <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a>), gcz(:,:,m1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a>))</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">! dump physical forces</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">if</span> (dump_physical_gc) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">write</span>(dump_filename, 998) trim(input_extension)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;998 <span class="keyword">format</span>(<span class="stringliteral">&#39;phys_gc.&#39;</span>,a)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1 ntmax&quot;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j n m ntmax gcr gcz gcl&quot;</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keywordflow">do</span> n=0, ntor</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">do</span> m=0, mpol1</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;          <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">write</span>(42, *) j, n, m, i, &amp;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;              gcr(j, n, m, i), &amp;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;              gcz(j, n, m, i), &amp;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;              gcl(j, n, m, i)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordflow">          end do</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordflow">        end do</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordflow">      end do</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordflow">    end do</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    print *, <span class="stringliteral">&quot;dumped physical gc to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    stop</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">! COMPUTE INVARIANT RESIDUALS</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  r1 = one/(2*<a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>)**2 <span class="comment">! --&gt; actually look at r1*fnorm --&gt; scaling factor for forces (?)</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  jedge = 0</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="comment">! ADD A V3FIT RELATED FLAG? ADD fsq criterion first</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  deliter = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="comment">! Coding for VMEC2000 run stand-alone</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">IF</span> (deliter.lt.50 .and. (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>).lt.1.e-6_dp) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     <span class="comment">! include edge contribution only if converged well enough fast enough (?)</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">!      print *, &quot;include edge force in residue&quot;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;     jedge = 1</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>, r1*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a>, jedge)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1 ntmax&quot;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j n m ntmax gcr gcz gcl&quot;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keywordflow">do</span> n=0, ntor</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">do</span> m=0, mpol1</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;          <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keyword">write</span>(42, *) j, n, m, i, &amp;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;              gcr(j, n, m, i), &amp;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;              gcz(j, n, m, i), &amp;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              gcl(j, n, m, i)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordflow">          end do</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    print *, <span class="stringliteral">&quot;dumped physical gc to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    stop</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">! COMPUTE INVARIANT RESIDUALS</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  r1 = one/(2*<a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>)**2 <span class="comment">! --&gt; actually look at r1*fnorm --&gt; scaling factor for forces (?)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  jedge = 0</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">! ADD A V3FIT RELATED FLAG? ADD fsq criterion first</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  deliter = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">! Coding for VMEC2000 run stand-alone</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordflow">IF</span> (deliter.lt.50 .and. (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>).lt.1.e-6_dp) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;     <span class="comment">! include edge contribution only if converged well enough fast enough (?)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">!      print *, &quot;include edge force in residue&quot;</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;     jedge = 1</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1f3fe61ee7bbabc082cfdb7dcd2d3675">fsql</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a>*sum(gcl*gcl)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a> = r1*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> * sum(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">if</span> (dump_fsq) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">write</span>(dump_filename, 997) trim(input_extension)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;997 <span class="keyword">format</span>(<span class="stringliteral">&#39;fsq.&#39;</span>,a)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>, r1*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a>, jedge)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1f3fe61ee7bbabc082cfdb7dcd2d3675">fsql</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a>*sum(gcl*gcl)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a> = r1*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> * sum(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordflow">if</span> (dump_fsq) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">write</span>(dump_filename, 997) trim(input_extension)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;997 <span class="keyword">format</span>(<span class="stringliteral">&#39;fsq.&#39;</span>,a)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# r0scale r1 fnorm fnormL jedge fsqr fsqz fsql fedge&quot;</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">write</span>(42, *) <a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>, r1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a>, jedge, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1f3fe61ee7bbabc082cfdb7dcd2d3675">fsql</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    print *, <span class="stringliteral">&quot;dumped fsq to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    stop</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="comment">! PERFORM PRECONDITIONING AND COMPUTE RESIDUES</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# r0scale r1 fnorm fnormL jedge fsqr fsqz fsql fedge&quot;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">write</span>(42, *) <a class="code" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>, r1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a>, jedge, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1f3fe61ee7bbabc082cfdb7dcd2d3675">fsql</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    print *, <span class="stringliteral">&quot;dumped fsq to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    stop</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">! m = 1 constraint scaling</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a>), gcz(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a>))</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordflow">IF</span> (lasym)   <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a>), gcz(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a>))</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">! dump forces after scale_m1 has been applied</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordflow">if</span> ((<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a> .or. lasym) .and. dump_scale_m1) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">write</span>(dump_filename, 996) trim(input_extension)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;996 <span class="keyword">format</span>(<span class="stringliteral">&#39;scale_m1.&#39;</span>,a)</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">! PERFORM PRECONDITIONING AND COMPUTE RESIDUES</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">! #ifndef _HBANGLE</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">! m = 1 constraint scaling</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a97fe667ec67d78d1ff0235e1978e2d34">rss</a>), gcz(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aa24c48d82f06c3475c9e495244bcda33">zcs</a>))</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordflow">IF</span> (lasym)   <span class="keyword">CALL </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">rsc</a>), gcz(:,:,1,<a class="code" href="../../d1/d74/namespacevmec__params.html#a3fbf7f74d050798433a4c9dff3eba6de">zcc</a>))</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">! dump forces after scale_m1 has been applied</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordflow">if</span> ((<a class="code" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a> .or. lasym) .and. dump_scale_m1) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">write</span>(dump_filename, 996) trim(input_extension)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;996 <span class="keyword">format</span>(<span class="stringliteral">&#39;scale_m1.&#39;</span>,a)</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1 ntmax&quot;</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j n m ntmax gcr gcz&quot;</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      <span class="keywordflow">do</span> n=0, ntor</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">do</span> m=0, mpol1</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;          <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keyword">write</span>(42, *) j, n, m, i, &amp;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;              gcr(j, n, m, i), &amp;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;              gcz(j, n, m, i)</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keywordflow">          end do</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordflow">        end do</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keywordflow">      end do</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keywordflow">    end do</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    print *, <span class="stringliteral">&quot;dumped scale_m1 output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    stop</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1 ntmax&quot;</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j n m ntmax gcr gcz&quot;</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="keywordflow">do</span> n=0, ntor</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">do</span> m=0, mpol1</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;          <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keyword">write</span>(42, *) j, n, m, i, &amp;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;              gcr(j, n, m, i), &amp;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;              gcz(j, n, m, i)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keywordflow">          end do</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    print *, <span class="stringliteral">&quot;dumped scale_m1 output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    stop</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  jedge = 0</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a> (gcr, <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>, jedge)</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  jedge = 1</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a> (gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>, jedge)</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">!SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa239e50978770cb5c47b2649eecd716e">fsqr1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1db65e04b0a2c4ce232abb77fb594259">fsqz1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aba95b570f41162c5cf0d25846ec13d31">fnorm1</a>, m1) <span class="comment">! m1 is simply == 1 --&gt; include edge</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  jedge = 0</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a> (gcr, <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>, jedge)</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  jedge = 1</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a> (gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>, jedge)</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">! #end /* ndef _HBANGLE */</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">! dump forces after scalfor has been applied</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">if</span> (dump_scalfor_out) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">write</span>(dump_filename, 995) trim(input_extension)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;995 <span class="keyword">format</span>(<span class="stringliteral">&#39;scalfor_out.&#39;</span>,a)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="comment">!SPH: THIS IS NOT INVARIANT UNDER PHIP-&gt;A*PHIP, AM-&gt;A**2*AM IN PROFIL1D</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="comment">!     (EXTCUR -&gt; A*EXTCUR for FREE BOUNDARY)</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  gcl = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>*gcl</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ade48574653f0dea81d3ec92d76c9e740">fsql1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(gcl*gcl)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="comment">!030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089">residue</a></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">  182</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr, gcz)</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, p5 =&gt; cp5</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keywordtype">  REAL</span>(dp), <span class="keywordtype">DIMENSION(ns,0:ntor)</span>, <span class="keywordtype">INTENT(inout)</span> :: gcr, gcz</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keywordtype">  REAL</span>(dp), <span class="keywordtype">PARAMETER</span> :: FThreshold = 1.e-6_dp</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keywordtype">  REAL</span>(dp) :: temp(ns,0:ntor)</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="comment">! COMPUTE INTERNAL gr, gz</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="comment">! NOTE: internal gz =&gt; 0 for both values of lconm1 (although gz is different)</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">! FOR lconm1=T, gcr(internal) = gcr+gcz, gcz(internal) = gcr-gcz-&gt;0</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb">lconm1</a>) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;     temp = gcr</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;     gcr = osqrt2*(gcr + gcz)</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;     gcz = osqrt2*(temp - gcz)</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keywordflow">  END IF</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">!v8.50: ADD iter2&lt;2 so reset=&lt;WOUT_FILE&gt; works</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>.LT.fthreshold .OR. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.LT.2) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;     <span class="comment">! ensure that the m=1 constraint is satisfied exactly</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;     <span class="comment">! --&gt; the corresponding m=1 coeffs of R,Z are constrained to be zero</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;     <span class="comment">!     and thus must not be &quot;forced&quot; (by the time evol using gc) away from zero</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;     gcz = 0</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">  216</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr, gcz)</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,0:ntor)</span>, <span class="keywordtype">INTENT(inout)</span> :: gcr, gcz</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1 ntmax&quot;</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j arm brm ard brd&quot;</span> // &amp;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      <span class="stringliteral">&quot; azm bzm azd bzd crd&quot;</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;      <span class="keyword">write</span>(42, *) j, &amp;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(j,:), &amp;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">crd</a>(j)</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    j=ns+1 <span class="comment">! extra entry in a.., b..</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">write</span>(42, *) j, &amp;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      <a class="code" href="../../d1/d6c/namespacevmec__main.html#ac698e5949f1eb74b2f08ca1db78daac6">arm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a777509648b45f2c6bb3ca8eb9d559ca5">brm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(j,:), &amp;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      <a class="code" href="../../d1/d6c/namespacevmec__main.html#af002c750439e4e868629f93dcf4b4adc">azm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a8a5e0ef60a6cd2b06940a3a486fe0118">bzm</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(j,:), <a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(j,:), 0.0</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# j n m ntmax gcr gcz&quot;</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">do</span> j=1, ns</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      <span class="keywordflow">do</span> n=0, ntor</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordflow">do</span> m=0, mpol1</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;          <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keyword">write</span>(42, *) j, n, m, i, &amp;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;              gcr(j, n, m, i), &amp;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;              gcz(j, n, m, i)</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordflow">          end do</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    print *, <span class="stringliteral">&quot;dumped scalfor output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    stop</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="comment">!SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="keyword">CALL </span><a class="code" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa239e50978770cb5c47b2649eecd716e">fsqr1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1db65e04b0a2c4ce232abb77fb594259">fsqz1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aba95b570f41162c5cf0d25846ec13d31">fnorm1</a>, m1) <span class="comment">! m1 is simply == 1 --&gt; include edge</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="comment">!SPH: THIS IS NOT INVARIANT UNDER PHIP-&gt;A*PHIP, AM-&gt;A**2*AM IN PROFIL1D</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="comment">!     (EXTCUR -&gt; A*EXTCUR for FREE BOUNDARY)</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  gcl = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>*gcl</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#ade48574653f0dea81d3ec92d76c9e740">fsql1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a>*sum(gcl*gcl)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="comment">!030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordflow">if</span> (dump_fsq1) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keyword">write</span>(dump_filename, 994) trim(input_extension)</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;994 <span class="keyword">format</span>(<span class="stringliteral">&#39;fsq1.&#39;</span>,a)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# fnorm1 fsqr1 fsqz1 fsql1&quot;</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">write</span>(42, *) <a class="code" href="../../d1/d6c/namespacevmec__main.html#aba95b570f41162c5cf0d25846ec13d31">fnorm1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa239e50978770cb5c47b2649eecd716e">fsqr1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a1db65e04b0a2c4ce232abb77fb594259">fsqz1</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#ade48574653f0dea81d3ec92d76c9e740">fsql1</a></div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: nodd=2</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordtype">INTEGER</span> :: n</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: fac(ns)</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb">lconm1</a>) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    print *, <span class="stringliteral">&quot;dumped fsq1 to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    stop</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;     fac =  (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)                            )      &amp;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;           /(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        gcr(:,n) = fac*gcr(:,n)</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keywordflow">     END DO</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;     fac =  (                            <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))      &amp;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;           /(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        gcz(:,n) = fac*gcz(:,n)</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089">residue</a></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">  236</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a>(gcr, gcz)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, p5 =&gt; cp5</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keywordtype">  REAL</span>(dp), <span class="keywordtype">DIMENSION(ns,0:ntor)</span>, <span class="keywordtype">INTENT(inout)</span> :: gcr, gcz</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="keywordtype">  REAL</span>(dp), <span class="keywordtype">PARAMETER</span> :: FThreshold = 1.e-6_dp</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keywordtype">  REAL</span>(dp) :: temp(ns,0:ntor)</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="comment">! COMPUTE INTERNAL gr, gz</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="comment">! NOTE: internal gz =&gt; 0 for both values of lconm1 (although gz is different)</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <span class="comment">! FOR lconm1=T, gcr(internal) = gcr+gcz, gcz(internal) = gcr-gcz-&gt;0</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb">lconm1</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;     temp = gcr</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;     gcr = osqrt2*(gcr + gcz)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;     gcz = osqrt2*(temp - gcz)</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keywordflow">  END IF</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="comment">!v8.50: ADD iter2&lt;2 so reset=&lt;WOUT_FILE&gt; works</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>.LT.fthreshold .OR. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.LT.2) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;     <span class="comment">! ensure that the m=1 constraint is satisfied exactly</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;     <span class="comment">! --&gt; the corresponding m=1 coeffs of R,Z are constrained to be zero</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;     <span class="comment">!     and thus must not be &quot;forced&quot; (by the time evol using gc) away from zero</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;     gcz = 0</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">  270</a></span>&#160;<span class="keyword">SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a>(gcr, gcz)</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="keywordtype">USE </span><a class="code" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,0:ntor)</span>, <span class="keywordtype">INTENT(inout)</span> :: gcr, gcz</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: nodd=2</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="keywordtype">INTEGER</span> :: n</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: fac(ns)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb">lconm1</a>) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;     fac =  (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)                            )      &amp;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;           /(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        gcr(:,n) = fac*gcr(:,n)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;     fac =  (                            <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))      &amp;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;           /(<a class="code" href="../../d1/d6c/namespacevmec__main.html#a9f0b642edb451e1700583cc6f6536833">ard</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a241c07023ce8bbbdb2869fc3a4830bda">brd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75">azd</a>(:ns,nodd)+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a875f16d4c360e56fd834fc660f017656">bzd</a>(:ns,nodd))</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;     <span class="keywordflow">DO</span> n = 0, ntor</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        gcz(:,n) = fac*gcz(:,n)</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="keywordflow">     END DO</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a></div>
 <div class="ttc" id="agetfsq_8f90_html_a7b636db95ff23aaea849bd65fba7aa2e"><div class="ttname"><a href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a></div><div class="ttdeci">subroutine getfsq(gcr, gcz, gnormr, gnormz, gnorm, medge)</div><div class="ttdoc">Compute total force residual on flux surfaces.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d3a/getfsq_8f90_source.html#l00012">getfsq.f90:13</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_a1c90aebfdbb59eabfd15feac849063a2"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a1c90aebfdbb59eabfd15feac849063a2">vmec_main::crd</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable crd</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00024">vmec_main.f90:24</a></div></div>
@@ -380,8 +434,8 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div class="ttc" id="anamespacevmec__params_html_aee8e7f84a9d92797c7411048c55ce3e9"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#aee8e7f84a9d92797c7411048c55ce3e9">vmec_params::rsc</a></div><div class="ttdeci">integer rsc</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params.f90:42</a></div></div>
 <div class="ttc" id="anamespacexstuff_html"><div class="ttname"><a href="../../d9/d3c/namespacexstuff.html">xstuff</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dad/xstuff_8f90_source.html#l00002">xstuff.f90:2</a></div></div>
 <div class="ttc" id="aresidue_8f90_html_a2d42fddb02336c3ce8846116ab5bf089"><div class="ttname"><a href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089">residue</a></div><div class="ttdeci">subroutine residue(gcr, gcz, gcl)</div><div class="ttdoc">Compute invariant residuals.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d5a/residue_8f90_source.html#l00009">residue.f90:10</a></div></div>
-<div class="ttc" id="aresidue_8f90_html_a6b8a6225e22b043a0c73e6be6c99176c"><div class="ttname"><a href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a></div><div class="ttdeci">subroutine constrain_m1(gcr, gcz)</div><div class="ttdoc">Compute internal gr , gz required for  constraint.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d5a/residue_8f90_source.html#l00182">residue.f90:183</a></div></div>
-<div class="ttc" id="aresidue_8f90_html_aaf8d684a58b8bf9dfdecfdb925960780"><div class="ttname"><a href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a></div><div class="ttdeci">subroutine scale_m1(gcr, gcz)</div><div class="ttdoc">Compute internal gr , gz required for  constraint.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d5a/residue_8f90_source.html#l00216">residue.f90:217</a></div></div>
+<div class="ttc" id="aresidue_8f90_html_a6b8a6225e22b043a0c73e6be6c99176c"><div class="ttname"><a href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a></div><div class="ttdeci">subroutine constrain_m1(gcr, gcz)</div><div class="ttdoc">Compute internal gr , gz required for  constraint.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d5a/residue_8f90_source.html#l00236">residue.f90:237</a></div></div>
+<div class="ttc" id="aresidue_8f90_html_aaf8d684a58b8bf9dfdecfdb925960780"><div class="ttname"><a href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a></div><div class="ttdeci">subroutine scale_m1(gcr, gcz)</div><div class="ttdoc">Compute internal gr , gz required for  constraint.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d5a/residue_8f90_source.html#l00270">residue.f90:271</a></div></div>
 <div class="ttc" id="ascalfor_8f90_html_a20fb7039b82d05e64d01a2e50431ba5e"><div class="ttname"><a href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a></div><div class="ttdeci">subroutine scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)</div><div class="ttdoc">Build forces from different contributions.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d86/scalfor_8f90_source.html#l00015">scalfor.f90:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -389,7 +443,7 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d5a/residue_8f90.html">residue.f90</a></li>
-    <li class="footer">Generated on Wed Jun 2 2021 20:09:33 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 2 2021 22:05:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

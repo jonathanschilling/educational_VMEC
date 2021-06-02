@@ -158,11 +158,13 @@ SUBROUTINE tomnsps(frzl_array,       &
         write(42, *) "# js n m frcc frss fzsc fzcs flsc flcs"
         DO js = 1, ns
           do n=0, ntor
+            ni = n+ioff
             do m=0, mpol1
+              mj = m+joff
               write(42, *) js, n, m, &
-                frcc(js,n,m), frss(js,n,m), &
-                fzsc(js,n,m), fzcs(js,n,m), &
-                flsc(js,n,m), flcs(js,n,m)
+                frcc(js,ni,mj), frss(js,ni,mj), &
+                fzsc(js,ni,mj), fzcs(js,ni,mj), &
+                flsc(js,ni,mj), flcs(js,ni,mj)
             end do
           end do
         end do
@@ -170,9 +172,11 @@ SUBROUTINE tomnsps(frzl_array,       &
         write(42, *) "# js n m frcc fzsc flsc"
         DO js = 1, ns
           do n=0, ntor
+            ni = n+ioff
             do m=0, mpol1
+              mj = m+joff
               write(42, *) js, n, m, &
-                frcc(js,n,m), fzsc(js,n,m), flsc(js,n,m)
+                frcc(js,ni,mj), fzsc(js,ni,mj), flsc(js,ni,mj)
             end do
           end do
         end do
@@ -220,7 +224,7 @@ SUBROUTINE tomnspa(frzl_array,       &
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
 
   character(len=255) :: dump_filename
-  logical            :: dump_tomnspa = .false.
+  logical            :: dump_tomnspa = .true.
 
   frsc => frzl_array(:,:,:,rsc)               !!R-SIN(mu) COS(nv)
   fzcc => frzl_array(:,:,:,zcc+ntmax)         !!Z-COS(mu) COS(nv)
@@ -326,21 +330,25 @@ SUBROUTINE tomnspa(frzl_array,       &
         write(42, *) "# js n m frsc frcs fzcc fzss flcc flss"
         DO js = 1, ns
           do n=0, ntor
+            ni = n+ioff
             do m=0, mpol1
+              mj = m+joff
               write(42, *) js, n, m, &
-                frsc(js,n,m), frcs(js,n,m), &
-                fzcc(js,n,m), fzss(js,n,m), &
-                flcc(js,n,m), flss(js,n,m)
+                frsc(js,ni,mj), frcs(js,ni,mj), &
+                fzcc(js,ni,mj), fzss(js,ni,mj), &
+                flcc(js,ni,mj), flss(js,ni,mj)
             end do
           end do
         end do
       else ! lthreed
-        write(42, *) "# js n m frcc frss fzsc"
+        write(42, *) "# js n m frsc fzcc flcc"
         DO js = 1, ns
           do n=0, ntor
+            ni = n+ioff
             do m=0, mpol1
+              mj = m+joff
               write(42, *) js, n, m, &
-                frsc(js,n,m), fzcc(js,n,m), flcc(js,n,m)
+                frsc(js,ni,mj), fzcc(js,ni,mj), flcc(js,ni,mj)
             end do
           end do
         end do

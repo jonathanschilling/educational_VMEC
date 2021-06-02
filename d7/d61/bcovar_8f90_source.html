@@ -565,7 +565,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    <span class="keywordflow">IF</span> (mod(<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a>,<a class="code" href="../../d1/d74/namespacevmec__params.html#a92d5f29dab8191fb5f28ea0c78c9d2b5">ns4</a>).eq.0) <span class="keywordflow">THEN</span></div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;       <span class="comment">! only update preconditioner every ns4==25 iterations (?) (for ns4, see vmec_params)</span></div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;       <span class="comment">!write(*,*) &quot;update 1d preconditioner&quot;</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;       <span class="keyword">write</span>(*,*) <span class="stringliteral">&quot;update 1d preconditioner&quot;</span></div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;       phipog(:nrzt) = phipog(:nrzt)*<a class="code" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(:nrzt) <span class="comment">! remember that actually phipog == 1/sqrt(g)</span></div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
@@ -892,7 +892,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/bcovar_8f90.html">bcovar.f90</a></li>
-    <li class="footer">Generated on Wed Jun 2 2021 22:05:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 2 2021 22:48:51 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -62,4 +62,5 @@ MODULE vmec_params
   INTEGER, PARAMETER :: m1=1 !< from totzsp
   INTEGER, PARAMETER :: n0=0 !< from totzsp
 
+
 END MODULE vmec_params

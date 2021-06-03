@@ -9,6 +9,9 @@ MODULE vmec_main
 
   IMPLICIT NONE
 
+  !> dump data for this many timestamps
+  integer, parameter :: nDump = 20
+
   ! 1d-preconditioner-related
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: blam
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: clam

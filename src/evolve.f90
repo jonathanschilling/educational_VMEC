@@ -87,7 +87,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   fac = one/(one + dtau)
 
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
-  if (dump_evolve .and. iter2.le.2) then
+  if (dump_evolve .and. iter2.le.nDump) then
     write(dump_filename, 999) ns, iter2, trim(input_extension)
 999 format('evolve_',i5.5,'_',i6.6,'.',a)
     open(unit=42, file=trim(dump_filename), status="unknown")
@@ -107,7 +107,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xcdot = fac*(b1*xcdot + time_step*gc) ! update velocity
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
-  if (dump_evolve .and. iter2.le.2) then
+  if (dump_evolve .and. iter2.le.nDump) then
     write(42, *) "# after timestep: i xc xcdot"
     do i=1, neqs
       write(42, *) i, xc(i), xcdot(i)

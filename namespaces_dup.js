@@ -667,6 +667,7 @@ var namespaces_dup =
       [ "lthreed", "d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86", null ],
       [ "mass", "d1/d6c/namespacevmec__main.html#ad705d16d5a83c0cd5aa7b6c537c78f1d", null ],
       [ "multi_ns_grid", "d1/d6c/namespacevmec__main.html#aae4561baab56e810326d085e7436adeb", null ],
+      [ "ndump", "d1/d6c/namespacevmec__main.html#ab8f45473559c9ab39f65dc505440c8d8", null ],
       [ "neqs", "d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb", null ],
       [ "niterv", "d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9", null ],
       [ "ohs", "d1/d6c/namespacevmec__main.html#a54b8fd4835a3d7fd9b93b761e0ef4dc0", null ],

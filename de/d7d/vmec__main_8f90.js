@@ -75,6 +75,7 @@ var vmec__main_8f90 =
     [ "lthreed", "de/d7d/vmec__main_8f90.html#ac815c089a079d08356f5740573842c86", null ],
     [ "mass", "de/d7d/vmec__main_8f90.html#ad705d16d5a83c0cd5aa7b6c537c78f1d", null ],
     [ "multi_ns_grid", "de/d7d/vmec__main_8f90.html#aae4561baab56e810326d085e7436adeb", null ],
+    [ "ndump", "de/d7d/vmec__main_8f90.html#ab8f45473559c9ab39f65dc505440c8d8", null ],
     [ "neqs", "de/d7d/vmec__main_8f90.html#a62454a545665bf5259ef3bc2882c02eb", null ],
     [ "niterv", "de/d7d/vmec__main_8f90.html#aa3db038a05e5668cb1afe8c7edea20b9", null ],
     [ "ohs", "de/d7d/vmec__main_8f90.html#a54b8fd4835a3d7fd9b93b761e0ef4dc0", null ],

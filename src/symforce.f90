@@ -40,16 +40,16 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
 
   character(len=255) :: dump_filename
-  logical            :: dump_symforce = .false.
+  logical            :: dump_symforce = .true.
 
   i = ns*nzeta
   ALLOCATE (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &
             rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)
 
 
-  if (dump_symforce) then
-    write(dump_filename, 997) ns, trim(input_extension)
-997 format('symforce_',i5.5,'.',a)
+  if (dump_symforce .and. iter2.le.2) then
+    write(dump_filename, 997) ns, iter2, trim(input_extension)
+997 format('symforce_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -145,7 +145,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   DEALLOCATE (ars_0, brs_0, azs_0, bzs_0, bls_0,          &
               rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)
 
-  if (dump_symforce) then
+  if (dump_symforce .and. iter2.le.2) then
     ! outputs from symforce()
     write(42, *) "# js lv ku m" // &
       " ars brs crs azs bzs czs bls cls rcs zcs" // &
@@ -172,7 +172,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
     close(42)
 
     print *, "dumped symforce output to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if ! dump_symforce
 
 END SUBROUTINE symforce

@@ -35,7 +35,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
 
   character(len=255) :: dump_filename
-  logical            :: dump_scalfor = .false.
+  logical            :: dump_scalfor = .true.
 
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
 
@@ -111,19 +111,19 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! END IF
 
   ! check scalfor state == inputs to tridslv
-  if (dump_scalfor) then
+  if (dump_scalfor .and. iter2.le.2) then
 
     ! prior knowledge about how this is called:
     ! iflag=0 --> R
     ! iflag=1 --> Z
 
     if (iflag.eq.0) then
-      write(dump_filename, 995) trim(input_extension)
+      write(dump_filename, 995) ns, iter2, trim(input_extension)
     elseif (iflag.eq.1) then
-      write(dump_filename, 996) trim(input_extension)
+      write(dump_filename, 996) ns, iter2, trim(input_extension)
     end if
-995 format('scalfor_R.',a)
-996 format('scalfor_Z.',a)
+995 format('scalfor_R_',i5.5,'_',i6.6,'.',a)
+996 format('scalfor_Z_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -145,10 +145,10 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
     print *, "dumped scalfor state to '"//trim(dump_filename)//"'"
     close(42)
 
-    ! should only stop after also Z has been dumped
-    if (iflag.eq.1) then
-      stop
-    end if
+!     ! should only stop after also Z has been dumped
+!     if (iflag.eq.1) then
+!       stop
+!     end if
   end if
 
   ! SOLVES AX(I)*X(I+1) + DX(I)*X(I) + BX(I)*X(I-1) = GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)

@@ -29,11 +29,11 @@ SUBROUTINE residue (gcr, gcz, gcl)
   REAL(rprec) :: r1
 
   character(len=255) :: dump_filename
-  logical            :: dump_physical_gc = .false.
-  logical            :: dump_fsq = .false.
-  logical            :: dump_scale_m1 = .false.
-  logical            :: dump_scalfor_out = .false.
-  logical            :: dump_fsq1 = .false.
+  logical            :: dump_physical_gc = .true.
+  logical            :: dump_fsq = .true.
+  logical            :: dump_scale_m1 = .true.
+  logical            :: dump_scalfor_out = .true.
+  logical            :: dump_fsq1 = .true.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -56,9 +56,9 @@ SUBROUTINE residue (gcr, gcz, gcl)
 ! #end /* ndef _HBANGLE */
 
   ! dump physical forces
-  if (dump_physical_gc) then
-    write(dump_filename, 998) trim(input_extension)
-998 format('phys_gc.',a)
+  if (dump_physical_gc .and. iter2.le.2) then
+    write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('phys_gc_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -82,7 +82,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
     print *, "dumped physical gc to '"//trim(dump_filename)//"'"
     close(42)
 
-    stop
+!     stop
   end if
 
   ! COMPUTE INVARIANT RESIDUALS
@@ -105,9 +105,9 @@ SUBROUTINE residue (gcr, gcz, gcl)
   fsql = fnormL*SUM(gcl*gcl)
   fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
-  if (dump_fsq) then
-    write(dump_filename, 997) trim(input_extension)
-997 format('fsq.',a)
+  if (dump_fsq .and. iter2.le.2) then
+    write(dump_filename, 997) ns, iter2, trim(input_extension)
+997 format('fsq_'i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -117,7 +117,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
     print *, "dumped fsq to '"//trim(dump_filename)//"'"
     close(42)
 
-    stop
+!     stop
   end if
 
   ! PERFORM PRECONDITIONING AND COMPUTE RESIDUES
@@ -128,9 +128,9 @@ SUBROUTINE residue (gcr, gcz, gcl)
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
 
   ! dump forces after scale_m1 has been applied
-  if ((lthreed .or. lasym) .and. dump_scale_m1) then
-    write(dump_filename, 996) trim(input_extension)
-996 format('scale_m1.',a)
+  if ((lthreed .or. lasym) .and. dump_scale_m1 .and. iter2.le.2) then
+    write(dump_filename, 996) ns, iter2, trim(input_extension)
+996 format('scale_m1_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -153,7 +153,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
     print *, "dumped scale_m1 output to '"//trim(dump_filename)//"'"
     close(42)
 
-    stop
+!     stop
   end if
 
   jedge = 0
@@ -163,9 +163,9 @@ SUBROUTINE residue (gcr, gcz, gcl)
 ! #end /* ndef _HBANGLE */
 
   ! dump forces after scalfor has been applied
-  if (dump_scalfor_out) then
-    write(dump_filename, 995) trim(input_extension)
-995 format('scalfor_out.',a)
+  if (dump_scalfor_out .and. iter2.le.2) then
+    write(dump_filename, 995) ns, iter2, trim(input_extension)
+995 format('scalfor_out_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -200,7 +200,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
     print *, "dumped scalfor output to '"//trim(dump_filename)//"'"
     close(42)
 
-    stop
+!     stop
   end if
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
@@ -212,9 +212,9 @@ SUBROUTINE residue (gcr, gcz, gcl)
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-  if (dump_fsq1) then
-    write(dump_filename, 994) trim(input_extension)
-994 format('fsq1.',a)
+  if (dump_fsq1 .and. iter2.le.2) then
+    write(dump_filename, 994) ns, iter2, trim(input_extension)
+994 format('fsq1_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -224,7 +224,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
     print *, "dumped fsq1 to '"//trim(dump_filename)//"'"
     close(42)
 
-    stop
+!     stop
   end if
 
 END SUBROUTINE residue

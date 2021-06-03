@@ -34,7 +34,7 @@ SUBROUTINE tomnsps(frzl_array,       &
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
 
   character(len=255) :: dump_filename
-  logical            :: dump_tomnsps = .false.
+  logical            :: dump_tomnsps = .true.
 
   frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
@@ -146,9 +146,9 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
-  if (dump_tomnsps) then
-      write(dump_filename, 999) trim(input_extension)
-999 format('tomnsps.',a)
+  if (dump_tomnsps .and. iter2.le.2) then
+      write(dump_filename, 999) ns, iter2, trim(input_extension)
+999 format('tomnsps_',i5.5,'_',i6.6,'.',a)
       open(unit=42, file=trim(dump_filename), status="unknown")
 
       write(42, *) "# ns ntor mpol1"
@@ -186,7 +186,7 @@ SUBROUTINE tomnsps(frzl_array,       &
       close(42)
 
       print *, "dumped tomnsps output to '"//trim(dump_filename)//"'"
-      stop
+!       stop
   end if
 
 END SUBROUTINE tomnsps
@@ -224,7 +224,7 @@ SUBROUTINE tomnspa(frzl_array,       &
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
 
   character(len=255) :: dump_filename
-  logical            :: dump_tomnspa = .false.
+  logical            :: dump_tomnspa = .true.
 
   frsc => frzl_array(:,:,:,rsc)               !!R-SIN(mu) COS(nv)
   fzcc => frzl_array(:,:,:,zcc+ntmax)         !!Z-COS(mu) COS(nv)
@@ -318,9 +318,9 @@ SUBROUTINE tomnspa(frzl_array,       &
 
   DEALLOCATE (work1, temp1, temp3)
 
-  if (dump_tomnspa) then
-      write(dump_filename, 998) trim(input_extension)
-998 format('tomnspa.',a)
+  if (dump_tomnspa .and. iter2.le.2) then
+      write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('tomnspa_',i5.5,'_',i6.6,'.',a)
       open(unit=42, file=trim(dump_filename), status="unknown")
 
       write(42, *) "# ns ntor mpol1"
@@ -358,7 +358,7 @@ SUBROUTINE tomnspa(frzl_array,       &
       close(42)
 
       print *, "dumped tomnspa output to '"//trim(dump_filename)//"'"
-      stop
+!       stop
   end if
 
 END SUBROUTINE tomnspa

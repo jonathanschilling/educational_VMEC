@@ -27,7 +27,7 @@ SUBROUTINE forces
   REAL(rprec), DIMENSION(:), POINTER :: guus
 
   character(len=255) :: dump_filename
-  logical            :: dump_forces = .false.
+  logical            :: dump_forces = .true.
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)
@@ -57,9 +57,9 @@ SUBROUTINE forces
   ! if lthreed:
   !  rv, zv
 
-  if (dump_forces) then
-    write(dump_filename, 999) ns, trim(input_extension)
-999 format('forces_',i5.5,'.',a)
+  if (dump_forces .and. iter2.le.2) then
+    write(dump_filename, 999) ns, iter2, trim(input_extension)
+999 format('forces_',i5.5,'_',i6.6,'.',a)
     open(unit=42, file=trim(dump_filename), status="unknown")
 
     write(42, *) "# ns ntheta3 nzeta"
@@ -214,7 +214,7 @@ SUBROUTINE forces
   zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
-  if (dump_forces) then
+  if (dump_forces .and. iter2.le.2) then
 
     if (lthreed) then
       write(42, *) "# js lv ku" // &
@@ -259,7 +259,7 @@ SUBROUTINE forces
     close(42)
 
     print *, "dumped forces to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
 END SUBROUTINE forces

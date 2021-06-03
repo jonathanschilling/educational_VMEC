@@ -10,7 +10,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE vmec_main, ONLY: buco, bvco, equif,             &
                        jcurv, jcuru, chipf, vp, pres, &
                        phipf, vpphi, presgrad, ohs,   &
-                       input_extension
+                       input_extension, iter2
   USE vmec_params, ONLY: signgs
   USE vmec_dim, ONLY: ns, nrzt, ns1
   USE realspace, ONLY: wint
@@ -24,7 +24,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   INTEGER  :: js
 
   character(len=255) :: dump_filename
-  logical            :: dump_calc_fbal = .false.
+  logical            :: dump_calc_fbal = .true.
 
 
   ! compute flux-surface averages of covariant magnetic field components
@@ -56,9 +56,9 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
 
 
   ! check calc_fbal output
-  if (dump_calc_fbal) then
-    write(dump_filename, 998) ns, trim(input_extension)
-998 format('calc_fbal_',i5.5,'.',a)
+  if (dump_calc_fbal .and. iter2.le.2) then
+    write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('calc_fbal_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -74,7 +74,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
     close(42)
 
     print *, "dumped calc_fbal output to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
 END SUBROUTINE calc_fbal

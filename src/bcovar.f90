@@ -36,15 +36,15 @@ SUBROUTINE bcovar (lu, lv)
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
 
   character(len=255) :: dump_filename
-  logical            :: dump_metric = .false.
-  logical            :: dump_volume = .false.
-  logical            :: dump_bcontrav = .false.
-  logical            :: dump_bcov = .false.
-  logical            :: dump_lambda_forces = .false.
-  logical            :: dump_bcov_full = .false.
-  logical            :: dump_precondn = .false.
-  logical            :: dump_forceNorms_tcon = .false.
-  logical            :: dump_lulv_comb = .false.
+  logical            :: dump_metric = .true.
+  logical            :: dump_volume = .true.
+  logical            :: dump_bcontrav = .true.
+  logical            :: dump_bcov = .true.
+  logical            :: dump_lambda_forces = .true.
+  logical            :: dump_bcov_full = .true.
+  logical            :: dump_precondn = .true.
+  logical            :: dump_forceNorms_tcon = .true.
+  logical            :: dump_lulv_comb = .true.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -122,8 +122,9 @@ SUBROUTINE bcovar (lu, lv)
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
   ! check metric coefficients
-  if (dump_metric) then
+  if (dump_metric .and. iter2.le.2) then
       write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('metric_',i5.5,'_',i6.6,'.',a)
       open(unit=42, file=trim(dump_filename), status="unknown")
 
       write(42, *) "# ns ntheta3 nzeta"
@@ -162,9 +163,8 @@ SUBROUTINE bcovar (lu, lv)
       close(42)
 
       print *, "dumped metric elements output to '"//trim(dump_filename)//"'"
-      stop
+!       stop
   end if
-998 format('metric_',i5.5,'_',i6.6,'.',a)
 
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
 
@@ -185,9 +185,9 @@ SUBROUTINE bcovar (lu, lv)
   end if
 
   ! check plasma volume computation
-  if (dump_volume) then
-    write(dump_filename, 997) ns, trim(input_extension)
-997 format('volume_',i5.5,'.',a)
+  if (dump_volume .and. iter2.le.2) then
+    write(dump_filename, 997) ns, iter2, trim(input_extension)
+997 format('volume_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -205,7 +205,7 @@ SUBROUTINE bcovar (lu, lv)
     close(42)
 
     print *, "dumped plasma volume to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
   ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.
@@ -237,9 +237,9 @@ SUBROUTINE bcovar (lu, lv)
   bsupu(ndim)=0
   bsupv(ndim)=0
 
-  if (dump_bcontrav) then
-    write(dump_filename, 996) ns, trim(input_extension)
-996 format('bcontrav_',i5.5,'.',a)
+  if (dump_bcontrav .and.  iter2.le.2) then
+    write(dump_filename, 996) ns, iter2, trim(input_extension)
+996 format('bcontrav_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -259,7 +259,7 @@ SUBROUTINE bcovar (lu, lv)
     close(42)
 
     print *, "dumped bsup(u,v) to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
   ! UPDATE IOTA EITHER OF TWO WAYS:
@@ -301,9 +301,9 @@ SUBROUTINE bcovar (lu, lv)
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
 
-  if (dump_bcov) then
-    write(dump_filename, 994) ns, trim(input_extension)
-994 format('bcov_',i5.5,'.',a)
+  if (dump_bcov .and. iter2.le.2) then
+    write(dump_filename, 994) ns, iter2, trim(input_extension)
+994 format('bcov_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -331,13 +331,17 @@ SUBROUTINE bcovar (lu, lv)
     close(42)
 
     print *, "dumped bsub(u,v)h to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
   ! COMPUTE LAMBDA FULL MESH FORCES
   ! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)
   lvv = phipog(:ndim)*gvv
   bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)
+
+  if (iter2.eq.2) then
+    write(*,*) "bsubv_e(1)  first step: ", bsubv_e(1)
+  end if
 
   lvv = lvv*shalf
   bsubu_e(:nrzt) = guv(:nrzt)*bsupu(:nrzt)
@@ -346,9 +350,16 @@ SUBROUTINE bcovar (lu, lv)
               + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &
               +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))
 
-   if (dump_lambda_forces) then
-    write(dump_filename, 993) ns, trim(input_extension)
-993 format('lambda_forces_',i5.5,'.',a)
+  if (iter2.eq.2) then
+    write(*,*) "bsubu_e(1:2) = ", bsubu_e(1:2), " from ", &
+      guv(1:2), bsupu(1:2)
+    write(*,*) "bsubv_e(1) second step: ", bsubv_e(1), lvv(1), lvv(2), &
+      lu(1,1), bsubu_e(1), bsubu_e(2)
+  end if
+
+   if (dump_lambda_forces .and. iter2.le.2) then
+    write(dump_filename, 993) ns, iter2, trim(input_extension)
+993 format('lambda_forces_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -368,7 +379,7 @@ SUBROUTINE bcovar (lu, lv)
     close(42)
 
     print *, "dumped lambda forces to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
   ! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
@@ -415,9 +426,9 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (dump_bcov_full) then
-    write(dump_filename, 990) ns, trim(input_extension)
-990 format('bcov_full_',i5.5,'.',a)
+  if (dump_bcov_full .and. iter2.le.2) then
+    write(dump_filename, 990) ns, iter2, trim(input_extension)
+990 format('bcov_full_',i5.5,'_',i6.6,'.',a)
 
     open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -445,7 +456,7 @@ SUBROUTINE bcovar (lu, lv)
     close(42)
 
     print *, "dumped bsub(u,v) on full grid to '"//trim(dump_filename)//"'"
-    stop
+!     stop
   end if
 
   if (iequi .eq. 0) then
@@ -471,9 +482,9 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, rru_fac, sin01)
 
        ! check preconditioner output
-       if (dump_precondn) then
-         write(dump_filename, 991) ns, trim(input_extension)
-991 format('precondn_',i5.5,'.',a)
+       if (dump_precondn .and. iter2.le.2) then
+         write(dump_filename, 991) ns, iter2, trim(input_extension)
+991 format('precondn_',i5.5,'_',i6.6,'.',a)
          open(unit=42, file=trim(dump_filename), status="unknown")
 
          write(42, *) "# ns"
@@ -490,7 +501,7 @@ SUBROUTINE bcovar (lu, lv)
          close(42)
 
          print *, "dumped preconditioner output to '"//trim(dump_filename)//"'"
-         stop
+!          stop
        end if
 
        rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
@@ -550,9 +561,9 @@ SUBROUTINE bcovar (lu, lv)
        IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (dump_forceNorms_tcon) then
-         write(dump_filename, 989) ns, trim(input_extension)
-989 format('forceNorms_tcon_',i5.5,'.',a)
+       if (dump_forceNorms_tcon .and. iter2.le.2) then
+         write(dump_filename, 989) ns, iter2, trim(input_extension)
+989 format('forceNorms_tcon_',i5.5,'_',i6.6,'.',a)
          open(unit=42, file=trim(dump_filename), status="unknown")
 
          write(42, *) "# ns nzeta ntheta3"
@@ -613,7 +624,7 @@ SUBROUTINE bcovar (lu, lv)
          close(42)
 
          print *, "dumped force norms and tcon output to '"//trim(dump_filename)//"'"
-         stop
+!          stop
        end if
 
      ENDIF ! MOD(iter2-iter1,ns4).eq.0
@@ -632,9 +643,9 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (dump_lulv_comb) then
-       write(dump_filename, 988) ns, trim(input_extension)
-988 format('lulv_comb_',i5.5,'.',a)
+     if (dump_lulv_comb .and. iter2.le.2) then
+       write(dump_filename, 988) ns, iter2, trim(input_extension)
+988 format('lulv_comb_',i5.5,'_',i6.6,'.',a)
        open(unit=42, file=trim(dump_filename), status="unknown")
 
        write(42, *) "# ns nzeta ntheta3"
@@ -658,7 +669,7 @@ SUBROUTINE bcovar (lu, lv)
        close(42)
 
        print *, "dumped lu*lv combinations to '"//trim(dump_filename)//"'"
-       stop
+!        stop
      end if
 
   ELSE ! (iequi .eq. 0)

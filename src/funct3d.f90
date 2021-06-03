@@ -52,8 +52,8 @@ SUBROUTINE funct3d (ier_flag)
   logical :: ldump_vacuum_ref = .false.
 
   character(len=255) :: dump_filename
-  logical            :: dump_geometry = .false.
-  logical            :: dump_constraint_force = .false.
+  logical            :: dump_geometry = .true.
+  logical            :: dump_constraint_force = .true.
 
   ! POINTER ALIASES
   lu => czmn
@@ -82,7 +82,7 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  if (dump_geometry) then
+  if (dump_geometry .and. iter2 .le. 2) then
       write(dump_filename, 999) ns, iter2, trim(input_extension)
       open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -110,7 +110,7 @@ SUBROUTINE funct3d (ier_flag)
       close(42)
 
       print *, "dumped geometry output to '"//trim(dump_filename)//"'"
-      stop
+      !stop
   end if
 999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a)
 
@@ -355,9 +355,9 @@ SUBROUTINE funct3d (ier_flag)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
 
-     if (dump_constraint_force) then
-       write(dump_filename, 998) ns, trim(input_extension)
-998 format('constraint_force_',i5.5,'.',a)
+     if (dump_constraint_force .and. iter2.le.2) then
+       write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('constraint_force_',i5.5,'_',i6.6,'.',a)
 
        open(unit=42, file=trim(dump_filename), status="unknown")
 
@@ -390,7 +390,7 @@ SUBROUTINE funct3d (ier_flag)
        close(42)
 
        print *, "dumped constraint force to '"//trim(dump_filename)//"'"
-       stop
+!        stop
      end if
 
      ! COMPUTE MHD FORCES ON INTEGER-MESH

@@ -129,16 +129,16 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">logical</span>            :: dump_symforce = .false.</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">logical</span>            :: dump_symforce = .true.</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  i = ns*nzeta</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">ALLOCATE</span> (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &amp;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">if</span> (dump_symforce) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">write</span>(dump_filename, 997) ns, trim(input_extension)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;997 <span class="keyword">format</span>(<span class="stringliteral">&#39;symforce_&#39;</span>,i5.5,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">if</span> (dump_symforce .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">write</span>(dump_filename, 997) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;997 <span class="keyword">format</span>(<span class="stringliteral">&#39;symforce_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
@@ -234,7 +234,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keyword">DEALLOCATE</span> (ars_0, brs_0, azs_0, bzs_0, bls_0,          &amp;</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;              rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordflow">if</span> (dump_symforce) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordflow">if</span> (dump_symforce .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="comment">! outputs from symforce()</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js lv ku m&quot;</span> // &amp;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      <span class="stringliteral">&quot; ars brs crs azs bzs czs bls cls rcs zcs&quot;</span> // &amp;</div>
@@ -261,7 +261,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">close</span>(42)</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    print *, <span class="stringliteral">&quot;dumped symforce output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    stop</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">!     stop</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keywordflow">  end if</span> <span class="comment">! dump_symforce</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">symforce</a></div>
@@ -326,6 +326,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac523d415be1865ef549b6a55a98fdd1a"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">vmec_main::ireflect</a></div><div class="ttdeci">integer, dimension(:), allocatable ireflect</div><div class="ttdoc">two-dimensional array for computing 2pi-v angle</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00135">vmec_main.f90:135</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac815c089a079d08356f5740573842c86"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">vmec_main::lthreed</a></div><div class="ttdeci">logical lthreed</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00130">vmec_main.f90:130</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_aed24975620399849c6967823bd798274"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">vmec_main::iter2</a></div><div class="ttdeci">integer iter2</div><div class="ttdoc">total number of iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00148">vmec_main.f90:148</a></div></div>
 <div class="ttc" id="asymforce_8f90_html_a169610bcc5544fc8e16ad1e10ac85dcb"><div class="ttname"><a href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">symforce</a></div><div class="ttdeci">subroutine symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)</div><div class="ttdoc">Symmetrize forces on restricted  interval  so cos, sin integrals can be performed.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/df3/symforce_8f90_source.html#l00028">symforce.f90:30</a></div></div>
 <div class="ttc" id="asymforce_8f90_html_a2489a93ca37b283b9dec6888826083ae"><div class="ttname"><a href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae">symoutput</a></div><div class="ttdeci">subroutine symoutput(bsq, gsqrt, bsubu, bsubv, bsupu, bsupv, bsubs, bsqa, gsqrta, bsubua, bsubva, bsupua, bsupva, bsubsa)</div><div class="ttdoc">Symmetrize some quantities so that they can be output (?)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/df3/symforce_8f90_source.html#l00196">symforce.f90:198</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -334,7 +335,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/df3/symforce_8f90.html">symforce.f90</a></li>
-    <li class="footer">Generated on Thu Jun 3 2021 19:05:58 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jun 3 2021 20:02:13 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

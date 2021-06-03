@@ -193,44 +193,36 @@ $(document).ready(function(){initNavTree('de/da9/evolve_8f90_source.html','../..
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  fac = one/(one + dtau)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a> .gt. 10) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">! only for first 10 iterations ...</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    dump_evolve = .false.</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="comment">! ... but reset for next multi-grid iteration</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    dump_evolve = .true.</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span> (dump_evolve .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">write</span>(dump_filename, 999) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;999 <span class="keyword">format</span>(<span class="stringliteral">&#39;evolve_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1&quot;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">if</span> (dump_evolve) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">write</span>(dump_filename, 999) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;999 <span class="keyword">format</span>(<span class="stringliteral">&#39;evolve_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntor mpol1&quot;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">write</span>(42, *) ns, ntor, mpol1</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# before timestep: i xc xcdot gc&quot;</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">write</span>(42, *) i, <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(i)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordflow">    end do</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">! GRADIENT METHOD, WITHOUT THE LINE SEARCHES (FLETCHER-REEVES),</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">! BASED ON A METHOD GIVEN BY P. GARABEDIAN</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> = fac*(b1*<a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> + time_step*<a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>) <span class="comment">! update velocity</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>    = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> + time_step*<a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>          <span class="comment">! advance xc by velocity given in xcdot</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordflow">if</span> (dump_evolve) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# after timestep: i xc xcdot&quot;</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <span class="keyword">write</span>(42, *) i, <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(i)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordflow">    end do</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4">evolve</a></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# before timestep: i xc xcdot gc&quot;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keyword">write</span>(42, *) i, <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(i)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">! GRADIENT METHOD, WITHOUT THE LINE SEARCHES (FLETCHER-REEVES),</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="comment">! BASED ON A METHOD GIVEN BY P. GARABEDIAN</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> = fac*(b1*<a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> + time_step*<a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>) <span class="comment">! update velocity</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>    = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> + time_step*<a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>          <span class="comment">! advance xc by velocity given in xcdot</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">if</span> (dump_evolve .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# after timestep: i xc xcdot&quot;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">do</span> i=1, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keyword">write</span>(42, *) i, <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(i), <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(i)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4">evolve</a></div>
 <div class="ttc" id="aevolve_8f90_html_a8103e838be03904e03551e04f6b396e4"><div class="ttname"><a href="../../de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4">evolve</a></div><div class="ttdeci">subroutine evolve(time_step, ier_flag, liter_flag)</div><div class="ttdoc">Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu...</div><div class="ttdef"><b>Definition:</b> <a href="../../de/da9/evolve_8f90_source.html#l00011">evolve.f90:12</a></div></div>
 <div class="ttc" id="afunct3d_8f90_html_a800bacc22176e16323899df87b55c547"><div class="ttname"><a href="../../d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547">funct3d</a></div><div class="ttdeci">subroutine funct3d(ier_flag)</div><div class="ttdoc">Evaluate the three-dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells...</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d4f/funct3d_8f90_source.html#l00013">funct3d.f90:14</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
@@ -262,7 +254,7 @@ $(document).ready(function(){initNavTree('de/da9/evolve_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/da9/evolve_8f90.html">evolve.f90</a></li>
-    <li class="footer">Generated on Thu Jun 3 2021 19:05:58 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jun 3 2021 20:02:13 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

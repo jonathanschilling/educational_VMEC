@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: top, bot</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">logical</span>            :: dump_add_fluxes = .false.</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">logical</span>            :: dump_add_fluxes = .true.</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">! I think this is the &quot;zero-current algorithm&quot; published in section 2.3 of</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">! Hirshman, Hogan, &quot;ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code&quot; (1986), J. Comp. Phys. 63 (2), 329-352</span></div>
@@ -182,9 +182,9 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  bsupu(:nrzt) = bsupu(:nrzt) + <a class="code" href="../../d7/d0e/namespacerealspace.html#a74e841a99d263ecf1b010979e1c64dc9">chip</a>(:nrzt)*overg(:nrzt)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">if</span> (dump_add_fluxes) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">write</span>(dump_filename, 995) ns, trim(input_extension)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;995 <span class="keyword">format</span>(<span class="stringliteral">&#39;add_fluxes_&#39;</span>,i5.5,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">if</span> (dump_add_fluxes .and. <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">write</span>(dump_filename, 995) ns, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;995 <span class="keyword">format</span>(<span class="stringliteral">&#39;add_fluxes_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
@@ -209,7 +209,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">close</span>(42)</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    print *, <span class="stringliteral">&quot;dumped add_fluxes output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    stop</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">!     stop</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordflow">  end if</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
@@ -226,6 +226,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="ttc" id="anamespacevmec__main_html_a956201e36438e3e1c04b16942621023d"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a956201e36438e3e1c04b16942621023d">vmec_main::iotaf</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable iotaf</div><div class="ttdoc">rotational transform (full grid)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00034">vmec_main.f90:34</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_aa571f88addf704703d895f72934d6759"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">vmec_main::chipf</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable chipf</div><div class="ttdoc">radial derivative of poloidal magnetic flux (full grid)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00036">vmec_main.f90:36</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ad18165373a8f8b0a4a939cefceb654cf"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ad18165373a8f8b0a4a939cefceb654cf">vmec_main::phips</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable phips</div><div class="ttdoc">toroidal flux (same as phip), one-dimensional array</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00068">vmec_main.f90:68</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_aed24975620399849c6967823bd798274"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">vmec_main::iter2</a></div><div class="ttdeci">integer iter2</div><div class="ttdoc">total number of iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00148">vmec_main.f90:148</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_aeec11c572d79c8b9bdfae7abd05962e4"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aeec11c572d79c8b9bdfae7abd05962e4">vmec_main::iotas</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable iotas</div><div class="ttdoc">rotational transform , on half radial mesh</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00069">vmec_main.f90:69</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_afa27ff9660af5f8390fed850ffe7242e"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#afa27ff9660af5f8390fed850ffe7242e">vmec_main::icurv</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable icurv</div><div class="ttdoc">(-)toroidal current inside flux surface (vanishes like s)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00070">vmec_main.f90:70</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -234,7 +235,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d7d/add__fluxes_8f90.html">add_fluxes.f90</a></li>
-    <li class="footer">Generated on Wed Jun 2 2021 22:48:51 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jun 3 2021 19:05:58 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

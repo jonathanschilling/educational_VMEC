@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">logical</span>            :: dump_symforce = .true.</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">logical</span>            :: dump_symforce = .false.</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  i = ns*nzeta</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">ALLOCATE</span> (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &amp;</div>
@@ -326,7 +326,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac523d415be1865ef549b6a55a98fdd1a"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">vmec_main::ireflect</a></div><div class="ttdeci">integer, dimension(:), allocatable ireflect</div><div class="ttdoc">two-dimensional array for computing 2pi-v angle</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00138">vmec_main.f90:138</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac815c089a079d08356f5740573842c86"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">vmec_main::lthreed</a></div><div class="ttdeci">logical lthreed</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00133">vmec_main.f90:133</a></div></div>
-<div class="ttc" id="anamespacevmec__main_html_aed24975620399849c6967823bd798274"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">vmec_main::iter2</a></div><div class="ttdeci">integer iter2</div><div class="ttdoc">total number of iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00151">vmec_main.f90:151</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_aed24975620399849c6967823bd798274"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">vmec_main::iter2</a></div><div class="ttdeci">integer iter2</div><div class="ttdoc">total number of iterations</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00152">vmec_main.f90:152</a></div></div>
 <div class="ttc" id="asymforce_8f90_html_a169610bcc5544fc8e16ad1e10ac85dcb"><div class="ttname"><a href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">symforce</a></div><div class="ttdeci">subroutine symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)</div><div class="ttdoc">Symmetrize forces on restricted  interval  so cos, sin integrals can be performed.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/df3/symforce_8f90_source.html#l00028">symforce.f90:30</a></div></div>
 <div class="ttc" id="asymforce_8f90_html_a2489a93ca37b283b9dec6888826083ae"><div class="ttname"><a href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae">symoutput</a></div><div class="ttdeci">subroutine symoutput(bsq, gsqrt, bsubu, bsubv, bsupu, bsupv, bsubs, bsqa, gsqrta, bsubua, bsubva, bsupua, bsupva, bsubsa)</div><div class="ttdoc">Symmetrize some quantities so that they can be output (?)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/df3/symforce_8f90_source.html#l00196">symforce.f90:198</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -335,7 +335,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/df3/symforce_8f90.html">symforce.f90</a></li>
-    <li class="footer">Generated on Thu Jun 3 2021 20:28:54 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jun 7 2021 10:50:23 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

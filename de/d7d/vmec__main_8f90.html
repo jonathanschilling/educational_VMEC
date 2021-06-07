@@ -380,6 +380,9 @@ Variables</h2></td></tr>
 <tr class="memitem:aa3db038a05e5668cb1afe8c7edea20b9"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">vmec_main::niterv</a></td></tr>
 <tr class="memdesc:aa3db038a05e5668cb1afe8c7edea20b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">max iterations for current multi-grid iteration  <a href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">More...</a><br /></td></tr>
 <tr class="separator:aa3db038a05e5668cb1afe8c7edea20b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa35fa9bd824253791a4029b33a6f3c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">vmec_main::first</a></td></tr>
+<tr class="memdesc:a6aa35fa9bd824253791a4029b33a6f3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step (was called irst before)  <a href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">More...</a><br /></td></tr>
+<tr class="separator:a6aa35fa9bd824253791a4029b33a6f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62454a545665bf5259ef3bc2882c02eb"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">vmec_main::neqs</a></td></tr>
 <tr class="memdesc:a62454a545665bf5259ef3bc2882c02eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">total number of equations to evolve (size of xc)  <a href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">More...</a><br /></td></tr>
 <tr class="separator:a62454a545665bf5259ef3bc2882c02eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -392,9 +395,6 @@ Variables</h2></td></tr>
 <tr class="memitem:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">vmec_main::ijacob</a></td></tr>
 <tr class="memdesc:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">counter for number of times jacobian changes sign  <a href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">More...</a><br /></td></tr>
 <tr class="separator:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bd32483d10580f6097bb69785152e51"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">vmec_main::irst</a></td></tr>
-<tr class="memdesc:a8bd32483d10580f6097bb69785152e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step  <a href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">More...</a><br /></td></tr>
-<tr class="separator:a8bd32483d10580f6097bb69785152e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef2c519ce424159dd2c7d44a00c463c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">vmec_main::iter1</a></td></tr>
 <tr class="memdesc:a3ef2c519ce424159dd2c7d44a00c463c"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of iterations at which the currently active evolution was branched off from  <a href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">More...</a><br /></td></tr>
 <tr class="separator:a3ef2c519ce424159dd2c7d44a00c463c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -415,7 +415,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_c1be8d27e7f84178e95f152701110b19.html">data</a></li><li class="navelem"><a class="el" href="../../de/d7d/vmec__main_8f90.html">vmec_main.f90</a></li>
-    <li class="footer">Generated on Thu Jun 3 2021 20:28:54 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jun 7 2021 10:50:23 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

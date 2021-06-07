@@ -372,6 +372,9 @@ Variables</h2></td></tr>
 <tr class="memitem:aa3db038a05e5668cb1afe8c7edea20b9"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">niterv</a></td></tr>
 <tr class="memdesc:aa3db038a05e5668cb1afe8c7edea20b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">max iterations for current multi-grid iteration  <a href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">More...</a><br /></td></tr>
 <tr class="separator:aa3db038a05e5668cb1afe8c7edea20b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa35fa9bd824253791a4029b33a6f3c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a></td></tr>
+<tr class="memdesc:a6aa35fa9bd824253791a4029b33a6f3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step (was called irst before)  <a href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">More...</a><br /></td></tr>
+<tr class="separator:a6aa35fa9bd824253791a4029b33a6f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62454a545665bf5259ef3bc2882c02eb"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></td></tr>
 <tr class="memdesc:a62454a545665bf5259ef3bc2882c02eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">total number of equations to evolve (size of xc)  <a href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">More...</a><br /></td></tr>
 <tr class="separator:a62454a545665bf5259ef3bc2882c02eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -384,9 +387,6 @@ Variables</h2></td></tr>
 <tr class="memitem:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a></td></tr>
 <tr class="memdesc:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">counter for number of times jacobian changes sign  <a href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">More...</a><br /></td></tr>
 <tr class="separator:aa5c5ac7e7c5f8a5359ed39ff9a51f8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bd32483d10580f6097bb69785152e51"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">irst</a></td></tr>
-<tr class="memdesc:a8bd32483d10580f6097bb69785152e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step  <a href="../../d1/d6c/namespacevmec__main.html#a8bd32483d10580f6097bb69785152e51">More...</a><br /></td></tr>
-<tr class="separator:a8bd32483d10580f6097bb69785152e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef2c519ce424159dd2c7d44a00c463c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a></td></tr>
 <tr class="memdesc:a3ef2c519ce424159dd2c7d44a00c463c"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of iterations at which the currently active evolution was branched off from  <a href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">More...</a><br /></td></tr>
 <tr class="separator:a3ef2c519ce424159dd2c7d44a00c463c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1158,6 +1158,26 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a6aa35fa9bd824253791a4029b33a6f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa35fa9bd824253791a4029b33a6f3c">&#9670;&nbsp;</a></span>first</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer vmec_main::first</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step (was called irst before) </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00143">143</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../de/da9/evolve_8f90_source.html#l00012">evolve()</a>, <a class="el" href="../../d0/d71/fileout_8f90_source.html#l00008">fileout()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, and <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>.</p>
+
+</div>
+</div>
 <a id="a53cec450305260beef2d65e731f87416"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53cec450305260beef2d65e731f87416">&#9670;&nbsp;</a></span>fnorm</h2>
 
@@ -1426,7 +1446,7 @@ Variables</h2></td></tr>
 
 <p>counter used to call -EQFOR- at end of run </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00145">145</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00149">149</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/d61/bcovar_8f90_source.html#l00009">bcovar()</a>, <a class="el" href="../../d0/d71/fileout_8f90_source.html#l00008">fileout()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, and <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>.</p>
 
@@ -1446,7 +1466,7 @@ Variables</h2></td></tr>
 
 <p>counter for number of times jacobian changes sign </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00146">146</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00150">150</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../d0/d71/fileout_8f90_source.html#l00008">fileout()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, and <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>.</p>
 
@@ -1512,26 +1532,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a8bd32483d10580f6097bb69785152e51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bd32483d10580f6097bb69785152e51">&#9670;&nbsp;</a></span>irst</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">integer vmec_main::irst</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>"counter" monitoring sign of jacobian; resets R, Z, and Lambda when jacobian changes sign and decreases time step </p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00147">147</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../de/da9/evolve_8f90_source.html#l00012">evolve()</a>, <a class="el" href="../../d0/d71/fileout_8f90_source.html#l00008">fileout()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, and <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>.</p>
-
-</div>
-</div>
 <a id="a0c433ca884dcd789eeca5e0332cefa19"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c433ca884dcd789eeca5e0332cefa19">&#9670;&nbsp;</a></span>irzloff</h2>
 
@@ -1546,7 +1546,7 @@ Variables</h2></td></tr>
 
 <p>offset in xc array between R,Z,L components </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00144">144</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00148">148</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/d61/bcovar_8f90_source.html#l00009">bcovar()</a>, <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../d7/dc9/printout_8f90_source.html#l00010">printout()</a>, <a class="el" href="../../dd/d75/profil3d_8f90_source.html#l00010">profil3d()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
@@ -1566,7 +1566,7 @@ Variables</h2></td></tr>
 
 <p>number of iterations at which the currently active evolution was branched off from </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00150">150</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00151">151</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/d61/bcovar_8f90_source.html#l00009">bcovar()</a>, <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../de/da9/evolve_8f90_source.html#l00012">evolve()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00010">residue()</a>, and <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>.</p>
 
@@ -1586,7 +1586,7 @@ Variables</h2></td></tr>
 
 <p>total number of iterations </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00151">151</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00152">152</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d8/d7d/add__fluxes_8f90_source.html#l00012">add_fluxes()</a>, <a class="el" href="../../d7/d61/bcovar_8f90_source.html#l00009">bcovar()</a>, <a class="el" href="../../d9/dff/calc__fbal_8f90_source.html#l00009">calc_fbal()</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00237">constrain_m1()</a>, <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../de/da9/evolve_8f90_source.html#l00012">evolve()</a>, <a class="el" href="../../de/d0c/forces_8f90_source.html#l00007">forces()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../d7/dc9/printout_8f90_source.html#l00010">printout()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00010">residue()</a>, <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>, <a class="el" href="../../d8/d86/scalfor_8f90_source.html#l00016">scalfor()</a>, <a class="el" href="../../d4/df3/symforce_8f90_source.html#l00030">symforce()</a>, <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00212">tomnspa()</a>, <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00022">tomnsps()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
@@ -1606,7 +1606,7 @@ Variables</h2></td></tr>
 
 <p>counts number of free-boundary iterations </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00152">152</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00153">153</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d0/d22/eqfor_8f90_source.html#l00016">eqfor()</a>, <a class="el" href="../../d7/d46/eqsolve_8f90_source.html#l00008">eqsolve()</a>, <a class="el" href="../../de/d0c/forces_8f90_source.html#l00007">forces()</a>, <a class="el" href="../../d1/d87/freeb__data_8f90_source.html#l00013">freeb_data()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d7/dc9/printout_8f90_source.html#l00010">printout()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, <a class="el" href="../../d8/d86/scalfor_8f90_source.html#l00016">scalfor()</a>, <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00212">tomnspa()</a>, <a class="el" href="../../d0/d6f/tomnsp_8f90_source.html#l00022">tomnsps()</a>, and <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>.</p>
 
@@ -1834,7 +1834,7 @@ Variables</h2></td></tr>
 
 <p>total number of equations to evolve (size of xc) </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00143">143</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00147">147</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d7/df2/allocate__ns_8f90_source.html#l00009">allocate_ns()</a>, <a class="el" href="../../de/da9/evolve_8f90_source.html#l00012">evolve()</a>, <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, <a class="el" href="../../d5/d6e/restart__iter_8f90_source.html#l00008">restart_iter()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
@@ -2066,7 +2066,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00155">155</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00156">156</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d9/da6/initialize__radial_8f90_source.html#l00010">initialize_radial()</a>, and <a class="el" href="../../dd/d75/profil3d_8f90_source.html#l00010">profil3d()</a>.</p>
 
@@ -2348,7 +2348,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00154">154</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00155">155</a> of file <a class="el" href="../../de/d7d/vmec__main_8f90_source.html">vmec_main.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>, and <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>.</p>
 
@@ -2620,7 +2620,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></li>
-    <li class="footer">Generated on Thu Jun 3 2021 20:28:54 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jun 7 2021 10:50:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

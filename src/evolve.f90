@@ -25,7 +25,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   REAL(rprec) :: fsq1, dtau, b1, fac
 
   character(len=255) :: dump_filename
-  logical            :: dump_evolve = .true.
+  logical            :: dump_evolve = .false.
 
   ! COMPUTE MHD FORCES
   CALL funct3d (ier_flag)

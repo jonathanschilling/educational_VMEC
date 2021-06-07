@@ -52,8 +52,8 @@ SUBROUTINE funct3d (ier_flag)
   logical :: ldump_vacuum_ref = .false.
 
   character(len=255) :: dump_filename
-  logical            :: dump_geometry = .true.
-  logical            :: dump_constraint_force = .true.
+  logical            :: dump_geometry = .false.
+  logical            :: dump_constraint_force = .false.
 
   ! POINTER ALIASES
   lu => czmn
@@ -266,7 +266,7 @@ SUBROUTINE funct3d (ier_flag)
 
         if (ldump_vacuum_ref) then
            ! construct filename for reference NESTOR output
-           write(vac_file, "(A,I6.6,A)") "vac/vacout_ref_"//TRIM(input_extension)//"_", &
+           write(vac_file, "(A,I6.6,A)") "vac_ref/vacout_ref_"//TRIM(input_extension)//"_", &
               vacuum_calls, ".nc"
 
            call write_nestor_outputs(vac_file, lasym, ivac, ier_flag)

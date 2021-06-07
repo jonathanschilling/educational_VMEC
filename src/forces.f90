@@ -27,7 +27,7 @@ SUBROUTINE forces
   REAL(rprec), DIMENSION(:), POINTER :: guus
 
   character(len=255) :: dump_filename
-  logical            :: dump_forces = .true.
+  logical            :: dump_forces = .false.
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)

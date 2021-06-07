@@ -29,11 +29,11 @@ SUBROUTINE residue (gcr, gcz, gcl)
   REAL(rprec) :: r1
 
   character(len=255) :: dump_filename
-  logical            :: dump_physical_gc = .true.
-  logical            :: dump_fsq = .true.
-  logical            :: dump_scale_m1 = .true.
-  logical            :: dump_scalfor_out = .true.
-  logical            :: dump_fsq1 = .true.
+  logical            :: dump_physical_gc = .false.
+  logical            :: dump_fsq         = .false.
+  logical            :: dump_scale_m1    = .false.
+  logical            :: dump_scalfor_out = .false.
+  logical            :: dump_fsq1        = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)

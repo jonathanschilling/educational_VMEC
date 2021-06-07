@@ -19,7 +19,7 @@ SUBROUTINE jacobian
   REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns)
 
   character(len=255) :: dump_filename
-  logical            :: dump_jacobian = .true.
+  logical            :: dump_jacobian = .false.
 
 
   ! (RS, ZS)=(R, Z) SUB S, (RU12, ZU12)=(R, Z) SUB THETA(=U)
@@ -36,11 +36,9 @@ SUBROUTINE jacobian
   DO l = 2,nrzt
     r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! R on half grid
 
-    if (l.eq.2 .and. iter2.eq.2) then
-      write(*,*) r1(l,meven), r1(l-1,meven), shalf(l), r1(l,modd), r1(l-1,modd), r12(l)
-    end if
-
-
+!     if (l.eq.2 .and. iter2.eq.2) then
+!       write(*,*) r1(l,meven), r1(l-1,meven), shalf(l), r1(l,modd), r1(l-1,modd), r12(l)
+!     end if
 
     ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) ) ! dR/du on half grid
     zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) ) ! dZ/du on half grid

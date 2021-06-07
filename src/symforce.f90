@@ -40,7 +40,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
 
   character(len=255) :: dump_filename
-  logical            :: dump_symforce = .true.
+  logical            :: dump_symforce = .false.
 
   i = ns*nzeta
   ALLOCATE (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &

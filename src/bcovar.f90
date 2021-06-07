@@ -36,15 +36,15 @@ SUBROUTINE bcovar (lu, lv)
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
 
   character(len=255) :: dump_filename
-  logical            :: dump_metric = .true.
-  logical            :: dump_volume = .true.
-  logical            :: dump_bcontrav = .true.
-  logical            :: dump_bcov = .true.
-  logical            :: dump_lambda_forces = .true.
-  logical            :: dump_bcov_full = .true.
-  logical            :: dump_precondn = .true.
-  logical            :: dump_forceNorms_tcon = .true.
-  logical            :: dump_lulv_comb = .true.
+  logical            :: dump_metric          = .false.
+  logical            :: dump_volume          = .false.
+  logical            :: dump_bcontrav        = .false.
+  logical            :: dump_bcov            = .false.
+  logical            :: dump_lambda_forces   = .false.
+  logical            :: dump_bcov_full       = .false.
+  logical            :: dump_precondn        = .false.
+  logical            :: dump_forceNorms_tcon = .false.
+  logical            :: dump_lulv_comb       = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 
@@ -339,9 +339,9 @@ SUBROUTINE bcovar (lu, lv)
   lvv = phipog(:ndim)*gvv
   bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)
 
-  if (iter2.eq.2) then
-    write(*,*) "bsubv_e(1)  first step: ", bsubv_e(1)
-  end if
+!   if (iter2.eq.2) then
+!     write(*,*) "bsubv_e(1)  first step: ", bsubv_e(1)
+!   end if
 
   lvv = lvv*shalf
   bsubu_e(:nrzt) = guv(:nrzt)*bsupu(:nrzt)
@@ -350,12 +350,12 @@ SUBROUTINE bcovar (lu, lv)
               + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &
               +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))
 
-  if (iter2.eq.2) then
-    write(*,*) "bsubu_e(1:2) = ", bsubu_e(1:2), " from ", &
-      guv(1:2), bsupu(1:2)
-    write(*,*) "bsubv_e(1) second step: ", bsubv_e(1), lvv(1), lvv(2), &
-      lu(1,1), bsubu_e(1), bsubu_e(2)
-  end if
+!   if (iter2.eq.2) then
+!     write(*,*) "bsubu_e(1:2) = ", bsubu_e(1:2), " from ", &
+!       guv(1:2), bsupu(1:2)
+!     write(*,*) "bsubv_e(1) second step: ", bsubv_e(1), lvv(1), lvv(2), &
+!       lu(1,1), bsubu_e(1), bsubu_e(2)
+!   end if
 
    if (dump_lambda_forces .and. iter2.le.2) then
     write(dump_filename, 993) ns, iter2, trim(input_extension)

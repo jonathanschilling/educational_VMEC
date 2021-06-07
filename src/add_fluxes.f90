@@ -24,7 +24,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   REAL(rprec) :: top, bot
 
   character(len=255) :: dump_filename
-  logical            :: dump_add_fluxes = .true.
+  logical            :: dump_add_fluxes = .false.
 
   ! I think this is the "zero-current algorithm" published in section 2.3 of
   ! Hirshman, Hogan, "ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code" (1986), J. Comp. Phys. 63 (2), 329-352

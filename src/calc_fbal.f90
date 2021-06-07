@@ -24,7 +24,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   INTEGER  :: js
 
   character(len=255) :: dump_filename
-  logical            :: dump_calc_fbal = .true.
+  logical            :: dump_calc_fbal = .false.
 
 
   ! compute flux-surface averages of covariant magnetic field components

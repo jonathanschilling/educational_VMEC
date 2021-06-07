@@ -34,7 +34,7 @@ SUBROUTINE tomnsps(frzl_array,       &
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
 
   character(len=255) :: dump_filename
-  logical            :: dump_tomnsps = .true.
+  logical            :: dump_tomnsps = .false.
 
   frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
@@ -224,7 +224,7 @@ SUBROUTINE tomnspa(frzl_array,       &
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
 
   character(len=255) :: dump_filename
-  logical            :: dump_tomnspa = .true.
+  logical            :: dump_tomnspa = .false.
 
   frsc => frzl_array(:,:,:,rsc)               !!R-SIN(mu) COS(nv)
   fzcc => frzl_array(:,:,:,zcc+ntmax)         !!Z-COS(mu) COS(nv)

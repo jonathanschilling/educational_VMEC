@@ -4,7 +4,7 @@
 !> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
 !>
 SUBROUTINE jacobian
-  USE vmec_main, ONLY: ohs, nrzt, irst, iter2
+  USE vmec_main, ONLY: ohs, nrzt, first, iter2
   USE vmec_params, ONLY: meven, modd
   use vmec_input, only: input_extension, nzeta
   USE realspace
@@ -31,7 +31,7 @@ SUBROUTINE jacobian
   ! THE DERIVATIVES OF SHALF = SQRT(s) WERE COMPUTED EXPLICITLY AS: d(shalf)/ds = .5/shalf
 
   ! initially, all good
-  irst = 1
+  first = 1
 
   DO l = 2,nrzt
     r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! R on half grid
@@ -93,7 +93,7 @@ SUBROUTINE jacobian
   taumin = MINVAL(tau(2:nrzt))
   IF (taumax*taumin .lt. zero) then
      ! bad jacobian !
-     irst = 2
+     first = 2
   end if
 
 

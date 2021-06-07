@@ -140,13 +140,14 @@ MODULE vmec_main
 
   integer :: niterv  !< max iterations for current multi-grid iteration
 
+  integer :: first   !< "counter" monitoring sign of jacobian;
+                     !< resets R, Z, and Lambda when jacobian changes sign
+                     !< and decreases time step (was called irst before)
+
   integer :: neqs    !< total number of equations to evolve (size of xc)
   integer :: irzloff !< offset in xc array between R,Z,L components
   integer :: iequi   !< counter used to call -EQFOR- at end of run
   integer :: ijacob  !< counter for number of times jacobian changes sign
-  integer :: irst    !< "counter" monitoring sign of jacobian;
-                     !< resets R, Z, and Lambda when jacobian changes sign
-                     !< and decreases time step
   integer :: iter1   !< number of iterations at which the currently active evolution was branched off from
   integer :: iter2   !< total number of iterations
   integer :: ivac    !< counts number of free-boundary iterations

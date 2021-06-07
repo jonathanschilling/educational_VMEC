@@ -38,10 +38,10 @@ SUBROUTINE eqsolve(ier_flag)
   ! RECOMPUTE INITIAL PROFILE, BUT WITH IMPROVED AXIS
   ! OR
   ! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
-  IF (irst .EQ. 2) THEN
+  IF (first .EQ. 2) THEN
      xc = 0
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
-     irst = 1 ! tells restart_iter to store current xc in xstore
+     first = 1 ! tells restart_iter to store current xc in xstore
      IF (liter_flag) then
         ! Note that at this point, liter_flag could also simply contain (iter2 .eq. 1) (see above).
         ! (OFF IN v8.50)
@@ -63,7 +63,7 @@ SUBROUTINE eqsolve(ier_flag)
 
      ! check for bad jacobian and bad initial guess for axis
      IF (ijacob.eq.0 .and.                                              &
-         (ier_flag.eq.bad_jacobian_flag .or. irst.eq.4) .and.           &
+         (ier_flag.eq.bad_jacobian_flag .or. first.eq.4) .and.           &
          ns.ge.3) THEN
 
         IF (ier_flag .eq. bad_jacobian_flag) THEN
@@ -75,7 +75,7 @@ SUBROUTINE eqsolve(ier_flag)
         CALL guess_axis (r1, z1, ru0, zu0)
         lreset_internal = .true.
         ijacob = 1
-        irst = 2
+        first = 2
         GOTO 20 ! try again
      ELSE IF (ier_flag.ne.norm_term_flag .and.                          &
               ier_flag.ne.successful_term_flag) THEN
@@ -94,19 +94,19 @@ SUBROUTINE eqsolve(ier_flag)
      ! and  for 50, delt0r is reset to 0.96*delt (delt given by user)
      IF (ijacob .eq. 25) THEN
         ! jacobian changed sign 25 times: hmmm? :-/
-        irst = 2
+        first = 2
         CALL restart_iter(delt0r)
         delt0r = p98*delt
         PRINT 120, delt0r
-        irst = 1
+        first = 1
         GOTO 20 ! try again
      ELSE IF (ijacob .eq. 50) THEN
         ! jacobian changed sign 50 times: what the hell? :-S
-        irst = 2
+        first = 2
         CALL restart_iter(delt0r)
         delt0r = p96*delt
         PRINT 120, delt0r
-        irst = 1
+        first = 1
         GOTO 20 ! try again
      ELSE IF (ijacob .ge. 75) THEN
         ! jacobian changed sign at least 75 times: time to give up :-(
@@ -130,12 +130,12 @@ SUBROUTINE eqsolve(ier_flag)
      res0 = MIN(res0,fsq)
 
      IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
-        ! Store current state (irst=1)
+        ! Store current state (first=1)
         ! --> was able to reduce force consistenly over at least 10 iterations
         CALL restart_iter(delt0r)
      ELSE IF (fsq.gt.100*res0 .and. iter2.gt.iter1) THEN
         ! Residuals are growing in time, reduce time step
-        irst = 2
+        first = 2
      ELSE IF (iter2-iter1 .gt. ns4/2 .and.                              &
               iter2       .gt. 2*ns4 .and.                              &
               fsqr+fsqz   .gt. c1pm2       ) THEN ! 1.0e-2
@@ -143,10 +143,10 @@ SUBROUTINE eqsolve(ier_flag)
         ! quite some iterations and quite large forces
         ! --> restart with different timestep
 
-        irst = 3
+        first = 3
      ENDIF
 
-     IF (irst .ne. 1) THEN
+     IF (first .ne. 1) THEN
         ! Retrieve previous good state
         CALL restart_iter(delt0r)
         iter1 = iter2

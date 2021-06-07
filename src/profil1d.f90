@@ -6,14 +6,11 @@
 !> @param xc state vector of VMEC, i.e., all Fourier coefficients of \f$R\f$, \f$Z\f$ and \f$\lambda\f$
 !> @param xcdot velocity vector in Fourier space
 !> @param lreset xc will be zeroes if this is true
-SUBROUTINE profil1d(xc, xcdot, lreset)
+SUBROUTINE profil1d()
   USE vmec_main
   USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp
   USE realspace, ONLY: shalf, sqrts
   IMPLICIT NONE
-
-  REAL(rprec), DIMENSION(neqs), INTENT(out) :: xc, xcdot
-  LOGICAL, INTENT(in) :: lreset
 
   REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
 
@@ -105,7 +102,6 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   END DO
 
   pres(:ns+1) = 0
-  xcdot = 0
 
   DO i = 1, ns
 
@@ -138,11 +134,6 @@ SUBROUTINE profil1d(xc, xcdot, lreset)
   sm(1) = 0
   sp(0) = 0
   sp(1) = sm(2)
-
-  ! reset Fourier coefficients vector if lreset was specified
-  IF (lreset) THEN
-    xc = 0
-  END IF
 
   ! dump all relevant output to a text file
   if (dump_profil1d) then

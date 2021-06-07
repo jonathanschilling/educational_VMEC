@@ -6,7 +6,7 @@
 SUBROUTINE reset_params
 
   USE vmec_main, ONLY: ivac, ftolv, fsqr, fsqz, fsq,      &
-                       res0, delt0r, iter1, iter2, ijacob, irst, &
+                       res0, delt0r, iter1, iter2, ijacob, first, &
                        lconm1, z00, vacuum_calls
   USE vmec_input, ONLY: delt
   USE stel_constants, only: zero
@@ -27,7 +27,7 @@ SUBROUTINE reset_params
 
   ijacob = 0
 
-  irst = 1
+  first = 1
 
   res0 = -1
 

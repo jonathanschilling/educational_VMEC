@@ -2,7 +2,8 @@
   ! SOLOV'EV Equilibrium from Hirshman Whitson 1983
   MGRID_FILE = 'none'
   LFREEB = F
-  DELT =   9.00E-01
+!  DELT =   9.00E-01
+  delt = 0.5
   TCON0 =   2.00E+00
   LASYM = F
   NFP =    1
@@ -13,8 +14,8 @@
   NS_ARRAY = 16 32 64 128
   NITER_ARRAY = 1000 2000 4000 20000
   FTOL_ARRAY = 1E-30 1E-30 1E-30 1E-12
-!  NSTEP =  250
-  nstep=1
+  NSTEP =  250
+!  nstep=1
   NVACSKIP =    6
   GAMMA =   0.000000E+00
   PHIEDGE =   1.00000000000000E+00

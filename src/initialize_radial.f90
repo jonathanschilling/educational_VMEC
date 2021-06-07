@@ -30,7 +30,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   iter2  = 1
   iter1  = iter2
   ijacob = 0
-  irst   = 1
+  first   = 1
   res0   = -1
 
   ! INITIALIZE MESH-DEPENDENT SCALARS
@@ -64,12 +64,22 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
         gc(1:neqs_old)=scalxc(1:neqs_old)*xstore(1:neqs_old)
      END IF
 
-     ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
-     CALL profil1d (xc, xcdot, lreset_internal)
-     profil3d_calls = 0 ! this is the point where the iterations for a given number of flux surfaces starts...
-     CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
+     ! reset Fourier coefficients vector if lreset was specified
+     xcdot = 0
+     IF (lreset_internal) THEN
+       xc = 0
+     END IF
 
-     irst = 1
+     ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
+     CALL profil1d()
+     profil3d_calls = 0 ! this is the point where the iterations for a given number of flux surfaces starts...
+
+     ! TODO: lreset .and. .not.linter?
+     ! If xc is overwritten by interp() anyway, why bother to initialize it in profil3d()?
+     CALL profil3d(xc(1), xc(1+irzloff), lreset_internal)
+
+     ! first.eq.1 at entry of restart_iter means to store xc in xstore
+     first = 1
      CALL restart_iter(delt)
 
      ! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID

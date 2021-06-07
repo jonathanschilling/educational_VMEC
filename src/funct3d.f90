@@ -167,7 +167,7 @@ SUBROUTINE funct3d (ier_flag)
 
   ! COMPUTE S AND THETA DERIVATIVE OF R AND Z AND JACOBIAN ON HALF-GRID
   CALL jacobian
-  IF (irst.eq.2 .and. iequi.eq.0) then
+  IF (first.eq.2 .and. iequi.eq.0) then
      ! bad jacobian and not final iteration yet (would be indicated by iequi.eq.1) --> need to restart
      ! except when computing output file --> ignore bad jacobian
      return
@@ -297,10 +297,14 @@ SUBROUTINE funct3d (ier_flag)
 
         ! RESET FIRST TIME FOR SOFT START
         IF (ivac .eq. 1) THEN
-           irst = 2
-           delt0 = delt ! delt0 is never used --> ignore change to time step by restart_iter
+           first = 2
+
+           ! delt0 is never used --> ignore change to time step by restart_iter
+           ! TODO: Since delt0 is never used and also nothing else is modified in restart_iter,
+           ! why bother which value it has on entry to restart_iter?
+           delt0 = delt
            CALL restart_iter(delt0)
-           irst = 1 ! already done in restart_iter...
+           first = 1 ! already done in restart_iter for first.eq.2
         END IF
 
         ! IN CASE PRESSURE IS NOT ZERO AT EXTRAPOLATED EDGE...
@@ -425,7 +429,7 @@ SUBROUTINE funct3d (ier_flag)
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
          ! first iteration and gigantic force residuals --> what is going one here?
-         irst = 4 ! fatal error
+         first = 4 ! fatal error
      end if
 
 !  ELSE

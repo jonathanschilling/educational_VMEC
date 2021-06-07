@@ -31,7 +31,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   CALL funct3d (ier_flag)
 
   ! COMPUTE ABSOLUTE STOPPING CRITERION
-  IF (iter2.eq.1 .and. irst.eq.2) THEN
+  IF (iter2.eq.1 .and. first.eq.2) THEN
      ! first iteration, jacobian was not computed correctly
      ier_flag = bad_jacobian_flag
   ELSE IF (fsqr.le.ftolv .and. fsqz.le.ftolv .and. fsql.le.ftolv) THEN

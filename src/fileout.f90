@@ -18,7 +18,7 @@ SUBROUTINE fileout(ier_flag)
   INTEGER :: istat
   INTEGER :: loc_ier_flag
   INTEGER :: js
-  INTEGER :: irst0
+  INTEGER :: first0
   LOGICAL :: lterm
 
   REAL(rprec), ALLOCATABLE :: br_out(:), bz_out(:)
@@ -48,8 +48,8 @@ SUBROUTINE fileout(ier_flag)
   end if
 
   IF (lterm) THEN
-     ! Must save irst value if in "restart" mode
-     irst0 = irst
+     ! Must save first value if in "restart" mode
+     first0 = first
      CALL funct3d (istat)
 
      ! The sign of the jacobian MUST multiply phi to get the physically correct toroidal flux
@@ -60,7 +60,7 @@ SUBROUTINE fileout(ier_flag)
      END DO
      phi = (signgs*twopi*hs)*phi
 
-     irst = irst0
+     first = first0
 
      ALLOCATE(br_out(nrzt), bz_out(nrzt), stat=istat)
 

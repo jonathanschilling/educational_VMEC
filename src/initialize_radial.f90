@@ -30,13 +30,13 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   iter2  = 1
   iter1  = iter2
   ijacob = 0
-  first   = 1
+  first  = 1
   res0   = -1
+  delt0  = delt
 
   ! INITIALIZE MESH-DEPENDENT SCALARS
   ns = nsval
   ns1 = ns-1
-  delt0 = delt
   hs = one/ns1
   ohs = one/hs ! == ns1 ?
   mns = ns*mnsize ! number of flux surfaces * number of Fourier coeffs per surface --> total size of Fourier basis (n>=0)

@@ -2,8 +2,8 @@
   ! SOLOV'EV Equilibrium from Hirshman Whitson 1983
   MGRID_FILE = 'none'
   LFREEB = F
-!  DELT =   9.00E-01
-  delt = 0.5
+  DELT =   9.00E-01
+!  delt = 0.5
   TCON0 =   2.00E+00
   LASYM = F
   NFP =    1

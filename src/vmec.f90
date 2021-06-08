@@ -106,7 +106,8 @@ subroutine vmec
         iequi = 0
 
         IF (lfreeb .and. jacob_off.eq.1) then
-           ! jacob_off=1 indicates that in the previous iteration jacobian was bad --> also need to restart vacuum calculations
+           ! jacob_off=1 indicates that in the previous iteration, the Jacobian was bad
+           ! --> also need to restart vacuum calculations
            ivac = 1
         end if
 

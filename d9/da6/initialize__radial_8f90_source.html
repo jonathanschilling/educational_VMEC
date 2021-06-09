@@ -135,71 +135,73 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="comment">! Set timestep control parameters</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a26518183e7cb6b328b72ae93a0d6e359">fsq</a>    = one</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>  = 1</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a>  = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = 0</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a>  = 1</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#abad0a6b272f9857edfb5009eaa769a2e">res0</a>   = -1</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  delt0  = delt</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">! INITIALIZE MESH-DEPENDENT SCALARS</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ns = nsval</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ns1 = ns-1</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a> = one/ns1</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a54b8fd4835a3d7fd9b93b761e0ef4dc0">ohs</a> = one/<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a> <span class="comment">! == ns1 ?</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  mns = ns*mnsize <span class="comment">! number of flux surfaces * number of Fourier coeffs per surface --&gt; total size of Fourier basis (n&gt;=0)</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a> = <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>*mns <span class="comment">! total number of Fourier coeffs for each of R, Z and Lambda --&gt; including (lasym, lthreed)-dependent ntmax</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  nrzt = nznt*ns</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a> = 3*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a> <span class="comment">! degrees of freedom == total number of (R,Z,Lambda) Fourier coefficients</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">WRITE</span> (nthreed, 10) ns, mnmax, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c">ftolv</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">niterv</a></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  print 10, ns, mnmax, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c">ftolv</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">niterv</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;10 <span class="keyword">FORMAT</span>(/<span class="stringliteral">&#39;  NS = &#39;</span>,i4,<span class="stringliteral">&#39; NO. FOURIER MODES = &#39;</span>,i4,<span class="stringliteral">&#39; FTOLV = &#39;</span>,1p,e10.3,<span class="stringliteral">&#39; NITER = &#39;</span>,i6)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  lreset_internal = .true.</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>  = 1</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a>  = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = 0</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a>  = 1</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#abad0a6b272f9857edfb5009eaa769a2e">res0</a>   = -1</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  delt0  = delt</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">! INITIALIZE MESH-DEPENDENT SCALARS</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  ns = nsval</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ns1 = ns-1</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a> = one/ns1</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a54b8fd4835a3d7fd9b93b761e0ef4dc0">ohs</a> = one/<a class="code" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a> <span class="comment">! == ns1 ?</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  mns = ns*mnsize <span class="comment">! number of flux surfaces * number of Fourier coeffs per surface --&gt; total size of Fourier basis (n&gt;=0)</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a> = <a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>*mns <span class="comment">! total number of Fourier coeffs for each of R, Z and Lambda --&gt; including (lasym, lthreed)-dependent ntmax</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  nrzt = nznt*ns</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a> = 3*<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a> <span class="comment">! degrees of freedom == total number of (R,Z,Lambda) Fourier coefficients</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">WRITE</span> (nthreed, 10) ns, mnmax, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c">ftolv</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">niterv</a></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  print 10, ns, mnmax, <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c">ftolv</a>, <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa3db038a05e5668cb1afe8c7edea20b9">niterv</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;10 <span class="keyword">FORMAT</span>(/<span class="stringliteral">&#39;  NS = &#39;</span>,i4,<span class="stringliteral">&#39; NO. FOURIER MODES = &#39;</span>,i4,<span class="stringliteral">&#39; FTOLV = &#39;</span>,1p,e10.3,<span class="stringliteral">&#39; NITER = &#39;</span>,i6)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">! check that interpolating from coarse to fine mesh</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">! and that old solution is available</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  linterp = (ns_old.lt.ns .and. ns_old.ne.0)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">IF</span> (ns_old .ne. ns) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     <span class="comment">! ALLOCATE NS-DEPENDENT ARRAYS</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">allocate_ns</a>(linterp, neqs_old)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     <span class="comment">! SAVE THIS FOR INTERPOLATION</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;     <span class="comment">! gc is re-used here for old, scaled xc</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;     <span class="keywordflow">IF</span> (neqs_old.gt.0 .and. linterp) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(1:neqs_old)=<a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>(1:neqs_old)*<a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(1:neqs_old)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;     <span class="comment">! reset Fourier coefficients vector if lreset was specified</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> = 0</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;     <span class="keywordflow">IF</span> (lreset_internal) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;       <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> = 0</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;     <span class="comment">! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2">profil1d</a>()</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2266ac88874496ac5a0f60c797ac43a7">profil3d_calls</a> = 0 <span class="comment">! this is the point where the iterations for a given number of flux surfaces starts...</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     <span class="comment">! TODO: lreset .and. .not.linter?</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;     <span class="comment">! If xc is overwritten by interp() anyway, why bother to initialize it in profil3d()?</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c">profil3d</a>(<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1), <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a>), lreset_internal)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="comment">! first.eq.1 at entry of restart_iter means to store xc in xstore</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a>(delt)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;     <span class="comment">! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;     <span class="keywordflow">IF</span> (linterp) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">CALL </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a> (<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, ns, ns_old)</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;     ns_old = ns</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     neqs_old = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  lreset_internal = .true.</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">! check that interpolating from coarse to fine mesh</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">! and that old solution is available</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  linterp = (ns_old.lt.ns .and. ns_old.ne.0)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">IF</span> (ns_old .ne. ns) <span class="keywordflow">then</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;     <span class="comment">! ALLOCATE NS-DEPENDENT ARRAYS</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">allocate_ns</a>(linterp, neqs_old)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;     <span class="comment">! SAVE THIS FOR INTERPOLATION</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;     <span class="comment">! gc is re-used here for old, scaled xc</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;     <span class="keywordflow">IF</span> (neqs_old.gt.0 .and. linterp) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>(1:neqs_old)=<a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>(1:neqs_old)*<a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(1:neqs_old)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;     <span class="comment">! reset Fourier coefficients vector if lreset was specified</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a> = 0</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;     <span class="keywordflow">IF</span> (lreset_internal) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;       <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> = 0</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;     <span class="comment">! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2">profil1d</a>()</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a2266ac88874496ac5a0f60c797ac43a7">profil3d_calls</a> = 0 <span class="comment">! this is the point where the iterations for a given number of flux surfaces starts...</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;     <span class="comment">! TODO: lreset .and. .not.linter?</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     <span class="comment">! If xc is overwritten by interp() anyway, why bother to initialize it in profil3d()?</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c">profil3d</a>(<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1), <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1+<a class="code" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a>), lreset_internal)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     <span class="comment">! first.eq.1 at entry of restart_iter means to store xc in xstore</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;     <span class="keyword">CALL </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a>(delt)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;     <span class="comment">! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;     <span class="keywordflow">IF</span> (linterp) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">CALL </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a> (<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, ns, ns_old)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     ns_old = ns</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;     neqs_old = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div>
 <div class="ttc" id="aallocate__ns_8f90_html_aeb3e662fed5b934054b3febb084ed659"><div class="ttname"><a href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">allocate_ns</a></div><div class="ttdeci">subroutine allocate_ns(linterp, neqs_old)</div><div class="ttdoc">allocate arrays depending on the number of flux surfaces ns</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/df2/allocate__ns_8f90_source.html#l00008">allocate_ns.f90:9</a></div></div>
 <div class="ttc" id="ainitialize__radial_8f90_html_a187faea543d3a42bc748511f04b5b7d5"><div class="ttname"><a href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div><div class="ttdeci">subroutine initialize_radial(nsval, ns_old, delt0)</div><div class="ttdoc">Allocates memory for radial arrays and initializes radial profiles.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/da6/initialize__radial_8f90_source.html#l00009">initialize_radial.f90:10</a></div></div>
 <div class="ttc" id="ainterp_8f90_html_a5bac7725cb89730c4bd187e158dc36ee"><div class="ttname"><a href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div><div class="ttdeci">subroutine interp(xnew, xold, scalxc, nsnew, nsold)</div><div class="ttdoc">Interpolate ,  and  on full grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df5/interp_8f90_source.html#l00011">interp.f90:12</a></div></div>
@@ -235,7 +237,7 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/da6/initialize__radial_8f90.html">initialize_radial.f90</a></li>
-    <li class="footer">Generated on Tue Jun 8 2021 22:14:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 10:40:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

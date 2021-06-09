@@ -22,7 +22,6 @@
   CHARACTER(LEN=100) :: line, line2
 
   ! dump rbcc, ... into 'input_coeffs.dat' and stop
-!  logical :: dump_input_coeffs = .true.
   logical :: dump_input_coeffs = .false.
 
   ier_flag_init = ier_flag

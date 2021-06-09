@@ -21,7 +21,7 @@ SUBROUTINE profil1d()
                            torflux, torflux_deriv, polflux, polflux_deriv
 
   character(len=255) :: dump_filename
-  logical, parameter :: dump_profil1d = .false.
+  logical, parameter :: dump_profil1d = .true.
 
   ! COMPUTE PHIP, IOTA PROFILES ON FULL-GRID
   ! COMPUTE MASS PROFILE ON HALF-GRID BY READING INPUT COEFFICIENTS.

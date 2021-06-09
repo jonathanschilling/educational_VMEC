@@ -127,43 +127,41 @@ $(document).ready(function(){initNavTree('d5/d6e/restart__iter_8f90_source.html'
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: cp90  = 0.90_dp</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordflow">SELECT CASE</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a>)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">CASE</span> (2:3)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <span class="comment">! restore previous good state</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = zero</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     <span class="comment">! ---- reduce time step ----</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;     <span class="comment">! this is only executed when first ==2 or ==3</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     <span class="comment">! first case: first == 2:</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     <span class="comment">!  =&gt; first-2 == 0</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     <span class="comment">!  =&gt; 3-first == 1</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step *= 0.9  (reduce time step)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;     <span class="comment">! second case: first == 3:</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <span class="comment">!  =&gt; first-2 == 1</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     <span class="comment">!  =&gt; 3-first == 0</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="comment">!  =&gt; resulting operation: time_step /= 1.03 (reduce time step)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;     time_step = time_step*(  (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a>-2)/c1p03  &amp;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                            + (3-<a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a>)*cp90  )</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     <span class="keywordflow">IF</span> (<a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> .eq. 2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        print *, <span class="stringliteral">&quot;bad jacobian --&gt; restart_iter&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> + 1</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">case</span>(2)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;     <span class="comment">! restore previous good state</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = zero</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;     <span class="comment">! ---- reduce time step ----</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     time_step = time_step * cp90</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;     print *, <span class="stringliteral">&quot;bad jacobian --&gt; restart_iter&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aa5c5ac7e7c5f8a5359ed39ff9a51f8ff">ijacob</a> + 1</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">iter1</a> = <a class="code" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">CASE</span> (3)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="comment">! restore previous good state</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#aed89eab9268cb164541a7843aea332b6">xcdot</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = zero</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <span class="comment">! ---- reduce time step ----</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;     time_step = time_step / c1p03</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     <a class="code" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">  CASE DEFAULT</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;     <span class="comment">! save current state vector, e.g. first=1</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordflow">  END SELECT</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordflow">  CASE DEFAULT</span> <span class="comment">! 1, 4</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;     <span class="comment">! save current state vector, e.g. first=1</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;     <a class="code" href="../../d9/d3c/namespacexstuff.html#af42b26fc040939348c5d6e2c20cfba3b">xstore</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>) = <a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(:<a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a>)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordflow">  END SELECT</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc">restart_iter</a></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_a3ef2c519ce424159dd2c7d44a00c463c"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c">vmec_main::iter1</a></div><div class="ttdeci">integer iter1</div><div class="ttdoc">number of iterations at which the currently active evolution was branched off from</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00151">vmec_main.f90:151</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_a62454a545665bf5259ef3bc2882c02eb"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">vmec_main::neqs</a></div><div class="ttdeci">integer neqs</div><div class="ttdoc">total number of equations to evolve (size of xc)</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00147">vmec_main.f90:147</a></div></div>
@@ -181,7 +179,7 @@ $(document).ready(function(){initNavTree('d5/d6e/restart__iter_8f90_source.html'
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/d6e/restart__iter_8f90.html">restart_iter.f90</a></li>
-    <li class="footer">Generated on Wed Jun 9 2021 10:40:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 17:41:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

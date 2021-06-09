@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">INTENT(inout)</span>   :: ns_old</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(out)</span> :: delt0</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">INTEGER</span> :: neqs_old=0</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">INTEGER</span> :: neqs_old = 0 <span class="comment">! note that this sets neqs_old to zero only once at program start!</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">LOGICAL</span> :: lreset_internal, linterp</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="comment">! Allocates memory for radial arrays and initializes radial profiles</span></div>
@@ -237,7 +237,7 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/da6/initialize__radial_8f90.html">initialize_radial.f90</a></li>
-    <li class="footer">Generated on Wed Jun 9 2021 10:40:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 17:41:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

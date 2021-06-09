@@ -30,7 +30,7 @@ SUBROUTINE eqsolve(ier_flag)
   ! need to do this before jump label 20 to allow restart_iter to do its magic
   lreset_internal = .false.
 
-  liter_flag = iter2 .eq. 1 ! true at startup of program
+  liter_flag = iter2 .eq. 1 ! true at start of current multi-grid iteration
 
   ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
 20 CONTINUE ! try again
@@ -62,7 +62,7 @@ SUBROUTINE eqsolve(ier_flag)
      CALL evolve (delt0r, ier_flag, liter_flag)
 
      ! check for bad jacobian and bad initial guess for axis
-     IF (ijacob.eq.0 .and.                                              &
+     IF (ijacob.eq.0 .and.                                               &
          (ier_flag.eq.bad_jacobian_flag .or. first.eq.4) .and.           &
          ns.ge.3) THEN
 
@@ -73,8 +73,10 @@ SUBROUTINE eqsolve(ier_flag)
         PRINT *, ' TRYING TO IMPROVE INITIAL MAGNETIC AXIS GUESS'
 
         CALL guess_axis (r1, z1, ru0, zu0)
-        lreset_internal = .true.
         ijacob = 1
+
+        ! prepare parameters to functions that get called due to lreset_internal and first=2
+        lreset_internal = .true.
         first = 2
         GOTO 20 ! try again
      ELSE IF (ier_flag.ne.norm_term_flag .and.                          &
@@ -98,7 +100,7 @@ SUBROUTINE eqsolve(ier_flag)
         CALL restart_iter(delt0r)
         delt0r = p98*delt
         PRINT 120, delt0r
-        first = 1
+        first = 1 ! done by restart_iter already...
         GOTO 20 ! try again
      ELSE IF (ijacob .eq. 50) THEN
         ! jacobian changed sign 50 times: what the hell? :-S
@@ -106,7 +108,7 @@ SUBROUTINE eqsolve(ier_flag)
         CALL restart_iter(delt0r)
         delt0r = p96*delt
         PRINT 120, delt0r
-        first = 1
+        first = 1 ! done by restart_iter already...
         GOTO 20 ! try again
      ELSE IF (ijacob .ge. 75) THEN
         ! jacobian changed sign at least 75 times: time to give up :-(
@@ -123,6 +125,7 @@ SUBROUTINE eqsolve(ier_flag)
 
      ! TIME STEP CONTROL
      IF (iter2.eq.iter1 .or. res0.eq.-1) then
+        ! if res0 has never been assigned (-1), give it the current value of fsq
         res0 = fsq
      end if
 

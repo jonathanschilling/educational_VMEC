@@ -27,10 +27,13 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
   ! Set timestep control parameters
   fsq    = one
+
   iter2  = 1
   iter1  = iter2
+
   ijacob = 0
   first   = 1
+
   res0   = -1
 
   ! INITIALIZE MESH-DEPENDENT SCALARS

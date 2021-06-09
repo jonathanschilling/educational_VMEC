@@ -10,14 +10,16 @@ import os
 import numpy as np
 from netCDF4 import Dataset
 
-#test_folder = "/data2/jonathan/work/code/educational_VMEC/test"
-test_folder = "/home/IPP-HGW/jons/work/code/educational_VMEC/test"
+test_folder = "/data2/jonathan/work/code/educational_VMEC/test"
+#test_folder = "/home/IPP-HGW/jons/work/code/educational_VMEC/test"
 
+# compare input files to NESTOR or output files from NESTOR
 inout = "out" # "in" or "out"
-#iteration = 2400
-runId = "BETA_5_ICUR_5K"
 
-maxIter = 8373
+#iteration = 2400
+runId = "test.vmec"
+
+maxIter = 1
 for iteration in range(maxIter):
 
     print("%d/%d"%(iteration+1, maxIter))
@@ -30,8 +32,8 @@ for iteration in range(maxIter):
 
     tst_fname = os.path.join(test_folder, "vac", "vac%s_%s_%06d.nc"%(inout, runId, iteration))
 
-#    print("ref: "+ref_fname)
-#    print("tst: "+tst_fname)
+    print("ref: "+ref_fname)
+    print("tst: "+tst_fname)
 
     if not os.path.isfile(ref_fname):
         raise RuntimeError("reference %s not found"%(ref_fname,))
@@ -55,7 +57,8 @@ for iteration in range(maxIter):
     # compare data
     for key in ref_data:
         if not key in tst_data:
-            raise RuntimeError("key %s not found in %s", key, tst_fname)
+            #raise RuntimeError("key %s not found in %s"%(key, tst_fname))
+            continue
 
         r = ref_data[key]
         t = tst_data[key]
@@ -64,9 +67,11 @@ for iteration in range(maxIter):
             raise RuntimeError("shape mismatch in %s: ref has %s, tst has %s"%(key, str(np.shape(r)), str(np.shape(t))))
 
         try:
-            d = np.sum(np.abs(r-t))
+            #d = np.sum(np.abs(r-t))
+            d = np.max(np.abs(r-t))
             if d != 0.0:
-                print("value mismatch in %s: %g"%(key, d))
+                #print("total value mismatch in %s: %g"%(key, d))
+                print("max value mismatch in %s: %g"%(key, d))
                 found_err = True
 #            else:
 #                print("%s ok"%(key,))

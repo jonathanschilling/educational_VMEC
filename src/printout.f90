@@ -3,7 +3,7 @@
 
 !> \brief Print iteration progress to screen and \c threed1 output file.
 !>
-!> @param i0 current iteration number
+!> @param i0 current iteration number (iter2)
 !> @param delt0 current time step
 !> @param w0 current MHD energy
 SUBROUTINE printout(i0, delt0, w0)
@@ -31,18 +31,19 @@ SUBROUTINE printout(i0, delt0, w0)
 
   betav = wp/wb
   w = w0*twopi*twopi
+
   den = zero
   specw(1) = one
-
   gc = xstore
   CALL spectrum (gc(:irzloff), gc(1+irzloff:2*irzloff))
-
   den = SUM(vp(2:ns))
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))
   avm = 0.5_dp*avm/den
+
   IF (ivac .ge. 1 .and. iter2.gt.1) then
      delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
   end if
+
   IF (i0.eq.1 .and. lfreeb) THEN
      print_line = iter_lines // " " // raxis_line
      IF (lasym) print_line = TRIM(print_line) // " " // zaxis_line
@@ -70,7 +71,7 @@ SUBROUTINE printout(i0, delt0, w0)
         PRINT 45, i0, fsqr, fsqz, fsql, r00, delt0, w
         WRITE (nthreed, 40) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, fsql1, &
            delt0, r00, w, betav, avm
-     RETURN
+        RETURN
      ENDIF
      PRINT 50, i0, fsqr, fsqz, fsql, r00, delt0, w, delbsq
      WRITE (nthreed, 42) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &
@@ -81,7 +82,7 @@ SUBROUTINE printout(i0, delt0, w0)
         PRINT 65, i0, fsqr, fsqz, fsql, r00, z00, delt0, w
         WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &
            fsql1, delt0, r00, z00, w, betav, avm
-     RETURN
+        RETURN
      ENDIF
      PRINT 70, i0, fsqr, fsqz, fsql, r00, z00, delt0, w, delbsq
      WRITE (nthreed, 60) i0, fsqr, fsqz, fsql, fsqr1, fsqz1, &

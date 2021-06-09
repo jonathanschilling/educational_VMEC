@@ -36,14 +36,21 @@ SUBROUTINE funct3d (ier_flag)
   integer :: nvac, istat_vac
 
   character(len=255) :: nestor_cmd
+
 !  character(len=*), parameter :: nestor_executable = &
 !    "/home/IPP-HGW/jons/work/code/educational_VMEC/build/bin/xnestor"
+
 !  character(len=*), parameter :: nestor_executable = &
 !     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
-!  character(len=*), parameter :: nestor_executable = &
+
+!    character(len=*), parameter :: nestor_executable = &
 !     "python /home/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
-  character(len=*), parameter :: nestor_executable = &
-    "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
+
+   character(len=*), parameter :: nestor_executable = &
+    "python /home/jonathan/work/code/NESTOR/src/main/python/ooNESTOR.py"
+
+!   character(len=*), parameter :: nestor_executable = &
+!     "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
 
   !> use system call to stand-alone NESTOR for vacuum computation
   logical :: lexternal_nestor = .false.
@@ -230,9 +237,15 @@ SUBROUTINE funct3d (ier_flag)
         ! zaxis_nestor(1:nzeta) = z1(1:ns*nzeta:ns,0)
 
         if (ldump_vacuum_ref .or. lexternal_nestor) then
+
            ! build filename for NESTOR inputs
-           write(vac_file, "(A,I6.6,A)") "vac/vacin_"//TRIM(input_extension)//"_", &
-              vacuum_calls, ".nc"
+           if (ldump_vacuum_ref) then
+             write(vac_file, "(A,I6.6,A)") "vac_ref/vacin_"//TRIM(input_extension)//"_", &
+                vacuum_calls, ".nc"
+           else ! lexternal_nestor
+             write(vac_file, "(A,I6.6,A)") "vac/vacin_"//TRIM(input_extension)//"_", &
+                vacuum_calls, ".nc"
+           end if
 
            ! write NESTOR inputs
            call write_nestor_inputs(trim(vac_file),                                &

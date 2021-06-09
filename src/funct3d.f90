@@ -198,13 +198,14 @@ SUBROUTINE funct3d (ier_flag)
   IF (lfreeb .and. iter2.gt.1 .and. iequi.eq.0) THEN
 
      IF ((fsqr + fsqz) .le. 1.e-3_dp) then
-        !print *, "force residuals decreased sufficiently => increment ivac=",ivac
-        ! this does ivac=-1 --> ivac=0 to enable NESTOR at all
+        ! when R+Z force residuals are <1e-3, enable vacuum contribution
+        ! print *, "force residuals decreased sufficiently => increment ivac=",ivac
 
-        ! initially, ivac is initialized to -1 by reset_params
-        ! when R,Z forces are <1e-3, enable vacuum contribution
+        ! Initially, ivac is initialized to -1 by reset_params().
+        ! This does ivac=-1 --> ivac=0 to enable NESTOR at all.
+        ! Also, this then keeps incrementing ivac until eternity (or convergence...)
+
         ivac = ivac+1   ! decreased from e-1 to e-3 - sph12/04
-        ! I guess this is where the vacuum pressure suddenly gets turned on ?
      end if
 
      IF (nvskip0 .eq. 0) then
@@ -226,6 +227,7 @@ SUBROUTINE funct3d (ier_flag)
         ! EXTEND NVACSKIP AS EQUILIBRIUM CONVERGES
         IF (ivacskip .eq. 0) THEN
            nvacskip = one/MAX(1.e-1_dp, 1.e11_dp*(fsqr+fsqz))
+           ! print *, "suggested nvacskip: ",nvacskip
            nvacskip = MAX(nvacskip, nvskip0)
         END IF
 
@@ -332,7 +334,7 @@ SUBROUTINE funct3d (ier_flag)
         end if
 
         lk = 0
-        DO l = ns, nrzt, ns
+        DO l = ns, nrzt, ns ! loop over all points on LCFS
            lk = lk + 1
 
            ! current extrapolation to LCFS of plasma magnetic field
@@ -353,7 +355,6 @@ SUBROUTINE funct3d (ier_flag)
         END DO
 
         IF (ivac .eq. 1) THEN
-           ! first time: debugging of initial soft-start ????
            print *,"bsqsav(:,1:2) are filled now"
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary
            bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary

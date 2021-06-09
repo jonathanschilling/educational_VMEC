@@ -56,4 +56,4 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
         xnew(1,:,ntype) = 0
   END DO
 
-  END SUBROUTINE interp
+END SUBROUTINE interp

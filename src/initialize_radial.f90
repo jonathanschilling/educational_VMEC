@@ -17,7 +17,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   INTEGER, INTENT(inout)   :: ns_old
   REAL(rprec), INTENT(out) :: delt0
 
-  INTEGER :: neqs_old=0
+  INTEGER :: neqs_old = 0 ! note that this sets neqs_old to zero only once at program start!
   LOGICAL :: lreset_internal, linterp
 
   ! Allocates memory for radial arrays and initializes radial profiles

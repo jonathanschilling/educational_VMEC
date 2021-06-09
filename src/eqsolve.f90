@@ -41,6 +41,7 @@ SUBROUTINE eqsolve(ier_flag)
   IF (first .EQ. 2) THEN
      xc = 0
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
+
      first = 1 ! tells restart_iter to store current xc in xstore
      IF (liter_flag) then
         ! Note that at this point, liter_flag could also simply contain (iter2 .eq. 1) (see above).
@@ -89,6 +90,10 @@ SUBROUTINE eqsolve(ier_flag)
      ! compute MHD energy
      w0 = wb + wp/(gamma - one)
 
+
+
+
+
      ! ADDITIONAL STOPPING CRITERION (set liter_flag to FALSE)
 
      ! the blocks for ijacob=25 or 50 are equal up to the point
@@ -123,7 +128,12 @@ SUBROUTINE eqsolve(ier_flag)
         /,2x,'If this does NOT resolve the problem, try changing ',     &
              '(decrease OR increase) the value of DELT')
 
+
+
+
+
      ! TIME STEP CONTROL
+
      IF (iter2.eq.iter1 .or. res0.eq.-1) then
         ! if res0 has never been assigned (-1), give it the current value of fsq
         res0 = fsq

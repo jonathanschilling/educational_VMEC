@@ -194,14 +194,16 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;     <span class="comment">! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;     <span class="keywordflow">IF</span> (linterp) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">CALL </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a> (<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, ns, ns_old)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordflow">     END IF</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     ns_old = ns</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;     neqs_old = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        print *, <span class="stringliteral">&quot;interpolate from previous solution&quot;</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">CALL </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a> (<a class="code" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36">gc</a>, <a class="code" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, ns, ns_old)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordflow">     END IF</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     ns_old = ns</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     neqs_old = <a class="code" href="../../d1/d6c/namespacevmec__main.html#a62454a545665bf5259ef3bc2882c02eb">neqs</a></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div>
 <div class="ttc" id="aallocate__ns_8f90_html_aeb3e662fed5b934054b3febb084ed659"><div class="ttname"><a href="../../d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659">allocate_ns</a></div><div class="ttdeci">subroutine allocate_ns(linterp, neqs_old)</div><div class="ttdoc">allocate arrays depending on the number of flux surfaces ns</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/df2/allocate__ns_8f90_source.html#l00008">allocate_ns.f90:9</a></div></div>
 <div class="ttc" id="ainitialize__radial_8f90_html_a187faea543d3a42bc748511f04b5b7d5"><div class="ttname"><a href="../../d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5">initialize_radial</a></div><div class="ttdeci">subroutine initialize_radial(nsval, ns_old, delt0)</div><div class="ttdoc">Allocates memory for radial arrays and initializes radial profiles.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/da6/initialize__radial_8f90_source.html#l00009">initialize_radial.f90:10</a></div></div>
 <div class="ttc" id="ainterp_8f90_html_a5bac7725cb89730c4bd187e158dc36ee"><div class="ttname"><a href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div><div class="ttdeci">subroutine interp(xnew, xold, scalxc, nsnew, nsold)</div><div class="ttdoc">Interpolate ,  and  on full grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df5/interp_8f90_source.html#l00011">interp.f90:12</a></div></div>
@@ -237,7 +239,7 @@ $(document).ready(function(){initNavTree('d9/da6/initialize__radial_8f90_source.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d9/da6/initialize__radial_8f90.html">initialize_radial.f90</a></li>
-    <li class="footer">Generated on Thu Jun 10 2021 09:38:14 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jun 10 2021 13:33:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

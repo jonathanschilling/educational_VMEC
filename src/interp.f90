@@ -9,7 +9,7 @@
 !> @param nsnew new number of flux surfaces
 !> @param nsold old number of flux surfaces
 SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
-  USE vmec_main, ONLY: dp, rprec, mnsize
+  USE vmec_main, ONLY: dp, rprec, mnsize, input_extension
   USE vmec_params, ONLY: ntmax
   USE vmec_persistent, ONLY: ixm
   IMPLICIT NONE
@@ -24,9 +24,24 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   INTEGER :: ntype, js, js1, js2
   REAL(rprec) :: hsold, sj, s1, xint
 
+  character(len=255) :: dump_filename
+  logical            :: dump_interp = .true.
+
   IF (nsold .le. 0) RETURN
 
   hsold = one/(nsold - 1)
+
+  if (dump_interp) then
+    write(dump_filename, 999) nsold, nsnew, trim(input_extension)
+999 format('interp_',i5.5,'_',i5.5,'.',a)
+
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    write(42, *) "# nsold nsnew ntmax"
+    write(42, *) nsold, nsnew, ntmax
+
+    write(42, *) "# js sj js1 js2 s1 xint"
+  end if
 
   ! INTERPOLATE R,Z AND LAMBDA ON FULL GRID
   ! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)
@@ -49,11 +64,20 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
         xint = MAX(zero,xint)
         xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype) &
                              +        xint *xold(js2,:,ntype)   )/scalxc(js,:,1)
+        if (dump_interp .and. ntype.eq.1) then
+          write(42, *) js, sj, js1, js2, s1, xint
+        end if
      END DO
 
      ! Zero M=1 modes at origin
      WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
         xnew(1,:,ntype) = 0
   END DO
+
+  if (dump_interp) then
+    close(42)
+
+    print *, "dumped interp to '"//trim(dump_filename)//"'"
+  end if
 
 END SUBROUTINE interp

@@ -86,6 +86,8 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
      ! INTERPOLATE FROM COARSE (ns_old) TO NEXT FINER (ns) RADIAL GRID
      IF (linterp) THEN
+        print *, "interpolate from previous solution"
+
         CALL interp (xc, gc, scalxc, ns, ns_old)
      END IF
 

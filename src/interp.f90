@@ -21,7 +21,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
   REAL(rprec), PARAMETER :: zero=0, one=1
 
-  INTEGER :: ntype, js, js1, js2
+  INTEGER :: ntype, js, js1, js2, mn
   REAL(rprec) :: hsold, sj, s1, xint
 
   character(len=255) :: dump_filename
@@ -75,6 +75,24 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   END DO
 
   if (dump_interp) then
+    write(42, *) "# js mn ntype xold"
+    DO ntype = 1, 3*ntmax
+      DO js = 1, nsold
+        do mn=1, mnsize
+          write(42, *) js, mn, ntype, xold(js, mn, ntype)
+        end do
+      end do
+    end do
+
+    write(42, *) "# js mn ntype xnew scalxc"
+    DO ntype = 1, 3*ntmax
+      DO js = 1, nsnew
+        do mn=1, mnsize
+          write(42, *) js, mn, ntype, xnew(js, mn, ntype), scalxc(js, mn, ntype)
+        end do
+      end do
+    end do
+
     close(42)
 
     print *, "dumped interp to '"//trim(dump_filename)//"'"

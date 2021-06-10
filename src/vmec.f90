@@ -19,6 +19,7 @@ subroutine vmec
   USE vmec_params
   USE vmec_main
   use mgrid_mod, only: free_mgrid
+  use xstuff, only: xc, scalxc
 
   IMPLICIT NONE
 
@@ -39,6 +40,12 @@ subroutine vmec
   INTEGER :: ns_old=0
   INTEGER :: igrid
   INTEGER :: jacob_off
+
+  integer :: i, js
+
+  character(len=255) :: dump_filename
+  logical            :: dump_multigrid_result = .true.
+
 
   ! Read in command-line arguments to get input file or sequence file,
   ! screen display information, and restart information
@@ -160,6 +167,46 @@ subroutine vmec
            ! did not reach convergence
            IF (ier_flag.ne.norm_term_flag .and. ier_flag.ne.successful_term_flag) then
               EXIT
+           end if
+
+           ! If this point is reached, the current multi-grid step should have properly converged.
+           ! Now dump the current state vector for debugging.
+           if (dump_multigrid_result) then
+             write(dump_filename, 999) nsval, iter2-1, trim(input_extension)
+999 format('multigrid_result_',i5.5,'_',i6.6,'.',a)
+
+             open(unit=42, file=trim(dump_filename), status="unknown")
+
+             ! resolution and number of iterations at which this converged
+             write(42,*) "# ns iter2 ncurr phiedge ntmax"
+             write(42,*) nsval, iter2-1, ncurr, phiedge, ntmax
+
+             write(42,*) "# js pres"
+             do js=2, ns
+               write(42,*) js, pres(js)
+             end do
+
+             if (ncurr.eq.1) then
+               ! constrained-current; dump iota
+               write(42,*) "# js iotas"
+               do js=2, ns
+                 write(42,*) js, iotas(js)
+               end do
+             else
+               ! constrained rotational transform; dump chi-prime
+               write(42,*) "# js chips"
+               do js=2, ns
+                 write(42,*) js, chips(js)
+               end do
+             end if
+
+             write(42,*) "# i xc scalxc"
+             do i=1, neqs
+               write(42,*) i, xc(i), scalxc(i)
+             end do
+
+             close(42)
+             print *, "dumped current multi-grid result to '"//trim(dump_filename)//"'"
            end if
 
         END DO ITERATIONS

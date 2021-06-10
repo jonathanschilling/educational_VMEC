@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero=0, one=1</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">INTEGER</span> :: ntype, js, js1, js2</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">INTEGER</span> :: ntype, js, js1, js2, mn</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">  REAL</span>(rprec) :: hsold, sj, s1, xint</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
@@ -181,12 +181,30 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordflow">  END DO</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">if</span> (dump_interp) <span class="keywordflow">then</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">close</span>(42)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    print *, <span class="stringliteral">&quot;dumped interp to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordflow">  end if</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js mn ntype xold&quot;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">DO</span> ntype = 1, 3*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keywordflow">DO</span> js = 1, nsold</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">do</span> mn=1, mnsize</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;          <span class="keyword">write</span>(42, *) js, mn, ntype, xold(js, mn, ntype)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js mn ntype xnew scalxc&quot;</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">DO</span> ntype = 1, 3*<a class="code" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">DO</span> js = 1, nsnew</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">do</span> mn=1, mnsize</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;          <span class="keyword">write</span>(42, *) js, mn, ntype, xnew(js, mn, ntype), scalxc(js, mn, ntype)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordflow">        end do</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordflow">      end do</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordflow">    end do</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">close</span>(42)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    print *, <span class="stringliteral">&quot;dumped interp to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordflow">  end if</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">END SUBROUTINE </span><a class="code" href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div>
 <div class="ttc" id="ainterp_8f90_html_a5bac7725cb89730c4bd187e158dc36ee"><div class="ttname"><a href="../../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee">interp</a></div><div class="ttdeci">subroutine interp(xnew, xold, scalxc, nsnew, nsold)</div><div class="ttdoc">Interpolate ,  and  on full grid.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/df5/interp_8f90_source.html#l00011">interp.f90:12</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
@@ -199,7 +217,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/df5/interp_8f90.html">interp.f90</a></li>
-    <li class="footer">Generated on Thu Jun 10 2021 13:33:26 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jun 10 2021 20:16:03 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

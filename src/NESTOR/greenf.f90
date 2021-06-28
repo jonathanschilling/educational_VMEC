@@ -132,52 +132,52 @@ SUBROUTINE greenf(delgr, delgrp, ip)
            ! this is where log_greenf_2.txt comes from
            !print *, ip, i, iuoff, ivoff, i+iuoff, i+ivoff, tanu(i+iuoff), tanv(i+ivoff)
 
-!            ga1(i) = tanu(i+iuoff)*(  guu_b(ip)*tanu(i+iuoff) + guv_b(ip)*tanv(i+ivoff)) &
-!                                    + gvv_b(ip)*tanv(i+ivoff)*tanv(i+ivoff)
-!            ga2(i) = tanu(i+iuoff)*(  auu  (ip)*tanu(i+iuoff) + auv  (ip)*tanv(i+ivoff)) &
-!                                    + avv  (ip)*tanv(i+ivoff)*tanv(i+ivoff)
+           ga1(i) = tanu(i+iuoff)*(  guu_b(ip)*tanu(i+iuoff) + guv_b(ip)*tanv(i+ivoff)) &
+                                   + gvv_b(ip)*tanv(i+ivoff)*tanv(i+ivoff)
+           ga2(i) = tanu(i+iuoff)*(  auu  (ip)*tanu(i+iuoff) + auv  (ip)*tanv(i+ivoff)) &
+                                   + avv  (ip)*tanv(i+ivoff)*tanv(i+ivoff)
 
-           if (abs(tanu(i+iuoff) - tanu_1d(delta_ku)) .gt. 1.0e-9_dp) then
-              print *, "mismatch in tanu:"
-              print *, "  tanu(i+iuoff)    = ", tanu(i+iuoff)
-              print *, "  tanu_1d(delta_ku)= ", tanu_1d(delta_ku)
-              print *, "        difference = ", tanu(i+iuoff) - tanu_1d(delta_ku)
-              print *, "                ip = ", ip
-              print *, "                i  = ", i
-              print *, "            iskip  = ", iskip
-              print *, "            iuoff  = ", iuoff
-              print *, "             ku_i  = ", ku_i
-              print *, "             kv_i  = ", kv_i
-              print *, "            ku_ip  = ", ku_ip
-              print *, "            kv_ip  = ", kv_ip
-              print *, "         delta_ku  = ", delta_ku
-              stop
-           end if
-
-
-           if (abs(tanv(i+ivoff) - tanv_1d(delta_kv)) .gt. 1.0e-9_dp) then
-              print *, "mismatch in tanv:"
-              print *, "  tanv(i+ivoff)    = ", tanv(i+ivoff)
-              print *, "  tanv_1d(delta_kv)= ", tanv_1d(delta_kv)
-              print *, "        difference = ", tanv(i+iuoff) - tanv_1d(delta_kv)
-              print *, "                ip = ", ip
-              print *, "                i  = ", i
-              print *, "           ivoff0  = ", ivoff0
-              print *, "           ivoff   = ", ivoff
-              print *, "             ku_i  = ", ku_i
-              print *, "             kv_i  = ", kv_i
-              print *, "            ku_ip  = ", ku_ip
-              print *, "            kv_ip  = ", kv_ip
-              print *, "         delta_kv  = ", delta_kv
-              stop
-           end if
-
-
-
-           ga1(i) = tanu_1d(delta_ku)*(  guu_b(ip)*tanu_1d(delta_ku) + guv_b(ip)*tanv_1d(delta_kv)) &
-                                   + gvv_b(ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
-           ga2(i) = tanu_1d(delta_ku)*(  auu  (ip)*tanu_1d(delta_ku) + auv  (ip)*tanv_1d(delta_kv)) &
-                                   + avv  (ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
+!            if (abs(tanu(i+iuoff) - tanu_1d(delta_ku)) .gt. 1.0e-9_dp) then
+!               print *, "mismatch in tanu:"
+!               print *, "  tanu(i+iuoff)    = ", tanu(i+iuoff)
+!               print *, "  tanu_1d(delta_ku)= ", tanu_1d(delta_ku)
+!               print *, "        difference = ", tanu(i+iuoff) - tanu_1d(delta_ku)
+!               print *, "                ip = ", ip
+!               print *, "                i  = ", i
+!               print *, "            iskip  = ", iskip
+!               print *, "            iuoff  = ", iuoff
+!               print *, "             ku_i  = ", ku_i
+!               print *, "             kv_i  = ", kv_i
+!               print *, "            ku_ip  = ", ku_ip
+!               print *, "            kv_ip  = ", kv_ip
+!               print *, "         delta_ku  = ", delta_ku
+!               stop
+!            end if
+!
+!
+!            if (abs(tanv(i+ivoff) - tanv_1d(delta_kv)) .gt. 1.0e-9_dp) then
+!               print *, "mismatch in tanv:"
+!               print *, "  tanv(i+ivoff)    = ", tanv(i+ivoff)
+!               print *, "  tanv_1d(delta_kv)= ", tanv_1d(delta_kv)
+!               print *, "        difference = ", tanv(i+iuoff) - tanv_1d(delta_kv)
+!               print *, "                ip = ", ip
+!               print *, "                i  = ", i
+!               print *, "           ivoff0  = ", ivoff0
+!               print *, "           ivoff   = ", ivoff
+!               print *, "             ku_i  = ", ku_i
+!               print *, "             kv_i  = ", kv_i
+!               print *, "            ku_ip  = ", ku_ip
+!               print *, "            kv_ip  = ", kv_ip
+!               print *, "         delta_kv  = ", delta_kv
+!               stop
+!            end if
+!
+!
+!
+!            ga1(i) = tanu_1d(delta_ku)*(  guu_b(ip)*tanu_1d(delta_ku) + guv_b(ip)*tanv_1d(delta_kv)) &
+!                                    + gvv_b(ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
+!            ga2(i) = tanu_1d(delta_ku)*(  auu  (ip)*tanu_1d(delta_ku) + auv  (ip)*tanv_1d(delta_kv)) &
+!                                    + avv  (ip)*tanv_1d(delta_kv)*tanv_1d(delta_kv)
 
            ! This was used to generate log_ga1_ga2.dat
            ! print *, ip, i, ga1(i), ga2(i)

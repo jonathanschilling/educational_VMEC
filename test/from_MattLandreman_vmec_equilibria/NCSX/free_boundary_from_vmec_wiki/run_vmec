@@ -1,0 +1,3 @@
+#!/bin/bash
+#/Users/mattland/stellopt_centered_differences/bin/xparvmec input.ncsx_c09r00_free | tee vmec.out
+/Users/mattland/stellopt_centered_differences/bin/xvmec2000 input.ncsx_c09r00_free | tee vmec.out

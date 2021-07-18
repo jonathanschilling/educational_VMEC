@@ -1,0 +1,93 @@
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  SEQ =    1 TIME SLICE  0.0000E+00
+  PROCESSING INPUT.100_44_64_0.0
+  THIS IS VMEC2000, A 3D EQUILIBRIUM CODE, VERSION 8.51
+  Lambda: Full Radial Mesh. L-Force: hybrid full/half.
+
+  COMPUTER: edison05   OS: linux   RELEASE: x86_64  DATE = Oct 22,2015  TIME = 06:33:34
+
+  NS =   21 NO. FOURIER MODES =  760 FTOLV =  5.000E-08 NITER =  12000
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  3.50E+00  2.07E+00  4.02E-01  1.740E+00  9.94E-01  5.9299E-01
+  100  6.54E-05  4.94E-05  1.58E-05  1.738E+00  5.70E-01  5.0984E-01
+  197  4.99E-08  4.73E-08  4.29E-08  1.738E+00  5.70E-01  5.0983E-01
+
+  NS =   41 NO. FOURIER MODES =  760 FTOLV =  5.000E-12 NITER =  12000
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  6.70E-02  4.62E-02  1.76E-05  1.738E+00  9.94E-01  5.0984E-01
+  100  1.32E-05  1.08E-05  5.84E-08  1.738E+00  5.28E-01  5.0983E-01
+  200  1.62E-07  1.42E-07  2.58E-09  1.739E+00  5.28E-01  5.0983E-01
+  300  2.22E-08  1.94E-08  6.34E-10  1.739E+00  5.28E-01  5.0983E-01
+  400  5.49E-09  5.01E-09  2.03E-10  1.739E+00  5.28E-01  5.0983E-01
+  500  1.81E-09  1.55E-09  6.59E-11  1.739E+00  5.28E-01  5.0983E-01
+  600  4.03E-10  3.35E-10  2.56E-11  1.739E+00  5.28E-01  5.0983E-01
+  700  1.08E-10  9.43E-11  1.32E-11  1.739E+00  5.28E-01  5.0983E-01
+  800  4.47E-11  4.00E-11  7.36E-12  1.739E+00  5.28E-01  5.0983E-01
+  900  1.57E-11  1.31E-11  4.17E-12  1.739E+00  5.28E-01  5.0983E-01
+ 1000  6.71E-12  5.21E-12  2.63E-12  1.739E+00  5.28E-01  5.0983E-01
+ 1055  4.98E-12  4.10E-12  1.93E-12  1.739E+00  5.28E-01  5.0983E-01
+
+  NS =  141 NO. FOURIER MODES =  760 FTOLV =  1.000E-12 NITER =  12000
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  1.02E-01  6.99E-02  1.10E-05  1.739E+00  9.94E-01  5.0984E-01
+  100  3.36E-05  2.69E-05  4.11E-08  1.739E+00  3.36E-01  5.0983E-01
+  200  1.91E-07  1.64E-07  8.13E-10  1.739E+00  3.36E-01  5.0983E-01
+  300  2.14E-08  1.75E-08  1.72E-10  1.739E+00  3.36E-01  5.0983E-01
+  400  4.17E-09  3.38E-09  5.02E-11  1.739E+00  3.36E-01  5.0983E-01
+  500  1.19E-09  9.79E-10  1.88E-11  1.739E+00  3.36E-01  5.0983E-01
+  600  5.11E-10  4.51E-10  9.91E-12  1.739E+00  3.36E-01  5.0983E-01
+  700  2.66E-10  2.21E-10  6.53E-12  1.739E+00  3.36E-01  5.0983E-01
+  800  1.50E-10  1.23E-10  4.14E-12  1.739E+00  3.36E-01  5.0983E-01
+  900  8.75E-11  6.79E-11  2.94E-12  1.739E+00  3.36E-01  5.0983E-01
+ 1000  4.42E-11  3.76E-11  1.79E-12  1.739E+00  3.36E-01  5.0983E-01
+ 1100  3.11E-11  2.65E-11  1.39E-12  1.739E+00  3.36E-01  5.0983E-01
+ 1200  2.04E-11  1.67E-11  9.21E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1300  1.16E-11  9.81E-12  6.49E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1400  6.82E-12  6.01E-12  3.98E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1500  4.32E-12  3.76E-12  2.87E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1600  2.87E-12  2.32E-12  2.14E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1700  1.77E-12  1.52E-12  1.56E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1800  1.44E-12  1.19E-12  1.16E-13  1.739E+00  3.36E-01  5.0983E-01
+ 1900  1.02E-12  8.36E-13  7.87E-14  1.739E+00  3.36E-01  5.0983E-01
+ 1902  9.96E-13  8.23E-13  7.81E-14  1.739E+00  3.36E-01  5.0983E-01
+
+ EXECUTION TERMINATED NORMALLY
+
+ FILE : 100_44_64_0.0
+ NUMBER OF JACOBIAN RESETS =   10
+
+    TOTAL COMPUTATIONAL TIME             350.96 SECONDS
+    TIME TO READ IN DATA                   0.04 SECONDS
+    TIME TO WRITE DATA TO WOUT             3.08 SECONDS
+    TIME IN EQFORCE                        1.96 SECONDS
+    TIME IN FOURIER TRANSFORM            119.30 SECONDS
+    TIME IN INVERSE FOURIER XFORM        105.10 SECONDS
+    TIME IN FORCES                        34.98 SECONDS
+    TIME IN BCOVAR                        43.63 SECONDS
+    TIME IN RESIDUE                       11.92 SECONDS
+    TIME (REMAINDER) IN FUNCT3D           28.54 SECONDS
+Application 16945794 resources: utime ~348s, stime ~3s, Rss ~101020, inblocks ~81270, outblocks ~214363
+
+ + --------------------------------------------------------------------------
+ +        Job name: vmec
+ +          Job Id: 3892613.edique02
+ +          System: edison
+ +     Queued Time: Thu Oct 22 06:33:13 2015
+ +      Start Time: Thu Oct 22 06:33:29 2015
+ + Completion Time: Thu Oct 22 06:39:26 2015
+ +            User: landrema
+ +        MOM Host: nid02435
+ +           Queue: debug
+ +  Req. Resources: mppnodect=1,mppnppn=24,mppwidth=24,walltime=00:30:00
+ +  Used Resources: cput=00:00:01,energy_used=0,mem=10512kb,vmem=90616kb,walltime=00:06:00
+ +     Acct String: mp217
+ +   PBS_O_WORKDIR: /global/u2/l/landrema/vmecEquilibria/TJ-II/100_44_64_0
+ +     Submit Args: job
+ + --------------------------------------------------------------------------
+

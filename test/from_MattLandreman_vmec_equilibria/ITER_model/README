@@ -1,0 +1,5 @@
+This configuration is a simplified model of ITER. It has the same
+major radius (6 m) and minor radius (2m), but has circular
+cross-section. It is up-down symmetric and axisymmetric. It has iota =
+0.9 on axis and iota = 0.25 at the edge. It has an average field
+strength of ~ 5.4 T, like ITER.

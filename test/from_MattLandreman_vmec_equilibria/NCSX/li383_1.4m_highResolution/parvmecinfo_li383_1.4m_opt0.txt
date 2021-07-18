@@ -1,0 +1,37 @@
+ ============================================================
+ PARVMEC =  T ; ALLGATHER =  T ; THOMAS =  F ; BCYCLIC =  T
+ > available processor count:          32
+ > global rank:           0
+ > nzeta:                48
+ > ntheta3:              29
+ > ntor:                 22
+ > mpol1:                24
+ > ntmax:                 2
+ > blocksize:           575
+ ============================================================
+ 
+ >>> grid resolution:             16
+ >>> active processors:            8
+ >>> xc/gc size:               55200
+ ------------------------------------------------------------
+ 
+ >>> grid resolution:             16
+ >>> active processors:            8
+ >>> xc/gc size:               55200
+ ------------------------------------------------------------
+ 
+ >>> grid resolution:             49
+ >>> active processors:           24
+ >>> xc/gc size:              169050
+ ------------------------------------------------------------
+ 
+ >>> grid resolution:             75
+ >>> active processors:           32
+ >>> xc/gc size:              258750
+ ------------------------------------------------------------
+ 
+ >>> grid resolution:            101
+ >>> active processors:           32
+ >>> xc/gc size:              348450
+ ------------------------------------------------------------
+ 

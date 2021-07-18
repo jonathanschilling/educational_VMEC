@@ -354,6 +354,8 @@ SUBROUTINE funct3d (ier_flag)
            dbsq(lk) = ABS(gcon(l)-bsqsav(lk,3))
         END DO
 
+        !print *, "max bsqvac = ", maxval(bsqvac)
+
         IF (ivac .eq. 1) THEN
            print *,"bsqsav(:,1:2) are filled now"
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary

@@ -59,4 +59,4 @@ test/input*
 test/vac*
 test/*.nc
 
-test/*
+test/old/*

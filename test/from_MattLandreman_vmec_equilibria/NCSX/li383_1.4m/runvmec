@@ -1,0 +1,2 @@
+#!/bin/bash
+/global/homes/l/landrema/20160401-01-stellinstall_246b_edison/VMEC2000/Release/xvmec2000 input.li383_1.4m | tee vmec_stdout

@@ -1,0 +1,4 @@
+More W7-X equilibria can be found by connecting to the IPP remote desktop via
+https://desktops.ipp-hgw.mpg.de/portal/webclient/index.html#/desktop
+opening a web browser, and then browsing to
+svvmec1.ipp-hgw.mpg.de:8080/vmecrest/v1/geiger/w7x/

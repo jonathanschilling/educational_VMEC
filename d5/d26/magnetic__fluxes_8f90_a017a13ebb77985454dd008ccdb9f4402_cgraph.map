@@ -1,4 +1,4 @@
 <map id="torflux" name="torflux">
-<area shape="rect" id="node1" title="Compute the enclosed toroidal magnetic flux." alt="" coords="5,5,61,32"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="109,5,200,32"/>
+<area shape="rect" id="node1" title="Compute the enclosed toroidal magnetic flux." alt="" coords="5,29,61,56"/>
+<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="109,29,200,56"/>
 </map>

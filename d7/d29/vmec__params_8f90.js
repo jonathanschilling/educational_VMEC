@@ -2,7 +2,6 @@ var vmec__params_8f90 =
 [
     [ "bad_jacobian_flag", "d7/d29/vmec__params_8f90.html#a1b03181cb863861ace0116ff9c0fc1b9", null ],
     [ "cleanup_flag", "d7/d29/vmec__params_8f90.html#a21a9ac12230312db0e65175bec35181c", null ],
-    [ "ink", "d7/d29/vmec__params_8f90.html#ac81d5a318bc05b9121e7a3d840bf5a34", null ],
     [ "input_error_flag", "d7/d29/vmec__params_8f90.html#a85bdca5125bff330b911768e130765c2", null ],
     [ "jac75_flag", "d7/d29/vmec__params_8f90.html#a1bb64fd7a1dd241a59b507318bfab4f4", null ],
     [ "jlam", "d7/d29/vmec__params_8f90.html#a4951d69603a739ae3d1ece2829f4c1fe", null ],

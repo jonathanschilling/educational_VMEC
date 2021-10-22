@@ -3,7 +3,6 @@ var mgrid__mod_8f =
     [ "assign_bptrs", "d2/d01/mgrid__mod_8f.html#acadb9c6d09345e3d8f91f5800ad7d452", null ],
     [ "free_mgrid", "d2/d01/mgrid__mod_8f.html#a1badf08429cd96cebc8ecc22782e87ac", null ],
     [ "read_mgrid", "d2/d01/mgrid__mod_8f.html#a202373a45f0c5b1f81076da92a1123d0", null ],
-    [ "read_mgrid_nc", "d2/d01/mgrid__mod_8f.html#a6716ed987ee30bdb9aab39c2aa00a116", null ],
     [ "sum_bfield", "d2/d01/mgrid__mod_8f.html#aa4818ade7a169c68f8b7c3a225fd287e", null ],
     [ "abcoil", "d2/d01/mgrid__mod_8f.html#a19ea4802c83152e92bb050b55787062b", null ],
     [ "b_chi", "d2/d01/mgrid__mod_8f.html#a2d8bad548f10d40b1bc75ba105a35cf6", null ],

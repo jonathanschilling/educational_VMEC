@@ -7,27 +7,19 @@ var namespaces_dup =
       [ "rzu_fac", "df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5", null ]
     ] ],
     [ "functions", "df/d36/namespacefunctions.html", [
-      [ "check", "df/d36/namespacefunctions.html#a033267915856ffffc6e40d5fbb0ee7fc", null ],
       [ "function_test", "df/d36/namespacefunctions.html#ac8a7a9050ac08bc732ab08c620621024", null ],
       [ "two_power", "df/d36/namespacefunctions.html#a518699207ca1e12189357365cbd4cecc", null ],
       [ "two_power_gs", "df/d36/namespacefunctions.html#abc11e343e0f1425203ffbbcaaf684593", null ]
     ] ],
     [ "line_segment", "d2/dcb/namespaceline__segment.html", [
-      [ "check", "d2/dcb/namespaceline__segment.html#a04c149e43d03225ae01a15c2f0b41dd3", null ],
-      [ "get_indices", "d2/dcb/namespaceline__segment.html#a31a01cf72d16fde32c0e24117463e47c", null ],
       [ "line_seg", "d2/dcb/namespaceline__segment.html#aa63bfde0ff39e19622f7f5fe150e8b59", null ],
       [ "line_seg_int", "d2/dcb/namespaceline__segment.html#a5686dda904eede25b04410ebada585d3", null ],
-      [ "line_seg_test", "d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8", null ],
-      [ "offset", "d2/dcb/namespaceline__segment.html#a0cf0121553fa4a68435b32d108a07939", null ],
-      [ "slope", "d2/dcb/namespaceline__segment.html#af56aa3476fb0180676f03621e37e8052", null ],
-      [ "y_value", "d2/dcb/namespaceline__segment.html#a7273855a867ff0e9b1ef9c62d0a54253", null ],
-      [ "y_value_int", "d2/dcb/namespaceline__segment.html#a44a262856a22f3a17b1d2e437d856350", null ]
+      [ "line_seg_test", "d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8", null ]
     ] ],
     [ "mgrid_mod", "d1/d41/namespacemgrid__mod.html", [
       [ "assign_bptrs", "d1/d41/namespacemgrid__mod.html#acadb9c6d09345e3d8f91f5800ad7d452", null ],
       [ "free_mgrid", "d1/d41/namespacemgrid__mod.html#a1badf08429cd96cebc8ecc22782e87ac", null ],
       [ "read_mgrid", "d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0", null ],
-      [ "read_mgrid_nc", "d1/d41/namespacemgrid__mod.html#a6716ed987ee30bdb9aab39c2aa00a116", null ],
       [ "sum_bfield", "d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e", null ],
       [ "abcoil", "d1/d41/namespacemgrid__mod.html#a19ea4802c83152e92bb050b55787062b", null ],
       [ "b_chi", "d1/d41/namespacemgrid__mod.html#a2d8bad548f10d40b1bc75ba105a35cf6", null ],
@@ -714,7 +706,6 @@ var namespaces_dup =
     [ "vmec_params", "d1/d74/namespacevmec__params.html", [
       [ "bad_jacobian_flag", "d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9", null ],
       [ "cleanup_flag", "d1/d74/namespacevmec__params.html#a21a9ac12230312db0e65175bec35181c", null ],
-      [ "ink", "d1/d74/namespacevmec__params.html#ac81d5a318bc05b9121e7a3d840bf5a34", null ],
       [ "input_error_flag", "d1/d74/namespacevmec__params.html#a85bdca5125bff330b911768e130765c2", null ],
       [ "jac75_flag", "d1/d74/namespacevmec__params.html#a1bb64fd7a1dd241a59b507318bfab4f4", null ],
       [ "jlam", "d1/d74/namespacevmec__params.html#a4951d69603a739ae3d1ece2829f4c1fe", null ],

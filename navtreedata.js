@@ -60,17 +60,17 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/d6c/namespacevmec__main.html#a9c615df93ea15a7ba9bfdb12531b82b7",
-"d2/dcb/namespaceline__segment.html#af56aa3476fb0180676f03621e37e8052",
-"d6/df3/getcurmid_8f90_source.html",
-"d8/df9/realspace_8f90.html#a08bab4dd4b3d0633fe56766d803924cf",
-"db/da1/nestor__io_8f90.html#a9ce4cc0ffed9fad3c4715c53e8678e72",
-"db/dae/namespaceread__wout__mod.html#a75476f248b02035b923f64db00971830",
-"db/dc0/namespacenestor__io.html#a34710c925fa8116bda499b387d7cb489",
-"dd/df2/namespacevacmod.html#a1a213e5fe574e7931c3c01850cf9a397",
-"df/d0c/namespacestel__constants.html#af3e1192258fe53b2791b692a9505ca08",
-"df/d61/read__wout__mod_8f.html#a9365fba3f0744975b2265c6a68294d7e",
-"namespacemembers_vars_d.html"
+"d1/d6c/namespacevmec__main.html#aa3fbe8ae1c186a7d41d252c37ed93468",
+"d3/dec/vmec__persistent_8f90.html#a0e3080920c0ec3ec4b15b1a17e091ace",
+"d7/d0e/namespacerealspace.html#a8c1dec7050f35ebbd2480dbc2c40362a",
+"d8/df9/realspace_8f90.html#a8d71f537dce83b5613df52d76a55c3bc",
+"db/da1/nestor__io_8f90.html#ab77c0001511cc14107d19ade2e76d254",
+"db/dae/namespaceread__wout__mod.html#a83f6466c72e3122cc1ba574811785015",
+"db/dc0/namespacenestor__io.html#a57f59234c7f7efa20b76250a25a5640f",
+"dd/df2/namespacevacmod.html#a4caa66709a88d6854d807355e64a3254",
+"df/d61/read__wout__mod_8f.html#a08b121b60a9042fb62f3c7eccb5e8e2b",
+"df/d61/read__wout__mod_8f.html#aa022eda6717d0e24d6e350f8b28b0edb",
+"namespacemembers_z.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

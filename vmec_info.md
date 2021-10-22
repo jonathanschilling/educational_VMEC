@@ -205,29 +205,35 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
 
 ************************************************************************************
 
- 12/04:  Added INDATA namelist variables mfilter_bdy, nfilter_bdy to filter out high harmonics
+ * 12/04:  Added INDATA namelist variables mfilter_bdy, nfilter_bdy to filter out high harmonics
          in the intial boundary representation for free boundary calculations. Default values (-1)
          DO NOT to filter ANY of the rbdy, zbdy harmonics. This is useful for very complex
          initial boundary shapes, for which it may be difficult to get the iterations started.
          Setting mfilter_bdy = M will exclude all harmonics in the initial boundary with m
          no. > M.
- 11/04:  Added reverse communication loop in vmec.f, allowing runvmec to be called and controlled
+
+ * 11/04:  Added reverse communication loop in vmec.f, allowing runvmec to be called and controlled
          externally via an ictrl_array of flags.
- 10/04:  Add GMRES, QMRS algorithms for stepping 2D, Preconditioner
- 03/02:  Added LASYM to INDATA namelist to control running VMEC in symmetric (default) or
+
+ * 10/04:  Add GMRES, QMRS algorithms for stepping 2D, Preconditioner
+
+ * 03/02:  Added LASYM to INDATA namelist to control running VMEC in symmetric (default) or
          asymmetric mode (stellarator symmetric...)
- 03/01:  Introduced some damping on the free-boundary motion into SCALFOR in order to
+
+ * 03/01:  Introduced some damping on the free-boundary motion into SCALFOR in order to
          accelerate (and improve) the convergence of the free-bdy code.
- 03/01:  Modified GUESS_AXIS subroutine to make better guess for axis. A grid search
+
+ * 03/01:  Modified GUESS_AXIS subroutine to make better guess for axis. A grid search
          over the plasma cross section is made to find the axis value which maximizes
          the minimum value of the jacobian for each value of toroidal angle. This algorithm
          was implemented to improve convergence of VMEC2000 inside STELLOPT optimization code.
 
- 03/00:  Begin modification of MHD forces to improve (post-processed) force balance at
+ * 03/00:  Begin modification of MHD forces to improve (post-processed) force balance at
          low aspect ratio. The first step is to divide out the factor of R in FR, FZ
          forces. At low aspect ratio this produces mode-coupling which impacts the force.
          balance in the grad-s direction.
- 01/00:  VMEC2000 is born!
+
+ * 01/00:  VMEC2000 is born!
          The latest modifications were made to improve the convergence with increasing
          mode numbers and finer radial meshes.
          Converted code to internal full mesh differencing for lambda, with a hybrid full/half
@@ -247,20 +253,25 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
          clarification) to specify the restart file name. The default, if lreset = F on the
          command line, is to look for the wout file with the input file name extension.
 
- 08/99:  Fixed scaling of tcon with radial mesh (1000*hs**2),  to keep it invariant
- 04/99:  Version 6.20: WROUT writes out signgs (VMEC now accepts pos jacobian)
+ * 08/99:  Fixed scaling of tcon with radial mesh (1000*hs**2),  to keep it invariant
+
+ * 04/99:  Version 6.20: WROUT writes out signgs (VMEC now accepts pos jacobian)
          Additional diagnostic info is also output
- 01/99:  Version 6.10: WROUT writes out pres, mass in pascals (1/mu0),
+
+ * 01/99:  Version 6.10: WROUT writes out pres, mass in pascals (1/mu0),
          and currents in A(/m**2), NOT internal VMEC units.
- 09/98:  Version 6.00. Start splitting out optimization routines.
+
+ * 09/98:  Version 6.00. Start splitting out optimization routines.
          Decoupled BOOZER COORDINATE transformation from vmec/optimizer. Replaced with
          system call to xbooz
          Removed lspectrum_dump option. User can run xbooz code separately now.
          Removed loptim option. User now runs xstelopt code for optimization.
- 07/98:  Added LOLDOUT logical to print out fort.8, fort.18 old-style output
+
+ * 07/98:  Added LOLDOUT logical to print out fort.8, fort.18 old-style output
          Added LEDGE_DUMP logical to print out fort.99 (edge-bfield) dump
          Added (1-cos(u))/2 weight to ripple in optimizer
- 05/98:  Version 5.20 introduced as new marker. Added version ID in WOUT file to monitor changes.
+
+ * 05/98:  Version 5.20 introduced as new marker. Added version ID in WOUT file to monitor changes.
          Fixed various subroutines to avoid 'segmentation fault' on DEC alphas,
          due to low stack space on those machines (eliminated large automatic
          vectors, replaced with dynamically allocated arrays). Users of DEC machines should
@@ -272,36 +283,43 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
          Fixed damping in lamcal: power = 0.5*m
          Added logical variable LMAC. If lmac = F (default), the
          mac-file (unit=nmac0) will be deleted (contains reconstruction data).
- 04/98:  Added |B|mn-boozer spectral targets for to optimization chi-sq. (Version 5.10)
+
+ * 04/98:  Added |B|mn-boozer spectral targets for to optimization chi-sq. (Version 5.10)
          Added LSPECTRUM_DUMP logical to indata file. If = T, will call load_target to dump
          boozer spectra, even for free/fixed boundary NOT being optimized.
          Writes to file bmn_spectrum.file-extension
          Fixed some 'bugs' associated with converting to a unique boundary representation
          used by the optimizer. Now the new input file written by the optimizer
          is consistent with the boundary representation
- 03/98:  Improved boundary representation (unique_boundary, convert_boundary) for optimization
+
+ * 03/98:  Improved boundary representation (unique_boundary, convert_boundary) for optimization
          code, as per Hirshman/Breslau representation.
- 01/98:  Fixed default MGRID-FILE so user can specify ANY name, not necessarily
+
+ * 01/98:  Fixed default MGRID-FILE so user can specify ANY name, not necessarily
          prefixed by mgrid.    . (mgrid_file =      now acceptable in input file.)
- 11/97:  Version 5.00: Fixed a number of F90-related bugs associated with
+
+ * 11/97:  Version 5.00: Fixed a number of F90-related bugs associated with
          the time-stepper and optimization loops. In particular, in EVOLVE,
          when irst = 2, we now ALWAYS return before evolving XC, since GC
          will NOT be the true force array coming out of FUNCT3D unless irst = 1.
          Also, the namelists have now been modularized (vmec_input, vmec_seq, optim_params modules).
          Added spres_ped: (0 < spres_ped <= 1) is a normed flux value. For
          s > spres_ped, the pressure profile is assumed flat. Default = 1 (no pedestal)
- 08/97:  A separate sequence file, SEQ.EXT, is no longer supported. Now, to
+
+ * 08/97:  A separate sequence file, SEQ.EXT, is no longer supported. Now, to
          run a sequence of input files, add a namelist section &VSEQ to an
          input file, and the filenames (or extensions to input.ext..) will
          be sequentially executed.
          Added ntheta, nzeta to namelist (indata).
- 08/97:  Added LPROF_OPT to optimizer namelist. When LPROF_OPT=T, then the AI (or AC)
+
+ * 08/97:  Added LPROF_OPT to optimizer namelist. When LPROF_OPT=T, then the AI (or AC)
          coefficients are allowed to vary. Thus, for ncurr=1, the current profile
          is varied, while for ncurr=0, the iota profile is varied (even though
          iota is matched in a chi-sq sense). When LPROF_OPT=F, AI (AC) coefficient array
          is fixed. LPROF_OPT replaces the older LCURPROF_OPT variable (which
          can still be read in, but is obsolete).
- 07/97:  Beginning to phase out gcc/cc (c-precompilation). To this end, have introduced
+
+ * 07/97:  Beginning to phase out gcc/cc (c-precompilation). To this end, have introduced
          three new logical flags: LFREEB, LRECON, LOPTIM, which all default to
          F (fixed boundary, no reconstruction, no optimization) unless:
          (a) mgrid_file is specified in indata file, then LFREEB=T (unless LOPTIM=T is
@@ -310,57 +328,84 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
          LFREEB=T (unless LOPTIM=T or no mgrid_file exists)
          (c) if LOPTIM=T in indata, then LFREEB=LRECON=F regardless of their input
          values
- 07/97:  Established new makefile structure for VMEC. Now, the user can
+
+ * 07/97:  Established new makefile structure for VMEC. Now, the user can
          run vmec.lsqh script on a UNIX machine and only newer vmec files
          will be updated. To 'make' the vmec executable, type make debug (release)
          for a debug (release) version.
- 04/97:  Began conversion of VMEC to F90 standard (Version 4.00). Making changes to
+
+ * 04/97:  Began conversion of VMEC to F90 standard (Version 4.00). Making changes to
          argument passing conventions so as to be compatible with
          parallel (CRAY) processors. The code will no longer run under
          F77 with these changes. Converted all includes and common blocks
          to modules.
- 07/96:  Added iresidue=3 condition to turn on FSQR(0,0) for fsq < FOPT_AXIS
+
+ * 07/96:  Added iresidue=3 condition to turn on FSQR(0,0) for fsq < FOPT_AXIS
          and turn off RADFOR-pfac time-variation
- 07/96:  Moved pressum0 stuff into radfor routine
- 07/96:  Fixed GETDIAM routine to use equilibrium pressure balance
+
+ * 07/96:  Moved pressum0 stuff into radfor routine
+
+ * 07/96:  Fixed GETDIAM routine to use equilibrium pressure balance
          to compute diamagnetic flux correctly
- 05/96:  Adjusted spatial damping parameter in FACLAM to improve convegence
- 05/96:  Added constraint weighting-parameter, TCON0, to INDATA input file
- 05/96:  WROUT modified: LMN Output on HALF-RADIAL mesh (same as internal VMEC mesh)
- 05/96:  Added multigrid capability, NS_ARRAY and FTOL_ARRAY
- 05/96:  Removed testing for MSE points changing sign in FIXRECON
- 05/96:  Improved algorithm for moving axis to minimize CHISQ in AXISOPT
- 04/96:  Upgraded fixed-boundary discrete p & iota profiles in profil1d
- 04/96:  Remove Input_Update routine
- 04/96:  Removed match to slope of MSE data in GETMSE routine
- 04/96:  Added imatch_ip as imatch_edge=3 (for fixed boundary mode)
- 03/96:  Made np (number field periods) a true parameter and added the
+
+ * 05/96:  Adjusted spatial damping parameter in FACLAM to improve convegence
+
+ * 05/96:  Added constraint weighting-parameter, TCON0, to INDATA input file
+
+ * 05/96:  WROUT modified: LMN Output on HALF-RADIAL mesh (same as internal VMEC mesh)
+
+ * 05/96:  Added multigrid capability, NS_ARRAY and FTOL_ARRAY
+
+ * 05/96:  Removed testing for MSE points changing sign in FIXRECON
+
+ * 05/96:  Improved algorithm for moving axis to minimize CHISQ in AXISOPT
+
+ * 04/96:  Upgraded fixed-boundary discrete p & iota profiles in profil1d
+
+ * 04/96:  Remove Input_Update routine
+
+ * 04/96:  Removed match to slope of MSE data in GETMSE routine
+
+ * 04/96:  Added imatch_ip as imatch_edge=3 (for fixed boundary mode)
+
+ * 03/96:  Made np (number field periods) a true parameter and added the
          variable nfper to vacuum include file.
- 02/96:  Allow Pressure vs. s (s=normalized toroidal flux) input
+
+ * 02/96:  Allow Pressure vs. s (s=normalized toroidal flux) input
          instead of Pressure vs. R (experimental input), when flag
          LPOFR = .FALSE. in namelist file. This is useful when TRANSP
          output, for example, is being used and the boundary shape is
          uncertain.
- 01/96:  ADDED OPTIONS FOR WINDOWS-NT COMPATABILITY AND DEBUGGING
+
+ * 01/96:  ADDED OPTIONS FOR WINDOWS-NT COMPATABILITY AND DEBUGGING
          SPLIT FILES INTO SEPARATE .F MODULES
- 11/95:  ASYMMETRIC THOUGHTS:
+
+ * 11/95:  ASYMMETRIC THOUGHTS:
          We need to match Bpol = sqrt(BZ**2 + BR**2) in the
          MSE measurement, rather than just BZ!!! (Check with
          S.Batha,F.Levinton)
- 10/95:  Added Variable tension option for weighting tension
+
+ * 10/95:  Added Variable tension option for weighting tension
          on iota spline knots independently, i.e., namelist
          variables TENSI2, FPOLYI
- 10/95:  Added NAMELIST variables ISNODES, IPNODES allowing
+
+ * 10/95:  Added NAMELIST variables ISNODES, IPNODES allowing
          user to pick number of iota,pressure knots
- 10/95:  Accelerate the feedback in the imatch_phidege=2 loop
- 09/95:  Merged INITSPLINE call into SETSPLINE routine
- 06/95:  Converted input pressure coefficients (AM) to
+
+ * 10/95:  Accelerate the feedback in the imatch_phidege=2 loop
+
+ * 09/95:  Merged INITSPLINE call into SETSPLINE routine
+
+ * 06/95:  Converted input pressure coefficients (AM) to
          be read in MKS units, NWT/M**2
- 05/95:  Changed over to arbitrarily oriented B loops in GETBFLD
+
+ * 05/95:  Changed over to arbitrarily oriented B loops in GETBFLD
          Added namelist VSEQ for sequential running
          Added GETLIM, CAUCHY Subroutines to match to limiter position
- 02/95:  Added Pres_Offset in Namelist for Thomson Data
- 12/94:  Re-wrote GETTHOM, GETMSE subroutines to compute
+
+ * 02/95:  Added Pres_Offset in Namelist for Thomson Data
+
+ * 12/94:  Re-wrote GETTHOM, GETMSE subroutines to compute
          CHI-SQ directly from data (not SMOOTHED and SPLINED data).
          Added indexing arrays INDEX_I, INDEX_P in NEWPROFIL so
          calling order of GET... routines is now irrelevant.
@@ -372,18 +417,25 @@ WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
          Rewrote CHISQ subroutine so all CHI-SQ's are computed
          from matrix elements, rather than from defining relations.
          Added VERSION NO. to THREED1 file output.
- 10/94:  Improved pfac, phifac algorithms (a little)
- 09/94:  Pass J-dot-B material through WOUT
+
+ * 10/94:  Improved pfac, phifac algorithms (a little)
+
+ * 09/94:  Pass J-dot-B material through WOUT
       :  User should customize mgrid_defarea in subr readin for his site
- 04/94:  LAMBDA DIFFERENCING ON HALF-MESH IMPLEMENTED
- 03/94:  ELIMINATED RMNSS FOR PUSHING AXIS, REPLACED WITH RMNCC(JS=1)
+
+ * 04/94:  LAMBDA DIFFERENCING ON HALF-MESH IMPLEMENTED
+
+ * 03/94:  ELIMINATED RMNSS FOR PUSHING AXIS, REPLACED WITH RMNCC(JS=1)
          THIS WAS NECESSITATED BY DISCREPANCIES FOR SMALL ITSE...
- 01/94:  IMPLEMENTED CHANGES FOR FIXED, FREE BOUNDARY
+
+ * 01/94:  IMPLEMENTED CHANGES FOR FIXED, FREE BOUNDARY
          FOR UP-DOWN NON-SYMMETRIC PLASMAS (symmetry_mode qualifier)
- 11/93:  REPLACED WEIGHTS WITH STANDARD DEVIATIONS
- 10/93:  IMPLEMENTED PHIEDGE MATCHING BASED ON WIDTH OF PRESSURE PROFILE DATA
- VERSION WHICH USES SQRT(S) MESH FOR SPLINES AND USES BOTH INNER AND
- OUTER EDGES FOR CURRENT MATCH (OPTIONAL RADIAL REDISTRIBUTION OF DATA)
+
+ * 11/93:  REPLACED WEIGHTS WITH STANDARD DEVIATIONS
+
+ * 10/93:  IMPLEMENTED PHIEDGE MATCHING BASED ON WIDTH OF PRESSURE PROFILE DATA
+           VERSION WHICH USES SQRT(S) MESH FOR SPLINES AND USES BOTH INNER AND
+           OUTER EDGES FOR CURRENT MATCH (OPTIONAL RADIAL REDISTRIBUTION OF DATA)
 
 
 ## Input File Contents
@@ -484,14 +536,17 @@ STANDARD INPUT DATA AND RECOMMENDED VALUES
 ### Character parameters
 
   `mgrid_file`:   full path for vacuum Green''s function data
+
   `pcurr_type`:   Specifies parameterization type of pcurr function
                  'power_series' - I'(s)=Sum[ ac(j) s ** j] - Default
                  'gauss_trunc'  - I'(s)=ac(0) (exp(-(s/ac(1)) ** 2) -
                                                exp(-(1/ac(1)) ** 2))
                   others - see function pcurr
+
   `piota_type`:   Specifies parameterization type of piota function
                  'power_series' - p(s)=Sum[ am(j) s ** j] - Default
                   others - see function piota
+
   `pmass_type`:   Specifies parameterization type of pmass function
                  'power_series' - p(s)=Sum[ am(j) s ** j] - Default
                  'gauss_trunc'  - p(s)=am(0) (exp(-(s/am(1)) ** 2) -

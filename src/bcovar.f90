@@ -7,7 +7,8 @@
 !> @param lv \f$- \partial\lambda / \partial\zeta\f$
 SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
-  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale, ntmax
+  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale, ntmax, &
+                         meven, modd
   USE realspace
   USE vforces, r12 => armn_o, ru12 => azmn_e, gsqrt => azmn_o,      &
                rs => bzmn_e, zs => brmn_e, zu12 => armn_e,          &

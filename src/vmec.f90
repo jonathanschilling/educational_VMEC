@@ -44,7 +44,7 @@ subroutine vmec
   integer :: i, js
 
   character(len=255) :: dump_filename
-  logical            :: dump_multigrid_result = .true.
+  logical            :: dump_multigrid_result = .false.
 
 
   ! Read in command-line arguments to get input file or sequence file,

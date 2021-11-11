@@ -25,7 +25,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   REAL(rprec) :: hsold, sj, s1, xint
 
   character(len=255) :: dump_filename
-  logical            :: dump_interp = .true.
+  logical            :: dump_interp = .false.
 
   IF (nsold .le. 0) RETURN
 

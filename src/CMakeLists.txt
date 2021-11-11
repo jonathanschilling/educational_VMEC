@@ -68,6 +68,7 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/precondn.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/residue.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/residue_con.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/residue_mhd.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/scalfor.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/spectrum.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/symforce.f90

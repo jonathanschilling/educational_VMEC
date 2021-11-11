@@ -34,7 +34,7 @@ SUBROUTINE free_mem_ns
        presgrad, bdamp, stat=istat8)
 
   IF (ALLOCATED(gc)) then
-    DEALLOCATE (gc, gc_con, xsave, xstore, xcdot, stat=istat10)
+    DEALLOCATE (gc, gc_con, gc_mhd, xsave, xstore, xcdot, stat=istat10)
   end if
 
   IF (ALLOCATED(xc)) then

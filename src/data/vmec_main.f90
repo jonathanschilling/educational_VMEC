@@ -112,6 +112,12 @@ MODULE vmec_main
   REAL(rprec) :: fsqz_con = 1
   REAL(rprec) :: fsqr1_con
   REAL(rprec) :: fsqz1_con
+  
+  ! force residuals due to MHD force alone
+  REAL(rprec) :: fsqr_mhd = 1
+  REAL(rprec) :: fsqz_mhd = 1
+  REAL(rprec) :: fsqr1_mhd
+  REAL(rprec) :: fsqz1_mhd
 
   REAL(rprec) :: router
   REAL(rprec) :: rinner

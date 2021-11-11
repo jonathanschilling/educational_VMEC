@@ -66,7 +66,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
 
   iotaf(nsp1) = 0 ! TODO: why explicitly zero out only the last entry? hidden storage?
 
-  ALLOCATE (gc(neqs), gc_con(neqs), xcdot(neqs), xsave(neqs), xstore(neqs), stat=istat1)
+  ALLOCATE (gc(neqs), gc_con(neqs), gc_mhd(neqs), xcdot(neqs), xsave(neqs), xstore(neqs), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #9 in allocate_ns'
   xstore = zero
 

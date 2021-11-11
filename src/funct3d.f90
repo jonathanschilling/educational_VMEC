@@ -447,6 +447,9 @@ SUBROUTINE funct3d (ier_flag)
 
      gc_con = gc_con * scalxc
      call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
+     
+     gc_mhd = gc - gc_con
+     call residue_mhd(gc_mhd, gc_mhd(1+irzloff), gc_mhd(1+2*irzloff))
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
          ! first iteration and gigantic force residuals --> what is going one here?

@@ -16,8 +16,8 @@ SUBROUTINE printout(i0, delt0, w0)
   REAL(rprec) :: delt0, w0
 
 ! #ifndef _HBANGLE
-  CHARACTER(LEN=*), PARAMETER :: iter_line  = "  ITER    FSQR      FSQZ      CONR      CONZ      FSQL   "
-  CHARACTER(LEN=*), PARAMETER :: fsq_line   = "   fsqr      fsqz      conr      conz      fsql      DELT    "
+  CHARACTER(LEN=*), PARAMETER :: iter_line  = "  ITER    FSQR      FSQZ      CONR      CONZ      MHDR      MHDZ      FSQL   "
+  CHARACTER(LEN=*), PARAMETER :: fsq_line   = "   fsqr      fsqz      conr      conz      mhdr      mhdz      fsql      DELT    "
   CHARACTER(LEN=*), PARAMETER :: iter_lines = iter_line
   CHARACTER(LEN=*), PARAMETER :: fsq_lines  = fsq_line
   CHARACTER(LEN=*), PARAMETER :: raxis_line = "RAX(v=0) "
@@ -68,33 +68,41 @@ SUBROUTINE printout(i0, delt0, w0)
 
   IF (.not. lasym) THEN
      IF (.not.lfreeb) THEN
-        PRINT 45, i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, r00, delt0, w
-        WRITE (nthreed, 40) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, fsql1, &
+        PRINT 45,           i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+           fsql, r00, delt0, w
+        WRITE (nthreed, 40) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+           fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, fsqr1_mhd, fsqz1_mhd, fsql1, &
            delt0, r00, w, betav, avm
         RETURN
      ENDIF
-     PRINT 50, i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, r00, delt0, w, delbsq
-     WRITE (nthreed, 42) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, &
+     PRINT 50,           i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+        fsql, r00, delt0, w, delbsq
+     WRITE (nthreed, 42) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+        fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, fsqr1_mhd, fsqz1_mhd, &
         fsql1, delt0, r00, w, betav, ABS(phiedge), delbsq, fedge
 
   ELSE ! (.not. lasym)
      IF (.not.lfreeb) THEN
-        PRINT 65, i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, r00, z00, delt0, w
-        WRITE (nthreed, 60) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, &
+        PRINT 65,           i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+           fsql, r00, z00, delt0, w
+        WRITE (nthreed, 60) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+           fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, fsqr1_mhd, fsqz1_mhd, &
            fsql1, delt0, r00, z00, w, betav, avm
         RETURN
      ENDIF
-     PRINT 70, i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, r00, z00, delt0, w, delbsq
-     WRITE (nthreed, 60) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, &
+     PRINT 70,           i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+        fsql, r00, z00, delt0, w, delbsq
+     WRITE (nthreed, 60) i0, fsqr, fsqz, fsqr_con, fsqz_con, fsqr_mhd, fsqz_mhd, &
+        fsql, fsqr1, fsqz1, fsqr1_con, fsqz1_con, fsqr1_mhd, fsqz1_mhd, &
         fsql1, delt0, r00, z00, w, betav, ABS(phiedge), delbsq, fedge
   END IF
 
-40 FORMAT(i6,1x,1p,11e10.2,e11.3,e12.4,e11.3,0p,f7.3,1p,2e9.2)
-42 FORMAT(i5,1p,11e10.2,e11.3,e12.4,2e11.3,0p,f7.3,1p,e9.2)
-45 FORMAT(i5,1p,5e10.2,e11.3,e10.2,e12.4)
-50 FORMAT(i5,1p,5e10.2,e11.3,e10.2,e12.4,e11.3)
-60 FORMAT(i6,1x,1p,11e10.2,2e11.3,e12.4,e11.3,0p,f7.3,1p,2e9.2)
-65 FORMAT(i5,1p,5e10.2,2e11.3,e10.2,e12.4)
-70 FORMAT(i5,1p,5e10.2,2e11.3,e10.2,e12.4,e11.3)
+40 FORMAT(i6,1x,1p,15e10.2,e11.3,e12.4,e11.3,0p,f7.3,1p,2e9.2)
+42 FORMAT(i5,1p,15e10.2,e11.3,e12.4,2e11.3,0p,f7.3,1p,e9.2)
+45 FORMAT(i5,1p,7e10.2,e11.3,e10.2,e12.4)
+50 FORMAT(i5,1p,7e10.2,e11.3,e10.2,e12.4,e11.3)
+60 FORMAT(i6,1x,1p,15e10.2,2e11.3,e12.4,e11.3,0p,f7.3,1p,2e9.2)
+65 FORMAT(i5,1p,7e10.2,2e11.3,e10.2,e12.4)
+70 FORMAT(i5,1p,7e10.2,2e11.3,e10.2,e12.4,e11.3)
 
 END SUBROUTINE printout

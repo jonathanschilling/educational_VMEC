@@ -25,7 +25,7 @@ SUBROUTINE eqsolve(ier_flag)
   ! TODO: initial value of lreset_internal was undefined! --> now set to false
   LOGICAL :: lreset_internal
 
-  print *, " eqsolve"
+!   print *, " eqsolve"
 
   ! need to do this before jump label 20 to allow restart_iter to do its magic
   lreset_internal = .false.

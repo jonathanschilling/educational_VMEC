@@ -34,7 +34,7 @@ MODULE xstuff
 !                                                    lmnss
 
   !> stacked array of R, Z, Lambda Spectral force coefficients (see above for stack order)
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gc
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: gc, gc_con
 
   !> stacked array of scaled R, Z, Lambda Fourier coefficients (see above for stack order)
   REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: xc

@@ -152,7 +152,7 @@ SUBROUTINE funct3d (ier_flag)
 
   IF (iter2.eq.iter1 .and. ivac.le.0) THEN
 
-     print *, "rcon0 <-- (rcon * s) into volume"
+!      print *, "rcon0 <-- (rcon * s) into volume"
      ! iter2 == iter1 is true at start of a new multi-grid iteration
      ! ivac .le. 0 is always true for fixed-boundary,
      ! but only true for first iteration in free-boundary (?)
@@ -432,16 +432,21 @@ SUBROUTINE funct3d (ier_flag)
                    armn, brmn, crmn, &
                    azmn, bzmn, czmn, &
                    blmn, clmn, rcon, zcon)
+     call tomnsps_con(gc_con, rcon, zcon)
      IF (lasym) then
         CALL tomnspa (gc,             &
                       r1, ru, rv,     &
                       z1, zu, zv,     &
                       extra3, extra4, extra1, extra2)
+        call tomnspa_con(gc_con, extra1, extra2)
      end if
 
      ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
-     gc = gc * scalxc    !!IS THIS CORRECT: SPH010214?
-     CALL residue (gc, gc(1+irzloff), gc(1+2*irzloff))
+     gc     = gc     * scalxc    !!IS THIS CORRECT: SPH010214?
+     CALL residue(gc, gc(1+irzloff), gc(1+2*irzloff))
+
+     gc_con = gc_con * scalxc
+     call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
          ! first iteration and gigantic force residuals --> what is going one here?

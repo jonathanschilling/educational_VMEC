@@ -16,6 +16,10 @@ SUBROUTINE restart_iter(time_step)
   REAL(rprec), PARAMETER :: c1p03 = 1.03_dp
   REAL(rprec), PARAMETER :: cp90  = 0.90_dp
 
+  if (first .ne. 1) then
+    print *, "bad jacobian --> restart_iter (first = ", first, ")"
+  end if
+  
   SELECT CASE (first)
   case(2)
      ! restore previous good state
@@ -24,8 +28,6 @@ SUBROUTINE restart_iter(time_step)
 
      ! ---- reduce time step ----
      time_step = time_step * cp90
-
-     print *, "bad jacobian --> restart_iter"
 
      ijacob = ijacob + 1
      iter1 = iter2

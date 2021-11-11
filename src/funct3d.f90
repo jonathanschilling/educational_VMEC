@@ -133,7 +133,7 @@ SUBROUTINE funct3d (ier_flag)
   r00 = r1(1,0) ! contrib from only even m
   z00 = z1(1,0) ! contrib from only even m
 
-
+!   print *, "r00 = ", r00
 
   ! COMPUTE CONSTRAINT RCON, ZCON
 

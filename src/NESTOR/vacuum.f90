@@ -26,6 +26,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
                   raxis, zaxis)
   USE vacmod
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
+  use vmec_main, only: input_extension
+
   IMPLICIT NONE
 
   INTEGER, intent(in) :: ivac_skip, mnmax
@@ -40,6 +42,10 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
   REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
+
+  integer, save :: icall = 0
+  character(len=255) :: dump_filename
+  logical            :: dump_bsqvac = .false.
 
   ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
   ! BASED ON THE PROGRAM BY P. MERKEL [J. Comp. Phys. 66, 83 (1986)]
@@ -138,11 +144,31 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       ! .5*|Bvac|**2
       bsqvac(i) = p5*(bsubu(i)*bsupu + bsubv(i)*bsupv)
 
+!       if (ivac.eq.0) then
+!         print *, i, bsqvac(i)
+!       end if
+
       ! cylindrical components of vacuum magnetic field
       brv(i)   = rub(i)*bsupu + rvb(i)*bsupv
       bphiv(i) =                r1b(i)*bsupv
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
+
+   if (dump_bsqvac) then
+    write(dump_filename, 999) icall, trim(input_extension)
+999 format('bsqvac_vac1_',i5.5,'.',a)
+    open(unit=42, file=trim(dump_filename), status="unknown")
+
+    do i = 1,nuv2
+      write(42,*) i, bsqvac(i)
+    end do
+
+    close(42)
+  end if
+
+  icall = icall + 1
+
+
 
    ! PRINT OUT VACUUM PARAMETERS
    IF (ivac .eq. 0) THEN

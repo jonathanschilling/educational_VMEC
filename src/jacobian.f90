@@ -28,7 +28,10 @@ SUBROUTINE jacobian
   ! SQRT(G) = R*TAU IS COMPUTED IN BCOVAR
   !
   ! HERE, TAU = (Ru * Zs - Rs * Zu).
+
   ! THE DERIVATIVES OF SHALF = SQRT(s) WERE COMPUTED EXPLICITLY AS: d(shalf)/ds = .5/shalf
+  ! This can be understood by noting shalf(i) = sqrt(s_{i-1/2}),
+  ! leading to d/ds sqrt(s_{i-1/2}) = 1/2 * (s_{i-1/2})^{-1/2} = 0.5 / shalf.
 
   ! initially, all good
   first = 1

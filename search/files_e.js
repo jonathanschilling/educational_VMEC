@@ -7,5 +7,6 @@ var searchData=
   ['realspace_2ef90_4',['realspace.f90',['../d8/df9/realspace_8f90.html',1,'']]],
   ['reset_5fparams_2ef90_5',['reset_params.f90',['../dc/dc0/reset__params_8f90.html',1,'']]],
   ['residue_2ef90_6',['residue.f90',['../db/d5a/residue_8f90.html',1,'']]],
-  ['restart_5fiter_2ef90_7',['restart_iter.f90',['../d5/d6e/restart__iter_8f90.html',1,'']]]
+  ['residue_5fcon_2ef90_7',['residue_con.f90',['../d3/d96/residue__con_8f90.html',1,'']]],
+  ['restart_5fiter_2ef90_8',['restart_iter.f90',['../d5/d6e/restart__iter_8f90.html',1,'']]]
 ];

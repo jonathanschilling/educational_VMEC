@@ -78,7 +78,9 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
      END DO
   END IF
 
-  lmns(1) = 0 ! may have been used for storing iota variation...
+  ! safeguard against spurious DC component in lambda (?)
+  ! may have been used for storing iota variation...
+  lmns(1) = 0
 
   ! now come the m>0, n=-ntor, ..., ntor entries
   DO m = 1, mpol1
@@ -97,6 +99,7 @@ SUBROUTINE convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)
            zmns(mn) = p5*t1*(rzl_array(js,n1,m,zmnsc)-sign0*rzl_array(js,n1,m,zmncs))
            lmns(mn) = p5*t1*(rzl_array(js,n1,m,lmnsc)-sign0*rzl_array(js,n1,m,lmncs))
         ELSE IF (js .eq. 1) THEN
+           ! no m>=1 component in magnetic axis (js==1)
            rmnc(mn) = 0
            zmns(mn) = 0
            lmns(mn) = 0

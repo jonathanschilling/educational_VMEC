@@ -68,35 +68,36 @@ SUBROUTINE bcovar (lu, lv)
   ! FIRST, GIJ = EVEN PART (ON FULL MESH), LIJ = ODD PART (ON FULL MESH)
   ! THEN, GIJ(HALF) = < GIJ(even)> + SHALF < GIJ(odd) >
   r12sq(1:nrzt) = sqrts(1:nrzt)*sqrts(1:nrzt) ! s on full grid
-  guu(1:nrzt)   =   ru(1:nrzt,0)*ru(1:nrzt,0)                         &
-                  + zu(1:nrzt,0)*zu(1:nrzt,0) + r12sq(1:nrzt)*         &
-                 (  ru(1:nrzt,1)*ru(1:nrzt,1)                          &
-                  + zu(1:nrzt,1)*zu(1:nrzt,1))
+  guu(1:nrzt)   =   ru(1:nrzt,meven)*ru(1:nrzt,meven)                         &
+                  + zu(1:nrzt,meven)*zu(1:nrzt,meven) + r12sq(1:nrzt)*         &
+                 (  ru(1:nrzt,modd )*ru(1:nrzt,modd )                          &
+                  + zu(1:nrzt,modd )*zu(1:nrzt,modd ))
 
-  luu(1:nrzt)   = (ru(1:nrzt,0)*ru(1:nrzt,1)                        &
-                +  zu(1:nrzt,0)*zu(1:nrzt,1))*2
-  phipog(1:nrzt)= 2*r1(1:nrzt,0)*r1(1:nrzt,1) ! temporary re-use of phipog
+  luu(1:nrzt)   = (  ru(1:nrzt,meven)*ru(1:nrzt,modd)                        &
+                   + zu(1:nrzt,meven)*zu(1:nrzt,modd))*2
+
+  phipog(1:nrzt)= 2* r1(1:nrzt,meven)*r1(1:nrzt,modd) ! temporary re-use of phipog
 
   IF (lthreed) THEN
-     guv(1:nrzt)   = ru(1:nrzt,0)*rv(1:nrzt,0)                      &
-                   + zu(1:nrzt,0)*zv(1:nrzt,0) + r12sq(1:nrzt)*     &
-                   ( ru(1:nrzt,1)*rv(1:nrzt,1)                      &
-                   + zu(1:nrzt,1)*zv(1:nrzt,1) )
-     luv(1:nrzt)   = ru(1:nrzt,0)*rv(1:nrzt,1)                      &
-                   + ru(1:nrzt,1)*rv(1:nrzt,0)                      &
-                   + zu(1:nrzt,0)*zv(1:nrzt,1)                      &
-                   + zu(1:nrzt,1)*zv(1:nrzt,0)
+     guv(1:nrzt)   = ru(1:nrzt,meven)*rv(1:nrzt,meven)                      &
+                   + zu(1:nrzt,meven)*zv(1:nrzt,meven) + r12sq(1:nrzt)*     &
+                   ( ru(1:nrzt,modd )*rv(1:nrzt,modd )                      &
+                   + zu(1:nrzt,modd )*zv(1:nrzt,modd ) )
+     luv(1:nrzt)   = ru(1:nrzt,meven)*rv(1:nrzt,modd )                      &
+                   + ru(1:nrzt,modd )*rv(1:nrzt,meven)                      &
+                   + zu(1:nrzt,meven)*zv(1:nrzt,modd )                      &
+                   + zu(1:nrzt,modd )*zv(1:nrzt,meven)
 
-     gvv(1:nrzt)   = rv(1:nrzt,0)*rv(1:nrzt,0)                      &
-                   + zv(1:nrzt,0)*zv(1:nrzt,0) + r12sq(1:nrzt)*     &
-                   ( rv(1:nrzt,1)*rv(1:nrzt,1)                      &
-                   + zv(1:nrzt,1)*zv(1:nrzt,1) )
-     lvv(1:nrzt)   =(rv(1:nrzt,0)*rv(1:nrzt,1)                      &
-                   + zv(1:nrzt,0)*zv(1:nrzt,1))*2
+     gvv(1:nrzt)   = rv(1:nrzt,meven)*rv(1:nrzt,meven)                      &
+                   + zv(1:nrzt,meven)*zv(1:nrzt,meven) + r12sq(1:nrzt)*     &
+                   ( rv(1:nrzt,modd )*rv(1:nrzt,modd )                      &
+                   + zv(1:nrzt,modd )*zv(1:nrzt,modd ) )
+     lvv(1:nrzt)   =(rv(1:nrzt,meven)*rv(1:nrzt,modd )                      &
+                   + zv(1:nrzt,meven)*zv(1:nrzt,modd ))*2
   END IF
 
-  r12sq(1:nrzt) = r1(1:nrzt,0)*r1(1:nrzt,0) + r12sq(1:nrzt)*        &
-                  r1(1:nrzt,1)*r1(1:nrzt,1)
+  r12sq(1:nrzt) = r1(1:nrzt,meven)*r1(1:nrzt,meven) + r12sq(1:nrzt)*        &
+                  r1(1:nrzt,modd )*r1(1:nrzt,modd )
 
   ! need to do this in reverse order since guu and r12sq were re-used
   ! for their full-grid even-m contributions
@@ -115,7 +116,7 @@ SUBROUTINE bcovar (lu, lv)
   END IF
 
   tau(1:nrzt) = gsqrt(1:nrzt)
-  gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt)
+  gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt) ! r12 = R on half grid
 
   gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) ! constant extrapolation towards axis
 
@@ -546,6 +547,8 @@ SUBROUTINE bcovar (lu, lv)
        tcon_mul = tcon_mul/((4*r0scale**2)**2)           ! Scaling of ard, azd (2*r0scale**2);
                                                          ! Scaling of cos**2 in alias (4*r0scale**2)
 
+!       print *, "tcon_mul = ", tcon_mul
+
        DO js = 2, ns-1
          arnorm = SUM(wint(js:nrzt:ns)*ru0(js:nrzt:ns)**2)
          aznorm = SUM(wint(js:nrzt:ns)*zu0(js:nrzt:ns)**2)
@@ -555,6 +558,8 @@ SUBROUTINE bcovar (lu, lv)
 
          tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
        END DO
+
+!       print *, "tcon profile: ", tcon
 
        tcon(ns) = p5*tcon(ns-1)
 

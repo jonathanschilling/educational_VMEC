@@ -1,0 +1,2 @@
+#!/bin/bash
+/Users/mattland/stellopt_centered_differences/bin/xgrid < makegrid.in | tee makegrid.out

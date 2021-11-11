@@ -73,6 +73,8 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
      END DO
   END DO
 
+  !print *, "max R = ", maxval(r1b)
+
   ! COMPUTE METRIC COEFFICIENTS GIJ_B AND SURFACE NORMAL COMPONENTS
   ! [SNR, SNV, SNZ] = NP*[Xu cross Xv]
   !

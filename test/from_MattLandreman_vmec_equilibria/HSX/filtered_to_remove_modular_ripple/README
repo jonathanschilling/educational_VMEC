@@ -1,0 +1,5 @@
+Provided in an email from Aaron Bader on September 20, 2018.
+
+From Aaron:
+"The file is done just by truncating the mpol and ntor to remove the 
+higher order terms."

@@ -1,0 +1,20 @@
+c09r00
+S
+y
+0.436
+2.436
+-1.0
+1.0
+36
+201
+201
+1. Coils file suffix
+2. Current format (S/R : Scale current to unit current or use raw currents, old version did not prompt the user for this and assumed scaled current)
+3. Stellarator Symmetry (T/F)
+4. Minimum radial extent (Rmin)
+5. Maximum radial extent (Rmax)
+6. Minimum vertical extent (Vmin)
+7. Maximum vertical extent (Vmax)
+8. Number of toroidal cutplanes (per half period if stellarator symmetry is assumed)
+9. Number of radial grid points
+10. Number of vertical grid points

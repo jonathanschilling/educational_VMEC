@@ -1,0 +1,285 @@
+&INDATA
+!----- Runtime Parameters -----
+  LWOUTTXT=T
+  DELT =   9.00E-01
+  NITER = 10000                   !2/23/16.(146o5,161r5)
+  NSTEP =  200
+  TCON0 =   2.00E+00
+!  NS_ARRAY    =       9       29       49       99
+!  NITER_ARRAY =    1000     2000     4000    10000
+!  FTOL_ARRAY  = 1.0E-30  1.0E-30  1.0E-30  1.0E-12
+  NS_ARRAY    =       9       29       49   !2/23/16.(146o5,161r5)
+  NITER_ARRAY =    1000     2000    10000
+  FTOL_ARRAY  = 1.0E-06  1.0E-08  1.0E-11
+  PRECON_TYPE = 'none'
+  PREC2D_THRESHOLD =   1.000000E-19
+!----- Grid Parameters -----
+  LASYM = F
+  NFP = 0003
+  MPOL = 0009   NTOR = 0005
+  PHIEDGE =    3.14159     !(161s1)
+!----- Free Boundary Parameters -----
+  LFREEB = F
+  NVACSKIP =    6
+!----- Pressure Parameters -----
+  GAMMA =    0.000000000000E+000
+  BLOAT =    1.000000000000E+000
+  SPRES_PED =    1.000000000000E+000
+  PRES_SCALE =    1.000000000000E+000
+  PMASS_TYPE = 'power_series'
+  AM = 4.7127e+04  -3.5200e+03  -2.4853e+04  -3.2604e+05
+       1.2297e+06  -2.2103e+06   1.8496e+06  -5.6170e+05
+      -1.4766e+01          0.0          0.0
+!----- Current/Iota Parameters -----
+  CURTOR =   -3.9140e+05  !(161s1)
+  NCURR = 1
+  PIOTA_TYPE = 'power_series'
+  AI =   0.00000000000000E+00  0.00000000000000E+00  0.00000000000000E+00  0.00000000000000E+00
+  0.00000000000000E+00  0.00000000000000E+00  0.00000000000000E+00  0.00000000000000E+00
+  0.00000000000000E+00  0.00000000000000E+00  0.00000000000000E+00  
+  PCURR_TYPE = 'power_series'
+  AC =    8.183957000000E+003   1.436035600000E+006  -1.074071400000E+007   7.443892000000E+007
+  -3.222156500000E+008   8.810508000000E+008  -1.493896600000E+009   1.527468000000E+009
+  -8.679015900000E+008   2.103512000000E+008   0.000000000000E+000   
+!----- Axis Parameters ----- 
+  RAXIS = 4.2601e+00   1.5466e-01   4.7930e-03  -2.3250e-03   !(161s1)
+          1.4712e-03  -7.8655e-05
+  ZAXIS =        0.0  -1.1407e-01  -6.7111e-03   2.5926e-03
+         -1.1052e-03   2.2968e-04
+!----- Boundary Parameters -----
+   RBC(  0,  0) =  0.37473E+01  ZBS(  0,  0) =  0.00000E+00   !(161s1)
+   RBC(  1,  0) = -0.11271E-01  ZBS(  1,  0) =  0.19477E-01
+   RBC(  2,  0) = -0.11250E-01  ZBS(  2,  0) =  0.20663E-01
+   RBC(  3,  0) =  0.98201E-02  ZBS(  3,  0) = -0.80220E-02
+   RBC(  4,  0) = -0.90502E-03  ZBS(  4,  0) =  0.13998E-02
+   RBC( -4,  1) = -0.12264E-02  ZBS( -4,  1) =  0.19166E-03
+   RBC( -3,  1) =  0.12813E-02  ZBS( -3,  1) = -0.43376E-03
+   RBC( -2,  1) = -0.71118E-02  ZBS( -2,  1) =  0.38381E-02
+   RBC( -1,  1) =  0.56743E-01  ZBS( -1,  1) =  0.25252E-01
+   RBC(  0,  1) =  0.73611E+00  ZBS(  0,  1) =  0.12634E+01
+   RBC(  1,  1) = -0.36707E+00  ZBS(  1,  1) =  0.44907E+00
+   RBC(  2,  1) =  0.13192E-01  ZBS(  2,  1) = -0.16466E-01
+   RBC(  3,  1) =  0.13298E-02  ZBS(  3,  1) = -0.48224E-03
+   RBC(  4,  1) = -0.25747E-02  ZBS(  4,  1) =  0.15401E-02
+   RBC( -4,  2) =  0.12207E-02  ZBS( -4,  2) =  0.47640E-03
+   RBC( -3,  2) = -0.12553E-02  ZBS( -3,  2) =  0.16103E-02
+   RBC( -2,  2) = -0.54347E-03  ZBS( -2,  2) =  0.52613E-03
+   RBC( -1,  2) =  0.24292E-01  ZBS( -1,  2) =  0.34678E-01
+   RBC(  0,  2) =  0.24769E+00  ZBS(  0,  2) =  0.42011E-01
+   RBC(  1,  2) =  0.24657E+00  ZBS(  1,  2) =  0.31589E-01
+   RBC(  2,  2) =  0.73980E-01  ZBS(  2,  2) = -0.74331E-01
+   RBC(  3,  2) = -0.12144E-01  ZBS(  3,  2) =  0.36747E-02
+   RBC(  4,  2) = -0.40271E-03  ZBS(  4,  2) =  0.23529E-02
+   RBC( -4,  3) = -0.65338E-04  ZBS( -4,  3) =  0.47833E-04
+   RBC( -3,  3) =  0.16160E-02  ZBS( -3,  3) = -0.15948E-02
+   RBC( -2,  3) =  0.14267E-03  ZBS( -2,  3) = -0.27788E-03
+   RBC( -1,  3) =  0.86876E-02  ZBS( -1,  3) = -0.82991E-02
+   RBC(  0,  3) = -0.38540E-01  ZBS(  0,  3) =  0.32028E-01
+   RBC(  1,  3) = -0.48387E-02  ZBS(  1,  3) = -0.52368E-02
+   RBC(  2,  3) = -0.28628E-01  ZBS(  2,  3) =  0.28993E-01
+   RBC(  3,  3) = -0.15774E-01  ZBS(  3,  3) =  0.15796E-01
+   RBC(  4,  3) =  0.38765E-02  ZBS(  4,  3) = -0.39271E-02
+   RBC( -4,  4) =  0.70404E-04  ZBS( -4,  4) = -0.23880E-04
+   RBC( -3,  4) = -0.88817E-03  ZBS( -3,  4) =  0.70907E-03
+   RBC( -2,  4) = -0.13062E-03  ZBS( -2,  4) =  0.63769E-04
+   RBC( -1,  4) = -0.14401E-02  ZBS( -1,  4) =  0.79090E-03
+   RBC(  0,  4) =  0.12358E-01  ZBS(  0,  4) =  0.49622E-03
+   RBC(  1,  4) = -0.12779E-01  ZBS(  1,  4) =  0.26216E-01
+   RBC(  2,  4) =  0.17561E-01  ZBS(  2,  4) = -0.82919E-02
+   RBC(  3,  4) =  0.48428E-03  ZBS(  3,  4) = -0.14730E-02
+   RBC(  4,  4) =  0.46869E-02  ZBS(  4,  4) = -0.48590E-02
+   RBC( -4,  5) = -0.73334E-05  ZBS( -4,  5) = -0.73334E-05
+   RBC( -3,  5) =  0.20806E-03  ZBS( -3,  5) =  0.20806E-03
+   RBC( -2,  5) =  0.27250E-04  ZBS( -2,  5) =  0.27250E-04
+   RBC( -1,  5) =  0.11007E-02  ZBS( -1,  5) =  0.11007E-02
+   RBC(  0,  5) = -0.45725E-02  ZBS(  0,  5) = -0.45725E-02
+   RBC(  1,  5) =  0.25787E-04  ZBS(  1,  5) =  0.25787E-04
+   RBC(  2,  5) = -0.37340E-02  ZBS(  2,  5) = -0.37340E-02
+   RBC(  3,  5) = -0.20457E-02  ZBS(  3,  5) = -0.20457E-02
+   RBC(  4,  5) =  0.50568E-03  ZBS(  4,  5) =  0.50568E-03
+   RBC( -4,  6) =  0.93118E-05  ZBS( -4,  6) =  0.93118E-05
+   RBC( -3,  6) = -0.15775E-03  ZBS( -3,  6) = -0.15775E-03
+   RBC( -2,  6) = -0.19199E-04  ZBS( -2,  6) = -0.19199E-04
+   RBC( -1,  6) = -0.22035E-03  ZBS( -1,  6) = -0.22035E-03
+   RBC(  0,  6) =  0.11715E-02  ZBS(  0,  6) =  0.11715E-02
+   RBC(  1,  6) = -0.38515E-02  ZBS(  1,  6) = -0.38515E-02
+   RBC(  2,  6) =  0.25533E-02  ZBS(  2,  6) =  0.25533E-02
+   RBC(  3,  6) =  0.19331E-03  ZBS(  3,  6) =  0.19331E-03
+   RBC(  4,  6) =  0.94279E-03  ZBS(  4,  6) =  0.94279E-03   
+/
+&OPTIMUM
+!-----------------------------------------------------------------------
+!          OPTIMIZER RUN CONTROL PARAMETERS
+!-----------------------------------------------------------------------
+  NFUNC_MAX = 1
+  EQUIL_TYPE = 'VMEC2000'
+  opt_type   = 'lmdif'  ! (161g)
+  mode   =  1   !(161g)
+  npopulation = 8  !(161g)
+  factor =   100       ! (161g)
+  FTOL =  1.00000000000000E-06
+  XTOL =  1.00000000000000E-30
+  GTOL =  1.00000000000000E-30
+  EPSFCN =   1.0E-05
+  LKEEP_MINS = T
+!-----------------------------------------------------------------------
+!          OPTIMIZED QUANTITIES
+!-----------------------------------------------------------------------
+  LCURTOR_OPT = T    !2/23/15.(146o4)
+  LPHIEDGE_OPT = T  
+  LAC_OPT = 11*T  !3/2/15.(146o5,161r1)
+  LAM_OPT = 11*T  
+  LAXIS_OPT(0:5) = 6*T !(161g3,161r1)
+! nopt_boundary = 1   !4/16/15.(147g2,147g4). for Stellopt14, for Garab rep, need instead
+! to go lrho_opt (H-B)->ldeltamn_opt(Garab) via [xvmec2stel] -> msg[SLaz-4/21/15]:
+!LDELTAMN_OPT(-8:8,-6) = 17*T
+!LDELTAMN_OPT(-8:8,-5) = 17*T
+!LDELTAMN_OPT(-4:4,-6) = 9*T   !(161r1)
+!LDELTAMN_OPT(-4:4,-5) = 9*T
+LDELTAMN_OPT(-3:3,-4) = 7*T      !(161g2,161l2,161r3)
+LDELTAMN_OPT(-3:3,-3) = 7*T
+LDELTAMN_OPT(-3:3,-2) = 7*T
+LDELTAMN_OPT(-3:3,-1) = 7*T
+LDELTAMN_OPT(-3:3,0) = 7*T
+LDELTAMN_OPT(-3:3,1) = 7*T
+LDELTAMN_OPT(-3:3,2) = 7*T
+LDELTAMN_OPT(-3:3,3) = 7*T
+LDELTAMN_OPT(-3:3,4) = 7*T
+!LDELTAMN_OPT(-4:4,5) = 9*T
+!LDELTAMN_OPT(-4:4,6) = 9*T
+!  LRHO_OPT(-5:5,0) = 11*T  .. -out-(147g2)
+!  LBOUND_OPT(1:4,0) = 4*T  ! 3/2/15.(146o4,o5)
+  RHO_EXP = 4
+!------------------------------------------------------------------------
+!       Boozer Coordinate Transformation
+!------------------------------------------------------------------------
+  MBOZ = 64
+  NBOZ = 32
+!-----------------------------------------------------------------------
+!          COIL OPTIMIZATION PARAMETERS
+!-----------------------------------------------------------------------
+!-----------------------------------------------------------------------
+!          PLASMA PROPERTIES
+!-----------------------------------------------------------------------
+  TARGET_ASPECT  = 4.370  SIGMA_ASPECT  = 1.0
+  TARGET_BETA    = 0.042  SIGMA_BETA    = 1.0
+  TARGET_CURTOR  = 2.0E5  SIGMA_CURTOR  = 1.0e20   ! (146b)
+  TARGET_PHIEDGE = 3.14159  SIGMA_PHIEDGE = 1.0e20  !(161s1)
+  TARGET_RBTOR   = 2.380  SIGMA_RBTOR   = 1.0
+  TARGET_R0      = 1.600  SIGMA_R0      = 1.0e20
+  TARGET_VOLUME  = 1.0E2  SIGMA_VOLUME  = 1.0e20
+  TARGET_WP      = 1.0E3  SIGMA_WP      = 1.0e20
+!------------------------------------------------------------------------
+!       Boozer Coordinate Helicity
+!         Note that helicity targeting is by surface.  Axis (01) is ignored.
+!         (X,0): Quasi-Axisymetry
+!         (0,X): Quasi-Poloidal Symmetry
+!         (L,K): Quasi-Helical Symmetry (m *K + n*L)
+!------------------------------------------------------------------------
+  HELICITY = (1, 0)   ! (161r5)
+  TARGET_HELICITY(1:49) = 49*0.0  SIGMA_HELICITY(1:49) = 49*1.0
+!------------------------------------------------------------------------
+!       Ballooning Stability (as calculated by COBRA_VMEC)
+!         Note that ballooning stability is by surface.  Axis (01) is ignored.
+!         THETA, ZETA: Ballooning angle perturbations
+!------------------------------------------------------------------------
+  BALLOON_THETA   = 0.0
+  BALLOON_ZETA    = 0.0
+  TARGET_BALLOON(1:49) = 49*0.0  SIGMA_BALLOON(1:49) = 49*1.0
+!------------------------------------------------------------------------
+!       Neoclassical Transport Calculation (as calculated by NEO)
+!         Note that neoclassical transport is by surface. Axis (01) is ignored.
+!------------------------------------------------------------------------
+!  TARGET_NEO(1:49) = 49*0.0  SIGMA_NEO(1:49) = 49*1.0 ! (146a)fra SLaz.
+   TARGET_NEO(16)   = 0.0     SIGMA_NEO(16)   = 1.0  ! (146b)fra (140h2). as (35q)
+   TARGET_NEO(26)   = 0.0     SIGMA_NEO(26)   = 1.0
+   TARGET_NEO(40)   = 0.0     SIGMA_NEO(40)   = 1.0
+!------------------------------------------------------------------------
+!       Drift Kinetic Equation Solver (DKES)
+!         Axis (01) is ignored.
+!------------------------------------------------------------------------
+!  TARGET_DKES(1:49) = 49*0.0  SIGMA_DKES(1:49) = 49*1.0
+!  TARGET_DKES(3) = 0.0  SIGMA_DKES(3) = 1.0
+!  TARGET_DKES(3:49) = 97*0.0  SIGMA_DKES(3:49) = 97*1.0
+!------------------------------------------------------------------------
+!       Bootstrap Current Calculation (as calculated by BOOTSJ)
+!------------------------------------------------------------------------
+!  TARGET_BOOTSTRAP(1:49) = 49*0.0  SIGMA_BOOTSTRAP(1:49) = 49*1.0
+!-----------------------------------------------------------------------
+!          TURBULENT TRANSPORT
+!-----------------------------------------------------------------------
+  TARGET_TXPORT(01) = 0.0E+00  SIGMA_TXPORT(01) = 1.0  S_TXPORT(01) = 0.635  !(146b)
+  TXPORT_PROXY = 'all'  ! 2/12/15.(146o)
+/ 
+&BOOTIN 
+   NRHO    =  99
+   MBUSE   =  64
+   NBUSE   =  32
+   ZEFF1   =  1.00
+   DENS0   =  0.50
+   TETI    =  1.00
+   TEMPRES = -1.0
+   DAMP    = -0.01
+   DAMP_BS = -0.01
+   ISYMM0  =  0
+   ATE=  4.5774107358E+00   -3.4189656529E-01   -2.4139157095E+00   -3.1667990087E+01    1.1944243495E+02   -2.1468460416E+02    1.7964690946E+02   -5.4556914438E+01   -1.4341821998E-03
+   ATI=  4.5774107358E+00   -3.4189656529E-01   -2.4139157095E+00   -3.1667990087E+01    1.1944243495E+02   -2.1468460416E+02    1.7964690946E+02   -5.4556914438E+01   -1.4341821998E-03
+/
+&NEO_IN
+  THETA_N = 200
+  PHI_N = 200
+  MAX_M_MODE = 63
+  MAX_N_MODE = 96
+  NPART = 75
+  MULTRA = 1
+  ACC_req = 0.01
+  NO_BINS = 100
+  NSTEP_PER = 75
+  NSTEP_MIN = 500
+  NSTEP_MAX = 2000
+  CALC_NSTEP_MAX = 0
+  EOUT_SWI = 1
+  LAB_SWI = 0
+  INP_SWI = 0
+  REF_SWI = 2
+  WRITE_PROGRESS = 1
+  WRITE_OUTPUT_FILES = 0
+  SPLINE_TEST = 0
+  WRITE_INTEGRATE = 0
+  WRITE_DIAGNOSTIC = 0
+  CALC_CUR = 1
+  NPART_CUR = 200
+  CALC_CUR = 1
+  CALC_CUR = 1
+/
+&COORDINATES
+ pest=.t.
+ boozer=.f.
+/
+&IN_OUT
+ global_y=.f.
+ vmec_dir='~/VMECfiles'
+ vmec_file='wout_W7X.txt'
+ out_tag='s07'
+ /
+&SETUP
+ s0=.7
+ alpha0=0.
+ alpha0_start=-.6283   
+ alpha0_end=.6283   
+ nalpha0=3
+ pol_turns=1. 
+ nz0=160
+/
+&DIAGNO_IN
+  NU = 128
+  NV = 128
+  FLUX_DIAG_FILE = '/u/slazerso/Sims/NCSX/probes/diagno_fluxloops_n36.NCSX'
+  INT_TYPE = 'simpson'
+  INT_STEP = 2
+  LRPHIZ = F
+  VC_ADAPT_TOL =  0.0
+  VC_ADAPT_REL =  1.0E-3
+  LVC_FIELD = T
+/
+&END

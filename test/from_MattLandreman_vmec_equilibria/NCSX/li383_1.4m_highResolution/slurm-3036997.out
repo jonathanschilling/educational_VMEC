@@ -1,0 +1,136 @@
+This is .bashrc
+anaconda/2: submodules are available, see the endmost output of `module avail'
+load netCDF Library 4.4.1.1
+load HDF5 Library 1.8.18
+STELLOPT Version  2.51
+  Equilibrium calculation provided by: 
+  =================================================================================
+  =========   Parallel Variational Moments Equilibrium Code (v 1.0)      =========
+  =========       Variational Moments Equilibrium Code (v 1.0)           =========
+  =========                (S. Hirshman, J. Whitson)                      =========
+  =========         http://vmecwiki.pppl.wikispaces.net/VMEC              =========
+  =================================================================================
+     
+ -----  Optimization  -----
+    =======VARS=======
+    ======TARGETS=====
+    ==================
+    Number of Processors:           32
+    Number of Parameters:            0
+    Number of Targets:               0
+    !!!! EQUILIBRIUM RESTARTING NOT UTILIZED !!!!
+    ========Parallel Code Execution Info=======
+    Number of processors:          32
+    Number of procesor groups (noptimizers):           1
+     OPTIMIZER: SINGLE_ITERATION
+     NFUNC_MAX:         5000
+ ---------------------------  EQUILIBRIUM CALCULATION  ------------------------
+
+  NS =   16 NO. FOURIER MODES = 1103 FTOLV =  1.000E-06 NITER =    400
+  PROCESSOR COUNT - RADIAL:    8
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  5.27E+01  1.58E+00  4.18E-01  1.579E+00  8.00E-01  3.7735E+00
+  HAVING A CONVERGENCE PROBLEM: RESETTING DELT TO    0.052
+  If this does NOT resolve the problem, try changing (decrease OR increase) the value of DELT
+  HAVING A CONVERGENCE PROBLEM: RESETTING DELT TO    0.004
+  If this does NOT resolve the problem, try changing (decrease OR increase) the value of DELT
+
+ MORE THAN 75 JACOBIAN ITERATIONS (DECREASE DELT)
+
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+ jac75 flag_detected. Reducing delt to  0.759999990463257     
+
+  NS =   16 NO. FOURIER MODES = 1103 FTOLV =  1.000E-06 NITER =    400
+  PROCESSOR COUNT - RADIAL:    8
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  5.27E+01  1.58E+00  4.18E-01  1.579E+00  7.60E-01  3.7735E+00
+  183  9.99E-07  3.92E-07  9.31E-07  1.580E+00  4.70E-01  3.6365E+00
+
+  NS =   49 NO. FOURIER MODES = 1103 FTOLV =  1.000E-09 NITER =   1400
+  PROCESSOR COUNT - RADIAL:   24
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  9.21E-02  2.96E-02  1.96E-04  1.580E+00  7.60E-01  3.6364E+00
+  200  2.38E-06  6.08E-07  7.12E-08  1.580E+00  6.96E-01  3.6363E+00
+  400  3.45E-08  9.54E-09  2.54E-09  1.578E+00  6.96E-01  3.6363E+00
+  600  3.98E-09  1.10E-09  4.14E-10  1.578E+00  6.96E-01  3.6363E+00
+  800  1.09E-09  3.14E-10  1.39E-10  1.578E+00  6.96E-01  3.6363E+00
+  816  9.84E-10  2.99E-10  1.35E-10  1.578E+00  6.96E-01  3.6363E+00
+
+  NS =   75 NO. FOURIER MODES = 1103 FTOLV =  1.000E-09 NITER =   1600
+  PROCESSOR COUNT - RADIAL:   32
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  6.58E-03  3.84E-03  3.16E-06  1.578E+00  7.60E-01  3.6363E+00
+  200  6.87E-09  2.64E-09  1.77E-10  1.578E+00  6.18E-01  3.6363E+00
+  320  9.95E-10  2.40E-10  9.16E-11  1.578E+00  6.18E-01  3.6363E+00
+
+  NS =  101 NO. FOURIER MODES = 1103 FTOLV =  1.000E-11 NITER =   3000
+  PROCESSOR COUNT - RADIAL:   32
+
+  ITER    FSQR      FSQZ      FSQL    RAX(v=0)    DELT       WMHD
+
+    1  2.07E-03  1.20E-03  1.00E-06  1.578E+00  7.60E-01  3.6363E+00
+  200  1.23E-08  5.63E-09  1.44E-10  1.578E+00  5.49E-01  3.6363E+00
+  400  6.65E-10  1.51E-10  6.98E-11  1.578E+00  5.49E-01  3.6363E+00
+  600  2.44E-10  5.54E-11  3.96E-11  1.578E+00  5.49E-01  3.6363E+00
+  800  1.39E-10  3.12E-11  2.40E-11  1.578E+00  5.49E-01  3.6363E+00
+ 1000  7.82E-11  1.80E-11  1.47E-11  1.578E+00  5.49E-01  3.6363E+00
+ 1200  4.29E-11  1.09E-11  1.07E-11  1.578E+00  5.49E-01  3.6363E+00
+ 1400  2.45E-11  6.78E-12  8.55E-12  1.578E+00  5.49E-01  3.6363E+00
+ 1600  1.55E-11  4.59E-12  7.16E-12  1.578E+00  5.49E-01  3.6363E+00
+ 1800  1.05E-11  3.24E-12  5.56E-12  1.578E+00  5.49E-01  3.6363E+00
+ 1828  1.00E-11  3.08E-12  5.33E-12  1.578E+00  5.49E-01  3.6363E+00
+
+ EXECUTION TERMINATED NORMALLY
+
+ FILE : li383_1.4m_opt0
+ NUMBER OF JACOBIAN RESETS =    0
+
+    TOTAL COMPUTATIONAL TIME              54.73 SECONDS
+    TIME TO READ IN DATA                   0.00 SECONDS
+    TIME TO WRITE DATA TO WOUT             4.95 SECONDS
+    TIME IN EQFORCE                        3.16 SECONDS
+    TIME IN FOURIER TRANSFORM              6.48 SECONDS
+    TIME IN INVERSE FOURIER XFORM          9.29 SECONDS
+    TIME IN FORCES + SYMFORCES             1.79 SECONDS
+    TIME IN BCOVAR                         3.19 SECONDS
+    TIME IN RESIDUE                       13.75 SECONDS
+    TIME (REMAINDER) IN FUNCT3D            5.67 SECONDS
+ -------------------------  PARAVMEC CALCULATION DONE  -----------------------

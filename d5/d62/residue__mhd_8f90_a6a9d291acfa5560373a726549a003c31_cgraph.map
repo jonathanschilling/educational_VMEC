@@ -1,0 +1,8 @@
+<map id="residue_mhd" name="residue_mhd">
+<area shape="rect" id="node1" title="Compute invariant residuals." alt="" coords="5,81,101,108"/>
+<area shape="rect" id="node2" href="$db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="149,5,249,32"/>
+<area shape="rect" id="node3" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="170,56,229,83"/>
+<area shape="rect" id="node4" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="160,107,239,133"/>
+<area shape="rect" id="node5" href="$d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" title="Build forces from different contributions." alt="" coords="169,157,230,184"/>
+<area shape="rect" id="node6" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="297,157,355,184"/>
+</map>

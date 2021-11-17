@@ -13,8 +13,8 @@
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title="Write the output files.">
-<polygon fill="#bfbfbf" stroke="black" points="0,-791.5 0,-810.5 42,-810.5 42,-791.5 0,-791.5"/>
-<text text-anchor="middle" x="21" y="-798.5" font-family="Helvetica,sans-Serif" font-size="10.00">fileout</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-829.5 0,-848.5 42,-848.5 42,-829.5 0,-829.5"/>
+<text text-anchor="middle" x="21" y="-836.5" font-family="Helvetica,sans-Serif" font-size="10.00">fileout</text>
 </a>
 </g>
 </g>
@@ -22,623 +22,638 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="../../d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" target="_top" xlink:title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre...">
-<polygon fill="white" stroke="black" points="83.5,-943.5 83.5,-962.5 121.5,-962.5 121.5,-943.5 83.5,-943.5"/>
-<text text-anchor="middle" x="102.5" y="-950.5" font-family="Helvetica,sans-Serif" font-size="10.00">eqfor</text>
+<polygon fill="white" stroke="black" points="83.5,-981.5 83.5,-1000.5 121.5,-1000.5 121.5,-981.5 83.5,-981.5"/>
+<text text-anchor="middle" x="102.5" y="-988.5" font-family="Helvetica,sans-Serif" font-size="10.00">eqfor</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M26.97,-810.51C39.91,-835.25 74.8,-901.95 91.85,-934.56"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="88.79,-936.26 96.53,-943.5 95,-933.01 88.79,-936.26"/>
+<path fill="none" stroke="midnightblue" d="M26.97,-848.51C39.91,-873.25 74.8,-939.95 91.85,-972.56"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="88.79,-974.26 96.53,-981.5 95,-971.01 88.79,-974.26"/>
 </g>
 <!-- Node15 -->
 <g id="node15" class="node">
 <title>Node15</title>
 <g id="a_node15"><a xlink:href="../../d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" target="_top" xlink:title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells...">
-<polygon fill="white" stroke="black" points="78,-392.5 78,-411.5 127,-411.5 127,-392.5 78,-392.5"/>
-<text text-anchor="middle" x="102.5" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">funct3d</text>
+<polygon fill="white" stroke="black" points="78,-411.5 78,-430.5 127,-430.5 127,-411.5 78,-411.5"/>
+<text text-anchor="middle" x="102.5" y="-418.5" font-family="Helvetica,sans-Serif" font-size="10.00">funct3d</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node15 -->
 <g id="edge14" class="edge">
 <title>Node1&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M23.97,-791.14C34.41,-738.74 83.43,-492.7 97.63,-421.4"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="101.08,-422.01 99.6,-411.52 94.22,-420.64 101.08,-422.01"/>
+<path fill="none" stroke="midnightblue" d="M23.81,-829.48C33.94,-776.2 83.7,-514.57 97.78,-440.55"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="101.23,-441.16 99.66,-430.68 94.35,-439.85 101.23,-441.16"/>
 </g>
-<!-- Node58 -->
-<g id="node58" class="node">
-<title>Node58</title>
-<g id="a_node58"><a xlink:href="../../de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" target="_top" xlink:title="Write the output files of VMEC.">
-<polygon fill="white" stroke="black" points="82,-791.5 82,-810.5 123,-810.5 123,-791.5 82,-791.5"/>
-<text text-anchor="middle" x="102.5" y="-798.5" font-family="Helvetica,sans-Serif" font-size="10.00">wrout</text>
+<!-- Node59 -->
+<g id="node59" class="node">
+<title>Node59</title>
+<g id="a_node59"><a xlink:href="../../de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" target="_top" xlink:title="Write the output files of VMEC.">
+<polygon fill="white" stroke="black" points="82,-829.5 82,-848.5 123,-848.5 123,-829.5 82,-829.5"/>
+<text text-anchor="middle" x="102.5" y="-836.5" font-family="Helvetica,sans-Serif" font-size="10.00">wrout</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node58 -->
-<g id="edge63" class="edge">
-<title>Node1&#45;&gt;Node58</title>
-<path fill="none" stroke="midnightblue" d="M42.06,-801C51.05,-801 61.83,-801 71.73,-801"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="71.99,-804.5 81.99,-801 71.99,-797.5 71.99,-804.5"/>
+<!-- Node1&#45;&gt;Node59 -->
+<g id="edge68" class="edge">
+<title>Node1&#45;&gt;Node59</title>
+<path fill="none" stroke="midnightblue" d="M42.06,-839C51.05,-839 61.83,-839 71.73,-839"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="71.99,-842.5 81.99,-839 71.99,-835.5 71.99,-842.5"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="../../d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" target="_top" xlink:title="Computes minimum and maximum &#160;along &#160;between two angle lines ( ).">
-<polygon fill="white" stroke="black" points="192,-962.5 192,-981.5 248,-981.5 248,-962.5 192,-962.5"/>
-<text text-anchor="middle" x="220" y="-969.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextrema</text>
+<polygon fill="white" stroke="black" points="192,-1038.5 192,-1057.5 248,-1057.5 248,-1038.5 192,-1038.5"/>
+<text text-anchor="middle" x="220" y="-1045.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextrema</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M121.55,-955.97C137.54,-958.6 161.4,-962.53 181.52,-965.83"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="181.19,-969.33 191.63,-967.5 182.33,-962.42 181.19,-969.33"/>
+<path fill="none" stroke="midnightblue" d="M116.67,-1000.73C128.38,-1009.05 146.21,-1020.93 163,-1029 169.16,-1031.96 175.89,-1034.66 182.49,-1037.04"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="181.39,-1040.36 191.99,-1040.29 183.66,-1033.74 181.39,-1040.36"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" target="_top" xlink:title="Computes br, bphi, bz, bsubs on half&#45;radial mesh.">
-<polygon fill="white" stroke="black" points="204,-924.5 204,-943.5 236,-943.5 236,-924.5 204,-924.5"/>
-<text text-anchor="middle" x="220" y="-931.5" font-family="Helvetica,sans-Serif" font-size="10.00">bss</text>
+<polygon fill="white" stroke="black" points="204,-1000.5 204,-1019.5 236,-1019.5 236,-1000.5 204,-1000.5"/>
+<text text-anchor="middle" x="220" y="-1007.5" font-family="Helvetica,sans-Serif" font-size="10.00">bss</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node2&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M121.55,-950.03C140.96,-946.84 171.97,-941.74 193.78,-938.15"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="194.36,-941.6 203.66,-936.52 193.23,-934.69 194.36,-941.6"/>
+<path fill="none" stroke="midnightblue" d="M121.55,-993.97C140.96,-997.16 171.97,-1002.26 193.78,-1005.85"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="193.23,-1009.31 203.66,-1007.48 194.36,-1002.4 193.23,-1009.31"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" target="_top" xlink:title="Compute flux&#45;surface averaged radial force balance .">
-<polygon fill="white" stroke="black" points="323.5,-801.5 323.5,-820.5 379.5,-820.5 379.5,-801.5 323.5,-801.5"/>
-<text text-anchor="middle" x="351.5" y="-808.5" font-family="Helvetica,sans-Serif" font-size="10.00">calc_fbal</text>
+<polygon fill="white" stroke="black" points="323.5,-592.5 323.5,-611.5 379.5,-611.5 379.5,-592.5 323.5,-592.5"/>
+<text text-anchor="middle" x="351.5" y="-599.5" font-family="Helvetica,sans-Serif" font-size="10.00">calc_fbal</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node2&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M118.01,-943.37C129.97,-935.54 147.42,-924.29 163,-915 219.21,-881.5 286.64,-844.97 323.37,-825.37"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="325.27,-828.32 332.45,-820.53 321.98,-822.14 325.27,-828.32"/>
+<path fill="none" stroke="midnightblue" d="M118.34,-981.47C159.86,-954.78 274.4,-880.94 277,-877 326.57,-802.03 284.84,-763.35 313,-678 319.73,-657.6 330.98,-635.74 339.41,-620.73"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="342.51,-622.35 344.46,-611.94 336.45,-618.87 342.51,-622.35"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="../../d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" target="_top" xlink:title="Compute Waist thickness and height in &#160;symmetry planes.">
-<polygon fill="white" stroke="black" points="189.5,-1000.5 189.5,-1019.5 250.5,-1019.5 250.5,-1000.5 189.5,-1000.5"/>
-<text text-anchor="middle" x="220" y="-1007.5" font-family="Helvetica,sans-Serif" font-size="10.00">elongation</text>
+<polygon fill="white" stroke="black" points="189.5,-1076.5 189.5,-1095.5 250.5,-1095.5 250.5,-1076.5 189.5,-1076.5"/>
+<text text-anchor="middle" x="220" y="-1083.5" font-family="Helvetica,sans-Serif" font-size="10.00">elongation</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node2&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M116.67,-962.73C128.38,-971.05 146.21,-982.93 163,-991 168.34,-993.56 174.11,-995.93 179.85,-998.07"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="178.81,-1001.42 189.4,-1001.44 181.14,-994.81 178.81,-1001.42"/>
+<path fill="none" stroke="midnightblue" d="M108.57,-1000.64C117.47,-1016.68 137.44,-1048.87 163,-1067 167.99,-1070.54 173.69,-1073.46 179.5,-1075.86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="178.68,-1079.28 189.27,-1079.42 181.08,-1072.71 178.68,-1079.28"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="../../d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" target="_top" xlink:title="Program for computing local &#160;force balance.">
-<polygon fill="white" stroke="black" points="195,-1038.5 195,-1057.5 245,-1057.5 245,-1038.5 195,-1038.5"/>
-<text text-anchor="middle" x="220" y="-1045.5" font-family="Helvetica,sans-Serif" font-size="10.00">jxbforce</text>
+<polygon fill="white" stroke="black" points="195,-962.5 195,-981.5 245,-981.5 245,-962.5 195,-962.5"/>
+<text text-anchor="middle" x="220" y="-969.5" font-family="Helvetica,sans-Serif" font-size="10.00">jxbforce</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
 <title>Node2&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M108.57,-962.64C117.47,-978.68 137.44,-1010.87 163,-1029 169.65,-1033.72 177.57,-1037.34 185.33,-1040.09"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="184.37,-1043.45 194.96,-1043.12 186.47,-1036.78 184.37,-1043.45"/>
+<path fill="none" stroke="midnightblue" d="M121.55,-988.03C138.37,-985.26 163.91,-981.06 184.63,-977.65"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.35,-981.08 194.65,-976.01 184.21,-974.18 185.35,-981.08"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" target="_top" xlink:title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle .">
-<polygon fill="white" stroke="black" points="328.5,-1038.5 328.5,-1057.5 374.5,-1057.5 374.5,-1038.5 328.5,-1038.5"/>
-<text text-anchor="middle" x="351.5" y="-1045.5" font-family="Helvetica,sans-Serif" font-size="10.00">fext_fft</text>
+<polygon fill="white" stroke="black" points="328.5,-981.5 328.5,-1000.5 374.5,-1000.5 374.5,-981.5 328.5,-981.5"/>
+<text text-anchor="middle" x="351.5" y="-988.5" font-family="Helvetica,sans-Serif" font-size="10.00">fext_fft</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node8 -->
 <g id="edge7" class="edge">
 <title>Node7&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M245.05,-1048C265.64,-1048 295.45,-1048 318.13,-1048"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="318.3,-1051.5 328.3,-1048 318.3,-1044.5 318.3,-1051.5"/>
+<path fill="none" stroke="midnightblue" d="M245.05,-975.53C265.64,-978.55 295.45,-982.92 318.13,-986.25"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="317.9,-989.75 328.3,-987.74 318.92,-982.83 317.9,-989.75"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
 <title>Node9</title>
 <g id="a_node9"><a xlink:href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" target="_top" xlink:title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ...">
-<polygon fill="white" stroke="black" points="326,-1000.5 326,-1019.5 377,-1019.5 377,-1000.5 326,-1000.5"/>
-<text text-anchor="middle" x="351.5" y="-1007.5" font-family="Helvetica,sans-Serif" font-size="10.00">fsym_fft</text>
+<polygon fill="white" stroke="black" points="326,-943.5 326,-962.5 377,-962.5 377,-943.5 326,-943.5"/>
+<text text-anchor="middle" x="351.5" y="-950.5" font-family="Helvetica,sans-Serif" font-size="10.00">fsym_fft</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node9 -->
 <g id="edge8" class="edge">
 <title>Node7&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M245.05,-1040.94C264.97,-1035.1 293.53,-1026.72 315.9,-1020.15"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="317.08,-1023.45 325.69,-1017.28 315.11,-1016.74 317.08,-1023.45"/>
+<path fill="none" stroke="midnightblue" d="M245.05,-968.47C264.88,-965.56 293.27,-961.4 315.6,-958.12"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="316.31,-961.55 325.69,-956.64 315.29,-954.63 316.31,-961.55"/>
 </g>
 <!-- Node10 -->
 <g id="node10" class="node">
 <title>Node10</title>
 <g id="a_node10"><a xlink:href="../../d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" target="_top" xlink:title="Extends function from ntheta2 to ntheta3 range.">
-<polygon fill="white" stroke="black" points="319.5,-962.5 319.5,-981.5 383.5,-981.5 383.5,-962.5 319.5,-962.5"/>
-<text text-anchor="middle" x="351.5" y="-969.5" font-family="Helvetica,sans-Serif" font-size="10.00">fsym_invfft</text>
+<polygon fill="white" stroke="black" points="319.5,-905.5 319.5,-924.5 383.5,-924.5 383.5,-905.5 319.5,-905.5"/>
+<text text-anchor="middle" x="351.5" y="-912.5" font-family="Helvetica,sans-Serif" font-size="10.00">fsym_invfft</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node10 -->
 <g id="edge9" class="edge">
 <title>Node7&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M245.03,-1042.62C255.39,-1039.61 267.32,-1035.2 277,-1029 296.59,-1016.45 294.35,-1004.91 313,-991 315.05,-989.47 317.24,-988.01 319.49,-986.62"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="321.33,-989.6 328.33,-981.64 317.9,-983.49 321.33,-989.6"/>
+<path fill="none" stroke="midnightblue" d="M243.65,-962.4C253.86,-958.04 266.05,-952.8 277,-948 291.22,-941.76 306.94,-934.72 320.17,-928.76"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="321.64,-931.93 329.31,-924.63 318.76,-925.55 321.64,-931.93"/>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
 <g id="a_node11"><a xlink:href="../../d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" target="_top" xlink:title="Solves the radial force balance &#160;for &#160;in real space using collocation.">
-<polygon fill="white" stroke="black" points="323.5,-924.5 323.5,-943.5 379.5,-943.5 379.5,-924.5 323.5,-924.5"/>
-<text text-anchor="middle" x="351.5" y="-931.5" font-family="Helvetica,sans-Serif" font-size="10.00">getbsubs</text>
+<polygon fill="white" stroke="black" points="323.5,-829.5 323.5,-848.5 379.5,-848.5 379.5,-829.5 323.5,-829.5"/>
+<text text-anchor="middle" x="351.5" y="-836.5" font-family="Helvetica,sans-Serif" font-size="10.00">getbsubs</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node11 -->
 <g id="edge10" class="edge">
 <title>Node7&#45;&gt;Node11</title>
-<path fill="none" stroke="midnightblue" d="M245.23,-1044.21C255.99,-1041.49 268.18,-1036.85 277,-1029 304.91,-1004.14 286.93,-979.78 313,-953 314.37,-951.59 315.88,-950.26 317.46,-949.02"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="319.45,-951.9 325.91,-943.5 315.63,-946.04 319.45,-951.9"/>
+<path fill="none" stroke="midnightblue" d="M245.28,-965.03C255.8,-961.19 267.79,-955.62 277,-948 279.07,-946.29 317.94,-888 338.3,-857.38"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="341.34,-859.13 343.96,-848.86 335.51,-855.25 341.34,-859.13"/>
 </g>
 <!-- Node13 -->
 <g id="node13" class="node">
 <title>Node13</title>
 <g id="a_node13"><a xlink:href="../../de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" target="_top" xlink:title="Evaluate the Mercier stability criterion.">
-<polygon fill="white" stroke="black" points="327,-1076.5 327,-1095.5 376,-1095.5 376,-1076.5 327,-1076.5"/>
-<text text-anchor="middle" x="351.5" y="-1083.5" font-family="Helvetica,sans-Serif" font-size="10.00">mercier</text>
+<polygon fill="white" stroke="black" points="327,-1019.5 327,-1038.5 376,-1038.5 376,-1019.5 327,-1019.5"/>
+<text text-anchor="middle" x="351.5" y="-1026.5" font-family="Helvetica,sans-Serif" font-size="10.00">mercier</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node13 -->
 <g id="edge12" class="edge">
 <title>Node7&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M245.05,-1055.06C265.23,-1060.98 294.26,-1069.5 316.75,-1076.1"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.99,-1079.52 326.57,-1078.98 317.96,-1072.81 315.99,-1079.52"/>
+<path fill="none" stroke="midnightblue" d="M245.02,-979.22C255.04,-982.48 266.72,-986.58 277,-991 293.62,-998.15 296.93,-1001.69 313,-1010 315.98,-1011.54 319.1,-1013.14 322.22,-1014.73"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="320.89,-1017.99 331.39,-1019.4 324.06,-1011.74 320.89,-1017.99"/>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
 <g id="a_node12"><a xlink:href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" target="_top" xlink:title="Solve a linear system of equations using dgesv.">
-<polygon fill="white" stroke="black" points="472,-658.5 472,-677.5 515,-677.5 515,-658.5 472,-658.5"/>
-<text text-anchor="middle" x="493.5" y="-665.5" font-family="Helvetica,sans-Serif" font-size="10.00">solver</text>
+<polygon fill="white" stroke="black" points="472,-639.5 472,-658.5 515,-658.5 515,-639.5 472,-639.5"/>
+<text text-anchor="middle" x="493.5" y="-646.5" font-family="Helvetica,sans-Serif" font-size="10.00">solver</text>
 </a>
 </g>
 </g>
 <!-- Node11&#45;&gt;Node12 -->
 <g id="edge11" class="edge">
 <title>Node11&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M377.62,-924.42C382.15,-921.86 386.53,-918.75 390,-915 453.44,-846.58 480.44,-733.36 489.12,-687.85"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="492.6,-688.27 490.94,-677.81 485.71,-687.02 492.6,-688.27"/>
+<path fill="none" stroke="midnightblue" d="M359.64,-829.32C381.82,-799.21 449.83,-706.92 478.99,-667.34"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="482.1,-669.02 485.21,-658.89 476.46,-664.87 482.1,-669.02"/>
 </g>
 <!-- Node14 -->
 <g id="node14" class="node">
 <title>Node14</title>
 <g id="a_node14"><a xlink:href="../../d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="426,-1076.5 426,-1095.5 561,-1095.5 561,-1076.5 426,-1076.5"/>
-<text text-anchor="middle" x="493.5" y="-1083.5" font-family="Helvetica,sans-Serif" font-size="10.00">safe_open_mod::safe_open</text>
+<polygon fill="white" stroke="black" points="426,-1019.5 426,-1038.5 561,-1038.5 561,-1019.5 426,-1019.5"/>
+<text text-anchor="middle" x="493.5" y="-1026.5" font-family="Helvetica,sans-Serif" font-size="10.00">safe_open_mod::safe_open</text>
 </a>
 </g>
 </g>
 <!-- Node13&#45;&gt;Node14 -->
 <g id="edge13" class="edge">
 <title>Node13&#45;&gt;Node14</title>
-<path fill="none" stroke="midnightblue" d="M376.25,-1086C387.3,-1086 401.13,-1086 415.36,-1086"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="415.75,-1089.5 425.75,-1086 415.75,-1082.5 415.75,-1089.5"/>
+<path fill="none" stroke="midnightblue" d="M376.25,-1029C387.3,-1029 401.13,-1029 415.36,-1029"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="415.75,-1032.5 425.75,-1029 415.75,-1025.5 415.75,-1032.5"/>
 </g>
 <!-- Node16 -->
 <g id="node16" class="node">
 <title>Node16</title>
 <g id="a_node16"><a xlink:href="../../d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4" target="_top" xlink:title="Fourier&#45;space bandpass filter on constraint force for spectral condensation.">
-<polygon fill="white" stroke="black" points="201.5,-430.5 201.5,-449.5 238.5,-449.5 238.5,-430.5 201.5,-430.5"/>
-<text text-anchor="middle" x="220" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00">alias</text>
+<polygon fill="white" stroke="black" points="201.5,-506.5 201.5,-525.5 238.5,-525.5 238.5,-506.5 201.5,-506.5"/>
+<text text-anchor="middle" x="220" y="-513.5" font-family="Helvetica,sans-Serif" font-size="10.00">alias</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node16 -->
 <g id="edge15" class="edge">
 <title>Node15&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M127.15,-409.78C145.92,-415.96 172.18,-424.6 191.82,-431.06"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="190.82,-434.41 201.41,-434.21 193,-427.76 190.82,-434.41"/>
+<path fill="none" stroke="midnightblue" d="M108.57,-430.64C117.47,-446.68 137.44,-478.87 163,-497 171.43,-502.97 181.88,-507.19 191.46,-510.1"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="190.82,-513.55 201.39,-512.77 192.64,-506.79 190.82,-513.55"/>
 </g>
 <!-- Node17 -->
 <g id="node17" class="node">
 <title>Node17</title>
 <g id="a_node17"><a xlink:href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" target="_top" xlink:title="Compute the covariant components of the magnetic field , .">
-<polygon fill="white" stroke="black" points="197,-354.5 197,-373.5 243,-373.5 243,-354.5 197,-354.5"/>
-<text text-anchor="middle" x="220" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">bcovar</text>
+<polygon fill="white" stroke="black" points="197,-392.5 197,-411.5 243,-411.5 243,-392.5 197,-392.5"/>
+<text text-anchor="middle" x="220" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">bcovar</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node17 -->
 <g id="edge16" class="edge">
 <title>Node15&#45;&gt;Node17</title>
-<path fill="none" stroke="midnightblue" d="M127.15,-394.22C144.49,-388.51 168.23,-380.7 187.23,-374.45"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="188.54,-377.71 196.94,-371.26 186.35,-371.06 188.54,-377.71"/>
+<path fill="none" stroke="midnightblue" d="M127.15,-417.11C144.41,-414.27 168.01,-410.39 186.96,-407.27"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="187.65,-410.7 196.94,-405.63 186.51,-403.8 187.65,-410.7"/>
 </g>
 <!-- Node21 -->
 <g id="node21" class="node">
 <title>Node21</title>
 <g id="a_node21"><a xlink:href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" target="_top" xlink:title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),...">
-<polygon fill="white" stroke="black" points="195.5,-734.5 195.5,-753.5 244.5,-753.5 244.5,-734.5 195.5,-734.5"/>
-<text text-anchor="middle" x="220" y="-741.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert</text>
+<polygon fill="white" stroke="black" points="195.5,-772.5 195.5,-791.5 244.5,-791.5 244.5,-772.5 195.5,-772.5"/>
+<text text-anchor="middle" x="220" y="-779.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node21 -->
 <g id="edge21" class="edge">
 <title>Node15&#45;&gt;Node21</title>
-<path fill="none" stroke="midnightblue" d="M103.99,-411.61C106.63,-459.94 120.67,-676.04 163,-725 168.84,-731.75 177.17,-736.11 185.64,-738.92"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="184.92,-742.35 195.48,-741.56 186.73,-735.59 184.92,-742.35"/>
+<path fill="none" stroke="midnightblue" d="M103.88,-430.51C106.03,-480.3 118.32,-710.81 163,-763 168.81,-769.78 177.13,-774.15 185.59,-776.96"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="184.88,-780.39 195.44,-779.59 186.69,-773.63 184.88,-780.39"/>
 </g>
 <!-- Node22 -->
 <g id="node22" class="node">
 <title>Node22</title>
 <g id="a_node22"><a xlink:href="../../de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0" target="_top" xlink:title="Compute the real&#45;space MHD forces.">
-<polygon fill="white" stroke="black" points="198,-278.5 198,-297.5 242,-297.5 242,-278.5 198,-278.5"/>
-<text text-anchor="middle" x="220" y="-285.5" font-family="Helvetica,sans-Serif" font-size="10.00">forces</text>
+<polygon fill="white" stroke="black" points="198,-316.5 198,-335.5 242,-335.5 242,-316.5 198,-316.5"/>
+<text text-anchor="middle" x="220" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">forces</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node22 -->
 <g id="edge22" class="edge">
 <title>Node15&#45;&gt;Node22</title>
-<path fill="none" stroke="midnightblue" d="M106.95,-392.4C114.29,-373.34 133.24,-330.54 163,-307 170.31,-301.22 179.49,-297.14 188.28,-294.3"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="189.25,-297.66 197.92,-291.58 187.35,-290.92 189.25,-297.66"/>
+<path fill="none" stroke="midnightblue" d="M108.57,-411.36C117.47,-395.32 137.44,-363.13 163,-345 170.46,-339.71 179.52,-335.8 188.15,-332.95"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="189.36,-336.24 197.97,-330.07 187.39,-329.52 189.36,-336.24"/>
 </g>
 <!-- Node23 -->
 <g id="node23" class="node">
 <title>Node23</title>
 <g id="a_node23"><a xlink:href="../../d8/dc3/jacobian_8f90.html#af346f65d2aa225d9ede6e0f23add6142" target="_top" xlink:title="Evaulate the Jacobian of the transform from flux&#45; to cylindrical coordinates.">
-<polygon fill="white" stroke="black" points="193.5,-240.5 193.5,-259.5 246.5,-259.5 246.5,-240.5 193.5,-240.5"/>
-<text text-anchor="middle" x="220" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">jacobian</text>
+<polygon fill="white" stroke="black" points="193.5,-278.5 193.5,-297.5 246.5,-297.5 246.5,-278.5 193.5,-278.5"/>
+<text text-anchor="middle" x="220" y="-285.5" font-family="Helvetica,sans-Serif" font-size="10.00">jacobian</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node23 -->
 <g id="edge23" class="edge">
 <title>Node15&#45;&gt;Node23</title>
-<path fill="none" stroke="midnightblue" d="M105.08,-392.42C109.57,-368.2 124.66,-303.91 163,-269 168.81,-263.71 176.14,-259.89 183.57,-257.13"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="184.79,-260.41 193.28,-254.07 182.69,-253.74 184.79,-260.41"/>
+<path fill="none" stroke="midnightblue" d="M105.93,-411.19C111.85,-389.29 129.09,-336.05 163,-307 168.84,-301.99 176.06,-298.29 183.35,-295.56"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="184.76,-298.78 193.22,-292.4 182.63,-292.11 184.76,-298.78"/>
 </g>
 <!-- Node24 -->
 <g id="node24" class="node">
 <title>Node24</title>
 <g id="a_node24"><a xlink:href="../../db/da1/nestor__io_8f90.html#a67b1cb19f12a5860a25a89dbd3dfd9c9" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="167.5,-202.5 167.5,-221.5 272.5,-221.5 272.5,-202.5 167.5,-202.5"/>
-<text text-anchor="middle" x="220" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">read_nestor_outputs</text>
+<polygon fill="white" stroke="black" points="167.5,-240.5 167.5,-259.5 272.5,-259.5 272.5,-240.5 167.5,-240.5"/>
+<text text-anchor="middle" x="220" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">read_nestor_outputs</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node24 -->
 <g id="edge24" class="edge">
 <title>Node15&#45;&gt;Node24</title>
-<path fill="none" stroke="midnightblue" d="M104,-392.34C106.03,-363.59 115.92,-277.72 163,-231 164.6,-229.41 166.33,-227.96 168.17,-226.63"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="169.96,-229.64 176.77,-221.53 166.39,-223.62 169.96,-229.64"/>
+<path fill="none" stroke="midnightblue" d="M104.5,-411.27C107.74,-384.61 120.37,-309.71 163,-269 164.66,-267.42 166.45,-265.96 168.35,-264.63"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="170.28,-267.56 177.2,-259.53 166.78,-261.5 170.28,-267.56"/>
 </g>
 <!-- Node25 -->
 <g id="node25" class="node">
 <title>Node25</title>
 <g id="a_node25"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title="Compute invariant residuals.">
-<polygon fill="white" stroke="black" points="196,-164.5 196,-183.5 244,-183.5 244,-164.5 196,-164.5"/>
-<text text-anchor="middle" x="220" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
+<polygon fill="white" stroke="black" points="196,-202.5 196,-221.5 244,-221.5 244,-202.5 196,-202.5"/>
+<text text-anchor="middle" x="220" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node25 -->
 <g id="edge25" class="edge">
 <title>Node15&#45;&gt;Node25</title>
-<path fill="none" stroke="midnightblue" d="M103.29,-392.16C103.12,-359.24 107.09,-251.76 163,-193 169.15,-186.53 177.59,-182.27 186.05,-179.45"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="187.13,-182.78 195.85,-176.77 185.28,-176.03 187.13,-182.78"/>
+<path fill="none" stroke="midnightblue" d="M103.62,-411.18C104.53,-380.23 111.56,-283.67 163,-231 169.24,-224.61 177.7,-220.37 186.16,-217.56"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="187.23,-220.89 195.95,-214.86 185.38,-214.14 187.23,-220.89"/>
 </g>
 <!-- Node31 -->
 <g id="node31" class="node">
 <title>Node31</title>
 <g id="a_node31"><a xlink:href="../../d3/d96/residue__con_8f90.html#a412d6d3c67bc4020bcfc3bcf83718b98" target="_top" xlink:title="Compute invariant residuals.">
-<polygon fill="white" stroke="black" points="185.5,-126.5 185.5,-145.5 254.5,-145.5 254.5,-126.5 185.5,-126.5"/>
-<text text-anchor="middle" x="220" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue_con</text>
+<polygon fill="white" stroke="black" points="185.5,-164.5 185.5,-183.5 254.5,-183.5 254.5,-164.5 185.5,-164.5"/>
+<text text-anchor="middle" x="220" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue_con</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node31 -->
 <g id="edge31" class="edge">
 <title>Node15&#45;&gt;Node31</title>
-<path fill="none" stroke="midnightblue" d="M104.59,-392.28C109.39,-351.07 129.91,-191.24 163,-155 166.59,-151.07 171.01,-147.96 175.79,-145.49"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="177.44,-148.59 185.3,-141.48 174.72,-142.14 177.44,-148.59"/>
+<path fill="none" stroke="midnightblue" d="M103.01,-411.26C101.82,-376.62 102.52,-257.99 163,-193 166.62,-189.11 171.07,-186.01 175.87,-183.55"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="177.51,-186.65 185.38,-179.56 174.8,-180.2 177.51,-186.65"/>
 </g>
 <!-- Node32 -->
 <g id="node32" class="node">
 <title>Node32</title>
-<g id="a_node32"><a xlink:href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" target="_top" xlink:title="Save current or restore previous good state vector and reduce time step.">
-<polygon fill="white" stroke="black" points="188.5,-0.5 188.5,-19.5 251.5,-19.5 251.5,-0.5 188.5,-0.5"/>
-<text text-anchor="middle" x="220" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">restart_iter</text>
+<g id="a_node32"><a xlink:href="../../d5/d62/residue__mhd_8f90.html#a6a9d291acfa5560373a726549a003c31" target="_top" xlink:title="Compute invariant residuals.">
+<polygon fill="white" stroke="black" points="184,-0.5 184,-19.5 256,-19.5 256,-0.5 184,-0.5"/>
+<text text-anchor="middle" x="220" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue_mhd</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node32 -->
 <g id="edge36" class="edge">
 <title>Node15&#45;&gt;Node32</title>
-<path fill="none" stroke="midnightblue" d="M103.73,-392.34C105.17,-339.57 114.58,-86.38 163,-29 167.21,-24.01 172.8,-20.32 178.8,-17.6"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="180.27,-20.79 188.46,-14.08 177.87,-14.22 180.27,-20.79"/>
+<path fill="none" stroke="midnightblue" d="M103.65,-411.21C104.68,-356.58 112.29,-89.56 163,-29 166.17,-25.21 170.13,-22.18 174.46,-19.75"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="176.08,-22.86 183.76,-15.56 173.2,-16.48 176.08,-22.86"/>
 </g>
 <!-- Node33 -->
 <g id="node33" class="node">
 <title>Node33</title>
-<g id="a_node33"><a xlink:href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" target="_top" xlink:title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed.">
-<polygon fill="white" stroke="black" points="192,-620.5 192,-639.5 248,-639.5 248,-620.5 192,-620.5"/>
-<text text-anchor="middle" x="220" y="-627.5" font-family="Helvetica,sans-Serif" font-size="10.00">symforce</text>
+<g id="a_node33"><a xlink:href="../../d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" target="_top" xlink:title="Save current or restore previous good state vector and reduce time step.">
+<polygon fill="white" stroke="black" points="188.5,-38.5 188.5,-57.5 251.5,-57.5 251.5,-38.5 188.5,-38.5"/>
+<text text-anchor="middle" x="220" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">restart_iter</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node33 -->
-<g id="edge37" class="edge">
+<g id="edge41" class="edge">
 <title>Node15&#45;&gt;Node33</title>
-<path fill="none" stroke="midnightblue" d="M103.29,-411.84C103.12,-444.76 107.09,-552.24 163,-611 168.21,-616.47 175.04,-620.37 182.15,-623.14"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="181.28,-626.54 191.87,-626.27 183.42,-619.87 181.28,-626.54"/>
+<path fill="none" stroke="midnightblue" d="M103.81,-411.5C105.68,-360.68 116.85,-121.22 163,-67 167.24,-62.02 172.83,-58.35 178.84,-55.63"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="180.3,-58.82 188.5,-52.11 177.9,-52.25 180.3,-58.82"/>
 </g>
 <!-- Node34 -->
 <g id="node34" class="node">
 <title>Node34</title>
-<g id="a_node34"><a xlink:href="../../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" target="_top" xlink:title="Symmetrize , &#160;and .">
-<polygon fill="white" stroke="black" points="198,-582.5 198,-601.5 242,-601.5 242,-582.5 198,-582.5"/>
-<text text-anchor="middle" x="220" y="-589.5" font-family="Helvetica,sans-Serif" font-size="10.00">symrzl</text>
+<g id="a_node34"><a xlink:href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" target="_top" xlink:title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed.">
+<polygon fill="white" stroke="black" points="192,-696.5 192,-715.5 248,-715.5 248,-696.5 192,-696.5"/>
+<text text-anchor="middle" x="220" y="-703.5" font-family="Helvetica,sans-Serif" font-size="10.00">symforce</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node34 -->
-<g id="edge38" class="edge">
+<g id="edge42" class="edge">
 <title>Node15&#45;&gt;Node34</title>
-<path fill="none" stroke="midnightblue" d="M104,-411.66C106.03,-440.41 115.92,-526.28 163,-573 169.78,-579.73 179.02,-584.07 188.04,-586.88"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="187.44,-590.34 198,-589.44 189.18,-583.56 187.44,-590.34"/>
+<path fill="none" stroke="midnightblue" d="M104.4,-430.58C108.59,-473.49 127.58,-647.57 163,-687 168.09,-692.67 174.94,-696.65 182.1,-699.44"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="181.33,-702.87 191.92,-702.56 183.45,-696.2 181.33,-702.87"/>
 </g>
 <!-- Node35 -->
 <g id="node35" class="node">
 <title>Node35</title>
-<g id="a_node35"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" target="_top" xlink:title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space.">
-<polygon fill="white" stroke="black" points="193,-544.5 193,-563.5 247,-563.5 247,-544.5 193,-544.5"/>
-<text text-anchor="middle" x="220" y="-551.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnspa</text>
+<g id="a_node35"><a xlink:href="../../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" target="_top" xlink:title="Symmetrize , &#160;and .">
+<polygon fill="white" stroke="black" points="198,-658.5 198,-677.5 242,-677.5 242,-658.5 198,-658.5"/>
+<text text-anchor="middle" x="220" y="-665.5" font-family="Helvetica,sans-Serif" font-size="10.00">symrzl</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node35 -->
-<g id="edge39" class="edge">
+<g id="edge43" class="edge">
 <title>Node15&#45;&gt;Node35</title>
-<path fill="none" stroke="midnightblue" d="M105.08,-411.58C109.57,-435.8 124.66,-500.09 163,-535 168.69,-540.18 175.85,-543.96 183.12,-546.7"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="182.41,-550.15 193,-549.85 184.53,-543.48 182.41,-550.15"/>
+<path fill="none" stroke="midnightblue" d="M103.01,-430.74C101.82,-465.38 102.52,-584.01 163,-649 169.63,-656.12 179.02,-660.57 188.22,-663.36"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="187.44,-666.77 197.99,-665.77 189.12,-659.97 187.44,-666.77"/>
 </g>
 <!-- Node36 -->
 <g id="node36" class="node">
 <title>Node36</title>
-<g id="a_node36"><a xlink:href="../../d8/db9/tomnsp__con_8f90.html#aa011f73310c28780ca2f65cf6d1e41a6" target="_top" xlink:title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space.">
-<polygon fill="white" stroke="black" points="182.5,-506.5 182.5,-525.5 257.5,-525.5 257.5,-506.5 182.5,-506.5"/>
-<text text-anchor="middle" x="220" y="-513.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnspa_con</text>
+<g id="a_node36"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" target="_top" xlink:title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space.">
+<polygon fill="white" stroke="black" points="193,-620.5 193,-639.5 247,-639.5 247,-620.5 193,-620.5"/>
+<text text-anchor="middle" x="220" y="-627.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnspa</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node36 -->
-<g id="edge40" class="edge">
+<g id="edge44" class="edge">
 <title>Node15&#45;&gt;Node36</title>
-<path fill="none" stroke="midnightblue" d="M106.95,-411.6C114.29,-430.66 133.24,-473.46 163,-497 166.13,-499.47 169.59,-501.63 173.22,-503.52"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="171.93,-506.77 182.49,-507.66 174.79,-500.38 171.93,-506.77"/>
+<path fill="none" stroke="midnightblue" d="M103.62,-430.82C104.53,-461.77 111.56,-558.33 163,-611 168.49,-616.62 175.69,-620.57 183.1,-623.36"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="182.24,-626.76 192.83,-626.39 184.33,-620.08 182.24,-626.76"/>
 </g>
 <!-- Node37 -->
 <g id="node37" class="node">
 <title>Node37</title>
-<g id="a_node37"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" target="_top" xlink:title="Fourier&#45;transform symmetric forces from real space to Fourier space.">
-<polygon fill="white" stroke="black" points="193,-468.5 193,-487.5 247,-487.5 247,-468.5 193,-468.5"/>
-<text text-anchor="middle" x="220" y="-475.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnsps</text>
+<g id="a_node37"><a xlink:href="../../d8/db9/tomnsp__con_8f90.html#aa011f73310c28780ca2f65cf6d1e41a6" target="_top" xlink:title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space.">
+<polygon fill="white" stroke="black" points="182.5,-582.5 182.5,-601.5 257.5,-601.5 257.5,-582.5 182.5,-582.5"/>
+<text text-anchor="middle" x="220" y="-589.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnspa_con</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node37 -->
-<g id="edge41" class="edge">
+<g id="edge45" class="edge">
 <title>Node15&#45;&gt;Node37</title>
-<path fill="none" stroke="midnightblue" d="M111.35,-411.82C121.88,-424.39 141.72,-446.09 163,-459 169.13,-462.72 176.09,-465.83 182.96,-468.38"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="182.28,-471.84 192.87,-471.72 184.51,-465.21 182.28,-471.84"/>
+<path fill="none" stroke="midnightblue" d="M104.5,-430.73C107.74,-457.39 120.37,-532.29 163,-573 165.96,-575.83 169.37,-578.24 173,-580.29"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="171.83,-583.61 182.37,-584.69 174.8,-577.27 171.83,-583.61"/>
 </g>
 <!-- Node38 -->
 <g id="node38" class="node">
 <title>Node38</title>
-<g id="a_node38"><a xlink:href="../../d8/db9/tomnsp__con_8f90.html#a8754ec603096f40e309ea74e612dc071" target="_top" xlink:title="Fourier&#45;transform symmetric forces from real space to Fourier space.">
-<polygon fill="white" stroke="black" points="182.5,-392.5 182.5,-411.5 257.5,-411.5 257.5,-392.5 182.5,-392.5"/>
-<text text-anchor="middle" x="220" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnsps_con</text>
+<g id="a_node38"><a xlink:href="../../d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" target="_top" xlink:title="Fourier&#45;transform symmetric forces from real space to Fourier space.">
+<polygon fill="white" stroke="black" points="193,-544.5 193,-563.5 247,-563.5 247,-544.5 193,-544.5"/>
+<text text-anchor="middle" x="220" y="-551.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnsps</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node38 -->
-<g id="edge42" class="edge">
+<g id="edge46" class="edge">
 <title>Node15&#45;&gt;Node38</title>
-<path fill="none" stroke="midnightblue" d="M127.15,-402C140.02,-402 156.41,-402 171.77,-402"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="172.19,-405.5 182.19,-402 172.19,-398.5 172.19,-405.5"/>
+<path fill="none" stroke="midnightblue" d="M105.93,-430.81C111.85,-452.71 129.09,-505.95 163,-535 168.79,-539.96 175.93,-543.64 183.15,-546.37"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="182.34,-549.78 192.93,-549.53 184.49,-543.12 182.34,-549.78"/>
 </g>
 <!-- Node39 -->
 <g id="node39" class="node">
 <title>Node39</title>
-<g id="a_node39"><a xlink:href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space.">
-<polygon fill="white" stroke="black" points="196,-696.5 196,-715.5 244,-715.5 244,-696.5 196,-696.5"/>
-<text text-anchor="middle" x="220" y="-703.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzspa</text>
+<g id="a_node39"><a xlink:href="../../d8/db9/tomnsp__con_8f90.html#a8754ec603096f40e309ea74e612dc071" target="_top" xlink:title="Fourier&#45;transform symmetric forces from real space to Fourier space.">
+<polygon fill="white" stroke="black" points="182.5,-468.5 182.5,-487.5 257.5,-487.5 257.5,-468.5 182.5,-468.5"/>
+<text text-anchor="middle" x="220" y="-475.5" font-family="Helvetica,sans-Serif" font-size="10.00">tomnsps_con</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node39 -->
-<g id="edge43" class="edge">
-<title>Node15&#45;&gt;Node39</title>
-<path fill="none" stroke="midnightblue" d="M104.25,-411.65C107.91,-456.53 125.3,-644.43 163,-687 168.97,-693.74 177.42,-698.09 185.95,-700.9"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="185.29,-704.35 195.86,-703.54 187.1,-697.58 185.29,-704.35"/>
-</g>
-<!-- Node41 -->
-<g id="node41" class="node">
-<title>Node41</title>
-<g id="a_node41"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space.">
-<polygon fill="white" stroke="black" points="196,-658.5 196,-677.5 244,-677.5 244,-658.5 196,-658.5"/>
-<text text-anchor="middle" x="220" y="-665.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzsps</text>
-</a>
-</g>
-</g>
-<!-- Node15&#45;&gt;Node41 -->
-<g id="edge45" class="edge">
-<title>Node15&#45;&gt;Node41</title>
-<path fill="none" stroke="midnightblue" d="M104.59,-411.72C109.39,-452.93 129.91,-612.76 163,-649 169.07,-655.65 177.55,-659.97 186.08,-662.78"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="185.41,-666.22 195.97,-665.43 187.22,-659.46 185.41,-666.22"/>
-</g>
-<!-- Node43 -->
-<g id="node43" class="node">
-<title>Node43</title>
-<g id="a_node43"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title="Compute the vacuum contribution to the free&#45;boundary energy functional.">
-<polygon fill="white" stroke="black" points="194.5,-316.5 194.5,-335.5 245.5,-335.5 245.5,-316.5 194.5,-316.5"/>
-<text text-anchor="middle" x="220" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">vacuum</text>
-</a>
-</g>
-</g>
-<!-- Node15&#45;&gt;Node43 -->
 <g id="edge47" class="edge">
-<title>Node15&#45;&gt;Node43</title>
-<path fill="none" stroke="midnightblue" d="M111.35,-392.18C121.88,-379.61 141.72,-357.91 163,-345 169.65,-340.96 177.27,-337.65 184.71,-334.99"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="185.86,-338.29 194.27,-331.86 183.68,-331.64 185.86,-338.29"/>
+<title>Node15&#45;&gt;Node39</title>
+<path fill="none" stroke="midnightblue" d="M116.67,-430.73C128.38,-439.05 146.21,-450.93 163,-459 167.4,-461.11 172.09,-463.09 176.82,-464.92"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="175.89,-468.31 186.49,-468.45 178.29,-461.73 175.89,-468.31"/>
 </g>
-<!-- Node56 -->
-<g id="node56" class="node">
-<title>Node56</title>
-<g id="a_node56"><a xlink:href="../../db/da1/nestor__io_8f90.html#a771059753d70a579e9443aa7ca5a991e" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="169.5,-88.5 169.5,-107.5 270.5,-107.5 270.5,-88.5 169.5,-88.5"/>
-<text text-anchor="middle" x="220" y="-95.5" font-family="Helvetica,sans-Serif" font-size="10.00">write_nestor_inputs</text>
+<!-- Node40 -->
+<g id="node40" class="node">
+<title>Node40</title>
+<g id="a_node40"><a xlink:href="../../dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space.">
+<polygon fill="white" stroke="black" points="196,-734.5 196,-753.5 244,-753.5 244,-734.5 196,-734.5"/>
+<text text-anchor="middle" x="220" y="-741.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzspa</text>
 </a>
 </g>
 </g>
-<!-- Node15&#45;&gt;Node56 -->
-<g id="edge61" class="edge">
-<title>Node15&#45;&gt;Node56</title>
-<path fill="none" stroke="midnightblue" d="M104.25,-392.35C107.91,-347.47 125.3,-159.57 163,-117 164.17,-115.68 165.43,-114.45 166.78,-113.31"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="168.85,-116.13 175.19,-107.64 164.94,-110.33 168.85,-116.13"/>
+<!-- Node15&#45;&gt;Node40 -->
+<g id="edge48" class="edge">
+<title>Node15&#45;&gt;Node40</title>
+<path fill="none" stroke="midnightblue" d="M104.11,-430.66C107.25,-477.35 123,-679.25 163,-725 168.93,-731.78 177.36,-736.14 185.89,-738.95"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.25,-742.4 195.81,-741.58 187.04,-735.63 185.25,-742.4"/>
+</g>
+<!-- Node42 -->
+<g id="node42" class="node">
+<title>Node42</title>
+<g id="a_node42"><a xlink:href="../../dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" target="_top" xlink:title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space.">
+<polygon fill="white" stroke="black" points="196,-430.5 196,-449.5 244,-449.5 244,-430.5 196,-430.5"/>
+<text text-anchor="middle" x="220" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00">totzsps</text>
+</a>
+</g>
+</g>
+<!-- Node15&#45;&gt;Node42 -->
+<g id="edge50" class="edge">
+<title>Node15&#45;&gt;Node42</title>
+<path fill="none" stroke="midnightblue" d="M127.15,-424.89C144.08,-427.68 167.1,-431.46 185.86,-434.55"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.34,-438.01 195.77,-436.18 186.48,-431.1 185.34,-438.01"/>
+</g>
+<!-- Node44 -->
+<g id="node44" class="node">
+<title>Node44</title>
+<g id="a_node44"><a xlink:href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" target="_top" xlink:title="Compute the vacuum contribution to the free&#45;boundary energy functional.">
+<polygon fill="white" stroke="black" points="194.5,-354.5 194.5,-373.5 245.5,-373.5 245.5,-354.5 194.5,-354.5"/>
+<text text-anchor="middle" x="220" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">vacuum</text>
+</a>
+</g>
+</g>
+<!-- Node15&#45;&gt;Node44 -->
+<g id="edge52" class="edge">
+<title>Node15&#45;&gt;Node44</title>
+<path fill="none" stroke="midnightblue" d="M116.67,-411.27C128.38,-402.95 146.21,-391.07 163,-383 169.81,-379.73 177.33,-376.77 184.59,-374.21"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.86,-377.48 194.23,-370.98 183.64,-370.84 185.86,-377.48"/>
 </g>
 <!-- Node57 -->
 <g id="node57" class="node">
 <title>Node57</title>
-<g id="a_node57"><a xlink:href="../../db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="163,-39 163,-69 277,-69 277,-39 163,-39"/>
-<text text-anchor="start" x="171" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">nestor_io::write_nestor</text>
-<text text-anchor="middle" x="220" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">_outputs</text>
+<g id="a_node57"><a xlink:href="../../db/da1/nestor__io_8f90.html#a771059753d70a579e9443aa7ca5a991e" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="169.5,-126.5 169.5,-145.5 270.5,-145.5 270.5,-126.5 169.5,-126.5"/>
+<text text-anchor="middle" x="220" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">write_nestor_inputs</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node57 -->
-<g id="edge62" class="edge">
+<g id="edge66" class="edge">
 <title>Node15&#45;&gt;Node57</title>
-<path fill="none" stroke="midnightblue" d="M104.08,-392.46C107.15,-344.49 122.99,-129.87 163,-79 163.95,-77.8 164.96,-76.65 166.04,-75.56"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="168.39,-78.15 173.89,-69.1 163.94,-72.75 168.39,-78.15"/>
+<path fill="none" stroke="midnightblue" d="M104.4,-411.42C108.59,-368.51 127.58,-194.43 163,-155 164.2,-153.66 165.5,-152.42 166.88,-151.26"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="169.11,-153.98 175.51,-145.54 165.24,-148.15 169.11,-153.98"/>
+</g>
+<!-- Node58 -->
+<g id="node58" class="node">
+<title>Node58</title>
+<g id="a_node58"><a xlink:href="../../db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="163,-77 163,-107 277,-107 277,-77 163,-77"/>
+<text text-anchor="start" x="171" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">nestor_io::write_nestor</text>
+<text text-anchor="middle" x="220" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">_outputs</text>
+</a>
+</g>
+</g>
+<!-- Node15&#45;&gt;Node58 -->
+<g id="edge67" class="edge">
+<title>Node15&#45;&gt;Node58</title>
+<path fill="none" stroke="midnightblue" d="M104.2,-411.41C107.76,-365.07 125.16,-164.55 163,-117 163.95,-115.8 164.98,-114.66 166.06,-113.57"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="168.41,-116.17 173.93,-107.13 163.97,-110.75 168.41,-116.17"/>
 </g>
 <!-- Node17&#45;&gt;Node5 -->
 <g id="edge18" class="edge">
 <title>Node17&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M243.15,-365.84C255.04,-368.04 268.89,-372.79 277,-383 327.16,-446.11 288.8,-667.1 313,-744 318.54,-761.6 329.05,-779.75 337.54,-792.72"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="334.75,-794.84 343.26,-801.16 340.54,-790.92 334.75,-794.84"/>
+<path fill="none" stroke="midnightblue" d="M243.21,-404.69C254.68,-407.16 268.09,-411.9 277,-421 314.17,-458.97 291.91,-486.23 313,-535 320.41,-552.13 330.93,-570.57 338.94,-583.75"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="336.02,-585.67 344.26,-592.33 341.97,-581.99 336.02,-585.67"/>
 </g>
 <!-- Node18 -->
 <g id="node18" class="node">
 <title>Node18</title>
 <g id="a_node18"><a xlink:href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" target="_top" xlink:title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie...">
-<polygon fill="white" stroke="black" points="320.5,-468.5 320.5,-487.5 382.5,-487.5 382.5,-468.5 320.5,-468.5"/>
-<text text-anchor="middle" x="351.5" y="-475.5" font-family="Helvetica,sans-Serif" font-size="10.00">add_fluxes</text>
+<polygon fill="white" stroke="black" points="320.5,-430.5 320.5,-449.5 382.5,-449.5 382.5,-430.5 320.5,-430.5"/>
+<text text-anchor="middle" x="351.5" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00">add_fluxes</text>
 </a>
 </g>
 </g>
 <!-- Node17&#45;&gt;Node18 -->
 <g id="edge17" class="edge">
 <title>Node17&#45;&gt;Node18</title>
-<path fill="none" stroke="midnightblue" d="M243,-367.25C254.28,-369.89 267.57,-374.6 277,-383 304.91,-407.86 286.93,-432.22 313,-459 314.37,-460.41 315.88,-461.74 317.46,-462.98"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.63,-465.96 325.91,-468.5 319.45,-460.1 315.63,-465.96"/>
+<path fill="none" stroke="midnightblue" d="M243.26,-408.53C261.7,-413.94 288.37,-421.77 310.49,-428.26"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="309.71,-431.68 320.3,-431.14 311.69,-424.96 309.71,-431.68"/>
 </g>
 <!-- Node19 -->
 <g id="node19" class="node">
 <title>Node19</title>
 <g id="a_node19"><a xlink:href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" target="_top" xlink:title="Normalization parameters for .">
-<polygon fill="white" stroke="black" points="329,-430.5 329,-449.5 374,-449.5 374,-430.5 329,-430.5"/>
-<text text-anchor="middle" x="351.5" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00">lamcal</text>
+<polygon fill="white" stroke="black" points="329,-506.5 329,-525.5 374,-525.5 374,-506.5 329,-506.5"/>
+<text text-anchor="middle" x="351.5" y="-513.5" font-family="Helvetica,sans-Serif" font-size="10.00">lamcal</text>
 </a>
 </g>
 </g>
 <!-- Node17&#45;&gt;Node19 -->
 <g id="edge19" class="edge">
 <title>Node17&#45;&gt;Node19</title>
-<path fill="none" stroke="midnightblue" d="M243.19,-369.23C253.86,-372.31 266.58,-376.83 277,-383 295.68,-394.06 295.8,-402.77 313,-416 316.93,-419.02 321.24,-422.04 325.5,-424.86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="323.72,-427.87 334.03,-430.31 327.49,-421.97 323.72,-427.87"/>
+<path fill="none" stroke="midnightblue" d="M243,-405.25C254.28,-407.89 267.57,-412.6 277,-421 304.91,-445.86 286.93,-470.22 313,-497 315.05,-499.11 317.39,-501.02 319.87,-502.75"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="318.26,-505.87 328.65,-507.94 321.82,-499.84 318.26,-505.87"/>
 </g>
 <!-- Node20 -->
 <g id="node20" class="node">
 <title>Node20</title>
 <g id="a_node20"><a xlink:href="../../d4/da9/precondn_8f90.html#a4c530a7978360300894520e9c5f7663c" target="_top" xlink:title="Compute preconditioning matrix elements for , &#160;force.">
-<polygon fill="white" stroke="black" points="323.5,-506.5 323.5,-525.5 379.5,-525.5 379.5,-506.5 323.5,-506.5"/>
-<text text-anchor="middle" x="351.5" y="-513.5" font-family="Helvetica,sans-Serif" font-size="10.00">precondn</text>
+<polygon fill="white" stroke="black" points="323.5,-468.5 323.5,-487.5 379.5,-487.5 379.5,-468.5 323.5,-468.5"/>
+<text text-anchor="middle" x="351.5" y="-475.5" font-family="Helvetica,sans-Serif" font-size="10.00">precondn</text>
 </a>
 </g>
 </g>
 <!-- Node17&#45;&gt;Node20 -->
 <g id="edge20" class="edge">
 <title>Node17&#45;&gt;Node20</title>
-<path fill="none" stroke="midnightblue" d="M243.21,-366.69C254.68,-369.16 268.09,-373.9 277,-383 314.17,-420.97 278.61,-456.49 313,-497 314,-498.18 315.1,-499.3 316.26,-500.35"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="314.56,-503.44 324.73,-506.43 318.65,-497.76 314.56,-503.44"/>
+<path fill="none" stroke="midnightblue" d="M243.11,-406.84C253.89,-409.84 266.71,-414.41 277,-421 296.59,-433.55 294.35,-445.09 313,-459 315.05,-460.53 317.24,-461.99 319.49,-463.38"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="317.9,-466.51 328.33,-468.36 321.33,-460.4 317.9,-466.51"/>
 </g>
 <!-- Node26 -->
 <g id="node26" class="node">
 <title>Node26</title>
 <g id="a_node26"><a xlink:href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c" target="_top" xlink:title="Compute internal gr , gz required for &#160;constraint.">
-<polygon fill="white" stroke="black" points="314,-202.5 314,-221.5 389,-221.5 389,-202.5 314,-202.5"/>
-<text text-anchor="middle" x="351.5" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">constrain_m1</text>
+<polygon fill="white" stroke="black" points="314,-164.5 314,-183.5 389,-183.5 389,-164.5 314,-164.5"/>
+<text text-anchor="middle" x="351.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">constrain_m1</text>
 </a>
 </g>
 </g>
 <!-- Node25&#45;&gt;Node26 -->
 <g id="edge26" class="edge">
 <title>Node25&#45;&gt;Node26</title>
-<path fill="none" stroke="midnightblue" d="M244.15,-180.79C261.86,-185.99 286.77,-193.3 308.04,-199.54"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="307.24,-202.95 317.82,-202.41 309.21,-196.24 307.24,-202.95"/>
+<path fill="none" stroke="midnightblue" d="M244.15,-205.21C261.86,-200.01 286.77,-192.7 308.04,-186.46"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="309.21,-189.76 317.82,-183.59 307.24,-183.05 309.21,-189.76"/>
 </g>
 <!-- Node27 -->
 <g id="node27" class="node">
 <title>Node27</title>
 <g id="a_node27"><a xlink:href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" target="_top" xlink:title="Compute total force residual on flux surfaces.">
-<polygon fill="white" stroke="black" points="329.5,-164.5 329.5,-183.5 373.5,-183.5 373.5,-164.5 329.5,-164.5"/>
-<text text-anchor="middle" x="351.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">getfsq</text>
+<polygon fill="white" stroke="black" points="329.5,-126.5 329.5,-145.5 373.5,-145.5 373.5,-126.5 329.5,-126.5"/>
+<text text-anchor="middle" x="351.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">getfsq</text>
 </a>
 </g>
 </g>
 <!-- Node25&#45;&gt;Node27 -->
 <g id="edge27" class="edge">
 <title>Node25&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M244.15,-174C265.1,-174 296.11,-174 319.25,-174"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="319.27,-177.5 329.27,-174 319.27,-170.5 319.27,-177.5"/>
+<path fill="none" stroke="midnightblue" d="M244.2,-206.85C254.75,-203.85 267.06,-199.37 277,-193 296.59,-180.45 294.35,-168.91 313,-155 315.3,-153.28 317.79,-151.64 320.34,-150.1"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="322.06,-153.15 329.12,-145.24 318.67,-147.02 322.06,-153.15"/>
 </g>
 <!-- Node28 -->
 <g id="node28" class="node">
 <title>Node28</title>
 <g id="a_node28"><a xlink:href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" target="_top" xlink:title="Compute internal gr , gz required for &#160;constraint.">
-<polygon fill="white" stroke="black" points="322,-126.5 322,-145.5 381,-145.5 381,-126.5 322,-126.5"/>
-<text text-anchor="middle" x="351.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">scale_m1</text>
+<polygon fill="white" stroke="black" points="322,-202.5 322,-221.5 381,-221.5 381,-202.5 322,-202.5"/>
+<text text-anchor="middle" x="351.5" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">scale_m1</text>
 </a>
 </g>
 </g>
 <!-- Node25&#45;&gt;Node28 -->
 <g id="edge28" class="edge">
 <title>Node25&#45;&gt;Node28</title>
-<path fill="none" stroke="midnightblue" d="M244.15,-167.21C262.95,-161.69 289.87,-153.79 311.92,-147.32"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="313.05,-150.64 321.66,-144.46 311.08,-143.92 313.05,-150.64"/>
+<path fill="none" stroke="midnightblue" d="M244.15,-212C262.87,-212 289.62,-212 311.62,-212"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="311.66,-215.5 321.66,-212 311.66,-208.5 311.66,-215.5"/>
 </g>
 <!-- Node29 -->
 <g id="node29" class="node">
@@ -652,8 +667,8 @@
 <!-- Node25&#45;&gt;Node29 -->
 <g id="edge29" class="edge">
 <title>Node25&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M244.2,-168.85C254.75,-165.85 267.06,-161.37 277,-155 296.59,-142.45 294.35,-130.91 313,-117 315.05,-115.47 317.24,-114.01 319.49,-112.62"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="321.33,-115.6 328.33,-107.64 317.9,-109.49 321.33,-115.6"/>
+<path fill="none" stroke="midnightblue" d="M244.11,-208.48C255.14,-205.8 267.88,-201.13 277,-193 304.91,-168.14 286.93,-143.78 313,-117 314.87,-115.08 316.98,-113.32 319.21,-111.71"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="321.5,-114.42 328.25,-106.26 317.88,-108.42 321.5,-114.42"/>
 </g>
 <!-- Node30 -->
 <g id="node30" class="node">
@@ -673,275 +688,299 @@
 <!-- Node31&#45;&gt;Node26 -->
 <g id="edge32" class="edge">
 <title>Node31&#45;&gt;Node26</title>
-<path fill="none" stroke="midnightblue" d="M254.79,-144.52C262.42,-147.23 270.26,-150.68 277,-155 296.59,-167.55 294.35,-179.09 313,-193 315.05,-194.53 317.24,-195.99 319.49,-197.38"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="317.9,-200.51 328.33,-202.36 321.33,-194.4 317.9,-200.51"/>
+<path fill="none" stroke="midnightblue" d="M254.69,-174C269.56,-174 287.31,-174 303.46,-174"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="303.8,-177.5 313.8,-174 303.8,-170.5 303.8,-177.5"/>
 </g>
 <!-- Node31&#45;&gt;Node27 -->
 <g id="edge33" class="edge">
 <title>Node31&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M253.68,-145.59C273.84,-151.51 299.55,-159.05 319.41,-164.88"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="318.63,-168.29 329.21,-167.75 320.6,-161.58 318.63,-168.29"/>
+<path fill="none" stroke="midnightblue" d="M253.68,-164.41C273.84,-158.49 299.55,-150.95 319.41,-145.12"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="320.6,-148.42 329.21,-142.25 318.63,-141.71 320.6,-148.42"/>
 </g>
 <!-- Node31&#45;&gt;Node28 -->
 <g id="edge34" class="edge">
 <title>Node31&#45;&gt;Node28</title>
-<path fill="none" stroke="midnightblue" d="M254.69,-136C272.1,-136 293.45,-136 311.57,-136"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="311.81,-139.5 321.81,-136 311.81,-132.5 311.81,-139.5"/>
+<path fill="none" stroke="midnightblue" d="M253.68,-183.59C271.46,-188.81 293.56,-195.29 312.16,-200.75"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="311.22,-204.12 321.8,-203.58 313.19,-197.4 311.22,-204.12"/>
 </g>
 <!-- Node31&#45;&gt;Node29 -->
 <g id="edge35" class="edge">
 <title>Node31&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M253.68,-126.41C273.59,-120.57 298.9,-113.14 318.66,-107.34"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="319.81,-110.65 328.42,-104.48 317.84,-103.94 319.81,-110.65"/>
+<path fill="none" stroke="midnightblue" d="M254.79,-165.48C262.42,-162.77 270.26,-159.32 277,-155 296.59,-142.45 294.35,-130.91 313,-117 315.05,-115.47 317.24,-114.01 319.49,-112.62"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="321.33,-115.6 328.33,-107.64 317.9,-109.49 321.33,-115.6"/>
 </g>
-<!-- Node40 -->
-<g id="node40" class="node">
-<title>Node40</title>
-<g id="a_node40"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form.">
-<polygon fill="white" stroke="black" points="313,-886.5 313,-905.5 390,-905.5 390,-886.5 313,-886.5"/>
-<text text-anchor="middle" x="351.5" y="-893.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_asym</text>
+<!-- Node32&#45;&gt;Node26 -->
+<g id="edge37" class="edge">
+<title>Node32&#45;&gt;Node26</title>
+<path fill="none" stroke="midnightblue" d="M256.27,-16.27C263.93,-19.07 271.41,-23.13 277,-29 317.17,-71.17 275.92,-110.08 313,-155 313.96,-156.16 315.01,-157.26 316.12,-158.29"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="314.13,-161.17 324.26,-164.28 318.28,-155.53 314.13,-161.17"/>
+</g>
+<!-- Node32&#45;&gt;Node27 -->
+<g id="edge38" class="edge">
+<title>Node32&#45;&gt;Node27</title>
+<path fill="none" stroke="midnightblue" d="M256.11,-16.83C263.69,-19.61 271.17,-23.51 277,-29 307.78,-57.95 284.35,-85.94 313,-117 315.23,-119.41 317.83,-121.57 320.61,-123.47"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="318.86,-126.5 329.26,-128.48 322.36,-120.45 318.86,-126.5"/>
+</g>
+<!-- Node32&#45;&gt;Node28 -->
+<g id="edge39" class="edge">
+<title>Node32&#45;&gt;Node28</title>
+<path fill="none" stroke="midnightblue" d="M256.25,-15.91C264,-18.73 271.52,-22.88 277,-29 326.76,-84.61 267.31,-134 313,-193 313.92,-194.19 314.94,-195.31 316.03,-196.37"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="313.97,-199.2 324.07,-202.43 318.19,-193.61 313.97,-199.2"/>
+</g>
+<!-- Node32&#45;&gt;Node29 -->
+<g id="edge40" class="edge">
+<title>Node32&#45;&gt;Node29</title>
+<path fill="none" stroke="midnightblue" d="M256.08,-19.33C263.26,-21.94 270.57,-25.14 277,-29 300.05,-42.83 321.89,-64.9 335.68,-80.34"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="333.27,-82.9 342.47,-88.15 338.55,-78.3 333.27,-82.9"/>
+</g>
+<!-- Node41 -->
+<g id="node41" class="node">
+<title>Node41</title>
+<g id="a_node41"><a xlink:href="../../dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form.">
+<polygon fill="white" stroke="black" points="313,-753.5 313,-772.5 390,-772.5 390,-753.5 313,-753.5"/>
+<text text-anchor="middle" x="351.5" y="-760.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_asym</text>
 </a>
 </g>
 </g>
-<!-- Node39&#45;&gt;Node40 -->
-<g id="edge44" class="edge">
-<title>Node39&#45;&gt;Node40</title>
-<path fill="none" stroke="midnightblue" d="M244.23,-709.03C255.42,-711.58 268.27,-716.3 277,-725 311.94,-759.83 292.73,-785.02 313,-830 320.51,-846.66 330.89,-864.63 338.82,-877.61"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="336.07,-879.82 344.32,-886.46 342.01,-876.12 336.07,-879.82"/>
+<!-- Node40&#45;&gt;Node41 -->
+<g id="edge49" class="edge">
+<title>Node40&#45;&gt;Node41</title>
+<path fill="none" stroke="midnightblue" d="M244.15,-747.4C260.46,-749.79 282.87,-753.08 302.91,-756.02"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="302.43,-759.48 312.83,-757.47 303.44,-752.56 302.43,-759.48"/>
 </g>
-<!-- Node42 -->
-<g id="node42" class="node">
-<title>Node42</title>
-<g id="a_node42"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
-<polygon fill="white" stroke="black" points="315.5,-715.5 315.5,-734.5 387.5,-734.5 387.5,-715.5 315.5,-715.5"/>
-<text text-anchor="middle" x="351.5" y="-722.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
+<!-- Node43 -->
+<g id="node43" class="node">
+<title>Node43</title>
+<g id="a_node43"><a xlink:href="../../dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" target="_top" xlink:title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form.">
+<polygon fill="white" stroke="black" points="315.5,-687.5 315.5,-706.5 387.5,-706.5 387.5,-687.5 315.5,-687.5"/>
+<text text-anchor="middle" x="351.5" y="-694.5" font-family="Helvetica,sans-Serif" font-size="10.00">convert_sym</text>
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node42 -->
-<g id="edge46" class="edge">
-<title>Node41&#45;&gt;Node42</title>
-<path fill="none" stroke="midnightblue" d="M244.18,-675C254.38,-678.3 266.42,-682.5 277,-687 293.22,-693.9 310.77,-702.91 324.66,-710.43"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="323.17,-713.61 333.62,-715.35 326.54,-707.47 323.17,-713.61"/>
-</g>
-<!-- Node43&#45;&gt;Node12 -->
-<g id="edge59" class="edge">
-<title>Node43&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M245.59,-331.55C255.81,-334.54 267.49,-338.91 277,-345 296.59,-357.55 294.28,-369.19 313,-383 343.71,-405.65 363.91,-393.15 390,-421 453.8,-489.09 480.6,-602.49 489.17,-648.1"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="485.76,-648.94 490.97,-658.17 492.66,-647.71 485.76,-648.94"/>
-</g>
-<!-- Node44 -->
-<g id="node44" class="node">
-<title>Node44</title>
-<g id="a_node44"><a xlink:href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" target="_top" xlink:title="Compute the total magnetic field due to external coils and the net toroidal plasma current.">
-<polygon fill="white" stroke="black" points="327.5,-278.5 327.5,-297.5 375.5,-297.5 375.5,-278.5 327.5,-278.5"/>
-<text text-anchor="middle" x="351.5" y="-285.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextern</text>
-</a>
-</g>
-</g>
-<!-- Node43&#45;&gt;Node44 -->
-<g id="edge48" class="edge">
-<title>Node43&#45;&gt;Node44</title>
-<path fill="none" stroke="midnightblue" d="M245.66,-318.76C266.03,-312.79 295.11,-304.25 317.48,-297.69"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="318.63,-301 327.24,-294.83 316.65,-294.28 318.63,-301"/>
-</g>
-<!-- Node47 -->
-<g id="node47" class="node">
-<title>Node47</title>
-<g id="a_node47"><a xlink:href="../../dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" target="_top" xlink:title="Pre&#45;compute constant terms required for NESTOR.">
-<polygon fill="white" stroke="black" points="330,-316.5 330,-335.5 373,-335.5 373,-316.5 330,-316.5"/>
-<text text-anchor="middle" x="351.5" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">precal</text>
-</a>
-</g>
-</g>
-<!-- Node43&#45;&gt;Node47 -->
+<!-- Node42&#45;&gt;Node43 -->
 <g id="edge51" class="edge">
-<title>Node43&#45;&gt;Node47</title>
-<path fill="none" stroke="midnightblue" d="M245.66,-326C266.7,-326 297.03,-326 319.67,-326"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="319.77,-329.5 329.77,-326 319.77,-322.5 319.77,-329.5"/>
+<title>Node42&#45;&gt;Node43</title>
+<path fill="none" stroke="midnightblue" d="M244.09,-442.5C255.53,-444.92 268.64,-449.68 277,-459 326.25,-513.9 288.51,-551.43 313,-621 320.21,-641.49 331.58,-663.63 339.91,-678.7"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="336.91,-680.5 344.87,-687.49 343.01,-677.06 336.91,-680.5"/>
 </g>
-<!-- Node48 -->
-<g id="node48" class="node">
-<title>Node48</title>
-<g id="a_node48"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title="Compute all required terms for solving for the scalar magnetic potential.">
-<polygon fill="white" stroke="black" points="327.5,-240.5 327.5,-259.5 375.5,-259.5 375.5,-240.5 327.5,-240.5"/>
-<text text-anchor="middle" x="351.5" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalpot</text>
-</a>
-</g>
-</g>
-<!-- Node43&#45;&gt;Node48 -->
-<g id="edge52" class="edge">
-<title>Node43&#45;&gt;Node48</title>
-<path fill="none" stroke="midnightblue" d="M245.59,-320.45C255.81,-317.46 267.49,-313.09 277,-307 296.59,-294.45 294.35,-282.91 313,-269 315.05,-267.47 317.24,-266.01 319.49,-264.62"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="321.33,-267.6 328.33,-259.64 317.9,-261.49 321.33,-267.6"/>
-</g>
-<!-- Node55 -->
-<g id="node55" class="node">
-<title>Node55</title>
-<g id="a_node55"><a xlink:href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" target="_top" xlink:title="Evaluate the geometry of the LCFS and tangential derivatives.">
-<polygon fill="white" stroke="black" points="327,-354.5 327,-373.5 376,-373.5 376,-354.5 327,-354.5"/>
-<text text-anchor="middle" x="351.5" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">surface</text>
-</a>
-</g>
-</g>
-<!-- Node43&#45;&gt;Node55 -->
-<g id="edge60" class="edge">
-<title>Node43&#45;&gt;Node55</title>
-<path fill="none" stroke="midnightblue" d="M245.66,-333.24C265.9,-339.18 294.75,-347.64 317.06,-354.19"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="316.22,-357.59 326.8,-357.05 318.19,-350.87 316.22,-357.59"/>
+<!-- Node44&#45;&gt;Node12 -->
+<g id="edge64" class="edge">
+<title>Node44&#45;&gt;Node12</title>
+<path fill="none" stroke="midnightblue" d="M245.54,-369.71C286.97,-379.75 368.39,-401.39 390,-421 454.16,-479.21 480.59,-585.28 489.11,-629.17"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="485.7,-629.94 490.94,-639.14 492.58,-628.68 485.7,-629.94"/>
 </g>
 <!-- Node45 -->
 <g id="node45" class="node">
 <title>Node45</title>
-<g id="a_node45"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol...">
-<polygon fill="white" stroke="black" points="472.5,-297.5 472.5,-316.5 514.5,-316.5 514.5,-297.5 472.5,-297.5"/>
-<text text-anchor="middle" x="493.5" y="-304.5" font-family="Helvetica,sans-Serif" font-size="10.00">becoil</text>
+<g id="a_node45"><a xlink:href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" target="_top" xlink:title="Compute the total magnetic field due to external coils and the net toroidal plasma current.">
+<polygon fill="white" stroke="black" points="327.5,-240.5 327.5,-259.5 375.5,-259.5 375.5,-240.5 327.5,-240.5"/>
+<text text-anchor="middle" x="351.5" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">bextern</text>
 </a>
 </g>
 </g>
 <!-- Node44&#45;&gt;Node45 -->
-<g id="edge49" class="edge">
+<g id="edge53" class="edge">
 <title>Node44&#45;&gt;Node45</title>
-<path fill="none" stroke="midnightblue" d="M375.62,-291.14C399.24,-294.34 436.03,-299.34 462.02,-302.86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="461.7,-306.35 472.08,-304.23 462.64,-299.42 461.7,-306.35"/>
+<path fill="none" stroke="midnightblue" d="M245.51,-360.13C256.2,-357.4 268.26,-352.79 277,-345 304.91,-320.14 286.93,-295.78 313,-269 314.78,-267.17 316.78,-265.49 318.9,-263.94"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="320.79,-266.88 327.47,-258.66 317.12,-260.92 320.79,-266.88"/>
 </g>
-<!-- Node46 -->
-<g id="node46" class="node">
-<title>Node46</title>
-<g id="a_node46"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.">
-<polygon fill="white" stroke="black" points="472.5,-335.5 472.5,-354.5 514.5,-354.5 514.5,-335.5 472.5,-335.5"/>
-<text text-anchor="middle" x="493.5" y="-342.5" font-family="Helvetica,sans-Serif" font-size="10.00">belicu</text>
+<!-- Node48 -->
+<g id="node48" class="node">
+<title>Node48</title>
+<g id="a_node48"><a xlink:href="../../dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" target="_top" xlink:title="Pre&#45;compute constant terms required for NESTOR.">
+<polygon fill="white" stroke="black" points="330,-278.5 330,-297.5 373,-297.5 373,-278.5 330,-278.5"/>
+<text text-anchor="middle" x="351.5" y="-285.5" font-family="Helvetica,sans-Serif" font-size="10.00">precal</text>
 </a>
 </g>
 </g>
-<!-- Node44&#45;&gt;Node46 -->
-<g id="edge50" class="edge">
-<title>Node44&#45;&gt;Node46</title>
-<path fill="none" stroke="midnightblue" d="M371.61,-297.6C377.52,-300.59 384.04,-303.92 390,-307 406.07,-315.31 409.21,-319.26 426,-326 437.72,-330.71 451.04,-334.75 462.66,-337.89"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="461.79,-341.28 472.35,-340.4 463.55,-334.5 461.79,-341.28"/>
+<!-- Node44&#45;&gt;Node48 -->
+<g id="edge56" class="edge">
+<title>Node44&#45;&gt;Node48</title>
+<path fill="none" stroke="midnightblue" d="M245.59,-358.45C255.81,-355.46 267.49,-351.09 277,-345 296.59,-332.45 294.35,-320.91 313,-307 315.49,-305.14 318.2,-303.37 320.97,-301.72"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="322.8,-304.71 329.9,-296.85 319.44,-298.57 322.8,-304.71"/>
 </g>
 <!-- Node49 -->
 <g id="node49" class="node">
 <title>Node49</title>
-<g id="a_node49"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions.">
-<polygon fill="white" stroke="black" points="472.5,-221.5 472.5,-240.5 514.5,-240.5 514.5,-221.5 472.5,-221.5"/>
-<text text-anchor="middle" x="493.5" y="-228.5" font-family="Helvetica,sans-Serif" font-size="10.00">analyt</text>
+<g id="a_node49"><a xlink:href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" target="_top" xlink:title="Compute all required terms for solving for the scalar magnetic potential.">
+<polygon fill="white" stroke="black" points="327.5,-354.5 327.5,-373.5 375.5,-373.5 375.5,-354.5 327.5,-354.5"/>
+<text text-anchor="middle" x="351.5" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">scalpot</text>
 </a>
 </g>
 </g>
-<!-- Node48&#45;&gt;Node49 -->
-<g id="edge53" class="edge">
-<title>Node48&#45;&gt;Node49</title>
-<path fill="none" stroke="midnightblue" d="M375.62,-246.86C399.24,-243.66 436.03,-238.66 462.02,-235.14"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="462.64,-238.58 472.08,-233.77 461.7,-231.65 462.64,-238.58"/>
-</g>
-<!-- Node52 -->
-<g id="node52" class="node">
-<title>Node52</title>
-<g id="a_node52"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title="Compute Fourier integrals and build amatrix.">
-<polygon fill="white" stroke="black" points="476,-183.5 476,-202.5 511,-202.5 511,-183.5 476,-183.5"/>
-<text text-anchor="middle" x="493.5" y="-190.5" font-family="Helvetica,sans-Serif" font-size="10.00">fouri</text>
-</a>
-</g>
-</g>
-<!-- Node48&#45;&gt;Node52 -->
-<g id="edge56" class="edge">
-<title>Node48&#45;&gt;Node52</title>
-<path fill="none" stroke="midnightblue" d="M371.61,-240.4C377.52,-237.41 384.04,-234.08 390,-231 406.07,-222.69 409.21,-218.74 426,-212 438.88,-206.83 453.69,-202.45 466.06,-199.21"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="466.94,-202.59 475.78,-196.75 465.23,-195.81 466.94,-202.59"/>
-</g>
-<!-- Node53 -->
-<g id="node53" class="node">
-<title>Node53</title>
-<g id="a_node53"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title="Perform Fourier integrals of Green&#39;s function kernel.">
-<polygon fill="white" stroke="black" points="474.5,-145.5 474.5,-164.5 512.5,-164.5 512.5,-145.5 474.5,-145.5"/>
-<text text-anchor="middle" x="493.5" y="-152.5" font-family="Helvetica,sans-Serif" font-size="10.00">fourp</text>
-</a>
-</g>
-</g>
-<!-- Node48&#45;&gt;Node53 -->
+<!-- Node44&#45;&gt;Node49 -->
 <g id="edge57" class="edge">
-<title>Node48&#45;&gt;Node53</title>
-<path fill="none" stroke="midnightblue" d="M375.57,-240.77C380.66,-238.09 385.79,-234.83 390,-231 412.16,-210.84 402.02,-191.96 426,-174 437.04,-165.73 451.55,-161.06 464.21,-158.42"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="465.04,-161.83 474.28,-156.65 463.83,-154.93 465.04,-161.83"/>
+<title>Node44&#45;&gt;Node49</title>
+<path fill="none" stroke="midnightblue" d="M245.66,-364C265.94,-364 294.85,-364 317.18,-364"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="317.24,-367.5 327.24,-364 317.24,-360.5 317.24,-367.5"/>
 </g>
-<!-- Node54 -->
-<g id="node54" class="node">
-<title>Node54</title>
-<g id="a_node54"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title="Compute the regularized evaluation of the Green&#39;s function and the source term.">
-<polygon fill="white" stroke="black" points="471.5,-259.5 471.5,-278.5 515.5,-278.5 515.5,-259.5 471.5,-259.5"/>
-<text text-anchor="middle" x="493.5" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00">greenf</text>
+<!-- Node56 -->
+<g id="node56" class="node">
+<title>Node56</title>
+<g id="a_node56"><a xlink:href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" target="_top" xlink:title="Evaluate the geometry of the LCFS and tangential derivatives.">
+<polygon fill="white" stroke="black" points="327,-316.5 327,-335.5 376,-335.5 376,-316.5 327,-316.5"/>
+<text text-anchor="middle" x="351.5" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">surface</text>
 </a>
 </g>
 </g>
-<!-- Node48&#45;&gt;Node54 -->
-<g id="edge58" class="edge">
-<title>Node48&#45;&gt;Node54</title>
-<path fill="none" stroke="midnightblue" d="M375.62,-253.14C398.96,-256.31 435.18,-261.22 461.11,-264.74"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="460.8,-268.23 471.18,-266.11 461.75,-261.29 460.8,-268.23"/>
+<!-- Node44&#45;&gt;Node56 -->
+<g id="edge65" class="edge">
+<title>Node44&#45;&gt;Node56</title>
+<path fill="none" stroke="midnightblue" d="M245.66,-356.76C265.9,-350.82 294.75,-342.36 317.06,-335.81"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="318.19,-339.13 326.8,-332.95 316.22,-332.41 318.19,-339.13"/>
+</g>
+<!-- Node46 -->
+<g id="node46" class="node">
+<title>Node46</title>
+<g id="a_node46"><a xlink:href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" target="_top" xlink:title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol...">
+<polygon fill="white" stroke="black" points="472.5,-249.5 472.5,-268.5 514.5,-268.5 514.5,-249.5 472.5,-249.5"/>
+<text text-anchor="middle" x="493.5" y="-256.5" font-family="Helvetica,sans-Serif" font-size="10.00">becoil</text>
+</a>
+</g>
+</g>
+<!-- Node45&#45;&gt;Node46 -->
+<g id="edge54" class="edge">
+<title>Node45&#45;&gt;Node46</title>
+<path fill="none" stroke="midnightblue" d="M375.62,-251.49C399.24,-253 436.03,-255.37 462.02,-257.04"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="461.88,-260.54 472.08,-257.69 462.33,-253.55 461.88,-260.54"/>
+</g>
+<!-- Node47 -->
+<g id="node47" class="node">
+<title>Node47</title>
+<g id="a_node47"><a xlink:href="../../d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" target="_top" xlink:title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis.">
+<polygon fill="white" stroke="black" points="472.5,-211.5 472.5,-230.5 514.5,-230.5 514.5,-211.5 472.5,-211.5"/>
+<text text-anchor="middle" x="493.5" y="-218.5" font-family="Helvetica,sans-Serif" font-size="10.00">belicu</text>
+</a>
+</g>
+</g>
+<!-- Node45&#45;&gt;Node47 -->
+<g id="edge55" class="edge">
+<title>Node45&#45;&gt;Node47</title>
+<path fill="none" stroke="midnightblue" d="M375.62,-245.21C399.24,-240.32 436.03,-232.7 462.02,-227.31"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="463,-230.69 472.08,-225.23 461.58,-223.83 463,-230.69"/>
 </g>
 <!-- Node50 -->
 <g id="node50" class="node">
 <title>Node50</title>
-<g id="a_node50"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin...">
-<polygon fill="white" stroke="black" points="599.5,-240.5 599.5,-259.5 657.5,-259.5 657.5,-240.5 599.5,-240.5"/>
-<text text-anchor="middle" x="628.5" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum</text>
+<g id="a_node50"><a xlink:href="../../da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" target="_top" xlink:title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions.">
+<polygon fill="white" stroke="black" points="472.5,-335.5 472.5,-354.5 514.5,-354.5 514.5,-335.5 472.5,-335.5"/>
+<text text-anchor="middle" x="493.5" y="-342.5" font-family="Helvetica,sans-Serif" font-size="10.00">analyt</text>
 </a>
 </g>
 </g>
 <!-- Node49&#45;&gt;Node50 -->
-<g id="edge54" class="edge">
+<g id="edge58" class="edge">
 <title>Node49&#45;&gt;Node50</title>
-<path fill="none" stroke="midnightblue" d="M514.7,-233.89C534.41,-236.7 564.9,-241.06 589.21,-244.53"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="588.81,-248.01 599.2,-245.96 589.8,-241.08 588.81,-248.01"/>
+<path fill="none" stroke="midnightblue" d="M375.62,-360.86C399.24,-357.66 436.03,-352.66 462.02,-349.14"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="462.64,-352.58 472.08,-347.77 461.7,-345.65 462.64,-352.58"/>
+</g>
+<!-- Node53 -->
+<g id="node53" class="node">
+<title>Node53</title>
+<g id="a_node53"><a xlink:href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" target="_top" xlink:title="Compute Fourier integrals and build amatrix.">
+<polygon fill="white" stroke="black" points="476,-297.5 476,-316.5 511,-316.5 511,-297.5 476,-297.5"/>
+<text text-anchor="middle" x="493.5" y="-304.5" font-family="Helvetica,sans-Serif" font-size="10.00">fouri</text>
+</a>
+</g>
+</g>
+<!-- Node49&#45;&gt;Node53 -->
+<g id="edge61" class="edge">
+<title>Node49&#45;&gt;Node53</title>
+<path fill="none" stroke="midnightblue" d="M371.61,-354.4C377.52,-351.41 384.04,-348.08 390,-345 406.07,-336.69 409.21,-332.74 426,-326 438.88,-320.83 453.69,-316.45 466.06,-313.21"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="466.94,-316.59 475.78,-310.75 465.23,-309.81 466.94,-316.59"/>
+</g>
+<!-- Node54 -->
+<g id="node54" class="node">
+<title>Node54</title>
+<g id="a_node54"><a xlink:href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" target="_top" xlink:title="Perform Fourier integrals of Green&#39;s function kernel.">
+<polygon fill="white" stroke="black" points="474.5,-411.5 474.5,-430.5 512.5,-430.5 512.5,-411.5 474.5,-411.5"/>
+<text text-anchor="middle" x="493.5" y="-418.5" font-family="Helvetica,sans-Serif" font-size="10.00">fourp</text>
+</a>
+</g>
+</g>
+<!-- Node49&#45;&gt;Node54 -->
+<g id="edge62" class="edge">
+<title>Node49&#45;&gt;Node54</title>
+<path fill="none" stroke="midnightblue" d="M368.7,-373.57C383.31,-381.9 405.57,-393.89 426,-402 438.34,-406.9 452.43,-411.11 464.46,-414.31"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="463.84,-417.77 474.4,-416.86 465.58,-410.99 463.84,-417.77"/>
+</g>
+<!-- Node55 -->
+<g id="node55" class="node">
+<title>Node55</title>
+<g id="a_node55"><a xlink:href="../../df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" target="_top" xlink:title="Compute the regularized evaluation of the Green&#39;s function and the source term.">
+<polygon fill="white" stroke="black" points="471.5,-373.5 471.5,-392.5 515.5,-392.5 515.5,-373.5 471.5,-373.5"/>
+<text text-anchor="middle" x="493.5" y="-380.5" font-family="Helvetica,sans-Serif" font-size="10.00">greenf</text>
+</a>
+</g>
+</g>
+<!-- Node49&#45;&gt;Node55 -->
+<g id="edge63" class="edge">
+<title>Node49&#45;&gt;Node55</title>
+<path fill="none" stroke="midnightblue" d="M375.62,-367.14C398.96,-370.31 435.18,-375.22 461.11,-378.74"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="460.8,-382.23 471.18,-380.11 461.75,-375.29 460.8,-382.23"/>
 </g>
 <!-- Node51 -->
 <g id="node51" class="node">
 <title>Node51</title>
-<g id="a_node51"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si...">
-<polygon fill="white" stroke="black" points="597,-202.5 597,-221.5 660,-221.5 660,-202.5 597,-202.5"/>
-<text text-anchor="middle" x="628.5" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum2</text>
+<g id="a_node51"><a xlink:href="../../df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" target="_top" xlink:title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin...">
+<polygon fill="white" stroke="black" points="599.5,-354.5 599.5,-373.5 657.5,-373.5 657.5,-354.5 599.5,-354.5"/>
+<text text-anchor="middle" x="628.5" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum</text>
 </a>
 </g>
 </g>
-<!-- Node49&#45;&gt;Node51 -->
-<g id="edge55" class="edge">
-<title>Node49&#45;&gt;Node51</title>
-<path fill="none" stroke="midnightblue" d="M514.7,-228.11C533.75,-225.39 562.87,-221.23 586.75,-217.82"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="587.56,-221.24 596.96,-216.36 586.57,-214.31 587.56,-221.24"/>
+<!-- Node50&#45;&gt;Node51 -->
+<g id="edge59" class="edge">
+<title>Node50&#45;&gt;Node51</title>
+<path fill="none" stroke="midnightblue" d="M514.7,-347.89C534.41,-350.7 564.9,-355.06 589.21,-358.53"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="588.81,-362.01 599.2,-359.96 589.8,-355.08 588.81,-362.01"/>
 </g>
-<!-- Node58&#45;&gt;Node21 -->
-<g id="edge64" class="edge">
-<title>Node58&#45;&gt;Node21</title>
-<path fill="none" stroke="midnightblue" d="M119.68,-791.44C131.51,-784.6 148.04,-775.33 163,-768 170.35,-764.4 178.37,-760.78 185.98,-757.49"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="187.49,-760.65 195.33,-753.52 184.76,-754.21 187.49,-760.65"/>
-</g>
-<!-- Node58&#45;&gt;Node40 -->
-<g id="edge65" class="edge">
-<title>Node58&#45;&gt;Node40</title>
-<path fill="none" stroke="midnightblue" d="M116.15,-810.53C127.81,-818.95 145.86,-831.1 163,-839 208.67,-860.04 264.1,-875.79 302.8,-885.34"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="302.21,-888.79 312.76,-887.75 303.86,-881.99 302.21,-888.79"/>
-</g>
-<!-- Node58&#45;&gt;Node42 -->
-<g id="edge66" class="edge">
-<title>Node58&#45;&gt;Node42</title>
-<path fill="none" stroke="midnightblue" d="M123.22,-798.4C155.91,-793.71 223.05,-782.47 277,-763 294.02,-756.86 312.08,-747.56 326.04,-739.7"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="328.07,-742.57 334.99,-734.55 324.57,-736.51 328.07,-742.57"/>
-</g>
-<!-- Node59 -->
-<g id="node59" class="node">
-<title>Node59</title>
-<g id="a_node59"><a xlink:href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae" target="_top" xlink:title="Symmetrize some quantities so that they can be output (?)">
-<polygon fill="white" stroke="black" points="189,-810.5 189,-829.5 251,-829.5 251,-810.5 189,-810.5"/>
-<text text-anchor="middle" x="220" y="-817.5" font-family="Helvetica,sans-Serif" font-size="10.00">symoutput</text>
+<!-- Node52 -->
+<g id="node52" class="node">
+<title>Node52</title>
+<g id="a_node52"><a xlink:href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" target="_top" xlink:title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si...">
+<polygon fill="white" stroke="black" points="597,-316.5 597,-335.5 660,-335.5 660,-316.5 597,-316.5"/>
+<text text-anchor="middle" x="628.5" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">analysum2</text>
 </a>
 </g>
 </g>
-<!-- Node58&#45;&gt;Node59 -->
-<g id="edge67" class="edge">
-<title>Node58&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M123.09,-804.22C138.37,-806.74 160.09,-810.31 179,-813.42"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="178.44,-816.87 188.87,-815.04 179.57,-809.97 178.44,-816.87"/>
+<!-- Node50&#45;&gt;Node52 -->
+<g id="edge60" class="edge">
+<title>Node50&#45;&gt;Node52</title>
+<path fill="none" stroke="midnightblue" d="M514.7,-342.11C533.75,-339.39 562.87,-335.23 586.75,-331.82"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="587.56,-335.24 596.96,-330.36 586.57,-328.31 587.56,-335.24"/>
+</g>
+<!-- Node59&#45;&gt;Node21 -->
+<g id="edge69" class="edge">
+<title>Node59&#45;&gt;Node21</title>
+<path fill="none" stroke="midnightblue" d="M119.68,-829.44C131.51,-822.6 148.04,-813.33 163,-806 170.35,-802.4 178.37,-798.78 185.98,-795.49"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="187.49,-798.65 195.33,-791.52 184.76,-792.21 187.49,-798.65"/>
+</g>
+<!-- Node59&#45;&gt;Node41 -->
+<g id="edge70" class="edge">
+<title>Node59&#45;&gt;Node41</title>
+<path fill="none" stroke="midnightblue" d="M114.38,-848.7C125.64,-858.03 144.18,-871.5 163,-877 211.63,-891.21 232.63,-901.46 277,-877 303.24,-862.54 296.77,-845.18 313,-820 321.42,-806.93 331.07,-792.28 338.47,-781.11"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="341.47,-782.91 344.08,-772.65 335.63,-779.05 341.47,-782.91"/>
+</g>
+<!-- Node59&#45;&gt;Node43 -->
+<g id="edge71" class="edge">
+<title>Node59&#45;&gt;Node43</title>
+<path fill="none" stroke="midnightblue" d="M123.13,-839.43C157.46,-839.23 229.28,-834.46 277,-801 301.53,-783.8 295.63,-768.41 313,-744 320.08,-734.05 328.52,-723.38 335.6,-714.72"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="338.45,-716.77 342.13,-706.84 333.05,-712.31 338.45,-716.77"/>
+</g>
+<!-- Node60 -->
+<g id="node60" class="node">
+<title>Node60</title>
+<g id="a_node60"><a xlink:href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae" target="_top" xlink:title="Symmetrize some quantities so that they can be output (?)">
+<polygon fill="white" stroke="black" points="189,-848.5 189,-867.5 251,-867.5 251,-848.5 189,-848.5"/>
+<text text-anchor="middle" x="220" y="-855.5" font-family="Helvetica,sans-Serif" font-size="10.00">symoutput</text>
+</a>
+</g>
+</g>
+<!-- Node59&#45;&gt;Node60 -->
+<g id="edge72" class="edge">
+<title>Node59&#45;&gt;Node60</title>
+<path fill="none" stroke="midnightblue" d="M123.09,-842.22C138.37,-844.74 160.09,-848.31 179,-851.42"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="178.44,-854.87 188.87,-853.04 179.57,-847.97 178.44,-854.87"/>
 </g>
 </g>
 </svg>

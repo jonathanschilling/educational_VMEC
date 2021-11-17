@@ -8,5 +8,6 @@ var searchData=
   ['reset_5fparams_2ef90_5',['reset_params.f90',['../dc/dc0/reset__params_8f90.html',1,'']]],
   ['residue_2ef90_6',['residue.f90',['../db/d5a/residue_8f90.html',1,'']]],
   ['residue_5fcon_2ef90_7',['residue_con.f90',['../d3/d96/residue__con_8f90.html',1,'']]],
-  ['restart_5fiter_2ef90_8',['restart_iter.f90',['../d5/d6e/restart__iter_8f90.html',1,'']]]
+  ['residue_5fmhd_2ef90_8',['residue_mhd.f90',['../d5/d62/residue__mhd_8f90.html',1,'']]],
+  ['restart_5fiter_2ef90_9',['restart_iter.f90',['../d5/d6e/restart__iter_8f90.html',1,'']]]
 ];

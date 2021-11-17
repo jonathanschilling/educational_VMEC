@@ -56,6 +56,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "reset_params.f90", "dc/dc0/reset__params_8f90.html", "dc/dc0/reset__params_8f90" ],
     [ "residue.f90", "db/d5a/residue_8f90.html", "db/d5a/residue_8f90" ],
     [ "residue_con.f90", "d3/d96/residue__con_8f90.html", "d3/d96/residue__con_8f90" ],
+    [ "residue_mhd.f90", "d5/d62/residue__mhd_8f90.html", "d5/d62/residue__mhd_8f90" ],
     [ "restart_iter.f90", "d5/d6e/restart__iter_8f90.html", "d5/d6e/restart__iter_8f90" ],
     [ "safe_open_mod.f", "d2/d9f/safe__open__mod_8f.html", "d2/d9f/safe__open__mod_8f" ],
     [ "scalfor.f90", "d8/d86/scalfor_8f90.html", "d8/d86/scalfor_8f90" ],

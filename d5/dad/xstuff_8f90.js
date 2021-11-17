@@ -2,6 +2,7 @@ var xstuff_8f90 =
 [
     [ "gc", "d5/dad/xstuff_8f90.html#a27db4487d94c45fbea3f05a9ad295e36", null ],
     [ "gc_con", "d5/dad/xstuff_8f90.html#a0a1853289cc62ebd4d3e260525b7afcd", null ],
+    [ "gc_mhd", "d5/dad/xstuff_8f90.html#a0151cd68e54ffec0437b518fab3bee8a", null ],
     [ "scalxc", "d5/dad/xstuff_8f90.html#abb6e60127415c0fad68b4499cc6ddeee", null ],
     [ "xc", "d5/dad/xstuff_8f90.html#a3f67cbc56e41aa2c8c8bf6a0561b0200", null ],
     [ "xcdot", "d5/dad/xstuff_8f90.html#aed89eab9268cb164541a7843aea332b6", null ],

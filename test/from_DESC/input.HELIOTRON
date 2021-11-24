@@ -2,7 +2,7 @@
 MGRID_FILE =	'none'
 LFREEB =	F
 DELT =	0.9
-TCON0 =	2
+TCON0 =	1.0
 LASYM =	F
 NFP =	19
 NCURR =	0

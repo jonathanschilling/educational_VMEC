@@ -14,6 +14,7 @@ SUBROUTINE free_mem_funct3d
   IF (ALLOCATED(armn)) then
      DEALLOCATE (armn, azmn, brmn, bzmn, crmn, czmn, blmn, clmn,    &
         r1, ru, rv, z1, zu, zv, gcon, rcon, zcon, ru0, zu0,         &
+        brmn_con, bzmn_con, &
         rcon0, zcon0, guu, guv, gvv, stat=istat1)
   IF (istat1 .ne. 0) STOP 'deallocation error#1 in funct3d'
   end if

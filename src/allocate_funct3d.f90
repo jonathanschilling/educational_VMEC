@@ -22,11 +22,13 @@ SUBROUTINE allocate_funct3d
      z1(nrzt,0:1), zu(nrzt,0:1), zv(nrzt,0:1),                      &
      rcon(nrzt,0:1), zcon(nrzt,0:1), ru0(ndim), zu0(ndim),          &
      rcon0(ndim), zcon0(ndim), guu(ndim), guv(ndim), gvv(ndim),     &
+     brmn_con(ndim2), bzmn_con(ndim2), &
      gcon(ndim), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #1 in allocate_funct3d'
   armn=0; azmn=0; brmn=0; bzmn=0; crmn=0; czmn=0; blmn=0; clmn=0
   r1=0; ru=0; rv=0; z1=0; zu=0; zv=0; rcon=0; zcon=0
   ru0=0; zu0=0; guu=0; guv=0; gvv=0
+  brmn_con=0; bzmn_con=0
 
   ALLOCATE (extra1(ndim,0:1), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_funct3d'
@@ -80,5 +82,13 @@ SUBROUTINE allocate_funct3d
 
   rcon0(:ndim) = zero
   zcon0(:ndim) = zero
+
+  brmn_e_con => brmn_con(:ndim)
+  brmn_o_con => brmn_con(ndim:)
+  brmn_con(:ndim2) = zero
+
+  bzmn_e_con => bzmn_con(:ndim)
+  bzmn_o_con => bzmn_con(ndim:)
+  bzmn_con(:ndim2) = zero
 
 END SUBROUTINE allocate_funct3d

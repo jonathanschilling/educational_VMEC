@@ -432,13 +432,13 @@ SUBROUTINE funct3d (ier_flag)
                    armn, brmn, crmn, &
                    azmn, bzmn, czmn, &
                    blmn, clmn, rcon, zcon)
-     call tomnsps_con(gc_con, rcon, zcon)
+     call tomnsps_con(gc_con, brmn_con, bzmn_con, rcon, zcon)
      IF (lasym) then
         CALL tomnspa (gc,             &
                       r1, ru, rv,     &
                       z1, zu, zv,     &
                       extra3, extra4, extra1, extra2)
-        call tomnspa_con(gc_con, extra1, extra2)
+        call tomnspa_con(gc_con, brmn_con, bzmn_con, extra1, extra2)
      end if
 
      ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
@@ -447,7 +447,7 @@ SUBROUTINE funct3d (ier_flag)
 
      gc_con = gc_con * scalxc
      call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
-     
+
      gc_mhd = gc - gc_con
      call residue_mhd(gc_mhd, gc_mhd(1+irzloff), gc_mhd(1+2*irzloff))
 

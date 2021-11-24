@@ -208,6 +208,12 @@ SUBROUTINE forces
   brmn_o(:nrzt) = brmn_o(:nrzt) + rcon(:nrzt,0) * sqrts(:nrzt)
   bzmn_o(:nrzt) = bzmn_o(:nrzt) + zcon(:nrzt,0) * sqrts(:nrzt)
 
+  ! real-space B-type forces due to constraint only
+  brmn_e_con(:nrzt) = brmn_e_con(:nrzt) + rcon(:nrzt,0)
+  bzmn_e_con(:nrzt) = bzmn_e_con(:nrzt) + zcon(:nrzt,0)
+  brmn_o_con(:nrzt) = brmn_o_con(:nrzt) + rcon(:nrzt,0) * sqrts(:nrzt)
+  bzmn_o_con(:nrzt) = bzmn_o_con(:nrzt) + zcon(:nrzt,0) * sqrts(:nrzt)
+
   rcon(:nrzt,0) =  ru0(:nrzt) * gcon(:nrzt)
   zcon(:nrzt,0) =  zu0(:nrzt) * gcon(:nrzt)
   rcon(:nrzt,1) = rcon(:nrzt,0) * sqrts(:nrzt)

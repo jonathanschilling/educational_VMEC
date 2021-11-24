@@ -35,4 +35,12 @@ MODULE vforces
   REAL(rprec), POINTER, DIMENSION(:) :: clmn_e
   REAL(rprec), POINTER, DIMENSION(:) :: clmn_o
 
+  ! B-type forces with contributions only from constraint
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: brmn_con
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: bzmn_con
+  REAL(rprec), POINTER, DIMENSION(:) :: brmn_e_con
+  REAL(rprec), POINTER, DIMENSION(:) :: brmn_o_con
+  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_e_con
+  REAL(rprec), POINTER, DIMENSION(:) :: bzmn_o_con
+
 END MODULE vforces

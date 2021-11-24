@@ -15,13 +15,15 @@
 !> @param arcon
 !> @param azcon
 SUBROUTINE tomnsps_con(frzl_array,       &
+                       brmn_con, bzmn_con, &
                        arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(out) :: frzl_array
-  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(in) :: arcon, azcon
+  REAL(rprec), DIMENSION(ns*nzeta*ntheta3,0:1), INTENT(in) :: &
+    brmn_con, bzmn_con, arcon, azcon
 
   INTEGER :: jmax, m, mparity, i, n, k, l, nsz
   INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl, js
@@ -78,14 +80,14 @@ SUBROUTINE tomnsps_con(frzl_array,       &
         tempr(:) = xmpq(m,1)*arcon(jll:nsl,mparity)
         tempz(:) = xmpq(m,1)*azcon(jll:nsl,mparity)
 
-        work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) 
-        work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m) 
+        work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) + brmn_con(jll:nsl,mparity)*sinmumi(i,m)
+        work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m) + bzmn_con(jll:nsl,mparity)*cosmumi(i,m)
 
         IF (.not.lthreed) CYCLE
 
-        work1(:,3) = work1(:,3) + tempr(:)*sinmui(i,m) 
-        work1(:,5) = work1(:,5) + tempz(:)*cosmui(i,m)
-        
+        work1(:,3) = work1(:,3) + tempr(:)*sinmui(i,m) + brmn_con(jll:nsl,mparity)*cosmumi(i,m)
+        work1(:,5) = work1(:,5) + tempz(:)*cosmui(i,m) + bzmn_con(jll:nsl,mparity)*sinmumi(i,m)
+
      END DO
 
      ! NEXT, DO ZETA (V) TRANSFORM
@@ -106,8 +108,8 @@ SUBROUTINE tomnsps_con(frzl_array,       &
 
            IF (.not.lthreed) CYCLE
 
-           frss(j2:jmax,ni,mj) = frss(j2:jmax,ni,mj) + work1(j2l:jmaxl,3)*sinnv(k,n) 
-           fzcs(j2:jmax,ni,mj) = fzcs(j2:jmax,ni,mj) + work1(j2l:jmaxl,5)*sinnv(k,n) 
+           frss(j2:jmax,ni,mj) = frss(j2:jmax,ni,mj) + work1(j2l:jmaxl,3)*sinnv(k,n)
+           fzcs(j2:jmax,ni,mj) = fzcs(j2:jmax,ni,mj) + work1(j2l:jmaxl,5)*sinnv(k,n)
 
         END DO
      END DO
@@ -131,13 +133,15 @@ END SUBROUTINE tomnsps_con
 !> @param arcon
 !> @param azcon
 SUBROUTINE tomnspa_con(frzl_array,       &
+                       brmn_con, bzmn_con, &
                        arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: frzl_array
-  REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(in) :: arcon, azcon
+  REAL(rprec), DIMENSION(ns*nzeta,ntheta3,0:1), INTENT(in) :: &
+    brmn_con, bzmn_con, arcon, azcon
 
   INTEGER :: jmax, m, mparity, i, n, k, l, nsz
   INTEGER :: ioff, joff, mj, ni, nsl, j2, j2l, jl, jll, jmaxl, js
@@ -180,14 +184,14 @@ SUBROUTINE tomnspa_con(frzl_array,       &
         temp1(:) = xmpq(m,1)*arcon(:,i,mparity)
         temp3(:) = xmpq(m,1)*azcon(:,i,mparity)
 
-        work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m) 
-        work1(:,5) = work1(:,5) + temp3(:)*cosmui(i,m) 
+        work1(:,3) = work1(:,3) + temp1(:)*sinmui(i,m) + brmn_con(:,i,mparity)*cosmumi(i,m)
+        work1(:,5) = work1(:,5) + temp3(:)*cosmui(i,m) + bzmn_con(:,i,mparity)*sinmumi(i,m)
 
         IF (.not.lthreed) CYCLE
 
-        work1(:,1) = work1(:,1) + temp1(:)*cosmui(i,m) 
-        work1(:,7) = work1(:,7) + temp3(:)*sinmui(i,m)
-        
+        work1(:,1) = work1(:,1) + temp1(:)*cosmui(i,m) + brmn_con(:,i,mparity)*sinmumi(i,m)
+        work1(:,7) = work1(:,7) + temp3(:)*sinmui(i,m) + bzmn_con(:,i,mparity)*cosmumi(i,m)
+
      END DO
 
      ! NEXT, DO ZETA (V) TRANSFORM
@@ -207,9 +211,9 @@ SUBROUTINE tomnspa_con(frzl_array,       &
 
            IF (.not.lthreed) CYCLE
 
-           frcs(j2:jmax,ni,mj) = frcs(j2:jmax,ni,mj) + work1(j2l:jmaxl,1)*sinnv(k,n) 
-           fzss(j2:jmax,ni,mj) = fzss(j2:jmax,ni,mj) + work1(j2l:jmaxl,7)*sinnv(k,n) 
-           
+           frcs(j2:jmax,ni,mj) = frcs(j2:jmax,ni,mj) + work1(j2l:jmaxl,1)*sinnv(k,n)
+           fzss(j2:jmax,ni,mj) = fzss(j2:jmax,ni,mj) + work1(j2l:jmaxl,7)*sinnv(k,n)
+
         END DO
      END DO
   END DO

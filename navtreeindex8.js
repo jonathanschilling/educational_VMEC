@@ -1,5 +1,17 @@
 var NAVTREEINDEX8 =
 {
+"dd/df2/namespacevacmod.html":[1,0,11],
+"dd/df2/namespacevacmod.html#a02cc8c3b0e2ef840bc61bfad14294f53":[1,0,11,98],
+"dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951":[1,0,11,33],
+"dd/df2/namespacevacmod.html#a04c2f1242b7210f9e31be272ab19f268":[1,0,11,6],
+"dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd":[1,0,11,31],
+"dd/df2/namespacevacmod.html#a081e9fa8bd60d76cab0f9770b9ddf4c3":[1,0,11,8],
+"dd/df2/namespacevacmod.html#a0d69e11e9330bee62be0111869b43687":[1,0,11,16],
+"dd/df2/namespacevacmod.html#a0ec82b38a7b4f2ada7aa91089f58f2fd":[1,0,11,45],
+"dd/df2/namespacevacmod.html#a165c8203bb6b5545436fc608bcda702a":[1,0,11,108],
+"dd/df2/namespacevacmod.html#a16b4118a852890729ad984ecf0baf3b2":[1,0,11,38],
+"dd/df2/namespacevacmod.html#a176628128314c2e3e471cb9d7241f6bc":[1,0,11,11],
+"dd/df2/namespacevacmod.html#a19748c5ece055a44c7eadde10afed467":[1,0,11,110],
 "dd/df2/namespacevacmod.html#a19bba9f7d9e1e8d9a09fc2c20937b0a3":[1,0,11,71],
 "dd/df2/namespacevacmod.html#a19c1e5671322472eeb83d87107e59661":[1,0,11,69],
 "dd/df2/namespacevacmod.html#a1a213e5fe574e7931c3c01850cf9a397":[1,0,11,35],
@@ -237,17 +249,5 @@ var NAVTREEINDEX8 =
 "de/d7d/vmec__main_8f90.html#aeed3d6d5fb82120b7be857acc5ce4085":[3,0,0,0,8,59],
 "de/d7d/vmec__main_8f90.html#af002c750439e4e868629f93dcf4b4adc":[3,0,0,0,8,4],
 "de/d7d/vmec__main_8f90.html#af0770da5afa36b830ff718d3c4d3f913":[3,0,0,0,8,77],
-"de/d7d/vmec__main_8f90.html#af25579de1c0c445f09c2efc505991a3b":[3,0,0,0,8,91],
-"de/d7d/vmec__main_8f90.html#af2f8b72c0bb03e67c6470e393b412289":[3,0,0,0,8,110],
-"de/d7d/vmec__main_8f90.html#afa27ff9660af5f8390fed850ffe7242e":[3,0,0,0,8,63],
-"de/d7d/vmec__main_8f90.html#afcfe0ec022a9743d67e1643828138464":[3,0,0,0,8,114],
-"de/d7d/vmec__main_8f90.html#afd221292da4705fded1bda215e2a3869":[3,0,0,0,8,74],
-"de/d7d/vmec__main_8f90_source.html":[3,0,0,0,8],
-"de/da9/evolve_8f90.html":[3,0,0,16],
-"de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4":[3,0,0,16,0],
-"de/da9/evolve_8f90_source.html":[3,0,0,16],
-"de/daf/spectrum_8f90.html":[3,0,0,61],
-"de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc":[3,0,0,61,0],
-"de/daf/spectrum_8f90_source.html":[3,0,0,61],
-"de/dd6/free__mem__nunv_8f90.html":[3,0,0,23]
+"de/d7d/vmec__main_8f90.html#af25579de1c0c445f09c2efc505991a3b":[3,0,0,0,8,91]
 };

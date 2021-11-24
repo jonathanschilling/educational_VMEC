@@ -121,20 +121,20 @@ $(document).ready(function(){initNavTree('d8/db9/tomnsp__con_8f90.html','../../'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a8754ec603096f40e309ea74e612dc071"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/tomnsp__con_8f90.html#a8754ec603096f40e309ea74e612dc071">tomnsps_con</a> (frzl_array, arcon, azcon)</td></tr>
-<tr class="memdesc:a8754ec603096f40e309ea74e612dc071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier-transform symmetric forces from real space to Fourier space.  <a href="../../d8/db9/tomnsp__con_8f90.html#a8754ec603096f40e309ea74e612dc071">More...</a><br /></td></tr>
-<tr class="separator:a8754ec603096f40e309ea74e612dc071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa011f73310c28780ca2f65cf6d1e41a6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/tomnsp__con_8f90.html#aa011f73310c28780ca2f65cf6d1e41a6">tomnspa_con</a> (frzl_array, arcon, azcon)</td></tr>
-<tr class="memdesc:aa011f73310c28780ca2f65cf6d1e41a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier-transform anti-symmetric forces from real space to Fourier space.  <a href="../../d8/db9/tomnsp__con_8f90.html#aa011f73310c28780ca2f65cf6d1e41a6">More...</a><br /></td></tr>
-<tr class="separator:aa011f73310c28780ca2f65cf6d1e41a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e62cd03062ffcb2abc0d0ff59503e3"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/tomnsp__con_8f90.html#ac9e62cd03062ffcb2abc0d0ff59503e3">tomnsps_con</a> (frzl_array, brmn_con, bzmn_con, arcon, azcon)</td></tr>
+<tr class="memdesc:ac9e62cd03062ffcb2abc0d0ff59503e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier-transform symmetric forces from real space to Fourier space.  <a href="../../d8/db9/tomnsp__con_8f90.html#ac9e62cd03062ffcb2abc0d0ff59503e3">More...</a><br /></td></tr>
+<tr class="separator:ac9e62cd03062ffcb2abc0d0ff59503e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e8c98805decf1c832d812e19d9577dd"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/tomnsp__con_8f90.html#a2e8c98805decf1c832d812e19d9577dd">tomnspa_con</a> (frzl_array, brmn_con, bzmn_con, arcon, azcon)</td></tr>
+<tr class="memdesc:a2e8c98805decf1c832d812e19d9577dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fourier-transform anti-symmetric forces from real space to Fourier space.  <a href="../../d8/db9/tomnsp__con_8f90.html#a2e8c98805decf1c832d812e19d9577dd">More...</a><br /></td></tr>
+<tr class="separator:a2e8c98805decf1c832d812e19d9577dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Fourier-transform forces from real space to Fourier space. </p>
 
 <p class="definition">Definition in file <a class="el" href="../../d8/db9/tomnsp__con_8f90_source.html">tomnsp_con.f90</a>.</p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="aa011f73310c28780ca2f65cf6d1e41a6" name="aa011f73310c28780ca2f65cf6d1e41a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa011f73310c28780ca2f65cf6d1e41a6">&#9670;&nbsp;</a></span>tomnspa_con()</h2>
+<a id="a2e8c98805decf1c832d812e19d9577dd" name="a2e8c98805decf1c832d812e19d9577dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e8c98805decf1c832d812e19d9577dd">&#9670;&nbsp;</a></span>tomnspa_con()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +144,18 @@ Functions/Subroutines</h2></td></tr>
           <td>(</td>
           <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,3*ntmax), intent(inout), target&#160;</td>
           <td class="paramname"><em>frzl_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>brmn_con</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta,ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>bzmn_con</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -183,7 +195,7 @@ Functions/Subroutines</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/db9/tomnsp__con_8f90_source.html#l00133">133</a> of file <a class="el" href="../../d8/db9/tomnsp__con_8f90_source.html">tomnsp_con.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/db9/tomnsp__con_8f90_source.html#l00135">135</a> of file <a class="el" href="../../d8/db9/tomnsp__con_8f90_source.html">tomnsp_con.f90</a>.</p>
 
 <p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00165">vmec_main::ivac</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00017">vmec_params::jlam</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00016">vmec_params::jmin2</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00145">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00084">vmec_main::xmpq</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params::zss</a>.</p>
 
@@ -191,14 +203,14 @@ Functions/Subroutines</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/db9/tomnsp__con_8f90_aa011f73310c28780ca2f65cf6d1e41a6_icgraph.svg" width="658" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/db9/tomnsp__con_8f90_a2e8c98805decf1c832d812e19d9577dd_icgraph.svg" width="658" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="a8754ec603096f40e309ea74e612dc071" name="a8754ec603096f40e309ea74e612dc071"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8754ec603096f40e309ea74e612dc071">&#9670;&nbsp;</a></span>tomnsps_con()</h2>
+<a id="ac9e62cd03062ffcb2abc0d0ff59503e3" name="ac9e62cd03062ffcb2abc0d0ff59503e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9e62cd03062ffcb2abc0d0ff59503e3">&#9670;&nbsp;</a></span>tomnsps_con()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,6 +220,18 @@ Here is the caller graph for this function:</div>
           <td>(</td>
           <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,3*ntmax), intent(out), target&#160;</td>
           <td class="paramname"><em>frzl_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>brmn_con</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), dimension(ns*nzeta*ntheta3,0:1), intent(in)&#160;</td>
+          <td class="paramname"><em>bzmn_con</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -255,7 +279,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/db9/tomnsp__con_8f90_a8754ec603096f40e309ea74e612dc071_icgraph.svg" width="658" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/db9/tomnsp__con_8f90_ac9e62cd03062ffcb2abc0d0ff59503e3_icgraph.svg" width="658" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -267,7 +291,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/db9/tomnsp__con_8f90.html">tomnsp_con.f90</a></li>
-    <li class="footer">Generated on Wed Nov 24 2021 16:25:27 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Wed Nov 24 2021 16:41:05 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

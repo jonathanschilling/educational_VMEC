@@ -20,7 +20,7 @@ var searchData=
   ['clmn_5fo_17',['clmn_o',['../d8/d09/namespacevforces.html#a4392e16de652435cce06bb93d8ef0416',1,'vforces']]],
   ['cma_18',['cma',['../dd/df2/namespacevacmod.html#a16b4118a852890729ad984ecf0baf3b2',1,'vacmod']]],
   ['cma11u_19',['cma11u',['../dd/df2/namespacevacmod.html#a764fe4b2b0fe6b10f17722075f0f36c3',1,'vacmod']]],
-  ['cmakelists_2etxt_20',['CMakeLists.txt',['../da/d9e/CMakeLists_8txt.html',1,'(Global Namespace)'],['../d5/d7c/data_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../d8/de1/NESTOR_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../d7/d4c/NESTOR_2data_2CMakeLists_8txt.html',1,'(Global Namespace)']]],
+  ['cmakelists_2etxt_20',['CMakeLists.txt',['../d8/de1/NESTOR_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../da/d9e/CMakeLists_8txt.html',1,'(Global Namespace)'],['../d5/d7c/data_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../d7/d4c/NESTOR_2data_2CMakeLists_8txt.html',1,'(Global Namespace)']]],
   ['cmns_21',['cmns',['../df/dd0/namespacevac__persistent.html#a527577804662e55b7dbaf85a5d4bad11',1,'vac_persistent']]],
   ['compute_5fcurrents_22',['compute_currents',['../db/dae/namespaceread__wout__mod.html#a6dbf955bfc44315ebbc83a7c8260c72e',1,'read_wout_mod']]],
   ['condif_23',['condif',['../d1/d41/namespacemgrid__mod.html#a959b0397700f704c8699fe3072aeec80',1,'mgrid_mod']]],

@@ -61,7 +61,7 @@ SUBROUTINE forces
     write(dump_filename, 999) ns, iter2, trim(input_extension)
 999 format('forces_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_3d("lu_e", ns, nzeta, ntheta3, &
             reshape(lu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )

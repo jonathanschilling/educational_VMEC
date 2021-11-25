@@ -90,7 +90,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
     write(dump_filename, 999) ns, iter2, trim(input_extension)
 999 format('evolve_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_5d("xc_before",    ns, ntor1, mpol, ntmax, 2, &
                       reshape(xc, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )

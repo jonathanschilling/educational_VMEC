@@ -57,7 +57,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
     write(dump_filename, 998) ns, iter2, trim(input_extension)
 998 format('calc_fbal_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_1d("buco", ns, buco)
     call add_real_1d("bvco", ns, bvco)

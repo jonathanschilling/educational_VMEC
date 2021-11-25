@@ -137,7 +137,7 @@ SUBROUTINE profil1d()
     write(dump_filename, 999) ns, trim(input_extension)
 999 format('profil1d_',i5.5,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real("torflux_edge", torflux_edge)
     call add_real("polflux_edge", polflux_edge)

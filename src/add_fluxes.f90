@@ -76,7 +76,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
     write(dump_filename, 995) ns, iter2, trim(input_extension)
 995 format('add_fluxes_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_1d("chips", ns, chips)
     call add_real_1d("iotas", ns, iotas)

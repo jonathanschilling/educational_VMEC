@@ -118,7 +118,7 @@ SUBROUTINE bcovar (lu, lv)
       write(dump_filename, 998) ns, iter2, trim(input_extension)
 998 format('metric_',i5.5,'_',i6.6,'.',a,'.json')
 
-      call open_dbg_out(trim(dump_filename))
+      call open_dbg_out(dump_filename)
 
       call add_real_3d("guu", ns, nzeta, ntheta3, &
               reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
@@ -162,7 +162,7 @@ SUBROUTINE bcovar (lu, lv)
     write(dump_filename, 997) ns, iter2, trim(input_extension)
 997 format('volume_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_1d("vp", ns-1, vp(2:ns))
     call add_real("voli", voli)
@@ -203,7 +203,7 @@ SUBROUTINE bcovar (lu, lv)
     write(dump_filename, 996) ns, iter2, trim(input_extension)
 996 format('bcontrav_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_3d("bsupu", ns, nzeta, ntheta3, &
               reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
@@ -256,7 +256,7 @@ SUBROUTINE bcovar (lu, lv)
     write(dump_filename, 994) ns, iter2, trim(input_extension)
 994 format('bcov_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_3d("bsubuh", ns, nzeta, ntheta3, &
             reshape(bsubuh, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
@@ -300,7 +300,7 @@ SUBROUTINE bcovar (lu, lv)
     write(dump_filename, 993) ns, iter2, trim(input_extension)
 993 format('lambda_forces_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real_3d("lvv",       ns, nzeta, ntheta3, &
                   reshape(lvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
@@ -362,7 +362,7 @@ SUBROUTINE bcovar (lu, lv)
     write(dump_filename, 990) ns, iter2, trim(input_extension)
 990 format('bcov_full_',i5.5,'_',i6.6,'.',a,'.json')
 
-    call open_dbg_out(trim(dump_filename))
+    call open_dbg_out(dump_filename)
 
     call add_real("rbtor0", rbtor0)
     call add_real("rbtor",  rbtor)
@@ -405,7 +405,7 @@ SUBROUTINE bcovar (lu, lv)
          write(dump_filename, 991) ns, iter2, trim(input_extension)
 991 format('precondn_',i5.5,'_',i6.6,'.',a,'.json')
 
-         call open_dbg_out(trim(dump_filename))
+         call open_dbg_out(dump_filename)
 
          call add_read_2d("arm", ns+1, 2, arm)
          call add_read_2d("ard", ns+1, 2, ard)
@@ -488,7 +488,7 @@ SUBROUTINE bcovar (lu, lv)
          write(dump_filename, 989) ns, iter2, trim(input_extension)
 989 format('forceNorms_tcon_',i5.5,'_',i6.6,'.',a,'.json')
 
-         call open_dbg_out(trim(dump_filename))
+         call open_dbg_out(dump_filename)
 
          call add_real("volume", volume)
          call add_real("r2",     MAX(wb,wp)/volume)
@@ -532,7 +532,7 @@ SUBROUTINE bcovar (lu, lv)
        write(dump_filename, 988) ns, iter2, trim(input_extension)
 988 format('lulv_comb_',i5.5,'_',i6.6,'.',a,'.json')
 
-       call open_dbg_out(trim(dump_filename))
+       call open_dbg_out(dump_filename)
 
        call add_real_3d("bsubu_e", ns, nzeta, ntheta3, &
                reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )

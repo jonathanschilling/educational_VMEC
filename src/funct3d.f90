@@ -91,7 +91,7 @@ SUBROUTINE funct3d (ier_flag)
       write(dump_filename, 999) ns, iter2, trim(input_extension)
 999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a,'.json')
 
-      call open_dbg_out(trim(dump_filename))
+      call open_dbg_out(dump_filename)
 
       call add_real_4d("r1", ns, 2, nzeta, ntheta3, &
               reshape(r1, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
@@ -359,7 +359,7 @@ SUBROUTINE funct3d (ier_flag)
           write(dump_filename, 997) iter2, trim(input_extension)
 997 format('rbsq_',i5.5,'.',a,'.json')
 
-          call open_dbg_out(trim(dump_filename))
+          call open_dbg_out(dump_filename)
           call add_real_1d("rbsq", ns, rbsq(ns:nrzt:ns))
           call close_dbg_out()
         end if
@@ -387,7 +387,7 @@ SUBROUTINE funct3d (ier_flag)
        write(dump_filename, 998) ns, iter2, trim(input_extension)
 998 format('constraint_force_',i5.5,'_',i6.6,'.',a,'.json')
 
-       call open_dbg_out(trim(dump_filename))
+       call open_dbg_out(dump_filename)
 
        call add_real_3d("extra1", ns, nzeta, ntheta3, &
           reshape(extra1(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )

@@ -87,37 +87,38 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  if (dump_geometry .and. iter2 .le. 2) then
+  if (dump_geometry .and. iter2 .le. max_dump) then
       write(dump_filename, 999) ns, iter2, trim(input_extension)
-      open(unit=42, file=trim(dump_filename), status="unknown")
+999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a,'.json')
 
-      write(42, *) "# ns ntheta3 nzeta"
-      write(42, *) ns, ntheta3, nzeta
+      call open_dbg_out(trim(dump_filename))
 
-      write(42, *) "# js ku lv m%2 r1 ru rv z1 zu zv lu lv rcon zcon"
-      l = 1
-      DO ku = 1, ntheta3
-        DO lk = 1, nzeta
-          DO js = 1, ns
-            DO m=0,1
-              !l = ((ku-1)*nzeta+(lk-1))*ns+js
-              write (42, *) js, ku, lk, m, &
-                            r1(l,m), ru(l,m), rv(l,m),  &
-                            z1(l,m), zu(l,m), zv(l,m),  &
-                            lu(l+m*nrzt), lv(l+m*nrzt), &
-                            rcon(l,m), zcon(l,m)
-            end do
-            l = l+1
-          end do
-        end do
-      end do
+      call add_real_4d("r1", ns, 2, nzeta, ntheta3, &
+              reshape(r1, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("ru", ns, 2, nzeta, ntheta3, &
+              reshape(ru, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("rv", ns, 2, nzeta, ntheta3, &
+              reshape(rv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
 
-      close(42)
+      call add_real_4d("z1", ns, 2, nzeta, ntheta3, &
+              reshape(z1, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("zu", ns, 2, nzeta, ntheta3, &
+              reshape(zu, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("zv", ns, 2, nzeta, ntheta3, &
+              reshape(zv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
 
-      print *, "dumped geometry output to '"//trim(dump_filename)//"'"
-      !stop
+      call add_real_4d("lu", ns, 2, nzeta, ntheta3, &
+              reshape(lu, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("lv", ns, 2, nzeta, ntheta3, &
+              reshape(lv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+
+      call add_real_4d("rcon", ns, 2, nzeta, ntheta3, &
+              reshape(rcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("zcon", ns, 2, nzeta, ntheta3, &
+              reshape(zcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+
+      call close_dbg_out()
   end if
-999 format('funct3d_geometry_',i5.5,'_',i6.6,'.',a)
 
   ! now that we have the current real-space geometry, use the opportunity so do some analysis / statistics
   ! --> at ns, sqrt(s)==1 --> no need to scale r1(ns or l0pi, 1) by sqrt(s) anymore
@@ -354,6 +355,15 @@ SUBROUTINE funct3d (ier_flag)
 
         !print *, "max bsqvac = ", maxval(bsqvac)
 
+        if (dump_rbsq .and. iter2 .le. max_dump) then
+          write(dump_filename, 997) iter2, trim(input_extension)
+997 format('rbsq_',i5.5,'.',a,'.json')
+
+          call open_dbg_out(trim(dump_filename))
+          call add_real_1d("rbsq", ns, rbsq(ns:nrzt:ns))
+          call close_dbg_out()
+        end if
+
         IF (ivac .eq. 1) THEN
            print *,"bsqsav(:,1:2) are filled now"
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary
@@ -373,42 +383,27 @@ SUBROUTINE funct3d (ier_flag)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
 
-     if (dump_constraint_force .and. iter2.le.2) then
+     if (dump_constraint_force .and. iter2.le.max_dump) then
        write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('constraint_force_',i5.5,'_',i6.6,'.',a)
+998 format('constraint_force_',i5.5,'_',i6.6,'.',a,'.json')
 
-       open(unit=42, file=trim(dump_filename), status="unknown")
+       call open_dbg_out(trim(dump_filename))
 
-       write(42, *) "# ns ntheta3 nzeta mpol1 ntor"
-       write(42, *) ns, ntheta3, nzeta, mpol1, ntor
+       call add_real_3d("extra1", ns, nzeta, ntheta3, &
+          reshape(extra1(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("gcon", ns, nzeta, ntheta3, &
+          reshape(gcon,      (/ ns, nzeta, ntheta3 /),   order=(/ 2, 3, 1 /) ) )
 
-       write(42, *) "# js ku lv extra1(:,0) gcons"
-       DO js = 1, ns
-         DO lk = 1, nzeta
-           DO ku = 1, ntheta3
-             l = ((ku-1)*nzeta+(lk-1))*ns+js
-             write (42, *) js, ku, lk, &
-                           extra1(l,0), gcon(l)
-           end do
-         end do
-       end do
+       call add_real_3d("gcs",         ns, ntor+1, mpol, &
+         reshape(gc(0*mns+1:1*mns), (/ ns, ntor+1, mpol /) ) )
+       call add_real_3d("gsc",         ns, ntor+1, mpol, &
+         reshape(gc(1*mns+1:2*mns), (/ ns, ntor+1, mpol /) ) )
+       call add_real_3d("gcc",         ns, ntor+1, mpol, &
+         reshape(gc(2*mns+1:3*mns), (/ ns, ntor+1, mpol /) ) )
+       call add_real_3d("gss",         ns, ntor+1, mpol, &
+         reshape(gc(3*mns+1:4*mns), (/ ns, ntor+1, mpol /) ) )
 
-       write(42, *) "# js n m gcs gsc gcc gss"
-       l=0
-       DO m = 0, mpol1
-         DO n = 0, ntor
-           DO js = 1, ns
-             l = l+1
-             write (42, *) js, n, m, &
-                           gc(l), gc(mns+l), gc(2*mns+l), extra1(l,1)
-           end do
-         end do
-       end do
-
-       close(42)
-
-       print *, "dumped constraint force to '"//trim(dump_filename)//"'"
-!        stop
+       call close_dbg_out()
      end if
 
      ! COMPUTE MHD FORCES ON INTEGER-MESH

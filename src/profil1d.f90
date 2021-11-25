@@ -133,61 +133,34 @@ SUBROUTINE profil1d()
   sp(0) = 0
   sp(1) = sm(2)
 
-  ! dump all relevant output to a text file
   if (dump_profil1d) then
     write(dump_filename, 999) ns, trim(input_extension)
-999 format('profil1d_',i5.5,'.',a)
+999 format('profil1d_',i5.5,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# torflux_edge polflux_edge r00 lamscale"
-    write(42, *) torflux_edge, polflux_edge, r00, lamscale
+    call add_real("torflux_edge", torflux_edge)
+    call add_real("polflux_edge", polflux_edge)
+    call add_real("r00", r00)
+    call add_real("lamscale", lamscale)
+    call add_real("currv", currv)
+    call add_real("Itor", Itor)
 
-    write(42, *) "# currv Itor"
-    write(42, *) currv, Itor
+    call add_real_1d("shalf", ns+1, shalf(:ns+1))
+    call add_real_1d("phips", ns+1, phips)
+    call add_real_1d("chips", ns, chips)
+    call add_real_1d("iotas", ns-1, iotas(2:ns))
+    call add_real_1d("icurv", ns, icurv)
+    call add_real_1d("mass", ns-1, mass(2:ns))
+    call add_real_1d("sqrts", ns, sqrts(:ns))
+    call add_real_1d("phipf", ns, phipf)
+    call add_real_1d("chipf", ns, chipf)
+    call add_real_1d("iotaf", ns, iotaf)
+    call add_real_1d("bdamp", ns, bdamp)
+    call add_real_1d("sm", ns, sm)
+    call add_real_1d("sp", ns+1, sp)
 
-    write(42, *) "# shalf"
-    write(42, *) shalf(:ns)
-
-    write(42, *) "# phips"
-    write(42, *) phips
-
-    write(42, *) "# chips"
-    write(42, *) chips
-
-    write(42, *) "# iotas"
-    write(42, *) iotas
-
-    write(42, *) "# icurv"
-    write(42, *) icurv
-
-    write(42, *) "# mass"
-    write(42, *) mass
-
-    write(42, *) "# sqrts"
-    write(42, *) sqrts(:ns)
-
-    write(42, *) "# phipf"
-    write(42, *) phipf
-
-    write(42, *) "# chipf"
-    write(42, *) chipf
-
-    write(42, *) "# iotaf"
-    write(42, *) iotaf
-
-    write(42, *) "# bdamp"
-    write(42, *) bdamp
-
-    write(42, *) "# sm"
-    write(42, *) sm
-
-    write(42, *) "# sp"
-    write(42, *) sp
-
-    close(42)
-
-    print *, "dumped profil1d output to '"//trim(dump_filename)//"'"
+    call close_dbg_out()
   end if
 
 END SUBROUTINE profil1d

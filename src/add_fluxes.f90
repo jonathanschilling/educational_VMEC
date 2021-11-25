@@ -35,8 +35,8 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
         top = icurv(js) ! offset: this makes the zero-current algorithm a constrained-current algorithm
         bot = 0
         DO l = js, nrzt, ns
-           ! bsupu contains -d(lambda)/d(zeta)*lamscale+phipf on entry (?)
-           ! bsupv contains  d(lambda)/d(theta)*lamscale on entry (?)
+           ! bsupu contains -d(lambda)/d( zeta)*lamscale+phipf on entry (?)
+           ! bsupv contains  d(lambda)/d(theta)*lamscale       on entry (?)
            top = top - wint(l)*(guu(l)*bsupu(l) + guv(l)*bsupv(l))
            bot = bot + wint(l)* guu(l)*overg(l)
         END DO
@@ -72,36 +72,21 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.
   bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)
 
-  if (dump_add_fluxes .and. iter2.le.2) then
+  if (dump_add_fluxes .and. iter2.le.max_dump) then
     write(dump_filename, 995) ns, iter2, trim(input_extension)
-995 format('add_fluxes_',i5.5,'_',i6.6,'.',a)
+995 format('add_fluxes_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns nzeta ntheta3"
-    write(42, *) ns, nzeta, ntheta3
+    call add_real_1d("chips", ns, chips)
+    call add_real_1d("iotas", ns, iotas)
+    call add_real_1d("chipf", ns, chipf)
+    call add_real_1d("iotaf", ns, iotaf)
 
-    write(42, *) "# js chips iotas chipf iotaf"
-    DO js = 1, ns
-      write(42, *) js, chips(js), iotas(js), chipf(js), iotaf(js)
-    end do
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, &
+            reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    write(42, *) "# js lk ku bsupu"
-    DO js = 2, ns
-      DO lk = 1, nzeta
-        DO ku = 1, ntheta3
-          l = ((ku-1)*nzeta+(lk-1))*ns+js
-          write (42, *) js, lk, ku, bsupu(l)
-        end do
-      end do
-    end do
-
-    close(42)
-
-    print *, "dumped add_fluxes output to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
-
-
 
 END SUBROUTINE add_fluxes

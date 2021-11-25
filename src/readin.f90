@@ -395,62 +395,52 @@
      DEALLOCATE (temp)
   END IF
 
-  if (dump_input_coeffs) then
-    open(unit=42, file="coeffs_input."//trim(input_extension), status="unknown")
+  if (dump_readin_boundary) then
+    call open_dbg_out("readin_boundary."//trim(input_extension)//".json")
 
-    ! write header
     if (.not. lasym) then
-    IF (.not. lthreed) THEN
-      ! not lasym, not lthreed
-      write(42,*) "# not lasym, not lthreed"
-      write(42,*) "# m |n| rbcc zbsc"
-    else ! lthreed == .true.
-      ! not lasym, lthreed
-      write(42,*) "# not lasym, lthreed"
-      write(42,*) "# m |n| rbcc zbsc rbss zbcs"
+      if (.not. lthreed) then
+        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("rbsc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbcc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+      else
+        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbss", ntor+1, mpol, rbss)
+        call add_real_2d("zbcs", ntor+1, mpol, zbcs)
+        call add_real_2d("rbsc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbcc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+      end if
+    else
+      if (.not. lthreed) then
+        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("rbsc", ntor+1, mpol, rbsc)
+        call add_real_2d("zbcc", ntor+1, mpol, zbcc)
+        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+      else
+        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbss", ntor+1, mpol, rbss)
+        call add_real_2d("zbcs", ntor+1, mpol, zbcs)
+        call add_real_2d("rbsc", ntor+1, mpol, rbsc)
+        call add_real_2d("zbcc", ntor+1, mpol, zbcc)
+        call add_real_2d("rbcs", ntor+1, mpol, rbcs)
+        call add_real_2d("zbss", ntor+1, mpol, zbss)
+      end if
     end if
-  else ! lasym == .true.
-    IF (.not. lthreed) THEN
-      ! lasym, not lthreed
-      write(42,*) "# lasym, not lthreed"
-      write(42,*) "# m |n| rbcc zbsc rbsc zbcc"
-    else ! lthreed == .true.
-      ! lasym, lthreed
-      write(42,*) "# lasym, lthreed"
-      write(42,*) "# m |n| rbcc zbsc rbss zbcs rbsc zbcc rbcs zbss"
-    end if
-  end if
 
-    ! write data
-    DO m=0,mpol1
-      mj = m+joff
-      DO n=0,ntor
-        ni = n + ioff
-
-        if (.not. lasym) then
-          IF (.not. lthreed) THEN
-            ! not lasym, not lthreed
-            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj)
-          else ! lthreed == .true.
-            ! not lasym, lthreed
-            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbss(ni,mj), zbcs(ni,mj)
-          end if ! lthreed
-        else ! lasym == .true.
-          IF (.not. lthreed) THEN
-            ! lasym, not lthreed
-            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbsc(ni,mj), zbcc(ni,mj)
-          else ! lthreed == .true.
-            ! lasym, lthreed
-            write(42,*) m, n, rbcc(ni,mj), zbsc(ni,mj), rbss(ni,mj), zbcs(ni,mj), &
-                              rbsc(ni,mj), zbcc(ni,mj), rbcs(ni,mj), zbss(ni,mj)
-          end if ! lthreed
-        end if ! lasym
-      end do ! n
-    end do ! m
-
-    close(42)
-
-    stop "boundary coeffs dumped to coeffs_input.<ext>"
+    call close_dbg_out()
   end if
 
 END SUBROUTINE readin

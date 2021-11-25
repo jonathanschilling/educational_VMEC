@@ -130,6 +130,29 @@ SUBROUTINE fixaray
 
   IF (mn1 .ne. mnmax) STOP 'mn1 != mnmax'
 
+  if (dump_fixaray) then
+    call open_dbg_out("fixaray."//trim(input_extension)//".json")
+
+    call add_real_2d("cosmu", ntheta3, mnyq+1, cosmu)
+    call add_real_2d("sinmu", ntheta3, mnyq+1, sinmu)
+    call add_real_2d("cosmum", ntheta3, mnyq+1, cosmum)
+    call add_real_2d("sinmum", ntheta3, mnyq+1, sinmum)
+    call add_real_2d("cosmui", ntheta3, mnyq+1, cosmui)
+    call add_real_2d("sinmui", ntheta3, mnyq+1, sinmui)
+    call add_real_2d("cosmui3", ntheta3, mnyq+1, cosmui3)
+    call add_real_2d("cosmumi", ntheta3, mnyq+1, cosmumi)
+    call add_real_2d("sinmumi", ntheta3, mnyq+1, sinmumi)
+    call add_real_2d("cosmumi3", ntheta3, mnyq+1, cosmumi3)
+
+    call add_real_2d("cosnv", nzeta, nnyq+1, cosnv)
+    call add_real_2d("sinnv", nzeta, nnyq+1, sinnv)
+    call add_real_2d("cosnvn", nzeta, nnyq+1, cosnvn)
+    call add_real_2d("sinnvn", nzeta, nnyq+1, sinnvn)
+
+    call add_real_1d("mscale", mnyq+1, mscale)
+    call add_real_1d("nscale", nnyq+1, nscale)
+  end if
+
   ! COMPUTE NYQUIST-SIZED ARRAYS FOR OUTPUT.
   ! RESTORE m,n Nyquist TO 1 X ... (USED IN WROUT, JXBFORCE)
   !  mnyq = mnyq0;  nnyq = nnyq0
@@ -170,82 +193,38 @@ SUBROUTINE fixaray
   faccon(mpol1) = zero
 
   if (dump_fixaray) then
-    open(unit=42, file="fixaray."//trim(input_extension), status="unknown")
+    call add_int("ntheta3", ntheta3)
+    call add_int("mnyq", mnyq)
+    call add_int("nzeta", nzeta)
+    call add_int("nnyq", nnyq)
+    call add_int("nznt", nznt)
+    call add_int("mnmax", mnmax)
+    call add_int("mnsize", mnsize)
+    call add_int("mnmax_nyq", mnmax_nyq)
 
-    write(42, *) "# ntheta3 mnyq nzeta nnyq nznt mnmax mnsize mnmax_nyq"
-    write(42, *) ntheta3, mnyq, nzeta, nnyq, nznt, mnmax, mnsize, mnmax_nyq
+    call add_real_1d("cos01", nznt, cos01)
+    call add_real_1d("sin01", nznt, sin01)
 
-    write(42, *) "# i m cosmu sinmu cosmum sinmum cosmui sinmui cosmui3 cosmumi sinmumi cosmumi3"
-    DO i = 1, ntheta3
-      DO m = 0, mnyq
-        write (42, *) i, m, cosmu(i,m), sinmu(i,m), cosmum(i,m), sinmum(i,m), &
-                      cosmui(i,m), sinmui(i,m), cosmui3(i,m), &
-                      cosmumi(i,m), sinmumi(i,m), cosmumi3(i,m)
-      end do
-    end do
+    call add_real_1d("xm", mnmax, xm)
+    call add_real_1d("xn", mnmax, xn)
 
-    write(42, *) "# j n cosnv sinnv cosnvn sinnvn"
-    DO j = 1, nzeta
-      DO n = 0, nnyq
-        write(42, *) j, n, cosnv(j,n), sinnv(j,n), cosnvn(j,n), sinnvn(j,n)
-      END DO
-    END DO
+    call add_real_1d("xm_nyq", mnmax_nyq, xm_nyq)
+    call add_real_1d("xn_nyq", mnmax_nyq, xn_nyq)
 
-    write(42, *) "# i j mn cos01 sin01"
-    mn = 0 ! mn is re-used as linear grid index here
-    DO i = 1, ntheta3
-      DO j = 1, nzeta
-        mn = mn + 1
-        write(42, *) i, j, mn, cos01(mn), sin01(mn)
-      END DO
-    END DO
+    call add_int_1d("ixm", mnsize, ixm)
 
-    write(42, *) "# mn1 xm xn"
-    DO mn1 = 1, mnmax
-      write(42, *) mn1, xm(mn1), xn(mn1)
-    END DO
-
-    write(42, *) "# m n mn ixm"
-    mn = 0
-    DO m = 0, mpol1
-      DO n = 0, ntor
-        mn = mn + 1
-        write(42, *) m, n, mn, ixm(mn)
-      END DO
-    end do
-
-    write(42, *) "# mn1 xm_nyq xn_nyq"
-    DO mn1 = 1, mnmax_nyq
-        write(42, *) mn1, xm_nyq(mn1), xn_nyq(mn1)
-     END DO
-
-    write(42, *) "# m mscale"
-    DO m = 0, mnyq
-      write(42, *) m, mscale(m)
-    end do
-
-    write(42, *) "# n nscale"
-    DO n = 0, nnyq
-      write(42, *) n, nscale(n)
-    end do
-
-    close(42)
-    stop "fixaray output dumped to fixaray.<ext>"
+    call close_dbg_out()
   end if
 
   if (dump_spectral_constraint) then
-    open(unit=42, file="spectral_constraint."//trim(input_extension), status="unknown")
+    call open_dbg_out("spectral_constraint."//trim(input_extension)//".json")
 
-    write(42, *) "# mpol1"
-    write(42, *) mpol1
+    ! xmpq is allocated statically, so need size here explicitly!
+    call add_real_2d("xmpq", mpol, 3, xmpq(0:mpol1,1:3))
 
-    write(42, *) "# m xmpq(m,1) xmpq(m,2) xmpq(m,3) faccon"
-    do m = 0, mpol1
-      write(42, *) m, xmpq(m,1), xmpq(m,2), xmpq(m,3), faccon(m)
-    end do
+    call add_real_1d("faccon", mpol, faccon)
 
-    close(42)
-    stop "spectral constraint output dumped to spectral_constraint.<ext>"
+    call close_dbg_out()
   end if
 
 END SUBROUTINE fixaray

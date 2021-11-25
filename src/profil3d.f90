@@ -241,46 +241,21 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
   ! dump all relevant output to a text file
   if (dump_profil3d) then
+
     write(dump_filename, 999) ns, profil3d_calls, trim(input_extension)
-999 format('profil3d_',i5.5,'_',i2.2,'.',a)
+999 format('profil3d_',i5.5,'_',i2.2,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# ns ntmax mpol ntor"
-    write(42, *) ns, ntmax, mpol, ntor
+    call add_real_3d("scalxc", ns, ntor+1, mpol, scalxc(:irzloff))
 
-    write(42, *) "# js ntype m n mn l scalxc"
-    DO js = 1, ns
-      DO ntype = 1, ntmax
-        DO m = 0, mpol1
-          DO n = 0, ntor
-            mn = n + ntor1*m
-            l = js + ns*mn + (ntype - 1)*mns
+    call add_real_4d("rmn", ntmax, ns, ntor+1, mpol, &
+            reshape(rmn, (/ ntmax, ns, ntor+1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("zmn", ntmax, ns, ntor+1, mpol, &
+            reshape(zmn, (/ ntmax, ns, ntor+1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
 
-            write (42, *) js, ntype, m, n, mn, l, scalxc(l)
-          end do
-        end do
-      end do
-    end do
-
-    write(42, *) "# js ntype m n rmn zmn"
-    DO js = 1, ns
-      DO ntype = 1, ntmax
-        DO m = 0, mpol1
-          DO n = 0, ntor
-            write (42, *) js, ntype, m, n, &
-                          rmn(js,n,m,ntype), zmn(js,n,m,ntype)
-          end do
-        end do
-      end do
-    end do
-
-    close(42)
-
-    print *, "dumped profil3d output to '"//trim(dump_filename)//"'"
-
+    call close_dbg_out()
   end if
-
 
   profil3d_calls = profil3d_calls + 1
 

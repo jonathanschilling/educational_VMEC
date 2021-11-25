@@ -6,7 +6,7 @@ var searchData=
   ['machsq_3',['machsq',['../db/dae/namespaceread__wout__mod.html#ad1096d2188cf659e338db8bf6f0a4ba1',1,'read_wout_mod']]],
   ['magnetic_5ffluxes_2ef90_4',['magnetic_fluxes.f90',['../d5/d26/magnetic__fluxes_8f90.html',1,'']]],
   ['mass_5',['mass',['../d1/d6c/namespacevmec__main.html#ad705d16d5a83c0cd5aa7b6c537c78f1d',1,'vmec_main::mass()'],['../db/dae/namespaceread__wout__mod.html#a574b1fb3f0425a2ca61489aaeffcda06',1,'read_wout_mod::mass()']]],
-  ['max_5fdump_6',['max_dump',['../d8/dfd/namespacedbgout.html#a24208a027d2d52b230565c3a358e09fc',1,'dbgout']]],
+  ['max_5fdump_6',['max_dump',['../d8/dfd/namespacedbgout.html#a295f1c6eef23fe72ec4dd73555c4cc42',1,'dbgout']]],
   ['mercier_7',['mercier',['../de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208',1,'mercier.f90']]],
   ['mercier_2ef90_8',['mercier.f90',['../de/d25/mercier_8f90.html',1,'']]],
   ['meven_9',['meven',['../d1/d74/namespacevmec__params.html#ada6e14ebc01d2c741c97bdbc89d8de87',1,'vmec_params']]],

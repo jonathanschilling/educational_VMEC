@@ -5,7 +5,7 @@ var searchData=
   ['m_5fmap_5fwrt_2',['m_map_wrt',['../dd/df2/namespacevacmod.html#ad07231309e5ad23d3fa65219a48235d7',1,'vacmod']]],
   ['machsq_3',['machsq',['../db/dae/namespaceread__wout__mod.html#ad1096d2188cf659e338db8bf6f0a4ba1',1,'read_wout_mod']]],
   ['mass_4',['mass',['../d1/d6c/namespacevmec__main.html#ad705d16d5a83c0cd5aa7b6c537c78f1d',1,'vmec_main::mass()'],['../db/dae/namespaceread__wout__mod.html#a574b1fb3f0425a2ca61489aaeffcda06',1,'read_wout_mod::mass()']]],
-  ['max_5fdump_5',['max_dump',['../d8/dfd/namespacedbgout.html#a24208a027d2d52b230565c3a358e09fc',1,'dbgout']]],
+  ['max_5fdump_5',['max_dump',['../d8/dfd/namespacedbgout.html#a295f1c6eef23fe72ec4dd73555c4cc42',1,'dbgout']]],
   ['meven_6',['meven',['../d1/d74/namespacevmec__params.html#ada6e14ebc01d2c741c97bdbc89d8de87',1,'vmec_params']]],
   ['mf_7',['mf',['../d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2',1,'vacmod0']]],
   ['mf1_8',['mf1',['../d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795',1,'vacmod0']]],

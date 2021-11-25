@@ -11,7 +11,7 @@
 SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   USE vmec_main
   USE vmec_params, ONLY: bad_jacobian_flag, successful_term_flag,       &
-                         norm_term_flag
+                         norm_term_flag, ntmax
   USE xstuff
 
   use dbgout
@@ -88,16 +88,16 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
   if (dump_evolve .and. iter2.le.nDump) then
     write(dump_filename, 999) ns, iter2, trim(input_extension)
-999 format('evolve_',i5.5,'_',i6.6,'.',a)
-    open(unit=42, file=trim(dump_filename), status="unknown")
+999 format('evolve_',i5.5,'_',i6.6,'.',a,'.json')
 
-    write(42, *) "# ns ntor mpol1"
-    write(42, *) ns, ntor, mpol1
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# before timestep: i xc xcdot gc"
-    do i=1, neqs
-      write(42, *) i, xc(i), xcdot(i), gc(i)
-    end do
+    call add_real_5d("xc_before",    ns, ntor, mpol1, ntmax, 2, &
+               reshape(xc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xcdot_before", ns, ntor, mpol1, ntmax, 2, &
+            reshape(xcdot, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("gc",    ns, ntor, mpol1, ntmax, 2, &
+               reshape(gc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
   end if
 
   ! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE
@@ -107,12 +107,12 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
   if (dump_evolve .and. iter2.le.nDump) then
-    write(42, *) "# after timestep: i xc xcdot"
-    do i=1, neqs
-      write(42, *) i, xc(i), xcdot(i)
-    end do
+    call add_real_5d("xc_after",    ns, ntor, mpol1, ntmax, 2, &
+                     reshape(xc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xcdot_after", ns, ntor, mpol1, ntmax, 2, &
+                  reshape(xcdot, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
 
-    close(42)
+    call close_dbg_out()
   end if
 
 END SUBROUTINE evolve

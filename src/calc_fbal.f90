@@ -52,27 +52,22 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   equif(1) = 0
   equif(ns) = 0
 
-
   ! check calc_fbal output
-  if (dump_calc_fbal .and. iter2.le.2) then
+  if (dump_calc_fbal .and. iter2.le.max_dump) then
     write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('calc_fbal_',i5.5,'_',i6.6,'.',a)
+998 format('calc_fbal_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns"
-    write(42, *) ns
+    call add_real_1d("buco", ns, buco)
+    call add_real_1d("bvco", ns, bvco)
+    call add_real_1d("jcurv", ns, jcurv)
+    call add_real_1d("jcuru", ns, jcuru)
+    call add_real_1d("vpphi", ns, vpphi)
+    call add_real_1d("presgrad", ns, presgrad)
+    call add_real_1d("equif", ns, equif)
 
-    write(42, *) "# js buco bvco jcurv jcuru vpphi presgrad equif"
-    DO js = 1, ns
-      write(42,*) js, buco(js), bvco(js), jcurv(js), jcuru(js), &
-                      vpphi(js), presgrad(js), equif(js)
-    end do
-
-    close(42)
-
-    print *, "dumped calc_fbal output to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
 END SUBROUTINE calc_fbal

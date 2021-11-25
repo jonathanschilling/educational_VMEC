@@ -12,6 +12,9 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   USE vmec_main, ONLY: dp, rprec, mnsize, input_extension
   USE vmec_params, ONLY: ntmax
   USE vmec_persistent, ONLY: ixm
+
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, intent(in) :: nsnew, nsold
@@ -23,9 +26,6 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
   INTEGER :: ntype, js, js1, js2, mn
   REAL(rprec) :: hsold, sj, s1, xint
-
-  character(len=255) :: dump_filename
-  logical            :: dump_interp = .false.
 
   IF (nsold .le. 0) RETURN
 

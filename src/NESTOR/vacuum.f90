@@ -28,6 +28,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   USE vmec_params, ONLY: norm_term_flag, phiedge_error_flag
   use vmec_main, only: input_extension
 
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, intent(in) :: ivac_skip, mnmax
@@ -44,8 +46,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
 
   integer, save :: icall = 0
-  character(len=255) :: dump_filename
-  logical            :: dump_bsqvac = .false.
 
   ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
   ! BASED ON THE PROGRAM BY P. MERKEL [J. Comp. Phys. 66, 83 (1986)]

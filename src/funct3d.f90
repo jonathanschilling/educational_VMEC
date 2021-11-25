@@ -21,6 +21,8 @@ SUBROUTINE funct3d (ier_flag)
   USE xstuff
   USE vparams, ONLY: twopi
 
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
@@ -57,10 +59,6 @@ SUBROUTINE funct3d (ier_flag)
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.
-
-  character(len=255) :: dump_filename
-  logical            :: dump_geometry = .false.
-  logical            :: dump_constraint_force = .false.
 
   ! POINTER ALIASES
   lu => czmn

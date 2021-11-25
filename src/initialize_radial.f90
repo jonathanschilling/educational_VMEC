@@ -23,7 +23,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   ! Allocates memory for radial arrays and initializes radial profiles
   ! Loads data (if available) from a reset file
 
-  print *, "initialize_radial"
+  ! print *, "initialize_radial"
 
   ! Set timestep control parameters
   fsq    = one

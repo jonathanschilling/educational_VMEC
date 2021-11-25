@@ -34,7 +34,6 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   INTEGER, INTENT(in) :: ier_flag
 
   LOGICAL, PARAMETER :: lprint = .false.   ! Prints out bsubs spectrum to fort.33
-  REAL(rprec), PARAMETER :: two=2, p5=0.5_dp, c1p5=1.5_dp
 
   INTEGER lk, lz, lt, k, m, js, j, n, injxbout, mparity, nznt1
   INTEGER :: njxbout = jxbout0, info
@@ -149,7 +148,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
 
      ! Put bsubs on full mesh
      IF (js.gt.1 .and. js.lt.ns) THEN
-        bsubs(js,:) = p5*(bsubsh(js,:) + bsubsh(js+1,:))
+        bsubs(js,:) = cp5*(bsubsh(js,:) + bsubsh(js+1,:))
      END IF
 
      bsubu(js,:,1) = bsubu(js,:,1)/shalf(js)
@@ -172,8 +171,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
 
            ! FOURIER TRANSFORM
            dnorm1 = one/r0scale**2
-           IF (m .eq. mnyq) dnorm1 = p5*dnorm1
-           IF (n.eq.nnyq .and. n.ne.0) dnorm1 = p5*dnorm1
+           IF (m .eq. mnyq) dnorm1 = cp5*dnorm1
+           IF (n.eq.nnyq .and. n.ne.0) dnorm1 = cp5*dnorm1
            bsubsmn1 = 0;  bsubsmn2 = 0
            IF (lasym) THEN
               ! SPH012314 in FixAray
@@ -298,9 +297,9 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   ! brho==sigma B_s, pp1 and pp2 are the Jacobian times the hot particle parallel
   ! pressure radial gradient Amplitudes on the full integer mesh
   correct_bsubs: DO js = 2, ns-1
-     jxb(:) = p5*(gsqrt(js,:) + gsqrt(js+1,:))
-     bsupu1(:) = p5*(bsupu(js,:)*gsqrt(js,:) + bsupu(js+1,:)*gsqrt(js+1,:))
-     bsupv1(:) = p5*(bsupv(js,:)*gsqrt(js,:) + bsupv(js+1,:)*gsqrt(js+1,:))
+     jxb(:) = cp5*(gsqrt(js,:) + gsqrt(js+1,:))
+     bsupu1(:) = cp5*(bsupu(js,:)*gsqrt(js,:) + bsupu(js+1,:)*gsqrt(js+1,:))
+     bsupv1(:) = cp5*(bsupv(js,:)*gsqrt(js,:) + bsupv(js+1,:)*gsqrt(js+1,:))
      brho(js,:) = ohs*                                              &
      ( bsupu1(:)*(bsubu(js+1,:,0) - bsubu(js,:,0))                  &
      + bsupv1(:)*(bsubv(js+1,:,0) - bsubv(js,:,0)))                 &
@@ -309,7 +308,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
      ! SUBTRACT FLUX-SURFACE AVERAGE FORCE BALANCE FROM brho, OTHERWISE
      ! LOCAL FORCE BALANCE EQUATION B dot grad(Bs) = brho CAN'T BE SOLVED
      brho00(js) = SUM(brho(js,:)*wint(js:nrzt:ns))
-     brho(js,:) = brho(js,:) - signgs*jxb(:)*brho00(js)/(p5*(vp(js) + vp(js+1)))
+     brho(js,:) = brho(js,:) - signgs*jxb(:)*brho00(js)/(cp5*(vp(js) + vp(js+1)))
 
      jxb(:) = brho(js,:)
      CALL getbsubs (brhomn, jxb, bsupu1, bsupv1, mnyq, nnyq, info)
@@ -416,8 +415,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
 
   WRITE (33, '(/,2a,/)') 'ANGLE INDEX       B*grad(Bs)      Frhs          Fold'
   check_fb: DO js = 2, ns-1
-     bsupu1(:) = p5*(bsupu(js,:)*gsqrt(js,:) + bsupu(js+1,:)*gsqrt(js+1,:))
-     bsupv1(:) = p5*(bsupv(js,:)*gsqrt(js,:) + bsupv(js+1,:)*gsqrt(js+1,:))
+     bsupu1(:) = cp5*(bsupu(js,:)*gsqrt(js,:) + bsupu(js+1,:)*gsqrt(js+1,:))
+     bsupv1(:) = cp5*(bsupv(js,:)*gsqrt(js,:) + bsupv(js+1,:)*gsqrt(js+1,:))
      kp2(:) = bsupu1(:)*bsubsu(js,:,0) + bsupv1(:)*bsubsv(js,:,0)
      jxb(:) = bsupu1(:)*itheta(js,:) + bsupv1(:)*izeta(js,:)
 
@@ -480,7 +479,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   dnorm1 = twopi*twopi
 
   DO js = 2, ns1
-     ovp = two/(vp(js+1) + vp(js))/dnorm1
+     ovp = c2p0/(vp(js+1) + vp(js))/dnorm1
      tjnorm = ovp*signgs
      sqgb2(:nznt) = gsqrt(js+1,:nznt)                               &
                   * (bsq(js+1,:nznt)-pres(js+1))                    &
@@ -494,20 +493,20 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
      ! ! dp/ds here
      pprime(:) = ohs*(pres(js+1)-pres(js))/mu0
 
-     kperpu(:nznt) = p5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))* pprime(:)/sqgb2
-     kperpv(:nznt) =-p5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))* pprime(:)/sqgb2
-     kp2(:nznt)=p5*(kperpu**2*(guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
+     kperpu(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))* pprime(:)/sqgb2
+     kperpv(:nznt) =-cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))* pprime(:)/sqgb2
+     kp2(:nznt)=cp5*(kperpu**2*(guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
             + 2*kperpu*kperpv*(guv(js+1:nrzt:ns) + guv(js:nrzt:ns)) &
             +       kperpv**2*(gvv(js+1:nrzt:ns) + gvv(js:nrzt:ns)))
      itheta(js,:nznt) =  bsubsv(js,:nznt,0) - ohs*(bsubv(js+1,:nznt,0) - bsubv(js,:nznt,0))
      izeta(js,:nznt)  = -bsubsu(js,:nznt,0) + ohs*(bsubu(js+1,:nznt,0) - bsubu(js,:nznt,0))
      itheta(js,:nznt) = itheta(js,:nznt)/mu0
      izeta(js,:nznt)  = izeta(js,:nznt)/mu0
-     sqrtg(:) = p5*(gsqrt(js,:) + gsqrt(js+1,:))
-     bsupu1(:nznt) = p5*(bsupu(js+1,:nznt)*gsqrt(js+1,:) + bsupu(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
-     bsupv1(:nznt) = p5*(bsupv(js+1,:nznt)*gsqrt(js+1,:) + bsupv(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
-     bsubu1(:nznt) = p5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))
-     bsubv1(:nznt) = p5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))
+     sqrtg(:) = cp5*(gsqrt(js,:) + gsqrt(js+1,:))
+     bsupu1(:nznt) = cp5*(bsupu(js+1,:nznt)*gsqrt(js+1,:) + bsupu(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
+     bsupv1(:nznt) = cp5*(bsupv(js+1,:nznt)*gsqrt(js+1,:) + bsupv(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
+     bsubu1(:nznt) = cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))
+     bsubv1(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))
      jxb(:nznt) = ovp*(itheta(js,:nznt) * bsupv1(:nznt) - izeta (js,:nznt) * bsupu1(:nznt))
      bdotk(js,:nznt) = itheta(js,:nznt) * bsubu1(:nznt) + izeta (js,:nznt) * bsubv1(:nznt)
      pprime(:nznt) = ovp*pprime(:nznt)
@@ -524,7 +523,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
      jdotb(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)*wint(2:nrzt:ns))
      bdotb(js) = dnorm1*tjnorm*SUM(sqgb2(:nznt)*wint(2:nrzt:ns))
 
-     bdotgradv(js) = p5*dnorm1*tjnorm*(phip(js) + phip(js+1))
+     bdotgradv(js) = cp5*dnorm1*tjnorm*(phip(js) + phip(js+1))
      jpar2(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)**2*wint(2:nrzt:ns)/sqgb2(:nznt))
      jperp2(js)= dnorm1*tjnorm*SUM(kp2(:nznt)*wint(2:nrzt:ns)*sqrtg(:nznt))
 
@@ -553,17 +552,17 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu,        &
   END DO
 
   ! Need in wrout
-  izeta(1,:nznt) = two*izeta(2,:nznt) - izeta(3,:nznt)
+  izeta(1,:nznt) = c2p0*izeta(2,:nznt) - izeta(3,:nznt)
 
   ! Need in wrout
-  izeta(ns,:nznt)= two*izeta(ns-1,:nznt) - izeta(ns-2,:nznt)
+  izeta(ns,:nznt)= c2p0*izeta(ns-1,:nznt) - izeta(ns-2,:nznt)
 
-  jdotb(1) = two*jdotb(2) - jdotb(3)
-  jdotb(ns) = two*jdotb(ns-1) - jdotb(ns-2)
-  bdotb(1) = two*bdotb(3) - bdotb(2)
-  bdotb(ns) = two*bdotb(ns-1) - bdotb(ns-2)
-  bdotgradv(1) = two*bdotgradv(2) - bdotgradv(3)
-  bdotgradv(ns) = two*bdotgradv(ns-1) - bdotgradv(ns-2)
+  jdotb(1) = c2p0*jdotb(2) - jdotb(3)
+  jdotb(ns) = c2p0*jdotb(ns-1) - jdotb(ns-2)
+  bdotb(1) = c2p0*bdotb(3) - bdotb(2)
+  bdotb(ns) = c2p0*bdotb(ns-1) - bdotb(ns-2)
+  bdotgradv(1) = c2p0*bdotgradv(2) - bdotgradv(3)
+  bdotgradv(ns) = c2p0*bdotgradv(ns-1) - bdotgradv(ns-2)
   jpar2(1)   = 0; jpar2(ns)  = 0; jperp2(1)  = 0; jperp2(ns) = 0
   pprim(1) = 2*pprim(ns-1) - pprim(ns-2)
   pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)

@@ -16,16 +16,14 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE realspace, ONLY: wint
   USE stel_kinds, ONLY: dp
 
+  use dbgout
+
   implicit none
 
   REAL(dp), INTENT(in) :: bsubu(1:nrzt)
   REAL(dp), INTENT(in) :: bsubv(1:nrzt)
 
   INTEGER  :: js
-
-  character(len=255) :: dump_filename
-  logical            :: dump_calc_fbal = .false.
-
 
   ! compute flux-surface averages of covariant magnetic field components
   DO js = 2, ns

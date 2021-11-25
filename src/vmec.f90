@@ -21,6 +21,8 @@ subroutine vmec
   use mgrid_mod, only: free_mgrid
   use xstuff, only: xc, scalxc
 
+  use dbgout
+
   IMPLICIT NONE
 
   CHARACTER(LEN=*), PARAMETER :: bad_jacobian = "The jacobian was non-definite!"
@@ -42,10 +44,6 @@ subroutine vmec
   INTEGER :: jacob_off
 
   integer :: i, js
-
-  character(len=255) :: dump_filename
-  logical            :: dump_multigrid_result = .false.
-
 
   ! Read in command-line arguments to get input file or sequence file,
   ! screen display information, and restart information

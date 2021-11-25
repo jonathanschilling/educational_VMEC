@@ -17,14 +17,15 @@ SUBROUTINE bcovar (lu, lv)
                bsq => bzmn_o, phipog => brmn_o
   USE xstuff, ONLY: xc
   USE fbal
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lu
   REAL(rprec), DIMENSION(nrzt,0:1), INTENT(inout) :: lv
 
   ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1) (STORED IN VMEC_PARAMS)
-
-  REAL(rprec), PARAMETER :: c1p5 = (one + p5)
 
   INTEGER :: l, js, ndim, lk, ku, m, n, rzl
   REAL(rprec) :: r2, volume, curpol_temp
@@ -35,17 +36,6 @@ SUBROUTINE bcovar (lu, lv)
 
   REAL(rprec), POINTER, DIMENSION(:) :: luu, luv, lvv, tau
   REAL(rprec), DIMENSION(:), POINTER :: bsupu, bsubuh, bsupv, bsubvh, r12sq
-
-  character(len=255) :: dump_filename
-  logical            :: dump_metric          = .false.
-  logical            :: dump_volume          = .false.
-  logical            :: dump_bcontrav        = .false.
-  logical            :: dump_bcov            = .false.
-  logical            :: dump_lambda_forces   = .false.
-  logical            :: dump_bcov_full       = .false.
-  logical            :: dump_precondn        = .false.
-  logical            :: dump_forceNorms_tcon = .false.
-  logical            :: dump_lulv_comb       = .false.
 
   ndim = 1+nrzt ! what is hidden at the end of these vectors? probably leftover from reconstruction stuff...
 

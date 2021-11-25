@@ -12,6 +12,8 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   USE vmec_params, ONLY: rss, zcs, rsc, zcc, meven, modd, ntmax
   USE xstuff
 
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcr
@@ -28,13 +30,6 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   INTEGER :: jedge, j, n, m, i
   INTEGER :: delIter
   REAL(rprec) :: r1
-
-  character(len=255) :: dump_filename
-  logical            :: dump_physical_gc = .false.
-  logical            :: dump_fsq         = .false.
-  logical            :: dump_scale_m1    = .false.
-  logical            :: dump_scalfor_out = .false.
-  logical            :: dump_fsq1        = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)

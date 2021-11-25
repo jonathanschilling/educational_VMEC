@@ -32,8 +32,6 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   REAL(rprec), DIMENSION(nrzt), INTENT(out) :: tau
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(in) :: rzl_array
 
-  REAL(rprec), PARAMETER :: c1p5=1.5_dp
-
   INTEGER :: i, icount, itheta, js, l, loff,                       &
      lpi, lt, n, n1, noff,                          &
      iv, iu, lk, nplanes

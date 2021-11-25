@@ -12,19 +12,15 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   USE vmec_main
   USE realspace, ONLY: wint, guu, guv, chip
 
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nrzt), INTENT(in)    :: overg
   REAL(rprec), DIMENSION(nrzt), INTENT(inout) :: bsupu, bsupv
 
-  REAL(rprec), PARAMETER :: p5=0.5_dp, c1p5=1.5_dp
-  REAL(rprec), PARAMETER :: iotaped = 0.10
-
   INTEGER :: js, l, ku, lk
   REAL(rprec) :: top, bot
-
-  character(len=255) :: dump_filename
-  logical            :: dump_add_fluxes = .false.
 
   ! I think this is the "zero-current algorithm" published in section 2.3 of
   ! Hirshman, Hogan, "ORMEC: A Three-Dimensional MHD Spectral Inverse Equilibrium Code" (1986), J. Comp. Phys. 63 (2), 329-352
@@ -67,10 +63,10 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   chipf(ns)    = 2*chips(ns)-chips(ns1)
 
   ! Do not compute iota too near origin
-  iotaf(1)  = c1p5*iotas(2) - p5*iotas(3)     !zero gradient near axis
-  iotaf(ns) = c1p5*iotas(ns) - p5*iotas(ns-1)
+  iotaf(1)  = c1p5*iotas(2) - cp5*iotas(3)     !zero gradient near axis
+  iotaf(ns) = c1p5*iotas(ns) - cp5*iotas(ns-1)
   DO js = 2, ns-1
-     iotaf(js) = p5*(iotas(js) + iotas(js+1))
+     iotaf(js) = cp5*(iotas(js) + iotas(js+1))
   END DO
 
   ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.

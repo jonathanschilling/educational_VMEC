@@ -76,5 +76,6 @@ list (APPEND vmec_sources
 	${CMAKE_CURRENT_SOURCE_DIR}/tomnsp.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/tomnsp_con.f90
 	${CMAKE_CURRENT_SOURCE_DIR}/totzsp.f90
+	${CMAKE_CURRENT_SOURCE_DIR}/dbgout.f90
 )
 set (vmec_sources "${vmec_sources}" PARENT_SCOPE)

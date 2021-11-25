@@ -11,6 +11,9 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   USE vmec_main
   USE vmec_params, ONLY: nscale, signgs
   USE realspace, ONLY: sqrts
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,nzeta,ntheta3,0:1), INTENT(in) :: r1, z1
@@ -27,9 +30,6 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   REAL(rprec) :: rlim, zlim
   REAL(rprec) :: rmax, rmin, zmax, zmin, dzeta
   REAL(rprec) :: ds, mintau, mintemp
-
-  character(len=255) :: dump_filename
-  logical            :: dump_guess_axis = .false.
 
   ! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS
   ! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID

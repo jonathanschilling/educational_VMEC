@@ -82,8 +82,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   REAL(rprec), DIMENSION(mnmax,ns,3*MAX(ntmax/2,1)), INTENT(inout), TARGET :: rzl_array, gc_array
   REAL(rprec), DIMENSION(ns,nznt), INTENT(inout) :: bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu
 
-  REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
-
   REAL(rprec) :: qfact(ns)
 
   CHARACTER(LEN=*), PARAMETER, DIMENSION(1) :: &

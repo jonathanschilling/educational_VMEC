@@ -41,6 +41,7 @@ endif ()
 
 set (vmec_sources "")
 add_subdirectory(src)
+add_subdirectory(json-fortran)
 
 add_library (vmec STATIC ${vmec_sources})
 set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)

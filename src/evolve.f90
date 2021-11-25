@@ -14,6 +14,8 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
                          norm_term_flag
   USE xstuff
 
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), intent(in) :: time_step
@@ -23,9 +25,6 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   integer :: i
   CHARACTER(LEN=*), PARAMETER :: fcn_message = "External calls to FUNCT3D: "
   REAL(rprec) :: fsq1, dtau, b1, fac
-
-  character(len=255) :: dump_filename
-  logical            :: dump_evolve = .false.
 
   ! COMPUTE MHD FORCES
   CALL funct3d (ier_flag)

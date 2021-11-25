@@ -18,6 +18,8 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   USE vmec_params
   USE vmec_dim, ONLY: ns
 
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: iflag
@@ -26,16 +28,12 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec), DIMENSION(ns), INTENT(in) :: cx
 
   REAL(rprec), PARAMETER :: ftol_edge = 1.e-9_dp
-  REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
   REAL(rprec), PARAMETER :: fac=0.25_dp
   REAL(rprec), PARAMETER :: edge_pedestal= 0.05_dp
   INTEGER :: m , mp, n, js, jmax
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE :: ax, bx, dx
   REAL(rprec) :: mult_fac
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
-
-  character(len=255) :: dump_filename
-  logical            :: dump_scalfor = .false.
 
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
 

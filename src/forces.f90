@@ -14,6 +14,9 @@ SUBROUTINE forces
                azmn_e => azmn_e, armn_e => armn_e, &
                  lv_e => crmn_e,   lu_e => czmn_e,   lu_o => czmn_o, &
                crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: p25 = p5*p5
@@ -25,9 +28,6 @@ SUBROUTINE forces
   REAL(rprec), DIMENSION(:), POINTER :: gvvs
   REAL(rprec), DIMENSION(:), POINTER :: guvs
   REAL(rprec), DIMENSION(:), POINTER :: guus
-
-  character(len=255) :: dump_filename
-  logical            :: dump_forces = .false.
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)

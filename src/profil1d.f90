@@ -10,18 +10,16 @@ SUBROUTINE profil1d()
   USE vmec_main
   USE vmec_params, ONLY: signgs, lamscale, rcc, pdamp
   USE realspace, ONLY: shalf, sqrts
-  IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: c1p5 = 1.5_dp
+  use dbgout
+
+  IMPLICIT NONE
 
   INTEGER :: i
   REAL(rprec) :: Itor, si, tf, pedge, vpnorm, torflux_edge, polflux_edge
 
   REAL(rprec), EXTERNAL :: pcurr, pmass, piota, &
                            torflux, torflux_deriv, polflux, polflux_deriv
-
-  character(len=255) :: dump_filename
-  logical, parameter :: dump_profil1d = .false.
 
   ! COMPUTE PHIP, IOTA PROFILES ON FULL-GRID
   ! COMPUTE MASS PROFILE ON HALF-GRID BY READING INPUT COEFFICIENTS.

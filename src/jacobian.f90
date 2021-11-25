@@ -11,16 +11,15 @@ SUBROUTINE jacobian
   USE vmec_dim, ONLY: ns, ntheta3
   USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e, &
                rs => bzmn_e, zs => brmn_e, tau => azmn_o
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: zero=0, p5=0.5_dp, p25=p5*p5
 
   INTEGER :: l, js, ku, lk
   REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns)
-
-  character(len=255) :: dump_filename
-  logical            :: dump_jacobian = .false.
-
 
   ! (RS, ZS)=(R, Z) SUB S, (RU12, ZU12)=(R, Z) SUB THETA(=U)
   ! AND TAU=SQRT(G)/R ARE DIFFERENCED ON HALF MESH

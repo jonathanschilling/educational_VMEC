@@ -8,6 +8,8 @@ SUBROUTINE fixaray
   USE vmec_main, p5 => cp5
   USE vmec_params, ONLY: jmin2, mscale, nscale, mnyq, nnyq, signgs
 
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: two=2
@@ -17,10 +19,6 @@ SUBROUTINE fixaray
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
   REAL(rprec):: argi, arg, argj, dnorm
-
-  logical, parameter :: dump_fixaray = .false.
-  logical, parameter :: dump_spectral_constraint = .false.
-
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT

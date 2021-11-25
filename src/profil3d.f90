@@ -11,6 +11,9 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   USE vmec_params
   USE realspace
   USE xstuff
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) ::  rmn, zmn
@@ -20,9 +23,6 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   REAL(rprec), DIMENSION(0:ntor,ntmax) :: rold, zold
   REAL(rprec) :: sm0, t1, facj, si, rax1, zax1
   INTEGER :: jcount, jk, k
-
-  character(len=255) :: dump_filename
-  logical, parameter :: dump_profil3d = .false.
 
   ! expant to full surface grid
   DO js = 1, ns

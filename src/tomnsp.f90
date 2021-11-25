@@ -21,6 +21,9 @@ SUBROUTINE tomnsps(frzl_array,       &
                    arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(out) :: frzl_array
@@ -32,9 +35,6 @@ SUBROUTINE tomnsps(frzl_array,       &
   REAL(rprec), DIMENSION(:,:,:), POINTER :: frcc, frss, fzcs, fzsc, flcs, flsc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: work1
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: tempr, tempz
-
-  character(len=255) :: dump_filename
-  logical            :: dump_tomnsps = .false.
 
   frcc => frzl_array(:,:,:,rcc)               !!COS(mu) COS(nv)
   fzsc => frzl_array(:,:,:,zsc+ntmax)         !!SIN(mu) COS(nv)
@@ -211,6 +211,9 @@ SUBROUTINE tomnspa(frzl_array,       &
                    arcon, azcon       )
   USE vmec_main
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(inout) :: frzl_array
@@ -222,9 +225,6 @@ SUBROUTINE tomnspa(frzl_array,       &
   REAL(rprec), DIMENSION(:,:,:), POINTER :: frcs, frsc, fzcc, fzss, flcc, flss
   REAL(rprec), DIMENSION(:), ALLOCATABLE   :: temp1, temp3
   REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: work1
-
-  character(len=255) :: dump_filename
-  logical            :: dump_tomnspa = .false.
 
   frsc => frzl_array(:,:,:,rsc)               !!R-SIN(mu) COS(nv)
   fzcc => frzl_array(:,:,:,zcc+ntmax)         !!Z-COS(mu) COS(nv)

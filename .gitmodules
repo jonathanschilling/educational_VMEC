@@ -1,0 +1,3 @@
+[submodule "json-fortran"]
+	path = json-fortran
+	url = git@github.com:jonathanschilling/json-fortran.git

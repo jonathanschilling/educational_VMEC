@@ -10,6 +10,9 @@
   USE vmec_params
   USE mgrid_mod, ONLY: nextcur, curlabel, read_mgrid, &
                        nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb
+
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, INTENT(inout) :: ier_flag
@@ -20,9 +23,6 @@
   REAL(rprec) :: rtest, ztest, tzc, trc, delta
   REAL(rprec), ALLOCATABLE :: temp(:)
   CHARACTER(LEN=100) :: line, line2
-
-  ! dump rbcc, ... into 'input_coeffs.dat' and stop
-  logical :: dump_input_coeffs = .false.
 
   ier_flag_init = ier_flag
   ier_flag      = norm_term_flag

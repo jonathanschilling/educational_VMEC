@@ -171,40 +171,26 @@ subroutine vmec
            ! Now dump the current state vector for debugging.
            if (dump_multigrid_result) then
              write(dump_filename, 999) nsval, iter2-1, trim(input_extension)
-999 format('multigrid_result_',i5.5,'_',i6.6,'.',a)
+999 format('multigrid_result_',i5.5,'_',i6.6,'.',a,'.json')
 
-             open(unit=42, file=trim(dump_filename), status="unknown")
+             call open_dbg_out(dump_filename)
 
-             ! resolution and number of iterations at which this converged
-             write(42,*) "# ns iter2 ncurr phiedge ntmax"
-             write(42,*) nsval, iter2-1, ncurr, phiedge, ntmax
+             call add_int("ns", nsval)
+             call add_int("iter2", iter2)
+             call add_int("ncurr", ncurr)
+             call add_real("phiedge", phiedge)
+             call add_int("ntmax", ntmax)
 
-             write(42,*) "# js pres"
-             do js=2, ns
-               write(42,*) js, pres(js)
-             end do
+             call add_real_1d("pres", ns-1, pres(2:ns))
+             call add_real_1d("iotas", ns-1, iotas(2:ns))
+             call add_real_1d("chips", ns-1, chips(2:ns))
 
-             if (ncurr.eq.1) then
-               ! constrained-current; dump iota
-               write(42,*) "# js iotas"
-               do js=2, ns
-                 write(42,*) js, iotas(js)
-               end do
-             else
-               ! constrained rotational transform; dump chi-prime
-               write(42,*) "# js chips"
-               do js=2, ns
-                 write(42,*) js, chips(js)
-               end do
-             end if
+             call add_real_5d("xc",     ns, ntor1, mpol, ntmax, 2, &
+                     reshape(xc,     (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+             call add_real_5d("scalxc", ns, ntor1, mpol, ntmax, 2, &
+                     reshape(scalxc, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
 
-             write(42,*) "# i xc scalxc"
-             do i=1, neqs
-               write(42,*) i, xc(i), scalxc(i)
-             end do
-
-             close(42)
-             print *, "dumped current multi-grid result to '"//trim(dump_filename)//"'"
+             call close_dbg_out()
            end if
 
         END DO ITERATIONS

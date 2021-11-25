@@ -247,12 +247,12 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("scalxc", ns, ntor+1, mpol, scalxc(:irzloff))
+    call add_real_3d("scalxc", ns, ntor1, mpol, scalxc(:irzloff))
 
-    call add_real_4d("rmn", ntmax, ns, ntor+1, mpol, &
-            reshape(rmn, (/ ntmax, ns, ntor+1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("zmn", ntmax, ns, ntor+1, mpol, &
-            reshape(zmn, (/ ntmax, ns, ntor+1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("rmn", ntmax, ns, ntor1, mpol, &
+            reshape(rmn, (/ ntmax, ns, ntor1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("zmn", ntmax, ns, ntor1, mpol, &
+            reshape(zmn, (/ ntmax, ns, ntor1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
 
     call close_dbg_out()
   end if

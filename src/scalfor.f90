@@ -109,44 +109,28 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! END IF
 
   ! check scalfor state == inputs to tridslv
-  if (dump_scalfor .and. iter2.le.2) then
+  if (dump_scalfor .and. iter2.le.max_dump) then
 
     ! prior knowledge about how this is called:
     ! iflag=0 --> R
     ! iflag=1 --> Z
-
     if (iflag.eq.0) then
       write(dump_filename, 995) ns, iter2, trim(input_extension)
+995 format('scalfor_R_',i5.5,'_',i6.6,'.',a,'.json')
     elseif (iflag.eq.1) then
       write(dump_filename, 996) ns, iter2, trim(input_extension)
+996 format('scalfor_Z_',i5.5,'_',i6.6,'.',a,'.json')
+    else
+      stop "unknown iflag in dump_scalfor"
     end if
-995 format('scalfor_R_',i5.5,'_',i6.6,'.',a)
-996 format('scalfor_Z_',i5.5,'_',i6.6,'.',a)
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# ns ntor mpol1"
-    write(42, *) ns, ntor, mpol1
+    call add_real_3d("ax", ns, ntor1, mpol, ax)
+    call add_real_3d("bx", ns, ntor1, mpol, bx)
+    call add_real_3d("dx", ns, ntor1, mpol, dx)
 
-    write(42, *) "# j n m ax dx bx"
-    do js=1, ns
-      do n=0, ntor
-        do m=0, mpol1
-          write(42, *) js, n, m, &
-            ax(js, n, m), &
-            dx(js, n, m), &
-            bx(js, n, m)
-        end do
-      end do
-    end do
-
-    print *, "dumped scalfor state to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     ! should only stop after also Z has been dumped
-!     if (iflag.eq.1) then
-!       stop
-!     end if
+    call close_dbg_out()
   end if
 
   ! SOLVES AX(I)*X(I+1) + DX(I)*X(I) + BX(I)*X(I-1) = GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)

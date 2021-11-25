@@ -146,47 +146,27 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
-  if (dump_tomnsps .and. iter2.le.2) then
-      write(dump_filename, 999) ns, iter2, trim(input_extension)
-999 format('tomnsps_',i5.5,'_',i6.6,'.',a)
-      open(unit=42, file=trim(dump_filename), status="unknown")
+  if (dump_tomnsps .and. iter2.le.max_dump) then
+    write(dump_filename, 999) ns, iter2, trim(input_extension)
+999 format('tomnsps_',i5.5,'_',i6.6,'.',a,'.json')
 
-      write(42, *) "# ns ntor mpol1"
-      write(42, *) ns, ntor, mpol1
+    call open_dbg_out(dump_filename)
 
-      if (lthreed) then
-        write(42, *) "# js n m frcc frss fzsc fzcs flsc flcs"
-        DO js = 1, ns
-          do n=0, ntor
-            ni = n+ioff
-            do m=0, mpol1
-              mj = m+joff
-              write(42, *) js, n, m, &
-                frcc(js,ni,mj), frss(js,ni,mj), &
-                fzsc(js,ni,mj), fzcs(js,ni,mj), &
-                flsc(js,ni,mj), flcs(js,ni,mj)
-            end do
-          end do
-        end do
-      else ! lthreed
-        write(42, *) "# js n m frcc fzsc flsc"
-        DO js = 1, ns
-          do n=0, ntor
-            ni = n+ioff
-            do m=0, mpol1
-              mj = m+joff
-              write(42, *) js, n, m, &
-                frcc(js,ni,mj), fzsc(js,ni,mj), flsc(js,ni,mj)
-            end do
-          end do
-        end do
+    call add_real_3d("frcc", ns, ntor1, mpol, frcc)
+    call add_real_3d("fzsc", ns, ntor1, mpol, fzsc)
+    call add_real_3d("flsc", ns, ntor1, mpol, flsc)
 
-      end if ! lthreed
+    if (lthreed) then
+      call add_real_3d("frss", ns, ntor1, mpol, frss)
+      call add_real_3d("fzcs", ns, ntor1, mpol, fzcs)
+      call add_real_3d("flcs", ns, ntor1, mpol, flcs)
+    else
+      call add_null_3d("frss")
+      call add_null_3d("fzcs")
+      call add_null_3d("flcs")
+    end if
 
-      close(42)
-
-      print *, "dumped tomnsps output to '"//trim(dump_filename)//"'"
-!       stop
+    call close_dbg_out()
   end if
 
 END SUBROUTINE tomnsps
@@ -318,47 +298,27 @@ SUBROUTINE tomnspa(frzl_array,       &
 
   DEALLOCATE (work1, temp1, temp3)
 
-  if (dump_tomnspa .and. iter2.le.2) then
-      write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('tomnspa_',i5.5,'_',i6.6,'.',a)
-      open(unit=42, file=trim(dump_filename), status="unknown")
+  if (dump_tomnspa .and. iter2.le.max_dump) then
+    write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('tomnspa_',i5.5,'_',i6.6,'.',a,'.json')
 
-      write(42, *) "# ns ntor mpol1"
-      write(42, *) ns, ntor, mpol1
+    call open_dbg_out(dump_filename)
 
-      if (lthreed) then
-        write(42, *) "# js n m frsc frcs fzcc fzss flcc flss"
-        DO js = 1, ns
-          do n=0, ntor
-            ni = n+ioff
-            do m=0, mpol1
-              mj = m+joff
-              write(42, *) js, n, m, &
-                frsc(js,ni,mj), frcs(js,ni,mj), &
-                fzcc(js,ni,mj), fzss(js,ni,mj), &
-                flcc(js,ni,mj), flss(js,ni,mj)
-            end do
-          end do
-        end do
-      else ! lthreed
-        write(42, *) "# js n m frsc fzcc flcc"
-        DO js = 1, ns
-          do n=0, ntor
-            ni = n+ioff
-            do m=0, mpol1
-              mj = m+joff
-              write(42, *) js, n, m, &
-                frsc(js,ni,mj), fzcc(js,ni,mj), flcc(js,ni,mj)
-            end do
-          end do
-        end do
+    call add_real_3d("frsc", ns, ntor1, mpol, frsc)
+    call add_real_3d("fzcc", ns, ntor1, mpol, fzcc)
+    call add_real_3d("flcc", ns, ntor1, mpol, flcc)
 
-      end if ! lthreed
+    if (lthreed) then
+      call add_real_3d("frcs", ns, ntor1, mpol, frcs)
+      call add_real_3d("fzss", ns, ntor1, mpol, fzss)
+      call add_real_3d("flss", ns, ntor1, mpol, flss)
+    else
+      call add_null_3d("frcs")
+      call add_null_3d("fzss")
+      call add_null_3d("flss")
+    end if
 
-      close(42)
-
-      print *, "dumped tomnspa output to '"//trim(dump_filename)//"'"
-!       stop
+    call close_dbg_out()
   end if
 
 END SUBROUTINE tomnspa

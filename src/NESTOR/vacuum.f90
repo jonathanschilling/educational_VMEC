@@ -156,14 +156,11 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 
    if (dump_bsqvac) then
     write(dump_filename, 999) icall, trim(input_extension)
-999 format('bsqvac_vac1_',i5.5,'.',a)
-    open(unit=42, file=trim(dump_filename), status="unknown")
+999 format('bsqvac_vac1_',i5.5,'.',a,'.json')
 
-    do i = 1,nuv2
-      write(42,*) i, bsqvac(i)
-    end do
-
-    close(42)
+    call open_dbg_out(dump_filename)
+    call add_real_2d("bsqvac", nv, nu3, bsqvac)
+    call close_dbg_out()
   end if
 
   icall = icall + 1

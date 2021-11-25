@@ -50,7 +50,7 @@ They were alternatively compiled in via the preprocessor flag `_HBANGLE`.
 
 By default, the `_HBANGLE` preprocessor flag is not active and thus, the "old" `m=1` constraint is active.
 
-This version of VMEC has most, if not all, of its preprocessor flags explicitly expanded.
+This version of VMEC has all preprocessor flags already expanded.
 It became clear that it is nevertheless useful to have at least a vague idea of what parts of the code are related to the angle constraint.
 Therefore, those parts of VMEC related to the `m=1`constraint are marked to start with 
 
@@ -64,3 +64,6 @@ and end with
 ```Fortran
 ! #end /* ndef _HBANGLE */
 ```
+
+Note that the [original documentation](https://github.com/jonathanschilling/educational_VMEC/blob/master/vmec_info.md) states:
+> THE POLOIDAL ANGLE IS DETERMINED BY MINIMIZING <M> = m\*\*2 S(m) , WHERE S(m) = Rm\*\*2 + Zm\*\*2 .

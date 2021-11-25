@@ -156,6 +156,10 @@ SUBROUTINE eqsolve(ier_flag)
         ! quite some iterations and quite large forces
         ! --> restart with different timestep
 
+        ! TODO: maybe the threshold 0.01 is too large nowadays
+        ! --> this could help fix the cases where VMEC gets stuck immediately at ~2e-3
+        ! --> lower threshold, e.g. 1e-4 ?
+
         first = 3
      ENDIF
 
@@ -182,11 +186,11 @@ SUBROUTINE eqsolve(ier_flag)
      ! ivac gets set to 1 in vacuum() of NESTOR
      IF (ivac .eq. 1) THEN
         ! vacuum pressure turned on at iter2 iterations (here)
-        ! this makes ivac=1 --> ivac=2
         PRINT 110, iter2
         WRITE (nthreed, 110) iter2
 110 FORMAT(/,2x,'VACUUM PRESSURE TURNED ON AT ',i4,' ITERATIONS'/)
 
+        ! this makes ivac=1 --> ivac=2
         ivac = ivac + 1
      ENDIF
 

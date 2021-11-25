@@ -29,7 +29,7 @@ SUBROUTINE funct3d (ier_flag)
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
-  REAL(dp) :: presf_ns, delt0
+  REAL(dp) :: presf_ns, delt0, fsqrz, old_fsqz, diff
   REAL(dp), EXTERNAL :: pmass
 
   CHARACTER(LEN=255) :: vac_file
@@ -443,13 +443,15 @@ SUBROUTINE funct3d (ier_flag)
 
      ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
      gc     = gc     * scalxc    !!IS THIS CORRECT: SPH010214?
-     CALL residue(gc, gc(1+irzloff), gc(1+2*irzloff))
-
      gc_con = gc_con * scalxc
-     call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
-
      gc_mhd = gc - gc_con
-     call residue_mhd(gc_mhd, gc_mhd(1+irzloff), gc_mhd(1+2*irzloff))
+
+     fsqrz = fsqr + fsqz
+     old_fsqz = fsqz
+
+     CALL residue    (gc,     gc(1+irzloff),     gc(1+2*irzloff),     fsqrz, old_fsqz)
+     call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
+     call residue_mhd(gc_mhd, gc_mhd(1+irzloff), gc_mhd(1+2*irzloff), fsqrz, old_fsqz)
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then
          ! first iteration and gigantic force residuals --> what is going one here?

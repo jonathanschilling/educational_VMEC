@@ -6,7 +6,7 @@
 !> @param gcr \f$R\f$-component of forces
 !> @param gcz \f$Z\f$-component of forces
 !> @param gcl \f$\lambda\f$-component of forces
-SUBROUTINE residue (gcr, gcz, gcl)
+SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 
   USE vmec_main, p5 => cp5
   USE vmec_params, ONLY: rss, zcs, rsc, zcc, meven, modd, ntmax
@@ -17,6 +17,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcr
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcz
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcl
+  real(rprec), intent(in) :: fsqrz, old_fsqz
 
   INTEGER, PARAMETER :: n0=0
   INTEGER, PARAMETER :: m0=0
@@ -51,8 +52,8 @@ SUBROUTINE residue (gcr, gcz, gcl)
   ! THIS IMPLIES THE CONSTRAINT
   !    3D ONLY : GC(zcs) = 0;
   !    ASYM:     GC(zcc) = 0
-  IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs))
-  IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
+  IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs), old_fsqz)
+  IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc), old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump physical forces
@@ -94,7 +95,7 @@ SUBROUTINE residue (gcr, gcz, gcl)
   delIter = iter2-iter1
 
   ! Coding for VMEC2000 run stand-alone
-  IF (delIter.lt.50 .and. (fsqr+fsqz).lt.1.E-6_dp) then
+  IF (delIter.lt.50 .and. fsqrz.lt.1.E-6_dp) then
      ! include edge contribution only if converged well enough fast enough (?)
 !      print *, "include edge force in residue"
      jedge = 1
@@ -233,13 +234,14 @@ END SUBROUTINE residue
 !>
 !> @param gcr \f$R\f$-component of forces
 !> @param gcz \f$Z\f$-component of forces
-SUBROUTINE constrain_m1(gcr, gcz)
+SUBROUTINE constrain_m1(gcr, gcz, old_fsqz)
 
   USE vmec_main, p5 => cp5
 
   IMPLICIT NONE
 
   REAL(dp), DIMENSION(ns,0:ntor), INTENT(inout) :: gcr, gcz
+  real(dp), intent(in) :: old_fsqz
 
   REAL(dp), PARAMETER :: FThreshold = 1.E-6_dp
   REAL(dp) :: temp(ns,0:ntor)
@@ -254,8 +256,8 @@ SUBROUTINE constrain_m1(gcr, gcz)
   END IF
 
   !v8.50: ADD iter2<2 so reset=<WOUT_FILE> works
-  IF (fsqz.LT.FThreshold .OR. iter2.LT.2) then
-!     write(*,*) "zero z-force in constrain_m1"
+  IF (old_fsqz.LT.FThreshold .OR. iter2.LT.2) then
+     !write(*,*) "zero z-force in constrain_m1"
 
      ! ensure that the m=1 constraint is satisfied exactly
      ! --> the corresponding m=1 coeffs of R,Z are constrained to be zero

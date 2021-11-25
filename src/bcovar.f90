@@ -114,48 +114,29 @@ SUBROUTINE bcovar (lu, lv)
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
   ! check metric coefficients
-  if (dump_metric .and. iter2.le.2) then
+  if (dump_metric .and. iter2.le.max_dump) then
       write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('metric_',i5.5,'_',i6.6,'.',a)
-      open(unit=42, file=trim(dump_filename), status="unknown")
+998 format('metric_',i5.5,'_',i6.6,'.',a,'.json')
 
-      write(42, *) "# ns ntheta3 nzeta"
-      write(42, *) ns, ntheta3, nzeta
+      call open_dbg_out(trim(dump_filename))
+
+      call add_real_3d("guu", ns, nzeta, ntheta3, &
+              reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("gvv", ns, nzeta, ntheta3, &
+              reshape(gvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("r12sq", ns, nzeta, ntheta3, &
+              reshape(r12sq, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("gsqrt", ns, nzeta, ntheta3, &
+              reshape(gsqrt, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
       if (lthreed) then
-         write(42, *) "# js ku lv guu r12sq guv gvv gsqrt"
-         l = 1
-         DO ku = 1, ntheta3
-          DO lk = 1, nzeta
-            DO js = 1, ns
-                !l = ((ku-1)*nzeta+(lk-1))*ns+js
-                if (js .gt. 1) then
-                 write (42, *) js, ku, lk, &
-                               guu(l), r12sq(l), guv(l), &
-                               gvv(l), gsqrt(l)
-                end if
-                l = l+1
-             end do
-           end do
-         end do
+        call add_real_3d("guv", ns, nzeta, ntheta3, &
+                reshape(guv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
       else
-         write(42, *) "# js ku lv guu r12sq gvv gsqrt"
-         DO js = 2, ns
-           DO ku = 1, ntheta3
-             DO lk = 1, nzeta
-                 l = ((ku-1)*nzeta+(lk-1))*ns+js
-                 write (42, *) js, ku, lk, &
-                               guu(l), r12sq(l), &
-                               gvv(l), gsqrt(l)
-             end do
-           end do
-         end do
+        call add_none_3d("guv")
       end if
 
-      close(42)
-
-      print *, "dumped metric elements output to '"//trim(dump_filename)//"'"
-!       stop
+      call close_dbg_out()
   end if
 
   ! CATCH THIS AFTER WHERE LINE BELOW   phipog = 0
@@ -177,27 +158,16 @@ SUBROUTINE bcovar (lu, lv)
   end if
 
   ! check plasma volume computation
-  if (dump_volume .and. iter2.le.2) then
+  if (dump_volume .and. iter2.le.max_dump) then
     write(dump_filename, 997) ns, iter2, trim(input_extension)
-997 format('volume_',i5.5,'_',i6.6,'.',a)
+997 format('volume_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns"
-    write(42, *) ns
+    call add_real_1d("vp", ns-1, vp(2:ns))
+    call add_real("voli", voli)
 
-    write(42, *) "# js vp"
-    DO js = 2, ns
-      write(42,*) js, vp(js)
-    end do
-
-    write(42,*) "# voli"
-    write(42, *) voli
-
-    close(42)
-
-    print *, "dumped plasma volume to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
   ! COMPUTE CONTRA-VARIANT COMPONENTS OF B (Bsupu,v) ON RADIAL HALF-MESH TO ACCOMODATE LRFP=T CASES.
@@ -231,27 +201,16 @@ SUBROUTINE bcovar (lu, lv)
 
   if (dump_bcontrav .and.  iter2.le.2) then
     write(dump_filename, 996) ns, iter2, trim(input_extension)
-996 format('bcontrav_',i5.5,'_',i6.6,'.',a)
+996 format('bcontrav_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns nzeta ntheta3"
-    write(42, *) ns, nzeta, ntheta3
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, &
+              reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsupv", ns, nzeta, ntheta3, &
+              reshape(bsupv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    write(42, *) "# js lk ku bsupu bsupv"
-    DO js = 2, ns
-      DO lk = 1, nzeta
-        DO ku = 1, ntheta3
-          l = ((ku-1)*nzeta+(lk-1))*ns+js
-          write (42, *) js, lk, ku, bsupu(l), bsupv(l)
-        end do
-      end do
-    end do
-
-    close(42)
-
-    print *, "dumped bsup(u,v) to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
   ! UPDATE IOTA EITHER OF TWO WAYS:
@@ -295,35 +254,23 @@ SUBROUTINE bcovar (lu, lv)
 
   if (dump_bcov .and. iter2.le.2) then
     write(dump_filename, 994) ns, iter2, trim(input_extension)
-994 format('bcov_',i5.5,'_',i6.6,'.',a)
+994 format('bcov_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns nzeta ntheta3"
-    write(42, *) ns, nzeta, ntheta3
+    call add_real_3d("bsubuh", ns, nzeta, ntheta3, &
+            reshape(bsubuh, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubvh", ns, nzeta, ntheta3, &
+            reshape(bsubvh, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsq",    ns, nzeta, ntheta3, &
+               reshape(bsq, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    write(42, *) "# js lk ku bsubuh bsubvh bsq"
-    DO js = 2, ns
-      DO lk = 1, nzeta
-        DO ku = 1, ntheta3
-          l = ((ku-1)*nzeta+(lk-1))*ns+js
-          write (42, *) js, lk, ku, bsubuh(l), bsubvh(l), bsq(l)
-        end do
-      end do
-    end do
+    call add_read_1d("pres", ns, pres)
 
-    write(42, *) "# js pres"
-    DO js = 1, ns
-      write(42, *) js, pres(js)
-    end do
+    call add_real("wb", wb)
+    call add_real("wp", wp)
 
-    write(42, *) "# wb wp"
-    write(42, *) wb, wp
-
-    close(42)
-
-    print *, "dumped bsub(u,v)h to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
   ! COMPUTE LAMBDA FULL MESH FORCES
@@ -349,29 +296,22 @@ SUBROUTINE bcovar (lu, lv)
 !       lu(1,1), bsubu_e(1), bsubu_e(2)
 !   end if
 
-   if (dump_lambda_forces .and. iter2.le.2) then
+   if (dump_lambda_forces .and. iter2.le.max_dump) then
     write(dump_filename, 993) ns, iter2, trim(input_extension)
-993 format('lambda_forces_',i5.5,'_',i6.6,'.',a)
+993 format('lambda_forces_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns nzeta ntheta3"
-    write(42, *) ns, nzeta, ntheta3
+    call add_real_3d("lvv",       ns, nzeta, ntheta3, &
+                  reshape(lvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lu_even_m", ns, nzeta, ntheta3, &
+              reshape(lu(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, &
+              reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, &
+              reshape(bsubv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    write(42, *) "# js lk ku lvv lu(even-m) bsubu_e bsubv_e"
-    DO js = 1, ns
-      DO lk = 1, nzeta
-        DO ku = 1, ntheta3
-          l = ((ku-1)*nzeta+(lk-1))*ns+js
-          write (42, *) js, lk, ku, lvv(l), lu(l,0), bsubu_e(l), bsubv_e(l)
-        end do
-      end do
-    end do
-
-    close(42)
-
-    print *, "dumped lambda forces to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
   ! COMPUTE AVERAGE FORCE BALANCE AND TOROIDAL/POLOIDAL CURRENTS
@@ -418,37 +358,24 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (dump_bcov_full .and. iter2.le.2) then
+  if (dump_bcov_full .and. iter2.le.max_dump) then
     write(dump_filename, 990) ns, iter2, trim(input_extension)
-990 format('bcov_full_',i5.5,'_',i6.6,'.',a)
+990 format('bcov_full_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(trim(dump_filename))
 
-    write(42, *) "# ns nzeta ntheta3"
-    write(42, *) ns, nzeta, ntheta3
+    call add_real("rbtor0", rbtor0)
+    call add_real("rbtor",  rbtor)
+    call add_real("ctor",   ctor)
 
-    write(42, *) "# rbtor0 rbtor ctor"
-    write(42, *) rbtor0, rbtor, ctor
+    call add_real_1d("bdamp", ns, bdamp)
 
-    write(42, *) "# js bdamp"
-    DO js = 1, ns
-      write(42,*) js, bdamp(js)
-    end do
+    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, &
+              reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, &
+              reshape(bsubv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    write(42, *) "# js lk ku bsubu_e bsubv_e"
-    DO js = 1, ns
-      DO lk = 1, nzeta
-        DO ku = 1, ntheta3
-          l = ((ku-1)*nzeta+(lk-1))*ns+js
-          write (42, *) js, lk, ku, bsubu_e(l), bsubv_e(l)
-        end do
-      end do
-    end do
-
-    close(42)
-
-    print *, "dumped bsub(u,v) on full grid to '"//trim(dump_filename)//"'"
-!     stop
+    call close_dbg_out()
   end if
 
   if (iequi .eq. 0) then
@@ -474,26 +401,26 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, rru_fac, sin01)
 
        ! check preconditioner output
-       if (dump_precondn .and. iter2.le.2) then
+       if (dump_precondn .and. iter2.le.max_dump) then
          write(dump_filename, 991) ns, iter2, trim(input_extension)
-991 format('precondn_',i5.5,'_',i6.6,'.',a)
-         open(unit=42, file=trim(dump_filename), status="unknown")
+991 format('precondn_',i5.5,'_',i6.6,'.',a,'.json')
 
-         write(42, *) "# ns"
-         write(42, *) ns
+         call open_dbg_out(trim(dump_filename))
 
-         write(42, *) "# js arm ard brm brd crd rzu_fac" // &
-           " azm azd bzm bzd rru_fac"
-         DO js = 1, ns
-           write(42, *) js, &
-             arm(js,:), ard(js,:), brm(js,:), brd(js,:), crd(js), rzu_fac(js), &
-             azm(js,:), azd(js,:), bzm(js,:), bzd(js,:), rru_fac(js)
-         end do
+         call add_read_2d("arm", ns, 2, arm)
+         call add_read_2d("ard", ns, 2, ard)
+         call add_read_2d("brm", ns, 2, brm)
+         call add_read_2d("brd", ns, 2, brd)
+         call add_read_1d("crd", ns,    crd)
+         call add_read_2d("azm", ns, 2, azm)
+         call add_read_2d("azd", ns, 2, azd)
+         call add_read_2d("bzm", ns, 2, bzm)
+         call add_read_2d("bzd", ns, 2, bzd)
 
-         close(42)
+         call add_read_1d("rzu_fac", ns, rzu_fac)
+         call add_read_1d("rru_fac", ns, rru_fac)
 
-         print *, "dumped preconditioner output to '"//trim(dump_filename)//"'"
-!          stop
+         call close_dbg_out()
        end if
 
        rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
@@ -557,70 +484,32 @@ SUBROUTINE bcovar (lu, lv)
        IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (dump_forceNorms_tcon .and. iter2.le.2) then
+       if (dump_forceNorms_tcon .and. iter2.le.max_dump) then
          write(dump_filename, 989) ns, iter2, trim(input_extension)
-989 format('forceNorms_tcon_',i5.5,'_',i6.6,'.',a)
-         open(unit=42, file=trim(dump_filename), status="unknown")
+989 format('forceNorms_tcon_',i5.5,'_',i6.6,'.',a,'.json')
 
-         write(42, *) "# ns nzeta ntheta3"
-         write(42, *) ns, nzeta, ntheta3
+         call open_dbg_out(trim(dump_filename))
 
-         write(42, *) "# volume"
-         write(42, *) volume
+         call add_real("volume", volume)
+         call add_real("r2",     MAX(wb,wp)/volume)
+         call add_real("fnorm",  fnorm)
+         call add_real("fnorm1",  fnorm1)
+         call add_real("fnormL",  fnormL)
+         call add_real("tcon0",  tcon0)
+         call add_real("tcon_mul",  tcon_mul)
 
-         write(42, *) "# r2"
-         write(42, *) MAX(wb,wp)/volume
+         call add_real_1d("rzu_fac", ns, rzu_fac)
+         call add_real_1d("rru_fac", ns, rru_fac)
+         call add_real_1d("frcc_fac", ns, frcc_fac)
+         call add_real_1d("fzsc_fac", ns, fzsc_fac)
+         call add_real_1d("tcon", ns, tcon)
 
-         write(42, *) "# js ku lv guu"
-         DO js = 1, ns
-           DO ku = 1, ntheta3
-             DO lk = 1, nzeta
-                 l = ((ku-1)*nzeta+(lk-1))*ns+js
-                 write (42, *) js, ku, lk, guu(l)
-             end do
-           end do
-         end do
+         call add_real_3d("guu", ns, nzeta, ntheta3, &
+                 reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+         call add_real_5d("xc", ns, ntor, mpol1, ntmax, 2, &
+                 reshape(xc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
 
-         write(42, *) "# fnorm"
-         write(42, *) fnorm
-
-         write(42, *) "# rzl js n m rcc xc"
-         l=0
-         do rzl=1,2
-           do lk=1, ntmax
-             do m=0, mpol1
-               do n=0, ntor
-                 do js=1, ns
-                   l = l+1
-                   write(42, *) rzl, js, n, m, lk, xc(l)
-                 end do
-               end do
-             end do
-           end do
-         end do
-
-         write(42, *) "# fnorm1"
-         write(42, *) fnorm1
-
-         write(42, *) "# fnormL"
-         write(42, *) fnormL
-
-         write(42, *) "# tcon0"
-         write(42, *) tcon0
-
-         write(42, *) "# tcon_mul"
-         write(42, *) tcon_mul
-
-         write(42, *) "# js rzu_fac rru_fac frcc_fac fzsc_fac tcon"
-         DO js = 1, ns
-           write(42, *) js, rzu_fac(js), rru_fac(js), &
-             frcc_fac(js), fzsc_fac(js), tcon(js)
-         end do
-
-         close(42)
-
-         print *, "dumped force norms and tcon output to '"//trim(dump_filename)//"'"
-!          stop
+         call close_dbg_out()
        end if
 
      ENDIF ! MOD(iter2-iter1,ns4).eq.0
@@ -639,33 +528,34 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (dump_lulv_comb .and. iter2.le.2) then
+     if (dump_lulv_comb .and. iter2.le.max_dump) then
        write(dump_filename, 988) ns, iter2, trim(input_extension)
-988 format('lulv_comb_',i5.5,'_',i6.6,'.',a)
-       open(unit=42, file=trim(dump_filename), status="unknown")
+988 format('lulv_comb_',i5.5,'_',i6.6,'.',a,'.json')
 
-       write(42, *) "# ns nzeta ntheta3"
-       write(42, *) ns, nzeta, ntheta3
+       call open_dbg_out(trim(dump_filename))
 
-       write(42, *) "# js ku lv bsubu_e bsubv_e bsubu_o bsubv_o" // &
-                    " lvv guu guv gvv lv lu"
-       DO js = 1, ns
-         DO ku = 1, ntheta3
-           DO lk = 1, nzeta
-               l = ((ku-1)*nzeta+(lk-1))*ns+js
-               if (l.ge.2) then
-                 write (42, *) js, ku, lk, &
-                   bsubu_e(l), bsubv_e(l), bsubu_o(l), bsubv_o(l), &
-                   lvv(l), guu(l), guv(l), gvv(l), lv(l, 0), lu(l, 0)
-               end if
-           end do
-         end do
-       end do
+       call add_real_3d("bsubu_e", ns, nzeta, ntheta3, &
+               reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("bsubv_e", ns, nzeta, ntheta3, &
+               reshape(bsubv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("bsubu_o", ns, nzeta, ntheta3, &
+               reshape(bsubu_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("bsubv_o", ns, nzeta, ntheta3, &
+               reshape(bsubv_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("lvv", ns, nzeta, ntheta3, &
+               reshape(lvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("guu", ns, nzeta, ntheta3, &
+               reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("guv", ns, nzeta, ntheta3, &
+               reshape(guv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("gvv", ns, nzeta, ntheta3, &
+               reshape(gvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("lv_even_m", ns, nzeta, ntheta3, &
+                reshape(lv(:, 0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("lu_even_m", ns, nzeta, ntheta3, &
+                reshape(lu(:, 0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-       close(42)
-
-       print *, "dumped lu*lv combinations to '"//trim(dump_filename)//"'"
-!        stop
+       call close_dbg_out()
      end if
 
   ELSE ! (iequi .eq. 0)

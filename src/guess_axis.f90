@@ -157,13 +157,13 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
     call add_real_2d("zu12", nzeta, ntheta1, zu12)
     call add_real_2d("tau0", nzeta, ntheta1, tau0)
 
-    call add_read_1d("rcom", nzeta, rcom)
-    call add_read_1d("zcom", nzeta, zcom)
+    call add_real_1d("rcom", nzeta, rcom)
+    call add_real_1d("zcom", nzeta, zcom)
 
-    call add_read_1d("raxis_cc", ntor+1, raxis_cc)
-    call add_read_1d("zaxis_cs", ntor+1, zaxis_cs)
-    call add_read_1d("raxis_cs", ntor+1, raxis_cs)
-    call add_read_1d("zaxis_cc", ntor+1, zaxis_cc)
+    call add_real_1d("raxis_cc", ntor+1, raxis_cc)
+    call add_real_1d("zaxis_cs", ntor+1, zaxis_cs)
+    call add_real_1d("raxis_cs", ntor+1, raxis_cs)
+    call add_real_1d("zaxis_cc", ntor+1, zaxis_cc)
 
     call close_dbg_out()
   end if

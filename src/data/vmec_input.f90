@@ -4,6 +4,8 @@ MODULE vmec_input
   USE vparams, ONLY: rprec, dp, mpol1d, ntord, ndatafmax
   USE vsvd0
 
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: mpol_default = 6
@@ -120,7 +122,44 @@ MODULE vmec_input
      phiedge,       &
      lfreeb,        &
      lasym,         &
-     lbsubs
+     lbsubs,        &
+     max_dump                , &
+     dump_add_fluxes         , &
+     dump_metric             , &
+     dump_volume             , &
+     dump_bcontrav           , &
+     dump_bcov               , &
+     dump_lambda_forces      , &
+     dump_bcov_full          , &
+     dump_precondn           , &
+     dump_forceNorms_tcon    , &
+     dump_lulv_comb          , &
+     dump_calc_fbal          , &
+     dump_evolve             , &
+     dump_fixaray            , &
+     dump_spectral_constraint, &
+     dump_forces             , &
+     dump_geometry           , &
+     dump_constraint_force   , &
+     dump_guess_axis         , &
+     dump_interp             , &
+     dump_jacobian           , &
+     dump_lamcal             , &
+     dump_profil1d           , &
+     dump_profil3d           , &
+     dump_readin_boundary    , &
+     dump_physical_gc        , &
+     dump_fsq                , &
+     dump_scale_m1           , &
+     dump_scalfor_out        , &
+     dump_fsq1               , &
+     dump_scalfor            , &
+     dump_symforce           , &
+     dump_tomnsps            , &
+     dump_tomnspa            , &
+     dump_multigrid_result   , &
+     dump_bsqvac             , &
+     dump_rbsq
 
 CONTAINS
 

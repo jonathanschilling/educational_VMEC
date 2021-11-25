@@ -265,7 +265,7 @@ SUBROUTINE bcovar (lu, lv)
     call add_real_3d("bsq",    ns, nzeta, ntheta3, &
                reshape(bsq, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-    call add_read_1d("pres", ns, pres)
+    call add_real_1d("pres", ns, pres)
 
     call add_real("wb", wb)
     call add_real("wp", wp)
@@ -407,18 +407,18 @@ SUBROUTINE bcovar (lu, lv)
 
          call open_dbg_out(dump_filename)
 
-         call add_read_2d("arm", ns+1, 2, arm)
-         call add_read_2d("ard", ns+1, 2, ard)
-         call add_read_2d("brm", ns+1, 2, brm)
-         call add_read_2d("brd", ns+1, 2, brd)
-         call add_read_1d("crd", ns+1,    crd)
-         call add_read_2d("azm", ns+1, 2, azm)
-         call add_read_2d("azd", ns+1, 2, azd)
-         call add_read_2d("bzm", ns+1, 2, bzm)
-         call add_read_2d("bzd", ns+1, 2, bzd)
+         call add_real_2d("arm", ns+1, 2, arm)
+         call add_real_2d("ard", ns+1, 2, ard)
+         call add_real_2d("brm", ns+1, 2, brm)
+         call add_real_2d("brd", ns+1, 2, brd)
+         call add_real_1d("crd", ns+1,    crd)
+         call add_real_2d("azm", ns+1, 2, azm)
+         call add_real_2d("azd", ns+1, 2, azd)
+         call add_real_2d("bzm", ns+1, 2, bzm)
+         call add_real_2d("bzd", ns+1, 2, bzd)
 
-         call add_read_1d("rzu_fac", ns, rzu_fac)
-         call add_read_1d("rru_fac", ns, rru_fac)
+         call add_real_1d("rzu_fac", ns, rzu_fac)
+         call add_real_1d("rru_fac", ns, rru_fac)
 
          call close_dbg_out()
        end if

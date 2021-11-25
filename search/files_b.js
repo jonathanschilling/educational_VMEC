@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['nestor_5fio_2ef90_0',['nestor_io.f90',['../db/da1/nestor__io_8f90.html',1,'']]],
-  ['nestor_5fmain_2ef90_1',['nestor_main.f90',['../d4/d69/nestor__main_8f90.html',1,'']]]
+  ['magnetic_5ffluxes_2ef90_0',['magnetic_fluxes.f90',['../d5/d26/magnetic__fluxes_8f90.html',1,'']]],
+  ['mercier_2ef90_1',['mercier.f90',['../de/d25/mercier_8f90.html',1,'']]],
+  ['mgrid_5fmod_2ef_2',['mgrid_mod.f',['../d2/d01/mgrid__mod_8f.html',1,'']]]
 ];

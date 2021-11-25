@@ -1,13 +1,10 @@
 var searchData=
 [
-  ['read_5findata_2ef90_0',['read_indata.f90',['../d4/dc8/read__indata_8f90.html',1,'']]],
-  ['read_5fwout_5fmod_2ef_1',['read_wout_mod.f',['../df/d61/read__wout__mod_8f.html',1,'']]],
-  ['readin_2ef90_2',['readin.f90',['../d8/da3/readin_8f90.html',1,'']]],
-  ['readme_2emd_3',['README.md',['../da/ddd/README_8md.html',1,'']]],
-  ['realspace_2ef90_4',['realspace.f90',['../d8/df9/realspace_8f90.html',1,'']]],
-  ['reset_5fparams_2ef90_5',['reset_params.f90',['../dc/dc0/reset__params_8f90.html',1,'']]],
-  ['residue_2ef90_6',['residue.f90',['../db/d5a/residue_8f90.html',1,'']]],
-  ['residue_5fcon_2ef90_7',['residue_con.f90',['../d3/d96/residue__con_8f90.html',1,'']]],
-  ['residue_5fmhd_2ef90_8',['residue_mhd.f90',['../d5/d62/residue__mhd_8f90.html',1,'']]],
-  ['restart_5fiter_2ef90_9',['restart_iter.f90',['../d5/d6e/restart__iter_8f90.html',1,'']]]
+  ['parse_5fextension_2ef_0',['parse_extension.f',['../d8/d44/parse__extension_8f.html',1,'']]],
+  ['precal_2ef90_1',['precal.f90',['../dd/d98/precal_8f90.html',1,'']]],
+  ['precondn_2ef90_2',['precondn.f90',['../d4/da9/precondn_8f90.html',1,'']]],
+  ['printout_2ef90_3',['printout.f90',['../d7/dc9/printout_8f90.html',1,'']]],
+  ['profil1d_2ef90_4',['profil1d.f90',['../d7/d61/profil1d_8f90.html',1,'']]],
+  ['profil3d_2ef90_5',['profil3d.f90',['../dd/d75/profil3d_8f90.html',1,'']]],
+  ['profile_5ffunctions_2ef_6',['profile_functions.f',['../da/dc8/profile__functions_8f.html',1,'']]]
 ];

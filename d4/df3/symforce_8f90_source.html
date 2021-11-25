@@ -116,30 +116,30 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">   28</a></span><span class="keyword">SUBROUTINE </span><a class="code hl_function" href="../../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb">symforce</a>(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &amp;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                    ara, bra, cra, aza, bza, cza, bla, cla, rca, zca)</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, p5 =&gt; cp5</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns*nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(inout)</span> :: &amp;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>     ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns*nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(out)</span> ::   &amp;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>     ara, bra, cra, aza, bza, cza, bla, cla, rca, zca</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">INTEGER</span> :: mpar, ir, i, jk, jka, j, k</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: ars_0, brs_0, azs_0, &amp;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordtype">character(len=255)</span> :: dump_filename</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">logical</span>            :: dump_symforce = .false.</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dfd/namespacedbgout.html">dbgout</a></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns*nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(inout)</span> :: &amp;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>     ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns*nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(out)</span> ::   &amp;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>     ara, bra, cra, aza, bza, cza, bla, cla, rca, zca</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordtype">INTEGER</span> :: mpar, ir, i, jk, jka, j, k</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: ars_0, brs_0, azs_0, &amp;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  i = ns*nzeta</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">ALLOCATE</span> (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &amp;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">if</span> (dump_symforce .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">write</span>(dump_filename, 997) ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#a5572462e696c0b4bb2f2593ccc7e75c7">dump_symforce</a> .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">write</span>(<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dump_filename</a>, 997) ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>, trim(input_extension)</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>997 <span class="keyword">format</span>(<span class="stringliteral">&#39;symforce_&#39;</span>,i5.5,<span class="stringliteral">&#39;_&#39;</span>,i6.6,<span class="stringliteral">&#39;.&#39;</span>,a)</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">open</span>(unit=42, file=trim(dump_filename), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">open</span>(unit=42, file=trim(<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dump_filename</a>), status=<span class="stringliteral">&quot;unknown&quot;</span>)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# ns ntheta1 ntheta2 ntheta3 nzeta&quot;</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">write</span>(42, *) ns, ntheta1, ntheta2, ntheta3, nzeta</div>
@@ -233,7 +233,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keyword">DEALLOCATE</span> (ars_0, brs_0, azs_0, bzs_0, bls_0,          &amp;</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>              rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordflow">if</span> (dump_symforce .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#a5572462e696c0b4bb2f2593ccc7e75c7">dump_symforce</a> .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="comment">! outputs from symforce()</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">write</span>(42, *) <span class="stringliteral">&quot;# js lv ku m&quot;</span> // &amp;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      <span class="stringliteral">&quot; ars brs crs azs bzs czs bls cls rcs zcs&quot;</span> // &amp;</div>
@@ -259,7 +259,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">close</span>(42)</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    print *, <span class="stringliteral">&quot;dumped symforce output to &#39;&quot;</span>//trim(dump_filename)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    print *, <span class="stringliteral">&quot;dumped symforce output to &#39;&quot;</span>//trim(<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dump_filename</a>)//<span class="stringliteral">&quot;&#39;&quot;</span></div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">!     stop</span></div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keywordflow">  end if</span> <span class="comment">! dump_symforce</span></div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
@@ -322,6 +322,9 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae">symoutput</a></div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_a5572462e696c0b4bb2f2593ccc7e75c7"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#a5572462e696c0b4bb2f2593ccc7e75c7">dbgout::dump_symforce</a></div><div class="ttdeci">logical dump_symforce</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00038">dbgout.f90:38</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_ada94aa5a046b8810f2a85cadbf62ab55"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dbgout::dump_filename</a></div><div class="ttdeci">character(len=255) dump_filename</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00006">dbgout.f90:6</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac523d415be1865ef549b6a55a98fdd1a"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">vmec_main::ireflect</a></div><div class="ttdeci">integer, dimension(:), allocatable ireflect</div><div class="ttdoc">two-dimensional array for computing 2pi-v angle</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00150">vmec_main.f90:150</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html_ac815c089a079d08356f5740573842c86"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">vmec_main::lthreed</a></div><div class="ttdeci">logical lthreed</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00145">vmec_main.f90:145</a></div></div>
@@ -334,7 +337,7 @@ $(document).ready(function(){initNavTree('d4/df3/symforce_8f90_source.html','../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/df3/symforce_8f90.html">symforce.f90</a></li>
-    <li class="footer">Generated on Thu Nov 25 2021 10:57:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 25 2021 14:14:55 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

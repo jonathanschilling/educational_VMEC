@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['magnetic_5ffluxes_2ef90_0',['magnetic_fluxes.f90',['../d5/d26/magnetic__fluxes_8f90.html',1,'']]],
-  ['mercier_2ef90_1',['mercier.f90',['../de/d25/mercier_8f90.html',1,'']]],
-  ['mgrid_5fmod_2ef_2',['mgrid_mod.f',['../d2/d01/mgrid__mod_8f.html',1,'']]]
+  ['lamcal_2ef90_0',['lamcal.f90',['../d4/d51/lamcal_8f90.html',1,'']]],
+  ['line_5fsegment_2ef_1',['line_segment.f',['../d0/d19/line__segment_8f.html',1,'']]]
 ];

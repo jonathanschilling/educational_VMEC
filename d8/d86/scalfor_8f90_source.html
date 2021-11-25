@@ -210,7 +210,7 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="comment">! END IF</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="comment">! check scalfor state == inputs to tridslv</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ace3c175ec33dd18618a4b3239b3d033f">dump_scalfor</a> .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#add495642f1f8f76381eaf571fe3812f0">dump_scalfor</a> .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aed24975620399849c6967823bd798274">iter2</a>.le.2) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="comment">! prior knowledge about how this is called:</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="comment">! iflag=0 --&gt; R</span></div>
@@ -257,8 +257,8 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e">scalfor</a></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
-<div class="ttc" id="anamespacedbgout_html_ace3c175ec33dd18618a4b3239b3d033f"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ace3c175ec33dd18618a4b3239b3d033f">dbgout::dump_scalfor</a></div><div class="ttdeci">logical dump_scalfor</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00037">dbgout.f90:37</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_ada94aa5a046b8810f2a85cadbf62ab55"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dbgout::dump_filename</a></div><div class="ttdeci">character(len=255) dump_filename</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00006">dbgout.f90:6</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_add495642f1f8f76381eaf571fe3812f0"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#add495642f1f8f76381eaf571fe3812f0">dbgout::dump_scalfor</a></div><div class="ttdeci">logical, parameter dump_scalfor</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00040">dbgout.f90:40</a></div></div>
 <div class="ttc" id="anamespacevmec__dim_html"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html">vmec_dim</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00002">vmec_dim.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__dim_html_a08f67222abe8f767b19781cc7a5cbd23"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html#a08f67222abe8f767b19781cc7a5cbd23">vmec_dim::mpol1</a></div><div class="ttdeci">integer mpol1</div><div class="ttdoc">mpol-1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00006">vmec_dim.f90:6</a></div></div>
 <div class="ttc" id="anamespacevmec__dim_html_a1c1e2057dee8ad616586aa12904faf6d"><div class="ttname"><a href="../../d2/d10/namespacevmec__dim.html#a1c1e2057dee8ad616586aa12904faf6d">vmec_dim::ns1</a></div><div class="ttdeci">integer ns1</div><div class="ttdoc">ns-1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d05/vmec__dim_8f90_source.html#l00018">vmec_dim.f90:18</a></div></div>
@@ -279,7 +279,7 @@ $(document).ready(function(){initNavTree('d8/d86/scalfor_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d86/scalfor_8f90.html">scalfor.f90</a></li>
-    <li class="footer">Generated on Thu Nov 25 2021 14:14:55 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 25 2021 15:28:37 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

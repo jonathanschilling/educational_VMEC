@@ -143,17 +143,20 @@ Angle Constraint</h1>
 <li>an unknown mixture of several constraints of the <code>m=1</code> Fourier coefficients (the logical <code>lconm1</code> is true for this constraint).</li>
 </ol>
 <p >By default, the <code>_HBANGLE</code> preprocessor flag is not active and thus, the "old" <code>m=1</code> constraint is active.</p>
-<p >This version of VMEC has most, if not all, of its preprocessor flags explicitly expanded. It became clear that it is nevertheless useful to have at least a vague idea of what parts of the code are related to the angle constraint. Therefore, those parts of VMEC related to the <code>m=1</code>constraint are marked to start with</p>
+<p >This version of VMEC has all preprocessor flags already expanded. It became clear that it is nevertheless useful to have at least a vague idea of what parts of the code are related to the angle constraint. Therefore, those parts of VMEC related to the <code>m=1</code>constraint are marked to start with</p>
 <div class="fragment"><div class="line">! #ifndef _hbangle</div>
 </div><!-- fragment --><p >and end with</p>
 <div class="fragment"><div class="line">! #<span class="keyword">end </span>/* ndef _HBANGLE */</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+</div><!-- fragment --><p >Note that the <a href="https://github.com/jonathanschilling/educational_VMEC/blob/master/vmec_info.md">original documentation</a> states: </p><blockquote class="doxtable">
+<p >THE POLOIDAL ANGLE IS DETERMINED BY MINIMIZING &lt;M&gt; = m**2 S(m) , WHERE S(m) = Rm**2 + Zm**2 . </p>
+</blockquote>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 25 2021 17:24:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 25 2021 17:27:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

@@ -92,12 +92,12 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
 
     call open_dbg_out(trim(dump_filename))
 
-    call add_real_5d("xc_before",    ns, ntor, mpol1, ntmax, 2, &
-               reshape(xc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
-    call add_real_5d("xcdot_before", ns, ntor, mpol1, ntmax, 2, &
-            reshape(xcdot, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
-    call add_real_5d("gc",    ns, ntor, mpol1, ntmax, 2, &
-               reshape(gc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xc_before",    ns, ntor1, mpol, ntmax, 2, &
+                      reshape(xc, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xcdot_before", ns, ntor1, mpol, ntmax, 2, &
+                   reshape(xcdot, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("gc",           ns, ntor1, mpol, ntmax, 2, &
+                      reshape(gc, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
   end if
 
   ! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE
@@ -107,10 +107,10 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
   if (dump_evolve .and. iter2.le.nDump) then
-    call add_real_5d("xc_after",    ns, ntor, mpol1, ntmax, 2, &
-                     reshape(xc, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
-    call add_real_5d("xcdot_after", ns, ntor, mpol1, ntmax, 2, &
-                  reshape(xcdot, (/ ns, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xc_after",    ns, ntor1, mpol, ntmax, 2, &
+                     reshape(xc, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("xcdot_after", ns, ntor1, mpol, ntmax, 2, &
+                  reshape(xcdot, (/ ns, ntor1, mpol, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
 
     call close_dbg_out()
   end if

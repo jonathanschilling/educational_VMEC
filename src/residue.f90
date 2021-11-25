@@ -52,33 +52,20 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump physical forces
-  if (dump_physical_gc .and. iter2.le.2) then
+  if (dump_physical_gc .and. iter2.le.max_dump) then
     write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('phys_gc_',i5.5,'_',i6.6,'.',a)
+998 format('phys_gc_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# ns ntor mpol1 ntmax"
-    write(42, *) ns, ntor, mpol1, ntmax
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
+            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
+            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcl", ns, ntmax, ntor1, mpol, &
+            reshape(gcl, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
 
-    write(42, *) "# j n m ntmax gcr gcz gcl"
-    do j=1, ns
-      do n=0, ntor
-        do m=0, mpol1
-          do i=1, ntmax
-            write(42, *) j, n, m, i, &
-              gcr(j, n, m, i), &
-              gcz(j, n, m, i), &
-              gcl(j, n, m, i)
-          end do
-        end do
-      end do
-    end do
-
-    print *, "dumped physical gc to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     stop
+    call close_dbg_out()
   end if
 
   ! COMPUTE INVARIANT RESIDUALS
@@ -101,19 +88,23 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql = fnormL*SUM(gcl*gcl)
   fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
-  if (dump_fsq .and. iter2.le.2) then
+  if (dump_fsq .and. iter2.le.max_dump) then
     write(dump_filename, 997) ns, iter2, trim(input_extension)
-997 format('fsq_'i5.5,'_',i6.6,'.',a)
+997 format('fsq_'i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# r0scale r1 fnorm fnormL jedge fsqr fsqz fsql fedge"
-    write(42, *) r0scale, r1, fnorm, fnormL, jedge, fsqr, fsqz, fsql, fedge
+    call add_real("r0scale", r0scale)
+    call add_real("r1", r1)
+    call add_real("fnorm", fnorm)
+    call add_real("fnormL", fnormL)
+    call add_int("jedge", jedge)
+    call add_real("fsqr", fsqr)
+    call add_real("fsqz", fsqz)
+    call add_real("fsql", fsql)
+    call add_real("fedge", fedge)
 
-    print *, "dumped fsq to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     stop
+    call close_dbg_out()
   end if
 
   ! PERFORM PRECONDITIONING AND COMPUTE RESIDUES
@@ -124,32 +115,18 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
 
   ! dump forces after scale_m1 has been applied
-  if ((lthreed .or. lasym) .and. dump_scale_m1 .and. iter2.le.2) then
+  if (dump_scale_m1 .and. iter2.le.max_dump) then
     write(dump_filename, 996) ns, iter2, trim(input_extension)
-996 format('scale_m1_',i5.5,'_',i6.6,'.',a)
+996 format('scale_m1_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# ns ntor mpol1 ntmax"
-    write(42, *) ns, ntor, mpol1, ntmax
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
+            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
+            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
 
-    write(42, *) "# j n m ntmax gcr gcz"
-    do j=1, ns
-      do n=0, ntor
-        do m=0, mpol1
-          do i=1, ntmax
-            write(42, *) j, n, m, i, &
-              gcr(j, n, m, i), &
-              gcz(j, n, m, i)
-          end do
-        end do
-      end do
-    end do
-
-    print *, "dumped scale_m1 output to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     stop
+    call close_dbg_out()
   end if
 
   jedge = 0
@@ -159,44 +136,28 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump forces after scalfor has been applied
-  if (dump_scalfor_out .and. iter2.le.2) then
+  if (dump_scalfor_out .and. iter2.le.max_dump) then
     write(dump_filename, 995) ns, iter2, trim(input_extension)
-995 format('scalfor_out_',i5.5,'_',i6.6,'.',a)
+995 format('scalfor_out_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# ns ntor mpol1 ntmax"
-    write(42, *) ns, ntor, mpol1, ntmax
+    call add_read_2d("arm", ns+1, 2, arm)
+    call add_read_2d("ard", ns+1, 2, ard)
+    call add_read_2d("brm", ns+1, 2, brm)
+    call add_read_2d("brd", ns+1, 2, brd)
+    call add_read_1d("crd", ns+1,    crd)
+    call add_read_2d("azm", ns+1, 2, azm)
+    call add_read_2d("azd", ns+1, 2, azd)
+    call add_read_2d("bzm", ns+1, 2, bzm)
+    call add_read_2d("bzd", ns+1, 2, bzd)
 
-    write(42, *) "# j arm brm ard brd" // &
-      " azm bzm azd bzd crd"
-    do j=1, ns
-      write(42, *) j, &
-        arm(j,:), brm(j,:), ard(j,:), brd(j,:), &
-        azm(j,:), bzm(j,:), azd(j,:), bzd(j,:), crd(j)
-    end do
-    j=ns+1 ! extra entry in a.., b..
-    write(42, *) j, &
-      arm(j,:), brm(j,:), ard(j,:), brd(j,:), &
-      azm(j,:), bzm(j,:), azd(j,:), bzd(j,:), 0.0
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
+            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
+            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
 
-    write(42, *) "# j n m ntmax gcr gcz"
-    do j=1, ns
-      do n=0, ntor
-        do m=0, mpol1
-          do i=1, ntmax
-            write(42, *) j, n, m, i, &
-              gcr(j, n, m, i), &
-              gcz(j, n, m, i)
-          end do
-        end do
-      end do
-    end do
-
-    print *, "dumped scalfor output to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     stop
+    call close_dbg_out()
   end if
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
@@ -208,19 +169,18 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-  if (dump_fsq1 .and. iter2.le.2) then
+  if (dump_fsq1 .and. iter2.le.max_dump) then
     write(dump_filename, 994) ns, iter2, trim(input_extension)
-994 format('fsq1_',i5.5,'_',i6.6,'.',a)
+994 format('fsq1_',i5.5,'_',i6.6,'.',a,'.json')
 
-    open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-    write(42, *) "# fnorm1 fsqr1 fsqz1 fsql1"
-    write(42, *) fnorm1, fsqr1, fsqz1, fsql1
+    call add_real("fnorm1", fnorm1)
+    call add_real("fsqr1", fsqr1)
+    call add_real("fsqz1", fsqz1)
+    call add_real("fsql1", fsql1)
 
-    print *, "dumped fsq1 to '"//trim(dump_filename)//"'"
-    close(42)
-
-!     stop
+    call close_dbg_out()
   end if
 
 END SUBROUTINE residue

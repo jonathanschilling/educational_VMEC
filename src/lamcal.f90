@@ -84,35 +84,21 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
 
   ! check lamcal output
   if (dump_lamcal) then
-      write(dump_filename, 998) ns, trim(input_extension)
-998 format('lamcal_',i5.5,'.',a)
+    write(dump_filename, 998) ns, trim(input_extension)
+998 format('lamcal_',i5.5,'.',a,'.json')
 
-      open(unit=42, file=trim(dump_filename), status="unknown")
+    call open_dbg_out(dump_filename)
 
-      write(42, *) "# ns mpol1 ntor"
-      write(42, *) ns, mpol1, ntor
+    call add_real("pfactor0", pfactor0)
 
-      write(42, *) "# pfactor0"
-      write(42, *) pfactor0
+    call add_real_1d("blam", ns-1, blam(2:ns))
+    call add_real_1d("clam", ns-1, clam(2:ns))
+    call add_real_1d("dlam", ns-1, dlam(2:ns))
 
-      write(42, *) "# js blam clam dlam"
-      DO js = 2, ns
-        write(42, *) js, blam(js), clam(js), dlam(js)
-      end do
+    call add_real_3d("faclam", ns, ntor+1, mpol1, &
+   reshape(faclam(:,:,:,1), (/ ns, ntor+1, mpol1 /), order=(/ 2, 3, 1 /) ) )
 
-      write(42, *) "# m n js faclam(js,n,m,1)"
-      DO m = 0, mpol1
-        DO n = 0, ntor
-          DO js = 1, ns
-            write(42, *) m, n, js, faclam(js,n,m,1)
-          end do
-        end do
-      end do
-
-      close(42)
-
-      print *, "dumped lamcal output to '"//trim(dump_filename)//"'"
-      stop
+    call close_dbg_out()
   end if
 
 END SUBROUTINE lamcal

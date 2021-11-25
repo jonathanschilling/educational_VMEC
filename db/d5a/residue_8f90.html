@@ -121,12 +121,12 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90.html','../../'); i
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a2d42fddb02336c3ce8846116ab5bf089"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089">residue</a> (gcr, gcz, gcl)</td></tr>
-<tr class="memdesc:a2d42fddb02336c3ce8846116ab5bf089"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute invariant residuals.  <a href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089">More...</a><br /></td></tr>
-<tr class="separator:a2d42fddb02336c3ce8846116ab5bf089"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8a6225e22b043a0c73e6be6c99176c"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">constrain_m1</a> (gcr, gcz)</td></tr>
-<tr class="memdesc:a6b8a6225e22b043a0c73e6be6c99176c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute internal <code>gr</code> , <code>gz</code> required for \(m=1\) constraint.  <a href="../../db/d5a/residue_8f90.html#a6b8a6225e22b043a0c73e6be6c99176c">More...</a><br /></td></tr>
-<tr class="separator:a6b8a6225e22b043a0c73e6be6c99176c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2390b3cf93196383bbe960acb85b3e32"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32">residue</a> (gcr, gcz, gcl, fsqrz, old_fsqz)</td></tr>
+<tr class="memdesc:a2390b3cf93196383bbe960acb85b3e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute invariant residuals.  <a href="../../db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32">More...</a><br /></td></tr>
+<tr class="separator:a2390b3cf93196383bbe960acb85b3e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29cc4a06a22a55dc9b1bf7252ebcc9ed"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed">constrain_m1</a> (gcr, gcz, old_fsqz)</td></tr>
+<tr class="memdesc:a29cc4a06a22a55dc9b1bf7252ebcc9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute internal <code>gr</code> , <code>gz</code> required for \(m=1\) constraint.  <a href="../../db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed">More...</a><br /></td></tr>
+<tr class="separator:a29cc4a06a22a55dc9b1bf7252ebcc9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf8d684a58b8bf9dfdecfdb925960780"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">scale_m1</a> (gcr, gcz)</td></tr>
 <tr class="memdesc:aaf8d684a58b8bf9dfdecfdb925960780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute internal <code>gr</code> , <code>gz</code> required for \(m=1\) constraint.  <a href="../../db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780">More...</a><br /></td></tr>
 <tr class="separator:aaf8d684a58b8bf9dfdecfdb925960780"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,8 +136,8 @@ Functions/Subroutines</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="a6b8a6225e22b043a0c73e6be6c99176c" name="a6b8a6225e22b043a0c73e6be6c99176c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b8a6225e22b043a0c73e6be6c99176c">&#9670;&nbsp;</a></span>constrain_m1()</h2>
+<a id="a29cc4a06a22a55dc9b1bf7252ebcc9ed" name="a29cc4a06a22a55dc9b1bf7252ebcc9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29cc4a06a22a55dc9b1bf7252ebcc9ed">&#9670;&nbsp;</a></span>constrain_m1()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +152,13 @@ Functions/Subroutines</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">real(dp), dimension(ns,0:ntor), intent(inout)&#160;</td>
-          <td class="paramname"><em>gcz</em>&#160;</td>
+          <td class="paramname"><em>gcz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>old_fsqz</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -171,22 +177,22 @@ Functions/Subroutines</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../db/d5a/residue_8f90_source.html#l00236">236</a> of file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d5a/residue_8f90_source.html#l00237">237</a> of file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
 
-<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00098">vmec_main::fsqz</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00164">vmec_main::iter2</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00146">vmec_main::lconm1</a>.</p>
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00164">vmec_main::iter2</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00146">vmec_main::lconm1</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../db/d5a/residue_8f90_source.html#l00010">residue()</a>, <a class="el" href="../../d3/d96/residue__con_8f90_source.html#l00010">residue_con()</a>, and <a class="el" href="../../d5/d62/residue__mhd_8f90_source.html#l00010">residue_mhd()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a6b8a6225e22b043a0c73e6be6c99176c_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a29cc4a06a22a55dc9b1bf7252ebcc9ed_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
 </div>
 </div>
-<a id="a2d42fddb02336c3ce8846116ab5bf089" name="a2d42fddb02336c3ce8846116ab5bf089"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d42fddb02336c3ce8846116ab5bf089">&#9670;&nbsp;</a></span>residue()</h2>
+<a id="a2390b3cf93196383bbe960acb85b3e32" name="a2390b3cf93196383bbe960acb85b3e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2390b3cf93196383bbe960acb85b3e32">&#9670;&nbsp;</a></span>residue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +213,19 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">real(rprec), dimension(ns,0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
-          <td class="paramname"><em>gcl</em>&#160;</td>
+          <td class="paramname"><em>gcl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>fsqrz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(rprec), intent(in)&#160;</td>
+          <td class="paramname"><em>old_fsqz</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,19 +247,19 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../db/d5a/residue_8f90_source.html#l00009">9</a> of file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
 
-<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00019">vmec_main::ard</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00020">vmec_main::arm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00023">vmec_main::azd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00024">vmec_main::azm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00021">vmec_main::brd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00022">vmec_main::brm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00025">vmec_main::bzd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00026">vmec_main::bzm</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00237">constrain_m1()</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00027">vmec_main::crd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00031">vmec_main::faclam</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00106">vmec_main::fedge</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00096">vmec_main::fnorm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00100">vmec_main::fnorm1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00101">vmec_main::fnorml</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00099">vmec_main::fsql</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00104">vmec_main::fsql1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00097">vmec_main::fsqr</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00102">vmec_main::fsqr1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00098">vmec_main::fsqz</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00103">vmec_main::fsqz1</a>, <a class="el" href="../../d3/d3a/getfsq_8f90_source.html#l00013">getfsq()</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00087">vmec_main::hs</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00163">vmec_main::iter1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00164">vmec_main::iter2</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00145">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00009">vmec_params::meven</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00010">vmec_params::modd</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00093">vmec_main::r0scale</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00273">scale_m1()</a>, <a class="el" href="../../d8/d86/scalfor_8f90_source.html#l00016">scalfor()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>.</p>
+<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00019">vmec_main::ard</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00020">vmec_main::arm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00023">vmec_main::azd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00024">vmec_main::azm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00021">vmec_main::brd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00022">vmec_main::brm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00025">vmec_main::bzd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00026">vmec_main::bzm</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00238">constrain_m1()</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00027">vmec_main::crd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00031">vmec_main::faclam</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00106">vmec_main::fedge</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00096">vmec_main::fnorm</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00100">vmec_main::fnorm1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00101">vmec_main::fnorml</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00099">vmec_main::fsql</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00104">vmec_main::fsql1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00097">vmec_main::fsqr</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00102">vmec_main::fsqr1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00098">vmec_main::fsqz</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00103">vmec_main::fsqz1</a>, <a class="el" href="../../d3/d3a/getfsq_8f90_source.html#l00013">getfsq()</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00087">vmec_main::hs</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00163">vmec_main::iter1</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00164">vmec_main::iter2</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00145">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00009">vmec_params::meven</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00010">vmec_params::modd</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00093">vmec_main::r0scale</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../db/d5a/residue_8f90_source.html#l00275">scale_m1()</a>, <a class="el" href="../../d8/d86/scalfor_8f90_source.html#l00016">scalfor()</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d3/d4f/funct3d_8f90_source.html#l00014">funct3d()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a2d42fddb02336c3ce8846116ab5bf089_cgraph.svg" width="328" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a2390b3cf93196383bbe960acb85b3e32_cgraph.svg" width="328" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a2d42fddb02336c3ce8846116ab5bf089_icgraph.svg" width="622" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d5a/residue_8f90_a2390b3cf93196383bbe960acb85b3e32_icgraph.svg" width="622" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -282,7 +300,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../db/d5a/residue_8f90_source.html#l00272">272</a> of file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d5a/residue_8f90_source.html#l00274">274</a> of file <a class="el" href="../../db/d5a/residue_8f90_source.html">residue.f90</a>.</p>
 
 <p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00019">vmec_main::ard</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00023">vmec_main::azd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00021">vmec_main::brd</a>, <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00025">vmec_main::bzd</a>, and <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00146">vmec_main::lconm1</a>.</p>
 
@@ -302,7 +320,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d5a/residue_8f90.html">residue.f90</a></li>
-    <li class="footer">Generated on Wed Nov 24 2021 16:41:05 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 25 2021 10:57:02 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="../../db/d5a/residue_8f90.html#a2d42fddb02336c3ce8846116ab5bf089" target="_top" xlink:title="Compute invariant residuals.">
+<g id="a_node2"><a xlink:href="../../db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="422,-76.5 422,-95.5 470,-95.5 470,-76.5 422,-76.5"/>
 <text text-anchor="middle" x="446" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node10 -->
 <g id="node10" class="node">
 <title>Node10</title>
-<g id="a_node10"><a xlink:href="../../d5/d62/residue__mhd_8f90.html#a6a9d291acfa5560373a726549a003c31" target="_top" xlink:title="Compute invariant residuals.">
+<g id="a_node10"><a xlink:href="../../d5/d62/residue__mhd_8f90.html#a3ed729a2f8c8d70e4d2fef05c9dfc4c8" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="410,-0.5 410,-19.5 482,-19.5 482,-0.5 410,-0.5"/>
 <text text-anchor="middle" x="446" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue_mhd</text>
 </a>

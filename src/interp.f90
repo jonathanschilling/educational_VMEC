@@ -12,6 +12,8 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   USE vmec_main, ONLY: dp, rprec, mnsize, input_extension
   USE vmec_params, ONLY: ntmax
   USE vmec_persistent, ONLY: ixm
+  use vmec_dim
+  use vmec_input
 
   use dbgout
 
@@ -24,24 +26,14 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
   REAL(rprec), PARAMETER :: zero=0, one=1
 
-  INTEGER :: ntype, js, js1, js2, mn
-  REAL(rprec) :: hsold, sj, s1, xint
+  INTEGER :: ntype, js, mn
+  integer, dimension(nsnew) :: js1, js2
+  REAL(rprec) :: hsold
+  real(rprec), dimension(nsnew) :: sj, s1, xint
 
   IF (nsold .le. 0) RETURN
 
   hsold = one/(nsold - 1)
-
-  if (dump_interp) then
-    write(dump_filename, 999) nsold, nsnew, trim(input_extension)
-999 format('interp_',i5.5,'_',i5.5,'.',a)
-
-    open(unit=42, file=trim(dump_filename), status="unknown")
-
-    write(42, *) "# nsold nsnew ntmax"
-    write(42, *) nsold, nsnew, ntmax
-
-    write(42, *) "# js sj js1 js2 s1 xint"
-  end if
 
   ! INTERPOLATE R,Z AND LAMBDA ON FULL GRID
   ! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)
@@ -55,18 +47,15 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
      ! radial interpolation from old, coarse state vector to new, finer state vector
      DO js = 1, nsnew
-        sj = REAL(js - 1, rprec)/(nsnew - 1)
-        js1 = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)
-        js2 = MIN(js1 + 1, nsold)
-        s1 = (js1 - 1)*hsold
-        xint = (sj - s1)/hsold
-        xint = MIN(one,xint)
-        xint = MAX(zero,xint)
-        xnew(js,:,ntype) = (   (one - xint)*xold(js1,:,ntype) &
-                             +        xint *xold(js2,:,ntype)   )/scalxc(js,:,1)
-        if (dump_interp .and. ntype.eq.1) then
-          write(42, *) js, sj, js1, js2, s1, xint
-        end if
+        sj(js) = REAL(js - 1, rprec)/(nsnew - 1)
+        js1(js) = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)
+        js2(js) = MIN(js1(js) + 1, nsold)
+        s1(js) = (js1(js) - 1)*hsold
+        xint(js) = (sj(js) - s1(js))/hsold
+        xint(js) = MIN(one, xint(js))
+        xint(js) = MAX(zero,xint(js))
+        xnew(js,:,ntype) = (   (one - xint(js))*xold(js1(js),:,ntype) &
+                             +        xint(js) *xold(js2(js),:,ntype)   )/scalxc(js,:,1)
      END DO
 
      ! Zero M=1 modes at origin
@@ -75,27 +64,26 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   END DO
 
   if (dump_interp) then
-    write(42, *) "# js mn ntype xold"
-    DO ntype = 1, 3*ntmax
-      DO js = 1, nsold
-        do mn=1, mnsize
-          write(42, *) js, mn, ntype, xold(js, mn, ntype)
-        end do
-      end do
-    end do
+    write(dump_filename, 999) nsold, nsnew, trim(input_extension)
+999 format('interp_',i5.5,'_',i5.5,'.',a,'.json')
 
-    write(42, *) "# js mn ntype xnew scalxc"
-    DO ntype = 1, 3*ntmax
-      DO js = 1, nsnew
-        do mn=1, mnsize
-          write(42, *) js, mn, ntype, xnew(js, mn, ntype), scalxc(js, mn, ntype)
-        end do
-      end do
-    end do
+    call open_dbg_out(dump_filename)
 
-    close(42)
+    call add_real_1d("sj", nsnew, sj)
+    call add_int_1d("js1", nsnew, js1)
+    call add_int_1d("js2", nsnew, js2)
+    call add_real_1d("s1", nsnew, s1)
+    call add_real_1d("xint", nsnew, xint)
 
-    print *, "dumped interp to '"//trim(dump_filename)//"'"
+    call add_real_5d("xold", nsold, ntor, mpol1, ntmax, 2, &
+            reshape(xold, (/ nsold, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+
+    call add_real_5d("xnew", nsnew, ntor, mpol1, ntmax, 2, &
+            reshape(xnew, (/ nsnew, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+    call add_real_5d("scalxc", nsnew, ntor, mpol1, ntmax, 2, &
+            reshape(scalxc, (/ nsnew, ntor, mpol1, ntmax, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )
+
+    call close_dbg_out()
   end if
 
 END SUBROUTINE interp

@@ -24,9 +24,9 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
 
   INTEGER :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n
   REAL(rprec), DIMENSION(nzeta) :: rcom, zcom
-  REAL(rprec), DIMENSION(ntheta1) :: r1b, z1b, rub, zub
-  REAL(rprec), DIMENSION(ntheta1) :: r12, z12
-  REAL(rprec), DIMENSION(ntheta1) :: rs, zs, tau, ru12, zu12, tau0
+  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r1b, z1b, rub, zub
+  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r12, z12
+  REAL(rprec), DIMENSION(nzeta,ntheta1) :: rs, zs, tau, ru12, zu12, tau0
   REAL(rprec) :: rlim, zlim
   REAL(rprec) :: rmax, rmin, zmax, zmin, dzeta
   REAL(rprec) :: ds, mintau, mintemp
@@ -39,17 +39,6 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
 
   ns12 = (ns+1)/2
 
-  ! debugging output from guess_axis
-  if (dump_guess_axis) then
-    write(dump_filename, 998) trim(input_extension)
-    open(unit=42, file=trim(dump_filename), status="unknown")
-
-    write(42, *) "# nzeta ntheta1, ns12"
-    write(42, *) nzeta, ntheta1, ns12
-
-    write(42, *) "# iv iu r1b z1b rub zub r12 z12 rs zs tau ru12 zu12 tau0"
-  end if
-
   planes: DO iv = 1, nzeta
 
      IF (.not.lasym .and. iv.gt.nzeta/2+1) THEN
@@ -58,14 +47,14 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         CYCLE
      END IF
 
-     r1b(:ntheta3) = r1(ns,iv,:,0) + r1(ns,iv,:,1)
-     z1b(:ntheta3) = z1(ns,iv,:,0) + z1(ns,iv,:,1)
-     r12(:ntheta3) = r1(ns12,iv,:,0) + r1(ns12,iv,:,1)*sqrts(ns12)
-     z12(:ntheta3) = z1(ns12,iv,:,0) + z1(ns12,iv,:,1)*sqrts(ns12)
-     rub(:ntheta3) = ru0(ns,iv,:)
-     zub(:ntheta3) = zu0(ns,iv,:)
-     ru12(:ntheta3) =  p5*(ru0(ns,iv,:) + ru0(ns12,iv,:))
-     zu12(:ntheta3) =  p5*(zu0(ns,iv,:) + zu0(ns12,iv,:))
+     r1b(iv,:ntheta3) = r1(ns,iv,:,0) + r1(ns,iv,:,1)
+     z1b(iv,:ntheta3) = z1(ns,iv,:,0) + z1(ns,iv,:,1)
+     r12(iv,:ntheta3) = r1(ns12,iv,:,0) + r1(ns12,iv,:,1)*sqrts(ns12)
+     z12(iv,:ntheta3) = z1(ns12,iv,:,0) + z1(ns12,iv,:,1)*sqrts(ns12)
+     rub(iv,:ntheta3) = ru0(ns,iv,:)
+     zub(iv,:ntheta3) = zu0(ns,iv,:)
+     ru12(iv,:ntheta3) =  p5*(ru0(ns,iv,:) + ru0(ns12,iv,:))
+     zu12(iv,:ntheta3) =  p5*(zu0(ns,iv,:) + zu0(ns12,iv,:))
 
      IF (.not.lasym) THEN
 
@@ -76,14 +65,14 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         ivminus = MOD(nzeta + 1 - iv, nzeta) + 1
         DO iu = 1+ntheta2, ntheta1
            iu_r = ntheta1 + 2 - iu ! (ntheta1 + 1) - (iu - 1)
-           r1b(iu) = r1(ns,ivminus,iu_r,0) + r1(ns,ivminus,iu_r,1)
-           z1b(iu) =-(z1(ns,ivminus,iu_r,0) + z1(ns,ivminus,iu_r,1))
-           r12(iu) =  r1(ns12,ivminus,iu_r,0) + r1(ns12,ivminus,iu_r,1)*sqrts(ns12)
-           z12(iu) =-(z1(ns12,ivminus,iu_r,0) + z1(ns12,ivminus,iu_r,1)*sqrts(ns12))
-           rub(iu) =-ru0(ns,ivminus,iu_r)
-           zub(iu) = zu0(ns,ivminus,iu_r)
-           ru12(iu)=-p5*(ru0(ns,ivminus,iu_r) + ru0(ns12,ivminus,iu_r))
-           zu12(iu)= p5*(zu0(ns,ivminus,iu_r) + zu0(ns12,ivminus,iu_r))
+           r1b(iv,iu) = r1(ns,ivminus,iu_r,0) + r1(ns,ivminus,iu_r,1)
+           z1b(iv,iu) =-(z1(ns,ivminus,iu_r,0) + z1(ns,ivminus,iu_r,1))
+           r12(iv,iu) =  r1(ns12,ivminus,iu_r,0) + r1(ns12,ivminus,iu_r,1)*sqrts(ns12)
+           z12(iv,iu) =-(z1(ns12,ivminus,iu_r,0) + z1(ns12,ivminus,iu_r,1)*sqrts(ns12))
+           rub(iv,iu) =-ru0(ns,ivminus,iu_r)
+           zub(iv,iu) = zu0(ns,ivminus,iu_r)
+           ru12(iv,iu)=-p5*(ru0(ns,ivminus,iu_r) + ru0(ns12,ivminus,iu_r))
+           zu12(iv,iu)= p5*(zu0(ns,ivminus,iu_r) + zu0(ns12,ivminus,iu_r))
         END DO
 
      END IF
@@ -99,9 +88,9 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
      ! Estimate jacobian based on boundary and 1/2 surface
      ds = (ns - ns12)*hs
      DO iu = 1, ntheta1
-        rs(iu) = (r1b(iu) - r12(iu))/ds + r1(1,iv,1,0)
-        zs(iu) = (z1b(iu) - z12(iu))/ds + z1(1,iv,1,0)
-        tau0(iu) = ru12(iu)*zs(iu) - zu12(iu)*rs(iu)
+        rs(iv,iu) = (r1b(iv,iu) - r12(iv,iu))/ds + r1(1,iv,1,0)
+        zs(iv,iu) = (z1b(iv,iu) - z12(iv,iu))/ds + z1(1,iv,1,0)
+        tau0(iv,iu) = ru12(iv,iu)*zs(iv,iu) - zu12(iv,iu)*rs(iv,iu)
      END DO
 
      mintau = 0
@@ -118,9 +107,9 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         ! Find value of magnetic axis that maximizes the minimum jacobian value
         DO klim = 1, limpts
            rlim = rmin + ((rmax - rmin)*(klim-1))/(limpts-1)
-           tau = signgs*(tau0 - ru12(:)*zlim + zu12(:)*rlim)
+           tau(iv,:) = signgs*(tau0(iv,:) - ru12(iv,:)*zlim + zu12(iv,:)*rlim)
 
-           mintemp = MINVAL(tau)
+           mintemp = MINVAL(tau(iv,:))
            IF (mintemp .gt. mintau) THEN
               mintau = mintemp
               rcom(iv) = rlim
@@ -133,16 +122,6 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
            END IF
         END DO
      END DO
-
-     if (dump_guess_axis) then
-       do iu = 1, ntheta1
-         write(42, *) iv, iu,                                    &
-           r1b(iu), z1b(iu), rub(iu), zub(iu),                   &
-           r12(iu), z12(iu),                                     &
-           rs(iu), zs(iu), tau(iu), ru12(iu), zu12(iu), tau0(iu)
-       end do
-     end if
-
   END DO planes
 
   ! FOURIER TRANSFORM RCOM, ZCOM
@@ -158,22 +137,35 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
      END IF
   END DO
 
+  ! debugging output from guess_axis
   if (dump_guess_axis) then
-    write(42, *) "# iv rcom zcom"
-    do iv=1, nzeta
-      write(42, *) iv, rcom(iv), zcom(iv)
-    end do
+    write(dump_filename, 998) trim(input_extension)
+998 format('guess_axis.',a,'.json')
 
-    write(42, *) "# n raxis_cc zaxis_cs raxis_cs zaxis_cc"
-    DO n = 0, ntor
-      write(42, *) n, raxis_cc(n), zaxis_cs(n), raxis_cs(n), zaxis_cc(n)
-    end do
+    call open_dbg_out(dump_filename)
 
-    close(42)
+    call add_real_2d("r1b" , nzeta, ntheta1, r1b )
+    call add_real_2d("z1b" , nzeta, ntheta1, z1b )
+    call add_real_2d("rub" , nzeta, ntheta1, rub )
+    call add_real_2d("zub" , nzeta, ntheta1, zub )
+    call add_real_2d("r12" , nzeta, ntheta1, r12 )
+    call add_real_2d("z12" , nzeta, ntheta1, z12 )
+    call add_real_2d("rs"  , nzeta, ntheta1, rs  )
+    call add_real_2d("zs"  , nzeta, ntheta1, zs  )
+    call add_real_2d("tau" , nzeta, ntheta1, tau )
+    call add_real_2d("ru12", nzeta, ntheta1, ru12)
+    call add_real_2d("zu12", nzeta, ntheta1, zu12)
+    call add_real_2d("tau0", nzeta, ntheta1, tau0)
 
-    print *, "dumped guess_axis output to '"//trim(dump_filename)//"'"
-    stop
+    call add_read_1d("rcom", nzeta, rcom)
+    call add_read_1d("zcom", nzeta, zcom)
+
+    call add_read_1d("raxis_cc", ntor+1, raxis_cc)
+    call add_read_1d("zaxis_cs", ntor+1, zaxis_cs)
+    call add_read_1d("raxis_cs", ntor+1, raxis_cs)
+    call add_read_1d("zaxis_cc", ntor+1, zaxis_cc)
+
+    call close_dbg_out()
   end if
-998 format('guess_axis.',a)
 
 END SUBROUTINE guess_axis

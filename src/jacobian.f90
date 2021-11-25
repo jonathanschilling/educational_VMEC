@@ -10,7 +10,7 @@ SUBROUTINE jacobian
   USE realspace
   USE vmec_dim, ONLY: ns, ntheta3
   USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e, &
-               rs => bzmn_e, zs => brmn_e, tau => azmn_o
+               rs  => bzmn_e, zs   => brmn_e, tau  => azmn_o
 
   use dbgout
 
@@ -38,10 +38,6 @@ SUBROUTINE jacobian
   DO l = 2,nrzt
     r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*(r1(l,modd)  + r1(l-1,modd)) ) ! R on half grid
 
-!     if (l.eq.2 .and. iter2.eq.2) then
-!       write(*,*) r1(l,meven), r1(l-1,meven), shalf(l), r1(l,modd), r1(l-1,modd), r12(l)
-!     end if
-
     ru12(l) =  p5*( ru(l,meven) + ru(l-1,meven) + shalf(l)*(ru(l,modd)  + ru(l-1,modd)) ) ! dR/du on half grid
     zu12(l) =  p5*( zu(l,meven) + zu(l-1,meven) + shalf(l)*(zu(l,modd)  + zu(l-1,modd)) ) ! dZ/du on half grid
 
@@ -61,32 +57,27 @@ SUBROUTINE jacobian
   tau(1:nrzt:ns) = temp(:)
 
   ! check output from jacobian()
-  if (dump_jacobian .and. iter2 .le. 2) then
-      write(dump_filename, 998) ns, iter2, trim(input_extension)
-      open(unit=42, file=trim(dump_filename), status="unknown")
+  if (dump_jacobian .and. iter2.le.max_dump) then
+    write(dump_filename, 998) ns, iter2, trim(input_extension)
+998 format('jacobian_',i5.5,'_',i6.6,'.',a,'.json')
 
-      write(42, *) "# ns ntheta3 nzeta"
-      write(42, *) ns, ntheta3, nzeta
+    call open_dbg_out(dump_filename)
 
-      write(42, *) "# js ku lv r12 ru12 zu12 rs zs tau"
-      DO js = 2, ns
-        DO ku = 1, ntheta3
-          DO lk = 1, nzeta
-              l = ((ku-1)*nzeta+(lk-1))*ns+js
-              write (42, *) js, ku, lk, &
-                            r12(l), ru12(l), zu12(l), &
-                            rs(l), zs(l), tau(l)
-          end do
-        end do
-      end do
+    call add_real_3d("r12", ns, nzeta, ntheta3, &
+              reshape(r12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("ru12", ns, nzeta, ntheta3, &
+              reshape(ru12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zu12", ns, nzeta, ntheta3, &
+              reshape(zu12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("rs", ns, nzeta, ntheta3, &
+              reshape(rs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zs", ns, nzeta, ntheta3, &
+              reshape(zs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("tau", ns, nzeta, ntheta3, &
+              reshape(tau, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
 
-      close(42)
-
-      print *, "dumped jacobian output to '"//trim(dump_filename)//"'"
-!       stop
+    call close_dbg_out()
   end if
-998 format('jacobian_',i5.5,'_',i6.6,'.',a)
-
 
 ! TEST FOR SIGN CHANGE IN JACOBIAN
   taumax = MAXVAL(tau(2:nrzt))
@@ -95,6 +86,5 @@ SUBROUTINE jacobian
      ! bad jacobian !
      first = 2
   end if
-
 
 END SUBROUTINE jacobian

@@ -120,18 +120,13 @@ SUBROUTINE bcovar (lu, lv)
 
       call open_dbg_out(dump_filename)
 
-      call add_real_3d("guu", ns, nzeta, ntheta3, &
-              reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("gvv", ns, nzeta, ntheta3, &
-              reshape(gvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("r12sq", ns, nzeta, ntheta3, &
-              reshape(r12sq, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("gsqrt", ns, nzeta, ntheta3, &
-              reshape(gsqrt, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("guu",   ns, nzeta, ntheta3, guu,   order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv,   order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("r12sq", ns, nzeta, ntheta3, r12sq, order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt, order=(/ 2, 3, 1 /) ) )
 
       if (lthreed) then
-        call add_real_3d("guv", ns, nzeta, ntheta3, &
-                reshape(guv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+        call add_real_3d("guv", ns, nzeta, ntheta3, guv, order=(/ 2, 3, 1 /) ) )
       else
         call add_none_3d("guv")
       end if
@@ -205,10 +200,8 @@ SUBROUTINE bcovar (lu, lv)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("bsupu", ns, nzeta, ntheta3, &
-              reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsupv", ns, nzeta, ntheta3, &
-              reshape(bsupv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv, order=(/ 2, 3, 1 /) ) )
 
     call close_dbg_out()
   end if
@@ -258,12 +251,9 @@ SUBROUTINE bcovar (lu, lv)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("bsubuh", ns, nzeta, ntheta3, &
-            reshape(bsubuh, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsubvh", ns, nzeta, ntheta3, &
-            reshape(bsubvh, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsq",    ns, nzeta, ntheta3, &
-               reshape(bsq, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsq",    ns, nzeta, ntheta3, bsq,    order=(/ 2, 3, 1 /) ) )
 
     call add_real_1d("pres", ns, pres)
 
@@ -302,14 +292,10 @@ SUBROUTINE bcovar (lu, lv)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("lvv",       ns, nzeta, ntheta3, &
-                  reshape(lvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("lu_even_m", ns, nzeta, ntheta3, &
-              reshape(lu(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, &
-              reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, &
-              reshape(bsubv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lvv",       ns, nzeta, ntheta3, lvv,     order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:,0), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) ) )
 
     call close_dbg_out()
   end if
@@ -370,10 +356,8 @@ SUBROUTINE bcovar (lu, lv)
 
     call add_real_1d("bdamp", ns, bdamp)
 
-    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, &
-              reshape(bsubu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, &
-              reshape(bsubv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) ) )
 
     call close_dbg_out()
   end if

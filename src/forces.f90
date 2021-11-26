@@ -63,52 +63,30 @@ SUBROUTINE forces
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("lu_e", ns, nzeta, ntheta3, &
-            reshape(lu_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("lv_e", ns, nzeta, ntheta3, &
-            reshape(lv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("guu", ns, nzeta, ntheta3, &
-            reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("guv", ns, nzeta, ntheta3, &
-            reshape(guv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("gvv", ns, nzeta, ntheta3, &
-            reshape(gvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("ru12", ns, nzeta, ntheta3, &
-            reshape(ru12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zu12", ns, nzeta, ntheta3, &
-            reshape(zu12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("brmn_e", ns, nzeta, ntheta3, &
-            reshape(brmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bzmn_e", ns, nzeta, ntheta3, &
-            reshape(bzmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("r1", ns, nzeta, ntheta3, &
-            reshape(r1, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("z1", ns, nzeta, ntheta3, &
-            reshape(z1, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("ru", ns, nzeta, ntheta3, &
-            reshape(ru, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zu", ns, nzeta, ntheta3, &
-            reshape(zu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("ru0", ns, nzeta, ntheta3, &
-            reshape(ru0, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zu0", ns, nzeta, ntheta3, &
-            reshape(zu0, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("rcon_even_m", ns, nzeta, ntheta3, &
-              reshape(rcon(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zcon_even_m", ns, nzeta, ntheta3, &
-              reshape(zcon(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("rcon0", ns, nzeta, ntheta3, &
-            reshape(rcon0, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zcon0", ns, nzeta, ntheta3, &
-            reshape(zcon0, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("gcon", ns, nzeta, ntheta3, &
-            reshape(gcon, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lu_e",        ns, nzeta, ntheta3, lu_e,      order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lv_e",        ns, nzeta, ntheta3, lv_e,      order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guu",         ns, nzeta, ntheta3, guu,       order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guv",         ns, nzeta, ntheta3, guv,       order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("gvv",         ns, nzeta, ntheta3, gvv,       order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("ru12",        ns, nzeta, ntheta3, ru12,      order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zu12",        ns, nzeta, ntheta3, zu12,      order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("brmn_e",      ns, nzeta, ntheta3, brmn_e,    order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bzmn_e",      ns, nzeta, ntheta3, bzmn_e,    order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("r1",          ns, nzeta, ntheta3, r1,        order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("z1",          ns, nzeta, ntheta3, z1,        order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("ru",          ns, nzeta, ntheta3, ru,        order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zu",          ns, nzeta, ntheta3, zu,        order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("ru0",         ns, nzeta, ntheta3, ru0,       order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zu0",         ns, nzeta, ntheta3, zu0,       order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("rcon_even_m", ns, nzeta, ntheta3, rcon(:,0), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zcon_even_m", ns, nzeta, ntheta3, zcon(:,0), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("rcon0",       ns, nzeta, ntheta3, rcon0,     order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("zcon0",       ns, nzeta, ntheta3, zcon0,     order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("gcon",        ns, nzeta, ntheta3, gcon,      order=(/ 2, 3, 1 /) ) )
 
     if (lthreed) then
-      call add_real_4d("rv", ns, 2, nzeta, ntheta3, &
-              reshape(rv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("zv", ns, 2, nzeta, ntheta3, &
-              reshape(zv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("rv", ns, 2, nzeta, ntheta3, rv, order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("zv", ns, 2, nzeta, ntheta3, zv, order=(/ 1, 3, 4, 2 /) ) )
     else
       call add_null_4d("rv")
       call add_null_4d("zv")
@@ -231,63 +209,37 @@ SUBROUTINE forces
 ! #end /* ndef _HBANGLE */
 
   if (dump_forces .and. iter2.le.max_dump) then
-    call add_real_3d("armn_e", ns, nzeta, ntheta3, &
-            reshape(armn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("armn_o", ns, nzeta, ntheta3, &
-            reshape(armn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("brmn_e", ns, nzeta, ntheta3, &
-            reshape(brmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("brmn_o", ns, nzeta, ntheta3, &
-            reshape(brmn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-
-    call add_real_3d("azmn_e", ns, nzeta, ntheta3, &
-            reshape(azmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("azmn_o", ns, nzeta, ntheta3, &
-            reshape(azmn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bzmn_e", ns, nzeta, ntheta3, &
-            reshape(bzmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bzmn_o", ns, nzeta, ntheta3, &
-            reshape(bzmn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-
-    call add_real_3d("guu", ns, nzeta, ntheta3, &
-            reshape(guu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("guus", ns, nzeta, ntheta3, &
-            reshape(guus, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("guv", ns, nzeta, ntheta3, &
-            reshape(guv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("guvs", ns, nzeta, ntheta3, &
-            reshape(guvs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("gvv", ns, nzeta, ntheta3, &
-            reshape(gvv, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("gvvs", ns, nzeta, ntheta3, &
-            reshape(gvvs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("bsqr", ns, nzeta, ntheta3, &
-            reshape(bsqr, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("lu_o", ns, nzeta, ntheta3, &
-            reshape(lu_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("lv_e", ns, nzeta, ntheta3, &
-            reshape(lv_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-
-    call add_real_4d("rcon", ns, 2, nzeta, ntheta3, &
-            reshape(rcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-    call add_real_4d("zcon", ns, 2, nzeta, ntheta3, &
-            reshape(zcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-
+    call add_real_3d("armn_e", ns, nzeta, ntheta3, armn_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("armn_o", ns, nzeta, ntheta3, armn_o, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("brmn_e", ns, nzeta, ntheta3, brmn_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("brmn_o", ns, nzeta, ntheta3, brmn_o, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("azmn_e", ns, nzeta, ntheta3, azmn_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("azmn_o", ns, nzeta, ntheta3, azmn_o, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bzmn_e", ns, nzeta, ntheta3, bzmn_e, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bzmn_o", ns, nzeta, ntheta3, bzmn_o, order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guu",    ns, nzeta, ntheta3, guu,    order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guus",   ns, nzeta, ntheta3, guus,   order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guv",    ns, nzeta, ntheta3, guv,    order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("guvs",   ns, nzeta, ntheta3, guvs,   order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("gvv",    ns, nzeta, ntheta3, gvv,    order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("gvvs",   ns, nzeta, ntheta3, gvvs,   order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsqr",   ns, nzeta, ntheta3, bsqr,   order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lu_o",   ns, nzeta, ntheta3, lu_o,   order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("lv_e",   ns, nzeta, ntheta3, lv_e,   order=(/ 2, 3, 1 /) ) )
     if (lthreed) then
-      call add_real_3d("crmn_e", ns, nzeta, ntheta3, &
-              reshape(crmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("crmn_o", ns, nzeta, ntheta3, &
-              reshape(crmn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("czmn_e", ns, nzeta, ntheta3, &
-              reshape(czmn_e, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-      call add_real_3d("czmn_o", ns, nzeta, ntheta3, &
-              reshape(czmn_o, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("crmn_e", ns, nzeta, ntheta3, crmn_e, order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("crmn_o", ns, nzeta, ntheta3, crmn_o, order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("czmn_e", ns, nzeta, ntheta3, czmn_e, order=(/ 2, 3, 1 /) ) )
+      call add_real_3d("czmn_o", ns, nzeta, ntheta3, czmn_o, order=(/ 2, 3, 1 /) ) )
     else
       call add_null_4d("crmn_e")
       call add_null_4d("crmn_o")
       call add_null_4d("czmn_e")
       call add_null_4d("czmn_o")
     end if
+
+    call add_real_4d("rcon", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("zcon", ns, 2, nzeta, ntheta3, zcon, order=(/ 1, 3, 4, 2 /) ) )
 
     call close_dbg_out()
   end if

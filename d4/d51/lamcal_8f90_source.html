@@ -201,13 +201,12 @@ $(document).ready(function(){initNavTree('d4/d51/lamcal_8f90_source.html','../..
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;clam&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a93acd935f1290f6b40c3fb8fc233a02e">clam</a>(2:ns))</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;dlam&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a04979f1c0b31bc89eaba86c1a8cce239">dlam</a>(2:ns))</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;faclam&quot;</span>, ns, ntor+1, mpol1, &amp;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>   reshape(<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>(:,:,:,1), (/ ns, ntor+1, mpol1 /), order=(/ 2, 3, 1 /) ) )</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096">lamcal</a></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;faclam&quot;</span>, ns, ntor+1, mpol1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>(:,:,:,1), order=(/ 2, 3, 1 /) )</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096">lamcal</a></div>
 <div class="ttc" id="alamcal_8f90_html_aae66bdcec0bbb969704413d933148096"><div class="ttname"><a href="../../d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096">lamcal</a></div><div class="ttdeci">subroutine lamcal(overg, guu, guv, gvv)</div><div class="ttdoc">Normalization parameters for .</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d51/lamcal_8f90_source.html#l00010">lamcal.f90:11</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_ad553dea10f45e256a4faf02e8e456ebf"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ad553dea10f45e256a4faf02e8e456ebf">dbgout::dump_lamcal</a></div><div class="ttdeci">logical dump_lamcal</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00031">dbgout.f90:31</a></div></div>
@@ -230,7 +229,7 @@ $(document).ready(function(){initNavTree('d4/d51/lamcal_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/d51/lamcal_8f90.html">lamcal.f90</a></li>
-    <li class="footer">Generated on Fri Nov 26 2021 19:39:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Nov 28 2021 13:47:51 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

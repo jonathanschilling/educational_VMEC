@@ -295,79 +295,77 @@ $(document).ready(function(){initNavTree('db/d61/vmec_8f90_source.html','../../'
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>             <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;iotas&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aeec11c572d79c8b9bdfae7abd05962e4">iotas</a>(2:ns))</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>             <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;chips&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(2:ns))</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>             <span class="keyword">call </span>add_real_5d(<span class="stringliteral">&quot;xc&quot;</span>,     ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2, &amp;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                     reshape(<a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>,     (/ ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>             <span class="keyword">call </span>add_real_5d(<span class="stringliteral">&quot;scalxc&quot;</span>, ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2, &amp;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                     reshape(<a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, (/ ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2 /), order=(/ 1, 3, 4, 5, 2 /) ) )</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>             <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keywordflow">           end if</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>             <span class="keyword">call </span>add_real_5d(<span class="stringliteral">&quot;xc&quot;</span>,     ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2, <a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>,     order=(/ 1, 3, 4, 5, 2 /) )</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>             <span class="keyword">call </span>add_real_5d(<span class="stringliteral">&quot;scalxc&quot;</span>, ns, ntor1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944">mpol</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a>, 2, <a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#abb6e60127415c0fad68b4499cc6ddeee">scalxc</a>, order=(/ 1, 3, 4, 5, 2 /) )</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>             <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keywordflow">           end if</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keywordflow">        END DO</span> iterations</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keywordflow">        END DO</span> iterations</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="comment">! if did not converge only because jacobian was bad</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="comment">! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="comment">! retry the whole thing again</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">IF</span> (ier_flag.ne.<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9">bad_jacobian_flag</a>) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>           <span class="keywordflow">exit</span> <span class="comment">! jacob_off loop</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>           <span class="comment">! otherwise, retry with initial ns=3 to fix bad jacobian</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="keywordflow">        END IF</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>     <span class="comment">! if ier_flag .eq. bad_jacobian_flag, repeat once again with ns=3 before</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="keywordflow">     end do</span> <span class="comment">! jacob_off = 0, 1</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="comment">! if did not converge only because jacobian was bad</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="comment">! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="comment">! retry the whole thing again</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">IF</span> (ier_flag.ne.<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9">bad_jacobian_flag</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>           <span class="keywordflow">exit</span> <span class="comment">! jacob_off loop</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>           <span class="comment">! otherwise, retry with initial ns=3 to fix bad jacobian</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="keywordflow">        END IF</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>     <span class="comment">! if ier_flag .eq. bad_jacobian_flag, repeat once again with ns=3 before</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keywordflow">     end do</span> <span class="comment">! jacob_off = 0, 1</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="keywordflow">  end if</span> <span class="comment">! (ier_flag .eq. 0) after readin</span></div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keywordflow">  end if</span> <span class="comment">! (ier_flag .eq. 0) after readin</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="comment">! write output files</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af">fileout</a> (ier_flag)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="comment">! write output files</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af">fileout</a> (ier_flag)</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="comment">! free memory</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(cosmu)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <span class="keyword">DEALLOCATE</span>(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &amp;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>             sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &amp;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>             cosmui3, cosmumi3, cos01, sin01, stat=istat1)</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="keywordflow">IF</span> (istat1 .ne. 0) print *, warning // <span class="stringliteral">&quot;#1&quot;</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(xm)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keyword">DEALLOCATE</span> (xm, xn, ixm, xm_nyq, xn_nyq,                           &amp;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>              jmin3, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a5bb8702c95b9b2ca9d27ceea0d00709b">uminus</a>, stat=istat1)</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  <span class="keywordflow">IF</span> (istat1 .ne. 0) print *, warning // <span class="stringliteral">&quot;#2&quot;</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  <span class="comment">! free memory</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(cosmu)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="keyword">DEALLOCATE</span>(cosmu, sinmu, cosmum, sinmum, cosmui, cosmumi,          &amp;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>             sinmui, sinmumi, cosnv, sinnv, cosnvn, sinnvn,          &amp;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>             cosmui3, cosmumi3, cos01, sin01, stat=istat1)</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  <span class="keywordflow">IF</span> (istat1 .ne. 0) print *, warning // <span class="stringliteral">&quot;#1&quot;</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <span class="keywordflow">IF</span> (<span class="keyword">ALLOCATED</span>(xm)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  <span class="keyword">DEALLOCATE</span> (xm, xn, ixm, xm_nyq, xn_nyq,                           &amp;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>              jmin3, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>, <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a5bb8702c95b9b2ca9d27ceea0d00709b">uminus</a>, stat=istat1)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keywordflow">IF</span> (istat1 .ne. 0) print *, warning // <span class="stringliteral">&quot;#2&quot;</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">free_mem_funct3d</a></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">free_mem_ns</a></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226">free_mem_nunv</a></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d1/d41/namespacemgrid__mod.html#a1badf08429cd96cebc8ecc22782e87ac">free_mgrid</a> (istat1)</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="keywordflow">IF</span> (istat1.ne.0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      print *,<span class="stringliteral">&#39;problem in free_mgrid&#39;</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      print *,<span class="stringliteral">&#39; istat1 = &#39;</span>,istat1</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="comment">! verbose error message</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  <span class="keywordflow">SELECT CASE</span> (ier_flag)</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  <span class="keywordflow">CASE</span> (<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9">bad_jacobian_flag</a>)</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>     <span class="comment">! Bad jacobian even after axis reset and ns-&gt;3</span></div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>     <span class="keyword">WRITE</span> (      6, <span class="stringliteral">&#39;(/,1x,a)&#39;</span>) bad_jacobian</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>     <span class="keyword">WRITE</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a>, <span class="stringliteral">&#39;(/,1x,a)&#39;</span>) bad_jacobian</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keywordflow">  CASE DEFAULT</span></div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="keywordflow">  END SELECT</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="comment">! close threed1 file</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a> .gt. 0) <span class="keyword">CLOSE</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a>)</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="keyword">END subroutine </span><a class="code hl_function" href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23">vmec</a></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289">free_mem_funct3d</a></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37">free_mem_ns</a></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226">free_mem_nunv</a></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d1/d41/namespacemgrid__mod.html#a1badf08429cd96cebc8ecc22782e87ac">free_mgrid</a> (istat1)</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="keywordflow">IF</span> (istat1.ne.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      print *,<span class="stringliteral">&#39;problem in free_mgrid&#39;</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      print *,<span class="stringliteral">&#39; istat1 = &#39;</span>,istat1</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="comment">! verbose error message</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keywordflow">SELECT CASE</span> (ier_flag)</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="keywordflow">CASE</span> (<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9">bad_jacobian_flag</a>)</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>     <span class="comment">! Bad jacobian even after axis reset and ns-&gt;3</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>     <span class="keyword">WRITE</span> (      6, <span class="stringliteral">&#39;(/,1x,a)&#39;</span>) bad_jacobian</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>     <span class="keyword">WRITE</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a>, <span class="stringliteral">&#39;(/,1x,a)&#39;</span>) bad_jacobian</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="keywordflow">  CASE DEFAULT</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keywordflow">  END SELECT</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="comment">! close threed1 file</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a> .gt. 0) <span class="keyword">CLOSE</span> (<a class="code hl_variable" href="../../d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120">nthreed</a>)</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="keyword">END subroutine </span><a class="code hl_function" href="../../db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23">vmec</a></div>
 <div class="ttc" id="aeqsolve_8f90_html_ab740b09d1b651e2ab8a60c5d552df0c2"><div class="ttname"><a href="../../d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2">eqsolve</a></div><div class="ttdeci">subroutine eqsolve(ier_flag)</div><div class="ttdoc">Iteratively evolve the Fourier coefficients that specify the equilibrium.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d46/eqsolve_8f90_source.html#l00007">eqsolve.f90:8</a></div></div>
 <div class="ttc" id="afileout_8f90_html_a7228e984aaf2c38bd772e3d846fab7af"><div class="ttname"><a href="../../d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af">fileout</a></div><div class="ttdeci">subroutine fileout(ier_flag)</div><div class="ttdoc">Write the output files.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d71/fileout_8f90_source.html#l00007">fileout.f90:8</a></div></div>
 <div class="ttc" id="afixaray_8f90_html_aca9a4c886a9423b95e8a9336071de2e3"><div class="ttname"><a href="../../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3">fixaray</a></div><div class="ttdeci">subroutine fixaray</div><div class="ttdoc">allocate and fill some fixed-size arrays (only depending on Fourier resolution).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dd1/fixaray_8f90_source.html#l00006">fixaray.f90:7</a></div></div>
@@ -425,7 +423,7 @@ $(document).ready(function(){initNavTree('db/d61/vmec_8f90_source.html','../../'
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d61/vmec_8f90.html">vmec.f90</a></li>
-    <li class="footer">Generated on Fri Nov 26 2021 19:39:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Nov 28 2021 13:47:51 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

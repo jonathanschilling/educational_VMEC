@@ -188,13 +188,12 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;chipf&quot;</span>, ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">chipf</a>)</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;iotaf&quot;</span>, ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a956201e36438e3e1c04b16942621023d">iotaf</a>)</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsupu&quot;</span>, ns, nzeta, ntheta3, &amp;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsupu&quot;</span>, ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div>
 <div class="ttc" id="aadd__fluxes_8f90_html_a988e7013ef02301b9cfbde5b8068d5af"><div class="ttname"><a href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div><div class="ttdeci">subroutine add_fluxes(overg, bsupu, bsupv)</div><div class="ttdoc">Add the magnetic fluxes to the tangential derivatives of  to arrive at the contravariant magnetic fie...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7d/add__fluxes_8f90_source.html#l00011">add_fluxes.f90:12</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_a295f1c6eef23fe72ec4dd73555c4cc42"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#a295f1c6eef23fe72ec4dd73555c4cc42">dbgout::max_dump</a></div><div class="ttdeci">integer max_dump</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00009">dbgout.f90:9</a></div></div>
@@ -219,7 +218,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d7d/add__fluxes_8f90.html">add_fluxes.f90</a></li>
-    <li class="footer">Generated on Fri Nov 26 2021 19:39:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Nov 28 2021 13:47:50 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

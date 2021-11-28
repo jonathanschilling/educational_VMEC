@@ -76,7 +76,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   ! AND
   ! SCALXC ARRAY (1/SQRTS FACTOR FOR ODD M VALUES)
 
-  print *, "initial guess for R_mn, Z_mn in profil3d"
+  ! print *, "initial guess for R_mn, Z_mn in profil3d"
 
 !   write(*,*) "raxis_cc(0)=",raxis_cc(0)
 !   DO m = 0, mpol1
@@ -248,11 +248,8 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
     call open_dbg_out(dump_filename)
 
     call add_real_3d("scalxc", ns, ntor1, mpol, scalxc(:irzloff))
-
-    call add_real_4d("rmn", ntmax, ns, ntor1, mpol, &
-            reshape(rmn, (/ ntmax, ns, ntor1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("zmn", ntmax, ns, ntor1, mpol, &
-            reshape(zmn, (/ ntmax, ns, ntor1, mpol /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("rmn", ntmax, ns, ntor1, mpol, rmn, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("zmn", ntmax, ns, ntor1, mpol, zmn, order=(/ 2, 3, 4, 1 /) )
 
     call close_dbg_out()
   end if

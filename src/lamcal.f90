@@ -95,8 +95,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
     call add_real_1d("clam", ns-1, clam(2:ns))
     call add_real_1d("dlam", ns-1, dlam(2:ns))
 
-    call add_real_3d("faclam", ns, ntor+1, mpol1, &
-   reshape(faclam(:,:,:,1), (/ ns, ntor+1, mpol1 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("faclam", ns, ntor+1, mpol1, faclam(:,:,:,1), order=(/ 2, 3, 1 /) )
 
     call close_dbg_out()
   end if

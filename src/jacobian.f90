@@ -63,18 +63,12 @@ SUBROUTINE jacobian
 
     call open_dbg_out(dump_filename)
 
-    call add_real_3d("r12", ns, nzeta, ntheta3, &
-              reshape(r12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("ru12", ns, nzeta, ntheta3, &
-              reshape(ru12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zu12", ns, nzeta, ntheta3, &
-              reshape(zu12, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("rs", ns, nzeta, ntheta3, &
-              reshape(rs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("zs", ns, nzeta, ntheta3, &
-              reshape(zs, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-    call add_real_3d("tau", ns, nzeta, ntheta3, &
-              reshape(tau, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("r12",  ns, nzeta, ntheta3, r12,  order=(/ 2, 3, 1 /) )
+    call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 2, 3, 1 /) )
+    call add_real_3d("zu12", ns, nzeta, ntheta3, zu12, order=(/ 2, 3, 1 /) )
+    call add_real_3d("rs",   ns, nzeta, ntheta3, rs,   order=(/ 2, 3, 1 /) )
+    call add_real_3d("zs",   ns, nzeta, ntheta3, zs,   order=(/ 2, 3, 1 /) )
+    call add_real_3d("tau",  ns, nzeta, ntheta3, tau,  order=(/ 2, 3, 1 /) )
 
     call close_dbg_out()
   end if

@@ -53,29 +53,16 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
 
     call open_dbg_out(dump_filename)
 
-    call add_real_4d("ars", ns, 2, nzeta, ntheta3, &
-            reshape(ars, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("brs", ns, 2, nzeta, ntheta3, &
-            reshape(brs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("crs", ns, 2, nzeta, ntheta3, &
-            reshape(crs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-
-    call add_real_4d("azs", ns, 2, nzeta, ntheta3, &
-            reshape(azs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("bzs", ns, 2, nzeta, ntheta3, &
-            reshape(bzs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("czs", ns, 2, nzeta, ntheta3, &
-            reshape(czs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-
-    call add_real_4d("bls", ns, 2, nzeta, ntheta3, &
-            reshape(bls, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("cls", ns, 2, nzeta, ntheta3, &
-            reshape(cls, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-
-    call add_real_4d("rcs", ns, 2, nzeta, ntheta3, &
-            reshape(rcs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("zcs", ns, 2, nzeta, ntheta3, &
-            reshape(zcs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("ars", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("brs", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("crs", ns, 2, nzeta, ntheta3, crs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("azs", ns, 2, nzeta, ntheta3, azs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bzs", ns, 2, nzeta, ntheta3, bzs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("czs", ns, 2, nzeta, ntheta3, czs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bls", ns, 2, nzeta, ntheta3, bls, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("cls", ns, 2, nzeta, ntheta3, cls, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("rcs", ns, 2, nzeta, ntheta3, rcs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("zcs", ns, 2, nzeta, ntheta3, zcs, order=(/ 2, 3, 4, 1 /) )
   end if ! dump_symforce
 
   ! SYMMETRIZE FORCES ON RESTRICTED THETA INTERVAL (0 <= u <= pi)
@@ -149,49 +136,29 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
               rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)
 
   if (dump_symforce .and. iter2.le.max_dump) then
-    call add_real_4d("ars_out", ns, 2, nzeta, ntheta3, &
-            reshape(ars, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("brs_out", ns, 2, nzeta, ntheta3, &
-            reshape(brs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("crs_out", ns, 2, nzeta, ntheta3, &
-            reshape(crs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("ara_out", ns, 2, nzeta, ntheta3, &
-            reshape(ara, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("bra_out", ns, 2, nzeta, ntheta3, &
-            reshape(bra, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("cra_out", ns, 2, nzeta, ntheta3, &
-            reshape(cra, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("ars_out", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("brs_out", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("crs_out", ns, 2, nzeta, ntheta3, crs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("ara_out", ns, 2, nzeta, ntheta3, ara, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bra_out", ns, 2, nzeta, ntheta3, bra, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("cra_out", ns, 2, nzeta, ntheta3, cra, order=(/ 2, 3, 4, 1 /) )
 
-    call add_real_4d("azs_out", ns, 2, nzeta, ntheta3, &
-            reshape(azs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("bzs_out", ns, 2, nzeta, ntheta3, &
-            reshape(bzs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("czs_out", ns, 2, nzeta, ntheta3, &
-            reshape(czs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("aza_out", ns, 2, nzeta, ntheta3, &
-            reshape(aza, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("bza_out", ns, 2, nzeta, ntheta3, &
-            reshape(bza, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("cza_out", ns, 2, nzeta, ntheta3, &
-            reshape(cza, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("azs_out", ns, 2, nzeta, ntheta3, azs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bzs_out", ns, 2, nzeta, ntheta3, bzs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("czs_out", ns, 2, nzeta, ntheta3, czs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("aza_out", ns, 2, nzeta, ntheta3, aza, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bza_out", ns, 2, nzeta, ntheta3, bza, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("cza_out", ns, 2, nzeta, ntheta3, cza, order=(/ 2, 3, 4, 1 /) )
 
-    call add_real_4d("bls_out", ns, 2, nzeta, ntheta3, &
-            reshape(bls, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("cls_out", ns, 2, nzeta, ntheta3, &
-            reshape(cls, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("bla_out", ns, 2, nzeta, ntheta3, &
-            reshape(bla, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("cla_out", ns, 2, nzeta, ntheta3, &
-            reshape(cla, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("bls_out", ns, 2, nzeta, ntheta3, bls, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("cls_out", ns, 2, nzeta, ntheta3, cls, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("bla_out", ns, 2, nzeta, ntheta3, bla, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("cla_out", ns, 2, nzeta, ntheta3, cla, order=(/ 2, 3, 4, 1 /) )
 
-    call add_real_4d("rcs_out", ns, 2, nzeta, ntheta3, &
-            reshape(rcs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("zcs_out", ns, 2, nzeta, ntheta3, &
-            reshape(zcs, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("rca_out", ns, 2, nzeta, ntheta3, &
-            reshape(rca, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
-    call add_real_4d("zca_out", ns, 2, nzeta, ntheta3, &
-            reshape(zca, (/ ns, 2, nzeta, ntheta3 /), order=(/ 2, 3, 4, 1 /) ) )
+    call add_real_4d("rcs_out", ns, 2, nzeta, ntheta3, rcs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("zcs_out", ns, 2, nzeta, ntheta3, zcs, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("rca_out", ns, 2, nzeta, ntheta3, rca, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("zca_out", ns, 2, nzeta, ntheta3, zca, order=(/ 2, 3, 4, 1 /) )
 
     call close_dbg_out()
   end if ! dump_symforce

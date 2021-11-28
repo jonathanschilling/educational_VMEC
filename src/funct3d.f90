@@ -93,29 +93,16 @@ SUBROUTINE funct3d (ier_flag)
 
       call open_dbg_out(dump_filename)
 
-      call add_real_4d("r1", ns, 2, nzeta, ntheta3, &
-              reshape(r1, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("ru", ns, 2, nzeta, ntheta3, &
-              reshape(ru, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("rv", ns, 2, nzeta, ntheta3, &
-              reshape(rv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-
-      call add_real_4d("z1", ns, 2, nzeta, ntheta3, &
-              reshape(z1, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("zu", ns, 2, nzeta, ntheta3, &
-              reshape(zu, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("zv", ns, 2, nzeta, ntheta3, &
-              reshape(zv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-
-      call add_real_4d("lu", ns, 2, nzeta, ntheta3, &
-              reshape(lu, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("lv", ns, 2, nzeta, ntheta3, &
-              reshape(lv, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-
-      call add_real_4d("rcon", ns, 2, nzeta, ntheta3, &
-              reshape(rcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
-      call add_real_4d("zcon", ns, 2, nzeta, ntheta3, &
-              reshape(zcon, (/ ns, 2, nzeta, ntheta3 /), order=(/ 1, 3, 4, 2 /) ) )
+      call add_real_4d("r1",   ns, 2, nzeta, ntheta3, r1,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("ru",   ns, 2, nzeta, ntheta3, ru,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("rv",   ns, 2, nzeta, ntheta3, rv,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("z1",   ns, 2, nzeta, ntheta3, z1,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("zu",   ns, 2, nzeta, ntheta3, zu,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("zv",   ns, 2, nzeta, ntheta3, zv,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("lu",   ns, 2, nzeta, ntheta3, lu,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("lv",   ns, 2, nzeta, ntheta3, lv,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("rcon", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("zcon", ns, 2, nzeta, ntheta3, zcon, order=(/ 1, 3, 4, 2 /) )
 
       call close_dbg_out()
   end if
@@ -360,7 +347,7 @@ SUBROUTINE funct3d (ier_flag)
 997 format('rbsq_',i5.5,'.',a,'.json')
 
           call open_dbg_out(dump_filename)
-          call add_real_1d("rbsq", ns, rbsq(ns:nrzt:ns))
+          call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
           call close_dbg_out()
         end if
 
@@ -389,19 +376,13 @@ SUBROUTINE funct3d (ier_flag)
 
        call open_dbg_out(dump_filename)
 
-       call add_real_3d("extra1", ns, nzeta, ntheta3, &
-          reshape(extra1(:,0), (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
-       call add_real_3d("gcon", ns, nzeta, ntheta3, &
-          reshape(gcon,      (/ ns, nzeta, ntheta3 /),   order=(/ 2, 3, 1 /) ) )
+       call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0), order=(/ 2, 3, 1 /) ) 
+       call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon,        order=(/ 2, 3, 1 /) ) 
 
-       call add_real_3d("gcs",         ns, ntor+1, mpol, &
-         reshape(gc(0*mns+1:1*mns), (/ ns, ntor+1, mpol /) ) )
-       call add_real_3d("gsc",         ns, ntor+1, mpol, &
-         reshape(gc(1*mns+1:2*mns), (/ ns, ntor+1, mpol /) ) )
-       call add_real_3d("gcc",         ns, ntor+1, mpol, &
-         reshape(gc(2*mns+1:3*mns), (/ ns, ntor+1, mpol /) ) )
-       call add_real_3d("gss",         ns, ntor+1, mpol, &
-         reshape(gc(3*mns+1:4*mns), (/ ns, ntor+1, mpol /) ) )
+       call add_real_3d("gcs",    ns, ntor+1, mpol, gc(0*mns+1:1*mns))
+       call add_real_3d("gsc",    ns, ntor+1, mpol, gc(1*mns+1:2*mns))
+       call add_real_3d("gcc",    ns, ntor+1, mpol, gc(2*mns+1:3*mns))
+       call add_real_3d("gss",    ns, ntor+1, mpol, gc(3*mns+1:4*mns))
 
        call close_dbg_out()
      end if

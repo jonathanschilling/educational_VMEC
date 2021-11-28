@@ -83,8 +83,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
     call add_real_1d("chipf", ns, chipf)
     call add_real_1d("iotaf", ns, iotaf)
 
-    call add_real_3d("bsupu", ns, nzeta, ntheta3, &
-            reshape(bsupu, (/ ns, nzeta, ntheta3 /), order=(/ 2, 3, 1 /) ) )
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )
 
     call close_dbg_out()
   end if

@@ -402,32 +402,32 @@
       if (.not. lthreed) then
         call add_real_2d("rbcc", ntor+1, mpol, rbcc)
         call add_real_2d("zbsc", ntor+1, mpol, zbsc)
-        call add_real_2d("rbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("rbsc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbcc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_null_2d("rbss")
+        call add_null_2d("zbcs")
+        call add_null_2d("rbsc")
+        call add_null_2d("zbcc")
+        call add_null_2d("rbcs")
+        call add_null_2d("zbss")
       else
         call add_real_2d("rbcc", ntor+1, mpol, rbcc)
         call add_real_2d("zbsc", ntor+1, mpol, zbsc)
         call add_real_2d("rbss", ntor+1, mpol, rbss)
         call add_real_2d("zbcs", ntor+1, mpol, zbcs)
-        call add_real_2d("rbsc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbcc", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_null_2d("rbsc")
+        call add_null_2d("zbcc")
+        call add_null_2d("rbcs")
+        call add_null_2d("zbss")
       end if
     else
       if (.not. lthreed) then
         call add_real_2d("rbcc", ntor+1, mpol, rbcc)
         call add_real_2d("zbsc", ntor+1, mpol, zbsc)
-        call add_real_2d("rbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_null_2d("rbss")
+        call add_null_2d("zbcs")
         call add_real_2d("rbsc", ntor+1, mpol, rbsc)
         call add_real_2d("zbcc", ntor+1, mpol, zbcc)
-        call add_real_2d("rbcs", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
-        call add_real_2d("zbss", 1, 1, (/ (/ 0.0_dp /) /)) ! dummy value
+        call add_null_2d("rbcs")
+        call add_null_2d("zbss")
       else
         call add_real_2d("rbcc", ntor+1, mpol, rbcc)
         call add_real_2d("zbsc", ntor+1, mpol, zbsc)

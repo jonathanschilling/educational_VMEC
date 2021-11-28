@@ -58,12 +58,9 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
-            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
-    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
-            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
-    call add_real_4d("gcl", ns, ntmax, ntor1, mpol, &
-            reshape(gcl, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, gcr, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, gcz, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("gcl", ns, ntmax, ntor1, mpol, gcl, order=(/ 1, 3, 4, 2 /) )
 
     call close_dbg_out()
   end if
@@ -121,10 +118,8 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 
     call open_dbg_out(dump_filename)
 
-    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
-            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
-    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
-            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, gcr, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, gcz, order=(/ 1, 3, 4, 2 /) )
 
     call close_dbg_out()
   end if
@@ -152,10 +147,8 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
     call add_real_2d("bzm", ns+1, 2, bzm)
     call add_real_2d("bzd", ns+1, 2, bzd)
 
-    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, &
-            reshape(gcr, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
-    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, &
-            reshape(gcz, (/ ns, ntmax, ntor1, mpol /), order=(/ 1, 3, 4, 2 /) ) )
+    call add_real_4d("gcr", ns, ntmax, ntor1, mpol, gcr, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("gcz", ns, ntmax, ntor1, mpol, gcz, order=(/ 1, 3, 4, 2 /) )
 
     call close_dbg_out()
   end if

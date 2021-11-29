@@ -55,13 +55,13 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   ! check calc_fbal output
   if (open_dbg_context("calc_fbal")) then
 
-    call add_real_1d("buco", ns, buco)
-    call add_real_1d("bvco", ns, bvco)
-    call add_real_1d("jcurv", ns, jcurv)
-    call add_real_1d("jcuru", ns, jcuru)
-    call add_real_1d("vpphi", ns, vpphi)
-    call add_real_1d("presgrad", ns, presgrad)
-    call add_real_1d("equif", ns, equif)
+    call add_real_1d("buco",     ns-1, buco(2:ns))
+    call add_real_1d("bvco",     ns-1, bvco(2:ns))
+    call add_real_1d("jcurv",    ns-2, jcurv(2:ns1))
+    call add_real_1d("jcuru",    ns-2, jcuru(2:ns1))
+    call add_real_1d("vpphi",    ns-2, vpphi(2:ns1))
+    call add_real_1d("presgrad", ns-2, presgrad(2:ns1))
+    call add_real_1d("equif",    ns,   equif)
 
     call close_dbg_out()
   end if

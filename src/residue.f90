@@ -30,6 +30,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   INTEGER :: jedge, j, n, m, i
   INTEGER :: delIter
   REAL(rprec) :: r1
+  logical, parameter :: skip_scalfor_dbg = .false.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -113,9 +114,9 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   end if
 
   jedge = 0
-  CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
+  CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge, skip_scalfor_dbg)
   jedge = 1
-  CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
+  CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge, skip_scalfor_dbg)
 ! #end /* ndef _HBANGLE */
 
   ! dump forces after scalfor has been applied

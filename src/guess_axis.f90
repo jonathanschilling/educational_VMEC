@@ -23,13 +23,42 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2
 
   INTEGER :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n
-  REAL(rprec), DIMENSION(nzeta) :: rcom, zcom
-  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r1b, z1b, rub, zub
-  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r12, z12
-  REAL(rprec), DIMENSION(nzeta,ntheta1) :: rs, zs, tau, ru12, zu12, tau0
+!  REAL(rprec), DIMENSION(nzeta) :: rcom, zcom
+!  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r1b, z1b, rub, zub
+!  REAL(rprec), DIMENSION(nzeta,ntheta1) :: r12, z12
+!  REAL(rprec), DIMENSION(nzeta,ntheta1) :: rs, zs, tau, ru12, zu12, tau0
+
+  REAL(rprec), DIMENSION(:),   allocatable :: rcom, zcom
+  REAL(rprec), DIMENSION(:,:), allocatable :: r1b, z1b, rub, zub
+  REAL(rprec), DIMENSION(:,:), allocatable :: r12, z12
+  REAL(rprec), DIMENSION(:,:), allocatable :: rs, zs, tau, ru12, zu12, tau0
+
   REAL(rprec) :: rlim, zlim
   REAL(rprec) :: rmax, rmin, zmax, zmin, dzeta
   REAL(rprec) :: ds, mintau, mintemp
+  
+  integer :: ivmax
+  
+  if (.not.lasym) then
+    ivmax = nzeta/2+1
+  else
+    ivmax = nzeta
+  end if
+  
+  allocate(rcom(nzeta))
+  allocate(zcom(nzeta))
+  allocate(r1b (nzeta,ntheta1)); r1b  = cbig
+  allocate(z1b (nzeta,ntheta1)); z1b  = cbig
+  allocate(rub (nzeta,ntheta1)); rub  = cbig
+  allocate(zub (nzeta,ntheta1)); zub  = cbig
+  allocate(r12 (nzeta,ntheta1)); r12  = cbig
+  allocate(z12 (nzeta,ntheta1)); z12  = cbig
+  allocate(rs  (nzeta,ntheta1)); rs   = cbig
+  allocate(zs  (nzeta,ntheta1)); zs   = cbig
+  allocate(tau (nzeta,ntheta1)); tau  = cbig
+  allocate(ru12(nzeta,ntheta1)); ru12 = cbig
+  allocate(zu12(nzeta,ntheta1)); zu12 = cbig
+  allocate(tau0(nzeta,ntheta1)); tau0 = cbig
 
   ! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS
   ! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID
@@ -44,6 +73,8 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
      IF (.not.lasym .and. iv.gt.nzeta/2+1) THEN
         rcom(iv) = rcom(nzeta+2-iv)
         zcom(iv) =-zcom(nzeta+2-iv)
+        
+        ! For a stellarator-symmetric case, the rest of the loop is skipped for iv>nzeta/2+1.
         CYCLE
      END IF
 
@@ -65,23 +96,23 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         ivminus = MOD(nzeta + 1 - iv, nzeta) + 1
         DO iu = 1+ntheta2, ntheta1
            iu_r = ntheta1 + 2 - iu ! (ntheta1 + 1) - (iu - 1)
-           r1b(iv,iu) = r1(ns,ivminus,iu_r,0) + r1(ns,ivminus,iu_r,1)
-           z1b(iv,iu) =-(z1(ns,ivminus,iu_r,0) + z1(ns,ivminus,iu_r,1))
-           r12(iv,iu) =  r1(ns12,ivminus,iu_r,0) + r1(ns12,ivminus,iu_r,1)*sqrts(ns12)
-           z12(iv,iu) =-(z1(ns12,ivminus,iu_r,0) + z1(ns12,ivminus,iu_r,1)*sqrts(ns12))
-           rub(iv,iu) =-ru0(ns,ivminus,iu_r)
-           zub(iv,iu) = zu0(ns,ivminus,iu_r)
-           ru12(iv,iu)=-p5*(ru0(ns,ivminus,iu_r) + ru0(ns12,ivminus,iu_r))
-           zu12(iv,iu)= p5*(zu0(ns,ivminus,iu_r) + zu0(ns12,ivminus,iu_r))
+           
+           r1b(iv,iu) =   r1(ns,  ivminus,iu_r,0) + r1( ns,  ivminus,iu_r,1)
+           z1b(iv,iu) =-( z1(ns,  ivminus,iu_r,0) + z1( ns,  ivminus,iu_r,1))
+           r12(iv,iu) =   r1(ns12,ivminus,iu_r,0) + r1( ns12,ivminus,iu_r,1)*sqrts(ns12)
+           z12(iv,iu) =-( z1(ns12,ivminus,iu_r,0) + z1( ns12,ivminus,iu_r,1)*sqrts(ns12))
+           rub(iv,iu) =- ru0(ns,  ivminus,iu_r)
+           zub(iv,iu) =  zu0(ns,  ivminus,iu_r)
+           ru12(iv,iu)=-(ru0(ns,  ivminus,iu_r)   + ru0(ns12,ivminus,iu_r))*p5
+           zu12(iv,iu)= (zu0(ns,  ivminus,iu_r)   + zu0(ns12,ivminus,iu_r))*p5
         END DO
-
      END IF
-
+     
      ! Scan over r-z grid for interior point
-     rmin = MINVAL(r1b)
-     rmax = MAXVAL(r1b)
-     zmin = MINVAL(z1b)
-     zmax = MAXVAL(z1b)
+     rmin = MINVAL(r1b(iv,:))
+     rmax = MAXVAL(r1b(iv,:))
+     zmin = MINVAL(z1b(iv,:))
+     zmax = MAXVAL(z1b(iv,:))
      rcom(iv) = (rmax + rmin)/2
      zcom(iv) = (zmax + zmin)/2
 
@@ -139,19 +170,19 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
 
   ! debugging output from guess_axis
   if (open_dbg_context("guess_axis")) then
-
-    call add_real_2d("r1b" , nzeta, ntheta1, r1b )
-    call add_real_2d("z1b" , nzeta, ntheta1, z1b )
-    call add_real_2d("rub" , nzeta, ntheta1, rub )
-    call add_real_2d("zub" , nzeta, ntheta1, zub )
-    call add_real_2d("r12" , nzeta, ntheta1, r12 )
-    call add_real_2d("z12" , nzeta, ntheta1, z12 )
-    call add_real_2d("rs"  , nzeta, ntheta1, rs  )
-    call add_real_2d("zs"  , nzeta, ntheta1, zs  )
-    call add_real_2d("tau" , nzeta, ntheta1, tau )
-    call add_real_2d("ru12", nzeta, ntheta1, ru12)
-    call add_real_2d("zu12", nzeta, ntheta1, zu12)
-    call add_real_2d("tau0", nzeta, ntheta1, tau0)
+    
+    call add_real_2d("r1b" , ivmax, ntheta1, r1b(1:ivmax,:) )
+    call add_real_2d("z1b" , ivmax, ntheta1, z1b(1:ivmax,:) )
+    call add_real_2d("rub" , ivmax, ntheta1, rub(1:ivmax,:) )
+    call add_real_2d("zub" , ivmax, ntheta1, zub(1:ivmax,:) )
+    call add_real_2d("r12" , ivmax, ntheta1, r12(1:ivmax,:) )
+    call add_real_2d("z12" , ivmax, ntheta1, z12(1:ivmax,:) )
+    call add_real_2d("rs"  , ivmax, ntheta1, rs(1:ivmax,:)  )
+    call add_real_2d("zs"  , ivmax, ntheta1, zs(1:ivmax,:)  )
+    call add_real_2d("tau" , ivmax, ntheta1, tau(1:ivmax,:) )
+    call add_real_2d("ru12", ivmax, ntheta1, ru12(1:ivmax,:))
+    call add_real_2d("zu12", ivmax, ntheta1, zu12(1:ivmax,:))
+    call add_real_2d("tau0", ivmax, ntheta1, tau0(1:ivmax,:))
 
     call add_real_1d("rcom", nzeta, rcom)
     call add_real_1d("zcom", nzeta, zcom)
@@ -163,5 +194,10 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
 
     call close_dbg_out()
   end if
+  
+  deallocate(rcom, zcom)
+  deallocate(r1b, z1b, rub, zub, &
+             r12, z12, &
+             rs, zs, tau, ru12, zu12, tau0)
 
 END SUBROUTINE guess_axis

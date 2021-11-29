@@ -4,7 +4,7 @@
 !> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
 !>
 SUBROUTINE jacobian
-  USE vmec_main, ONLY: ohs, nrzt, first, iter2
+  USE vmec_main, ONLY: ohs, nrzt, first, iter2, funct3d_calls
   USE vmec_params, ONLY: meven, modd
   use vmec_input, only: input_extension, nzeta, dump_jacobian
   USE realspace
@@ -57,7 +57,7 @@ SUBROUTINE jacobian
   tau(1:nrzt:ns) = temp(:)
 
   ! check output from jacobian()
-  if (open_dbg_context("jacobian")) then
+  if (open_dbg_context("jacobian", funct3d_calls)) then
 
     call add_real_3d("r12",  ns, nzeta, ntheta3, r12,  order=(/ 2, 3, 1 /) )
     call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 2, 3, 1 /) )

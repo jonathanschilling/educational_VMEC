@@ -1,0 +1,77 @@
+&INDATA
+
+! VMEC Execution parameters.
+  DELT = 1.0
+  NTOR = 8
+  MPOL = 8
+  NS_ARRAY    = 51
+  FTOL_ARRAY  = 1.0e-12
+  NITER_array = 5000
+  NSTEP = 1
+  NVACSKIP = 10
+  LASYM = F
+
+  NZETA = 36
+  NFP = 5
+
+! Plasma current parameters.
+  NCURR = 1
+  PCURR_TYPE = 'sum_atan'
+  CURTOR = 5000.0
+  AC = 0, 1, 1, 1.5, 1
+
+! Plasma pressure parameters
+  SPRES_PED = 1.0
+  pmass_type = 'two_Lorentz'
+  PRES_SCALE = 50000.0
+  AM = 1, 1, 1, 1, 1, 1, 1, 1
+
+! Fitting parameters.
+  GAMMA = 0.0
+  PHIEDGE = -1.7104
+  BLOAT = 1.0
+
+! Vacuum Fields.
+  MGRID_FILE = 'mgrid_w7x_v2_10mm_grid.nc'
+
+! Initial Position.
+  RAXIS_CC = 5.5607E+00
+  ZAXIS_CS = 0.0000E+00
+  RBC(0,0) = 5.5210E+00
+  RBC(1,0) = 2.7849e-01
+  RBC(0,1) = 4.8900E-01
+  ZBS(0,0) = 0.0000E+00
+  ZBS(1,0) = -2.3504e-01
+  ZBS(0,1) = 6.2496E-01
+
+  EXTCUR( 1) =  1.28700e+04 ! AAE10_SC
+  EXTCUR( 2) =  1.31220e+04 ! AAE29_SC
+  EXTCUR( 3) =  1.38960e+04 ! AAE38_SC
+  EXTCUR( 4) =  1.19640e+04 ! AAE47_SC
+  EXTCUR( 5) =  1.08440e+04 ! AAE56_SC
+  EXTCUR( 6) = -1.00000e+00 ! AAE14_SC
+  EXTCUR( 7) = -1.00000e+00 ! AAE23_SC
+  EXTCUR( 8) =  0.00000e+00 ! SWEEP1
+  EXTCUR( 9) =  0.00000e+00 ! SWEEP2
+  EXTCUR(10) =  0.00000e+00 ! SWEEP3
+  EXTCUR(11) =  0.00000e+00 ! SWEEP4
+  EXTCUR(12) =  0.00000e+00 ! SWEEP5
+  EXTCUR(13) =  0.00000e+00 ! SWEEP6
+  EXTCUR(14) =  0.00000e+00 ! SWEEP7
+  EXTCUR(15) =  0.00000e+00 ! SWEEP8
+  EXTCUR(16) =  0.00000e+00 ! SWEEP9
+  EXTCUR(17) =  0.00000e+00 ! SWEEP10
+  EXTCUR(18) =  0.00000e+00 ! AAQ11
+  EXTCUR(19) =  0.00000e+00 ! AAQ31
+  EXTCUR(20) =  0.00000e+00 ! AAQ41
+  EXTCUR(21) =  0.00000e+00 ! AAQ51
+  EXTCUR(22) =  0.00000e+00 ! AAQ22
+  EXTCUR(23) =  0.00000e+00 ! AAE10
+  EXTCUR(24) =  0.00000e+00 ! AAE29
+  EXTCUR(25) =  0.00000e+00 ! AAE38
+  EXTCUR(26) =  0.00000e+00 ! AAE47
+  EXTCUR(27) =  0.00000e+00 ! AAE56
+  EXTCUR(28) =  0.00000e+00 ! AAE14
+  EXTCUR(29) =  0.00000e+00 ! AAE23
+/
+

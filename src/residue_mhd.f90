@@ -23,6 +23,7 @@ SUBROUTINE residue_mhd (gcr, gcz, gcl, fsqrz, old_fsqz)
 
   INTEGER :: jedge, delIter
   REAL(rprec) :: r1
+  logical, parameter :: skip_scalfor_dbg = .true.
 
   ! IMPOSE M=1 MODE CONSTRAINT TO MAKE THETA ANGLE
   ! INVARIANT TO PHI-SHIFTS (AND THETA SHIFTS FOR ASYMMETRIC CASE)
@@ -72,9 +73,9 @@ SUBROUTINE residue_mhd (gcr, gcz, gcl, fsqrz, old_fsqz)
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
 
   jedge = 0
-  CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge)
+  CALL scalfor (gcr, arm, brm, ard, brd, crd, jedge, skip_scalfor_dbg)
   jedge = 1
-  CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge)
+  CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge, skip_scalfor_dbg)
 ! #end /* ndef _HBANGLE */
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn

@@ -22,7 +22,9 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   INTEGER :: js, l, lk, lt, lz, ntype, m, n, mn
   REAL(rprec), DIMENSION(0:ntor,ntmax) :: rold, zold
   REAL(rprec) :: sm0, t1, facj, si, rax1, zax1
-  INTEGER :: jcount, jk, k
+  INTEGER :: jcount, jk, k  
+
+  profil3d_calls = profil3d_calls + 1
 
   ! expant to full surface grid
   DO js = 1, ns
@@ -78,19 +80,17 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
   ! print *, "initial guess for R_mn, Z_mn in profil3d"
 
-!   write(*,*) "raxis_cc(0)=",raxis_cc(0)
-!   DO m = 0, mpol1
-!      DO n = 0, ntor
-!        if (abs(rmn_bdy(n,m,rcc)) .gt. 1.0e-12_dp) then
-!          write(*,*) n, m, rmn_bdy(n,m,rcc)
-!        end if
-!        if (abs(zmn_bdy(n,m,zcs)) .gt. 1.0e-12_dp) then
-!          write(*,*) n, m, zmn_bdy(n,m,zcs)
-!        end if
-!      end do
+!  write(*,*) "raxis_cc(0)=",raxis_cc(0)
+!  DO m = 0, mpol1
+!    DO n = 0, ntor
+!      if (abs(rmn_bdy(n,m,rcc)) .gt. 1.0e-12_dp) then
+!        write(*,*) n, m, rmn_bdy(n,m,rcc)
+!      end if
+!      if (abs(zmn_bdy(n,m,zcs)) .gt. 1.0e-12_dp) then
+!        write(*,*) n, m, zmn_bdy(n,m,zcs)
+!      end if
 !    end do
-
-
+!  end do
 
   DO js = 1, ns
 
@@ -240,7 +240,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
 
   ! dump all relevant output to a text file
-  if (open_dbg_context("profil3d")) then
+  if (open_dbg_context("profil3d", profil3d_calls)) then
 
     call add_real_3d("scalxc", ns, ntor1, mpol, scalxc(:irzloff))
     call add_real_4d("rmn", ntmax, ns, ntor1, mpol, rmn, order=(/ 2, 3, 4, 1 /) )
@@ -248,7 +248,5 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
     call close_dbg_out()
   end if
-
-  profil3d_calls = profil3d_calls + 1
-
+  
 END SUBROUTINE profil3d

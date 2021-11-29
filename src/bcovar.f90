@@ -454,7 +454,7 @@ SUBROUTINE bcovar (lu, lv)
          call add_real_1d("rru_fac", ns, rru_fac)
          call add_real_1d("frcc_fac", ns, frcc_fac)
          call add_real_1d("fzsc_fac", ns, fzsc_fac)
-         call add_real_1d("tcon", ns, tcon)
+         call add_real_1d("tcon", ns-1, tcon(2:ns))
 
          call add_real_3d("guu", ns, nzeta, ntheta3,        guu, order=(/ 2, 3, 1 /) )
          call add_real_5d("xc",  ns, ntor1, mpol, ntmax, 2, xc,  order=(/ 1, 3, 4, 5, 2 /) )

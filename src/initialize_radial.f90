@@ -57,6 +57,11 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
 
   IF (ns_old .ne. ns) then
+     
+     profil3d_calls = 0
+     funct3d_calls  = 0
+  
+  
      ! ALLOCATE NS-DEPENDENT ARRAYS
      CALL allocate_ns(linterp, neqs_old)
 
@@ -74,7 +79,6 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
      ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
      CALL profil1d()
-     profil3d_calls = 0 ! this is the point where the iterations for a given number of flux surfaces starts...
 
      ! TODO: lreset .and. .not.linter?
      ! If xc is overwritten by interp() anyway, why bother to initialize it in profil3d()?

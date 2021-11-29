@@ -60,6 +60,8 @@ SUBROUTINE funct3d (ier_flag)
   !> dump reference input for and output of NESTOR when using internal NESTOR
   logical :: ldump_vacuum_ref = .false.
 
+  funct3d_calls = funct3d_calls + 1
+
   ! POINTER ALIASES
   lu => czmn
   lv => crmn
@@ -87,8 +89,8 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  if (open_dbg_context("funct3d_geometry")) then
-
+  if (open_dbg_context("funct3d_geometry", funct3d_calls)) then
+    
       call add_real_4d("r1",   ns, 2, nzeta, ntheta3, r1,   order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("ru",   ns, 2, nzeta, ntheta3, ru,   order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("rv",   ns, 2, nzeta, ntheta3, rv,   order=(/ 1, 3, 4, 2 /) )
@@ -346,7 +348,7 @@ SUBROUTINE funct3d (ier_flag)
         end if
 
         IF (ivac .eq. 1) THEN
-           print *,"bsqsav(:,1:2) are filled now"
+!           print *,"bsqsav(:,1:2) are filled now"
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary
            bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary
         ENDIF

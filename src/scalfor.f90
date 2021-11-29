@@ -12,7 +12,7 @@
 !> @param bxd force contribution input
 !> @param cx force contribution input
 !> @param iflag subtract edge instability from preconditioner
-SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
+SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
 
   USE vmec_main
   USE vmec_params
@@ -26,6 +26,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcx
   REAL(rprec), DIMENSION(ns+1,2), INTENT(in) :: axm, bxm, axd, bxd
   REAL(rprec), DIMENSION(ns), INTENT(in) :: cx
+  logical, intent(in) :: skip_scalfor_dbg
 
   REAL(rprec), PARAMETER :: ftol_edge = 1.e-9_dp
   REAL(rprec), PARAMETER :: fac=0.25_dp
@@ -34,6 +35,13 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE :: ax, bx, dx
   REAL(rprec) :: mult_fac
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
+  logical :: dbg_open
+
+  !if (iflag.eq.0) then
+  !  print *, "scalfor_R", funct3d_calls
+  !else
+  !  print *, "scalfor_Z", funct3d_calls
+  !end if
 
   if (iflag.ne.0 .and. iflag.ne.1) then
     stop "unknown iflag in dump_scalfor"
@@ -112,19 +120,30 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   !    dx(ns,1:,1:) = 3*dx(ns,1:,1:)
   ! END IF
 
-  ! check scalfor state == inputs to tridslv
-  ! prior knowledge about how this is called:
-  ! iflag = 0 --> R
-  ! iflag = 1 --> Z
-  if ((iflag.eq.0 .and. open_dbg_context("scalfor_R")) .or. &
-      (iflag.eq.1 .and. open_dbg_context("scalfor_Z"))       ) then
+  if (.not. skip_scalfor_dbg) then
+    ! check scalfor state == inputs to tridslv
+    ! prior knowledge about how this is called:
+    ! iflag = 0 --> R
+    ! iflag = 1 --> Z
+    dbg_open = .false.
+    if (iflag.eq.0) then
+      dbg_open = open_dbg_context("scalfor_R")
+    end if
+    if (iflag.eq.1) then
+      if (dbg_open) then
+        stop "how can dbg_open be true here ?"
+      end if
+      dbg_open = open_dbg_context("scalfor_Z")
+    end if
+      
+    if (dbg_open) then
+      call add_real_3d("ax", ns, ntor1, mpol, ax)
+      call add_real_3d("bx", ns, ntor1, mpol, bx)
+      call add_real_3d("dx", ns, ntor1, mpol, dx)
 
-    call add_real_3d("ax", ns, ntor1, mpol, ax)
-    call add_real_3d("bx", ns, ntor1, mpol, bx)
-    call add_real_3d("dx", ns, ntor1, mpol, dx)
-
-    call close_dbg_out()
-  end if
+      call close_dbg_out()
+    end if ! open_dbg_context
+  end if ! skip_scalfor_dbg
 
   ! SOLVES AX(I)*X(I+1) + DX(I)*X(I) + BX(I)*X(I-1) = GCX(I), I=JMIN3,JMAX AND RETURNS ANSWER IN GCX(I)
   CALL tridslv (ax, dx, bx, gcx, jmin3, jmax, mnsize-1, ns, ntmax)

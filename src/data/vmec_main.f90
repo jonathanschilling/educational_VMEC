@@ -163,5 +163,6 @@ MODULE vmec_main
 
   integer :: vacuum_calls = 0
   integer :: profil3d_calls = 0
+  integer :: funct3d_calls = 0
 
 END MODULE vmec_main

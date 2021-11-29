@@ -4,18 +4,19 @@ module dbgout
 
 contains
 
-function open_dbg_context(context_name)
+function open_dbg_context(context_name, repetition)
   use vmec_dim,   only: ns
   use vmec_main,  only: iter2
   use vmec_input
   implicit none
   
-  character(len=*), intent(in) :: context_name
+  character(len=*), intent(in)  :: context_name
+  integer, intent(in), optional :: repetition
   logical :: open_dbg_context
   
   character(len=255) :: dump_filename
   character(len=255) :: output_folder
-  logical            :: should_write
+  logical            :: should_write, file_exists
   
   ! check if requested context is enabled by input flags
   if      (trim(context_name) .eq. "add_fluxes") then
@@ -107,12 +108,26 @@ function open_dbg_context(context_name)
     ! debugging output into separate folder "input_extension"
     output_folder = trim(input_extension) // "/" // trim(context_name)
     CALL system("mkdir -p "//trim(output_folder))
-        
-    write(dump_filename, 999) trim(output_folder), &
-                              trim(context_name),  &
-                              ns, iter2, trim(input_extension)
-999 format(a,'/',a,'_',i5.5,'_',i6.6,'.',a,'.json')
-
+    
+    if (present(repetition)) then
+      write(dump_filename, 998) trim(output_folder), &
+                                trim(context_name),  &
+                                ns, iter2, repetition, &
+                                trim(input_extension)
+998   format(a,'/',a,'_',i5.5,'_',i6.6,'_',i2.2,'.',a,'.json')
+    else
+      write(dump_filename, 999) trim(output_folder), &
+                                trim(context_name),  &
+                                ns, iter2, trim(input_extension)
+999   format(a,'/',a,'_',i5.5,'_',i6.6,'_01.',a,'.json')
+    end if
+    
+    ! check if file already exists (and stop in that case)
+    inquire(file=trim(dump_filename), exist=file_exists)
+    if (file_exists) then
+      stop "debug output file already exists: '"//trim(dump_filename)//"'"
+    end if
+    
     call open_dbg_out(dump_filename)
   end if
 

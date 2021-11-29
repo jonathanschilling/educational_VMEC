@@ -194,6 +194,8 @@ SUBROUTINE eqsolve(ier_flag)
         ivac = ivac + 1
      ENDIF
 
+     funct3d_calls = 0
+
   END DO iter_loop
 
   ! write MHD energy at end of iterations for current number of surfaces

@@ -87,8 +87,8 @@ SUBROUTINE forces
       call add_real_4d("rv", ns, 2, nzeta, ntheta3, rv, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("zv", ns, 2, nzeta, ntheta3, zv, order=(/ 1, 3, 4, 2 /) )
     else
-      call add_null_4d("rv")
-      call add_null_4d("zv")
+      call add_null("rv")
+      call add_null("zv")
     end if
   end if ! dump_forces
 
@@ -231,10 +231,10 @@ SUBROUTINE forces
       call add_real_3d("czmn_e", ns, nzeta, ntheta3, czmn_e, order=(/ 2, 3, 1 /) )
       call add_real_3d("czmn_o", ns, nzeta, ntheta3, czmn_o, order=(/ 2, 3, 1 /) )
     else
-      call add_null_4d("crmn_e")
-      call add_null_4d("crmn_o")
-      call add_null_4d("czmn_e")
-      call add_null_4d("czmn_o")
+      call add_null("crmn_e")
+      call add_null("crmn_o")
+      call add_null("czmn_e")
+      call add_null("czmn_o")
     end if
 
     call add_real_4d("rcon", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) )

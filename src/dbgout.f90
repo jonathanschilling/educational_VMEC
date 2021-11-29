@@ -14,6 +14,7 @@ function open_dbg_context(context_name)
   logical :: open_dbg_context
   
   character(len=255) :: dump_filename
+  character(len=255) :: output_folder
   logical            :: should_write
   
   ! check if requested context is enabled by input flags
@@ -103,10 +104,14 @@ function open_dbg_context(context_name)
   ! create output filename and open output file
   if (open_dbg_context) then
   
-    ! TODO: debugging output into separate folder
-  
-    write(dump_filename, 995) trim(context_name), ns, iter2, trim(input_extension)
-995 format(a,'_',i5.5,'_',i6.6,'.',a,'.json')
+    ! debugging output into separate folder "input_extension"
+    output_folder = trim(input_extension) // "/" // trim(context_name)
+    CALL system("mkdir -p "//trim(output_folder))
+        
+    write(dump_filename, 999) trim(output_folder), &
+                              trim(context_name),  &
+                              ns, iter2, trim(input_extension)
+999 format(a,'/',a,'_',i5.5,'_',i6.6,'.',a,'.json')
 
     call open_dbg_out(dump_filename)
   end if

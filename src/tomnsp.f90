@@ -157,9 +157,9 @@ SUBROUTINE tomnsps(frzl_array,       &
       call add_real_3d("fzcs", ns, ntor1, mpol, fzcs)
       call add_real_3d("flcs", ns, ntor1, mpol, flcs)
     else
-      call add_null_3d("frss")
-      call add_null_3d("fzcs")
-      call add_null_3d("flcs")
+      call add_null("frss")
+      call add_null("fzcs")
+      call add_null("flcs")
     end if
 
     call close_dbg_out()
@@ -305,9 +305,9 @@ SUBROUTINE tomnspa(frzl_array,       &
       call add_real_3d("fzss", ns, ntor1, mpol, fzss)
       call add_real_3d("flss", ns, ntor1, mpol, flss)
     else
-      call add_null_3d("frcs")
-      call add_null_3d("fzss")
-      call add_null_3d("flss")
+      call add_null("frcs")
+      call add_null("fzss")
+      call add_null("flss")
     end if
 
     call close_dbg_out()

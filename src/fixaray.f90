@@ -9,6 +9,8 @@ SUBROUTINE fixaray
   USE vmec_params, ONLY: jmin2, mscale, nscale, mnyq, nnyq, signgs
 
   use dbgout
+  use vmec_input, only: dump_fixaray, &
+                        dump_spectral_constraint
 
   IMPLICIT NONE
 
@@ -130,8 +132,8 @@ SUBROUTINE fixaray
 
   IF (mn1 .ne. mnmax) STOP 'mn1 != mnmax'
 
-  if (dump_fixaray) then
-    call open_dbg_out("fixaray."//trim(input_extension)//".json")
+  if (dump_fixaray .and. should_write()) then
+    call open_dbg_context("fixaray")
 
     call add_real_2d("cosmu",    ntheta3, mnyq+1, cosmu)
     call add_real_2d("sinmu",    ntheta3, mnyq+1, sinmu)
@@ -192,7 +194,7 @@ SUBROUTINE fixaray
   faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
   faccon(mpol1) = zero
 
-  if (dump_fixaray) then
+  if (dump_fixaray .and. should_write()) then
     call add_int("ntheta3", ntheta3)
     call add_int("mnyq", mnyq)
     call add_int("nzeta", nzeta)
@@ -216,8 +218,8 @@ SUBROUTINE fixaray
     call close_dbg_out()
   end if
 
-  if (dump_spectral_constraint) then
-    call open_dbg_out("spectral_constraint."//trim(input_extension)//".json")
+  if (dump_spectral_constraint .and. should_write()) then
+    call open_dbg_context("spectral_constraint")
 
     ! xmpq is allocated statically, so need size here explicitly!
     call add_real_2d("xmpq", mpol, 3, xmpq(0:mpol1,1:3))

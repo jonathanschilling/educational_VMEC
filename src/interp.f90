@@ -63,11 +63,8 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
         xnew(1,:,ntype) = 0
   END DO
 
-  if (dump_interp) then
-    write(dump_filename, 999) nsold, nsnew, trim(input_extension)
-999 format('interp_',i5.5,'_',i5.5,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_interp .and. should_write()) then
+    call open_dbg_context("interp")
 
     call add_real_1d("sj", nsnew, sj)
     call add_int_1d("js1", nsnew, js1)

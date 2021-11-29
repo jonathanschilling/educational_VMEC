@@ -17,6 +17,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE stel_kinds, ONLY: dp
 
   use dbgout
+  use vmec_input, only: dump_calc_fbal
 
   implicit none
 
@@ -53,11 +54,8 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   equif(ns) = 0
 
   ! check calc_fbal output
-  if (dump_calc_fbal .and. iter2.le.max_dump) then
-    write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('calc_fbal_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_calc_fbal .and. should_write()) then
+    call open_dbg_context("calc_fbal")
 
     call add_real_1d("buco", ns, buco)
     call add_real_1d("bvco", ns, bvco)

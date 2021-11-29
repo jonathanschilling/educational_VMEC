@@ -30,6 +30,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   USE vmec_main, p5 => cp5
 
   use dbgout
+  use vmec_input, only: dump_symforce
 
   IMPLICIT NONE
 
@@ -47,11 +48,8 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
             rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)
 
 
-  if (dump_symforce .and. iter2.le.max_dump) then
-    write(dump_filename, 997) ns, iter2, trim(input_extension)
-997 format('symforce_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_symforce .and. should_write()) then
+    call open_dbg_context("symforce")
 
     call add_real_4d("ars", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("brs", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
@@ -135,7 +133,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   DEALLOCATE (ars_0, brs_0, azs_0, bzs_0, bls_0,          &
               rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)
 
-  if (dump_symforce .and. iter2.le.max_dump) then
+  if (dump_symforce .and. should_write()) then
     call add_real_4d("ars_out", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("brs_out", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("crs_out", ns, 2, nzeta, ntheta3, crs, order=(/ 2, 3, 4, 1 /) )

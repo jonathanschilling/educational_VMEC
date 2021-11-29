@@ -19,6 +19,15 @@ SUBROUTINE bcovar (lu, lv)
   USE fbal
 
   use dbgout
+  use vmec_input, only: dump_metric, &
+                        dump_volume, &
+                        dump_bcontrav, &
+                        dump_bcov, &
+                        dump_lambda_forces, &
+                        dump_bcov_full, &
+                        dump_precondn, &
+                        dump_forceNorms_tcon, &
+                        dump_lulv_comb
 
   IMPLICIT NONE
 
@@ -114,11 +123,8 @@ SUBROUTINE bcovar (lu, lv)
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
   ! check metric coefficients
-  if (dump_metric .and. iter2.le.max_dump) then
-      write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('metric_',i5.5,'_',i6.6,'.',a,'.json')
-
-      call open_dbg_out(dump_filename)
+  if (dump_metric .and. should_write()) then
+      call open_dbg_context("metric")
 
       call add_real_3d("guu",   ns, nzeta, ntheta3, guu,   order=(/ 2, 3, 1 /) )
       call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv,   order=(/ 2, 3, 1 /) )
@@ -153,11 +159,8 @@ SUBROUTINE bcovar (lu, lv)
   end if
 
   ! check plasma volume computation
-  if (dump_volume .and. iter2.le.max_dump) then
-    write(dump_filename, 997) ns, iter2, trim(input_extension)
-997 format('volume_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_volume .and. should_write()) then
+    call open_dbg_context("volume")
 
     call add_real_1d("vp", ns-1, vp(2:ns))
     call add_real("voli", voli)
@@ -194,11 +197,8 @@ SUBROUTINE bcovar (lu, lv)
   bsupu(ndim)=0
   bsupv(ndim)=0
 
-  if (dump_bcontrav .and.  iter2.le.2) then
-    write(dump_filename, 996) ns, iter2, trim(input_extension)
-996 format('bcontrav_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_bcontrav .and.  should_write()) then
+    call open_dbg_context("bcontrav")
 
     call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )
     call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv, order=(/ 2, 3, 1 /) )
@@ -245,11 +245,8 @@ SUBROUTINE bcovar (lu, lv)
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
 
-  if (dump_bcov .and. iter2.le.2) then
-    write(dump_filename, 994) ns, iter2, trim(input_extension)
-994 format('bcov_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_bcov .and. should_write()) then
+    call open_dbg_context("bcov")
 
     call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh, order=(/ 2, 3, 1 /) )
     call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh, order=(/ 2, 3, 1 /) )
@@ -286,11 +283,8 @@ SUBROUTINE bcovar (lu, lv)
 !       lu(1,1), bsubu_e(1), bsubu_e(2)
 !   end if
 
-   if (dump_lambda_forces .and. iter2.le.max_dump) then
-    write(dump_filename, 993) ns, iter2, trim(input_extension)
-993 format('lambda_forces_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+   if (dump_lambda_forces .and. should_write()) then
+    call open_dbg_context("lambda_forces")
 
     call add_real_3d("lvv",       ns, nzeta, ntheta3, lvv,     order=(/ 2, 3, 1 /) )
     call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:,0), order=(/ 2, 3, 1 /) )
@@ -344,11 +338,8 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (dump_bcov_full .and. iter2.le.max_dump) then
-    write(dump_filename, 990) ns, iter2, trim(input_extension)
-990 format('bcov_full_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_bcov_full .and. should_write()) then
+    call open_dbg_context("bcov_full")
 
     call add_real("rbtor0", rbtor0)
     call add_real("rbtor",  rbtor)
@@ -356,8 +347,8 @@ SUBROUTINE bcovar (lu, lv)
 
     call add_real_1d("bdamp", ns, bdamp)
 
-    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )
 
     call close_dbg_out()
   end if
@@ -385,11 +376,8 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, rru_fac, sin01)
 
        ! check preconditioner output
-       if (dump_precondn .and. iter2.le.max_dump) then
-         write(dump_filename, 991) ns, iter2, trim(input_extension)
-991 format('precondn_',i5.5,'_',i6.6,'.',a,'.json')
-
-         call open_dbg_out(dump_filename)
+       if (dump_precondn .and. should_write()) then
+         call open_dbg_context("precondn")
 
          call add_real_2d("arm", ns+1, 2, arm)
          call add_real_2d("ard", ns+1, 2, ard)
@@ -468,11 +456,8 @@ SUBROUTINE bcovar (lu, lv)
        IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (dump_forceNorms_tcon .and. iter2.le.max_dump) then
-         write(dump_filename, 989) ns, iter2, trim(input_extension)
-989 format('forceNorms_tcon_',i5.5,'_',i6.6,'.',a,'.json')
-
-         call open_dbg_out(dump_filename)
+       if (dump_forceNorms_tcon .and. should_write()) then
+         call open_dbg_context("forceNorms_tcon")
 
          call add_real("volume", volume)
          call add_real("r2",     MAX(wb,wp)/volume)
@@ -510,11 +495,8 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (dump_lulv_comb .and. iter2.le.max_dump) then
-       write(dump_filename, 988) ns, iter2, trim(input_extension)
-988 format('lulv_comb_',i5.5,'_',i6.6,'.',a,'.json')
-
-       call open_dbg_out(dump_filename)
+     if (dump_lulv_comb .and. should_write()) then
+       call open_dbg_context("lulv_comb")
 
        call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
        call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )

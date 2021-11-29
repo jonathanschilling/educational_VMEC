@@ -169,11 +169,8 @@ subroutine vmec
 
            ! If this point is reached, the current multi-grid step should have properly converged.
            ! Now dump the current state vector for debugging.
-           if (dump_multigrid_result) then
-             write(dump_filename, 999) nsval, iter2-1, trim(input_extension)
-999 format('multigrid_result_',i5.5,'_',i6.6,'.',a,'.json')
-
-             call open_dbg_out(dump_filename)
+           if (dump_multigrid_result .and. should_write()) then
+             call open_dbg_context("multigrid_result")
 
              call add_int("ns", nsval)
              call add_int("iter2", iter2)

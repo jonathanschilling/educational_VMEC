@@ -6,7 +6,7 @@
 SUBROUTINE jacobian
   USE vmec_main, ONLY: ohs, nrzt, first, iter2
   USE vmec_params, ONLY: meven, modd
-  use vmec_input, only: input_extension, nzeta
+  use vmec_input, only: input_extension, nzeta, dump_jacobian
   USE realspace
   USE vmec_dim, ONLY: ns, ntheta3
   USE vforces, r12 => armn_o, ru12 => azmn_e, zu12 => armn_e, &
@@ -57,11 +57,8 @@ SUBROUTINE jacobian
   tau(1:nrzt:ns) = temp(:)
 
   ! check output from jacobian()
-  if (dump_jacobian .and. iter2.le.max_dump) then
-    write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('jacobian_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_jacobian .and. should_write()) then
+    call open_dbg_context("jacobian")
 
     call add_real_3d("r12",  ns, nzeta, ntheta3, r12,  order=(/ 2, 3, 1 /) )
     call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 2, 3, 1 /) )

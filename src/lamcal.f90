@@ -13,6 +13,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   USE realspace, ONLY: sqrts
 
   use dbgout
+  use vmec_input, only: dump_lamcal
 
   IMPLICIT NONE
 
@@ -83,11 +84,8 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   END DO
 
   ! check lamcal output
-  if (dump_lamcal) then
-    write(dump_filename, 998) ns, trim(input_extension)
-998 format('lamcal_',i5.5,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_lamcal .and. should_write()) then
+    call open_dbg_context("lamcal")
 
     call add_real("pfactor0", pfactor0)
 

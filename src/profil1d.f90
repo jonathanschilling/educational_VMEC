@@ -12,6 +12,7 @@ SUBROUTINE profil1d()
   USE realspace, ONLY: shalf, sqrts
 
   use dbgout
+  use vmec_input, only: dump_profil1d
 
   IMPLICIT NONE
 
@@ -133,11 +134,8 @@ SUBROUTINE profil1d()
   sp(0) = 0
   sp(1) = sm(2)
 
-  if (dump_profil1d) then
-    write(dump_filename, 999) ns, trim(input_extension)
-999 format('profil1d_',i5.5,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_profil1d .and. should_write()) then
+    call open_dbg_context("profil1d")
 
     call add_real("torflux_edge", torflux_edge)
     call add_real("polflux_edge", polflux_edge)

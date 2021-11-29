@@ -23,6 +23,7 @@ SUBROUTINE tomnsps(frzl_array,       &
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
 
   use dbgout
+  use vmec_input, only: dump_tomnsps
 
   IMPLICIT NONE
 
@@ -146,11 +147,8 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
-  if (dump_tomnsps .and. iter2.le.max_dump) then
-    write(dump_filename, 999) ns, iter2, trim(input_extension)
-999 format('tomnsps_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_tomnsps .and. should_write()) then
+    call open_dbg_context("tomnsps")
 
     call add_real_3d("frcc", ns, ntor1, mpol, frcc)
     call add_real_3d("fzsc", ns, ntor1, mpol, fzsc)
@@ -193,6 +191,7 @@ SUBROUTINE tomnspa(frzl_array,       &
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
 
   use dbgout
+  use vmec_input, only: dump_tomnspa
 
   IMPLICIT NONE
 
@@ -298,11 +297,8 @@ SUBROUTINE tomnspa(frzl_array,       &
 
   DEALLOCATE (work1, temp1, temp3)
 
-  if (dump_tomnspa .and. iter2.le.max_dump) then
-    write(dump_filename, 998) ns, iter2, trim(input_extension)
-998 format('tomnspa_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_tomnspa .and. should_write()) then
+    call open_dbg_context("tomnspa")
 
     call add_real_3d("frsc", ns, ntor1, mpol, frsc)
     call add_real_3d("fzcc", ns, ntor1, mpol, fzcc)

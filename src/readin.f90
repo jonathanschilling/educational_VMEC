@@ -12,6 +12,7 @@
                        nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb
 
   use dbgout
+  use vmec_input, only: dump_readin_boundary
 
   IMPLICIT NONE
 
@@ -395,8 +396,8 @@
      DEALLOCATE (temp)
   END IF
 
-  if (dump_readin_boundary) then
-    call open_dbg_out("readin_boundary."//trim(input_extension)//".json")
+  if (dump_readin_boundary .and. should_write()) then
+    call open_dbg_context("readin_boundary")
 
     if (.not. lasym) then
       if (.not. lthreed) then

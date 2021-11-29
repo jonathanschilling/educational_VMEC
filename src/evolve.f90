@@ -15,6 +15,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   USE xstuff
 
   use dbgout
+  use vmec_input, only: dump_evolve
 
   IMPLICIT NONE
 
@@ -86,11 +87,8 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   fac = one/(one + dtau)
 
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
-  if (dump_evolve .and. iter2.le.nDump) then
-    write(dump_filename, 999) ns, iter2, trim(input_extension)
-999 format('evolve_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_evolve .and. should_write()) then
+    call open_dbg_context("evolve")
 
     call add_real_5d("xc_before",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
     call add_real_5d("xcdot_before", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
@@ -103,7 +101,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xcdot = fac*(b1*xcdot + time_step*gc) ! update velocity
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
-  if (dump_evolve .and. iter2.le.nDump) then
+  if (dump_evolve .and. should_write()) then
     call add_real_5d("xc_after",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
     call add_real_5d("xcdot_after", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
 

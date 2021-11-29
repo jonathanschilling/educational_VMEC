@@ -16,6 +16,7 @@ SUBROUTINE forces
                crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
 
   use dbgout
+  use vmec_input, only: dump_forces
 
   IMPLICIT NONE
 
@@ -57,11 +58,8 @@ SUBROUTINE forces
   ! if lthreed:
   !  rv, zv
 
-  if (dump_forces .and. iter2.le.max_dump) then
-    write(dump_filename, 999) ns, iter2, trim(input_extension)
-999 format('forces_',i5.5,'_',i6.6,'.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_forces .and. should_write()) then
+    call open_dbg_context("forces")
 
     call add_real_3d("lu_e",        ns, nzeta, ntheta3, lu_e,      order=(/ 2, 3, 1 /) )
     call add_real_3d("lv_e",        ns, nzeta, ntheta3, lv_e,      order=(/ 2, 3, 1 /) )
@@ -208,7 +206,7 @@ SUBROUTINE forces
   zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
-  if (dump_forces .and. iter2.le.max_dump) then
+  if (dump_forces .and. should_write()) then
     call add_real_3d("armn_e", ns, nzeta, ntheta3, armn_e, order=(/ 2, 3, 1 /) )
     call add_real_3d("armn_o", ns, nzeta, ntheta3, armn_o, order=(/ 2, 3, 1 /) )
     call add_real_3d("brmn_e", ns, nzeta, ntheta3, brmn_e, order=(/ 2, 3, 1 /) )

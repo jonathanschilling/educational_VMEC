@@ -29,6 +29,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   use vmec_main, only: input_extension
 
   use dbgout
+  use vmec_input, only: dump_bsqvac
 
   IMPLICIT NONE
 
@@ -154,12 +155,11 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
 
-   if (dump_bsqvac) then
-    write(dump_filename, 999) icall, trim(input_extension)
-999 format('bsqvac_vac1_',i5.5,'.',a,'.json')
+   if (dump_bsqvac .and. should_write()) then
+    call open_dbg_context("bsqvac_vac1")
 
-    call open_dbg_out(dump_filename)
     call add_real_2d("bsqvac", nv, nu3, bsqvac)
+
     call close_dbg_out()
   end if
 

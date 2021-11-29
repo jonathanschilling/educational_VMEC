@@ -19,6 +19,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   USE vmec_dim, ONLY: ns
 
   use dbgout
+  use vmec_input, only: dump_scalfor
 
   IMPLICIT NONE
 
@@ -109,22 +110,18 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! END IF
 
   ! check scalfor state == inputs to tridslv
-  if (dump_scalfor .and. iter2.le.max_dump) then
+  if (dump_scalfor .and. should_write()) then
 
     ! prior knowledge about how this is called:
     ! iflag=0 --> R
     ! iflag=1 --> Z
     if (iflag.eq.0) then
-      write(dump_filename, 995) ns, iter2, trim(input_extension)
-995 format('scalfor_R_',i5.5,'_',i6.6,'.',a,'.json')
+      call open_dbg_context("scalfor_R")
     elseif (iflag.eq.1) then
-      write(dump_filename, 996) ns, iter2, trim(input_extension)
-996 format('scalfor_Z_',i5.5,'_',i6.6,'.',a,'.json')
+      call open_dbg_context("scalfor_Z")
     else
       stop "unknown iflag in dump_scalfor"
     end if
-
-    call open_dbg_out(dump_filename)
 
     call add_real_3d("ax", ns, ntor1, mpol, ax)
     call add_real_3d("bx", ns, ntor1, mpol, bx)

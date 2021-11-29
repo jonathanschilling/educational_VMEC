@@ -13,6 +13,7 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   USE realspace, ONLY: sqrts
 
   use dbgout
+  use vmec_input, only: dump_guess_axis
 
   IMPLICIT NONE
 
@@ -138,11 +139,8 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   END DO
 
   ! debugging output from guess_axis
-  if (dump_guess_axis) then
-    write(dump_filename, 998) trim(input_extension)
-998 format('guess_axis.',a,'.json')
-
-    call open_dbg_out(dump_filename)
+  if (dump_guess_axis .and. should_write()) then
+    call open_dbg_context("guess_axis")
 
     call add_real_2d("r1b" , nzeta, ntheta1, r1b )
     call add_real_2d("z1b" , nzeta, ntheta1, z1b )

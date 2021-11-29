@@ -375,8 +375,7 @@
   
   rtest = SUM(rbcc(1:ntor1,mj))
   ztest = SUM(zbsc(1:ntor1,mj))
-  lflip=(rtest*ztest .lt. zero)
-  if (lflip) then
+  if (rtest*ztest .lt. zero) then
     stop "flip_theta did not fix it!"
   end if
 
@@ -411,32 +410,32 @@
       if (.not. lthreed) then
         call add_real_2d("rbcc", ntor1, mpol, rbcc)
         call add_real_2d("zbsc", ntor1, mpol, zbsc)
-        call add_null_2d("rbss")
-        call add_null_2d("zbcs")
-        call add_null_2d("rbsc")
-        call add_null_2d("zbcc")
-        call add_null_2d("rbcs")
-        call add_null_2d("zbss")
+        call add_null("rbss")
+        call add_null("zbcs")
+        call add_null("rbsc")
+        call add_null("zbcc")
+        call add_null("rbcs")
+        call add_null("zbss")
       else
         call add_real_2d("rbcc", ntor1, mpol, rbcc)
         call add_real_2d("zbsc", ntor1, mpol, zbsc)
         call add_real_2d("rbss", ntor1, mpol, rbss)
         call add_real_2d("zbcs", ntor1, mpol, zbcs)
-        call add_null_2d("rbsc")
-        call add_null_2d("zbcc")
-        call add_null_2d("rbcs")
-        call add_null_2d("zbss")
+        call add_null("rbsc")
+        call add_null("zbcc")
+        call add_null("rbcs")
+        call add_null("zbss")
       end if
     else
       if (.not. lthreed) then
         call add_real_2d("rbcc", ntor1, mpol, rbcc)
         call add_real_2d("zbsc", ntor1, mpol, zbsc)
-        call add_null_2d("rbss")
-        call add_null_2d("zbcs")
+        call add_null("rbss")
+        call add_null("zbcs")
         call add_real_2d("rbsc", ntor1, mpol, rbsc)
         call add_real_2d("zbcc", ntor1, mpol, zbcc)
-        call add_null_2d("rbcs")
-        call add_null_2d("zbss")
+        call add_null("rbcs")
+        call add_null("zbss")
       else
         call add_real_2d("rbcc", ntor1, mpol, rbcc)
         call add_real_2d("zbsc", ntor1, mpol, zbsc)

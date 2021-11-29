@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d2/d04/namespacevacmod0.html#abafb31353914441872d856afe6b168cc":[1,0,13,13],
 "d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc":[1,0,13,15],
 "d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2":[1,0,13,1],
 "d2/d10/namespacevmec__dim.html":[1,0,15],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d5/dde/namespacevparams.html#a69041d69189c8e589b3a160902dd3120":[1,0,22,19],
 "d5/dde/namespacevparams.html#a6b8c6353f8448e4d4fb2c5a2edc45808":[1,0,22,3],
 "d5/dde/namespacevparams.html#a80d6786fffa441ff48365db16af19557":[1,0,22,6],
-"d5/dde/namespacevparams.html#a93129e6c611a1b41e5560b2f48c8a0a5":[1,0,22,23],
-"d5/dde/namespacevparams.html#aac852c62983af4adb4cbf4e36830fea4":[1,0,22,20]
+"d5/dde/namespacevparams.html#a93129e6c611a1b41e5560b2f48c8a0a5":[1,0,22,23]
 };

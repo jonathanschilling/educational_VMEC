@@ -1,9 +1,7 @@
 var namespaces_dup =
 [
     [ "dbgout", "d8/dfd/namespacedbgout.html", [
-      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b", null ],
-      [ "should_write", "d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559", null ],
-      [ "dump_filename", "d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55", null ]
+      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887", null ]
     ] ],
     [ "fbal", "df/d88/namespacefbal.html", [
       [ "frcc_fac", "df/d88/namespacefbal.html#ab5c754bcc9f66b0acd7642a15b0fe080", null ],
@@ -538,7 +536,7 @@ var namespaces_dup =
       [ "dump_bcontrav", "d8/dbf/namespacevmec__input.html#ae79ac9a4167bf950746795d4acd2e584", null ],
       [ "dump_bcov", "d8/dbf/namespacevmec__input.html#a68828f97ab9b42ea3fe39cbaebb312ae", null ],
       [ "dump_bcov_full", "d8/dbf/namespacevmec__input.html#a47ae8e29221925d6c5fdad642b42f6b3", null ],
-      [ "dump_bsqvac", "d8/dbf/namespacevmec__input.html#a6920376f5728c881ceaa18f46dbfecfa", null ],
+      [ "dump_bsqvac_vac1", "d8/dbf/namespacevmec__input.html#a1c854ae37e0dc956f7f0ad4f380b77b4", null ],
       [ "dump_calc_fbal", "d8/dbf/namespacevmec__input.html#a81306108b43fc4a9508062479a55695f", null ],
       [ "dump_constraint_force", "d8/dbf/namespacevmec__input.html#a89c76d3b521f435ed778c9704a5fdb13", null ],
       [ "dump_evolve", "d8/dbf/namespacevmec__input.html#a3ee0e863e0052ad9ab896de6b9be97f6", null ],
@@ -547,7 +545,7 @@ var namespaces_dup =
       [ "dump_forces", "d8/dbf/namespacevmec__input.html#a81296e34dd0ba56f35e776274770864c", null ],
       [ "dump_fsq", "d8/dbf/namespacevmec__input.html#a5c6e56838ebc995ec1cdbce5aece69ba", null ],
       [ "dump_fsq1", "d8/dbf/namespacevmec__input.html#a3702f7a28e9b68d271dd049aac18db9d", null ],
-      [ "dump_geometry", "d8/dbf/namespacevmec__input.html#a16146f84b54db33457fec06fc376d3a9", null ],
+      [ "dump_funct3d_geometry", "d8/dbf/namespacevmec__input.html#a3cc8881555f2cdfeb9b4db4f53078961", null ],
       [ "dump_guess_axis", "d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd", null ],
       [ "dump_interp", "d8/dbf/namespacevmec__input.html#a9495d7b36be1d8815574e1c6ca51ba27", null ],
       [ "dump_jacobian", "d8/dbf/namespacevmec__input.html#a3ce0e9393c56963910a2ec05676246fb", null ],
@@ -556,15 +554,16 @@ var namespaces_dup =
       [ "dump_lulv_comb", "d8/dbf/namespacevmec__input.html#aae5724d8ffb632b177ac6c7371cf6770", null ],
       [ "dump_metric", "d8/dbf/namespacevmec__input.html#aaaeece74984ffcb9eb8580b777ad0365", null ],
       [ "dump_multigrid_result", "d8/dbf/namespacevmec__input.html#a5f8d58daa8225d7e86456fbf83ddd425", null ],
-      [ "dump_physical_gc", "d8/dbf/namespacevmec__input.html#a195820d116142ec73b795edea68478ba", null ],
+      [ "dump_phys_gc", "d8/dbf/namespacevmec__input.html#aa973f17fd11e9778b4ab77f24c42c0a1", null ],
       [ "dump_precondn", "d8/dbf/namespacevmec__input.html#a2309fd4dda6b2f2ed24fc24c2e00300e", null ],
       [ "dump_profil1d", "d8/dbf/namespacevmec__input.html#abf12e8a9f30a08ae42cef04fb72a7fb4", null ],
       [ "dump_profil3d", "d8/dbf/namespacevmec__input.html#acee53407f837b677e3c52a7d8902fcb6", null ],
       [ "dump_rbsq", "d8/dbf/namespacevmec__input.html#a059ba4e6c7ded6a36d4cfdcf0ffb3871", null ],
       [ "dump_readin_boundary", "d8/dbf/namespacevmec__input.html#a43c2aa16b360c6ad610088cd3cc93481", null ],
       [ "dump_scale_m1", "d8/dbf/namespacevmec__input.html#adaee4e2ef44444d1bb24eae4de043b0d", null ],
-      [ "dump_scalfor", "d8/dbf/namespacevmec__input.html#a54a430eb8eefc82bb106223b7a6f4ffd", null ],
       [ "dump_scalfor_out", "d8/dbf/namespacevmec__input.html#a064f74afd37213ecf597bf6f1b8340a7", null ],
+      [ "dump_scalfor_r", "d8/dbf/namespacevmec__input.html#aa0859ab3daaf16dbb269b03d883da376", null ],
+      [ "dump_scalfor_z", "d8/dbf/namespacevmec__input.html#a17e0f52b500158fee9ca65ac422db22b", null ],
       [ "dump_spectral_constraint", "d8/dbf/namespacevmec__input.html#a1bd8313e00014acbbc99bd458e8f3d06", null ],
       [ "dump_symforce", "d8/dbf/namespacevmec__input.html#a5bc98c298e7d6f82660e91795d9829a1", null ],
       [ "dump_tomnspa", "d8/dbf/namespacevmec__input.html#a767bfe05a8310cc7eed0baa1fe68bf13", null ],

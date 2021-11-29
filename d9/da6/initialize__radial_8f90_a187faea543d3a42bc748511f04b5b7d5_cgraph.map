@@ -1,13 +1,12 @@
 <map id="initialize_radial" name="initialize_radial">
-<area shape="rect" id="node1" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="5,151,112,177"/>
-<area shape="rect" id="node2" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="160,49,248,76"/>
-<area shape="rect" id="node6" href="$dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee" title="Interpolate , &#160;and &#160;on full grid." alt="" coords="177,100,231,127"/>
-<area shape="rect" id="node9" href="$d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2" title="Compute phip and iota profiles on full grid." alt="" coords="173,151,235,177"/>
-<area shape="rect" id="node10" href="$dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="173,201,235,228"/>
-<area shape="rect" id="node11" href="$d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" title="Save current or restore previous good state vector and reduce time step." alt="" coords="162,252,246,279"/>
+<area shape="rect" id="node1" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="5,144,112,171"/>
+<area shape="rect" id="node2" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="160,43,248,69"/>
+<area shape="rect" id="node6" href="$dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee" title="Interpolate , &#160;and &#160;on full grid." alt="" coords="177,93,231,120"/>
+<area shape="rect" id="node8" href="$d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2" title="Compute phip and iota profiles on full grid." alt="" coords="173,144,235,171"/>
+<area shape="rect" id="node9" href="$dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="173,195,235,221"/>
+<area shape="rect" id="node10" href="$d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" title="Save current or restore previous good state vector and reduce time step." alt="" coords="162,245,246,272"/>
 <area shape="rect" id="node3" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="323,5,441,32"/>
 <area shape="rect" id="node5" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="331,56,433,83"/>
 <area shape="rect" id="node4" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="516,5,647,32"/>
-<area shape="rect" id="node7" href="$d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b" title=" " alt="" coords="296,113,468,140"/>
-<area shape="rect" id="node8" href="$d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559" title=" " alt="" coords="312,188,452,215"/>
+<area shape="rect" id="node7" href="$d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887" title=" " alt="" coords="296,144,468,171"/>
 </map>

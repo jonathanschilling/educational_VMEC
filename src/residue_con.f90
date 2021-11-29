@@ -6,7 +6,7 @@
 !> @param gcr \f$R\f$-component of forces
 !> @param gcz \f$Z\f$-component of forces
 !> @param gcl \f$\lambda\f$-component of forces
-SUBROUTINE residue_con(gcr, gcz, gcl)
+SUBROUTINE residue_con(gcr, gcz, gcl, fsqrz, old_fsqz)
 
   USE vmec_main, p5 => cp5
   USE vmec_params, ONLY: rss, zcs, rsc, zcc, meven, modd, ntmax
@@ -17,6 +17,7 @@ SUBROUTINE residue_con(gcr, gcz, gcl)
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcr
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcz
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,ntmax), INTENT(inout) :: gcl
+  real(rprec), intent(in) :: fsqrz, old_fsqz
 
   INTEGER, PARAMETER :: n0=0
   INTEGER, PARAMETER :: m0=0
@@ -44,8 +45,8 @@ SUBROUTINE residue_con(gcr, gcz, gcl)
   ! THIS IMPLIES THE CONSTRAINT
   !    3D ONLY : GC(zcs) = 0;
   !    ASYM:     GC(zcc) = 0
-  IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs))
-  IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc))
+  IF (lthreed) CALL constrain_m1(gcr(:,:,m1,rss), gcz(:,:,m1,zcs), old_fsqz)
+  IF (lasym)   CALL constrain_m1(gcr(:,:,m1,rsc), gcz(:,:,m1,zcc), old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! COMPUTE INVARIANT RESIDUALS
@@ -57,7 +58,7 @@ SUBROUTINE residue_con(gcr, gcz, gcl)
   delIter = iter2-iter1
 
   ! Coding for VMEC2000 run stand-alone
-  IF (delIter.lt.50 .and. (fsqr+fsqz).lt.1.E-6_dp) then
+  IF (delIter.lt.50 .and. fsqrz.lt.1.E-6_dp) then
      ! include edge contribution only if converged well enough fast enough (?)
 !      print *, "include edge force in residue"
      jedge = 1

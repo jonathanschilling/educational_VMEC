@@ -12,6 +12,7 @@
                        nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb
 
   use dbgout
+  use theta_flip
 
   IMPLICIT NONE
 
@@ -299,7 +300,9 @@
         IF (m .gt. 0) zbsc(ni,mj) = zbsc(ni,mj) + zbs(n,m)
 
         IF (lthreed) THEN
-           IF (m .gt. 0) rbss(ni,mj) = rbss(ni,mj) + isgn*rbc(n,m)
+           IF (m .gt. 0) then
+             rbss(ni,mj) = rbss(ni,mj) + isgn*rbc(n,m)
+           end if
            zbcs(ni,mj) = zbcs(ni,mj) - isgn*zbs(n,m)
         END IF
 
@@ -369,6 +372,13 @@
      ! (rtest*ztest < 0) means that rtest and ztest have different signs
      CALL flip_theta(rmn_bdy, zmn_bdy)
   end if
+  
+  rtest = SUM(rbcc(1:ntor1,mj))
+  ztest = SUM(zbsc(1:ntor1,mj))
+  lflip=(rtest*ztest .lt. zero)
+  if (lflip) then
+    print *, "flip_theta did not fix it!"
+  end if
 
   ! CONVERT TO INTERNAL FORM FOR (CONSTRAINED) m=1 MODES
   ! INTERNALLY, FOR m=1: XC(rss) = .5(RSS+ZCS), XC(zcs) = .5(RSS-ZCS)
@@ -382,9 +392,19 @@
      ALLOCATE (temp(SIZE(rbcc,1)))
      IF (lthreed) THEN
         mj = 1+joff ! index of m=1 modes for all n
+        
+        print *, "before lconm1"
+        print *, "rbss", rbss(ioff+1,mj)
+        print *, "zbcs", zbcs(ioff+1,mj)
+        
         temp = rbss(:,mj)
         rbss(:,mj) = cp5*(temp(:) + zbcs(:,mj))
         zbcs(:,mj) = cp5*(temp(:) - zbcs(:,mj))
+
+        print *, "after lconm1"
+        print *, "rbss", rbss(ioff+1,mj)
+        print *, "zbcs", zbcs(ioff+1,mj)
+
      END IF
      IF (lasym) THEN
         mj = 1+joff ! index of m=1 modes for all n
@@ -399,8 +419,8 @@
 
     if (.not. lasym) then
       if (.not. lthreed) then
-        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
-        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbcc", ntor1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor1, mpol, zbsc)
         call add_null("rbss")
         call add_null("zbcs")
         call add_null("rbsc")
@@ -408,10 +428,14 @@
         call add_null("rbcs")
         call add_null("zbss")
       else
-        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
-        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
-        call add_real_2d("rbss", ntor+1, mpol, rbss)
-        call add_real_2d("zbcs", ntor+1, mpol, zbcs)
+        call add_real_2d("rbcc", ntor1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor1, mpol, zbsc)
+        
+        print *, "min(|rbss|) = ",minval(abs(rbss(ioff:ioff+ntor, joff:joff+mpol1)))
+        print *, "max(|rbss|) = ",maxval(abs(rbss(ioff:ioff+ntor, joff:joff+mpol1)))
+        
+        call add_real_2d("rbss", ntor1, mpol, rbss)
+        call add_real_2d("zbcs", ntor1, mpol, zbcs)
         call add_null("rbsc")
         call add_null("zbcc")
         call add_null("rbcs")
@@ -419,23 +443,23 @@
       end if
     else
       if (.not. lthreed) then
-        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
-        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
+        call add_real_2d("rbcc", ntor1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor1, mpol, zbsc)
         call add_null("rbss")
         call add_null("zbcs")
-        call add_real_2d("rbsc", ntor+1, mpol, rbsc)
-        call add_real_2d("zbcc", ntor+1, mpol, zbcc)
+        call add_real_2d("rbsc", ntor1, mpol, rbsc)
+        call add_real_2d("zbcc", ntor1, mpol, zbcc)
         call add_null("rbcs")
         call add_null("zbss")
       else
-        call add_real_2d("rbcc", ntor+1, mpol, rbcc)
-        call add_real_2d("zbsc", ntor+1, mpol, zbsc)
-        call add_real_2d("rbss", ntor+1, mpol, rbss)
-        call add_real_2d("zbcs", ntor+1, mpol, zbcs)
-        call add_real_2d("rbsc", ntor+1, mpol, rbsc)
-        call add_real_2d("zbcc", ntor+1, mpol, zbcc)
-        call add_real_2d("rbcs", ntor+1, mpol, rbcs)
-        call add_real_2d("zbss", ntor+1, mpol, zbss)
+        call add_real_2d("rbcc", ntor1, mpol, rbcc)
+        call add_real_2d("zbsc", ntor1, mpol, zbsc)
+        call add_real_2d("rbss", ntor1, mpol, rbss)
+        call add_real_2d("zbcs", ntor1, mpol, zbcs)
+        call add_real_2d("rbsc", ntor1, mpol, rbsc)
+        call add_real_2d("zbcc", ntor1, mpol, zbcc)
+        call add_real_2d("rbcs", ntor1, mpol, rbcs)
+        call add_real_2d("zbss", ntor1, mpol, zbss)
       end if
     end if
 

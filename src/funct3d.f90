@@ -414,7 +414,7 @@ SUBROUTINE funct3d (ier_flag)
      old_fsqz = fsqz
 
      CALL residue    (gc,     gc(1+irzloff),     gc(1+2*irzloff),     fsqrz, old_fsqz)
-     call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff))
+     call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff), fsqrz, old_fsqz)
      call residue_mhd(gc_mhd, gc_mhd(1+irzloff), gc_mhd(1+2*irzloff), fsqrz, old_fsqz)
 
      IF (iter2.eq.1 .and. (fsqr+fsqz+fsql).gt.1.E2_dp) then

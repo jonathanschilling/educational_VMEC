@@ -82,17 +82,17 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7" target="_top" xlink:title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry.">
-<polygon fill="white" stroke="black" points="115.5,-251.5 115.5,-270.5 171.5,-270.5 171.5,-251.5 115.5,-251.5"/>
-<text text-anchor="middle" x="143.5" y="-258.5" font-family="Helvetica,sans-Serif" font-size="10.00">flip_theta</text>
+<g id="a_node6"><a xlink:href="../../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" target="_top" xlink:title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry.">
+<polygon fill="white" stroke="black" points="94,-251.5 94,-270.5 193,-270.5 193,-251.5 94,-251.5"/>
+<text text-anchor="middle" x="143.5" y="-258.5" font-family="Helvetica,sans-Serif" font-size="10.00">theta_flip::flip_theta</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node1&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M31.62,-204.63C42.12,-215.2 60.33,-231.99 79,-242 87.18,-246.39 96.51,-249.89 105.45,-252.64"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="104.72,-256.07 115.3,-255.43 106.63,-249.34 104.72,-256.07"/>
+<path fill="none" stroke="midnightblue" d="M31.62,-204.63C42.12,-215.2 60.33,-231.99 79,-242 83.05,-244.17 87.37,-246.12 91.79,-247.88"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="90.96,-251.3 101.55,-251.4 93.34,-244.71 90.96,-251.3"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">

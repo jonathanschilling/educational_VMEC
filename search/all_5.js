@@ -12,7 +12,7 @@ var searchData=
   ['first_9',['first',['../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c',1,'vmec_main']]],
   ['fixaray_10',['fixaray',['../d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3',1,'fixaray.f90']]],
   ['fixaray_2ef90_11',['fixaray.f90',['../d4/dd1/fixaray_8f90.html',1,'']]],
-  ['flip_5ftheta_12',['flip_theta',['../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7',1,'flip_theta.f90']]],
+  ['flip_5ftheta_12',['flip_theta',['../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d',1,'theta_flip']]],
   ['flip_5ftheta_2ef90_13',['flip_theta.f90',['../d6/d36/flip__theta_8f90.html',1,'']]],
   ['flmwgt_14',['flmwgt',['../db/dae/namespaceread__wout__mod.html#a09e33a9e7d71a406b9cc5090c382723d',1,'read_wout_mod']]],
   ['fnorm_15',['fnorm',['../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416',1,'vmec_main']]],

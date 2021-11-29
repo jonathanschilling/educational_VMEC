@@ -393,7 +393,7 @@
 <!-- Node22 -->
 <g id="node22" class="node">
 <title>Node22</title>
-<g id="a_node22"><a xlink:href="../../d3/d96/residue__con_8f90.html#a412d6d3c67bc4020bcfc3bcf83718b98" target="_top" xlink:title="Compute invariant residuals.">
+<g id="a_node22"><a xlink:href="../../d3/d96/residue__con_8f90.html#a8b2d4eb1bd167c336b39b899858e7bfb" target="_top" xlink:title="Compute invariant residuals.">
 <polygon fill="white" stroke="black" points="478,-1428.5 478,-1447.5 547,-1447.5 547,-1428.5 478,-1428.5"/>
 <text text-anchor="middle" x="512.5" y="-1435.5" font-family="Helvetica,sans-Serif" font-size="10.00">residue_con</text>
 </a>
@@ -1489,17 +1489,17 @@
 <!-- Node83 -->
 <g id="node83" class="node">
 <title>Node83</title>
-<g id="a_node83"><a xlink:href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7" target="_top" xlink:title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry.">
-<polygon fill="white" stroke="black" points="484.5,-114.5 484.5,-133.5 540.5,-133.5 540.5,-114.5 484.5,-114.5"/>
-<text text-anchor="middle" x="512.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">flip_theta</text>
+<g id="a_node83"><a xlink:href="../../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" target="_top" xlink:title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry.">
+<polygon fill="white" stroke="black" points="463,-114.5 463,-133.5 562,-133.5 562,-114.5 463,-114.5"/>
+<text text-anchor="middle" x="512.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">theta_flip::flip_theta</text>
 </a>
 </g>
 </g>
 <!-- Node80&#45;&gt;Node83 -->
 <g id="edge124" class="edge">
 <title>Node80&#45;&gt;Node83</title>
-<path fill="none" stroke="midnightblue" d="M380.43,-228.4C391.69,-209.35 419.43,-166.55 454,-143 460.21,-138.77 467.44,-135.42 474.63,-132.79"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="475.89,-136.06 484.32,-129.63 473.72,-129.4 475.89,-136.06"/>
+<path fill="none" stroke="midnightblue" d="M380.43,-228.4C391.69,-209.35 419.43,-166.55 454,-143 456.91,-141.02 460.05,-139.23 463.3,-137.61"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="464.9,-140.73 472.67,-133.52 462.1,-134.31 464.9,-140.73"/>
 </g>
 <!-- Node84 -->
 <g id="node84" class="node">

@@ -109,6 +109,7 @@ $(document).ready(function(){initNavTree('d6/d36/flip__theta_8f90.html','../../'
 
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Modules</a> &#124;
 <a href="#func-members">Functions/Subroutines</a>  </div>
   <div class="headertitle"><div class="title">flip_theta.f90 File Reference</div></div>
 </div><!--header-->
@@ -119,80 +120,28 @@ $(document).ready(function(){initNavTree('d6/d36/flip__theta_8f90.html','../../'
 
 <p><a href="../../d6/d36/flip__theta_8f90_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Modules</h2></td></tr>
+<tr class="memitem:d2/d33/namespacetheta__flip"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d33/namespacetheta__flip.html">theta_flip</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a16e285a484c4af6298538139aa2312b7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7">flip_theta</a> (rmn, zmn, lmn)</td></tr>
-<tr class="memdesc:a16e285a484c4af6298538139aa2312b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry.  <a href="../../d6/d36/flip__theta_8f90.html#a16e285a484c4af6298538139aa2312b7">More...</a><br /></td></tr>
-<tr class="separator:a16e285a484c4af6298538139aa2312b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1177c598a2b1378ae34fecfba906634d"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d">theta_flip::flip_theta</a> (rmn, zmn, lmn)</td></tr>
+<tr class="memdesc:a1177c598a2b1378ae34fecfba906634d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry.  <a href="../../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d">More...</a><br /></td></tr>
+<tr class="separator:a1177c598a2b1378ae34fecfba906634d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry. </p>
 
 <p class="definition">Definition in file <a class="el" href="../../d6/d36/flip__theta_8f90_source.html">flip_theta.f90</a>.</p>
-</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="a16e285a484c4af6298538139aa2312b7" name="a16e285a484c4af6298538139aa2312b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16e285a484c4af6298538139aa2312b7">&#9670;&nbsp;</a></span>flip_theta()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine flip_theta </td>
-          <td>(</td>
-          <td class="paramtype">real(rprec), dimension(0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
-          <td class="paramname"><em>rmn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(rprec), dimension(0:ntor,0:mpol1,ntmax), intent(inout)&#160;</td>
-          <td class="paramname"><em>zmn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(rprec), dimension(0:ntor,0:mpol1,ntmax), intent(inout), optional&#160;</td>
-          <td class="paramname"><em>lmn</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Flip the definition of the poloidal angle in the user-provided initial guess for the LCFS geometry. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rmn</td><td>Fourier coefficients for \(R\) </td></tr>
-    <tr><td class="paramname">zmn</td><td>Fourier coefficients for \(Z\) </td></tr>
-    <tr><td class="paramname">lmn</td><td>Fourier coefficients for \(\lambda\) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/d36/flip__theta_8f90_source.html#l00009">9</a> of file <a class="el" href="../../d6/d36/flip__theta_8f90_source.html">flip_theta.f90</a>.</p>
-
-<p class="reference">References <a class="el" href="../../de/d7d/vmec__main_8f90_source.html#l00142">vmec_main::lthreed</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00038">vmec_params::ntmax</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00040">vmec_params::rcc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00043">vmec_params::rcs</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00042">vmec_params::rsc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00041">vmec_params::rss</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00046">vmec_params::zcc</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00045">vmec_params::zcs</a>, <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00044">vmec_params::zsc</a>, and <a class="el" href="../../d7/d29/vmec__params_8f90_source.html#l00047">vmec_params::zss</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d8/da3/readin_8f90_source.html#l00009">readin()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d6/d36/flip__theta_8f90_a16e285a484c4af6298538139aa2312b7_icgraph.svg" width="402" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d6/d36/flip__theta_8f90.html">flip_theta.f90</a></li>
-    <li class="footer">Generated on Mon Nov 29 2021 14:12:58 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Nov 29 2021 16:25:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

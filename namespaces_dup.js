@@ -305,6 +305,9 @@ var namespaces_dup =
       [ "iprec", "db/dcb/namespacestel__kinds.html#ab7dad4b77b2e8aa5c04356e7c77639e3", null ],
       [ "rprec", "db/dcb/namespacestel__kinds.html#ad5ec246eb6bc70cd89f4e3209ba62b2d", null ]
     ] ],
+    [ "theta_flip", "d2/d33/namespacetheta__flip.html", [
+      [ "flip_theta", "d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d", null ]
+    ] ],
     [ "vac_persistent", "df/dd0/namespacevac__persistent.html", [
       [ "bsubu_sur", "df/dd0/namespacevac__persistent.html#a1270492ca4432e395b70da9cd63bce76", null ],
       [ "bsubv_sur", "df/dd0/namespacevac__persistent.html#a0172db0a92a1cb9c0ac3f5b7e2136261", null ],

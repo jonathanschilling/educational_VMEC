@@ -1,0 +1,5 @@
+<map id="guess_axis" name="guess_axis">
+<area shape="rect" id="node1" title="Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian." alt="" coords="5,43,92,69"/>
+<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b" title=" " alt="" coords="140,5,312,32"/>
+<area shape="rect" id="node3" href="$d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559" title=" " alt="" coords="156,80,296,107"/>
+</map>

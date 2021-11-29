@@ -1,8 +1,10 @@
 <map id="residue" name="residue">
-<area shape="rect" id="node1" title="Compute invariant residuals." alt="" coords="5,81,69,108"/>
+<area shape="rect" id="node1" title="Compute invariant residuals." alt="" coords="5,132,69,159"/>
 <area shape="rect" id="node2" href="$db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="117,5,217,32"/>
 <area shape="rect" id="node3" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="138,56,197,83"/>
-<area shape="rect" id="node4" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="128,107,207,133"/>
-<area shape="rect" id="node5" href="$d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" title="Build forces from different contributions." alt="" coords="137,157,198,184"/>
-<area shape="rect" id="node6" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="265,157,323,184"/>
+<area shape="rect" id="node4" href="$d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b" title=" " alt="" coords="265,120,437,147"/>
+<area shape="rect" id="node5" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="128,157,207,184"/>
+<area shape="rect" id="node6" href="$d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" title="Build forces from different contributions." alt="" coords="137,208,198,235"/>
+<area shape="rect" id="node7" href="$d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559" title=" " alt="" coords="281,259,421,285"/>
+<area shape="rect" id="node8" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="323,184,380,211"/>
 </map>

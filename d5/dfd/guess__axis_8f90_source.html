@@ -119,170 +119,177 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d7/d0e/namespacerealspace.html">realspace</a>, <span class="keywordtype">ONLY</span>: <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dfd/namespacedbgout.html">dbgout</a></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(in)</span> :: r1, z1</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,nzeta,ntheta3)</span>,     <span class="keywordtype">INTENT(in)</span> :: ru0, zu0</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: limpts = 61</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp, two = 2</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordtype">INTEGER</span> :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta)</span> :: rcom, zcom</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: r1b, z1b, rub, zub</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: r12, z12</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: rs, zs, tau, ru12, zu12, tau0</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">  REAL</span>(rprec) :: rlim, zlim</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">  REAL</span>(rprec) :: rmax, rmin, zmax, zmin, dzeta</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">  REAL</span>(rprec) :: ds, mintau, mintemp</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="comment">! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! SEARCH (irgrid, izgrid) IN EACH PHI-PLANE FOR POINTS WHICH</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">! YIELD A VALUE FOR THE JACOBIAN WITH THE CORRECT SIGN (SIGNGS)</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">! CHOOSES THE AXIS POSITION SO THE MIN VALUE OF THE JACOBIAN IS MAXIMIZED</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  ns12 = (ns+1)/2</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  planes: <span class="keywordflow">DO</span> iv = 1, nzeta</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>     <span class="keywordflow">IF</span> (.not.lasym .and. iv.gt.nzeta/2+1) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        rcom(iv) = rcom(nzeta+2-iv)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        zcom(iv) =-zcom(nzeta+2-iv)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        cycle</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>     r1b(iv,:ntheta3) = r1(ns,iv,:,0) + r1(ns,iv,:,1)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>     z1b(iv,:ntheta3) = z1(ns,iv,:,0) + z1(ns,iv,:,1)</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>     r12(iv,:ntheta3) = r1(ns12,iv,:,0) + r1(ns12,iv,:,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>     z12(iv,:ntheta3) = z1(ns12,iv,:,0) + z1(ns12,iv,:,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>     rub(iv,:ntheta3) = ru0(ns,iv,:)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>     zub(iv,:ntheta3) = zu0(ns,iv,:)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>     ru12(iv,:ntheta3) =  p5*(ru0(ns,iv,:) + ru0(ns12,iv,:))</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>     zu12(iv,:ntheta3) =  p5*(zu0(ns,iv,:) + zu0(ns12,iv,:))</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>     <span class="keywordflow">IF</span> (.not.lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="comment">! USE Z(v,-u) = -Z(twopi-v,u), R(v,-u) = R(twopi-v,u)</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">! TO DO EXTEND R,Z, etc. OVER ALL THETA (NOT JUST 0,PI)</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="comment">! (twopi-v)</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        ivminus = mod(nzeta + 1 - iv, nzeta) + 1</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">DO</span> iu = 1+ntheta2, ntheta1</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>           iu_r = ntheta1 + 2 - iu <span class="comment">! (ntheta1 + 1) - (iu - 1)</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>           r1b(iv,iu) = r1(ns,ivminus,iu_r,0) + r1(ns,ivminus,iu_r,1)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>           z1b(iv,iu) =-(z1(ns,ivminus,iu_r,0) + z1(ns,ivminus,iu_r,1))</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>           r12(iv,iu) =  r1(ns12,ivminus,iu_r,0) + r1(ns12,ivminus,iu_r,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>           z12(iv,iu) =-(z1(ns12,ivminus,iu_r,0) + z1(ns12,ivminus,iu_r,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12))</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>           rub(iv,iu) =-ru0(ns,ivminus,iu_r)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>           zub(iv,iu) = zu0(ns,ivminus,iu_r)</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>           ru12(iv,iu)=-p5*(ru0(ns,ivminus,iu_r) + ru0(ns12,ivminus,iu_r))</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>           zu12(iv,iu)= p5*(zu0(ns,ivminus,iu_r) + zu0(ns12,ivminus,iu_r))</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>     <span class="comment">! Scan over r-z grid for interior point</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>     rmin = minval(r1b)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     rmax = maxval(r1b)</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     zmin = minval(z1b)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     zmax = maxval(z1b)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     rcom(iv) = (rmax + rmin)/2</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     zcom(iv) = (zmax + zmin)/2</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>     <span class="comment">! Estimate jacobian based on boundary and 1/2 surface</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     ds = (ns - ns12)*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     <span class="keywordflow">DO</span> iu = 1, ntheta1</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        rs(iv,iu) = (r1b(iv,iu) - r12(iv,iu))/ds + r1(1,iv,1,0)</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        zs(iv,iu) = (z1b(iv,iu) - z12(iv,iu))/ds + z1(1,iv,1,0)</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        tau0(iv,iu) = ru12(iv,iu)*zs(iv,iu) - zu12(iv,iu)*rs(iv,iu)</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>     mintau = 0</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>     <span class="keywordflow">DO</span> nlim = 1, limpts</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        zlim = zmin + ((zmax - zmin)*(nlim-1))/(limpts-1)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">IF</span> (.not.lasym .and. (iv.eq.1 .or. iv.eq.nzeta/2+1)) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>           zlim = 0</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>           <span class="keywordflow">IF</span> (nlim .gt. 1) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>              <span class="keywordflow">EXIT</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordflow">           end if</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keywordflow">        END IF</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="comment">! Find value of magnetic axis that maximizes the minimum jacobian value</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">DO</span> klim = 1, limpts</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>           rlim = rmin + ((rmax - rmin)*(klim-1))/(limpts-1)</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>           tau(iv,:) = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*(tau0(iv,:) - ru12(iv,:)*zlim + zu12(iv,:)*rlim)</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>           mintemp = minval(tau(iv,:))</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>           <span class="keywordflow">IF</span> (mintemp .gt. mintau) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>              mintau = mintemp</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>              rcom(iv) = rlim</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>              zcom(iv) = zlim</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>           <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (mintemp .eq. mintau) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>              <span class="comment">! If up-down symmetric and lasym=T, need this to pick z = 0</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>              <span class="keywordflow">IF</span> (abs(zcom(iv)).gt.abs(zlim)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                 zcom(iv) = zlim</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keywordflow">              end if</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordflow">           END IF</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keywordflow">  END DO</span> planes</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="comment">! FOURIER TRANSFORM RCOM, ZCOM</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  dzeta = two/nzeta</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>     raxis_cc(n) = dzeta*sum(cosnv(:,n)*rcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>     zaxis_cs(n) =-dzeta*sum(sinnv(:,n)*zcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>     raxis_cs(n) =-dzeta*sum(sinnv(:,n)*rcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>     zaxis_cc(n) = dzeta*sum(cosnv(:,n)*zcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>     <span class="keywordflow">IF</span> (n.eq.0 .or. n.eq.nzeta/2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        raxis_cc(n) = p5*raxis_cc(n)</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        zaxis_cc(n) = p5*zaxis_cc(n)</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keywordflow">  END DO</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  <span class="comment">! debugging output from guess_axis</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ad9378806f9ae436f30000250f334d22b">dump_guess_axis</a>) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">write</span>(<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dump_filename</a>, 998) trim(input_extension)</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>998 <span class="keyword">format</span>(<span class="stringliteral">&#39;guess_axis.&#39;</span>,a,<span class="stringliteral">&#39;.json&#39;</span>)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dbf/namespacevmec__input.html">vmec_input</a>, <span class="keywordtype">only</span>: <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd">dump_guess_axis</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,nzeta,ntheta3,0:1)</span>, <span class="keywordtype">INTENT(in)</span> :: r1, z1</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,nzeta,ntheta3)</span>,     <span class="keywordtype">INTENT(in)</span> :: ru0, zu0</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: limpts = 61</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp, two = 2</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">INTEGER</span> :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta)</span> :: rcom, zcom</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: r1b, z1b, rub, zub</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: r12, z12</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nzeta,ntheta1)</span> :: rs, zs, tau, ru12, zu12, tau0</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">  REAL</span>(rprec) :: rlim, zlim</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">  REAL</span>(rprec) :: rmax, rmin, zmax, zmin, dzeta</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">  REAL</span>(rprec) :: ds, mintau, mintemp</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="comment">! COMPUTES GUESS FOR MAGNETIC AXIS IF USER GUESS</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! LEADS TO INITIAL SIGN CHANGE OF JACOBIAN. DOES A GRID</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">! SEARCH (irgrid, izgrid) IN EACH PHI-PLANE FOR POINTS WHICH</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">! YIELD A VALUE FOR THE JACOBIAN WITH THE CORRECT SIGN (SIGNGS)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">! CHOOSES THE AXIS POSITION SO THE MIN VALUE OF THE JACOBIAN IS MAXIMIZED</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  ns12 = (ns+1)/2</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  planes: <span class="keywordflow">DO</span> iv = 1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>     <span class="keywordflow">IF</span> (.not.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a> .and. iv.gt.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2+1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        rcom(iv) = rcom(<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>+2-iv)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        zcom(iv) =-zcom(<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>+2-iv)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        cycle</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>     r1b(iv,:ntheta3) = r1(ns,iv,:,0) + r1(ns,iv,:,1)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>     z1b(iv,:ntheta3) = z1(ns,iv,:,0) + z1(ns,iv,:,1)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>     r12(iv,:ntheta3) = r1(ns12,iv,:,0) + r1(ns12,iv,:,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>     z12(iv,:ntheta3) = z1(ns12,iv,:,0) + z1(ns12,iv,:,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>     rub(iv,:ntheta3) = ru0(ns,iv,:)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>     zub(iv,:ntheta3) = zu0(ns,iv,:)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>     ru12(iv,:ntheta3) =  p5*(ru0(ns,iv,:) + ru0(ns12,iv,:))</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>     zu12(iv,:ntheta3) =  p5*(zu0(ns,iv,:) + zu0(ns12,iv,:))</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>     <span class="keywordflow">IF</span> (.not.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a>) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">! USE Z(v,-u) = -Z(twopi-v,u), R(v,-u) = R(twopi-v,u)</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">! TO DO EXTEND R,Z, etc. OVER ALL THETA (NOT JUST 0,PI)</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="comment">! (twopi-v)</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        ivminus = mod(<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a> + 1 - iv, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>) + 1</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">DO</span> iu = 1+ntheta2, ntheta1</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>           iu_r = ntheta1 + 2 - iu <span class="comment">! (ntheta1 + 1) - (iu - 1)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>           r1b(iv,iu) = r1(ns,ivminus,iu_r,0) + r1(ns,ivminus,iu_r,1)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>           z1b(iv,iu) =-(z1(ns,ivminus,iu_r,0) + z1(ns,ivminus,iu_r,1))</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>           r12(iv,iu) =  r1(ns12,ivminus,iu_r,0) + r1(ns12,ivminus,iu_r,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>           z12(iv,iu) =-(z1(ns12,ivminus,iu_r,0) + z1(ns12,ivminus,iu_r,1)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">sqrts</a>(ns12))</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>           rub(iv,iu) =-ru0(ns,ivminus,iu_r)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>           zub(iv,iu) = zu0(ns,ivminus,iu_r)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>           ru12(iv,iu)=-p5*(ru0(ns,ivminus,iu_r) + ru0(ns12,ivminus,iu_r))</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>           zu12(iv,iu)= p5*(zu0(ns,ivminus,iu_r) + zu0(ns12,ivminus,iu_r))</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>     <span class="comment">! Scan over r-z grid for interior point</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     rmin = minval(r1b)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     rmax = maxval(r1b)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     zmin = minval(z1b)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     zmax = maxval(z1b)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     rcom(iv) = (rmax + rmin)/2</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>     zcom(iv) = (zmax + zmin)/2</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     <span class="comment">! Estimate jacobian based on boundary and 1/2 surface</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     ds = (ns - ns12)*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     <span class="keywordflow">DO</span> iu = 1, ntheta1</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        rs(iv,iu) = (r1b(iv,iu) - r12(iv,iu))/ds + r1(1,iv,1,0)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        zs(iv,iu) = (z1b(iv,iu) - z12(iv,iu))/ds + z1(1,iv,1,0)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        tau0(iv,iu) = ru12(iv,iu)*zs(iv,iu) - zu12(iv,iu)*rs(iv,iu)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>     mintau = 0</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>     <span class="keywordflow">DO</span> nlim = 1, limpts</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        zlim = zmin + ((zmax - zmin)*(nlim-1))/(limpts-1)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">IF</span> (.not.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a> .and. (iv.eq.1 .or. iv.eq.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2+1)) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>           zlim = 0</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>           <span class="keywordflow">IF</span> (nlim .gt. 1) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>              <span class="keywordflow">EXIT</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keywordflow">           end if</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keywordflow">        END IF</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="comment">! Find value of magnetic axis that maximizes the minimum jacobian value</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">DO</span> klim = 1, limpts</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>           rlim = rmin + ((rmax - rmin)*(klim-1))/(limpts-1)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>           tau(iv,:) = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>*(tau0(iv,:) - ru12(iv,:)*zlim + zu12(iv,:)*rlim)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>           mintemp = minval(tau(iv,:))</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>           <span class="keywordflow">IF</span> (mintemp .gt. mintau) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>              mintau = mintemp</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>              rcom(iv) = rlim</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>              zcom(iv) = zlim</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>           <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (mintemp .eq. mintau) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>              <span class="comment">! If up-down symmetric and lasym=T, need this to pick z = 0</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>              <span class="keywordflow">IF</span> (abs(zcom(iv)).gt.abs(zlim)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                 zcom(iv) = zlim</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordflow">              end if</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordflow">           END IF</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keywordflow">  END DO</span> planes</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="comment">! FOURIER TRANSFORM RCOM, ZCOM</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  dzeta = two/<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keywordflow">DO</span> n = 0, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">ntor</a></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>     <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa18ee55849ad733365af99f3f6572c52">raxis_cc</a>(n) = dzeta*sum(cosnv(:,n)*rcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>     <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ae04dcdab64f8a635b81d1a331a6caf45">zaxis_cs</a>(n) =-dzeta*sum(sinnv(:,n)*zcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>     <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a82faf29b12593da80657b96cc848f81f">raxis_cs</a>(n) =-dzeta*sum(sinnv(:,n)*rcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>     <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8">zaxis_cc</a>(n) = dzeta*sum(cosnv(:,n)*zcom(:))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>     <span class="keywordflow">IF</span> (n.eq.0 .or. n.eq.<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>/2) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa18ee55849ad733365af99f3f6572c52">raxis_cc</a>(n) = p5*<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa18ee55849ad733365af99f3f6572c52">raxis_cc</a>(n)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8">zaxis_cc</a>(n) = p5*<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8">zaxis_cc</a>(n)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="comment">! debugging output from guess_axis</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd">dump_guess_axis</a> .and. <a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559">should_write</a>()) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">call </span><a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b">open_dbg_context</a>(<span class="stringliteral">&quot;guess_axis&quot;</span>)</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">call </span>open_dbg_out(<a class="code hl_variable" href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dump_filename</a>)</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;r1b&quot;</span> , nzeta, ntheta1, r1b )</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;z1b&quot;</span> , nzeta, ntheta1, z1b )</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rub&quot;</span> , nzeta, ntheta1, rub )</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zub&quot;</span> , nzeta, ntheta1, zub )</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;r12&quot;</span> , nzeta, ntheta1, r12 )</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;z12&quot;</span> , nzeta, ntheta1, z12 )</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rs&quot;</span>  , nzeta, ntheta1, rs  )</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zs&quot;</span>  , nzeta, ntheta1, zs  )</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tau&quot;</span> , nzeta, ntheta1, tau )</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;ru12&quot;</span>, nzeta, ntheta1, ru12)</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zu12&quot;</span>, nzeta, ntheta1, zu12)</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tau0&quot;</span>, nzeta, ntheta1, tau0)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rcom&quot;</span>, nzeta, rcom)</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zcom&quot;</span>, nzeta, zcom)</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;raxis_cc&quot;</span>, ntor+1, raxis_cc)</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zaxis_cs&quot;</span>, ntor+1, zaxis_cs)</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;raxis_cs&quot;</span>, ntor+1, raxis_cs)</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zaxis_cc&quot;</span>, ntor+1, zaxis_cc)</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">guess_axis</a></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;r1b&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, r1b )</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;z1b&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, z1b )</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rub&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, rub )</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zub&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, zub )</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;r12&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, r12 )</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;z12&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, z12 )</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rs&quot;</span>  , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, rs  )</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zs&quot;</span>  , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, zs  )</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tau&quot;</span> , <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, tau )</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;ru12&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, ru12)</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zu12&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, zu12)</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tau0&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, ntheta1, tau0)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rcom&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, rcom)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zcom&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">nzeta</a>, zcom)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;raxis_cc&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">ntor</a>+1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aa18ee55849ad733365af99f3f6572c52">raxis_cc</a>)</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zaxis_cs&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">ntor</a>+1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ae04dcdab64f8a635b81d1a331a6caf45">zaxis_cs</a>)</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;raxis_cs&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">ntor</a>+1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a82faf29b12593da80657b96cc848f81f">raxis_cs</a>)</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zaxis_cc&quot;</span>, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">ntor</a>+1, <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8">zaxis_cc</a>)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">guess_axis</a></div>
 <div class="ttc" id="aguess__axis_8f90_html_a375e34fe4656d4c51d5013939bf5617e"><div class="ttname"><a href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">guess_axis</a></div><div class="ttdeci">subroutine guess_axis(r1, z1, ru0, zu0)</div><div class="ttdoc">Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dfd/guess__axis_8f90_source.html#l00010">guess_axis.f90:11</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
-<div class="ttc" id="anamespacedbgout_html_ad9378806f9ae436f30000250f334d22b"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ad9378806f9ae436f30000250f334d22b">dbgout::dump_guess_axis</a></div><div class="ttdeci">logical dump_guess_axis</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00028">dbgout.f90:28</a></div></div>
-<div class="ttc" id="anamespacedbgout_html_ada94aa5a046b8810f2a85cadbf62ab55"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#ada94aa5a046b8810f2a85cadbf62ab55">dbgout::dump_filename</a></div><div class="ttdeci">character(len=255) dump_filename</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00006">dbgout.f90:6</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_a0537172e9da0db08b9d29ab8880f0559"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#a0537172e9da0db08b9d29ab8880f0559">dbgout::should_write</a></div><div class="ttdeci">logical function should_write()</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00009">dbgout.f90:10</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_a0752528f123b592bc57f687438b75d9b"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#a0752528f123b592bc57f687438b75d9b">dbgout::open_dbg_context</a></div><div class="ttdeci">subroutine open_dbg_context(context_name)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00019">dbgout.f90:20</a></div></div>
 <div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a55ec65e5e208dfe01a4d2fa5ce52efdb"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a55ec65e5e208dfe01a4d2fa5ce52efdb">realspace::sqrts</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable sqrts</div><div class="ttdoc">sqrt(s), two-dimensional array on full-grid</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00032">realspace.f90:32</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html">vmec_input</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00002">vmec_input.f90:2</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_a1ab18706b83ddbb3982eb30c013587bd"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd">vmec_input::dump_guess_axis</a></div><div class="ttdeci">logical dump_guess_axis</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00097">vmec_input.f90:97</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_a82faf29b12593da80657b96cc848f81f"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#a82faf29b12593da80657b96cc848f81f">vmec_input::raxis_cs</a></div><div class="ttdeci">real(rprec), dimension(0:ntord) raxis_cs</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00058">vmec_input.f90:58</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_aa18ee55849ad733365af99f3f6572c52"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#aa18ee55849ad733365af99f3f6572c52">vmec_input::raxis_cc</a></div><div class="ttdeci">real(rprec), dimension(0:ntord) raxis_cc</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00057">vmec_input.f90:57</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_aa44376c0bdcded8b56e0fe70c11c6553"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">vmec_input::lasym</a></div><div class="ttdeci">logical lasym</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00063">vmec_input.f90:63</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_ac6f2567548169008268f14d0bc8ca4b8"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8">vmec_input::ntor</a></div><div class="ttdeci">integer ntor</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00020">vmec_input.f90:20</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_acdf327762893b41f2bbe147f5825e396"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396">vmec_input::nzeta</a></div><div class="ttdeci">integer nzeta</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00022">vmec_input.f90:22</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_ae04dcdab64f8a635b81d1a331a6caf45"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#ae04dcdab64f8a635b81d1a331a6caf45">vmec_input::zaxis_cs</a></div><div class="ttdeci">real(rprec), dimension(0:ntord) zaxis_cs</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00060">vmec_input.f90:60</a></div></div>
+<div class="ttc" id="anamespacevmec__input_html_aed2709bd6d5a68d069df2d2250094fb8"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#aed2709bd6d5a68d069df2d2250094fb8">vmec_input::zaxis_cc</a></div><div class="ttdeci">real(rprec), dimension(0:ntord) zaxis_cc</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00059">vmec_input.f90:59</a></div></div>
 <div class="ttc" id="anamespacevmec__main_html"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00002">vmec_main.f90:2</a></div></div>
-<div class="ttc" id="anamespacevmec__main_html_a2f41223cbac50df3309e516d00894c51"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">vmec_main::hs</a></div><div class="ttdeci">real(rprec) hs</div><div class="ttdoc">radial mesh size increment</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00087">vmec_main.f90:87</a></div></div>
+<div class="ttc" id="anamespacevmec__main_html_a2f41223cbac50df3309e516d00894c51"><div class="ttname"><a href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">vmec_main::hs</a></div><div class="ttdeci">real(rprec) hs</div><div class="ttdoc">radial mesh size increment</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d7d/vmec__main_8f90_source.html#l00084">vmec_main.f90:84</a></div></div>
 <div class="ttc" id="anamespacevmec__params_html"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html">vmec_params</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00002">vmec_params.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__params_html_a518e8dfd22eeab87812b7b4d24dd7027"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">vmec_params::signgs</a></div><div class="ttdeci">real(rprec) signgs</div><div class="ttdoc">sign of Jacobian : must be =1 (right-handed) or =-1 (left-handed)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00057">vmec_params.f90:57</a></div></div>
 <div class="ttc" id="anamespacevmec__params_html_acb07091c2a3d31fe07129dd42c2bd733"><div class="ttname"><a href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">vmec_params::nscale</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable nscale</div><div class="ttdoc">array for norming zeta -trig functions (internal use only)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d29/vmec__params_8f90_source.html#l00055">vmec_params.f90:55</a></div></div>
@@ -292,7 +299,7 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/dfd/guess__axis_8f90.html">guess_axis.f90</a></li>
-    <li class="footer">Generated on Sun Nov 28 2021 13:47:51 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Nov 29 2021 10:46:50 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

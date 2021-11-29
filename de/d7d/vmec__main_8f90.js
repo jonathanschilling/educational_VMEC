@@ -62,6 +62,7 @@ var vmec__main_8f90 =
     [ "fsqz_con", "de/d7d/vmec__main_8f90.html#aeed3d6d5fb82120b7be857acc5ce4085", null ],
     [ "fsqz_mhd", "de/d7d/vmec__main_8f90.html#a86c3d3832d056afa9a4a7c7e084e40d5", null ],
     [ "ftolv", "de/d7d/vmec__main_8f90.html#a3c259d073f25d341b5df1d669125590c", null ],
+    [ "funct3d_calls", "de/d7d/vmec__main_8f90.html#a569bb4f23c6a86827d64743c07cf36ec", null ],
     [ "hs", "de/d7d/vmec__main_8f90.html#a2f41223cbac50df3309e516d00894c51", null ],
     [ "icurv", "de/d7d/vmec__main_8f90.html#afa27ff9660af5f8390fed850ffe7242e", null ],
     [ "iequi", "de/d7d/vmec__main_8f90.html#a68e1a2561e54d21e792c65aeda66546d", null ],

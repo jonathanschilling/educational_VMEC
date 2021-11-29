@@ -1,7 +1,7 @@
 <map id="vacuum" name="vacuum">
 <area shape="rect" id="node1" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="5,175,73,201"/>
 <area shape="rect" id="node2" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="175,24,239,51"/>
-<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887" title=" " alt="" coords="121,99,293,125"/>
+<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492" title=" " alt="" coords="121,99,293,125"/>
 <area shape="rect" id="node6" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="179,149,236,176"/>
 <area shape="rect" id="node7" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="175,200,239,227"/>
 <area shape="rect" id="node14" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="179,251,236,277"/>

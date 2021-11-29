@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('de/d0c/forces_8f90_source.html','../..
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">! if lthreed:</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">!  rv, zv</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  dbg_forces = <a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887">open_dbg_context</a>(<span class="stringliteral">&quot;forces&quot;</span>)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  dbg_forces = <a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492">open_dbg_context</a>(<span class="stringliteral">&quot;forces&quot;</span>)</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">if</span> (dbg_forces) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;lu_e&quot;</span>,        ns, nzeta, ntheta3, lu_e,      order=(/ 2, 3, 1 /) )</div>
@@ -356,7 +356,7 @@ $(document).ready(function(){initNavTree('de/d0c/forces_8f90_source.html','../..
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0">forces</a></div>
 <div class="ttc" id="aforces_8f90_html_a7b4708aaec3cc94526474c16bc3a16f0"><div class="ttname"><a href="../../de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0">forces</a></div><div class="ttdeci">subroutine forces</div><div class="ttdoc">Compute the real-space MHD forces.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d0c/forces_8f90_source.html#l00006">forces.f90:7</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
-<div class="ttc" id="anamespacedbgout_html_a1e9a1e529761acf2f036915bd6164887"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00007">dbgout.f90:8</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_af9a9deb4fdfe84878a6e319b15221492"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00007">dbgout.f90:8</a></div></div>
 <div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a08bab4dd4b3d0633fe56766d803924cf"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">realspace::rv</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable rv</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00010">realspace.f90:10</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a0aeb5452c4ce9d7dca3c463af823a9ae"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">realspace::zu0</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable zu0</div><div class="ttdoc">, even-m and odd-m added together appropriately</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00025">realspace.f90:25</a></div></div>
@@ -408,7 +408,7 @@ $(document).ready(function(){initNavTree('de/d0c/forces_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/d0c/forces_8f90.html">forces.f90</a></li>
-    <li class="footer">Generated on Mon Nov 29 2021 17:28:48 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Nov 29 2021 21:53:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

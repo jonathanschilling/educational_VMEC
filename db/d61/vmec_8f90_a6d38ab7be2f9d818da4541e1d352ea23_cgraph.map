@@ -1,7 +1,7 @@
 <map id="vmec" name="vmec">
 <area shape="rect" id="node1" title="Main driver for VMEC." alt="" coords="5,2099,60,2125"/>
 <area shape="rect" id="node2" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="151,1668,218,1695"/>
-<area shape="rect" id="node8" href="$d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887" title=" " alt="" coords="1033,1389,1205,1416"/>
+<area shape="rect" id="node8" href="$d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492" title=" " alt="" coords="1033,1389,1205,1416"/>
 <area shape="rect" id="node55" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="325,956,381,983"/>
 <area shape="rect" id="node69" href="$d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3" title="allocate and fill some fixed&#45;size arrays (only depending on Fourier resolution)." alt="" coords="155,2099,214,2125"/>
 <area shape="rect" id="node70" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="623,1972,754,1999"/>
@@ -44,7 +44,7 @@
 <area shape="rect" id="node17" href="$db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="848,765,948,792"/>
 <area shape="rect" id="node18" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="869,816,927,843"/>
 <area shape="rect" id="node19" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="859,664,937,691"/>
-<area shape="rect" id="node20" href="$d8/d86/scalfor_8f90.html#a20fb7039b82d05e64d01a2e50431ba5e" title="Build forces from different contributions." alt="" coords="867,715,929,741"/>
+<area shape="rect" id="node20" href="$d8/d86/scalfor_8f90.html#a2ef9c34d20ddf30cb7b15fe35066b8ca" title="Build forces from different contributions." alt="" coords="867,715,929,741"/>
 <area shape="rect" id="node21" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="1091,715,1148,741"/>
 <area shape="rect" id="node32" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="847,1204,949,1231"/>
 <area shape="rect" id="node34" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="850,1592,946,1619"/>

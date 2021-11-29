@@ -1,7 +1,7 @@
 var namespaces_dup =
 [
     [ "dbgout", "d8/dfd/namespacedbgout.html", [
-      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#a1e9a1e529761acf2f036915bd6164887", null ]
+      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492", null ]
     ] ],
     [ "fbal", "df/d88/namespacefbal.html", [
       [ "frcc_fac", "df/d88/namespacefbal.html#ab5c754bcc9f66b0acd7642a15b0fe080", null ],
@@ -696,6 +696,7 @@ var namespaces_dup =
       [ "fsqz_con", "d1/d6c/namespacevmec__main.html#aeed3d6d5fb82120b7be857acc5ce4085", null ],
       [ "fsqz_mhd", "d1/d6c/namespacevmec__main.html#a86c3d3832d056afa9a4a7c7e084e40d5", null ],
       [ "ftolv", "d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c", null ],
+      [ "funct3d_calls", "d1/d6c/namespacevmec__main.html#a569bb4f23c6a86827d64743c07cf36ec", null ],
       [ "hs", "d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51", null ],
       [ "icurv", "d1/d6c/namespacevmec__main.html#afa27ff9660af5f8390fed850ffe7242e", null ],
       [ "iequi", "d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d", null ],

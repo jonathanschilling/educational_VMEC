@@ -13,7 +13,6 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   USE realspace, ONLY: wint, guu, guv, chip
 
   use dbgout
-  use vmec_input, only: dump_add_fluxes
 
   IMPLICIT NONE
 
@@ -73,8 +72,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.
   bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)
 
-  if (dump_add_fluxes .and. should_write()) then
-    call open_dbg_context("add_fluxes")
+  if (open_dbg_context("add_fluxes")) then
 
     call add_real_1d("chips", ns, chips)
     call add_real_1d("iotas", ns, iotas)

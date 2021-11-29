@@ -30,7 +30,6 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   USE vmec_main, p5 => cp5
 
   use dbgout
-  use vmec_input, only: dump_symforce
 
   IMPLICIT NONE
 
@@ -42,14 +41,15 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   INTEGER :: mpar, ir, i, jk, jka, j, k
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ars_0, brs_0, azs_0, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
+                
+  logical :: dbg_symforce
 
   i = ns*nzeta
   ALLOCATE (ars_0(i), brs_0(i), azs_0(i), bzs_0(i), bls_0(i),         &
             rcs_0(i), zcs_0(i), crs_0(i), czs_0(i), cls_0(i), stat=ir)
 
-
-  if (dump_symforce .and. should_write()) then
-    call open_dbg_context("symforce")
+  dbg_symforce = open_dbg_context("symforce")
+  if (dbg_symforce) then
 
     call add_real_4d("ars", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("brs", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
@@ -133,7 +133,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   DEALLOCATE (ars_0, brs_0, azs_0, bzs_0, bls_0,          &
               rcs_0, zcs_0, crs_0, czs_0, cls_0, stat=ir)
 
-  if (dump_symforce .and. should_write()) then
+  if (dbg_symforce) then
     call add_real_4d("ars_out", ns, 2, nzeta, ntheta3, ars, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("brs_out", ns, 2, nzeta, ntheta3, brs, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("crs_out", ns, 2, nzeta, ntheta3, crs, order=(/ 2, 3, 4, 1 /) )

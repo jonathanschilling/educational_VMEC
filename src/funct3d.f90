@@ -22,9 +22,6 @@ SUBROUTINE funct3d (ier_flag)
   USE vparams, ONLY: twopi
 
   use dbgout
-  use vmec_input, only: dump_geometry, &
-                        dump_rbsq, &
-                        dump_constraint_force
 
   IMPLICIT NONE
 
@@ -90,8 +87,7 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  if (dump_geometry .and. should_write()) then
-      call open_dbg_context("funct3d_geometry")
+  if (open_dbg_context("funct3d_geometry")) then
 
       call add_real_4d("r1",   ns, 2, nzeta, ntheta3, r1,   order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("ru",   ns, 2, nzeta, ntheta3, ru,   order=(/ 1, 3, 4, 2 /) )
@@ -342,8 +338,7 @@ SUBROUTINE funct3d (ier_flag)
 
         !print *, "max bsqvac = ", maxval(bsqvac)
 
-        if (dump_rbsq .and. should_write()) then
-          call open_dbg_context("rbsq")
+        if (open_dbg_context("rbsq")) then
           
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
           
@@ -369,8 +364,7 @@ SUBROUTINE funct3d (ier_flag)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
 
-     if (dump_constraint_force .and. should_write()) then
-       call open_dbg_context("constraint_force")
+     if (open_dbg_context("constraint_force")) then
 
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0), order=(/ 2, 3, 1 /) ) 
        call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon,        order=(/ 2, 3, 1 /) ) 

@@ -17,7 +17,6 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE stel_kinds, ONLY: dp
 
   use dbgout
-  use vmec_input, only: dump_calc_fbal
 
   implicit none
 
@@ -54,8 +53,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   equif(ns) = 0
 
   ! check calc_fbal output
-  if (dump_calc_fbal .and. should_write()) then
-    call open_dbg_context("calc_fbal")
+  if (open_dbg_context("calc_fbal")) then
 
     call add_real_1d("buco", ns, buco)
     call add_real_1d("bvco", ns, bvco)

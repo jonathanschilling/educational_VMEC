@@ -15,7 +15,6 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   USE xstuff
 
   use dbgout
-  use vmec_input, only: dump_evolve
 
   IMPLICIT NONE
 
@@ -26,6 +25,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   integer :: i
   CHARACTER(LEN=*), PARAMETER :: fcn_message = "External calls to FUNCT3D: "
   REAL(rprec) :: fsq1, dtau, b1, fac
+  logical :: dbg_evolve
 
   ! COMPUTE MHD FORCES
   CALL funct3d (ier_flag)
@@ -87,8 +87,8 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   fac = one/(one + dtau)
 
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
-  if (dump_evolve .and. should_write()) then
-    call open_dbg_context("evolve")
+  dbg_evolve = open_dbg_context("evolve")
+  if (dbg_evolve) then
 
     call add_real_5d("xc_before",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
     call add_real_5d("xcdot_before", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
@@ -101,7 +101,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xcdot = fac*(b1*xcdot + time_step*gc) ! update velocity
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
-  if (dump_evolve .and. should_write()) then
+  if (dbg_evolve) then
     call add_real_5d("xc_after",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
     call add_real_5d("xcdot_after", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
 

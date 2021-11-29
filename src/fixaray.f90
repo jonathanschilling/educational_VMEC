@@ -9,8 +9,6 @@ SUBROUTINE fixaray
   USE vmec_params, ONLY: jmin2, mscale, nscale, mnyq, nnyq, signgs
 
   use dbgout
-  use vmec_input, only: dump_fixaray, &
-                        dump_spectral_constraint
 
   IMPLICIT NONE
 
@@ -21,6 +19,7 @@ SUBROUTINE fixaray
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
   REAL(rprec):: argi, arg, argj, dnorm
+  logical :: dbg_fixaray
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT
@@ -132,8 +131,8 @@ SUBROUTINE fixaray
 
   IF (mn1 .ne. mnmax) STOP 'mn1 != mnmax'
 
-  if (dump_fixaray .and. should_write()) then
-    call open_dbg_context("fixaray")
+  dbg_fixaray = open_dbg_context("fixaray")
+  if (dbg_fixaray) then
 
     call add_real_2d("cosmu",    ntheta3, mnyq+1, cosmu)
     call add_real_2d("sinmu",    ntheta3, mnyq+1, sinmu)
@@ -194,7 +193,8 @@ SUBROUTINE fixaray
   faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
   faccon(mpol1) = zero
 
-  if (dump_fixaray .and. should_write()) then
+  if (dbg_fixaray) then
+  
     call add_int("ntheta3", ntheta3)
     call add_int("mnyq", mnyq)
     call add_int("nzeta", nzeta)
@@ -218,8 +218,7 @@ SUBROUTINE fixaray
     call close_dbg_out()
   end if
 
-  if (dump_spectral_constraint .and. should_write()) then
-    call open_dbg_context("spectral_constraint")
+  if (open_dbg_context("spectral_constraint")) then
 
     ! xmpq is allocated statically, so need size here explicitly!
     call add_real_2d("xmpq", mpol, 3, xmpq(0:mpol1,1:3))

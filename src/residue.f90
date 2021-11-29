@@ -13,11 +13,6 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   USE xstuff
 
   use dbgout
-  use vmec_input, only: dump_physical_gc, &
-                        dump_fsq, &
-                        dump_scale_m1, &
-                        dump_scalfor_out, &
-                        dump_fsq1
 
   IMPLICIT NONE
 
@@ -57,8 +52,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump physical forces
-  if (dump_physical_gc .and. should_write()) then
-    call open_dbg_context("phys_gc")
+  if (open_dbg_context("phys_gc")) then
 
     call add_real_4d("gcr", ns, ntmax, ntor1, mpol, gcr, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("gcz", ns, ntmax, ntor1, mpol, gcz, order=(/ 1, 3, 4, 2 /) )
@@ -87,8 +81,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql = fnormL*SUM(gcl*gcl)
   fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
-  if (dump_fsq .and. should_write()) then
-    call open_dbg_context("fsq")
+  if (open_dbg_context("fsq")) then
 
     call add_real("r0scale", r0scale)
     call add_real("r1", r1)
@@ -111,8 +104,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
 
   ! dump forces after scale_m1 has been applied
-  if (dump_scale_m1 .and. should_write()) then
-    call open_dbg_context("scale_m1")
+  if (open_dbg_context("scale_m1")) then
 
     call add_real_4d("gcr", ns, ntmax, ntor1, mpol, gcr, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("gcz", ns, ntmax, ntor1, mpol, gcz, order=(/ 1, 3, 4, 2 /) )
@@ -127,8 +119,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump forces after scalfor has been applied
-  if (dump_scalfor_out .and. should_write()) then
-    call open_dbg_context("scalfor_out")
+  if (open_dbg_context("scalfor_out")) then
 
     call add_real_2d("arm", ns+1, 2, arm)
     call add_real_2d("ard", ns+1, 2, ard)
@@ -155,8 +146,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-  if (dump_fsq1 .and. should_write()) then
-    call open_dbg_context("fsq1")
+  if (open_dbg_context("fsq1")) then
 
     call add_real("fnorm1", fnorm1)
     call add_real("fsqr1", fsqr1)

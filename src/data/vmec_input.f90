@@ -92,7 +92,7 @@ MODULE vmec_input
   logical :: dump_fixaray             = .false.
   logical :: dump_spectral_constraint = .false.
   logical :: dump_forces              = .false.
-  logical :: dump_geometry            = .false.
+  logical :: dump_funct3d_geometry    = .false.
   logical :: dump_constraint_force    = .false.
   logical :: dump_guess_axis          = .false.
   logical :: dump_interp              = .false.
@@ -101,17 +101,18 @@ MODULE vmec_input
   logical :: dump_profil1d            = .false.
   logical :: dump_profil3d            = .false.
   logical :: dump_readin_boundary     = .false.
-  logical :: dump_physical_gc         = .false.
+  logical :: dump_phys_gc             = .false.
   logical :: dump_fsq                 = .false.
   logical :: dump_scale_m1            = .false.
   logical :: dump_scalfor_out         = .false.
   logical :: dump_fsq1                = .false.
-  logical :: dump_scalfor             = .false.
+  logical :: dump_scalfor_R           = .false.
+  logical :: dump_scalfor_Z           = .false.
   logical :: dump_symforce            = .false.
   logical :: dump_tomnsps             = .false.
   logical :: dump_tomnspa             = .false.
   logical :: dump_multigrid_result    = .false.
-  logical :: dump_bsqvac              = .false.
+  logical :: dump_bsqvac_vac1         = .false.
   logical :: dump_rbsq                = .false.
 
   NAMELIST /indata/ &
@@ -178,7 +179,7 @@ MODULE vmec_input
      dump_fixaray            , &
      dump_spectral_constraint, &
      dump_forces             , &
-     dump_geometry           , &
+     dump_funct3d_geometry   , &
      dump_constraint_force   , &
      dump_guess_axis         , &
      dump_interp             , &
@@ -187,17 +188,18 @@ MODULE vmec_input
      dump_profil1d           , &
      dump_profil3d           , &
      dump_readin_boundary    , &
-     dump_physical_gc        , &
+     dump_phys_gc            , &
      dump_fsq                , &
      dump_scale_m1           , &
      dump_scalfor_out        , &
      dump_fsq1               , &
-     dump_scalfor            , &
+     dump_scalfor_R          , &
+     dump_scalfor_Z          , &
      dump_symforce           , &
      dump_tomnsps            , &
      dump_tomnspa            , &
      dump_multigrid_result   , &
-     dump_bsqvac             , &
+     dump_bsqvac_vac1        , &
      dump_rbsq
 
 CONTAINS

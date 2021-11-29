@@ -13,7 +13,6 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   USE xstuff
 
   use dbgout
-  use vmec_input, only: dump_profil3d
 
   IMPLICIT NONE
 
@@ -241,8 +240,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
 
   ! dump all relevant output to a text file
-  if (dump_profil3d .and. should_write()) then
-    call open_dbg_context("profil3d")
+  if (open_dbg_context("profil3d")) then
 
     call add_real_3d("scalxc", ns, ntor1, mpol, scalxc(:irzloff))
     call add_real_4d("rmn", ntmax, ns, ntor1, mpol, rmn, order=(/ 2, 3, 4, 1 /) )

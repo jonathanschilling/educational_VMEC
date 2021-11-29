@@ -169,8 +169,7 @@ subroutine vmec
 
            ! If this point is reached, the current multi-grid step should have properly converged.
            ! Now dump the current state vector for debugging.
-           if (dump_multigrid_result .and. should_write()) then
-             call open_dbg_context("multigrid_result")
+           if (open_dbg_context("multigrid_result")) then
 
              call add_int("ns", nsval)
              call add_int("iter2", iter2)

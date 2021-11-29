@@ -19,15 +19,6 @@ SUBROUTINE bcovar (lu, lv)
   USE fbal
 
   use dbgout
-  use vmec_input, only: dump_metric, &
-                        dump_volume, &
-                        dump_bcontrav, &
-                        dump_bcov, &
-                        dump_lambda_forces, &
-                        dump_bcov_full, &
-                        dump_precondn, &
-                        dump_forceNorms_tcon, &
-                        dump_lulv_comb
 
   IMPLICIT NONE
 
@@ -123,8 +114,7 @@ SUBROUTINE bcovar (lu, lv)
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
   ! check metric coefficients
-  if (dump_metric .and. should_write()) then
-      call open_dbg_context("metric")
+  if (open_dbg_context("metric")) then
 
       call add_real_3d("guu",   ns, nzeta, ntheta3, guu,   order=(/ 2, 3, 1 /) )
       call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv,   order=(/ 2, 3, 1 /) )
@@ -159,8 +149,7 @@ SUBROUTINE bcovar (lu, lv)
   end if
 
   ! check plasma volume computation
-  if (dump_volume .and. should_write()) then
-    call open_dbg_context("volume")
+  if (open_dbg_context("volume")) then
 
     call add_real_1d("vp", ns-1, vp(2:ns))
     call add_real("voli", voli)
@@ -197,8 +186,7 @@ SUBROUTINE bcovar (lu, lv)
   bsupu(ndim)=0
   bsupv(ndim)=0
 
-  if (dump_bcontrav .and.  should_write()) then
-    call open_dbg_context("bcontrav")
+  if (open_dbg_context("bcontrav")) then
 
     call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )
     call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv, order=(/ 2, 3, 1 /) )
@@ -245,8 +233,7 @@ SUBROUTINE bcovar (lu, lv)
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
 
-  if (dump_bcov .and. should_write()) then
-    call open_dbg_context("bcov")
+  if (open_dbg_context("bcov")) then
 
     call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh, order=(/ 2, 3, 1 /) )
     call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh, order=(/ 2, 3, 1 /) )
@@ -283,8 +270,7 @@ SUBROUTINE bcovar (lu, lv)
 !       lu(1,1), bsubu_e(1), bsubu_e(2)
 !   end if
 
-   if (dump_lambda_forces .and. should_write()) then
-    call open_dbg_context("lambda_forces")
+   if (open_dbg_context("lambda_forces")) then
 
     call add_real_3d("lvv",       ns, nzeta, ntheta3, lvv,     order=(/ 2, 3, 1 /) )
     call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:,0), order=(/ 2, 3, 1 /) )
@@ -338,8 +324,7 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (dump_bcov_full .and. should_write()) then
-    call open_dbg_context("bcov_full")
+  if (open_dbg_context("bcov_full")) then
 
     call add_real("rbtor0", rbtor0)
     call add_real("rbtor",  rbtor)
@@ -376,8 +361,7 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, rru_fac, sin01)
 
        ! check preconditioner output
-       if (dump_precondn .and. should_write()) then
-         call open_dbg_context("precondn")
+       if (open_dbg_context("precondn")) then
 
          call add_real_2d("arm", ns+1, 2, arm)
          call add_real_2d("ard", ns+1, 2, ard)
@@ -456,8 +440,7 @@ SUBROUTINE bcovar (lu, lv)
        IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (dump_forceNorms_tcon .and. should_write()) then
-         call open_dbg_context("forceNorms_tcon")
+       if (open_dbg_context("forceNorms_tcon")) then
 
          call add_real("volume", volume)
          call add_real("r2",     MAX(wb,wp)/volume)
@@ -495,8 +478,7 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (dump_lulv_comb .and. should_write()) then
-       call open_dbg_context("lulv_comb")
+     if (open_dbg_context("lulv_comb")) then
 
        call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
        call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )

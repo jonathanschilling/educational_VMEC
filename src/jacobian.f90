@@ -57,8 +57,7 @@ SUBROUTINE jacobian
   tau(1:nrzt:ns) = temp(:)
 
   ! check output from jacobian()
-  if (dump_jacobian .and. should_write()) then
-    call open_dbg_context("jacobian")
+  if (open_dbg_context("jacobian")) then
 
     call add_real_3d("r12",  ns, nzeta, ntheta3, r12,  order=(/ 2, 3, 1 /) )
     call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 2, 3, 1 /) )

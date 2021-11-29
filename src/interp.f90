@@ -63,8 +63,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
         xnew(1,:,ntype) = 0
   END DO
 
-  if (dump_interp .and. should_write()) then
-    call open_dbg_context("interp")
+  if (open_dbg_context("interp")) then
 
     call add_real_1d("sj", nsnew, sj)
     call add_int_1d("js1", nsnew, js1)

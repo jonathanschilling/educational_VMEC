@@ -16,7 +16,6 @@ SUBROUTINE forces
                crmn_e => crmn_e, czmn_e => czmn_e, czmn_o => czmn_o
 
   use dbgout
-  use vmec_input, only: dump_forces
 
   IMPLICIT NONE
 
@@ -29,6 +28,8 @@ SUBROUTINE forces
   REAL(rprec), DIMENSION(:), POINTER :: gvvs
   REAL(rprec), DIMENSION(:), POINTER :: guvs
   REAL(rprec), DIMENSION(:), POINTER :: guus
+  
+  logical :: dbg_forces
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)
@@ -58,9 +59,9 @@ SUBROUTINE forces
   ! if lthreed:
   !  rv, zv
 
-  if (dump_forces .and. should_write()) then
-    call open_dbg_context("forces")
-
+  dbg_forces = open_dbg_context("forces")
+  if (dbg_forces) then
+  
     call add_real_3d("lu_e",        ns, nzeta, ntheta3, lu_e,      order=(/ 2, 3, 1 /) )
     call add_real_3d("lv_e",        ns, nzeta, ntheta3, lv_e,      order=(/ 2, 3, 1 /) )
     call add_real_3d("guu",         ns, nzeta, ntheta3, guu,       order=(/ 2, 3, 1 /) )
@@ -206,7 +207,7 @@ SUBROUTINE forces
   zcon(:nrzt,1) = zcon(:nrzt,0) * sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 
-  if (dump_forces .and. should_write()) then
+  if (dbg_forces) then
     call add_real_3d("armn_e", ns, nzeta, ntheta3, armn_e, order=(/ 2, 3, 1 /) )
     call add_real_3d("armn_o", ns, nzeta, ntheta3, armn_o, order=(/ 2, 3, 1 /) )
     call add_real_3d("brmn_e", ns, nzeta, ntheta3, brmn_e, order=(/ 2, 3, 1 /) )

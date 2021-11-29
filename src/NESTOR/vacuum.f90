@@ -29,7 +29,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   use vmec_main, only: input_extension
 
   use dbgout
-  use vmec_input, only: dump_bsqvac
 
   IMPLICIT NONE
 
@@ -155,8 +154,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
 
-   if (dump_bsqvac .and. should_write()) then
-    call open_dbg_context("bsqvac_vac1")
+   if (open_dbg_context("bsqvac_vac1")) then
 
     call add_real_2d("bsqvac", nv, nu3, bsqvac)
 

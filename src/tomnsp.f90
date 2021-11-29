@@ -23,7 +23,6 @@ SUBROUTINE tomnsps(frzl_array,       &
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rcc, rss, zsc, zcs
 
   use dbgout
-  use vmec_input, only: dump_tomnsps
 
   IMPLICIT NONE
 
@@ -147,8 +146,7 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
-  if (dump_tomnsps .and. should_write()) then
-    call open_dbg_context("tomnsps")
+  if (open_dbg_context("tomnsps")) then
 
     call add_real_3d("frcc", ns, ntor1, mpol, frcc)
     call add_real_3d("fzsc", ns, ntor1, mpol, fzsc)
@@ -191,7 +189,6 @@ SUBROUTINE tomnspa(frzl_array,       &
   USE vmec_params, ONLY: jlam, jmin2, ntmax, rsc, rcs, zcc, zss
 
   use dbgout
-  use vmec_input, only: dump_tomnspa
 
   IMPLICIT NONE
 
@@ -297,8 +294,7 @@ SUBROUTINE tomnspa(frzl_array,       &
 
   DEALLOCATE (work1, temp1, temp3)
 
-  if (dump_tomnspa .and. should_write()) then
-    call open_dbg_context("tomnspa")
+  if (open_dbg_context("tomnspa")) then
 
     call add_real_3d("frsc", ns, ntor1, mpol, frsc)
     call add_real_3d("fzcc", ns, ntor1, mpol, fzcc)

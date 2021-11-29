@@ -13,7 +13,6 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   USE realspace, ONLY: sqrts
 
   use dbgout
-  use vmec_input, only: dump_lamcal
 
   IMPLICIT NONE
 
@@ -84,8 +83,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   END DO
 
   ! check lamcal output
-  if (dump_lamcal .and. should_write()) then
-    call open_dbg_context("lamcal")
+  if (open_dbg_context("lamcal")) then
 
     call add_real("pfactor0", pfactor0)
 

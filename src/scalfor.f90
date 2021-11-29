@@ -19,7 +19,6 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   USE vmec_dim, ONLY: ns
 
   use dbgout
-  use vmec_input, only: dump_scalfor
 
   IMPLICIT NONE
 
@@ -35,6 +34,10 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   REAL(rprec), DIMENSION(:,:,:), ALLOCATABLE :: ax, bx, dx
   REAL(rprec) :: mult_fac
   ! LOGICAL :: ledge ! improved convergence for free-boundary, see below
+
+  if (iflag.ne.0 .and. iflag.ne.1) then
+    stop "unknown iflag in dump_scalfor"
+  end if
 
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
 
@@ -110,18 +113,11 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag)
   ! END IF
 
   ! check scalfor state == inputs to tridslv
-  if (dump_scalfor .and. should_write()) then
-
-    ! prior knowledge about how this is called:
-    ! iflag=0 --> R
-    ! iflag=1 --> Z
-    if (iflag.eq.0) then
-      call open_dbg_context("scalfor_R")
-    elseif (iflag.eq.1) then
-      call open_dbg_context("scalfor_Z")
-    else
-      stop "unknown iflag in dump_scalfor"
-    end if
+  ! prior knowledge about how this is called:
+  ! iflag = 0 --> R
+  ! iflag = 1 --> Z
+  if ((iflag.eq.0 .and. open_dbg_context("scalfor_R")) .or. &
+      (iflag.eq.1 .and. open_dbg_context("scalfor_Z"))       ) then
 
     call add_real_3d("ax", ns, ntor1, mpol, ax)
     call add_real_3d("bx", ns, ntor1, mpol, bx)

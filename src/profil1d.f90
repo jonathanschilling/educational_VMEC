@@ -12,7 +12,6 @@ SUBROUTINE profil1d()
   USE realspace, ONLY: shalf, sqrts
 
   use dbgout
-  use vmec_input, only: dump_profil1d
 
   IMPLICIT NONE
 
@@ -134,8 +133,7 @@ SUBROUTINE profil1d()
   sp(0) = 0
   sp(1) = sm(2)
 
-  if (dump_profil1d .and. should_write()) then
-    call open_dbg_context("profil1d")
+  if (open_dbg_context("profil1d")) then
 
     call add_real("torflux_edge", torflux_edge)
     call add_real("polflux_edge", polflux_edge)

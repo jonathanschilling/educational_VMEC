@@ -49,7 +49,8 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
      END DO
   else ! ncurr .eq. 0
      ! given iota profile: compute chips from iotas, phips
-     chips = iotas*phips
+     ! do not touch innermost/first entry in chips, which should not be used anyway
+     chips(2:ns) = iotas(2:ns)*phips(2:ns)
   END IF
 
   ! distribute chips (ns-sized array) into larger chip array (over full surface) (?)
@@ -74,12 +75,12 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
 
   if (open_dbg_context("add_fluxes")) then
 
-    call add_real_1d("chips", ns-1, chips(2:ns)) ! half-grid
+    call add_real_1d("chips", ns, chips) ! half-grid
     call add_real_1d("iotas", ns-1, iotas(2:ns)) ! half-grid
     call add_real_1d("chipf", ns, chipf)
     call add_real_1d("iotaf", ns, iotaf)
 
-    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu)
 
     call close_dbg_out()
   end if

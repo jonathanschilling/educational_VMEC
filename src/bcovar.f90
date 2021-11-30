@@ -159,7 +159,7 @@ SUBROUTINE bcovar (lu, lv)
   ! check plasma volume computation
   if (open_dbg_context("volume")) then
 
-    call add_real_1d("vp", ns-1, vp(2:ns))
+    call add_real_1d("vp", ns+1, vp)
     call add_real("voli", voli)
 
     call close_dbg_out()
@@ -196,8 +196,8 @@ SUBROUTINE bcovar (lu, lv)
 
   if (open_dbg_context("bcontrav")) then
 
-    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv, order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu)
+    call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv)
 
     call close_dbg_out()
   end if
@@ -243,9 +243,9 @@ SUBROUTINE bcovar (lu, lv)
 
   if (open_dbg_context("bcov")) then
 
-    call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsq",    ns, nzeta, ntheta3, bsq,    order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh)
+    call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh)
+    call add_real_3d("bsq",    ns, nzeta, ntheta3, bsq   )
 
     call add_real_1d("pres", ns, pres)
 
@@ -280,10 +280,10 @@ SUBROUTINE bcovar (lu, lv)
 
    if (open_dbg_context("lambda_forces")) then
 
-    call add_real_3d("lvv",       ns, nzeta, ntheta3, lvv,     order=(/ 2, 3, 1 /) )
-    call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:,0), order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )
+    call add_real_3d("lvv",     ns,    nzeta, ntheta3, lvv    )
+    call add_real_4d("lu",      ns, 2, nzeta, ntheta3, lu, order=(/1, 3, 4, 2 /))
+    call add_real_3d("bsubu_e", ns,    nzeta, ntheta3, bsubu_e)
+    call add_real_3d("bsubv_e", ns,    nzeta, ntheta3, bsubv_e)
 
     call close_dbg_out()
   end if
@@ -340,8 +340,8 @@ SUBROUTINE bcovar (lu, lv)
 
     call add_real_1d("bdamp", ns, bdamp)
 
-    call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
-    call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )
+    call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e)
+    call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e)
 
     call close_dbg_out()
   end if
@@ -464,7 +464,7 @@ SUBROUTINE bcovar (lu, lv)
          call add_real_1d("fzsc_fac", ns, fzsc_fac)
          call add_real_1d("tcon", ns-1, tcon(2:ns))
 
-         call add_real_3d("guu", ns, nzeta, ntheta3,        guu, order=(/ 2, 3, 1 /) )
+         call add_real_3d("guu", ns, nzeta, ntheta3,        guu)
          call add_real_5d("xc",  ns, ntor1, mpol, ntmax, 2, xc,  order=(/ 1, 3, 4, 5, 2 /) )
 
          call close_dbg_out()
@@ -488,16 +488,16 @@ SUBROUTINE bcovar (lu, lv)
 
      if (open_dbg_context("lulv_comb")) then
 
-       call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e, order=(/ 2, 3, 1 /) )
-       call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e, order=(/ 2, 3, 1 /) )
-       call add_real_3d("bsubu_o", ns, nzeta, ntheta3, bsubu_o, order=(/ 2, 3, 1 /) )
-       call add_real_3d("bsubv_o", ns, nzeta, ntheta3, bsubv_o, order=(/ 2, 3, 1 /) )
-       call add_real_3d("lvv", ns, nzeta, ntheta3, lvv, order=(/ 2, 3, 1 /) )
-       call add_real_3d("guu", ns, nzeta, ntheta3, guu, order=(/ 2, 3, 1 /) )
-       call add_real_3d("guv", ns, nzeta, ntheta3, guv, order=(/ 2, 3, 1 /) )
-       call add_real_3d("gvv", ns, nzeta, ntheta3, gvv, order=(/ 2, 3, 1 /) )
-       call add_real_3d("lv_even_m", ns, nzeta, ntheta3, lv(:, 0), order=(/ 2, 3, 1 /) )
-       call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:, 0), order=(/ 2, 3, 1 /) )
+       call add_real_3d("bsubu_e",   ns, nzeta, ntheta3, bsubu_e )
+       call add_real_3d("bsubv_e",   ns, nzeta, ntheta3, bsubv_e )
+       call add_real_3d("bsubu_o",   ns, nzeta, ntheta3, bsubu_o )
+       call add_real_3d("bsubv_o",   ns, nzeta, ntheta3, bsubv_o )
+       call add_real_3d("lvv",       ns, nzeta, ntheta3, lvv     )
+       call add_real_3d("guu",       ns, nzeta, ntheta3, guu     )
+       call add_real_3d("guv",       ns, nzeta, ntheta3, guv     )
+       call add_real_3d("gvv",       ns, nzeta, ntheta3, gvv     )
+       call add_real_3d("lv_even_m", ns, nzeta, ntheta3, lv(:, 0))
+       call add_real_3d("lu_even_m", ns, nzeta, ntheta3, lu(:, 0))
 
        call close_dbg_out()
      end if

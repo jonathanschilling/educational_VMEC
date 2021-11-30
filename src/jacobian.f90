@@ -59,12 +59,12 @@ SUBROUTINE jacobian
   ! check output from jacobian()
   if (open_dbg_context("jacobian", funct3d_calls)) then
  
-    call add_real_3d("r12",  ns, nzeta, ntheta3, r12 , order=(/ 1, 2, 3 /))
-    call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 1, 2, 3 /))
-    call add_real_3d("zu12", ns, nzeta, ntheta3, zu12, order=(/ 1, 2, 3 /))
-    call add_real_3d("rs",   ns, nzeta, ntheta3, rs  , order=(/ 1, 2, 3 /))
-    call add_real_3d("zs",   ns, nzeta, ntheta3, zs  , order=(/ 1, 2, 3 /))
-    call add_real_3d("tau",  ns, nzeta, ntheta3, tau , order=(/ 1, 2, 3 /))
+    call add_real_3d("r12",  ns, nzeta, ntheta3, r12 )
+    call add_real_3d("ru12", ns, nzeta, ntheta3, ru12)
+    call add_real_3d("zu12", ns, nzeta, ntheta3, zu12)
+    call add_real_3d("rs",   ns, nzeta, ntheta3, rs  )
+    call add_real_3d("zs",   ns, nzeta, ntheta3, zs  )
+    call add_real_3d("tau",  ns, nzeta, ntheta3, tau )
 
     call close_dbg_out()
   end if

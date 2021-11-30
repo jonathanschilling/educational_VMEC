@@ -368,8 +368,8 @@ SUBROUTINE funct3d (ier_flag)
 
      if (open_dbg_context("constraint_force")) then
 
-       call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0), order=(/ 2, 3, 1 /) ) 
-       call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon,        order=(/ 2, 3, 1 /) ) 
+       call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
+       call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       ) 
 
        call add_real_3d("gcs",    ns, ntor+1, mpol, gc(0*mns+1:1*mns))
        call add_real_3d("gsc",    ns, ntor+1, mpol, gc(1*mns+1:2*mns))

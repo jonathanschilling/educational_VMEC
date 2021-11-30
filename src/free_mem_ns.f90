@@ -8,7 +8,7 @@ SUBROUTINE free_mem_ns
   USE realspace
   USE vforces
   USE xstuff
-  USE fbal
+
   IMPLICIT NONE
 
   INTEGER :: istat1 = 0, istat2 = 0, istat3 = 0, istat4 = 0, &
@@ -30,8 +30,7 @@ SUBROUTINE free_mem_ns
        bdotgradv,equif,specw,tcon,psi,yellip,yinden,                &
        ytrian,yshift,ygeo,overr,faclam,iotas,phips,chips,pres,vp,   &
        beta_vol, jperp2, jpar2, bdotb, clam, blam, dlam, phipf,     &
-       chipf, rru_fac, rzu_fac, frcc_fac, fzsc_fac, icurv, vpphi,   &
-       presgrad, bdamp, stat=istat8)
+       chipf, icurv, vpphi, presgrad, bdamp, stat=istat8)
 
   IF (ALLOCATED(gc)) then
     DEALLOCATE (gc, gc_con, gc_mhd, xsave, xstore, xcdot, stat=istat10)

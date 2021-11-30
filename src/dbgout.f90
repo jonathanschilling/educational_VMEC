@@ -18,6 +18,9 @@ function open_dbg_context(context_name, repetition)
   character(len=255) :: output_folder
   logical            :: should_write, file_exists
   
+  ! check if debug out should be written at all
+  should_write = iter2.le.max_dump
+  
   ! check if requested context is enabled by input flags
   if      (trim(context_name) .eq. "add_fluxes") then
     open_dbg_context         = dump_add_fluxes
@@ -87,19 +90,21 @@ function open_dbg_context(context_name, repetition)
     open_dbg_context         = dump_tomnsps
   else if (trim(context_name) .eq. "tomnspa") then
     open_dbg_context         = dump_tomnspa
-  else if (trim(context_name) .eq. "multigrid_result") then
-    open_dbg_context         = dump_multigrid_result
   else if (trim(context_name) .eq. "bsqvac_vac1") then
     open_dbg_context         = dump_bsqvac_vac1
   else if (trim(context_name) .eq. "phys_gc") then
     open_dbg_context         = dump_phys_gc
+  else if (trim(context_name) .eq. "multigrid_result") then
+    open_dbg_context         = dump_multigrid_result
+
+    ! multigrid_result needs to be written once at end of many iterations,
+    ! so the usual should_write logic needs to be broken here
+    should_write = .true. 
   else
     write(*,*) "unknown debug output context: '",trim(context_name),"'"
     stop
   end if
 
-  ! check if debug out should be written at all
-  should_write = iter2.le.max_dump
   open_dbg_context = open_dbg_context .and. should_write
   
   ! create output filename and open output file

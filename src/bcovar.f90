@@ -16,7 +16,6 @@ SUBROUTINE bcovar (lu, lv)
                bsubu_o => clmn_o, bsubv_o => blmn_o,                &
                bsq => bzmn_o, phipog => brmn_o
   USE xstuff, ONLY: xc
-  USE fbal
 
   use dbgout
 
@@ -362,11 +361,11 @@ SUBROUTINE bcovar (lu, lv)
 
        CALL precondn(bsupv, bsq, gsqrt, r12, &
                      zs, zu12, zu, zu(1,1), z1(1,1), &
-                     arm, ard, brm, brd, crd, rzu_fac, cos01)
+                     arm, ard, brm, brd, crd, cos01)
 
        CALL precondn(bsupv, bsq, gsqrt, r12, &
                      rs, ru12, ru, ru(1,1), r1(1,1), &
-                     azm, azd, bzm, bzd, crd, rru_fac, sin01)
+                     azm, azd, bzm, bzd, crd, sin01)
 
        ! check preconditioner output
        if (open_dbg_context("precondn")) then
@@ -381,18 +380,8 @@ SUBROUTINE bcovar (lu, lv)
          call add_real_2d("bzm", ns+1, 2, bzm)
          call add_real_2d("bzd", ns+1, 2, bzd)
 
-         call add_real_1d("rzu_fac", ns, rzu_fac)
-         call add_real_1d("rru_fac", ns, rru_fac)
-
          call close_dbg_out()
        end if
-
-       rzu_fac(2:ns-1) = sqrts(2:ns-1)*rzu_fac(2:ns-1)
-       rru_fac(2:ns-1) = sqrts(2:ns-1)*rru_fac(2:ns-1)
-       frcc_fac(2:ns-1) = one/rzu_fac(2:ns-1)
-       fzsc_fac(2:ns-1) =-one/rru_fac(2:ns-1)
-       rzu_fac = rzu_fac/2
-       rru_fac = rru_fac/2
 
        volume = hs*SUM(vp(2:ns))
 
@@ -457,11 +446,6 @@ SUBROUTINE bcovar (lu, lv)
          call add_real("fnormL",  fnormL)
          call add_real("tcon0",  tcon0)
          call add_real("tcon_mul",  tcon_mul)
-
-         call add_real_1d("rzu_fac", ns, rzu_fac)
-         call add_real_1d("rru_fac", ns, rru_fac)
-         call add_real_1d("frcc_fac", ns, frcc_fac)
-         call add_real_1d("fzsc_fac", ns, fzsc_fac)
          call add_real_1d("tcon", ns-1, tcon(2:ns))
 
          call add_real_3d("guu", ns, nzeta, ntheta3,        guu)

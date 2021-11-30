@@ -12,7 +12,7 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
   USE vforces
   USE xstuff
   USE mgrid_mod
-  USE fbal
+
   IMPLICIT NONE
 
   LOGICAL, INTENT(in) :: linterp
@@ -57,12 +57,9 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
             iotas(nsp1), phips(nsp1), chips(nsp1), pres(nsp1),      &
             beta_vol(ns), jperp2(ns), jpar2(ns), bdotb(ns),         &
             phipf(ns), chipf(ns), blam(nsp1), clam(nsp1),           &
-            dlam(nsp1), rru_fac(ns), rzu_fac(ns), frcc_fac(ns),     &
-            fzsc_fac(ns), icurv(ns+1), vpphi(ns), bdamp(ns),        &
+            dlam(nsp1), icurv(ns+1), vpphi(ns), bdamp(ns),          &
             presgrad(ns), vp(nsp1), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #7 in allocate_ns'
-  frcc_fac = 0
-  fzsc_fac = 0
 
   iotaf(nsp1) = 0 ! TODO: why explicitly zero out only the last entry? hidden storage?
 

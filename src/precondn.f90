@@ -23,7 +23,7 @@
 !> @param trigmult
 SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
                     xs, xu12, xue, xuo, xodd, &
-                    axm, axd, bxm, bxd, cx, eqfactor, trigmult)
+                    axm, axd, bxm, bxd, cx, trigmult)
   USE vmec_main
   USE vmec_params, ONLY: signgs
   USE realspace
@@ -32,7 +32,6 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
   REAL(rprec), DIMENSION(nrzt),   INTENT(in)  :: lu1, bsq, gsqrt, r12, xs, xu12, xue, xuo, xodd
   REAL(rprec), DIMENSION(ns+1,2), INTENT(out) :: axm, axd, bxm, bxd
   REAL(rprec), DIMENSION(ns+1),   INTENT(out) :: cx
-  REAL(rprec), DIMENSION(ns),     INTENT(out) :: eqfactor
   REAL(rprec), DIMENSION(nznt),   INTENT(in)  :: trigmult
 
   INTEGER :: js, l, lk
@@ -108,9 +107,6 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
     temp(js) = signgs*(temp(js) + temp(js+1))
   END DO
 
-  eqfactor(2:ns-1) = axd(2:ns-1,2)*hs*hs/temp(2:ns-1)
-  eqfactor(1) = 0
-  eqfactor(ns) = 0
   axm(ns+1,:) = 0
   axd(ns+1,:) = 0
   bxm(ns+1,:) = 0

@@ -91,14 +91,14 @@ SUBROUTINE funct3d (ier_flag)
 
   if (open_dbg_context("funct3d_geometry", funct3d_calls)) then
     
-      call add_real_4d("r1",   ns, 2, nzeta, ntheta3, r1,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("ru",   ns, 2, nzeta, ntheta3, ru,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("rv",   ns, 2, nzeta, ntheta3, rv,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("z1",   ns, 2, nzeta, ntheta3, z1,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("zu",   ns, 2, nzeta, ntheta3, zu,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("zv",   ns, 2, nzeta, ntheta3, zv,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("lu",   ns, 2, nzeta, ntheta3, lu,   order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("lv",   ns, 2, nzeta, ntheta3, lv,   order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("r1",   ns, 2, nzeta, ntheta3,   r1, order=(/ 1, 3, 4, 2 /) ) ! in reality: ns, nzeta, ntheta3, 2
+      call add_real_4d("ru",   ns, 2, nzeta, ntheta3,   ru, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("rv",   ns, 2, nzeta, ntheta3,   rv, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("z1",   ns, 2, nzeta, ntheta3,   z1, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("zu",   ns, 2, nzeta, ntheta3,   zu, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("zv",   ns, 2, nzeta, ntheta3,   zv, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("lu",   ns, 2, nzeta, ntheta3,   lu, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("lv",   ns, 2, nzeta, ntheta3,   lv, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("rcon", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("zcon", ns, 2, nzeta, ntheta3, zcon, order=(/ 1, 3, 4, 2 /) )
 

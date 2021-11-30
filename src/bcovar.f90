@@ -68,6 +68,9 @@ SUBROUTINE bcovar (lu, lv)
                    + zu(1:nrzt,meven)*zu(1:nrzt,modd))*2
 
   phipog(1:nrzt)= 2* r1(1:nrzt,meven)*r1(1:nrzt,modd) ! temporary re-use of phipog
+  do l=1,2*ns
+    print *, l, r1(l,meven), r1(l,modd), phipog(l)
+  end do
 
   IF (lthreed) THEN
      guv(1:nrzt)   = ru(1:nrzt,meven)*rv(1:nrzt,meven)                      &
@@ -96,6 +99,10 @@ SUBROUTINE bcovar (lu, lv)
      guu(l) = p5*(guu(l) + guu(l-1) + shalf(l)*(luu(l) + luu(l-1)))
 
      ! r12sq = r12**2
+     if (mod(l-1,ns).eq.0) then
+       print *, (l-1)/ns+1, l, "evn_contrib=",p5*(  r12sq(l) +  r12sq(l-1) )," from ", r12sq(l)," and ", r12sq(l-1)
+       print *, (l-1)/ns+1, l, "odd_contrib=",p5*( phipog(l) + phipog(l-1) )," from ",phipog(l)," and ",phipog(l-1)
+     end if
      r12sq(l) = p5*( r12sq(l) + r12sq(l-1) + shalf(l)*(phipog(l) + phipog(l-1)) )
   END DO
 
@@ -116,15 +123,15 @@ SUBROUTINE bcovar (lu, lv)
   ! check metric coefficients
   if (open_dbg_context("metric")) then
 
-      call add_real_3d("guu",   ns, nzeta, ntheta3, guu,   order=(/ 2, 3, 1 /) )
-      call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv,   order=(/ 2, 3, 1 /) )
-      call add_real_3d("r12sq", ns, nzeta, ntheta3, r12sq, order=(/ 2, 3, 1 /) )
-      call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt, order=(/ 2, 3, 1 /) )
-
+      call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt)
+      call add_real_3d("guu",   ns, nzeta, ntheta3, guu  )
+      call add_real_3d("r12sq", ns, nzeta, ntheta3, r12sq)
+      call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv  )
+      
       if (lthreed) then
-        call add_real_3d("guv", ns, nzeta, ntheta3, guv, order=(/ 2, 3, 1 /) )
+        call add_real_3d("guv", ns, nzeta, ntheta3, guv  )
       else
-        call add_none_3d("guv")
+        call add_null("guv")
       end if
 
       call close_dbg_out()

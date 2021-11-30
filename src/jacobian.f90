@@ -19,7 +19,7 @@ SUBROUTINE jacobian
   REAL(rprec), PARAMETER :: zero=0, p5=0.5_dp, p25=p5*p5
 
   INTEGER :: l, js, ku, lk
-  REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns)
+  REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns) ! TODO: nrzt/ns == nznt?
 
   ! (RS, ZS)=(R, Z) SUB S, (RU12, ZU12)=(R, Z) SUB THETA(=U)
   ! AND TAU=SQRT(G)/R ARE DIFFERENCED ON HALF MESH
@@ -58,13 +58,13 @@ SUBROUTINE jacobian
 
   ! check output from jacobian()
   if (open_dbg_context("jacobian", funct3d_calls)) then
-
-    call add_real_3d("r12",  ns, nzeta, ntheta3, r12,  order=(/ 2, 3, 1 /) )
-    call add_real_3d("ru12", ns, nzeta, ntheta3, ru12, order=(/ 2, 3, 1 /) )
-    call add_real_3d("zu12", ns, nzeta, ntheta3, zu12, order=(/ 2, 3, 1 /) )
-    call add_real_3d("rs",   ns, nzeta, ntheta3, rs,   order=(/ 2, 3, 1 /) )
-    call add_real_3d("zs",   ns, nzeta, ntheta3, zs,   order=(/ 2, 3, 1 /) )
-    call add_real_3d("tau",  ns, nzeta, ntheta3, tau,  order=(/ 2, 3, 1 /) )
+ 
+    call add_real_3d("r12",  ns, nzeta, ntheta3, r12 )
+    call add_real_3d("ru12", ns, nzeta, ntheta3, ru12)
+    call add_real_3d("zu12", ns, nzeta, ntheta3, zu12)
+    call add_real_3d("rs",   ns, nzeta, ntheta3, rs  )
+    call add_real_3d("zs",   ns, nzeta, ntheta3, zs  )
+    call add_real_3d("tau",  ns, nzeta, ntheta3, tau )
 
     call close_dbg_out()
   end if

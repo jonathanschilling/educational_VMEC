@@ -35,6 +35,13 @@ SUBROUTINE jacobian
   ! initially, all good
   first = 1
 
+  ! try to fix weird leftover stuff in first entry
+  r12 (1) = 0.0_dp
+  ru12(1) = 0.0_dp
+  zu12(1) = 0.0_dp
+  rs  (1) = 0.0_dp
+  zs  (1) = 0.0_dp
+
   DO l = 2,nrzt
     r12(l)  =  p5*( r1(l,meven) + r1(l-1,meven) + shalf(l)*( r1(l,modd)  + r1(l-1,modd)) ) ! R on half grid
 

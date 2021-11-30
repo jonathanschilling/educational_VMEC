@@ -3,12 +3,6 @@ var namespaces_dup =
     [ "dbgout", "d8/dfd/namespacedbgout.html", [
       [ "open_dbg_context", "d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492", null ]
     ] ],
-    [ "fbal", "df/d88/namespacefbal.html", [
-      [ "frcc_fac", "df/d88/namespacefbal.html#ab5c754bcc9f66b0acd7642a15b0fe080", null ],
-      [ "fzsc_fac", "df/d88/namespacefbal.html#a070e7c18aa156afb4135415ecf8802b7", null ],
-      [ "rru_fac", "df/d88/namespacefbal.html#a7164fbcfc1c6c74b1f8061021d85ba52", null ],
-      [ "rzu_fac", "df/d88/namespacefbal.html#ace6d8555aebe17464dad8db80bfe05d5", null ]
-    ] ],
     [ "functions", "df/d36/namespacefunctions.html", [
       [ "function_test", "df/d36/namespacefunctions.html#ac8a7a9050ac08bc732ab08c620621024", null ],
       [ "two_power", "df/d36/namespacefunctions.html#a518699207ca1e12189357365cbd4cecc", null ],

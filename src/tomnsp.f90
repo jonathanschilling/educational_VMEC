@@ -92,23 +92,22 @@ SUBROUTINE tomnsps(frzl_array,       &
             + xmpq(m,1)*azcon(jll:nsl,mparity)
 ! #end /* ndef _HBANGLE */
 
-        work1(:,1) = work1(:,1) + tempr(:)*cosmui(i,m) + brmn(jll:nsl,mparity)*sinmumi(i,m)
-        work1(:,7) = work1(:,7) + tempz(:)*sinmui(i,m) + bzmn(jll:nsl,mparity)*cosmumi(i,m)
-        work1(:,11)= work1(:,11)+ blmn(jll:nsl,mparity)*cosmumi(i,m)
+        work1(:, 1) = work1(:, 1) + tempr(:)*cosmui(i,m) + brmn(jll:nsl,mparity)*sinmumi(i,m)
+        work1(:, 7) = work1(:, 7) + tempz(:)*sinmui(i,m) + bzmn(jll:nsl,mparity)*cosmumi(i,m)
+        work1(:,11) = work1(:,11) + blmn(jll:nsl,mparity)*cosmumi(i,m)
 
         IF (.not.lthreed) CYCLE
 
-        work1(:,2) = work1(:,2) - crmn(jll:nsl,mparity)*cosmui(i,m)
-        work1(:,3) = work1(:,3) + tempr(:)*sinmui(i,m) + brmn(jll:nsl,mparity)*cosmumi(i,m)
-        work1(:,4) = work1(:,4) - crmn(jll:nsl,mparity)*sinmui(i,m)
-        work1(:,5) = work1(:,5) + tempz(:)*cosmui(i,m) + bzmn(jll:nsl,mparity)*sinmumi(i,m)
-        work1(:,6) = work1(:,6) - czmn(jll:nsl,mparity)*cosmui(i,m)
-
-        work1(:,8) = work1(:,8) - czmn(jll:nsl,mparity)*sinmui(i,m)
-        work1(:,9) = work1(:,9) + blmn(jll:nsl,mparity)*sinmumi(i,m)
-        work1(:,10) =work1(:,10)- clmn(jll:nsl,mparity)*cosmui(i,m)
-
-        work1(:,12) =work1(:,12)- clmn(jll:nsl,mparity)*sinmui(i,m)
+        work1(:, 2) = work1(:, 2) - crmn(jll:nsl,mparity)*cosmui(i,m)
+        work1(:, 3) = work1(:, 3) + tempr(:)*sinmui(i,m) + brmn(jll:nsl,mparity)*cosmumi(i,m)
+        work1(:, 4) = work1(:, 4) - crmn(jll:nsl,mparity)*sinmui(i,m)
+        work1(:, 5) = work1(:, 5) + tempz(:)*cosmui(i,m) + bzmn(jll:nsl,mparity)*sinmumi(i,m)
+        work1(:, 6) = work1(:, 6) - czmn(jll:nsl,mparity)*cosmui(i,m)
+        work1(:, 8) = work1(:, 8) - czmn(jll:nsl,mparity)*sinmui(i,m)
+        
+        work1(:, 9) = work1(:, 9) + blmn(jll:nsl,mparity)*sinmumi(i,m)
+        work1(:,10) = work1(:,10) - clmn(jll:nsl,mparity)*cosmui(i,m)
+        work1(:,12) = work1(:,12) - clmn(jll:nsl,mparity)*sinmui(i,m)
      END DO
 
      ! NEXT, DO ZETA (V) TRANSFORM
@@ -138,7 +137,7 @@ SUBROUTINE tomnsps(frzl_array,       &
                                                      + work1(j2l:jmaxl,6)*cosnvn(k,n)
 
            flsc(jl:ns,ni,mj) = flsc(jl:ns,ni,mj) + work1(jll:nsl,12)*sinnvn(k,n)
-           flcs(jl:ns,ni,mj) = flcs(jl:ns,ni,mj) + work1(jll:nsl,9)*sinnv(k,n)   &
+           flcs(jl:ns,ni,mj) = flcs(jl:ns,ni,mj) + work1(jll:nsl, 9)*sinnv(k,n)   &
                                                  + work1(jll:nsl,10)*cosnvn(k,n)
         END DO
      END DO

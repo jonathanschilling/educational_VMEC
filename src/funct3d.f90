@@ -371,10 +371,10 @@ SUBROUTINE funct3d (ier_flag)
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
        call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       ) 
 
-       call add_real_3d("gcs",    ns, ntor+1, mpol, gc(0*mns+1:1*mns))
-       call add_real_3d("gsc",    ns, ntor+1, mpol, gc(1*mns+1:2*mns))
-       call add_real_3d("gcc",    ns, ntor+1, mpol, gc(2*mns+1:3*mns))
-       call add_real_3d("gss",    ns, ntor+1, mpol, gc(3*mns+1:4*mns))
+       call add_real_3d("gcs",    ns, ntor1, mpol, gc(0*mns+1:1*mns))
+       call add_real_3d("gsc",    ns, ntor1, mpol, gc(1*mns+1:2*mns))
+       call add_real_3d("gcc",    ns, ntor1, mpol, gc(2*mns+1:3*mns))
+       call add_real_3d("gss",    ns, ntor1, mpol, extra1(:,1))
 
        call close_dbg_out()
      end if

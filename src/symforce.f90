@@ -136,6 +136,22 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
         ENDIF
 
      END DO
+     
+     ! clear remainder of arrays for debug output
+     DO i = ntheta2+1, ntheta3
+       ara(:,i,mpar) = 0.0_dp
+       bra(:,i,mpar) = 0.0_dp
+       aza(:,i,mpar) = 0.0_dp
+       bza(:,i,mpar) = 0.0_dp
+       bla(:,i,mpar) = 0.0_dp
+       rca(:,i,mpar) = 0.0_dp
+       zca(:,i,mpar) = 0.0_dp
+       if (lthreed) then
+         cra(:,i,mpar) = 0.0_dp
+         cza(:,i,mpar) = 0.0_dp
+         cla(:,i,mpar) = 0.0_dp
+       end if
+     end do
   END DO
 
   DEALLOCATE (ars_0, brs_0, azs_0, bzs_0, bls_0,          &
@@ -143,30 +159,30 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
 
   if (dbg_symforce) then
     call add_real_4d("ars_out", ns, 2, nzeta, ntheta3, ars, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("ara_out", ns, 2, nzeta, ntheta2, ara, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("ara_out", ns, 2, nzeta, ntheta3, ara, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("brs_out", ns, 2, nzeta, ntheta3, brs, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("bra_out", ns, 2, nzeta, ntheta2, bra, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("bra_out", ns, 2, nzeta, ntheta3, bra, order=(/ 1, 3, 4, 2 /) )
 
     call add_real_4d("azs_out", ns, 2, nzeta, ntheta3, azs, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("aza_out", ns, 2, nzeta, ntheta2, aza, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("aza_out", ns, 2, nzeta, ntheta3, aza, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("bzs_out", ns, 2, nzeta, ntheta3, bzs, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("bza_out", ns, 2, nzeta, ntheta2, bza, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("bza_out", ns, 2, nzeta, ntheta3, bza, order=(/ 1, 3, 4, 2 /) )
 
     call add_real_4d("bls_out", ns, 2, nzeta, ntheta3, bls, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("bla_out", ns, 2, nzeta, ntheta2, bla, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("bla_out", ns, 2, nzeta, ntheta3, bla, order=(/ 1, 3, 4, 2 /) )
 
     call add_real_4d("rcs_out", ns, 2, nzeta, ntheta3, rcs, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("rca_out", ns, 2, nzeta, ntheta2, rca, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("rca_out", ns, 2, nzeta, ntheta3, rca, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("zcs_out", ns, 2, nzeta, ntheta3, zcs, order=(/ 1, 3, 4, 2 /) )
-    call add_real_4d("zca_out", ns, 2, nzeta, ntheta2, zca, order=(/ 1, 3, 4, 2 /) )
+    call add_real_4d("zca_out", ns, 2, nzeta, ntheta3, zca, order=(/ 1, 3, 4, 2 /) )
 
     if (lthreed) then
       call add_real_4d("crs_out", ns, 2, nzeta, ntheta3, crs, order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("cra_out", ns, 2, nzeta, ntheta2, cra, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("cra_out", ns, 2, nzeta, ntheta3, cra, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("czs_out", ns, 2, nzeta, ntheta3, czs, order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("cza_out", ns, 2, nzeta, ntheta2, cza, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("cza_out", ns, 2, nzeta, ntheta3, cza, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("cls_out", ns, 2, nzeta, ntheta3, cls, order=(/ 1, 3, 4, 2 /) )
-      call add_real_4d("cla_out", ns, 2, nzeta, ntheta2, cla, order=(/ 1, 3, 4, 2 /) )
+      call add_real_4d("cla_out", ns, 2, nzeta, ntheta3, cla, order=(/ 1, 3, 4, 2 /) )
     else
       call add_null("crs_out")
       call add_null("cra_out")

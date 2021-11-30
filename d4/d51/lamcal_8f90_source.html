@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('d4/d51/lamcal_8f90_source.html','../..
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;clam&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a93acd935f1290f6b40c3fb8fc233a02e">clam</a>(2:ns))</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;dlam&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a04979f1c0b31bc89eaba86c1a8cce239">dlam</a>(2:ns))</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;faclam&quot;</span>, ns, ntor+1, mpol1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>(:,:,:,1), order=(/ 2, 3, 1 /) )</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;faclam&quot;</span>, ns, ntor+1, mpol1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4">faclam</a>(:,:,:,1)) <span class="comment">!, order=(/ 2, 3, 1 /) ) ! TODO: check order !</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">call </span>close_dbg_out()</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keywordflow">  end if</span></div>
@@ -224,7 +224,7 @@ $(document).ready(function(){initNavTree('d4/d51/lamcal_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/d51/lamcal_8f90.html">lamcal.f90</a></li>
-    <li class="footer">Generated on Tue Nov 30 2021 10:12:20 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Nov 30 2021 12:35:59 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

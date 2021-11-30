@@ -181,8 +181,8 @@ subroutine vmec
              call add_real_1d("iotas", ns-1, iotas(2:ns))
              call add_real_1d("chips", ns-1, chips(2:ns))
 
-             call add_real_5d("xc",     ns, ntor1, mpol, ntmax, 2, xc,     order=(/ 1, 3, 4, 5, 2 /) )
-             call add_real_5d("scalxc", ns, ntor1, mpol, ntmax, 2, scalxc, order=(/ 1, 3, 4, 5, 2 /) )
+             call add_real_5d("xc",     3, ntmax, ns, ntor1, mpol, xc,     order=(/ 3, 4, 5, 2, 1 /) )
+             call add_real_5d("scalxc", 3, ntmax, ns, ntor1, mpol, scalxc, order=(/ 3, 4, 5, 2, 1 /) )
 
              call close_dbg_out()
            end if

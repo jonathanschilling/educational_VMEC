@@ -89,10 +89,9 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
   dbg_evolve = open_dbg_context("evolve")
   if (dbg_evolve) then
-
-    call add_real_5d("xc_before",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
-    call add_real_5d("xcdot_before", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
-    call add_real_5d("gc",           ns, ntor1, mpol, ntmax, 2, gc,    order=(/ 1, 3, 4, 5, 2 /) )
+    call add_real_5d("xc_before",    3, ntmax, ns, ntor1, mpol, xc,    order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_5d("xcdot_before", 3, ntmax, ns, ntor1, mpol, xcdot, order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_5d("gc",           3, ntmax, ns, ntor1, mpol, gc,    order=(/ 3, 4, 5, 2, 1 /) )
   end if
 
   ! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE
@@ -102,8 +101,8 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   xc    = xc + time_step*xcdot          ! advance xc by velocity given in xcdot
 
   if (dbg_evolve) then
-    call add_real_5d("xc_after",    ns, ntor1, mpol, ntmax, 2, xc,    order=(/ 1, 3, 4, 5, 2 /) )
-    call add_real_5d("xcdot_after", ns, ntor1, mpol, ntmax, 2, xcdot, order=(/ 1, 3, 4, 5, 2 /) )
+    call add_real_5d("xc_after",    3, ntmax, ns, ntor1, mpol, xc,    order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_5d("xcdot_after", 3, ntmax, ns, ntor1, mpol, xcdot, order=(/ 3, 4, 5, 2, 1 /) )
 
     call close_dbg_out()
   end if

@@ -465,7 +465,7 @@ SUBROUTINE bcovar (lu, lv)
          call add_real_1d("tcon", ns-1, tcon(2:ns))
 
          call add_real_3d("guu", ns, nzeta, ntheta3,        guu)
-         call add_real_5d("xc",  ns, ntor1, mpol, ntmax, 2, xc,  order=(/ 1, 3, 4, 5, 2 /) )
+         call add_real_5d("xc",  3, ntmax, ns, ntor1, mpol, xc, order=(/ 3, 4, 5, 2, 1 /) )
 
          call close_dbg_out()
        end if

@@ -71,9 +71,9 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
     call add_real_1d("s1", nsnew, s1)
     call add_real_1d("xint", nsnew, xint)
 
-    call add_real_5d("xold",   nsold, ntor1, mpol, ntmax, 2, xold,   order=(/ 1, 3, 4, 5, 2 /) )
-    call add_real_5d("xnew",   nsnew, ntor1, mpol, ntmax, 2, xnew,   order=(/ 1, 3, 4, 5, 2 /) )
-    call add_real_5d("scalxc", nsnew, ntor1, mpol, ntmax, 2, scalxc, order=(/ 1, 3, 4, 5, 2 /) ) 
+    call add_real_5d("xold",   3, ntmax, nsold, ntor1, mpol, xold,   order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_5d("xnew",   3, ntmax, nsnew, ntor1, mpol, xnew,   order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_5d("scalxc", 3, ntmax, nsnew, ntor1, mpol, scalxc, order=(/ 3, 4, 5, 2, 1 /) )
 
     call close_dbg_out()
   end if

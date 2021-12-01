@@ -171,8 +171,8 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492">open_dbg_context</a>(<span class="stringliteral">&quot;interp&quot;</span>)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;sj&quot;</span>, nsnew, sj)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">call </span>add_int_1d(<span class="stringliteral">&quot;js1&quot;</span>, nsnew, js1)</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">call </span>add_int_1d(<span class="stringliteral">&quot;js2&quot;</span>, nsnew, js2)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">call </span>add_int_1d(<span class="stringliteral">&quot;js1&quot;</span>, nsnew, js1-1) <span class="comment">! index shift: Fortran starts at 1, Java at 0</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">call </span>add_int_1d(<span class="stringliteral">&quot;js2&quot;</span>, nsnew, js2-1) <span class="comment">! index shift: Fortran starts at 1, Java at 0</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;s1&quot;</span>, nsnew, s1)</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;xint&quot;</span>, nsnew, xint)</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
@@ -203,7 +203,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/df5/interp_8f90.html">interp.f90</a></li>
-    <li class="footer">Generated on Tue Nov 30 2021 22:08:22 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Wed Dec 1 2021 11:10:43 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

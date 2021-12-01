@@ -85,7 +85,7 @@ function open_dbg_context(context_name, repetition)
   else if (trim(context_name) .eq. "scalfor_Z") then
     open_dbg_context         = dump_scalfor_Z
   else if (trim(context_name) .eq. "symforce") then
-    open_dbg_context         = dump_symforce
+    open_dbg_context         = dump_symforce   
   else if (trim(context_name) .eq. "tomnsps") then
     open_dbg_context         = dump_tomnsps
   else if (trim(context_name) .eq. "tomnspa") then

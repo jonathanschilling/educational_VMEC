@@ -246,7 +246,7 @@ SUBROUTINE bcovar (lu, lv)
     call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh)
     call add_real_3d("bsq",    ns, nzeta, ntheta3, bsq   )
 
-    call add_real_1d("pres", ns, pres)
+    call add_real_1d("pres", ns-1, pres(2:ns))
 
     call add_real("wb", wb)
     call add_real("wp", wp)

@@ -75,7 +75,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
 
   if (open_dbg_context("add_fluxes")) then
 
-    call add_real_1d("chips", ns, chips) ! half-grid
+    call add_real_1d("chips", ns-1, chips(2:ns)) ! half-grid
     call add_real_1d("iotas", ns-1, iotas(2:ns)) ! half-grid
     call add_real_1d("chipf", ns, chipf)
     call add_real_1d("iotaf", ns, iotaf)

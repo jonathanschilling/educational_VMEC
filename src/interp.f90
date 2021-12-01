@@ -66,8 +66,8 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   if (open_dbg_context("interp")) then
 
     call add_real_1d("sj", nsnew, sj)
-    call add_int_1d("js1", nsnew, js1)
-    call add_int_1d("js2", nsnew, js2)
+    call add_int_1d("js1", nsnew, js1-1) ! index shift: Fortran starts at 1, Java at 0
+    call add_int_1d("js2", nsnew, js2-1) ! index shift: Fortran starts at 1, Java at 0
     call add_real_1d("s1", nsnew, s1)
     call add_real_1d("xint", nsnew, xint)
 

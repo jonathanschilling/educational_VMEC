@@ -4,7 +4,14 @@ module dbgout
 
 contains
 
-function open_dbg_context(context_name, repetition)
+!> check if any output is desired for the current iteration
+!> check if the given context should be openend based on input file flags
+!> check if 
+!> @param context_name a string describing the subroutine from which this function is called
+!> @param repetition   a number to distinguish two calls to this with the same value of iter2
+!> @param id           a number to replace iter2 in the output filename
+!> @return true: debug output should be written and file is open; false otherwise
+function open_dbg_context(context_name, repetition, id)
   use vmec_dim,   only: ns
   use vmec_main,  only: iter2
   use vmec_input
@@ -12,6 +19,7 @@ function open_dbg_context(context_name, repetition)
   
   character(len=*), intent(in)  :: context_name
   integer, intent(in), optional :: repetition
+  integer, intent(in), optional :: id
   logical :: open_dbg_context
   
   character(len=255) :: dump_filename
@@ -19,7 +27,11 @@ function open_dbg_context(context_name, repetition)
   logical            :: should_write, file_exists
   
   ! check if debug out should be written at all
-  should_write = iter2.le.max_dump
+  if (present(id)) then
+    should_write = id.le.max_dump
+  else
+    should_write = iter2.le.max_dump
+  end if
   
   ! check if requested context is enabled by input flags
   if      (trim(context_name) .eq. "add_fluxes") then
@@ -99,7 +111,17 @@ function open_dbg_context(context_name, repetition)
 
     ! multigrid_result needs to be written once at end of many iterations,
     ! so the usual should_write logic needs to be broken here
-    should_write = .true. 
+    should_write = .true.
+    
+  ! NESTOR
+  else if (trim(context_name) .eq. "vac1n_vacuum") then
+    open_dbg_context         = dump_vac1n_vacuum
+  else if (trim(context_name) .eq. "vac1n_precal") then
+    open_dbg_context         = dump_vac1n_precal
+  else if (trim(context_name) .eq. "vac1n_surface") then
+    open_dbg_context         = dump_vac1n_surface
+
+
   else
     write(*,*) "unknown debug output context: '",trim(context_name),"'"
     stop
@@ -114,18 +136,31 @@ function open_dbg_context(context_name, repetition)
     output_folder = trim(input_extension) // "/" // trim(context_name)
     CALL system("mkdir -p "//trim(output_folder))
     
-    if (present(repetition)) then
-      write(dump_filename, 998) trim(output_folder), &
-                                trim(context_name),  &
-                                ns, iter2, repetition, &
-                                trim(input_extension)
-998   format(a,'/',a,'_',i5.5,'_',i6.6,'_',i2.2,'.',a,'.json')
+    if (present(id)) then
+      if (present(repetition)) then
+        write(dump_filename, 998) trim(output_folder), &
+                                  trim(context_name),  &
+                                  ns, id, repetition, &
+                                  trim(input_extension)
+      else
+        write(dump_filename, 999) trim(output_folder), &
+                                  trim(context_name),  &
+                                  ns, id, trim(input_extension)
+      end if
     else
-      write(dump_filename, 999) trim(output_folder), &
-                                trim(context_name),  &
-                                ns, iter2, trim(input_extension)
-999   format(a,'/',a,'_',i5.5,'_',i6.6,'_01.',a,'.json')
+      if (present(repetition)) then
+        write(dump_filename, 998) trim(output_folder), &
+                                  trim(context_name),  &
+                                  ns, iter2, repetition, &
+                                  trim(input_extension)
+      else
+        write(dump_filename, 999) trim(output_folder), &
+                                  trim(context_name),  &
+                                  ns, iter2, trim(input_extension)
+      end if
     end if
+998   format(a,'/',a,'_',i5.5,'_',i6.6,'_',i2.2,'.',a,'.json')
+999   format(a,'/',a,'_',i5.5,'_',i6.6,'_01.',a,'.json')
     
     ! check if file already exists (and stop in that case)
     inquire(file=trim(dump_filename), exist=file_exists)

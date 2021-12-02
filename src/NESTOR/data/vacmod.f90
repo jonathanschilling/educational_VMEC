@@ -6,6 +6,13 @@ MODULE vacmod
   USE vparams, ONLY: zero, one, c2p0, cp5, mu0
 
   IMPLICIT NONE
+  
+  
+  
+  integer, save :: icall = 0
+  
+  
+  
 
   REAL(rprec), PARAMETER :: p5 = cp5
   REAL(rprec), PARAMETER :: two = c2p0

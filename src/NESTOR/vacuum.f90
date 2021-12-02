@@ -45,8 +45,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
   REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
 
-  integer, save :: icall = 0
-
   ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
   ! BASED ON THE PROGRAM BY P. MERKEL [J. Comp. Phys. 66, 83 (1986)]
   ! AND MODIFIED BY W. I. VAN RIJ AND S. P. HIRSHMAN (1987)
@@ -82,6 +80,41 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   ! Here, the potential term is needed to satisfy B dot dS = 0 and has the form:
   !
   ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
+
+  ! write inputs to NESTOR
+  if (open_dbg_context("vac1n_vacuum", id=icall)) then
+  
+    call add_real_1d("rmnc", mnmax, rmnc)
+    call add_real_1d("zmns", mnmax, zmns)
+    if (lasym) then
+      call add_real_1d("rmns", mnmax, rmns)
+      call add_real_1d("zmnc", mnmax, zmnc)
+    else
+      call add_null("rmns")
+      call add_null("zmnc")
+    end if
+    call add_real_1d("xm", mnmax, xm)
+    call add_real_1d("xn", mnmax, xn)
+
+    call add_real("plascur", plascur)
+    call add_real("rbtor",   rbtor)
+
+    call add_real_2d("wint", nv, nu3, wint)
+    
+    call add_int("ivac_skip", ivac_skip)
+    call add_int("ivac",      ivac)
+    call add_int("mnmax",     mnmax)
+    call add_int("ier_flag",  ier_flag)
+    call add_logical("lasym", lasym)
+    call add_real("signgs",   signgs)
+    
+    call add_real_1d("raxis_nestor", nv, raxis_nestor)
+    call add_real_1d("zaxis_nestor", nv, zaxis_nestor)
+    
+    ! TODO: include leftovers from previous iterations, i.e., bvecsav and amatsav
+
+    call close_dbg_out() 
+  end if
 
    IF (.not. precal_done) then
       CALL precal
@@ -161,10 +194,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
     call close_dbg_out()
   end if
 
-  icall = icall + 1
-
-
-
    ! PRINT OUT VACUUM PARAMETERS
    IF (ivac .eq. 0) THEN
       ivac = ivac + 1
@@ -194,5 +223,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       ENDIF
 
    ENDIF
+   
+   icall = icall + 1
 
 END SUBROUTINE vacuum

@@ -32,15 +32,6 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    ! GReen's function Primed (normal derivative...) and Fourier-transformed to MN mode numbers --> "GR P MN"
    CALL analyt (grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map_wrt, grpmn_n_map_wrt)
 
-   ! investigate contribution to grpmn from analyt alone
-   ! return
-
-   ! debugging of fourp: get only contribution to grpmn from fourp / greenp
-   ! grpmn = 0
-
-   ! debugging of fouri: get only contribution to bvec from fouri / green / gstore
-   ! bvec = 0
-
    IF (ivacskip .ne. 0) THEN
       ! FOR ivacskip != 0, USE PREVIOUSLY COMPUTED bvecsav FOR SPEED
 
@@ -56,7 +47,6 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       ! FOR SPECTRAL DECOMPOSITION OF POTENTIAL INTEGRAL EQUATION
       ! NOTE: SOURCE IS THE RHS OF EQ.(3.2), KERNEL IS THE LHS OF EQ (3.2).
       ! IP IS THE INDEX OF THE PRIMED VARIABLE MESH.
-
       gstore = 0
       DO ip = 1, nuv2
 

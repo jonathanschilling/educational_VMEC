@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="145,17,248,44"/>
 <area shape="rect" id="node6" href="$d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry." alt="" coords="131,68,263,95"/>
 <area shape="rect" id="node7" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="163,119,230,145"/>
-<area shape="rect" id="node10" href="$d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492" title=" " alt="" coords="111,193,283,220"/>
+<area shape="rect" id="node10" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="111,193,283,220"/>
 <area shape="rect" id="node11" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="152,244,241,271"/>
 <area shape="rect" id="node14" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="119,352,275,379"/>
 <area shape="rect" id="node3" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="333,5,495,32"/>

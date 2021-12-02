@@ -1,7 +1,7 @@
 var namespaces_dup =
 [
     [ "dbgout", "d8/dfd/namespacedbgout.html", [
-      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#af9a9deb4fdfe84878a6e319b15221492", null ]
+      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed", null ]
     ] ],
     [ "functions", "df/d36/namespacefunctions.html", [
       [ "function_test", "df/d36/namespacefunctions.html#ac8a7a9050ac08bc732ab08c620621024", null ],
@@ -389,6 +389,7 @@ var namespaces_dup =
       [ "guu_b", "dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7", null ],
       [ "guv_b", "dd/df2/namespacevacmod.html#ac3d5effce915731468aaee36482541e9", null ],
       [ "gvv_b", "dd/df2/namespacevacmod.html#ab8dcbab065f715e5d306b0ddf0c42146", null ],
+      [ "icall", "dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3", null ],
       [ "m_map_wrt", "dd/df2/namespacevacmod.html#ad07231309e5ad23d3fa65219a48235d7", null ],
       [ "n_map_wrt", "dd/df2/namespacevacmod.html#acea4ed5211d0bcd5e0eba968d94f3ff4", null ],
       [ "onp", "dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09", null ],
@@ -565,6 +566,9 @@ var namespaces_dup =
       [ "dump_symforce", "d8/dbf/namespacevmec__input.html#a5bc98c298e7d6f82660e91795d9829a1", null ],
       [ "dump_tomnspa", "d8/dbf/namespacevmec__input.html#a767bfe05a8310cc7eed0baa1fe68bf13", null ],
       [ "dump_tomnsps", "d8/dbf/namespacevmec__input.html#a695413b2b07adf4131b2dc85a2b26663", null ],
+      [ "dump_vac1n_precal", "d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2", null ],
+      [ "dump_vac1n_surface", "d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b", null ],
+      [ "dump_vac1n_vacuum", "d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4", null ],
       [ "dump_volume", "d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd", null ],
       [ "extcur", "d8/dbf/namespacevmec__input.html#aabe72ad80fc933f4d79871a7190e8d7e", null ],
       [ "ftol_array", "d8/dbf/namespacevmec__input.html#ae19a0633d5cb8d41e6059c260d746a7b", null ],

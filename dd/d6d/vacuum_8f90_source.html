@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="comment">! write inputs to NESTOR</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;vac1n_vacuum&quot;</span>, id=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a>)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rmnc&quot;</span>, mnmax, rmnc)</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zmns&quot;</span>, mnmax, zmns)</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (lasym) <span class="keywordflow">then</span></div>
@@ -193,20 +193,20 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;rbtor&quot;</span>,   rbtor)</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;wint&quot;</span>, nv, nu3, wint)</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;ivac_skip&quot;</span>, ivac_skip)</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;ivac&quot;</span>,      ivac)</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;mnmax&quot;</span>,     mnmax)</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;ier_flag&quot;</span>,  ier_flag)</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">call </span>add_logical(<span class="stringliteral">&quot;lasym&quot;</span>, lasym)</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;signgs&quot;</span>,   signgs)</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;raxis_nestor&quot;</span>, nv, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>)</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zaxis_nestor&quot;</span>, nv, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>)</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="comment">! TODO: include leftovers from previous iterations, i.e., bvecsav and amatsav</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">call </span>close_dbg_out() </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">call </span>close_dbg_out()</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keywordflow">  end if</span></div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>   <span class="keywordflow">IF</span> (.not. <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad72a67e8bc59ed04867d87ce50cfdc3e">precal_done</a>) <span class="keywordflow">then</span></div>
@@ -215,111 +215,113 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88">surface</a> (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced">bextern</a> (plascur, wint)</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>   <span class="comment">! Determine scalar magnetic potential POTVAC</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e">scalpot</a> (<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">amatrix</a>, wint, ivac_skip, lasym, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad07231309e5ad23d3fa65219a48235d7">m_map_wrt</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#acea4ed5211d0bcd5e0eba968d94f3ff4">n_map_wrt</a>)</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>   <span class="comment">! stand-alone for debugging: working on scalpot at the moment</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>   <span class="comment">! return</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a> (<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">amatrix</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, mnpd2, 1, info)</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>   <span class="keywordflow">IF</span> (info .ne. 0) stop <span class="stringliteral">&#39;Error in solver in VACUUM&#39;</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>   potsin =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(1:mnpd)</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>   potcos =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(1+mnpd:)</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>   <span class="comment">! compute tangential covariant (sub u,v) and contravariant</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>   <span class="comment">! (super u,v) magnetic field components on the plasma surface</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(:nuv2) = zero</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(:nuv2) = zero</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>   mn = 0</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>   <span class="keywordflow">DO</span> n = -nf, nf</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      dn2 = -(n*nfper)</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      n1 = abs(n)</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      <span class="keywordflow">DO</span> m = 0, mf</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>         mn = mn + 1</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>         dm2 = m</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>         <span class="keywordflow">DO</span> i = 1, nuv2</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            cosmn = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) + dm2*potsin(mn)*cosmn</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) + dn2*potsin(mn)*cosmn</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keywordflow">         END DO</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>         <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">DO</span> i = 1, nuv2</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>               sinmn = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>               <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) - dm2*potcos(mn)*sinmn</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>               <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) - dn2*potcos(mn)*sinmn</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keywordflow">            END DO</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="keywordflow">         end if</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="keywordflow">      END DO</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keywordflow">   END DO</span></div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>   <span class="keywordflow">DO</span> i = 1, nuv2</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>      <span class="comment">! Covariant components</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af35a156c61760afb612fea6df3867602">bexu</a>(i)</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac08726bdc5ea21e2706d3f176c05f41a">bexv</a>(i)</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>      huv = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac3d5effce915731468aaee36482541e9">guv_b</a>(i)*(nfper)</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      hvv = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8dcbab065f715e5d306b0ddf0c42146">gvv_b</a>(i)*(nfper*nfper)</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>      det = one/(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7">guu_b</a>(i)*hvv-huv*huv)</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      <span class="comment">! Contravariant components</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      bsupu = (hvv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i)-huv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i))*det</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      bsupv = ((-huv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i))+<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7">guu_b</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i))*det</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      <span class="comment">! .5*|Bvac|**2</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i)*bsupv)</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">!       if (ivac.eq.0) then</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">!         print *, i, bsqvac(i)</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">!       end if</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>      <span class="comment">! cylindrical components of vacuum magnetic field</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>(i)   = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a89e4f722344dc228e31a15ac6a7557db">rub</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a909a59dbccec91b153a4b337029f9069">rvb</a>(i)*bsupv</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>(i) =                <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a19bba9f7d9e1e8d9a09fc2c20937b0a3">r1b</a>(i)*bsupv</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>(i)   = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a211fe869a96f62692add6fc4d2521a6f">zub</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a19748c5ece055a44c7eadde10afed467">zvb</a>(i)*bsupv</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keywordflow">   END DO</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>   <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bsqvac_vac1&quot;</span>)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>   <span class="comment">! NOTE: all fine up to here against NESTOR.py</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>   <span class="comment">! Determine scalar magnetic potential POTVAC</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e">scalpot</a> (<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">amatrix</a>, wint, ivac_skip, lasym, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad07231309e5ad23d3fa65219a48235d7">m_map_wrt</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#acea4ed5211d0bcd5e0eba968d94f3ff4">n_map_wrt</a>)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>   <span class="comment">! stand-alone for debugging: working on scalpot at the moment</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>   <span class="comment">! return</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>   <span class="keyword">CALL </span><a class="code hl_function" href="../../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220">solver</a> (<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae052cdfe050397e0021f208fadaf98dd">amatrix</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, mnpd2, 1, info)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>   <span class="keywordflow">IF</span> (info .ne. 0) stop <span class="stringliteral">&#39;Error in solver in VACUUM&#39;</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>   potsin =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(1:mnpd)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>   potcos =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(1+mnpd:)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>   <span class="comment">! compute tangential covariant (sub u,v) and contravariant</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>   <span class="comment">! (super u,v) magnetic field components on the plasma surface</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(:nuv2) = zero</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(:nuv2) = zero</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>   mn = 0</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>   <span class="keywordflow">DO</span> n = -nf, nf</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      dn2 = -(n*nfper)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>      n1 = abs(n)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      <span class="keywordflow">DO</span> m = 0, mf</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>         mn = mn + 1</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>         dm2 = m</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>         <span class="keywordflow">DO</span> i = 1, nuv2</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            cosmn = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) + dm2*potsin(mn)*cosmn</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) + dn2*potsin(mn)*cosmn</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keywordflow">         END DO</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>         <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">DO</span> i = 1, nuv2</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>               sinmn = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>               <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) - dm2*potcos(mn)*sinmn</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>               <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) - dn2*potcos(mn)*sinmn</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="keywordflow">            END DO</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keywordflow">         end if</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keywordflow">      END DO</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="keywordflow">   END DO</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>   <span class="keywordflow">DO</span> i = 1, nuv2</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      <span class="comment">! Covariant components</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af9e0a802bde333819c846c509e4cb563">potu</a>(i) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af35a156c61760afb612fea6df3867602">bexu</a>(i)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af18bca5b4da4765e1d137bfd66343b8d">potv</a>(i) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac08726bdc5ea21e2706d3f176c05f41a">bexv</a>(i)</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>      huv = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac3d5effce915731468aaee36482541e9">guv_b</a>(i)*(nfper)</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      hvv = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8dcbab065f715e5d306b0ddf0c42146">gvv_b</a>(i)*(nfper*nfper)</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      det = one/(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7">guu_b</a>(i)*hvv-huv*huv)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      <span class="comment">! Contravariant components</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      bsupu = (hvv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i)-huv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i))*det</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      bsupv = ((-huv*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i))+<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7">guu_b</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i))*det</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      <span class="comment">! .5*|Bvac|**2</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(i)*bsupv)</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">!       if (ivac.eq.0) then</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">!         print *, i, bsqvac(i)</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">!       end if</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      <span class="comment">! cylindrical components of vacuum magnetic field</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>(i)   = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a89e4f722344dc228e31a15ac6a7557db">rub</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a909a59dbccec91b153a4b337029f9069">rvb</a>(i)*bsupv</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>(i) =                <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a19bba9f7d9e1e8d9a09fc2c20937b0a3">r1b</a>(i)*bsupv</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>(i)   = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a211fe869a96f62692add6fc4d2521a6f">zub</a>(i)*bsupu + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a19748c5ece055a44c7eadde10afed467">zvb</a>(i)*bsupv</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keywordflow">   END DO</span></div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqvac&quot;</span>, nv, nu3, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>)</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>   <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bsqvac_vac1&quot;</span>)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>   <span class="comment">! PRINT OUT VACUUM PARAMETERS</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>   <span class="keywordflow">IF</span> (ivac .eq. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      ivac = ivac + 1</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      <span class="keyword">WRITE</span> (*, 200) nfper, mf, nf, nu, nv</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      <span class="comment">! WRITE (nthreed, 200) nfper, mf, nf, nu, nv</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> 200 <span class="keyword">FORMAT</span>(/,2x,<span class="stringliteral">&#39;In VACUUM, np =&#39;</span>,i3,2x,<span class="stringliteral">&#39;mf =&#39;</span>,i3,2x,<span class="stringliteral">&#39;nf =&#39;</span>,i3,<span class="stringliteral">&#39; nu =&#39;</span>,i3,2x,<span class="stringliteral">&#39;nv = &#39;</span>,i4)</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      <span class="comment">! -plasma current/pi2</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      bsubuvac = sum(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(:nuv2)*wint(:nuv2))*signgs*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac7a50ca4435483502a89d24b0523c44e">pi2</a></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a> = sum(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(:nuv2)*wint(:nuv2))</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      fac = 1.e-6_dp/mu0 <span class="comment">! currents in MA</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      <span class="keyword">WRITE</span> (*,1000) bsubuvac*fac, plascur*fac, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a>, rbtor</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      <span class="comment">! WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> 1000 <span class="keyword">FORMAT</span>(2x,<span class="stringliteral">&#39;2*pi * a * -BPOL(vac) = &#39;</span>,1p,e10.2,                 &amp;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>         <span class="stringliteral">&#39; TOROIDAL CURRENT = &#39;</span>,e10.2,/,2x,<span class="stringliteral">&#39;R * BTOR(vac) = &#39;</span>,       &amp;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>         e10.2,<span class="stringliteral">&#39; R * BTOR(plasma) = &#39;</span>,e10.2)</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      <span class="keywordflow">IF</span> (rbtor*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a> .lt. zero) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>         <span class="comment">! rbtor and bsubvvac must have the same sign</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>         ier_flag = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a2ff3cb442e65ea610c682b200bc3ef56">phiedge_error_flag</a></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="keywordflow">      ENDIF</span></div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      <span class="keywordflow">IF</span> (abs((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            ier_flag = 10 <span class="comment">! &#39;VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL&#39;</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="keywordflow">      ENDIF</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keywordflow">   ENDIF</span></div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>   </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> + 1</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqvac&quot;</span>, nv, nu3, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>   <span class="comment">! PRINT OUT VACUUM PARAMETERS</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>   <span class="keywordflow">IF</span> (ivac .eq. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      ivac = ivac + 1</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <span class="keyword">WRITE</span> (*, 200) nfper, mf, nf, nu, nv</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      <span class="comment">! WRITE (nthreed, 200) nfper, mf, nf, nu, nv</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> 200 <span class="keyword">FORMAT</span>(/,2x,<span class="stringliteral">&#39;In VACUUM, np =&#39;</span>,i3,2x,<span class="stringliteral">&#39;mf =&#39;</span>,i3,2x,<span class="stringliteral">&#39;nf =&#39;</span>,i3,<span class="stringliteral">&#39; nu =&#39;</span>,i3,2x,<span class="stringliteral">&#39;nv = &#39;</span>,i4)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="comment">! -plasma current/pi2</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>      bsubuvac = sum(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac44defba7f5757b1e29503a6c40a5f24">bsubu</a>(:nuv2)*wint(:nuv2))*signgs*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac7a50ca4435483502a89d24b0523c44e">pi2</a></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a> = sum(<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a03967f9293e5584017c1b849a9c07951">bsubv</a>(:nuv2)*wint(:nuv2))</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      fac = 1.e-6_dp/mu0 <span class="comment">! currents in MA</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>      <span class="keyword">WRITE</span> (*,1000) bsubuvac*fac, plascur*fac, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a>, rbtor</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      <span class="comment">! WRITE (nthreed, 1000)       bsubuvac*fac, plascur*fac, bsubvvac, rbtor</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> 1000 <span class="keyword">FORMAT</span>(2x,<span class="stringliteral">&#39;2*pi * a * -BPOL(vac) = &#39;</span>,1p,e10.2,                 &amp;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>         <span class="stringliteral">&#39; TOROIDAL CURRENT = &#39;</span>,e10.2,/,2x,<span class="stringliteral">&#39;R * BTOR(vac) = &#39;</span>,       &amp;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>         e10.2,<span class="stringliteral">&#39; R * BTOR(plasma) = &#39;</span>,e10.2)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      <span class="keywordflow">IF</span> (rbtor*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748">bsubvvac</a> .lt. zero) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>         <span class="comment">! rbtor and bsubvvac must have the same sign</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>         ier_flag = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a2ff3cb442e65ea610c682b200bc3ef56">phiedge_error_flag</a></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keywordflow">      ENDIF</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      <span class="keywordflow">IF</span> (abs((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            ier_flag = 10 <span class="comment">! &#39;VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL&#39;</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keywordflow">      ENDIF</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keywordflow">   ENDIF</span></div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35">vacuum</a></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> + 1</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35">vacuum</a></div>
 <div class="ttc" id="abextern_8f90_html_a90228cc5f358147ae7f59953d6f9cced"><div class="ttname"><a href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced">bextern</a></div><div class="ttdeci">subroutine bextern(plascur, wint)</div><div class="ttdoc">Compute the total magnetic field due to external coils and the net toroidal plasma current.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d3d/bextern_8f90_source.html#l00008">bextern.f90:9</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
@@ -368,7 +370,7 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../dd/d6d/vacuum_8f90.html">vacuum.f90</a></li>
-    <li class="footer">Generated on Fri Dec 3 2021 09:58:38 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Fri Dec 3 2021 14:22:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

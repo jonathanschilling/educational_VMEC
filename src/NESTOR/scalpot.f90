@@ -12,6 +12,7 @@
 !> @param n_map
 SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    USE vacmod, vm_amatrix => amatrix
+   use dbgout
    IMPLICIT NONE
 
    INTEGER, INTENT(in) :: ivacskip
@@ -60,6 +61,16 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
          gstore = gstore + bexni(ip)*green(:,ip)
 
       END DO
+
+      if (open_dbg_context("vac1n_greenf", id=icall)) then
+
+        call add_real_4d("green",  nv, nu3, nv, nu, green)
+        call add_real_4d("greenp", nv, nu3, nv, nu, greenp)
+
+        call add_real_4d("gstore", nv, nu3, nv, nu, gstore)
+
+        call close_dbg_out()
+      end if
 
       ! PERFORM FOURIER INTEGRAL OF GRADIENT KERNEL (GREENP) OVER THE UNPRIMED MESH
       ! AND STORE IN GRPMN (NOTE THAT GRPMN IS ADDED TO THE ANALYTIC PIECE IN EQ. 2.14,

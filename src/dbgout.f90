@@ -124,6 +124,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac1n_bextern
   else if (trim(context_name) .eq. "vac1n_analyt") then
     open_dbg_context         = dump_vac1n_analyt
+  else if (trim(context_name) .eq. "vac1n_greenf") then
+    open_dbg_context         = dump_vac1n_greenf
 
 
 

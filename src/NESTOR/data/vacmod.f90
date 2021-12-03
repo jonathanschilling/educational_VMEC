@@ -147,8 +147,8 @@ MODULE vacmod
 
   ! from greenf
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: gsave
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ga1
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ga2
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ga1
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ga2
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: dsave
 
   ! from fourp
@@ -267,7 +267,7 @@ subroutine allocate_nestor
   IF (l .ne. 0) STOP 'Allocation error for debugging analyt'
 
   ! from greenf
-  ALLOCATE (gsave(nuv), ga1(nuv), ga2(nuv), dsave(nuv), stat=i)
+  ALLOCATE (gsave(nuv), ga1(nvper,nuv), ga2(nvper,nuv), dsave(nuv), stat=i)
   IF (i .ne. 0) STOP 'allocation error in greenf'
 
   ! print *, "allocations; ndim=",ndim

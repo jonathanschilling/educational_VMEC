@@ -55,6 +55,9 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
          ! [FIRST TERMS IN EQ.(2.14, 2.16)].
          CALL greenf (green(1,ip), greenp(1,ip), ip)
 
+!          ! debugging: need to fix greenf for Tokamak first...
+!          stop
+
          ! PERFORM INTEGRAL (SUM) OVER PRIMED MESH OF NON-SINGULAR SOURCE TERM
          ! [(h-hsing)(u,v,u',v') == bexni(ip)*green(u,v; ip) in Eq. 2.16]
          ! AND STORE IT - FOR UNPRIMED MESH VALUES - IN GSTORE

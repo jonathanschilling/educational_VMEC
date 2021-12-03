@@ -7,7 +7,7 @@ SUBROUTINE precal
   USE vacmod
 
   use dbgout
-  
+
   IMPLICIT NONE
 
   REAL(rprec), PARAMETER :: p25 = p5*p5
@@ -230,22 +230,22 @@ SUBROUTINE precal
   cmns(0:mf+nf,0,0)    = (p5*alp)*(cmn(0:mf+nf,0,0)    + cmn(0:mf+nf,0,0))
 
   precal_done = .true.
-  
+
   if (open_dbg_context("vac1n_precal", id=icall)) then
     call add_int("nvper", nvper)
     call add_int("nuv_tan", nuv_tan)
-    
+
     call add_real_1d("cosper", nvper, cosper)
     call add_real_1d("sinper", nvper, sinper)
-    
+
     call add_real_1d("tanu_1d", 2*nu,  tanu_1d)
     call add_real_1d("tanv_1d", nuv_tan/(2*nu), tanv_1d)
-     
-    call add_real_1d("tanu", nuv_tan, tanu)
-    call add_real_1d("tanv", nuv_tan, tanv)
-    
+
+    call add_real_2d("tanu", 2*nu, nuv_tan/(2*nu), tanu)
+    call add_real_2d("tanv", 2*nu, nuv_tan/(2*nu), tanv)
+
     call add_real_3d("cmns", mf+nf+1, mf+1, nf+1, cmns)
-    
+
     call close_dbg_out()
   end if
 

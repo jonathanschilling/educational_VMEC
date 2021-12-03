@@ -26,7 +26,7 @@
   NS_ARRAY =    16     32     ! 64     128    256
   NITER_ARRAY = 10000  20000  ! 40000  200000 200000
   FTOL_ARRAY =  1E-10  1E-14  ! 1E-10  1E-11  1E-14
-  NSTEP =  100
+  NSTEP =  1
   NVACSKIP =    6
   GAMMA =   0.000000E+00
   PHIEDGE =   1.00000000000000E+00
@@ -44,12 +44,12 @@
   RBC( 0,1) =  1.026     ZBS( 0,1) =  1.580
   RBC( 0,2) =  0.068     ZBS( 0,2) =  -0.010
 
-  dump_vac1n_vacuum  = .true.
-  dump_vac1n_precal  = .true.
-  dump_vac1n_surface = .true.
-  dump_vac1n_bextern = .true.
-  dump_vac1n_analyt  = .true.
-  dump_vac1n_greenf  = .true.
+!  dump_vac1n_vacuum  = .true.
+!  dump_vac1n_precal  = .true.
+!  dump_vac1n_surface = .true.
+!  dump_vac1n_bextern = .true.
+!  dump_vac1n_analyt  = .true.
+!  dump_vac1n_greenf  = .true.
 /
 &END
 

@@ -45,20 +45,20 @@ SUBROUTINE funct3d (ier_flag)
 !  character(len=*), parameter :: nestor_executable = &
 !     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
 
-!   character(len=*), parameter :: nestor_executable = &
-!     "python /data/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
+  character(len=*), parameter :: nestor_executable = &
+    "python3 /data/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
 
-   character(len=*), parameter :: nestor_executable = &
-    "python /data/jonathan/work/code/NESTOR/src/main/python/ooNESTOR.py"
+!    character(len=*), parameter :: nestor_executable = &
+!     "python3 /data/jonathan/work/code/NESTOR/src/main/python/ooNESTOR.py"
 
 !   character(len=*), parameter :: nestor_executable = &
 !     "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
 
   !> use system call to stand-alone NESTOR for vacuum computation
-  logical :: lexternal_nestor = .false.
+  logical :: lexternal_nestor = .true.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .true.
+  logical :: ldump_vacuum_ref = .false.
 
   funct3d_calls = funct3d_calls + 1
 
@@ -90,7 +90,7 @@ SUBROUTINE funct3d (ier_flag)
   ENDIF
 
   if (open_dbg_context("funct3d_geometry", funct3d_calls)) then
-    
+
       call add_real_4d("r1",   ns, 2, nzeta, ntheta3,   r1, order=(/ 1, 3, 4, 2 /) ) ! in reality: ns, nzeta, ntheta3, 2
       call add_real_4d("ru",   ns, 2, nzeta, ntheta3,   ru, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("rv",   ns, 2, nzeta, ntheta3,   rv, order=(/ 1, 3, 4, 2 /) )
@@ -226,7 +226,7 @@ SUBROUTINE funct3d (ier_flag)
           ! build filename for NESTOR inputs
           write(vac_file, "(A,I6.6,A)") "vac_ref/vacin_"//TRIM(input_extension)//"_", &
                                          vacuum_calls, ".nc"
-               
+
           ! write NESTOR inputs
           call write_nestor_inputs(trim(vac_file),                                &
                  vacuum_calls, ier_flag, trim(mgrid_file), trim(input_extension), &
@@ -238,11 +238,11 @@ SUBROUTINE funct3d (ier_flag)
 
           ! print *, "dumped reference NESTOR inputs to '"//trim(vac_file)//"'"
         end if
-          
+
         if (lexternal_nestor) then
           write(vac_file, "(A,I6.6,A)") "vac/vacin_"//TRIM(input_extension)//"_", &
                                          vacuum_calls, ".nc"
- 
+
           ! write NESTOR inputs
           call write_nestor_inputs(trim(vac_file),                                &
                  vacuum_calls, ier_flag, trim(mgrid_file), trim(input_extension), &
@@ -254,13 +254,13 @@ SUBROUTINE funct3d (ier_flag)
 
           ! print *, "dumped NESTOR inputs to '"//trim(vac_file)//"'"
         end if
-        
+
         if (.not. lexternal_nestor) then
            ! use internal NESTOR
            CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                                    &
                         ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
                         lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
-        
+
         else
            ! construct command with argument for stand-alone external NESTOR
            write(nestor_cmd, "(A,X,A)") trim(nestor_executable), trim(vac_file)
@@ -281,7 +281,7 @@ SUBROUTINE funct3d (ier_flag)
 
            ! print *, "dumped reference NESTOR outputs to '"//trim(vac_file)//"'"
         end if
-        
+
         if (lexternal_nestor) then
           ! contruct filename from which to read output of stand-alone NESTOR
           write(vac_file, "(A,I6.6,A)") "vac/vacout_"//TRIM(input_extension)//"_", &
@@ -350,9 +350,9 @@ SUBROUTINE funct3d (ier_flag)
         !print *, "max bsqvac = ", maxval(bsqvac)
 
         if (open_dbg_context("rbsq")) then
-          
+
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
-          
+
           call close_dbg_out()
         end if
 
@@ -378,7 +378,7 @@ SUBROUTINE funct3d (ier_flag)
      if (open_dbg_context("constraint_force")) then
 
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
-       call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       ) 
+       call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       )
 
        call add_real_3d("gcs",    ns, ntor1, mpol, gc(0*mns+1:1*mns))
        call add_real_3d("gsc",    ns, ntor1, mpol, gc(1*mns+1:2*mns))

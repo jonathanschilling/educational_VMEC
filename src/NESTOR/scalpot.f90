@@ -64,10 +64,10 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
 
       if (open_dbg_context("vac1n_greenf", id=icall)) then
 
-        call add_real_4d("green",  nv, nu3, nv, nu, green)
-        call add_real_4d("greenp", nv, nu3, nv, nu, greenp)
+        call add_real_4d("green",  nv, nu, nv, nu3, green)
+        call add_real_4d("greenp", nv, nu, nv, nu3, greenp)
 
-        call add_real_4d("gstore", nv, nu3, nv, nu, gstore)
+        call add_real_4d("gstore", nv, nu, nv, nu3, gstore)
 
         call close_dbg_out()
       end if

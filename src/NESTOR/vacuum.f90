@@ -83,7 +83,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 
   ! write inputs to NESTOR
   if (open_dbg_context("vac1n_vacuum", id=icall)) then
-  
+
     call add_real_1d("rmnc", mnmax, rmnc)
     call add_real_1d("zmns", mnmax, zmns)
     if (lasym) then
@@ -100,20 +100,20 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
     call add_real("rbtor",   rbtor)
 
     call add_real_2d("wint", nv, nu3, wint)
-    
+
     call add_int("ivac_skip", ivac_skip)
     call add_int("ivac",      ivac)
     call add_int("mnmax",     mnmax)
     call add_int("ier_flag",  ier_flag)
     call add_logical("lasym", lasym)
     call add_real("signgs",   signgs)
-    
+
     call add_real_1d("raxis_nestor", nv, raxis_nestor)
     call add_real_1d("zaxis_nestor", nv, zaxis_nestor)
-    
+
     ! TODO: include leftovers from previous iterations, i.e., bvecsav and amatsav
 
-    call close_dbg_out() 
+    call close_dbg_out()
   end if
 
    IF (.not. precal_done) then
@@ -121,6 +121,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
    end if
    CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
    CALL bextern (plascur, wint)
+
+   ! NOTE: all fine up to here against NESTOR.py
 
    ! Determine scalar magnetic potential POTVAC
    CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
@@ -223,7 +225,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       ENDIF
 
    ENDIF
-   
+
    icall = icall + 1
 
 END SUBROUTINE vacuum

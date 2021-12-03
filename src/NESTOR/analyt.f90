@@ -13,6 +13,7 @@
 !> @param grpmn_n_map
 SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)
   USE vacmod, vm_grpmn => grpmn
+  use dbgout
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ivacskip
@@ -122,10 +123,10 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
 
         ! here, tlp/m and slp/m are available for the current value of l
         ! --> save into matrix for debugging
-        all_tlp(:,l) = tlp
-        all_tlm(:,l) = tlm
-        all_slp(:,l) = slp
-        all_slm(:,l) = slm
+        all_tlp(l,:) = tlp
+        all_tlm(l,:) = tlm
+        all_slp(l,:) = slp
+        all_slm(l,:) = slm
      ENDIF
 
      ! BEGIN MODE NUMBER (m,n) LOOP
@@ -162,5 +163,23 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
      tlm = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlm1 - fl*adp*tlm2)/(adm*fl1)
      tlpm = tlp + tlm
   END DO LLOOP
+
+  if (open_dbg_context("vac1n_analyt", id=icall)) then
+
+    call add_real_2d("all_tlp", mf+nf+1, nuv2, all_tlp)
+    call add_real_2d("all_tlm", mf+nf+1, nuv2, all_tlm)
+    call add_real_2d("bvec", mf1, nf1, bvec)
+    if (ivacskip .eq. 0) then
+      call add_real_2d("all_slp", mf+nf+1, nuv2, all_slp)
+      call add_real_2d("all_slm", mf+nf+1, nuv2, all_slm)
+      call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
+    else
+      call add_null("all_slp")
+      call add_null("all_slm")
+      call add_null("grpmn")
+    end if
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE analyt

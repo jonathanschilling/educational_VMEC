@@ -48,6 +48,7 @@
   dump_vac1n_precal  = .true.
   dump_vac1n_surface = .true.
   dump_vac1n_bextern = .true.
+  dump_vac1n_analyt  = .true.
 /
 &END
 

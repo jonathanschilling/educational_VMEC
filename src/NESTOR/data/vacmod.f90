@@ -6,13 +6,13 @@ MODULE vacmod
   USE vparams, ONLY: zero, one, c2p0, cp5, mu0
 
   IMPLICIT NONE
-  
-  
-  
+
+
+
   integer, save :: icall = 0
-  
-  
-  
+
+
+
 
   REAL(rprec), PARAMETER :: p5 = cp5
   REAL(rprec), PARAMETER :: two = c2p0
@@ -262,8 +262,8 @@ subroutine allocate_nestor
             sqad2u(nuv2), stat = l)
   IF (l .ne. 0) STOP 'Allocation error in SUBROUTINE analyt'
 
-  allocate(all_tlp(nuv2, 0:mf+nf), all_tlm(nuv2, 0:mf+nf), &
-           all_slp(nuv2, 0:mf+nf), all_slm(nuv2, 0:mf+nf), stat=l)
+  allocate(all_tlp(0:mf+nf, nuv2), all_tlm(0:mf+nf, nuv2), &
+           all_slp(0:mf+nf, nuv2), all_slm(0:mf+nf, nuv2), stat=l)
   IF (l .ne. 0) STOP 'Allocation error for debugging analyt'
 
   ! from greenf

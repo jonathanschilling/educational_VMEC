@@ -123,7 +123,7 @@ MODULE vmec_input
   logical :: dump_vac1n_precal  = .false.
   logical :: dump_vac1n_surface = .false.
   logical :: dump_vac1n_bextern = .false.
-
+  logical :: dump_vac1n_analyt  = .false.
 
 
 
@@ -219,7 +219,8 @@ MODULE vmec_input
      dump_vac1n_vacuum,  &
      dump_vac1n_precal,  &
      dump_vac1n_surface, &
-     dump_vac1n_bextern
+     dump_vac1n_bextern, &
+     dump_vac1n_analyt
 
 CONTAINS
 

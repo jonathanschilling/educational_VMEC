@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('dd/d98/precal_8f90_source.html','../..
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../dd/df2/namespacevacmod.html">vacmod</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dfd/namespacedbgout.html">dbgout</a></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p25 = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a></div>
@@ -340,22 +340,22 @@ $(document).ready(function(){initNavTree('dd/d98/precal_8f90_source.html','../..
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  cmns(0:mf+nf,0,0)    = (<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#abb3f92f25e4e09548c1a74b2fd95b83b">alp</a>)*(cmn(0:mf+nf,0,0)    + cmn(0:mf+nf,0,0))</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad72a67e8bc59ed04867d87ce50cfdc3e">precal_done</a> = .true.</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;vac1n_precal&quot;</span>, id=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a>)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;nvper&quot;</span>, nvper)</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keyword">call </span>add_int(<span class="stringliteral">&quot;nuv_tan&quot;</span>, nuv_tan)</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;cosper&quot;</span>, nvper, cosper)</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;sinper&quot;</span>, nvper, sinper)</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;tanu_1d&quot;</span>, 2*nu,  tanu_1d)</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;tanv_1d&quot;</span>, nuv_tan/(2*nu), tanv_1d)</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>     </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;tanu&quot;</span>, nuv_tan, tanu)</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;tanv&quot;</span>, nuv_tan, tanv)</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tanu&quot;</span>, 2*nu, nuv_tan/(2*nu), tanu)</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;tanv&quot;</span>, 2*nu, nuv_tan/(2*nu), tanv)</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;cmns&quot;</span>, mf+nf+1, mf+1, nf+1, cmns)</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keyword">call </span>close_dbg_out()</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keywordflow">  end if</span></div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
@@ -382,7 +382,7 @@ $(document).ready(function(){initNavTree('dd/d98/precal_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../dd/d98/precal_8f90.html">precal.f90</a></li>
-    <li class="footer">Generated on Fri Dec 3 2021 14:22:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Fri Dec 3 2021 18:06:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

@@ -2,8 +2,8 @@ var searchData=
 [
   ['g1_0',['g1',['../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824',1,'vacmod']]],
   ['g2_1',['g2',['../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723',1,'vacmod']]],
-  ['ga1_2',['ga1',['../dd/df2/namespacevacmod.html#a0ec82b38a7b4f2ada7aa91089f58f2fd',1,'vacmod']]],
-  ['ga2_3',['ga2',['../dd/df2/namespacevacmod.html#a2321515e30323900ad01fbcf30e30cc7',1,'vacmod']]],
+  ['ga1_2',['ga1',['../dd/df2/namespacevacmod.html#a8de38796d77960580b207f681188fcab',1,'vacmod']]],
+  ['ga2_3',['ga2',['../dd/df2/namespacevacmod.html#a6e18c69183532c900c7dd2da02ff7725',1,'vacmod']]],
   ['gamma_4',['gamma',['../d8/dbf/namespacevmec__input.html#a4f4ad4130df6b89923c091874fc7d65f',1,'vmec_input::gamma()'],['../db/dae/namespaceread__wout__mod.html#aeaa4786077d44288e48105f58c66a6b2',1,'read_wout_mod::gamma()']]],
   ['gc_5',['gc',['../d9/d3c/namespacexstuff.html#a27db4487d94c45fbea3f05a9ad295e36',1,'xstuff']]],
   ['gc_5fcon_6',['gc_con',['../d9/d3c/namespacexstuff.html#a0a1853289cc62ebd4d3e260525b7afcd',1,'xstuff']]],

@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"d5/dde/namespacevparams.html#a80d6786fffa441ff48365db16af19557":[1,0,22,6],
 "d5/dde/namespacevparams.html#a93129e6c611a1b41e5560b2f48c8a0a5":[1,0,22,23],
 "d5/dde/namespacevparams.html#aac852c62983af4adb4cbf4e36830fea4":[1,0,22,20],
 "d5/dde/namespacevparams.html#aafc96d5b64605b0135b68aabf765de08":[1,0,22,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "d8/dbf/namespacevmec__input.html#a07ea1753cb9431b04317b12a5a3de630":[1,0,16,11],
 "d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6":[1,0,16,2],
 "d8/dbf/namespacevmec__input.html#a17e0f52b500158fee9ca65ac422db22b":[1,0,16,46],
-"d8/dbf/namespacevmec__input.html#a18b259d90d62fc4c3aaa522114d40d58":[1,0,16,15],
-"d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd":[1,0,16,29]
+"d8/dbf/namespacevmec__input.html#a18b259d90d62fc4c3aaa522114d40d58":[1,0,16,15]
 };

@@ -77,7 +77,7 @@ MODULE vmec_input
 
   !> maximum number of iterations for which to dump data
   integer :: max_dump                 =    2
-  
+
   !> individual flags to control debug output loosely related to
   !> similarly-named routines (checkpoints along iterations)
   logical :: dump_add_fluxes          = .false.
@@ -117,17 +117,18 @@ MODULE vmec_input
   logical :: dump_multigrid_result    = .false.
   logical :: dump_bsqvac_vac1         = .false.
   logical :: dump_rbsq                = .false.
-  
+
   ! debugging output flags for NESTOR
-  logical :: dump_vac1n_vacuum = .false.
-  logical :: dump_vac1n_precal = .false.
+  logical :: dump_vac1n_vacuum  = .false.
+  logical :: dump_vac1n_precal  = .false.
   logical :: dump_vac1n_surface = .false.
-  
-  
-  
-  
-  
-  
+  logical :: dump_vac1n_bextern = .false.
+
+
+
+
+
+
 
   NAMELIST /indata/ &
      mgrid_file,    &
@@ -215,9 +216,10 @@ MODULE vmec_input
      dump_multigrid_result   , &
      dump_bsqvac_vac1        , &
      dump_rbsq               , &
-     dump_vac1n_vacuum, &
-     dump_vac1n_precal, &
-     dump_vac1n_surface
+     dump_vac1n_vacuum,  &
+     dump_vac1n_precal,  &
+     dump_vac1n_surface, &
+     dump_vac1n_bextern
 
 CONTAINS
 

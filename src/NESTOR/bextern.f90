@@ -8,6 +8,9 @@
 SUBROUTINE bextern(plascur, wint)
   USE vacmod
   USE mgrid_mod, ONLY: bvac
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), INTENT(in) :: plascur
@@ -51,5 +54,20 @@ SUBROUTINE bextern(plascur, wint)
   ! COMPUTE NORMALIZED [(2*pi)**2], READY-TO-INTEGRATE (WINT FACTOR) SOURCE TERM
   ! NOTE: BEXN == NP*F = -B0 dot [Xu cross Xv] NP        (see PKM, Eq. 2.13)
   bexni(:nuv2) = wint(:nuv2)*bexn(:nuv2)*pi2*pi2
+
+  if (open_dbg_context("vac1n_bextern", id=icall)) then
+
+    call add_real_2d("brad", nv, nu3, brad)
+    call add_real_2d("bphi", nv, nu3, bphi)
+    call add_real_2d("bz",   nv, nu3, bz)
+
+    call add_real_2d("bexu", nv, nu3, bexu)
+    call add_real_2d("bexv", nv, nu3, bexv)
+    call add_real_2d("bexn", nv, nu3, bexn)
+
+    call add_real_2d("bexni", nv, nu3, bexni(:nuv2))
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE bextern

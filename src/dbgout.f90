@@ -6,7 +6,7 @@ contains
 
 !> check if any output is desired for the current iteration
 !> check if the given context should be openend based on input file flags
-!> check if 
+!> check if
 !> @param context_name a string describing the subroutine from which this function is called
 !> @param repetition   a number to distinguish two calls to this with the same value of iter2
 !> @param id           a number to replace iter2 in the output filename
@@ -16,23 +16,23 @@ function open_dbg_context(context_name, repetition, id)
   use vmec_main,  only: iter2
   use vmec_input
   implicit none
-  
+
   character(len=*), intent(in)  :: context_name
   integer, intent(in), optional :: repetition
   integer, intent(in), optional :: id
   logical :: open_dbg_context
-  
+
   character(len=255) :: dump_filename
   character(len=255) :: output_folder
   logical            :: should_write, file_exists
-  
+
   ! check if debug out should be written at all
   if (present(id)) then
     should_write = id.le.max_dump
   else
     should_write = iter2.le.max_dump
   end if
-  
+
   ! check if requested context is enabled by input flags
   if      (trim(context_name) .eq. "add_fluxes") then
     open_dbg_context         = dump_add_fluxes
@@ -97,7 +97,7 @@ function open_dbg_context(context_name, repetition, id)
   else if (trim(context_name) .eq. "scalfor_Z") then
     open_dbg_context         = dump_scalfor_Z
   else if (trim(context_name) .eq. "symforce") then
-    open_dbg_context         = dump_symforce   
+    open_dbg_context         = dump_symforce
   else if (trim(context_name) .eq. "tomnsps") then
     open_dbg_context         = dump_tomnsps
   else if (trim(context_name) .eq. "tomnspa") then
@@ -112,7 +112,7 @@ function open_dbg_context(context_name, repetition, id)
     ! multigrid_result needs to be written once at end of many iterations,
     ! so the usual should_write logic needs to be broken here
     should_write = .true.
-    
+
   ! NESTOR
   else if (trim(context_name) .eq. "vac1n_vacuum") then
     open_dbg_context         = dump_vac1n_vacuum
@@ -120,6 +120,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac1n_precal
   else if (trim(context_name) .eq. "vac1n_surface") then
     open_dbg_context         = dump_vac1n_surface
+  else if (trim(context_name) .eq. "vac1n_bextern") then
+    open_dbg_context         = dump_vac1n_bextern
 
 
   else
@@ -128,14 +130,14 @@ function open_dbg_context(context_name, repetition, id)
   end if
 
   open_dbg_context = open_dbg_context .and. should_write
-  
+
   ! create output filename and open output file
   if (open_dbg_context) then
-  
+
     ! debugging output into separate folder "input_extension"
     output_folder = trim(input_extension) // "/" // trim(context_name)
     CALL system("mkdir -p "//trim(output_folder))
-    
+
     if (present(id)) then
       if (present(repetition)) then
         write(dump_filename, 998) trim(output_folder), &
@@ -161,13 +163,13 @@ function open_dbg_context(context_name, repetition, id)
     end if
 998   format(a,'/',a,'_',i5.5,'_',i6.6,'_',i2.2,'.',a,'.json')
 999   format(a,'/',a,'_',i5.5,'_',i6.6,'_01.',a,'.json')
-    
+
     ! check if file already exists (and stop in that case)
     inquire(file=trim(dump_filename), exist=file_exists)
     if (file_exists) then
       stop "debug output file already exists: '"//trim(dump_filename)//"'"
     end if
-    
+
     call open_dbg_out(dump_filename)
   end if
 

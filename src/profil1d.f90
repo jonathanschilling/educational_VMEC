@@ -91,6 +91,10 @@ SUBROUTINE profil1d()
     ! See line 195 of bcovar: pres(2:ns) = mass(2:ns)/vp(2:ns)**gamma
     tf = MIN(one, torflux(si))
     vpnorm = torflux_edge * torflux_deriv(si)
+
+    ! should either check if tf .gt. tf_pres_ped
+    !          or   eval pmass at min(1, torflux(spres_ped))
+    ! for consistency ...
     IF (si .gt. spres_ped) THEN
        pedge = pmass(spres_ped)
     ELSE

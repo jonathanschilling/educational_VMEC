@@ -94,9 +94,9 @@
   !      extcur = extcur*delta
   !      am = am*delta**2
 
-  WRITE (nthreed,100)                                               &
-    ns_array(multi_ns_grid),ntheta1,nzeta,mpol,ntor,nfp,            &
-    gamma,spres_ped,phiedge,curtor
+  WRITE (nthreed,100)                                                 &
+    ns_array(multi_ns_grid),ntheta1,nzeta,mpol,ntor,                  &
+    nfp,gamma,spres_ped,phiedge,curtor
 100 FORMAT(/,' COMPUTATION PARAMETERS: (u = theta, v = zeta)'/,       &
              1x,45('-'),/,                                                   &
              '     ns     nu     nv     mu     mv',/,5i7//,                  &
@@ -109,9 +109,9 @@
      ! how does that work for e.g. LHD with nfp=10 ???
      nvacskip = nfp
   end if
+
   WRITE (nthreed,110) ncurr,niter_array(multi_ns_grid),ns_array(1), &
-    nstep,nvacskip,                                                 &
-    ftol_array(multi_ns_grid),tcon0,lasym,lconm1,                   &
+    nstep,nvacskip,ftol_array(multi_ns_grid),tcon0,lasym,lconm1,    &
     mfilter_fbdy,nfilter_fbdy
 110 FORMAT(' RUN CONTROL PARAMETERS:',/,1x,23('-'),/,                   &
            '  ncurr  niter   nsin  nstep  nvacskip      ftol     tcon0',&
@@ -144,7 +144,7 @@
 
   IF (pres_scale .ne. one) THEN
       WRITE (nthreed,'(" Pressure profile factor: ",1pe11.4,'//        &
-            '" (multiplier for pressure)")') pres_scale
+                     '" (multiplier for pressure)")') pres_scale
   END IF
 
   ! Print out am array
@@ -372,7 +372,7 @@
      ! (rtest*ztest < 0) means that rtest and ztest have different signs
      CALL flip_theta(rmn_bdy, zmn_bdy)
   end if
-  
+
   rtest = SUM(rbcc(1:ntor1,mj))
   ztest = SUM(zbsc(1:ntor1,mj))
   if (rtest*ztest .lt. zero) then

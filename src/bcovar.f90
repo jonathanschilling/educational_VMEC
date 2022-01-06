@@ -66,7 +66,8 @@ SUBROUTINE bcovar (lu, lv)
   luu(1:nrzt)   = (  ru(1:nrzt,meven)*ru(1:nrzt,modd)                        &
                    + zu(1:nrzt,meven)*zu(1:nrzt,modd))*2
 
-  phipog(1:nrzt)= 2* r1(1:nrzt,meven)*r1(1:nrzt,modd) ! temporary re-use of phipog
+  ! temporary re-use of phipog for contribution to g_vv^o from R^2
+  phipog(1:nrzt)= 2* r1(1:nrzt,meven)*r1(1:nrzt,modd)
   !do l=1,2*ns
   !  print *, l, r1(l,meven), r1(l,modd), phipog(l)
   !end do
@@ -89,6 +90,7 @@ SUBROUTINE bcovar (lu, lv)
                    + zv(1:nrzt,meven)*zv(1:nrzt,modd ))*2
   END IF
 
+  ! contribution to g_vv^e from R^2
   r12sq(1:nrzt) = r1(1:nrzt,meven)*r1(1:nrzt,meven) + r12sq(1:nrzt)*        &
                   r1(1:nrzt,modd )*r1(1:nrzt,modd )
 
@@ -96,12 +98,13 @@ SUBROUTINE bcovar (lu, lv)
   ! for their full-grid even-m contributions
   DO l = nrzt, 2, -1
      guu(l) = p5*(guu(l) + guu(l-1) + shalf(l)*(luu(l) + luu(l-1)))
+     ! g_uu done here
 
-     ! r12sq = r12**2
 !     if (mod(l-1,ns).eq.0) then
 !       print *, (l-1)/ns+1, l, "evn_contrib=",p5*(  r12sq(l) +  r12sq(l-1) )," from ", r12sq(l)," and ", r12sq(l-1)
 !       print *, (l-1)/ns+1, l, "odd_contrib=",p5*( phipog(l) + phipog(l-1) )," from ",phipog(l)," and ",phipog(l-1)
 !     end if
+     ! r12sq = R^2 for g_vv here
      r12sq(l) = p5*( r12sq(l) + r12sq(l-1) + shalf(l)*(phipog(l) + phipog(l-1)) )
   END DO
 
@@ -113,21 +116,27 @@ SUBROUTINE bcovar (lu, lv)
   END IF
 
   ! save tau as output from jacobian()
+  ! TODO: for what later use is tau needed separately ?
   tau(1:nrzt) = gsqrt(1:nrzt)
+
+  ! actually build \sqrt{g} now with tau from jacobian()
+  ! and R^2 on the half-mesh from jacobian() as well
   gsqrt(1:nrzt) = r12(1:nrzt)*tau(1:nrzt) ! r12 = R on half grid
 
-  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns) ! constant extrapolation towards axis
+  ! constant extrapolation of sqrt(g) towards axis
+  ! TODO: or does this overwrite the weird terms at the ghost surface outside the LCFS ???
+  gsqrt(1:nrzt:ns) = gsqrt(2:nrzt:ns)
 
+  ! g_vv contains all up to R^2 here; so add R^2 term now
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
-  ! check metric coefficients
   if (open_dbg_context("metric")) then
 
       call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt)
       call add_real_3d("guu",   ns, nzeta, ntheta3, guu  )
       call add_real_3d("r12sq", ns, nzeta, ntheta3, r12sq)
       call add_real_3d("gvv",   ns, nzeta, ntheta3, gvv  )
-      
+
       if (lthreed) then
         call add_real_3d("guv", ns, nzeta, ntheta3, guv  )
       else
@@ -143,7 +152,8 @@ SUBROUTINE bcovar (lu, lv)
   ! note that the phip factor in phipog is gone... (see comment below)
   WHERE (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)
 
-  phipog(1:ndim:ns) = 0 ! 1/sqrt(g) is zero(since undefined) at the magnetic axis
+  ! 1/sqrt(g) is zero(since undefined) at the magnetic axis
+  phipog(1:ndim:ns) = 0
 
   ! compute plasma volume profile (vp) and total volume (voli)
   vp(1) = 0

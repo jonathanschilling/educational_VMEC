@@ -229,6 +229,8 @@ Variables</h2></td></tr>
 <tr class="separator:a2a939cc67d1bd46be74f843de71a6b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa44376c0bdcded8b56e0fe70c11c6553"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553">lasym</a></td></tr>
 <tr class="separator:aa44376c0bdcded8b56e0fe70c11c6553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef5136df8832f8868b5b311b71a77227"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#aef5136df8832f8868b5b311b71a77227">vac_1_2</a></td></tr>
+<tr class="separator:aef5136df8832f8868b5b311b71a77227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3eadff8c916355456de0affcbcf9722"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#ae3eadff8c916355456de0affcbcf9722">lbsubs</a></td></tr>
 <tr class="separator:ae3eadff8c916355456de0affcbcf9722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89f118af3bd13c4c82f2658e87c6339c"><td class="memItemLeft" align="right" valign="top">character(len=200)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a89f118af3bd13c4c82f2658e87c6339c">mgrid_file</a></td></tr>
@@ -309,8 +311,6 @@ Variables</h2></td></tr>
 <tr class="separator:a767bfe05a8310cc7eed0baa1fe68bf13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8d58daa8225d7e86456fbf83ddd425"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a5f8d58daa8225d7e86456fbf83ddd425">dump_multigrid_result</a> = .false.</td></tr>
 <tr class="separator:a5f8d58daa8225d7e86456fbf83ddd425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c854ae37e0dc956f7f0ad4f380b77b4"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a1c854ae37e0dc956f7f0ad4f380b77b4">dump_bsqvac_vac1</a> = .false.</td></tr>
-<tr class="separator:a1c854ae37e0dc956f7f0ad4f380b77b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a059ba4e6c7ded6a36d4cfdcf0ffb3871"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a059ba4e6c7ded6a36d4cfdcf0ffb3871">dump_rbsq</a> = .false.</td></tr>
 <tr class="separator:a059ba4e6c7ded6a36d4cfdcf0ffb3871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2648bcdf30cbc344a8e51526cb4415a4"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4">dump_vac1n_vacuum</a> = .false.</td></tr>
@@ -325,6 +325,8 @@ Variables</h2></td></tr>
 <tr class="separator:ab639483d2228d47c8acc768c5dece5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7e5fe53c301093c4cd8cceba13dd475"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475">dump_vac1n_greenf</a> = .false.</td></tr>
 <tr class="separator:ab7e5fe53c301093c4cd8cceba13dd475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5345851ef7954393ef0eeb0b0f0134"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a9c5345851ef7954393ef0eeb0b0f0134">dump_vac1n_bsqvac</a> = .false.</td></tr>
+<tr class="separator:a9c5345851ef7954393ef0eeb0b0f0134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a02b29863a947531e6c4e8d7c66c5a5e0" name="a02b29863a947531e6c4e8d7c66c5a5e0"></a>
@@ -353,9 +355,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00229">229</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00239">239</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">ac</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">ac_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">ai</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">ai_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">am</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">am_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00046">aphi</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">bloat</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00034">curtor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00035">delt</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00061">extcur</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00028">ftol_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00013">ftol_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00037">gamma</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00063">lasym</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00071">lbsubs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00062">lfreeb</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00023">mfilter_fbdy</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00073">mgrid_file</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00019">mpol</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00009">mpol_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00016">ncurr</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00024">nfilter_fbdy</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00015">nfp</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00027">niter_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00012">niter_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00026">ns_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00011">ns_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00017">nstep</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00021">ntheta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00020">ntor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00010">ntor_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00018">nvacskip</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00022">nzeta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">pcurr_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00041">phiedge</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">piota_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">pmass_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">pres_scale</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00057">raxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00058">raxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00030">rbc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00032">rbs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00040">spres_ped</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00036">tcon0</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00059">zaxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00060">zaxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00033">zbc</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00031">zbs</a>.</p>
+<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">ac</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">ac_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">ai</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">ai_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">am</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">am_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00046">aphi</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">bloat</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00034">curtor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00035">delt</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00061">extcur</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00028">ftol_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00013">ftol_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00037">gamma</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00063">lasym</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00078">lbsubs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00062">lfreeb</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00023">mfilter_fbdy</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00080">mgrid_file</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00019">mpol</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00009">mpol_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00016">ncurr</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00024">nfilter_fbdy</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00015">nfp</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00027">niter_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00012">niter_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00026">ns_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00011">ns_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00017">nstep</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00021">ntheta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00020">ntor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00010">ntor_default</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00018">nvacskip</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00022">nzeta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">pcurr_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00041">phiedge</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">piota_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">pmass_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">pres_scale</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00057">raxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00058">raxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00030">rbc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00032">rbs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00040">spres_ped</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00036">tcon0</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00059">zaxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00060">zaxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00033">zbc</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00031">zbs</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>.</p>
 <div class="dynheader">
@@ -393,9 +395,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00307">307</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00317">317</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">ac</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00055">ac_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">ac_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">ai</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00053">ai_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">ai_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">am</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00051">am_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">am_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">bloat</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00034">curtor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00035">delt</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00061">extcur</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00028">ftol_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00037">gamma</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00063">lasym</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00062">lfreeb</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00073">mgrid_file</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00019">mpol</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00016">ncurr</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00015">nfp</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00027">niter_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00026">ns_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00017">nstep</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00020">ntor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00018">nvacskip</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00022">nzeta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">pcurr_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00041">phiedge</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">piota_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">pmass_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">pres_scale</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00057">raxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00058">raxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00030">rbc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00032">rbs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00040">spres_ped</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00036">tcon0</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00059">zaxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00060">zaxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00033">zbc</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00031">zbs</a>.</p>
+<p class="reference">References <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">ac</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00055">ac_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">ac_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">ai</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00053">ai_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">ai_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">am</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00051">am_aux_f</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">am_aux_s</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">bloat</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00034">curtor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00035">delt</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00061">extcur</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00028">ftol_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00037">gamma</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00063">lasym</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00062">lfreeb</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00080">mgrid_file</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00019">mpol</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00016">ncurr</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00015">nfp</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00027">niter_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00026">ns_array</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00017">nstep</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00020">ntor</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00018">nvacskip</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00022">nzeta</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">pcurr_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00041">phiedge</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">piota_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">pmass_type</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">pres_scale</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00057">raxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00058">raxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00030">rbc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00032">rbs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00040">spres_ped</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00036">tcon0</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00059">zaxis_cc</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00060">zaxis_cs</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00033">zbc</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00031">zbs</a>.</p>
 
 </div>
 </div>
@@ -416,7 +418,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00044">44</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -434,7 +436,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00055">55</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -452,7 +454,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00054">54</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -472,7 +474,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00043">43</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -490,7 +492,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00053">53</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -508,7 +510,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00052">52</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -528,7 +530,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00042">42</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -546,7 +548,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00051">51</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -564,7 +566,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00050">50</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -582,7 +584,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00046">46</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00008">torflux_deriv()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d5/d26/magnetic__fluxes_8f90_source.html#l00008">torflux_deriv()</a>.</p>
 
 </div>
 </div>
@@ -600,7 +602,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00038">38</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -618,7 +620,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00034">34</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -636,7 +638,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00035">35</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../dc/dc0/reset__params_8f90_source.html#l00007">reset_params()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -654,7 +656,7 @@ Here is the caller graph for this function:</div>
 
 <p>individual flags to control debug output loosely related to similarly-named routines (checkpoints along iterations) </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00083">83</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00090">90</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -672,7 +674,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00086">86</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00093">93</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -690,7 +692,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00087">87</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00094">94</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -708,25 +710,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00089">89</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
-
-</div>
-</div>
-<a id="a1c854ae37e0dc956f7f0ad4f380b77b4" name="a1c854ae37e0dc956f7f0ad4f380b77b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c854ae37e0dc956f7f0ad4f380b77b4">&#9670;&nbsp;</a></span>dump_bsqvac_vac1</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">logical vmec_input::dump_bsqvac_vac1 = .false.</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00118">118</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00096">96</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -744,7 +728,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00093">93</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00100">100</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -762,7 +746,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00099">99</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00106">106</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -780,7 +764,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00094">94</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00101">101</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -798,7 +782,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00095">95</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00102">102</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -816,7 +800,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00091">91</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00098">98</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -834,7 +818,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00097">97</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00104">104</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -852,7 +836,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00108">108</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00115">115</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -870,7 +854,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00111">111</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00118">118</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -888,7 +872,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00098">98</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00105">105</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -906,7 +890,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00100">100</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00107">107</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -924,7 +908,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00101">101</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00108">108</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -942,7 +926,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00102">102</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00109">109</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, and <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -960,7 +944,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00088">88</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00095">95</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -978,7 +962,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00103">103</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00110">110</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -996,7 +980,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00092">92</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00099">99</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1014,7 +998,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00084">84</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00091">91</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1032,7 +1016,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00117">117</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00124">124</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1050,7 +1034,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00107">107</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00114">114</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1068,7 +1052,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00090">90</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00097">97</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1086,7 +1070,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00104">104</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00111">111</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1104,7 +1088,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00105">105</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00112">112</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1122,7 +1106,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00119">119</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00125">125</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1140,7 +1124,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00106">106</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00113">113</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1158,7 +1142,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00109">109</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00116">116</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1176,7 +1160,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00110">110</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00117">117</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1194,7 +1178,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00112">112</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00119">119</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1212,7 +1196,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00113">113</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00120">120</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1230,7 +1214,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00096">96</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00103">103</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1248,7 +1232,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00114">114</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00121">121</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1266,7 +1250,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00116">116</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00123">123</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1284,7 +1268,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00115">115</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00122">122</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1302,7 +1286,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00126">126</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00132">132</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1320,7 +1304,25 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00125">125</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00131">131</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
+
+</div>
+</div>
+<a id="a9c5345851ef7954393ef0eeb0b0f0134" name="a9c5345851ef7954393ef0eeb0b0f0134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c5345851ef7954393ef0eeb0b0f0134">&#9670;&nbsp;</a></span>dump_vac1n_bsqvac</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">logical vmec_input::dump_vac1n_bsqvac = .false.</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00134">134</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1338,7 +1340,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00127">127</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00133">133</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1356,7 +1358,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00123">123</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00129">129</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1374,7 +1376,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00124">124</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00130">130</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1392,7 +1394,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00122">122</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00128">128</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1410,7 +1412,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00085">85</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00092">92</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1430,7 +1432,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00061">61</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1448,7 +1450,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00028">28</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1466,7 +1468,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00013">13</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1484,7 +1486,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00037">37</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1500,7 +1502,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00074">74</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00081">81</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../de/d25/mercier_8f90_source.html#l00024">mercier()</a>, <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
@@ -1520,7 +1522,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00063">63</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1536,9 +1538,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00071">71</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00078">78</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1556,7 +1558,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00062">62</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d2/d01/mgrid__mod_8f_source.html#l00107">mgrid_mod::read_mgrid()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d2/d01/mgrid__mod_8f_source.html#l00107">mgrid_mod::read_mgrid()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1574,7 +1576,7 @@ Here is the caller graph for this function:</div>
 
 <p>maximum number of iterations for which to dump data </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00079">79</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00086">86</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../da/d25/dbgout_8f90_source.html#l00015">dbgout::open_dbg_context()</a>.</p>
 
@@ -1594,7 +1596,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00023">23</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1610,9 +1612,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00073">73</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00080">80</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1630,7 +1632,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00019">19</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/df5/interp_8f90_source.html#l00012">interp()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dc/df5/interp_8f90_source.html#l00012">interp()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1648,7 +1650,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00009">9</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1666,7 +1668,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00016">16</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1684,7 +1686,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00024">24</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1702,7 +1704,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00015">15</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1720,7 +1722,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00027">27</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1738,7 +1740,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00012">12</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1756,7 +1758,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00026">26</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1774,7 +1776,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00011">11</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1792,7 +1794,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00017">17</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1810,7 +1812,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00021">21</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1828,7 +1830,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00020">20</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1846,7 +1848,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00010">10</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1864,7 +1866,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00018">18</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1882,7 +1884,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00022">22</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d6/df3/getcurmid_8f90_source.html#l00011">getcurmid()</a>, <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d9b/getbsubs_8f90_source.html#l00014">getbsubs()</a>, <a class="el" href="../../d6/df3/getcurmid_8f90_source.html#l00011">getcurmid()</a>, <a class="el" href="../../d8/dc3/jacobian_8f90_source.html#l00007">jacobian()</a>, <a class="el" href="../../d4/dc8/read__indata_8f90_source.html#l00010">read_indata()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1900,7 +1902,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00047">47</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00012">pcurr()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1920,7 +1922,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00041">41</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../db/d61/vmec_8f90_source.html#l00015">vmec()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1938,7 +1940,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00048">48</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00324">piota()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1956,7 +1958,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00049">49</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -1974,7 +1976,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00039">39</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/dc8/profile__functions_8f_source.html#l00465">pmass()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -1992,7 +1994,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00057">57</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -2010,7 +2012,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00058">58</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -2028,7 +2030,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00030">30</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -2046,7 +2048,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00032">32</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -2066,7 +2068,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00040">40</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -2084,7 +2086,23 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00036">36</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
+
+</div>
+</div>
+<a id="aef5136df8832f8868b5b311b71a77227" name="aef5136df8832f8868b5b311b71a77227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef5136df8832f8868b5b311b71a77227">&#9670;&nbsp;</a></span>vac_1_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer vmec_input::vac_1_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00070">70</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
 </div>
 </div>
@@ -2102,7 +2120,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00059">59</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -2120,7 +2138,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00060">60</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>, and <a class="el" href="../../de/d3f/wrout_8f90_source.html#l00017">wrout()</a>.</p>
 
 </div>
 </div>
@@ -2138,7 +2156,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00033">33</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -2156,7 +2174,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00031">31</a> of file <a class="el" href="../../d1/d59/vmec__input_8f90_source.html">vmec_input.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00230">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00308">write_indata_namelist()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00240">read_indata_namelist()</a>, and <a class="el" href="../../d1/d59/vmec__input_8f90_source.html#l00318">write_indata_namelist()</a>.</p>
 
 </div>
 </div>
@@ -2166,7 +2184,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d8/dbf/namespacevmec__input.html">vmec_input</a></li>
-    <li class="footer">Generated on Thu Jan 6 2022 21:59:09 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Jan 8 2022 16:03:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

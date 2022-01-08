@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(kv)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="comment">! filament geometry: from previous point (R_i == xpts(:,i)) to current point (R_f == xpts(:,i-1))</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="comment">! filament geometry: from current point (R_i == xpts(:,i)) to previous point (R_f == xpts(:,i-1))</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        dvec = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i)-<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,i-1)</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        l = norm2(dvec)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d9/dda/belicu_8f90.html">belicu.f90</a></li>
-    <li class="footer">Generated on Thu Jan 6 2022 21:59:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Jan 8 2022 16:03:23 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

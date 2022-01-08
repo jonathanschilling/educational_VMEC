@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e":[1,0,18,55],
 "d1/d6c/namespacevmec__main.html#a46edf6de2104bb0e7e3a3bd3eda7ad23":[1,0,18,10],
 "d1/d6c/namespacevmec__main.html#a4bbecfa3f73d3a89a7574897125fd16e":[1,0,18,32],
 "d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d":[1,0,18,27],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1":[1,0,13,3],
 "d2/d04/namespacevacmod0.html#a466ba6bd980d581da32e88b9132bde6e":[1,0,13,7],
 "d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795":[1,0,13,2],
-"d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a":[1,0,13,0],
-"d2/d04/namespacevacmod0.html#a5e7fe4c50aa3845a1084d08e6e4fe2ee":[1,0,13,14]
+"d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a":[1,0,13,0]
 };

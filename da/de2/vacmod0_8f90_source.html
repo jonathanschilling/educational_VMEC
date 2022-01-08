@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('da/de2/vacmod0_8f90_source.html','../.
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">integer</span>, <span class="keywordtype">intent(in)</span> :: ntheta</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">logical</span>, <span class="keywordtype">intent(in)</span> :: lasym</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! copied from vmec:read_indata</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! START copied from vmec:read_indata</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">integer</span> :: ntheta1, ntheta2, ntheta3, nznt</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">!print *, &quot;set_nestor_sizes&quot;</span></div>
@@ -164,50 +164,51 @@ $(document).ready(function(){initNavTree('da/de2/vacmod0_8f90_source.html','../.
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordflow">  END IF</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  nznt = nzeta*ntheta3</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="comment">! from here on, for NESTOR only</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2">mf</a> = mpol+1</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a6782307f8fbefbbe43e07b10feb87b41">nf</a> = ntor</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a> = ntheta1</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a> = nzeta</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795">mf1</a> = 1+<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2">mf</a></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a466ba6bd980d581da32e88b9132bde6e">nf1</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a6782307f8fbefbbe43e07b10feb87b41">nf</a>+1</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795">mf1</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a466ba6bd980d581da32e88b9132bde6e">nf1</a></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">IF</span> (.NOT.lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756">mnpd2</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a701070b664d4fe5ae672e1fe0110029c">ndim</a> = 1</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">ELSE</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756">mnpd2</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a701070b664d4fe5ae672e1fe0110029c">ndim</a> = 2</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keywordflow">  END IF</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">! ndim = mnpd2/mnpd</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a895a8566ddc5d7a76cdfd72b210a385f">nuv</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8">nfper</a> = nfp</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a9a415f0d2133e6717de16ed85e451870">nu2</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>/2 + 1 <span class="comment">! nu2 is equal to ntheta2</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3f41c69e41aba9993ab4fbb31200e3b7">nu3</a> = ntheta3</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#abafb31353914441872d856afe6b168cc">nuv2</a> = nznt</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a> == 1) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>     <span class="comment">! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a> = 64</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a5e7fe4c50aa3845a1084d08e6e4fe2ee">nuv_tan</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordflow">ELSE</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8">nfper</a></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a5e7fe4c50aa3845a1084d08e6e4fe2ee">nuv_tan</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a895a8566ddc5d7a76cdfd72b210a385f">nuv</a></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordflow">  END IF</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aa0c9029a252a0c4c30fb90cfa737208a">nvp</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="comment">! in the end:</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="comment">! nu  = ntheta1</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">! nu2 = ntheta2</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">! nu3 = ntheta3</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">end subroutine </span><a class="code hl_function" href="../../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a">set_nestor_sizes</a></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">END MODULE </span><a class="code hl_namespace" href="../../d2/d04/namespacevacmod0.html">vacmod0</a></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="comment">! END copied from vmec:read_indata</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="comment">! from here on, for NESTOR only</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2">mf</a> = mpol+1</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a6782307f8fbefbbe43e07b10feb87b41">nf</a> = ntor</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a> = ntheta1</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a> = nzeta</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795">mf1</a> = 1+<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aca69125f6f6cd6a62fc53777e76ac4b2">mf</a></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a466ba6bd980d581da32e88b9132bde6e">nf1</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a6782307f8fbefbbe43e07b10feb87b41">nf</a>+1</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a48c0dbeb2065c6ca73cfd9e01e46e795">mf1</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a466ba6bd980d581da32e88b9132bde6e">nf1</a></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">IF</span> (.NOT.lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756">mnpd2</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a701070b664d4fe5ae672e1fe0110029c">ndim</a> = 1</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">ELSE</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756">mnpd2</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1">mnpd</a></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a701070b664d4fe5ae672e1fe0110029c">ndim</a> = 2</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordflow">  END IF</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="comment">! ndim = mnpd2/mnpd</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a895a8566ddc5d7a76cdfd72b210a385f">nuv</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8">nfper</a> = nfp</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a9a415f0d2133e6717de16ed85e451870">nu2</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>/2 + 1 <span class="comment">! nu2 is equal to ntheta2</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3f41c69e41aba9993ab4fbb31200e3b7">nu3</a> = ntheta3</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#abafb31353914441872d856afe6b168cc">nuv2</a> = nznt</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a> == 1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>     <span class="comment">! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a> = 64</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a5e7fe4c50aa3845a1084d08e6e4fe2ee">nuv_tan</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ab5652e885f298dec7940ddc3bc75d895">nu</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordflow">ELSE</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8">nfper</a></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a5e7fe4c50aa3845a1084d08e6e4fe2ee">nuv_tan</a> = 2*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a895a8566ddc5d7a76cdfd72b210a385f">nuv</a></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordflow">  END IF</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#aa0c9029a252a0c4c30fb90cfa737208a">nvp</a> = <a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#ac485e8f672ceba30e224978a103cedbc">nv</a>*<a class="code hl_variable" href="../../d2/d04/namespacevacmod0.html#a66c2291f2fdfc4126e88b3c8004a985a">nvper</a></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="comment">! in the end:</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">! nu  = ntheta1</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">! nu2 = ntheta2</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="comment">! nu3 = ntheta3</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">end subroutine </span><a class="code hl_function" href="../../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a">set_nestor_sizes</a></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">END MODULE </span><a class="code hl_namespace" href="../../d2/d04/namespacevacmod0.html">vacmod0</a></div>
 <div class="ttc" id="anamespacevacmod0_html"><div class="ttname"><a href="../../d2/d04/namespacevacmod0.html">vacmod0</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/de2/vacmod0_8f90_source.html#l00002">vacmod0.f90:2</a></div></div>
 <div class="ttc" id="anamespacevacmod0_html_a00ff67be61e210d2db60a6a0584c1756"><div class="ttname"><a href="../../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756">vacmod0::mnpd2</a></div><div class="ttdeci">integer mnpd2</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de2/vacmod0_8f90_source.html#l00012">vacmod0.f90:12</a></div></div>
 <div class="ttc" id="anamespacevacmod0_html_a3b06a97b6401723281d6949719fd93c8"><div class="ttname"><a href="../../d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8">vacmod0::nfper</a></div><div class="ttdeci">integer nfper</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de2/vacmod0_8f90_source.html#l00017">vacmod0.f90:17</a></div></div>
@@ -233,7 +234,7 @@ $(document).ready(function(){initNavTree('da/de2/vacmod0_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../dir_b047de4540f0c170bc9a31c46376859f.html">data</a></li><li class="navelem"><a class="el" href="../../da/de2/vacmod0_8f90.html">vacmod0.f90</a></li>
-    <li class="footer">Generated on Sat Jan 8 2022 16:03:23 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Jan 8 2022 23:02:57 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

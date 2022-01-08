@@ -122,14 +122,14 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   END DO
   
   if (open_dbg_context("vac1n_surface", id=icall)) then
-    call add_real_2d("r1b", nv, nu, r1b)
+    call add_real_2d("r1b", nv, nu,  r1b) ! nu !
     call add_real_2d("rub", nv, nu3, rub)
     call add_real_2d("rvb", nv, nu3, rvb)
     call add_real_2d("ruu", nv, nu3, ruu)
     call add_real_2d("ruv", nv, nu3, ruv)
     call add_real_2d("rvv", nv, nu3, rvv)
     
-    call add_real_2d("z1b", nv, nu, z1b)
+    call add_real_2d("z1b", nv, nu,  z1b) ! nu !
     call add_real_2d("zub", nv, nu3, zub)
     call add_real_2d("zvb", nv, nu3, zvb)
     call add_real_2d("zuu", nv, nu3, zuu)
@@ -140,7 +140,7 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
     call add_real_2d("guv_b", nv, nu3, guv_b)
     call add_real_2d("gvv_b", nv, nu3, gvv_b)
 
-    call add_real_2d("rzb2", nv, nu, rzb2)
+    call add_real_2d("rzb2", nv, nu, rzb2) ! nu !
     
     call add_real_2d("snr", nv, nu3, snr)
     call add_real_2d("snv", nv, nu3, snv)
@@ -152,8 +152,8 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
     call add_real_2d("auv", nv, nu3, auv)
     call add_real_2d("avv", nv, nu3, avv)
     
-    call add_real_2d("rcosuv", nv, nu, rcosuv)
-    call add_real_2d("rsinuv", nv, nu, rsinuv)
+    call add_real_2d("rcosuv", nv, nu, rcosuv) ! nu !
+    call add_real_2d("rsinuv", nv, nu, rsinuv) ! nu !
     
     call close_dbg_out()
   end if

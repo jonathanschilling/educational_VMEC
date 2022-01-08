@@ -33,7 +33,7 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
   integer, intent(in) :: ntheta
   logical, intent(in) :: lasym
 
-  ! copied from vmec:read_indata
+  ! START copied from vmec:read_indata
   integer :: ntheta1, ntheta2, ntheta3, nznt
 
   !print *, "set_nestor_sizes"
@@ -51,6 +51,7 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
   END IF
 
   nznt = nzeta*ntheta3
+  ! END copied from vmec:read_indata
 
   ! from here on, for NESTOR only
   mf = mpol+1

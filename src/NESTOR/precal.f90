@@ -23,16 +23,16 @@ SUBROUTINE precal
   ! THIS ROUTINE COMPUTES INITIAL CONSTANTS AND ARRAYS
 
   pi2 = 8*ATAN(one) ! 2 pi
-  pi3 = p5*pi2**3
-  pi4 = 2*pi2
-  onp = one/nfper
-  onp2 = onp*onp
-  alu = pi2/nu
-  alv = pi2/nv
-  alp = pi2*onp
-  alvp = onp*alv
+  pi3 = p5*pi2**3   ! 4 pi^3
+  pi4 = 2*pi2       ! 4 pi
+  onp = one/nfper   ! 1/nfp
+  onp2 = onp*onp    ! 1/nfp^2
+  alu = pi2/nu      ! (2 pi)/nu
+  alv = pi2/nv      ! (2 pi)/nv
+  alp = pi2*onp     ! (2 pi)/nfp
+  alvp = onp*alv    ! (2 pi)/(nv * nfp)
 
-  alp_per = pi2/nvper
+  alp_per = pi2/nvper ! (2 pi)/nvper
 
   DO kp = 1, nvper
      cosper(kp) = COS(alp_per*(kp - 1))

@@ -174,9 +174,10 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      END DO
 
      ! COS(0-0) mode *2 (TODO: why is this required ?)
+     ! maybe has to do with mscale and nscale
+     ! --> orthogonality of Fourier basis for cos ?
      amatrix(mn0,mn0,4) = amatrix(mn0,mn0,4) + pi3*int_ext
   END IF
-
 
   ! PUT ELEMENTS INTO SQUARE MATRIX
 

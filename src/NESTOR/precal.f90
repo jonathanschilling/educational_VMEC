@@ -14,9 +14,8 @@ SUBROUTINE precal
   REAL(rprec), PARAMETER :: bigno = 1.e50_dp
   REAL(rprec), PARAMETER :: epstan = EPSILON(one)
 
-
   INTEGER :: kp, ku, kuminus, kv, kvminus, i, m, n, mn,            &
-     imn, jmn, kmn, l, istat1, smn
+             imn, jmn, kmn, l, istat1, smn
   REAL(rprec), DIMENSION(0:mf + nf,0:mf,0:nf) :: cmn
   REAL(rprec) :: argu, argv, argp, dn1, f1, f2, f3, alp_per
 

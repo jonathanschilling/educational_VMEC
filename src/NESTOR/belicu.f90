@@ -53,7 +53,7 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
         xpts(2, i) = raxis_nestor(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))
         xpts(3, i) = zaxis_nestor(kv)
 
-        ! filament geometry: from previous point (R_i == xpts(:,i)) to current point (R_f == xpts(:,i-1))
+        ! filament geometry: from current point (R_i == xpts(:,i)) to previous point (R_f == xpts(:,i-1))
         dvec = xpts(:,i)-xpts(:,i-1)
         L = norm2(dvec)
 

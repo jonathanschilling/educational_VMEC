@@ -189,7 +189,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
 
-   if (open_dbg_context("bsqvac_vac1")) then
+   if (open_dbg_context("vac1n_bsqvac")) then
 
     call add_real_2d("bsqvac", nv, nu3, bsqvac)
 

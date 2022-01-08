@@ -61,6 +61,13 @@ MODULE vmec_input
   REAL(rprec), DIMENSION(nigroup)   :: extcur
   LOGICAL                           :: lfreeb
   LOGICAL                           :: lasym
+  
+  ! switch between implementations of NESTOR:
+  ! vac1 (magnetic scalar potential, both Stellarator and Tokamak)
+  ! vac2/vac3 (surface current density, Stellarator/Tokamak)
+  ! Only vac1 is available in educational_VMEC.
+  ! Therefore, this flag is ignored here.
+  integer                           :: vac_1_2
 
   ! RESET lbsubs DEFAULT FLAG TO FALSE TO CAPTURE CURRENT SHEETS!
   ! LOGICAL, PARAMETER :: lbsubs = .false. ! False to use (correct)  bsubs calculation (from metrics)
@@ -115,7 +122,6 @@ MODULE vmec_input
   logical :: dump_tomnsps             = .false.
   logical :: dump_tomnspa             = .false.
   logical :: dump_multigrid_result    = .false.
-  logical :: dump_bsqvac_vac1         = .false.
   logical :: dump_rbsq                = .false.
 
   ! debugging output flags for NESTOR
@@ -125,6 +131,8 @@ MODULE vmec_input
   logical :: dump_vac1n_bextern = .false.
   logical :: dump_vac1n_analyt  = .false.
   logical :: dump_vac1n_greenf  = .false.
+  logical :: dump_vac1n_bsqvac  = .false.
+  
 
 
 
@@ -215,14 +223,16 @@ MODULE vmec_input
      dump_tomnsps            , &
      dump_tomnspa            , &
      dump_multigrid_result   , &
-     dump_bsqvac_vac1        , &
      dump_rbsq               , &
+     vac_1_2, &
      dump_vac1n_vacuum,  &
      dump_vac1n_precal,  &
      dump_vac1n_surface, &
      dump_vac1n_bextern, &
      dump_vac1n_analyt,  &
-     dump_vac1n_greenf
+     dump_vac1n_greenf,  &
+     dump_vac1n_bsqvac
+     
 
 CONTAINS
 

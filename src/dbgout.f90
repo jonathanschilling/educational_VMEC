@@ -102,8 +102,6 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_tomnsps
   else if (trim(context_name) .eq. "tomnspa") then
     open_dbg_context         = dump_tomnspa
-  else if (trim(context_name) .eq. "bsqvac_vac1") then
-    open_dbg_context         = dump_bsqvac_vac1
   else if (trim(context_name) .eq. "phys_gc") then
     open_dbg_context         = dump_phys_gc
   else if (trim(context_name) .eq. "multigrid_result") then
@@ -126,6 +124,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac1n_analyt
   else if (trim(context_name) .eq. "vac1n_greenf") then
     open_dbg_context         = dump_vac1n_greenf
+  else if (trim(context_name) .eq. "vac1n_bsqvac") then
+    open_dbg_context         = dump_vac1n_bsqvac
 
 
 

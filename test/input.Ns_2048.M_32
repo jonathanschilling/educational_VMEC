@@ -50,6 +50,7 @@
 !  dump_vac1n_bextern = .true.
 !  dump_vac1n_analyt  = .true.
 !  dump_vac1n_greenf  = .true.
+!  dump_vac1n_bsqvac  = .true.
 /
 &END
 

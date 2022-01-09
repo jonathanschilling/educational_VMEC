@@ -1,10 +1,10 @@
 <map id="scalpot" name="scalpot">
-<area shape="rect" id="node1" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="5,175,69,201"/>
-<area shape="rect" id="node2" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="119,68,175,95"/>
-<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="224,131,396,157"/>
-<area shape="rect" id="node6" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="123,175,170,201"/>
-<area shape="rect" id="node7" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="121,225,172,252"/>
-<area shape="rect" id="node8" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="117,276,176,303"/>
+<area shape="rect" id="node1" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="5,151,69,177"/>
+<area shape="rect" id="node2" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="119,49,175,76"/>
+<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="224,137,396,164"/>
+<area shape="rect" id="node6" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="123,151,170,177"/>
+<area shape="rect" id="node7" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="121,201,172,228"/>
+<area shape="rect" id="node8" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="117,252,176,279"/>
 <area shape="rect" id="node3" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="271,5,349,32"/>
 <area shape="rect" id="node4" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="268,56,352,83"/>
 </map>

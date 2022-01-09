@@ -568,6 +568,8 @@ var namespaces_dup =
       [ "dump_vac1n_analyt", "d8/dbf/namespacevmec__input.html#ab639483d2228d47c8acc768c5dece5f4", null ],
       [ "dump_vac1n_bextern", "d8/dbf/namespacevmec__input.html#a2f14918a1007c2102854fd7c01008c22", null ],
       [ "dump_vac1n_bsqvac", "d8/dbf/namespacevmec__input.html#a9c5345851ef7954393ef0eeb0b0f0134", null ],
+      [ "dump_vac1n_fouri", "d8/dbf/namespacevmec__input.html#a2fe092deb104fe9120770fdc0f03691c", null ],
+      [ "dump_vac1n_fourp", "d8/dbf/namespacevmec__input.html#a16e9e1d9999023eddbefea8e3f8ce9a5", null ],
       [ "dump_vac1n_greenf", "d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475", null ],
       [ "dump_vac1n_precal", "d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2", null ],
       [ "dump_vac1n_surface", "d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b", null ],

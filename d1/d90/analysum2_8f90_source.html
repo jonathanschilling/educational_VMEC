@@ -160,36 +160,35 @@ $(document).ready(function(){initNavTree('d1/d90/analysum2_8f90_source.html','..
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>     <span class="comment">! SIN(mu - |n|v) * cmns (l,m,|n|)</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>     sinp = sinp + temp</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>     grpmn(m, n,i,1) = grpmn(m, n,i,1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8f25e7ca0012e133849e8df7da84af64">slp</a>(i)         *sinp</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>     grpmn(m,-n,i,1) = grpmn(m,-n,i,1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae2be1bf7407db4d5f42d5f1ffd5cfa32">slm</a>(i)         *sinm</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>     bvec(m, n,  1) = bvec(m, n,  1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a354e41c165b2635eedd3b9ee61c1df10">tlp</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*sinp</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>     bvec(m,-n,  1) = bvec(m,-n,  1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab2f1d70dec3567d526b304f7bfea33be">tlm</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*sinm</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     bvec(m, n,  1) = bvec(m, n,  1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a354e41c165b2635eedd3b9ee61c1df10">tlp</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*sinp</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>     bvec(m,-n,  1) = bvec(m,-n,  1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab2f1d70dec3567d526b304f7bfea33be">tlm</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*sinm</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     grpmn(m, n,i,1) = grpmn(m, n,i,1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8f25e7ca0012e133849e8df7da84af64">slp</a>(i)         *sinp</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>     grpmn(m,-n,i,1) = grpmn(m,-n,i,1) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae2be1bf7407db4d5f42d5f1ffd5cfa32">slm</a>(i)         *sinm</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keywordflow">     END IF</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        cosp = cosu1(i,m)*cosv1(i,n) * cmns(l,m,n)</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        temp = sinu1(i,m)*sinv1(i,n) * cmns(l,m,n)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="comment">! COS(mu + |n|v) * cmns (l,m,|n|)</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        cosm = cosp - temp</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="comment">! COS(mu - |n|v) * cmns (l,m,|n|)</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        cosp = cosp + temp</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        bvec(m, n,2) = bvec(m, n,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a354e41c165b2635eedd3b9ee61c1df10">tlp</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*cosp</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        bvec(m,-n,2) = bvec(m,-n,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab2f1d70dec3567d526b304f7bfea33be">tlm</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*cosm</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>           grpmn(m, n,i,2) = grpmn(m, n,i,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8f25e7ca0012e133849e8df7da84af64">slp</a>(i)*cosp</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>           grpmn(m,-n,i,2) = grpmn(m,-n,i,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae2be1bf7407db4d5f42d5f1ffd5cfa32">slm</a>(i)*cosm</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordflow">        END IF</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keywordflow">  END DO</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb">analysum2</a></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        cosp = cosu1(i,m)*cosv1(i,n) * cmns(l,m,n)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        temp = sinu1(i,m)*sinv1(i,n) * cmns(l,m,n)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="comment">! COS(mu + |n|v) * cmns (l,m,|n|)</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        cosm = cosp - temp</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="comment">! COS(mu - |n|v) * cmns (l,m,|n|)</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        cosp = cosp + temp</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        bvec(m, n,2) = bvec(m, n,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a354e41c165b2635eedd3b9ee61c1df10">tlp</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*cosp</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        bvec(m,-n,2) = bvec(m,-n,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab2f1d70dec3567d526b304f7bfea33be">tlm</a>(i)*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3d1039669dace5ef57e13514a59e7eab">bexni</a>(i)*cosm</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">IF</span> (ivacskip .EQ. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>           grpmn(m, n,i,2) = grpmn(m, n,i,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8f25e7ca0012e133849e8df7da84af64">slp</a>(i)*cosp</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>           grpmn(m,-n,i,2) = grpmn(m,-n,i,2) + <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae2be1bf7407db4d5f42d5f1ffd5cfa32">slm</a>(i)*cosm</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keywordflow">        END IF</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb">analysum2</a></div>
 <div class="ttc" id="aanalysum2_8f90_html_a47a0d185131a197c6fc62ee5d68d62fb"><div class="ttname"><a href="../../d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb">analysum2</a></div><div class="ttdeci">subroutine analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)</div><div class="ttdoc">Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently-si...</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d90/analysum2_8f90_source.html#l00017">analysum2.f90:19</a></div></div>
 <div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_a354e41c165b2635eedd3b9ee61c1df10"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a354e41c165b2635eedd3b9ee61c1df10">vacmod::tlp</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable tlp</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00123">vacmod.f90:123</a></div></div>
@@ -204,7 +203,7 @@ $(document).ready(function(){initNavTree('d1/d90/analysum2_8f90_source.html','..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d1/d90/analysum2_8f90.html">analysum2.f90</a></li>
-    <li class="footer">Generated on Sat Jan 8 2022 23:02:57 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Jan 9 2022 22:46:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

@@ -63,10 +63,12 @@ var searchData=
   ['dump_5fvac1n_5fanalyt_60',['dump_vac1n_analyt',['../d8/dbf/namespacevmec__input.html#ab639483d2228d47c8acc768c5dece5f4',1,'vmec_input']]],
   ['dump_5fvac1n_5fbextern_61',['dump_vac1n_bextern',['../d8/dbf/namespacevmec__input.html#a2f14918a1007c2102854fd7c01008c22',1,'vmec_input']]],
   ['dump_5fvac1n_5fbsqvac_62',['dump_vac1n_bsqvac',['../d8/dbf/namespacevmec__input.html#a9c5345851ef7954393ef0eeb0b0f0134',1,'vmec_input']]],
-  ['dump_5fvac1n_5fgreenf_63',['dump_vac1n_greenf',['../d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475',1,'vmec_input']]],
-  ['dump_5fvac1n_5fprecal_64',['dump_vac1n_precal',['../d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2',1,'vmec_input']]],
-  ['dump_5fvac1n_5fsurface_65',['dump_vac1n_surface',['../d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b',1,'vmec_input']]],
-  ['dump_5fvac1n_5fvacuum_66',['dump_vac1n_vacuum',['../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4',1,'vmec_input']]],
-  ['dump_5fvolume_67',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
-  ['dwell_68',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
+  ['dump_5fvac1n_5ffouri_63',['dump_vac1n_fouri',['../d8/dbf/namespacevmec__input.html#a2fe092deb104fe9120770fdc0f03691c',1,'vmec_input']]],
+  ['dump_5fvac1n_5ffourp_64',['dump_vac1n_fourp',['../d8/dbf/namespacevmec__input.html#a16e9e1d9999023eddbefea8e3f8ce9a5',1,'vmec_input']]],
+  ['dump_5fvac1n_5fgreenf_65',['dump_vac1n_greenf',['../d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475',1,'vmec_input']]],
+  ['dump_5fvac1n_5fprecal_66',['dump_vac1n_precal',['../d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2',1,'vmec_input']]],
+  ['dump_5fvac1n_5fsurface_67',['dump_vac1n_surface',['../d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b',1,'vmec_input']]],
+  ['dump_5fvac1n_5fvacuum_68',['dump_vac1n_vacuum',['../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4',1,'vmec_input']]],
+  ['dump_5fvolume_69',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
+  ['dwell_70',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
 ];

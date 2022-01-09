@@ -179,33 +179,34 @@ $(document).ready(function(){initNavTree('d6/dc7/becoil_8f90_source.html','../..
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae9f16d931a5c1a59223bda11531b3e9e">brad</a>(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25a2b10afc2b3bd8fe092619eb71465c">bphi</a>(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">bz</a>(i)   = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keywordflow">  END DO</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordflow">IF</span> (mod(icount,25).eq.0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     <span class="comment">! PRINT INFO IF R, Z OUT OF BOX</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     i = 0</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     rad0 = maxval(rad)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     zee0 = maxval(zee)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     <span class="keywordflow">IF</span> (rad0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>) i = 1</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>     <span class="keywordflow">IF</span> (zee0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>) i = i + 2</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>     ri   = minval(rad)</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     zj   = minval(zee)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     <span class="keywordflow">IF</span> (ri .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>) i = i + 4</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     <span class="keywordflow">IF</span> (zj .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>) i = i + 8</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>     <span class="keywordflow">IF</span> (i .ne. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        print *, warning</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="comment">! WRITE (nthreed, *) warning</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">IF</span> (i/8 .ne. 0) print *,<span class="stringliteral">&#39; zmin = &#39;</span>, zj</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        i = mod(i,8)</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">IF</span> (i/4 .ne. 0) print *,<span class="stringliteral">&#39; rmin = &#39;</span>, ri</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        i = mod(i,4)</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">IF</span> (i/2 .ne. 0) print *,<span class="stringliteral">&#39; zmax = &#39;</span>, zee0</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        i = mod(i,2)</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">IF</span> (i .ne. 0) print *,<span class="stringliteral">&#39; rmax = &#39;</span>, rad0</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>     </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordflow">IF</span> (mod(icount,25).eq.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     <span class="comment">! PRINT INFO IF R, Z OUT OF BOX</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     i = 0</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     rad0 = maxval(rad)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     zee0 = maxval(zee)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>     <span class="keywordflow">IF</span> (rad0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>) i = 1</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>     <span class="keywordflow">IF</span> (zee0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>) i = i + 2</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     ri   = minval(rad)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     zj   = minval(zee)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     <span class="keywordflow">IF</span> (ri .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>) i = i + 4</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>     <span class="keywordflow">IF</span> (zj .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>) i = i + 8</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>     <span class="keywordflow">IF</span> (i .ne. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        print *, warning</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="comment">! WRITE (nthreed, *) warning</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">IF</span> (i/8 .ne. 0) print *,<span class="stringliteral">&#39; zmin = &#39;</span>, zj</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        i = mod(i,8)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">IF</span> (i/4 .ne. 0) print *,<span class="stringliteral">&#39; rmin = &#39;</span>, ri</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        i = mod(i,4)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">IF</span> (i/2 .ne. 0) print *,<span class="stringliteral">&#39; zmax = &#39;</span>, zee0</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        i = mod(i,2)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">IF</span> (i .ne. 0) print *,<span class="stringliteral">&#39; rmax = &#39;</span>, rad0</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div>
 <div class="ttc" id="abecoil_8f90_html_a449b054fb88bdb4cdf73ef8939654bfb"><div class="ttname"><a href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div><div class="ttdeci">subroutine becoil(rad, zee, brvac, bpvac, bzvac)</div><div class="ttdoc">Compute the cylindrical components of the magnetic field due to external coils. by bi-linear interpol...</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc7/becoil_8f90_source.html#l00013">becoil.f90:14</a></div></div>
 <div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
 <div class="ttc" id="anamespacemgrid__mod_html_a20b0fc2e82883727360cd1e69275eafb"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">mgrid_mod::delzb</a></div><div class="ttdeci">real(rprec) delzb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
@@ -227,7 +228,7 @@ $(document).ready(function(){initNavTree('d6/dc7/becoil_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d6/dc7/becoil_8f90.html">becoil.f90</a></li>
-    <li class="footer">Generated on Sat Jan 8 2022 23:02:57 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Jan 9 2022 22:46:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

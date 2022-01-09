@@ -115,91 +115,103 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">    8</a></span><span class="keyword">SUBROUTINE </span><a class="code hl_function" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a> (grpmn, grp)</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_grpmn =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">grpmn</a></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(inout)</span> :: grpmn(0:mf,-nf:nf,nuv2,ndim)</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(in)</span>    :: grp(nuv,nuv2)</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dfd/namespacedbgout.html">dbgout</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">INTEGER</span> :: n, kv, ku, ip, iuv, m, ireflect, isym</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">  REAL</span>(rprec) :: cosm, sinm, cosn, sinn, kernel, gcos, gsin</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(inout)</span> :: grpmn(0:mf,-nf:nf,nuv2,ndim)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">INTENT(in)</span>    :: grp(nuv,nuv2)</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">IF</span> (ndim .GT. 2) stop <span class="stringliteral">&#39;NDIM &gt; 2&#39;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordflow">DO</span> ku = 1,nu2</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a> = 0</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a> = 0</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>     <span class="comment">! PERFORM KV (TOROIDAL ANGLE) TRANSFORM (OVER UNPRIMED MESH IN EQ. 2.14)</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>     <span class="comment">! THUS, THE (m,n) INDEX HERE CORRESPONDS TO THE FIRST INDEX OF AMATRIX</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>     <span class="comment">!</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>     <span class="comment">! NOTE: THE .5 FACTOR (IN COSN,SINN) ACCOUNTS FOR THE SUM IN KERNEL.</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>     <span class="comment">! ON ENTRY THE FIRST TIME, GRPMN IS SIN,COS * Kmn(analytic)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordtype">INTEGER</span> :: n, kv, ku, ip, iuv, m, ireflect, isym</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">  REAL</span>(rprec) :: cosm, sinm, cosn, sinn, kernel, gcos, gsin</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordflow">IF</span> (ndim .GT. 2) stop <span class="stringliteral">&#39;NDIM &gt; 2&#39;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">DO</span> ku = 1,nu2</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a> = 0</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a> = 0</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>     <span class="comment">! PERFORM KV (TOROIDAL ANGLE) TRANSFORM (OVER UNPRIMED MESH IN EQ. 2.14)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>     <span class="comment">! THUS, THE (m,n) INDEX HERE CORRESPONDS TO THE FIRST INDEX OF AMATRIX</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>     <span class="comment">!</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>     <span class="comment">! THE 3rd INDEX OF GRPMN IS THE PRIMED U,V MESH COORDINATE</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>     <span class="keywordflow">DO</span> kv = 1,nv</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">DO</span> n = 0,nf</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>           cosn = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*cosv(n,kv)</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>           sinn = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*sinv(n,kv)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>           iuv = kv+nv*(ku-1)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>           ireflect = imirr(iuv)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>           <span class="keywordflow">DO</span> isym = 1, ndim <span class="comment">! ndim == 1 for stellarator-symmetry, 2 for asymmetric (lasym=T)</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>              <span class="keywordflow">DO</span> ip = 1,nuv2</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                 <span class="keywordflow">IF</span> (isym .eq. 1) <span class="keywordflow">THEN</span> <span class="comment">! only contrib for stellarator-symmetry</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                    <span class="comment">! anti-symmetric part (u,v -&gt; -u,-v)</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                    kernel = grp(iuv,ip) - grp(ireflect,ip)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">!                     if (iuv .eq. ireflect) then</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">!                       print *, &quot;reflecting on self at iuv=&quot;, iuv, &quot; ip=&quot;, ip, &quot; n=&quot;, n, &quot; ku=&quot;, ku, &quot; kv=&quot;, kv, &amp;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">!                                &quot; =&gt; kernel=&quot;, kernel</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">!                     end if</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">!                      if (n.eq.0) then</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">!                         ! fourp_kernel.dat</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">!                         print *, iuv, ip, kernel</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">!                      end if</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                 <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (isym .eq. 2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                    <span class="comment">! symmetric part</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                    kernel = grp(iuv,ip) + grp(ireflect,ip)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordflow">                 END IF</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                 <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym) + cosn*kernel</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                 <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym) + sinn*kernel</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordflow">              END DO</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordflow">           END DO</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     <span class="comment">! PERFORM KU (POLOIDAL ANGLE) TRANFORM [COMPLETE SIN(mu-nv) / COS(mu-nv) TRANSFORM]</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     <span class="keywordflow">DO</span> m = 0,mf</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">DO</span> isym = 1, ndim</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>           <span class="keywordflow">IF</span> (isym .EQ. 1) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>              cosm = -cosui(m,ku)</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>              sinm =  sinui(m,ku)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>           <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (isym .EQ. 2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>              sinm = cosui(m,ku)</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>              cosm = sinui(m,ku)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keywordflow">           END IF</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>           <span class="keywordflow">DO</span> n= 0,nf</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>             <span class="keywordflow">DO</span> ip = 1,nuv2</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                 gcos = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)*sinm</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                 gsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)*cosm</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                 grpmn(m, n,ip,isym)    = grpmn(m, n,ip,isym) + gcos + gsin</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                 <span class="keywordflow">IF</span> (n .NE. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                    grpmn(m,-n,ip,isym) = grpmn(m,-n,ip,isym) + gcos - gsin</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keywordflow">                 ENDIF</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keywordflow">             END DO</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordflow">           END DO</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>     <span class="comment">! NOTE: THE .5 FACTOR (IN COSN,SINN) ACCOUNTS FOR THE SUM IN KERNEL.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>     <span class="comment">! ON ENTRY THE FIRST TIME, GRPMN IS SIN,COS * Kmn(analytic)</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>     <span class="comment">!</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>     <span class="comment">! THE 3rd INDEX OF GRPMN IS THE PRIMED U,V MESH COORDINATE</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>     <span class="keywordflow">DO</span> kv = 1,nv</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">DO</span> n = 0,nf</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>           cosn = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*cosv(n,kv)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>           sinn = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ac0e3a298ab117d5f9ed0e82eb72cb212">p5</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09">onp</a>*sinv(n,kv)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>           iuv = kv+nv*(ku-1)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>           ireflect = imirr(iuv)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>           <span class="keywordflow">DO</span> isym = 1, ndim <span class="comment">! ndim == 1 for stellarator-symmetry, 2 for asymmetric (lasym=T)</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>              <span class="keywordflow">DO</span> ip = 1,nuv2</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                 <span class="keywordflow">IF</span> (isym .eq. 1) <span class="keywordflow">THEN</span> <span class="comment">! only contrib for stellarator-symmetry</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    <span class="comment">! anti-symmetric part (u,v -&gt; -u,-v)</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    kernel = grp(iuv,ip) - grp(ireflect,ip)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">!                     if (iuv .eq. ireflect) then</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">!                       print *, &quot;reflecting on self at iuv=&quot;, iuv, &quot; ip=&quot;, ip, &quot; n=&quot;, n, &quot; ku=&quot;, ku, &quot; kv=&quot;, kv, &amp;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">!                                &quot; =&gt; kernel=&quot;, kernel</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">!                     end if</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">!                      if (n.eq.0) then</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">!                         ! fourp_kernel.dat</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">!                         print *, iuv, ip, kernel</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">!                      end if</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                 <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (isym .eq. 2) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                    <span class="comment">! symmetric part</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                    kernel = grp(iuv,ip) + grp(ireflect,ip)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordflow">                 END IF</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                 <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym) + cosn*kernel</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                 <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym) + sinn*kernel</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordflow">              END DO</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordflow">           END DO</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     <span class="comment">! PERFORM KU (POLOIDAL ANGLE) TRANFORM [COMPLETE SIN(mu-nv) / COS(mu-nv) TRANSFORM]</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>     <span class="keywordflow">DO</span> m = 0,mf</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">DO</span> isym = 1, ndim</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>           <span class="keywordflow">IF</span> (isym .EQ. 1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>              cosm = -cosui(m,ku)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>              sinm =  sinui(m,ku)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>           <span class="keywordflow">ELSE</span> <span class="keywordflow">IF</span> (isym .EQ. 2) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>              sinm = cosui(m,ku)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>              cosm = sinui(m,ku)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keywordflow">           END IF</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>           </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>           <span class="keywordflow">DO</span> n= 0,nf</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>             <span class="keywordflow">DO</span> ip = 1,nuv2</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                 gcos = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">g1</a>(ip,n,isym)*sinm</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                 gsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">g2</a>(ip,n,isym)*cosm</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                 grpmn(m, n,ip,isym)    = grpmn(m, n,ip,isym) + gcos + gsin</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                 <span class="keywordflow">IF</span> (n .NE. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    grpmn(m,-n,ip,isym) = grpmn(m,-n,ip,isym) + gcos - gsin</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keywordflow">                 ENDIF</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordflow">             END DO</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keywordflow">           END DO</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordflow">     END DO</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;vac1n_fourp&quot;</span>, id=<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a>)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">call </span>add_real_4d(<span class="stringliteral">&quot;grpmn&quot;</span>, mf1, nf1, nv, nu3, grpmn)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a></div>
 <div class="ttc" id="afourp_8f90_html_add725dd420251115fd60182dc992503c"><div class="ttname"><a href="../../d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c">fourp</a></div><div class="ttdeci">subroutine fourp(grpmn, grp)</div><div class="ttdoc">Perform Fourier integrals of Green's function kernel.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d1c/fourp_8f90_source.html#l00008">fourp.f90:9</a></div></div>
+<div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
 <div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
+<div class="ttc" id="anamespacevacmod_html_a051663172110b9e2d26acf19c295a2b3"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">vacmod::icall</a></div><div class="ttdeci">integer, save icall</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00012">vacmod.f90:12</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_a25445f363d4484905826ad5f7a2a7824"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a25445f363d4484905826ad5f7a2a7824">vacmod::g1</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable g1</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00155">vacmod.f90:155</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_a37c388409e5eab7adac7ce36f7ade723"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a37c388409e5eab7adac7ce36f7ade723">vacmod::g2</a></div><div class="ttdeci">real(rprec), dimension(:,:,:), allocatable g2</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00156">vacmod.f90:156</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_a58dae2ab36f775e99fffa97ca84e5f10"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a58dae2ab36f775e99fffa97ca84e5f10">vacmod::grpmn</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable grpmn</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00106">vacmod.f90:106</a></div></div>
@@ -211,7 +223,7 @@ $(document).ready(function(){initNavTree('d0/d1c/fourp_8f90_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d0/d1c/fourp_8f90.html">fourp.f90</a></li>
-    <li class="footer">Generated on Sat Jan 8 2022 23:02:57 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sun Jan 9 2022 22:46:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

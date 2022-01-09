@@ -4,7 +4,7 @@ var searchData=
   ['datathom_1',['datathom',['../db/dae/namespaceread__wout__mod.html#a2bb69cf2db64989262717eea6c65504e',1,'read_wout_mod']]],
   ['dbcoil_2',['dbcoil',['../d1/d41/namespacemgrid__mod.html#a83b17909f2833c777ff5f701f2a7fc4a',1,'mgrid_mod']]],
   ['dbsq_3',['dbsq',['../d1/d6c/namespacevmec__main.html#a4bbecfa3f73d3a89a7574897125fd16e',1,'vmec_main']]],
-  ['dcurr_4',['dcurr',['../dc/d06/namespacevmercier.html#a5fc728db4fd925416326ae1356314944',1,'vmercier::dcurr()'],['../db/dae/namespaceread__wout__mod.html#a45260ca6df177bc5a4101e01e3c152ff',1,'read_wout_mod::dcurr()']]],
+  ['dcurr_4',['dcurr',['../db/dae/namespaceread__wout__mod.html#a45260ca6df177bc5a4101e01e3c152ff',1,'read_wout_mod::dcurr()'],['../dc/d06/namespacevmercier.html#a5fc728db4fd925416326ae1356314944',1,'vmercier::dcurr()']]],
   ['degree_5',['degree',['../df/d0c/namespacestel__constants.html#a4f6b93c1a5e49de3ce2f4ca5e2840e28',1,'stel_constants']]],
   ['delbsq_6',['delbsq',['../d1/d6c/namespacevmec__main.html#a5ab505a1f81aa365910ef9ac24afb12a',1,'vmec_main']]],
   ['delphid_7',['delphid',['../db/dae/namespaceread__wout__mod.html#abd7904f2ffb046c21217d8b2d0be77da',1,'read_wout_mod']]],
@@ -61,10 +61,12 @@ var searchData=
   ['dump_5fvac1n_5fanalyt_58',['dump_vac1n_analyt',['../d8/dbf/namespacevmec__input.html#ab639483d2228d47c8acc768c5dece5f4',1,'vmec_input']]],
   ['dump_5fvac1n_5fbextern_59',['dump_vac1n_bextern',['../d8/dbf/namespacevmec__input.html#a2f14918a1007c2102854fd7c01008c22',1,'vmec_input']]],
   ['dump_5fvac1n_5fbsqvac_60',['dump_vac1n_bsqvac',['../d8/dbf/namespacevmec__input.html#a9c5345851ef7954393ef0eeb0b0f0134',1,'vmec_input']]],
-  ['dump_5fvac1n_5fgreenf_61',['dump_vac1n_greenf',['../d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475',1,'vmec_input']]],
-  ['dump_5fvac1n_5fprecal_62',['dump_vac1n_precal',['../d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2',1,'vmec_input']]],
-  ['dump_5fvac1n_5fsurface_63',['dump_vac1n_surface',['../d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b',1,'vmec_input']]],
-  ['dump_5fvac1n_5fvacuum_64',['dump_vac1n_vacuum',['../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4',1,'vmec_input']]],
-  ['dump_5fvolume_65',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
-  ['dwell_66',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
+  ['dump_5fvac1n_5ffouri_61',['dump_vac1n_fouri',['../d8/dbf/namespacevmec__input.html#a2fe092deb104fe9120770fdc0f03691c',1,'vmec_input']]],
+  ['dump_5fvac1n_5ffourp_62',['dump_vac1n_fourp',['../d8/dbf/namespacevmec__input.html#a16e9e1d9999023eddbefea8e3f8ce9a5',1,'vmec_input']]],
+  ['dump_5fvac1n_5fgreenf_63',['dump_vac1n_greenf',['../d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475',1,'vmec_input']]],
+  ['dump_5fvac1n_5fprecal_64',['dump_vac1n_precal',['../d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2',1,'vmec_input']]],
+  ['dump_5fvac1n_5fsurface_65',['dump_vac1n_surface',['../d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b',1,'vmec_input']]],
+  ['dump_5fvac1n_5fvacuum_66',['dump_vac1n_vacuum',['../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4',1,'vmec_input']]],
+  ['dump_5fvolume_67',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
+  ['dwell_68',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
 ];

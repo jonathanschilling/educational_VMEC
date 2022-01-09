@@ -166,12 +166,12 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
 
   if (open_dbg_context("vac1n_analyt", id=icall)) then
 
-    call add_real_2d("all_tlp", mf+nf+1, nuv2, all_tlp)
-    call add_real_2d("all_tlm", mf+nf+1, nuv2, all_tlm)
+    call add_real_3d("all_tlp", mf+nf+1, nv, nu3, all_tlp)
+    call add_real_3d("all_tlm", mf+nf+1, nv, nu3, all_tlm)
     call add_real_2d("bvec", mf1, nf1, bvec)
     if (ivacskip .eq. 0) then
-      call add_real_2d("all_slp", mf+nf+1, nuv2, all_slp)
-      call add_real_2d("all_slm", mf+nf+1, nuv2, all_slm)
+      call add_real_3d("all_slp", mf+nf+1, nv, nu3, all_slp)
+      call add_real_3d("all_slm", mf+nf+1, nv, nu3, all_slm)
       call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
     else
       call add_null("all_slp")

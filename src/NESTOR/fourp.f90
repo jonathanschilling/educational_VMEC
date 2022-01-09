@@ -7,6 +7,9 @@
 !> @param grp
 SUBROUTINE fourp (grpmn, grp)
   USE vacmod, vm_grpmn => grpmn
+  
+  use dbgout
+  
   IMPLICIT NONE
 
   REAL(rprec), INTENT(inout) :: grpmn(0:mf,-nf:nf,nuv2,ndim)
@@ -55,8 +58,6 @@ SUBROUTINE fourp (grpmn, grp)
                     kernel = grp(iuv,ip) + grp(ireflect,ip)
                  END IF
 
-
-
                  g1(ip,n,isym)=g1(ip,n,isym) + cosn*kernel
                  g2(ip,n,isym)=g2(ip,n,isym) + sinn*kernel
               END DO
@@ -74,6 +75,7 @@ SUBROUTINE fourp (grpmn, grp)
               sinm = cosui(m,ku)
               cosm = sinui(m,ku)
            END IF
+           
            DO n= 0,nf
              DO ip = 1,nuv2
                  gcos = g1(ip,n,isym)*sinm
@@ -88,5 +90,12 @@ SUBROUTINE fourp (grpmn, grp)
      END DO
 
   END DO
+  
+  if (open_dbg_context("vac1n_fourp", id=icall)) then
+    
+    call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE fourp

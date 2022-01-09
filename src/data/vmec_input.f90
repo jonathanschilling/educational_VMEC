@@ -131,12 +131,10 @@ MODULE vmec_input
   logical :: dump_vac1n_bextern = .false.
   logical :: dump_vac1n_analyt  = .false.
   logical :: dump_vac1n_greenf  = .false.
+  logical :: dump_vac1n_fourp   = .false.
+  logical :: dump_vac1n_fouri   = .false.
   logical :: dump_vac1n_bsqvac  = .false.
   
-
-
-
-
 
 
   NAMELIST /indata/ &
@@ -231,6 +229,8 @@ MODULE vmec_input
      dump_vac1n_bextern, &
      dump_vac1n_analyt,  &
      dump_vac1n_greenf,  &
+     dump_vac1n_fourp,   &
+     dump_vac1n_fouri,   &
      dump_vac1n_bsqvac
      
 

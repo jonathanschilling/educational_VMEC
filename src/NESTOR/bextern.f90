@@ -34,7 +34,7 @@ SUBROUTINE bextern(plascur, wint)
   !
   ! USE BEXU, BEXV, BEXN AS TEMPORARY STORAGE FOR BX, BY, BZ
   CALL belicu (plascur, bexu, bexv, bexn, cosuv, sinuv, r1b, z1b)
-  DO i = 1, nuv2
+  DO i = 1, nuv2  
      brad(i) = brad(i) + bexu(i)*cosuv(i) + bexv(i)*sinuv(i)
      bphi(i) = bphi(i) - bexu(i)*sinuv(i) + bexv(i)*cosuv(i)
      bz(i)   = bz(i) + bexn(i)

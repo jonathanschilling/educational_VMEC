@@ -140,8 +140,8 @@ SUBROUTINE precal
         cosui(m,ku) = cosu(m,ku)*alu*alv*2
         sinui(m,ku) = sinu(m,ku)*alu*alv*2
         IF (ku.eq.1 .or. ku.eq.nu2) then
-           ! This seems to be some kind of trapezoidal quadrature (weighting of "edge" contributions by 1/2) ?
-           ! --> maybe related to the (wrong) double summation of the imirr terms at the edges in fourp?
+           ! wint-like functionality to take stellarator-symmetric
+           ! "folding-over" into first half-period into account
            cosui(m,ku) = p5*cosui(m,ku)
         end if
      END DO

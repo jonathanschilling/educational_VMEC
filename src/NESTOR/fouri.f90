@@ -12,6 +12,9 @@
 !> @param lasym
 SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
+  
+  use dbgout
+  
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(mnpd,nv,nu3,ndim), INTENT(in) :: grpmn
@@ -65,6 +68,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      END DO
   END DO
 
+  ! 0.5 from above symmetrization maybe?
   source = p5*onp*source ! TODO: why is this required?
 
   ! INITIALIZE RUNNING-SUM ARRAYS
@@ -143,10 +147,6 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
   amatrix = (pi2*pi2)*amatrix ! TODO: can this be cancelled with some factors of 2*pi in the rest of NESTOR?
 
-
-
-
-
   ! ZERO BVEC(0,n) FOR n < 0 (TODO: why ?)
   ! Fixed SPH081515: had -nf:0 before
   bvec(0,-nf:-1,1:ndim) = 0
@@ -156,9 +156,6 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   mn0 = 1+mf1*nf
   ! SPH082415: mn0-mf1: (m=0,n=-1 index)
   amatrix(1:mn0-mf1:mf1, :, 1:ndim*ndim) = 0
-
-
-
 
   ! ADD DIAGONAL TERMS TO AMATRIX [THE FIRST TERM IN EQ(3.2) OF PKM]
   DO mn = 1, mnpd
@@ -193,6 +190,23 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
 
      ! Cos-Cos'
      amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
+  end if
+  
+  if (open_dbg_context("vac1n_fouri", id=icall)) then
+    
+    ! TODO: isym for lasym=.TRUE.
+    call add_real_2d("source", nv, nu2, source)
+    call add_real_2d("bcos",  bcos)
+    call add_real_2d("bsin",  bsin)
+    call add_real_2d("actemp",  actemp)
+    call add_real_2d("astemp",  astemp)
+    
+    call add_real_2d("bvec",  bvec)
+    call add_real_2d("amatrix",  amatrix)
+    
+    call add_real_2d("amatsq",  amatsq)
+
+    call close_dbg_out()
   end if
 
 END SUBROUTINE fouri

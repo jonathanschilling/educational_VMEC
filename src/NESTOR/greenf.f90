@@ -8,7 +8,9 @@
 !> @param ip
 SUBROUTINE greenf(delgr, delgrp, ip)
   USE vacmod
-  use dbgout
+
+!  use dbgout
+  
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ip
@@ -75,7 +77,7 @@ SUBROUTINE greenf(delgr, delgrp, ip)
      xper(kp) = xip*cosper(kp) - yip*sinper(kp)
 
      ! y(ip) in field period kp
-     yper(kp) = yip*cosper(kp) + xip*sinper(kp)
+     yper(kp) = xip*sinper(kp) + yip*cosper(kp)
 
      sxsave(kp) = (snr(ip)*xper(kp) - snv(ip)*yper(kp))/r1b(ip)
      sysave(kp) = (snr(ip)*yper(kp) + snv(ip)*xper(kp))/r1b(ip)

@@ -60,23 +60,19 @@ SUBROUTINE analysum(grpmn, bvec, sl, tl, m, n, l, ivacskip, lasym, m_map, n_map,
 
      ! Fourier-transform S_l or T_l*bexni and then
      ! add up Fourier coefficients, weighted by cmns
+     bvec (m,n,1)   = bvec (m,n,1)    + cmns(l,m,n) * bexni(i)*tl(i)*sinp
      IF (ivacskip .EQ. 0) then
      grpmn(m,n,i,1) = grpmn(m,n,i,1)  + cmns(l,m,n) *          sl(i)*sinp
      end if
-     bvec (m,n,1)   = bvec (m,n,1)    + cmns(l,m,n) * bexni(i)*tl(i)*sinp
-
-!     if (m.eq.1 .and. n.eq.0) then
-!       print *, "cmns=",cmns(l,m,n)," sinp(",i,") = ",sinp," in=",bexni(i)*tl(i)," => bvec(1,0)=", bvec(m,n,1)
-!     end if
 
      IF (lasym) THEN
         ! COS(mu - |n|v)*cmns
         cosp = cosu1(i,m)*cosv1(i,n) + sinv1(i,n)*sinu1(i,m)
 
+        bvec(m,n,2) = bvec(m,n,2) + tl(i)*cmns(l,m,n)*bexni(i)*cosp
         IF (ivacskip .EQ. 0) then
            grpmn(m,n,i,2) = grpmn(m,n,i,2)  + sl(i)*cmns(l,m,n)*cosp
         end if
-        bvec(m,n,2) = bvec(m,n,2) + tl(i)*cmns(l,m,n)*bexni(i)*cosp
      END IF
   END DO
 

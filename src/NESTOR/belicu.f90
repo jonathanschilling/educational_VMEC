@@ -32,7 +32,7 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
 
   ! net toroidal plasma current in A
   current = torcur/mu0
-
+  
   ! initialize target array
   bx = 0
   by = 0

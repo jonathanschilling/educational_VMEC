@@ -124,11 +124,14 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac1n_analyt
   else if (trim(context_name) .eq. "vac1n_greenf") then
     open_dbg_context         = dump_vac1n_greenf
+  else if (trim(context_name) .eq. "vac1n_fourp") then
+    open_dbg_context         = dump_vac1n_fourp
+  else if (trim(context_name) .eq. "vac1n_fouri") then
+    open_dbg_context         = dump_vac1n_fouri
   else if (trim(context_name) .eq. "vac1n_bsqvac") then
     open_dbg_context         = dump_vac1n_bsqvac
 
-
-
+  ! default
   else
     write(*,*) "unknown debug output context: '",trim(context_name),"'"
     stop

@@ -75,7 +75,7 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
   nfper = nfp
   nu2 = nu/2 + 1 ! nu2 is equal to ntheta2
   nu3 = ntheta3
-  nuv2 = nznt
+  nuv2 = nznt ! == nv * nu3
 
   IF (nv == 1) THEN
      ! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V

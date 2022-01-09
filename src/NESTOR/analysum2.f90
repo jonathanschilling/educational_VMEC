@@ -61,14 +61,13 @@ SUBROUTINE analysum2(grpmn, bvec, m, n, l, ivacskip, lasym, m_map, n_map, &
      ! SIN(mu - |n|v) * cmns (l,m,|n|)
      sinp = sinp + temp
 
+     bvec (m, n,  1) = bvec (m, n,  1) + tlp(i)*bexni(i)*sinp
+     bvec (m,-n,  1) = bvec (m,-n,  1) + tlm(i)*bexni(i)*sinm
+
      IF (ivacskip .EQ. 0) THEN
      grpmn(m, n,i,1) = grpmn(m, n,i,1) + slp(i)         *sinp
      grpmn(m,-n,i,1) = grpmn(m,-n,i,1) + slm(i)         *sinm
      END IF
-
-     bvec (m, n,  1) = bvec (m, n,  1) + tlp(i)*bexni(i)*sinp
-     bvec (m,-n,  1) = bvec (m,-n,  1) + tlm(i)*bexni(i)*sinm
-
 
      IF (lasym) THEN
         cosp = cosu1(i,m)*cosv1(i,n) * cmns(l,m,n)

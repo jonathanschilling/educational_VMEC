@@ -62,7 +62,6 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
          ! [(h-hsing)(u,v,u',v') == bexni(ip)*green(u,v; ip) in Eq. 2.16]
          ! AND STORE IT - FOR UNPRIMED MESH VALUES - IN GSTORE
          gstore = gstore + bexni(ip)*green(:,ip)
-
       END DO
 
       if (open_dbg_context("vac1n_greenf", id=icall)) then
@@ -70,7 +69,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
         call add_real_4d("green",  nv, nu, nv, nu3, green)
         call add_real_4d("greenp", nv, nu, nv, nu3, greenp)
 
-        call add_real_4d("gstore", nv, nu, nv, nu3, gstore)
+        call add_real_2d("gstore", nv, nu, gstore)
 
         call close_dbg_out()
       end if
@@ -79,11 +78,11 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       ! AND STORE IN GRPMN (NOTE THAT GRPMN IS ADDED TO THE ANALYTIC PIECE IN EQ. 2.14,
       ! - COMPUTED IN ANALYT - WHICH HAS THE APPROPRIATE SIN, COS FACTORS ALREADY)
       CALL fourp (grpmn, greenp)
-
+      
       ! COMPUTE FOURIER INTEGRAL OF GRADIENT (GRPMN) OVER PRIMED MESH IN EQ. 2.14
       ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
       CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, lasym)
-
+      
       ! debugging: focus on Fourier transforms in fouri for now
       ! return
 

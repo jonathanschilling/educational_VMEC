@@ -298,20 +298,22 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    </div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="comment">! TODO: isym for lasym=.TRUE.</span></div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;source&quot;</span>, nv, nu2, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d">source</a>)</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bcos&quot;</span>,  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>)</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsin&quot;</span>,  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>)</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;actemp&quot;</span>,  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>)</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;astemp&quot;</span>,  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>)</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bvec&quot;</span>,  bvec)</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;amatrix&quot;</span>,  amatrix)</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;amatsq&quot;</span>,  amatsq)</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bcos&quot;</span>, nu2, nf1, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a8febd379da66a08e39544caf44deae64">bcos</a>)</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsin&quot;</span>, nu2, nf1, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#acff5d98c846acd835a5c255af53b65a0">bsin</a>)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keyword">call </span>add_real_4d(<span class="stringliteral">&quot;actemp&quot;</span>, mf1, nf1, nf1, nu3, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a56862ddfc7262588ea9e5218cc7d2c2d">actemp</a>)</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">call </span>add_real_4d(<span class="stringliteral">&quot;astemp&quot;</span>, mf1, nf1, nf1, nu3, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#aab13c2987b3e8804fa533adb038158f5">astemp</a>)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bvec&quot;</span>, mf1, nf1, bvec)</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">call </span>add_real_4d(<span class="stringliteral">&quot;amatrix&quot;</span>, mf1, nf1, mf1, nf1, amatrix)</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;amatsq&quot;</span>, mf1*nf1, mf1*nf1, amatsq)</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a></div>
 <div class="ttc" id="afouri_8f90_html_a0f902f8d584a395f9db7175079d273c7"><div class="ttname"><a href="../../d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7">fouri</a></div><div class="ttdeci">subroutine fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)</div><div class="ttdoc">Compute Fourier integrals and build amatrix.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d77/fouri_8f90_source.html#l00013">fouri.f90:14</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
@@ -334,7 +336,7 @@ $(document).ready(function(){initNavTree('d6/d77/fouri_8f90_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d6/d77/fouri_8f90.html">fouri.f90</a></li>
-    <li class="footer">Generated on Sun Jan 9 2022 22:46:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Jan 10 2022 04:01:58 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

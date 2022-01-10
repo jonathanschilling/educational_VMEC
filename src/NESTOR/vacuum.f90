@@ -44,6 +44,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   INTEGER :: mn, n, n1, m, i, info
   REAL(rprec), DIMENSION(:), POINTER :: potcos, potsin
   REAL(rprec):: dn2, dm2, cosmn, sinmn, huv, hvv, det, bsupu, bsupv, bsubuvac, fac
+  logical :: vac1n_solver_active
 
   ! THIS ROUTINE COMPUTES .5 * B**2 ON THE VACUUM / PLASMA SURFACE
   ! BASED ON THE PROGRAM BY P. MERKEL [J. Comp. Phys. 66, 83 (1986)]
@@ -111,8 +112,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
     call add_real_1d("raxis_nestor", nv, raxis_nestor)
     call add_real_1d("zaxis_nestor", nv, zaxis_nestor)
 
-    ! TODO: include leftovers from previous iterations, i.e., bvecsav and amatsav
-
     call close_dbg_out()
   end if
 
@@ -130,11 +129,23 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
    ! stand-alone for debugging: working on scalpot at the moment
    ! return
 
+   vac1n_solver_active = open_dbg_context("vac1n_solver", id=icall)
+   if (vac1n_solver_active) then
+     call add_real_2d("amatrix", mnpd2, mnpd2, amatrix)
+     call add_real_1d("potvac_in", mnpd2, potvac)
+   end if
+
    CALL solver (amatrix, potvac, mnpd2, 1, info)
    IF (info .ne. 0) STOP 'Error in solver in VACUUM'
 
    potsin => potvac(1:mnpd)
    potcos => potvac(1+mnpd:)
+
+   if (vac1n_solver_active) then
+     call add_real_1d("potvac_out", mnpd2, potvac)
+
+     call close_dbg_out()
+   end if
 
    ! compute tangential covariant (sub u,v) and contravariant
    ! (super u,v) magnetic field components on the plasma surface
@@ -189,9 +200,26 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
 
-   if (open_dbg_context("vac1n_bsqvac")) then
+   if (open_dbg_context("vac1n_bsqvac", id=icall)) then
+
+    call add_real_1d("potsin", mnpd, potsin)
+    if (lasym) then
+      call add_real_1d("potcos", mnpd, potcos)
+    else
+      call add_null("potcos")
+    end if
+
+    call add_real_2d("potu", nv, nu3, potu)
+    call add_real_2d("potv", nv, nu3, potv)
+
+    call add_real_2d("bsubu", nv, nu3, bsubu)
+    call add_real_2d("bsubv", nv, nu3, bsubv)
 
     call add_real_2d("bsqvac", nv, nu3, bsqvac)
+
+    call add_real_2d("brv",   nv, nu3, brv)
+    call add_real_2d("bphiv", nv, nu3, bphiv)
+    call add_real_2d("bzv",   nv, nu3, bzv)
 
     call close_dbg_out()
   end if

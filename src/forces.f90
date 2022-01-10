@@ -28,8 +28,10 @@ SUBROUTINE forces
   REAL(rprec), DIMENSION(:), POINTER :: gvvs
   REAL(rprec), DIMENSION(:), POINTER :: guvs
   REAL(rprec), DIMENSION(:), POINTER :: guus
-  
+
   logical :: dbg_forces
+
+  character(len=255) :: dump_filename2
 
   ! ON ENTRY, ARMN=ZU, BRMN=ZS, AZMN=RU, BZMN=RS, LU=R*BSQ, LV = BSQ*SQRT(G)/R12
   ! HERE, XS (X=Z,R) DO NOT INCLUDE DERIVATIVE OF EXPLICIT SQRT(S)
@@ -61,7 +63,7 @@ SUBROUTINE forces
 
   dbg_forces = open_dbg_context("forces")
   if (dbg_forces) then
-  
+
     call add_real_3d("lu_e",        ns, nzeta, ntheta3, lu_e     )
     call add_real_3d("lv_e_in",     ns, nzeta, ntheta3, lv_e     )
     call add_real_3d("guu_in",      ns, nzeta, ntheta3, guu      )
@@ -83,7 +85,7 @@ SUBROUTINE forces
     call add_real_4d("zu",   ns, 2, nzeta, ntheta3, zu,   order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("rcon_in", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("zcon_in", ns, 2, nzeta, ntheta3, zcon, order=(/ 1, 3, 4, 2 /) )
-    
+
     if (lthreed) then
       call add_real_4d("rv", ns, 2, nzeta, ntheta3, rv, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("zv", ns, 2, nzeta, ntheta3, zv, order=(/ 1, 3, 4, 2 /) )
@@ -154,11 +156,11 @@ SUBROUTINE forces
   if (dbg_forces) then
     ! save data before it gets overwritten again
     ! due to array re-usage
-    
+
     call add_real_3d("lu_o",     ns, nzeta, ntheta3, lu_o  )
     call add_real_3d("lv_e_out", ns, nzeta, ntheta3, lv_e  )
   end if
-  
+
   guu(1:nrzt)  = guu(1:nrzt) * sqrts(1:nrzt)**2
   bsqr(1:nrzt) = gvv(1:nrzt) * sqrts(1:nrzt)**2
 
@@ -188,6 +190,42 @@ SUBROUTINE forces
 
   ! ASSIGN EDGE FORCES (JS = NS) FOR FREE BOUNDARY CALCULATION
   IF (ivac .ge. 1) THEN
+
+!     if (ns.eq.16) then
+!
+!        ! plasma forces on LCFS before vacuum contribution gets added
+!        write(dump_filename2, 997) iter2, trim(input_extension)
+! 997 format('lcfsfp_',i5.5,'.',a)
+!        open(unit=43, file=trim(dump_filename2), status="unknown")
+!
+!        lk = ns
+!        do l=1, nznt
+!          write(43, *) armn_e(lk+(l-1)*nznt), &
+!                       armn_o(lk+(l-1)*nznt), &
+!                       azmn_e(lk+(l-1)*nznt), &
+!                       azmn_o(lk+(l-1)*nznt)
+!        end do
+!
+!        close(43)
+!
+!
+!
+!
+!        write(dump_filename2, 998) iter2, trim(input_extension)
+! 998 format('vacforce_',i5.5,'.',a)
+!        open(unit=43, file=trim(dump_filename2), status="unknown")
+!
+!        do l=1, nznt
+!          write(43, *)  zu0(ns+(l-1)*nznt)*rbsq(l), &
+!                       -ru0(ns+(l-1)*nznt)*rbsq(l)
+!        end do
+!
+!        close(43)
+!      end if
+
+
+
+
      armn_e(ns:nrzt:ns) = armn_e(ns:nrzt:ns) + zu0(ns:nrzt:ns)*rbsq(1:nznt)
      armn_o(ns:nrzt:ns) = armn_o(ns:nrzt:ns) + zu0(ns:nrzt:ns)*rbsq(1:nznt)
      azmn_e(ns:nrzt:ns) = azmn_e(ns:nrzt:ns) - ru0(ns:nrzt:ns)*rbsq(1:nznt)
@@ -236,7 +274,7 @@ SUBROUTINE forces
       call add_null("czmn_e")
       call add_null("czmn_o")
     end if
-    
+
     call add_real_3d("guu_out",  ns, nzeta, ntheta3, guu   )
     call add_real_3d("guus",     ns, nzeta, ntheta3, guus  )
     call add_real_3d("guv_out",  ns, nzeta, ntheta3, guv   )
@@ -244,7 +282,7 @@ SUBROUTINE forces
     call add_real_3d("gvv_out",  ns, nzeta, ntheta3, gvv   )
     call add_real_3d("gvvs",     ns, nzeta, ntheta3, gvvs  )
     call add_real_3d("bsqr",     ns, nzeta, ntheta3, bsqr  )
-   
+
     call add_real_4d("rcon_out", ns, 2, nzeta, ntheta3, rcon, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("zcon_out", ns, 2, nzeta, ntheta3, zcon, order=(/ 1, 3, 4, 2 /) )
 

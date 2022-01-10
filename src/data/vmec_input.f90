@@ -61,7 +61,7 @@ MODULE vmec_input
   REAL(rprec), DIMENSION(nigroup)   :: extcur
   LOGICAL                           :: lfreeb
   LOGICAL                           :: lasym
-  
+
   ! switch between implementations of NESTOR:
   ! vac1 (magnetic scalar potential, both Stellarator and Tokamak)
   ! vac2/vac3 (surface current density, Stellarator/Tokamak)
@@ -133,8 +133,9 @@ MODULE vmec_input
   logical :: dump_vac1n_greenf  = .false.
   logical :: dump_vac1n_fourp   = .false.
   logical :: dump_vac1n_fouri   = .false.
+  logical :: dump_vac1n_solver  = .false.
   logical :: dump_vac1n_bsqvac  = .false.
-  
+
 
 
   NAMELIST /indata/ &
@@ -231,8 +232,9 @@ MODULE vmec_input
      dump_vac1n_greenf,  &
      dump_vac1n_fourp,   &
      dump_vac1n_fouri,   &
+     dump_vac1n_solver,  &
      dump_vac1n_bsqvac
-     
+
 
 CONTAINS
 

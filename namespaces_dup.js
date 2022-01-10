@@ -572,6 +572,7 @@ var namespaces_dup =
       [ "dump_vac1n_fourp", "d8/dbf/namespacevmec__input.html#a16e9e1d9999023eddbefea8e3f8ce9a5", null ],
       [ "dump_vac1n_greenf", "d8/dbf/namespacevmec__input.html#ab7e5fe53c301093c4cd8cceba13dd475", null ],
       [ "dump_vac1n_precal", "d8/dbf/namespacevmec__input.html#a245ba809d54e3dd12bbbea9232e09da2", null ],
+      [ "dump_vac1n_solver", "d8/dbf/namespacevmec__input.html#ab25852e02b73dd958288afd4df916397", null ],
       [ "dump_vac1n_surface", "d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b", null ],
       [ "dump_vac1n_vacuum", "d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4", null ],
       [ "dump_volume", "d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd", null ],

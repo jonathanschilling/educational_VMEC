@@ -57,6 +57,7 @@ var vmec__input_8f90 =
     [ "dump_vac1n_fourp", "d1/d59/vmec__input_8f90.html#a16e9e1d9999023eddbefea8e3f8ce9a5", null ],
     [ "dump_vac1n_greenf", "d1/d59/vmec__input_8f90.html#ab7e5fe53c301093c4cd8cceba13dd475", null ],
     [ "dump_vac1n_precal", "d1/d59/vmec__input_8f90.html#a245ba809d54e3dd12bbbea9232e09da2", null ],
+    [ "dump_vac1n_solver", "d1/d59/vmec__input_8f90.html#ab25852e02b73dd958288afd4df916397", null ],
     [ "dump_vac1n_surface", "d1/d59/vmec__input_8f90.html#a7f680eacbb780a8cdd418779ead7211b", null ],
     [ "dump_vac1n_vacuum", "d1/d59/vmec__input_8f90.html#a2648bcdf30cbc344a8e51526cb4415a4", null ],
     [ "dump_volume", "d1/d59/vmec__input_8f90.html#a5b66a9de88da42cdd94f9516628b97bd", null ],

@@ -196,15 +196,17 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
     
     ! TODO: isym for lasym=.TRUE.
     call add_real_2d("source", nv, nu2, source)
-    call add_real_2d("bcos",  bcos)
-    call add_real_2d("bsin",  bsin)
-    call add_real_2d("actemp",  actemp)
-    call add_real_2d("astemp",  astemp)
     
-    call add_real_2d("bvec",  bvec)
-    call add_real_2d("amatrix",  amatrix)
+    call add_real_2d("bcos", nu2, nf1, bcos)
+    call add_real_2d("bsin", nu2, nf1, bsin)
     
-    call add_real_2d("amatsq",  amatsq)
+    call add_real_4d("actemp", mf1, nf1, nf1, nu3, actemp)
+    call add_real_4d("astemp", mf1, nf1, nf1, nu3, astemp)
+    
+    call add_real_2d("bvec", mf1, nf1, bvec)
+    call add_real_4d("amatrix", mf1, nf1, mf1, nf1, amatrix)
+    
+    call add_real_2d("amatsq", mf1*nf1, mf1*nf1, amatsq)
 
     call close_dbg_out()
   end if

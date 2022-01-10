@@ -23,7 +23,7 @@ SUBROUTINE precal
   ! THIS ROUTINE COMPUTES INITIAL CONSTANTS AND ARRAYS
 
   pi2 = 8*ATAN(one) ! 2 pi
-  pi3 = p5*pi2**3   ! 4 pi^3
+  pi3 = p5*pi2**3   ! 4 pi^3 = pi * (2 pi)^2
   pi4 = 2*pi2       ! 4 pi
   onp = one/nfper   ! 1/nfp
   onp2 = onp*onp    ! 1/nfp^2

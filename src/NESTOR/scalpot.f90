@@ -3,7 +3,7 @@
 
 !> \brief Compute all required terms for solving for the scalar magnetic potential
 !>
-!> @param bvec
+!> @param bvec    scalpot
 !> @param amatrix
 !> @param wint
 !> @param ivacskip

@@ -106,6 +106,9 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_phys_gc
   else if (trim(context_name) .eq. "multigrid_result") then
     open_dbg_context         = dump_multigrid_result
+  else if (trim(context_name) .eq. "bcovar_fileout") then
+    open_dbg_context         = dump_bcovar_fileout
+
 
     ! multigrid_result needs to be written once at end of many iterations,
     ! so the usual should_write logic needs to be broken here

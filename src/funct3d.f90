@@ -362,7 +362,7 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary
         ENDIF
      ENDIF
-  ENDIF
+  ENDIF ! free-boundary contribution
 
   IF (iequi .NE. 1) THEN
      ! normal iterations, not final call from fileout (which sets iequi=1)

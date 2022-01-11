@@ -519,16 +519,37 @@ SUBROUTINE bcovar (lu, lv)
     ! ADJUST <bsubvh> AFTER MESH-BLENDING
     DO js = 2, ns
        curpol_temp = fpsi(js) - SUM(bsubvh(js:nrzt:ns)*wint(js:nrzt:ns))
+
        DO l = js, nrzt, ns
           bsubvh(l) = bsubvh(l) + curpol_temp
        END DO
     END DO
 
+    ! NOTE: below four lines modify bsubvh above !!!
     bsubu_e(:nrzt) = bsubuh(:nrzt)
     bsubv_e(:nrzt) = bsubvh(:nrzt)
 
     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
+
+    if (open_dbg_context("bcovar_fileout")) then
+
+      call add_real_3d("lu_e", ns, nzeta, ntheta3, lu(:nrzt,0))
+      call add_real_3d("lv_e", ns, nzeta, ntheta3, lv(:nrzt,0))
+
+      call add_real_1d("fpsi", ns-1, fpsi(2:ns))
+
+!       call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh)
+
+      call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu_e)
+      call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv_e)
+
+      call add_real_3d("bsubu_o", ns, nzeta, ntheta3, bsubu_o)
+      call add_real_3d("bsubv_o", ns, nzeta, ntheta3, bsubv_o)
+
+      call close_dbg_out()
+    end if
+
   END IF ! (iequi .eq. 0)
 
 END SUBROUTINE bcovar

@@ -623,19 +623,40 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>    <span class="comment">! ADJUST &lt;bsubvh&gt; AFTER MESH-BLENDING</span></div>
 <div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>    <span class="keywordflow">DO</span> js = 2, ns</div>
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>       curpol_temp = fpsi(js) - sum(bsubvh(js:nrzt:ns)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>          bsubvh(l) = bsubvh(l) + curpol_temp</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span><span class="keywordflow">       END DO</span></div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span><span class="keywordflow">    END DO</span></div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    bsubu_e(:nrzt) = bsubuh(:nrzt)</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    bsubv_e(:nrzt) = bsubvh(:nrzt)</div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    bsubu_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubu_e(:nrzt)</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    bsubv_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubv_e(:nrzt)</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span><span class="keywordflow">  END IF</span> <span class="comment">! (iequi .eq. 0)</span></div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>          bsubvh(l) = bsubvh(l) + curpol_temp</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span><span class="keywordflow">       END DO</span></div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span><span class="keywordflow">    END DO</span></div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span> </div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="comment">! NOTE: below four lines modify bsubvh above !!!</span></div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    bsubu_e(:nrzt) = bsubuh(:nrzt)</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    bsubv_e(:nrzt) = bsubvh(:nrzt)</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    bsubu_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubu_e(:nrzt)</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    bsubv_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubv_e(:nrzt)</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span> </div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bcovar_fileout&quot;</span>)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span> </div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;lu_e&quot;</span>, ns, nzeta, ntheta3, lu(:nrzt,0))</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;lv_e&quot;</span>, ns, nzeta, ntheta3, lv(:nrzt,0))</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>      <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;fpsi&quot;</span>, ns-1, fpsi(2:ns))</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span><span class="comment">!       call add_real_3d(&quot;bsubvh&quot;, ns, nzeta, ntheta3, bsubvh)</span></div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span> </div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubu_e&quot;</span>, ns, nzeta, ntheta3, bsubu_e)</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubv_e&quot;</span>, ns, nzeta, ntheta3, bsubv_e)</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span> </div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubu_o&quot;</span>, ns, nzeta, ntheta3, bsubu_o)</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubv_o&quot;</span>, ns, nzeta, ntheta3, bsubv_o)</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>      <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span><span class="keywordflow">    end if</span></div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span><span class="keywordflow">  END IF</span> <span class="comment">! (iequi .eq. 0)</span></div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span> </div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div>
 <div class="ttc" id="aadd__fluxes_8f90_html_a988e7013ef02301b9cfbde5b8068d5af"><div class="ttname"><a href="../../d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af">add_fluxes</a></div><div class="ttdeci">subroutine add_fluxes(overg, bsupu, bsupv)</div><div class="ttdoc">Add the magnetic fluxes to the tangential derivatives of  to arrive at the contravariant magnetic fie...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7d/add__fluxes_8f90_source.html#l00011">add_fluxes.f90:12</a></div></div>
 <div class="ttc" id="abcovar_8f90_html_a1e1624195f0c0c7daa9f49d83bae5ce8"><div class="ttname"><a href="../../d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8">bcovar</a></div><div class="ttdeci">subroutine bcovar(lu, lv)</div><div class="ttdoc">Compute the covariant components of the magnetic field , .</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d61/bcovar_8f90_source.html#l00008">bcovar.f90:9</a></div></div>
 <div class="ttc" id="acalc__fbal_8f90_html_a6cdc3d21c48f66aeaff8ab5e639641b6"><div class="ttname"><a href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6">calc_fbal</a></div><div class="ttdeci">subroutine calc_fbal(bsubu, bsubv)</div><div class="ttdoc">Compute flux-surface averaged radial force balance .</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dff/calc__fbal_8f90_source.html#l00008">calc_fbal.f90:9</a></div></div>
@@ -725,7 +746,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/bcovar_8f90.html">bcovar.f90</a></li>
-    <li class="footer">Generated on Mon Jan 10 2022 19:03:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Jan 11 2022 19:31:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

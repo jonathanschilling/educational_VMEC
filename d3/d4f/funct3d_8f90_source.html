@@ -463,7 +463,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>           <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(:nznt,2) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(:nznt)      <span class="comment">! initial NESTOR |B|^2 at boundary</span></div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="keywordflow">        ENDIF</span></div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="keywordflow">     ENDIF</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="keywordflow">  ENDIF</span> <span class="comment">! free-boundary contribution</span></div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a68e1a2561e54d21e792c65aeda66546d">iequi</a> .NE. 1) <span class="keywordflow">THEN</span></div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>     <span class="comment">! normal iterations, not final call from fileout (which sets iequi=1)</span></div>
@@ -654,7 +654,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d4f/funct3d_8f90.html">funct3d.f90</a></li>
-    <li class="footer">Generated on Mon Jan 10 2022 19:03:34 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Jan 11 2022 19:31:00 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

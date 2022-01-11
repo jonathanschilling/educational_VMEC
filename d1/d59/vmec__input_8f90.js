@@ -19,6 +19,7 @@ var vmec__input_8f90 =
     [ "dump_bcontrav", "d1/d59/vmec__input_8f90.html#ae79ac9a4167bf950746795d4acd2e584", null ],
     [ "dump_bcov", "d1/d59/vmec__input_8f90.html#a68828f97ab9b42ea3fe39cbaebb312ae", null ],
     [ "dump_bcov_full", "d1/d59/vmec__input_8f90.html#a47ae8e29221925d6c5fdad642b42f6b3", null ],
+    [ "dump_bcovar_fileout", "d1/d59/vmec__input_8f90.html#aac5786cefc74aee3889cff65684e0496", null ],
     [ "dump_calc_fbal", "d1/d59/vmec__input_8f90.html#a81306108b43fc4a9508062479a55695f", null ],
     [ "dump_constraint_force", "d1/d59/vmec__input_8f90.html#a89c76d3b521f435ed778c9704a5fdb13", null ],
     [ "dump_evolve", "d1/d59/vmec__input_8f90.html#a3ee0e863e0052ad9ab896de6b9be97f6", null ],

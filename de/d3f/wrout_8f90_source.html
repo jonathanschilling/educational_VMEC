@@ -813,12 +813,13 @@ $(document).ready(function(){initNavTree('de/d3f/wrout_8f90_source.html','../../
 <div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>                                   bsubsmn, bsupumn, bsupvmn, stat=istat)</div>
 <div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span> </div>
 <div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>  <span class="comment">! FREE BOUNDARY DATA</span></div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>  <span class="comment">!CALL freeb_data(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)</span></div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a>(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)</div>
 <div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
 <div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>  rzl_array = 0</div>
 <div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
 <div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9">wrout</a></div>
 <div class="ttc" id="aconvert_8f90_html_ae6d3862ea21a8d39210a79c6955b5b75"><div class="ttname"><a href="../../db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75">convert</a></div><div class="ttdeci">subroutine convert(rmnc, zmns, lmns, rmns, zmnc, lmnc, rzl_array, js)</div><div class="ttdoc">Convert internal mode representation to standard form for output (coefficients of cos(mu-nv),...</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d74/convert_8f90_source.html#l00016">convert.f90:17</a></div></div>
+<div class="ttc" id="afreeb__data_8f90_html_a71de251d01e145a30e3f710ac705f217"><div class="ttname"><a href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div><div class="ttdeci">subroutine freeb_data(rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)</div><div class="ttdoc">Write out edge values of fields.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d87/freeb__data_8f90_source.html#l00012">freeb_data.f90:13</a></div></div>
 <div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
 <div class="ttc" id="anamespacemgrid__mod_html_a09f69138fb039b68e1a933637bde3f36"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a09f69138fb039b68e1a933637bde3f36">mgrid_mod::vn_mgmode</a></div><div class="ttdeci">character(len= *), parameter vn_mgmode</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00017">mgrid_mod.f:17</a></div></div>
 <div class="ttc" id="anamespacemgrid__mod_html_a1af0a8581735258914941e4b92e654d1"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a1af0a8581735258914941e4b92e654d1">mgrid_mod::curlabel</a></div><div class="ttdeci">character(len=30), dimension(:), allocatable curlabel</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00092">mgrid_mod.f:92</a></div></div>
@@ -1191,7 +1192,7 @@ $(document).ready(function(){initNavTree('de/d3f/wrout_8f90_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/d3f/wrout_8f90.html">wrout.f90</a></li>
-    <li class="footer">Generated on Tue Jan 11 2022 19:31:01 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Jan 13 2022 16:14:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

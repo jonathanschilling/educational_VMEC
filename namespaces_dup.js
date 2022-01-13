@@ -535,6 +535,7 @@ var namespaces_dup =
       [ "dump_bcov", "d8/dbf/namespacevmec__input.html#a68828f97ab9b42ea3fe39cbaebb312ae", null ],
       [ "dump_bcov_full", "d8/dbf/namespacevmec__input.html#a47ae8e29221925d6c5fdad642b42f6b3", null ],
       [ "dump_bcovar_fileout", "d8/dbf/namespacevmec__input.html#aac5786cefc74aee3889cff65684e0496", null ],
+      [ "dump_bss", "d8/dbf/namespacevmec__input.html#ad4d91da9e40d5589e47d62c59c672dcd", null ],
       [ "dump_calc_fbal", "d8/dbf/namespacevmec__input.html#a81306108b43fc4a9508062479a55695f", null ],
       [ "dump_constraint_force", "d8/dbf/namespacevmec__input.html#a89c76d3b521f435ed778c9704a5fdb13", null ],
       [ "dump_evolve", "d8/dbf/namespacevmec__input.html#a3ee0e863e0052ad9ab896de6b9be97f6", null ],

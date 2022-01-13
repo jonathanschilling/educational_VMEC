@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"d1/d6c/namespacevmec__main.html#a3102a7f2ef0c513e935902cba70bfb75":[1,0,18,3],
 "d1/d6c/namespacevmec__main.html#a381425f05d439243a046ec6d554e5ab4":[1,0,18,38],
 "d1/d6c/namespacevmec__main.html#a3c259d073f25d341b5df1d669125590c":[1,0,18,61],
 "d1/d6c/namespacevmec__main.html#a3ef2c519ce424159dd2c7d44a00c463c":[1,0,18,71],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "d2/d01/mgrid__mod_8f_source.html":[3,0,0,43],
 "d2/d04/namespacevacmod0.html":[1,0,13],
 "d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756":[1,0,13,4],
-"d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8":[1,0,13,8],
-"d2/d04/namespacevacmod0.html#a3f41c69e41aba9993ab4fbb31200e3b7":[1,0,13,11]
+"d2/d04/namespacevacmod0.html#a3b06a97b6401723281d6949719fd93c8":[1,0,13,8]
 };

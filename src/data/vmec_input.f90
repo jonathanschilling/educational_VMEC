@@ -124,6 +124,7 @@ MODULE vmec_input
   logical :: dump_multigrid_result    = .false.
   logical :: dump_rbsq                = .false.
   logical :: dump_bcovar_fileout      = .false.
+  logical :: dump_bss                 = .false.
 
   ! debugging output flags for NESTOR
   logical :: dump_vac1n_vacuum  = .false.
@@ -225,6 +226,7 @@ MODULE vmec_input
      dump_multigrid_result   , &
      dump_rbsq               , &
      dump_bcovar_fileout     , &
+     dump_bss, &
      vac_1_2, &
      dump_vac1n_vacuum,  &
      dump_vac1n_precal,  &

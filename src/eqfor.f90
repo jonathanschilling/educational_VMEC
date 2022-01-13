@@ -70,7 +70,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
     zmaga => rzl_array(1,:,0,zcc+ntmax)
   END IF
 
-  ! crmn_o => bss on half grid
+  ! crmn_o == bss on half grid
+  !         r12  rs    zs    ru12  zu12  bsubs   bsupu  bsupv  br  bphi  bz
   CALL bss (r12, bzmn, brmn, azmn, armn, crmn_o, bsupu, bsupv, br, bphi, bz)
 
   ! STORE EDGE VALUES OF B-FIELD
@@ -81,7 +82,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      DO iv = 1,nzeta
         DO iu = 1,ntheta3
            lk = iv + nzeta*(iu-1)
-           n1 = ns*lk
+           n1 = ns*lk ! indices radially on LCFS
            bredge(lk) = 1.5_dp*br(n1)   - cp5*br(n1-1)
            bpedge(lk) = 1.5_dp*bphi(n1) - cp5*bphi(n1-1)
            bzedge(lk) = 1.5_dp*bz(n1)   - cp5*bz(n1-1)

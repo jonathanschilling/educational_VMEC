@@ -108,6 +108,9 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_multigrid_result
   else if (trim(context_name) .eq. "bcovar_fileout") then
     open_dbg_context         = dump_bcovar_fileout
+  else if (trim(context_name) .eq. "bss") then
+    open_dbg_context         = dump_bss
+
 
 
     ! multigrid_result needs to be written once at end of many iterations,

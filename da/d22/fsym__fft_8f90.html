@@ -121,9 +121,6 @@ $(document).ready(function(){initNavTree('da/d22/fsym__fft_8f90.html','../../');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a5558cd119122c53bb067ab7fc61b9fee"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee">fext_fft</a> (bout, bs_s, bs_a)</td></tr>
-<tr class="memdesc:a5558cd119122c53bb067ab7fc61b9fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends \(B_s\) from <code>ntheta2</code> interval to full <code>ntheta3</code> interval in angle \(\theta\).  <a href="../../da/d22/fsym__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee">More...</a><br /></td></tr>
-<tr class="separator:a5558cd119122c53bb067ab7fc61b9fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a019fe7da811a16aec5f0726e33df73ba"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">fsym_fft</a> (bs, bu, bv, bs_s, bu_s, bv_s, bs_a, bu_a, bv_a)</td></tr>
 <tr class="memdesc:a019fe7da811a16aec5f0726e33df73ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contract bs,bu,bv from full <code>nu</code> interval to half-u interval so cos, sin integrals can be performed on half-u interval.  <a href="../../da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba">More...</a><br /></td></tr>
 <tr class="separator:a019fe7da811a16aec5f0726e33df73ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,60 +130,6 @@ Functions/Subroutines</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="../../da/d22/fsym__fft_8f90_source.html">fsym_fft.f90</a>.</p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="a5558cd119122c53bb067ab7fc61b9fee" name="a5558cd119122c53bb067ab7fc61b9fee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5558cd119122c53bb067ab7fc61b9fee">&#9670;&nbsp;</a></span>fext_fft()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">subroutine fext_fft </td>
-          <td>(</td>
-          <td class="paramtype">real(rprec), dimension(nzeta,ntheta3), intent(out)&#160;</td>
-          <td class="paramname"><em>bout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2), intent(in)&#160;</td>
-          <td class="paramname"><em>bs_s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2), intent(in)&#160;</td>
-          <td class="paramname"><em>bs_a</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Extends \(B_s\) from <code>ntheta2</code> interval to full <code>ntheta3</code> interval in angle \(\theta\). </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bout</td><td>output \(B_s\) </td></tr>
-    <tr><td class="paramname">bs_s</td><td>symmetric part of \(B_s\) </td></tr>
-    <tr><td class="paramname">bs_a</td><td>anti-symmetric part of \(B_s\) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../da/d22/fsym__fft_8f90_source.html#l00009">9</a> of file <a class="el" href="../../da/d22/fsym__fft_8f90_source.html">fsym_fft.f90</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00021">jxbforce()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d22/fsym__fft_8f90_a5558cd119122c53bb067ab7fc61b9fee_icgraph.svg" width="600" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
 <a id="a019fe7da811a16aec5f0726e33df73ba" name="a019fe7da811a16aec5f0726e33df73ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a019fe7da811a16aec5f0726e33df73ba">&#9670;&nbsp;</a></span>fsym_fft()</h2>
 
@@ -214,7 +157,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2)&#160;</td>
+          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2), intent(out)&#160;</td>
           <td class="paramname"><em>bs_s</em>, </td>
         </tr>
         <tr>
@@ -232,7 +175,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2)&#160;</td>
+          <td class="paramtype">real(rprec), dimension(nzeta,ntheta2), intent(out)&#160;</td>
           <td class="paramname"><em>bs_a</em>, </td>
         </tr>
         <tr>
@@ -271,9 +214,9 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d22/fsym__fft_8f90_source.html#l00047">47</a> of file <a class="el" href="../../da/d22/fsym__fft_8f90_source.html">fsym_fft.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d22/fsym__fft_8f90_source.html#l00016">16</a> of file <a class="el" href="../../da/d22/fsym__fft_8f90_source.html">fsym_fft.f90</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00021">jxbforce()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d6/d53/jxbforce_8f90_source.html#l00022">jxbforce()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -289,7 +232,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/d22/fsym__fft_8f90.html">fsym_fft.f90</a></li>
-    <li class="footer">Generated on Thu Jan 13 2022 16:14:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Fri Jan 14 2022 19:43:24 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

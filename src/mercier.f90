@@ -20,7 +20,8 @@
 !> @param ns number of flux surfaces
 !> @param nznt number of grid points per flux surface
 SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
-                   r1, rt, rz, zt, zz, bsubu, vp, phips, pres, ns, nznt)
+                   r1, rt, rz, zt, zz, &
+                   bsubu, vp, phips, pres, ns, nznt)
   USE safe_open_mod
   USE vmercier
   USE vmec_input, ONLY: input_extension
@@ -29,12 +30,23 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ns, nznt
-  REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: gsqrt, bsq
-  REAL(rprec), DIMENSION(ns,nznt), INTENT(inout) :: bdotj
-  REAL(rprec), DIMENSION(ns*nznt), INTENT(in) :: wint, bsubu
-  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in) :: r1, rt, rz, zt, zz
-  REAL(rprec), DIMENSION(ns), INTENT(in) :: iotas, vp, phips, pres
+  REAL(rprec), DIMENSION(ns,nznt),     INTENT(in)    :: gsqrt
+  REAL(rprec), DIMENSION(ns,nznt),     INTENT(in)    :: bsq
+  REAL(rprec), DIMENSION(ns,nznt),     INTENT(inout) :: bdotj
+  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: iotas
+  REAL(rprec), DIMENSION(ns*nznt),     INTENT(in)    :: wint
+  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: r1
+  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: rt
+  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: rz
+  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: zt
+  REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: zz
+  REAL(rprec), DIMENSION(ns*nznt),     INTENT(in)    :: bsubu
+  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: iotas
+  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: vp
+  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: phips
+  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: pres
+  INTEGER,                             INTENT(in)    :: ns
+  INTEGER,                             INTENT(in)    :: nznt
 
   REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2
 
@@ -103,10 +115,10 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   DO i = 2,ns1
     phip_real(i) = p5*(phip_real(i+1) + phip_REAL(i))
     denom     = one/(hs*phip_real(i))
-    shear(i)  = (iotas(i+1) - iotas(i))*denom       !!d(iota)/d(PHI)
-    vpp(i)    = (vp_real(i+1) - vp_real(i))*denom   !!d(VP)/d(PHI)
-    presp(i)  = (pres(i+1) - pres(i))*denom         !!d(p)/d(PHI)
-    ip(i)     = (torcur(i+1) - torcur(i))*denom     !!d(Itor)/d(PHI)
+    shear(i)  = (iotas(i+1) - iotas(i))*denom       ! d(iota)/d(PHI)
+    vpp(i)    = (vp_real(i+1) - vp_real(i))*denom   ! d(VP)/d(PHI)
+    presp(i)  = (pres(i+1) - pres(i))*denom         ! d(p)/d(PHI)
+    ip(i)     = (torcur(i+1) - torcur(i))*denom     ! d(Itor)/d(PHI)
   END DO
 
   ! COMPUTE GPP == |grad-phi|**2 = PHIP**2*|grad-s|**2           (on full mesh)
@@ -149,7 +161,8 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   ! REFERENCE: BAUER, BETANCOURT, GARABEDIAN, MHD Equilibrium and Stability of Stellarators
   ! We break up the Omega-subs into a positive shear term (Dshear) and a net current term, Dcurr
-  ! Omega_subw == Dwell and Omega-subd == Dgeod (geodesic curvature, Pfirsch-Schluter term)
+  ! Omega_subw == Dwell
+  ! Omega-subd == Dgeod (geodesic curvature, Pfirsch-Schluter term)
   !
   ! Include (eventually) Suydam for reference (cylindrical limit)
 

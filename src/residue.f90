@@ -84,7 +84,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 
   if (open_dbg_context("fsq")) then
 
-    call add_real("r0scale", r0scale)
+    call add_real("r0scale", r0scale) ! TODO: move to debug output of fixaray
     call add_real("r1", r1)
     call add_real("fnorm", fnorm)
     call add_real("fnormL", fnormL)

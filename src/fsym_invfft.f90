@@ -14,7 +14,8 @@ SUBROUTINE fsym_invfft (bsubsu, bsubsv)
   INTEGER :: ir, i, jkz, jkr
 
   ! EXTENDS FUNCTION FROM ntheta2 to ntheta3 range
-  ! ASSUMES bsubsu,v(0) ~ cos(mu-nv)   bsubsu,v(1) ~ sin(mu-nv)
+  ! ASSUMES bsubsu,v(0) ~ cos(mu-nv)
+  !         bsubsu,v(1) ~ sin(mu-nv)
 
   DO i = 1+ntheta2, ntheta1
      ! -theta

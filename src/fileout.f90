@@ -65,7 +65,8 @@ SUBROUTINE fileout(ier_flag)
      ALLOCATE(br_out(nrzt), bz_out(nrzt), stat=istat)
 
      gc = xc
-     CALL eqfor (br_out, bz_out, clmn, blmn, rcon(1,1), gc, ier_flag)
+     !          br,     bz,     bsubu, bsubv, tau,       rzl_array, ier_flag
+     CALL eqfor(br_out, bz_out, clmn,  blmn,  rcon(1,1), gc,        ier_flag)
 
   END IF
 

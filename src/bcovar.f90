@@ -529,7 +529,7 @@ SUBROUTINE bcovar (lu, lv)
     bsubu_e(:nrzt) = bsubuh(:nrzt)
     bsubv_e(:nrzt) = bsubvh(:nrzt)
 
-    bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt)
+    bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt) ! will be undone again in jxbforce...
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
     if (open_dbg_context("bcovar_fileout")) then

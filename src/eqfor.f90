@@ -94,8 +94,10 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   !       ON OUTPUT, J, IZETA, JDOTB ARE IN MKS UNITS (1/MU0 FACTOR)
   !
   ! CAUTION: THIS CALL WILL WRITE OVER br, bz
-  CALL jxbforce (bsupu, bsupv, bsubu, bsubv, crmn_o, rcon, zcon, &
+  !              bsupu, bsupv, bsubu, bsubv, bsubsh, bsubsu, bsubsv
+  CALL jxbforce (bsupu, bsupv, bsubu, bsubv, crmn_o, rcon,   zcon, &
                  gsqrt, bsq, curtheta, izeta, brho, ier_flag)
+  !              gsqrt, bsq, itheta,   izeta, brho, ier_flag
 
   ! HALF-MESH VOLUME-AVERAGED BETA
   tau(1) = 0

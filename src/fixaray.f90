@@ -152,6 +152,9 @@ SUBROUTINE fixaray
 
     call add_real_1d("mscale", mnyq+1, mscale)
     call add_real_1d("nscale", nnyq+1, nscale)
+
+    ! TODO: add r0scale output (currently in residue...)
+
   end if
 
   ! COMPUTE NYQUIST-SIZED ARRAYS FOR OUTPUT.
@@ -194,7 +197,7 @@ SUBROUTINE fixaray
   faccon(mpol1) = zero
 
   if (dbg_fixaray) then
-  
+
     call add_int("ntheta3", ntheta3)
     call add_int("mnyq", mnyq)
     call add_int("nzeta", nzeta)

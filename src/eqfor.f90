@@ -103,7 +103,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   tau(1) = 0
   tau(2:nrzt) = signgs*wint(2:nrzt)*gsqrt(2:nrzt) ! re-use tau for ready-to-integrate Jacobian
   DO i = 2, ns
-     s2 = SUM(bsq(i:nrzt:ns)*tau(i:nrzt:ns))/vp(i) - pres(i)
+     s2 = SUM( bsq(i:nrzt:ns)*tau(i:nrzt:ns))/vp(i) - pres(i)
      beta_vol(i) = pres(i)/s2
 
      ! hijack loop to also compute overr ???
@@ -132,14 +132,14 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   ALLOCATE (phipf_loc(ns))
 
-  ! phip and pressure onto full grid
+  ! interpolate pressure and phip onto full grid
+  presf(1)     =               c1p5*pres(2) - cp5*pres(3)
   phipf_loc(1) = twopi*signgs*(c1p5*phip(2) - cp5*phip(3))
-  presf(1) = c1p5*pres(2) - cp5*pres(3)
   DO i = 2,ns1
-     presf(i) = cp5*(pres(i) + pres(i+1))
+     presf(i)     = cp5      *       (pres(i) + pres(i+1))
      phipf_loc(i) = cp5*twopi*signgs*(phip(i) + phip(i+1))
   END DO
-  presf(ns) = c1p5*pres(ns)- cp5*pres(ns-1)
+  presf(ns)     =               c1p5*pres(ns) - cp5*pres(ns1)
   phipf_loc(ns) = twopi*signgs*(c1p5*phip(ns) - cp5*phip(ns1))
 
   ! integrate flux differentials to get flux profiles
@@ -150,6 +150,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      chi1(i) = chi1(i-1) + hs*(phip(i)*iotas(i))
   END DO
   chi = twopi*chi1
+
+
+
 
   CALL calc_fbal(bsubu, bsubv)
 

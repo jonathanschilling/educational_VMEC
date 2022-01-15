@@ -101,13 +101,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   ! HALF-MESH VOLUME-AVERAGED BETA
   tau(1) = 0
-  tau(2:nrzt) = signgs*wint(2:nrzt)*gsqrt(2:nrzt)
+  tau(2:nrzt) = signgs*wint(2:nrzt)*gsqrt(2:nrzt) ! re-use tau for ready-to-integrate Jacobian
   DO i = 2, ns
      s2 = SUM(bsq(i:nrzt:ns)*tau(i:nrzt:ns))/vp(i) - pres(i)
-     overr(i) = SUM(tau(i:nrzt:ns)/r12(i:nrzt:ns)) / vp(i)
      beta_vol(i) = pres(i)/s2
+
+     ! hijack loop to also compute overr ???
+     overr(i) = SUM(tau(i:nrzt:ns)/r12(i:nrzt:ns)) / vp(i)
   END DO
 
+  ! extrapolate volume-averaged beta profile to magnetic axis
   betaxis = c1p5*beta_vol(2) - cp5*beta_vol(3)
 
   WRITE (nthreed, 5)
@@ -129,6 +132,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   ALLOCATE (phipf_loc(ns))
 
+  ! phip and pressure onto full grid
   phipf_loc(1) = twopi*signgs*(c1p5*phip(2) - cp5*phip(3))
   presf(1) = c1p5*pres(2) - cp5*pres(3)
   DO i = 2,ns1
@@ -138,13 +142,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   presf(ns) = c1p5*pres(ns)- cp5*pres(ns-1)
   phipf_loc(ns) = twopi*signgs*(c1p5*phip(ns) - cp5*phip(ns1))
 
+  ! integrate flux differentials to get flux profiles
   phi1(1) = zero
   chi1(1) = zero
   DO i = 2, ns
      phi1(i) = phi1(i-1) + hs*phip(i)
      chi1(i) = chi1(i-1) + hs*(phip(i)*iotas(i))
   END DO
-
   chi = twopi*chi1
 
   CALL calc_fbal(bsubu, bsubv)
@@ -175,12 +179,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   equif(ns) = c2p0*equif(ns1) - equif(ns1-1)
   jcuru(ns) = c2p0*jcuru(ns1) - jcuru(ns1-1)
   jcurv(ns) = c2p0*jcurv(ns1) - jcurv(ns1-1)
+
   ! NOTE: phipf = phipf_loc/(twopi), phipf_loc ACTUAL (twopi factor) Toroidal flux derivative
   ! SPH/JDH (060211): remove twopi factors from <JSUPU,V> (agree with output in JXBOUT file)
   fac = twopi*signgs
   DO js = 1, ns
-     es = (js - 1)*hs
-     cur0 = fac*vpphi(js)*twopi              !==dV/ds = dV/dPHI * d(PHI/ds)  (V=actual volume)
+     es = (js - 1)*hs           ! full-grid s value
+     cur0 = fac*vpphi(js)*twopi ! == dV/ds = dV/dPHI * d(PHI/ds)  (V=actual volume)
      WRITE (nthreed, 30) es, equif(js), fac*phi1(js), iotaf(js),        &
        jcuru(js)/vpphi(js)/mu0, jcurv(js)/vpphi(js)/mu0,                &
        cur0/phipf_loc(js), presgrad(js)/phipf_loc(js)/mu0,              &
@@ -236,6 +241,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   d_of_kappa = surf_area_p * aminor_p / ( 2 * volume_p)
   kappa_p = 1 + (pi * pi / 8) * (d_of_kappa ** 2 + SQRT(ABS(d_of_kappa ** 4 - 1)) -1)
 
+  ! TODO: is this used anywhere or directly overwritten below?
   aminr1 = 2*volume_p/surf_area_p
 
   ! OUTPUT BETAS, INDUCTANCES, SAFETY FACTORS, ETC.

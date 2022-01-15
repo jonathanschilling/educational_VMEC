@@ -33,7 +33,7 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
   LOGICAL :: lpior0
   EXTERNAL solver
 
-  ! Solves the radial force balance B dot bsubs = Fs for bsubs in real space using collocation
+  ! Solves the radial force balance B dot bsubs = Fs for bsubs in real space using collocation.
   ! Here, Fs = frho(mn) is the Fourier transform SQRT(g)*F (part of radial force
   ! balance sans the B dot bsubs term)
   !
@@ -67,14 +67,19 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
         ! IGNORE u=0,pi POINTS FOR v > pi: REFLECTIONAL SYMMETRY
         lpior0 = ((i.eq.1 .or. i.eq.ntheta2) .and. (j.gt.nzeta/2+1))
         IF (lpior0 .and. .not. lasym) CYCLE
+        
         ijtot = ijtot + 1
+        
         brhs(ijtot) = frho(j,i)
+        
         mntot = 0
         DO m = 0, mmax
            DO n = 0, nmax
               IF (mntot .ge. itotal) EXIT
               IF (m.eq.0 .and. n.eq.0 .and. lasym) CYCLE
+              
               mntot = mntot+1
+              
               ccmn = cosmu(i,m)*cosnv(j,n)
               ssmn = sinmu(i,m)*sinnv(j,n)
               dm = m * bsupu(j,i)
@@ -101,29 +106,33 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
                  amatrix(ijtot,mntot) = termcs
               END IF
 
-              IF (.not.lasym) CYCLE
-              IF (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) CYCLE
+              IF (lasym) then
+                IF (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) CYCLE
+                
+                IF (mntot .ge. itotal) EXIT
+                
+                mntot = mntot+1
+                
+                csmn = cosmu(i,m)*sinnv(j,n)
+                scmn = sinmu(i,m)*cosnv(j,n)
+                termcc =-dm*scmn - dn*csmn
+                termss = dm*csmn + dn*scmn
+                
+                IF ((n.eq.0 .or. n.eq.nmax) .or. (m.eq.0 .or. m.eq.mmax)) THEN
+                    ! ONLY bcc != 0 for m=0 or mmax
+                    amatrix(ijtot,mntot) = termcc
+                ELSE
+                   amatrix(ijtot,mntot) = termcc
+                   mntot = mntot+1
+                   amatrix(ijtot,mntot) = termss
+                END IF
+              
+              end if ! lasym
 
-              IF (mntot .ge. itotal) EXIT
-              mntot = mntot+1
-              csmn = cosmu(i,m)*sinnv(j,n)
-              scmn = sinmu(i,m)*cosnv(j,n)
-              termcc =-dm*scmn - dn*csmn
-              termss = dm*csmn + dn*scmn
-
-              IF ((n.eq.0 .or. n.eq.nmax) .or. (m.eq.0 .or. m.eq.mmax)) THEN
-                  ! ONLY bcc != 0 for m=0 or mmax
-                  amatrix(ijtot,mntot) = termcc
-              ELSE
-                 amatrix(ijtot,mntot) = termcc
-                 mntot = mntot+1
-                 amatrix(ijtot,mntot) = termss
-              END IF
-
-           END DO
-        END DO
-     END DO
-  END DO
+           END DO ! n
+        END DO ! m
+     END DO ! nzeta
+  END DO ! ntheta3
 
   save_matrix = amatrix
 
@@ -146,8 +155,11 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
      DO j = 1, nzeta
         lpior0 = ((i.eq.1 .or. i.eq.ntheta2) .and. (j.gt.nzeta/2+1))
         IF (lpior0 .and. .not.lasym) CYCLE
+        
         ijtot = ijtot + 1
+        
         amn = SUM(save_matrix(ijtot,:)*brhs(:))
+        
         IF (ABS(amn) .lt. 1.E-12_dp) CYCLE
         IF (ABS(frho(j,i) - amn) .gt. 1.e-8_dp*ABS(amn)) THEN
            PRINT 50,'In GETbsubs, i = ',i,' j = ',j, ' Original force = ', frho(j,i),' Final force = ', amn
@@ -161,13 +173,16 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
   ! CONVERT BACK TO BS*SIN(MU - NV) REPRESENTATION
   ! AND (FOR lasym) BC*COS(MU - NV)
 
-  mntot = 0
   bsubsmn = 0
+  
+  mntot = 0
   DO m = 0, mmax
      DO n = 0, nmax
         IF (mntot .ge. itotal) EXIT
         IF (m.eq.0 .and. n.eq.0 .and. lasym) CYCLE
+        
         mntot = mntot+1
+        
         IF (n.eq.0 .or. n.eq.nmax) THEN
            IF (m .gt. 0) THEN
               bsubsmn(m,n,0) = brhs(mntot)
@@ -184,25 +199,27 @@ SUBROUTINE getbsubs (bsubsmn, frho, bsupu, bsupv, mmax, nmax, info)
            bsubsmn(m,-n,0) = brhs(mntot)
         END IF
 
-        IF (.not.lasym) CYCLE
-        IF (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) CYCLE
-        IF (mntot .ge. itotal) EXIT
-        mntot = mntot+1
-
-        IF ((n.eq.0 .or. n.eq.nmax) .or. (m.eq.0 .or. m.eq.mmax)) THEN
-           bsubsmn(m,n,1) = brhs(mntot)
-        ELSE
-           bsubsmn(m,n,1) = brhs(mntot)
-           mntot = mntot+1
-           bsubsmn(m,-n,1)= brhs(mntot)
-        END IF
-
-     END DO
-  END DO
+        IF (lasym) then
+          IF (m.eq.0 .and. (n.eq.0 .or. n.eq.nmax)) CYCLE
+          IF (mntot .ge. itotal) EXIT
+          
+          mntot = mntot+1
+          
+          IF ((n.eq.0 .or. n.eq.nmax) .or. (m.eq.0 .or. m.eq.mmax)) THEN
+             bsubsmn(m,n,1) = brhs(mntot)
+          ELSE
+             bsubsmn(m,n,1) = brhs(mntot)
+             mntot = mntot+1
+             bsubsmn(m,-n,1)= brhs(mntot)
+          END IF
+        end if ! lasym
+        
+     END DO ! n
+  END DO ! m
 
   IF (mntot .ne. ijtot) info = -2
 
-200 CONTINUE
+200 CONTINUE ! error 
 
   DEALLOCATE (amatrix, save_matrix, brhs)
 

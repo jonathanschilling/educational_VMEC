@@ -38,7 +38,7 @@ SUBROUTINE printout(i0, delt0, w0)
   CALL spectrum (gc(:irzloff), gc(1+irzloff:2*irzloff))
   den = SUM(vp(2:ns))
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))
-  avm = 0.5_dp*avm/den
+  avm = 0.5_dp*avm/den ! volume-averaged spectral width (_av_erage _M_)
 
   IF (ivac .ge. 1 .and. iter2.gt.1) then
      delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))

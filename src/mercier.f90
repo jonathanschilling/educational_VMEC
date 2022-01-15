@@ -93,18 +93,21 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   ns1 = ns - 1
   IF (ns1 .le. 0) RETURN
   hs = one/ns1
+
+  ! TODO: why not take signgs here ???
   sign_jac = zero
   IF (gsqrt(ns,1) .ne. zero) then
      sign_jac = ABS(gsqrt(ns,1))/gsqrt(ns,1)
   end if
-
   IF (sign_jac .eq. zero) RETURN
-  phip_real = twopi * phips * sign_jac
 
   ! NOTE: phip_real should be > 0 to get the correct physical sign of REAL-space gradients
   ! For example, grad-p, grad-Ip, etc. However, with phip_real defined this way,
   ! Mercier will be correct
-  vp_real(2:ns) = sign_jac*(twopi*twopi)*vp(2:ns)/phip_real(2:ns)  !!dV/d(PHI) on half mesh
+  phip_real = twopi * phips * sign_jac
+
+  ! dV/d(PHI) on half mesh
+  vp_real(2:ns) = sign_jac*(twopi*twopi)*vp(2:ns)/phip_real(2:ns)
 
   ! COMPUTE INTEGRATED TOROIDAL CURRENT
   DO i = 2,ns
@@ -115,6 +118,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   DO i = 2,ns1
     phip_real(i) = p5*(phip_real(i+1) + phip_REAL(i))
     denom     = one/(hs*phip_real(i))
+
     shear(i)  = (iotas(i+1) - iotas(i))*denom       ! d(iota)/d(PHI)
     vpp(i)    = (vp_real(i+1) - vp_real(i))*denom   ! d(VP)/d(PHI)
     presp(i)  = (pres(i+1) - pres(i))*denom         ! d(p)/d(PHI)
@@ -127,16 +131,21 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
     gsqrt_full(i,:) = p5*(gsqrt(i,:) + gsqrt(i+1,:))
     bdotj(i,:) = bdotj(i,:)/gsqrt_full(i,:)
     gsqrt_full(i,:) = gsqrt_full(i,:)/phip_real(i)
+
     sj(i) = hs*(i-1)
-    sqs = SQRT(sj(i))
-    rtf(:) = rt(i,:,0) + sqs*rt(i,:,1)
-    ztf(:) = zt(i,:,0) + sqs*zt(i,:,1)
-    gtt(:) = rtf(:)*rtf(:) + ztf(:)*ztf(:)
-    rzf(:) = rz(i,:,0) + sqs*rz(i,:,1)
-    zzf(:) = zz(i,:,0) + sqs*zz(i,:,1)
-    r1f(:) = r1(i,:,0) + sqs*r1(i,:,1)
-    gpp(i,:) = gsqrt_full(i,:)**2/(gtt(:)*r1f(:)**2 +               &
-               (rtf(:)*zzf(:) - rzf(:)*ztf(:))**2)     ! 1/gpp
+    sqs = SQRT(sj(i)) ! sqrt(s) on full grid
+
+    rtf(:) = rt(i,:,0) + sqs*rt(i,:,1)     ! dR/dTheta
+    ztf(:) = zt(i,:,0) + sqs*zt(i,:,1)     ! dZ/dTheta
+    rzf(:) = rz(i,:,0) + sqs*rz(i,:,1)     ! dR/dZeta
+    zzf(:) = zz(i,:,0) + sqs*zz(i,:,1)     ! dZ/dZeta
+    r1f(:) = r1(i,:,0) + sqs*r1(i,:,1)     ! R
+
+    gtt(:) = rtf(:)*rtf(:) + ztf(:)*ztf(:) ! g_uu
+
+    gpp(i,:) = gsqrt_full(i,:)**2
+               / (  gtt(:)*r1f(:)**2                &
+                  + (rtf(:)*zzf(:) - rzf(:)*ztf(:))**2) ! 1/gpp
   END DO
 
   ! COMPUTE SURFACE AVERAGES OVER dS/|grad-PHI|**3 => |Jac| du dv / |grad-PHI|**2
@@ -147,12 +156,16 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   DO i = 2,ns1
     b2i(:) = p5*(b2(i+1,:) + b2(i,:))
+
     ob2(:) = gsqrt_full(i,:)/b2i(:)
     tpp(i) = SUM(ob2(:)*wint(i:nrzt:ns))                ! <1/B**2>
+
     ob2(:) = b2i(:) * gsqrt_full(i,:) * gpp(i,:)
     tbb(i) = SUM(ob2(:)*wint(i:nrzt:ns))                ! <b*b/|grad-phi|**3>
+
     jdotb(:) = bdotj(i,:) * gpp(i,:) * gsqrt_full(i,:)
     tjb(i) = SUM(jdotb(:)*wint(i:nrzt:ns))              ! <j*b/|grad-phi|**3>
+
     jdotb(:) = jdotb(:) * bdotj(i,:) / b2i(:)
     tjj(i) = SUM(jdotb(:)*wint(i:nrzt:ns))              ! <(j*b)2/b**2*|grad-phi|**3>
   END DO
@@ -171,15 +184,22 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
           8x,'ITOR',7x,'ITOR''',7x,'PRES',7x,'PRES''',/,120('-'))
 
   DO i = 2,ns1
+     ! re-use sqs scalar for V' on full grid
      sqs = p5*(vp_real(i) + vp_real(i+1))*sign_jac
      IF (sqs .eq. zero) CYCLE
-     WRITE(nmerc,100) sj(i), hs*SUM(phip_real(2:i)),                &
-       p5*(iotas(i+1)+iotas(i)), shear(i)/sqs,                      &
-       sqs, -vpp(i)*sign_jac,                                       &
-       p5*(torcur(i) + torcur(i+1)), ip(i)/sqs,                     &
-       p5*(pres(i) + pres(i+1)), presp(i)/sqs
-  END DO
 
+     WRITE(nmerc,100)                &
+       sj(i),                        & ! S
+       hs*SUM(phip_real(2:i)),       & ! PHI
+       p5*(iotas(i+1)+iotas(i)),     & ! IOTA
+       shear(i)/sqs,                 & ! SHEAR
+       sqs,                          & ! VP
+       -vpp(i)*sign_jac,             & ! WELL
+       p5*(torcur(i) + torcur(i+1)), & ! ITOR
+       ip(i)/sqs,                    & ! ITOR'
+       p5*(pres(i) + pres(i+1)),     & ! PRES
+       presp(i)/sqs                    ! PRES'
+  END DO
 100 FORMAT(1p,10e12.4)
 
   WRITE(nmerc,190)
@@ -190,12 +210,20 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
      tjb(i) = (twopi*twopi)*tjb(i)
      tbb(i) = (twopi*twopi)*tbb(i)
      tjj(i) = (twopi*twopi)*tjj(i)
+
      Dshear(i) = shear(i) * shear(i)/4
      Dcurr(i)  =-shear(i) * (tjb(i) - ip(i) *tbb(i))
      Dwell(i)  = presp(i) * (vpp(i) - presp(i) *tpp(i))*tbb(i)
      Dgeod(i)  = tjb(i) *tjb(i)  - tbb(i) *tjj(i)
      DMerc(i)  = Dshear(i) + Dcurr(i) + Dwell(i) + Dgeod(i)
-     WRITE(nmerc,100) sj(i), Dmerc(i), Dshear(i), Dcurr(i), Dwell(i), Dgeod(i)
+
+     WRITE(nmerc,100) &
+       sj(i),         &
+       Dmerc(i),      &
+       Dshear(i),     &
+       Dcurr(i),      &
+       Dwell(i),      &
+       Dgeod(i)
   END DO
 
   CLOSE (nmerc)

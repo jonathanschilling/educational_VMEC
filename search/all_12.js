@@ -42,7 +42,7 @@ var searchData=
   ['sp_39',['sp',['../d1/d6c/namespacevmec__main.html#a1d5fe1984da8208d574364e875ea8d38',1,'vmec_main']]],
   ['spectrum_40',['spectrum',['../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc',1,'spectrum.f90']]],
   ['spectrum_2ef90_41',['spectrum.f90',['../de/daf/spectrum_8f90.html',1,'']]],
-  ['specw_42',['specw',['../d1/d6c/namespacevmec__main.html#a9511ed475e7749eb1431dbfeace65a54',1,'vmec_main::specw()'],['../db/dae/namespaceread__wout__mod.html#a72696a1c65f5ccd67d68e2728f4c3511',1,'read_wout_mod::specw()']]],
+  ['specw_42',['specw',['../db/dae/namespaceread__wout__mod.html#a72696a1c65f5ccd67d68e2728f4c3511',1,'read_wout_mod::specw()'],['../d1/d6c/namespacevmec__main.html#a9511ed475e7749eb1431dbfeace65a54',1,'vmec_main::specw()']]],
   ['spline_5fakima_43',['spline_akima',['../d6/dec/spline__akima_8f.html#a7517a5f00e408c447a9dd0e438f60e52',1,'spline_akima.f']]],
   ['spline_5fakima_2ef_44',['spline_akima.f',['../d6/dec/spline__akima_8f.html',1,'']]],
   ['spline_5fakima_5fint_45',['spline_akima_int',['../d1/d95/spline__akima__int_8f.html#a06a168ee52e5ec1d7cab10c19ee37c91',1,'spline_akima_int.f']]],
@@ -73,7 +73,8 @@ var searchData=
   ['surface_2ef90_70',['surface.f90',['../d6/d03/surface_8f90.html',1,'']]],
   ['symforce_71',['symforce',['../d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb',1,'symforce.f90']]],
   ['symforce_2ef90_72',['symforce.f90',['../d4/df3/symforce_8f90.html',1,'']]],
-  ['symoutput_73',['symoutput',['../d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae',1,'symforce.f90']]],
-  ['symrzl_74',['symrzl',['../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817',1,'symrzl.f90']]],
-  ['symrzl_2ef90_75',['symrzl.f90',['../da/d11/symrzl_8f90.html',1,'']]]
+  ['symoutput_73',['symoutput',['../db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae',1,'symoutput.f90']]],
+  ['symoutput_2ef90_74',['symoutput.f90',['../db/d40/symoutput_8f90.html',1,'']]],
+  ['symrzl_75',['symrzl',['../da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817',1,'symrzl.f90']]],
+  ['symrzl_2ef90_76',['symrzl.f90',['../da/d11/symrzl_8f90.html',1,'']]]
 ];

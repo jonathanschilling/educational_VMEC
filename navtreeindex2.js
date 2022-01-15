@@ -222,7 +222,6 @@ var NAVTREEINDEX2 =
 "d4/dd1/fixaray_8f90_source.html":[3,0,0,20],
 "d4/df3/symforce_8f90.html":[3,0,0,68],
 "d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb":[3,0,0,68,0],
-"d4/df3/symforce_8f90.html#a2489a93ca37b283b9dec6888826083ae":[3,0,0,68,1],
 "d4/df3/symforce_8f90_source.html":[3,0,0,68],
 "d5/d26/magnetic__fluxes_8f90.html":[3,0,0,42],
 "d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402":[3,0,0,42,2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "d5/dde/namespacevparams.html":[1,0,22],
 "d5/dde/namespacevparams.html#a0814be0e76cd3c188c7ace652f3ed034":[1,0,22,13],
 "d5/dde/namespacevparams.html#a0ca601cf8c7d1b9114b4a307deeeb67a":[1,0,22,8],
-"d5/dde/namespacevparams.html#a128d67d64eff2b8c181140ad8339dcb8":[1,0,22,7]
+"d5/dde/namespacevparams.html#a128d67d64eff2b8c181140ad8339dcb8":[1,0,22,7],
+"d5/dde/namespacevparams.html#a1b23343688bca7c9eb6965fc76fc213f":[1,0,22,10]
 };

@@ -448,7 +448,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         rzmax = zero
 
         ! Theta = 0 to pi in upper half of X-Z plane
-        DO icount = 1,2
+        DO icount = 1,2 ! TODO: why second loop over toroidal offset ?
            ! nphi-plane, n1 = noff,...,nzeta
            n1 = noff
            IF (icount .eq. 2) then
@@ -456,12 +456,15 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
               n1 = MOD(nzeta+1-noff,nzeta)+1
            end if
            loff = js + ns*(n1-1)
+
            t1 = one
            IF (icount .eq. 2) t1 = -one
+
            DO itheta = 1,ntheta2
               yr1u = r1(loff,0) + sqrts(js)*r1(loff,1)
               yz1u = z1(loff,0) + sqrts(js)*z1(loff,1)
               yz1u = t1*yz1u
+
               IF (yz1u .ge. zmax) THEN
                  zmax = ABS(yz1u)
                  rzmax = yr1u
@@ -469,6 +472,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
                  zmin = yz1u
                  rzmin = yr1u
               END IF
+
               IF (yr1u .ge. xmax) THEN
                  xmax = yr1u
                  zxmax = yz1u
@@ -476,6 +480,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
                  xmin = yr1u
                  zxmin = yz1u
               END IF
+
               loff = loff + ns*nzeta
            END DO
         END DO
@@ -532,16 +537,21 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   WRITE (nthreed, 130)
 130 FORMAT(//,' Magnetic Fields and Pressure',/,1x,71('-'))
   fac = cp5/mu0
-  WRITE (nthreed, 140) sump/mu0, pavg/mu0, fac*sumbpol,                 &
-     fac*sumbpol/volume_p, fac*sumbtor, fac*sumbtor/volume_p,           &
-     fac*sumbtot, fac*sumbtot/volume_p, c1p5*sump/mu0,                  &
-     c1p5*pavg/mu0
-140 FORMAT(' Volume Integrals (Joules) and Volume ',                    &
-           'Averages (Pascals)',/,24x,'Integral',6x,'Average',/,        &
-           ' pressure         = ',1p,2e14.6,/,' bpol**2 /(2 mu0) = ',   &
-           2e14.6,/,' btor**2/(2 mu0)  = ',2e14.6,/,                    &
-           ' b**2/(2 mu0)     = ',2e14.6,/,' EKIN (3/2p)      = ',      &
-           2e14.6,/)
+  WRITE (nthreed, 140)                    &
+     sump/mu0,      pavg/mu0,             &
+     fac*sumbpol,   fac*sumbpol/volume_p, &
+     fac*sumbtor,   fac*sumbtor/volume_p, &
+     fac*sumbtot,   fac*sumbtot/volume_p, &
+     c1p5*sump/mu0, c1p5*pavg/mu0
+140 FORMAT(' Volume Integrals (Joules) and Volume Averages (Pascals)',/,&
+           24x,'Integral',6x,'Average',/,        &
+           ' pressure         = ',1p,2e14.6,/,&
+           ' bpol**2 /(2 mu0) = ',2e14.6,/, &
+           ' btor**2/(2 mu0)  = ',2e14.6,/, &
+           ' b**2/(2 mu0)     = ',2e14.6,/,&
+           ' EKIN (3/2p)      = ',2e14.6,/)
+
+
 
   WRITE (nthreed, 800)
 800 FORMAT(/,' MAGNETIC AXIS COEFFICIENTS'/,                            &
@@ -550,9 +560,12 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   loff = LBOUND(rmags,1)
   DO n = 0, ntor
      n1 = n + loff
+
      t1 = mscale(0)*nscale(n)
+
      tz = t1
      IF (.not.lthreed) tz = 0
+
      IF (lasym) THEN
         WRITE (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1)), -tz*rmaga(n1),   t1*zmaga(n1)
      ELSE
@@ -561,17 +574,28 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END DO
 820 FORMAT(i5,1p,4e12.4)
 
+
+
+
+
   betstr = c2p0*SQRT(sump2/volume_p)/(sumbtot/volume_p)
 
   WRITE (nthreed, 150) betatot, betapol, betator
 150 FORMAT(/,' From volume averages over plasma, betas are',/,          &
-             ' beta total    = ',f14.6,/,' beta poloidal = ',f14.6,/,   &
-             ' beta toroidal = ',f14.6,/)
+             ' beta total    = ',f14.6,/, &
+             ' beta poloidal = ',f14.6,/, &
+             ' beta toroidal = ',f14.6,/  )
 
-  WRITE (nthreed, 160) rbtor, betaxis, betstr
+  WRITE (nthreed, 160) rbtor, betaxis, betstr ! TODO: should this maybe be bsubvvac ?
 160 FORMAT(' R * Btor-vac         = ',f14.6,' [Wb/M]',/,                &
            ' Peak Beta            = ',f14.6,/,                          &
            ' Beta-star            = ',f14.6,/)
+
+
+
+
+
+
 
   ! Shafranov surface integrals s1,s2
   ! Plasma Physics vol 13, pp 757-762 (1971)
@@ -592,15 +616,15 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   ! (corrects wrong description of Rs in paper, which is NOT the major radius)
   ! This aminr1 = 1/2 the "correct" aminr1
   aminr1 = volume_p/surf_area_p
-  factor = twopi**2*aminr1*SUM(bpol2vac*surf_area)
+  factor = twopi**2 * aminr1 * SUM(bpol2vac*surf_area)
   factor = one/factor
-  facnorm = factor*twopi**2
+  facnorm = factor * twopi**2
 
   ! Lao's definition of normalization factor
-  scaling_ratio = (mu0*curtor/circum_p)**2*volume_p
+  scaling_ratio = (mu0*curtor/circum_p)**2 * volume_p
   scaling_ratio = scaling_ratio*factor
 
-  rbps1u(:nznt) = facnorm*redge(:nznt)*phat(:nznt)*wint(ns:nznt*ns:ns)
+  rbps1u(:nznt) = facnorm*redge(:nznt)*phat(:nznt)*wint(ns:nznt*ns:ns) ! TODO: why not use nrzt instead of nznt*ns ?
   sigr0 = SUM(rbps1u(:nznt)*zu0(ns:nrzt:ns))
   sigr1 = SUM(rbps1u(:nznt)*zu0(ns:nrzt:ns)*redge(:nznt))
   sigz1 =-SUM(rbps1u(:nznt)*ru0(ns:nrzt:ns)*(z1(ns:nrzt:ns,0) + z1(ns:nrzt:ns,1)))
@@ -634,21 +658,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   delta1 = zero
   delta2 = one - fgeo
   delta3 = one - flao
-  WRITE (nthreed, 168)
-  WRITE (nthreed, 170) rshaf, rcen, rlao, scaling_ratio,                &
-     s3, smaleli, musubi, betai, lambda
-  WRITE (nthreed, 174) delta1, delta2, delta3,                          &
-     s11, s12, s13, s2, s2/fgeo, s2/flao,                               &
-     musubi + s11,musubi + s12,                                         &
-     musubi + s13,                                                      &
-     cp5*s11 + s2, cp5*s12 + s2/fgeo, cp5*s13 + s2/flao,                   &
-     cp5*(3*betai+smaleli-musubi)/(s11+s2) - one,                        &
-     cp5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - one,                   &
-     cp5*(3*betai+smaleli-musubi)/(s13+s2/flao) - one,                   &
-     cp5*(betai+smaleli+musubi)/s2 - one,                                &
-     cp5*fgeo*(betai+smaleli+musubi)/s2 - one,                           &
-     cp5*flao*(betai+smaleli+musubi)/s2 - one
 
+  WRITE (nthreed, 168)
 168 FORMAT(' Shafranov Surface Integrals',/                             &
            ' Ref: S. P. Hirshman, Phys. Fluids B, 5, (1993) 3119',/,    &
            ' Note: s1 = S1/2, s2 = S2/2, where ',                       &
@@ -658,6 +669,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
          /,' field energy to the field energy estimated from the',      &
          /,' surface integral in Eq.8.',/,1x,22('-'),/)
 
+  WRITE (nthreed, 170) rshaf, rcen, rlao, scaling_ratio,                &
+     s3, smaleli, musubi, betai, lambda
 170 FORMAT(' RT (Pressure-weighted)  = ',f14.6,' [M]',/,                &
            ' RG (Geometric)          = ',f14.6,' [M]',/,                &
            ' RL (Vol/2*pi*Area-Lao)  = ',f14.6,' [M]',/,                &
@@ -668,6 +681,19 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            ' musubi                  = ',f14.6,/,                       &
            ' betai                   = ',f14.6,/,                       &
            ' lambda                  = ',f14.6,/)
+
+  WRITE (nthreed, 174) &
+     delta1, delta2, delta3,                             & ! delta = 1 - RT/R
+     s11, s12, s13,                                      & ! s1
+     s2, s2/fgeo, s2/flao,                               & ! s2
+     musubi + s11, musubi + s12, musubi + s13,           & ! betai (Mui + s1)
+     cp5*s11 + s2, cp5*s12 + s2/fgeo, cp5*s13 + s2/flao, & ! lambda (s1/2 + s2)
+     cp5*(3*betai+smaleli-musubi)/(s11+s2     ) - one,   & ! 1st Shafr''v relation
+     cp5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - one,   & ! (3*Betai + Li - Mui)/[2*(s1+s2)] - 1
+     cp5*(3*betai+smaleli-musubi)/(s13+s2/flao) - one,   &
+     cp5     *(betai+smaleli+musubi)/s2 - one,           & ! Radial force balance
+     cp5*fgeo*(betai+smaleli+musubi)/s2 - one,           & !(Betai + Li + Mui)/(2*s2) - 1
+     cp5*flao*(betai+smaleli+musubi)/s2 - one
 174 FORMAT(/,32x,'R = RT',12x,'R = RG',12x,'R = RL',/,                  &
            20x,3(10x,8('-')),/,                                         &
            ' delta = 1 - RT/R     = ',3(f14.6,4x),/,                    &

@@ -528,8 +528,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
               ! sin(mu - nv)
               tsini = dmult*(sinmui(j,m)*cosnv(k,n1) - sgn*cosmui(j,m)*sinnv(k,n1))
 
-              bmn(mn) = bmn(mn) + tcosi*bsq(js,lk)
-              gmn(mn) = gmn(mn) + tcosi*gsqrt(js,lk)
+              bmn(mn)     = bmn(mn)     + tcosi*bsq(js,lk)
+              gmn(mn)     = gmn(mn)     + tcosi*gsqrt(js,lk)
               bsubumn(mn) = bsubumn(mn) + tcosi*bsubu(js,lk)
               bsubvmn(mn) = bsubvmn(mn) + tcosi*bsubv(js,lk)
               bsubsmn(mn) = bsubsmn(mn) + tsini*bsubs(js,lk)
@@ -539,8 +539,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         END DO
      END DO MN2
 
-     IF (js .eq. ns/2) bmodmn = bmn(1:mnmax)
-     IF (js .eq. ns) bmodmn1 = bmn(1:mnmax)
+     IF (js .eq. ns/2) bmodmn  = bmn(1:mnmax)
+     IF (js .eq. ns  ) bmodmn1 = bmn(1:mnmax)
      gmnc(:,js) = gmn(:)
      bmnc(:,js) = bmn(:)
      bsubumnc(:,js) = bsubumn(:)
@@ -550,11 +550,13 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      bsupvmnc(:,js) = bsupvmn(:)
   END DO RADIUS2
 
-  gmnc(:,1) = 0; bmnc(:,1) = 0;
+  gmnc(:,1) = 0
+  bmnc(:,1) = 0
   bsubumnc(:,1) = 0
   bsubvmnc(:,1) = 0
   bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3)
-  bsupumnc(:,1) = 0;  bsupvmnc(:,1) = 0
+  bsupumnc(:,1) = 0
+  bsupvmnc(:,1) = 0
 
   IF (lasym) then
      RADIUS3: DO js = 2, ns
@@ -579,8 +581,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
                  lk = lk + 1
                  tcosi = dmult*(cosmui(j,m)*cosnv(k,n1) + sgn*sinmui(j,m)*sinnv(k,n1))
                  tsini = dmult*(sinmui(j,m)*cosnv(k,n1) - sgn*cosmui(j,m)*sinnv(k,n1))
-                 bmn(mn) = bmn(mn) + tsini*bsqa(jlk)
-                 gmn(mn) = gmn(mn) + tsini*gsqrta(jlk,0)
+                 bmn(mn)     = bmn(mn)     + tsini*bsqa(jlk)
+                 gmn(mn)     = gmn(mn)     + tsini*gsqrta(jlk,0)
                  bsubumn(mn) = bsubumn(mn) + tsini*bsubua(jlk)
                  bsubvmn(mn) = bsubvmn(mn) + tsini*bsubva(jlk)
                  bsubsmn(mn) = bsubsmn(mn) + tcosi*bsubsa(jlk)
@@ -591,8 +593,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
            END DO
         END DO MN3
 
-        gmns(:,js) = gmn(:)
-        bmns(:,js) = bmn(:)
+        gmns(:,js)     = gmn(:)
+        bmns(:,js)     = bmn(:)
         bsubumns(:,js) = bsubumn(:)
         bsubvmns(:,js) = bsubvmn(:)
         bsubsmnc(:,js) = bsubsmn(:)
@@ -600,11 +602,13 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         bsupvmns(:,js) = bsupvmn(:)
      END DO RADIUS3
 
-     gmns(:,1) = 0; bmns(:,1) = 0
+     gmns(:,1) = 0
+     bmns(:,1) = 0
      bsubumns(:,1) = 0
      bsubvmns(:,1) = 0
      bsubsmnc(:,1) = 2*bsubsmnc(:,2) - bsubsmnc(:,3)
-     bsupumns(:,1) = 0;  bsupvmns(:,1) = 0
+     bsupumns(:,1) = 0
+     bsupvmns(:,1) = 0
   end if
 
   ! WRITE OUT ARRAYS
@@ -659,8 +663,15 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_bgrv, bdotgradv)
 
   ! HALF-MESH quantities
-  iotas(1) = 0; mass(1) = 0; pres(1) = 0; phip(1) = 0;
-  buco(1) = 0; bvco(1) = 0; vp(1) = 0; overr(1) = 0;  specw(1) = 1
+  iotas(1) = 0
+  mass(1) = 0
+  pres(1) = 0
+  phip(1) = 0
+  buco(1) = 0
+  bvco(1) = 0
+  vp(1) = 0
+  overr(1) = 0
+  specw(1) = 1
   beta_vol(1) = 0
   CALL cdf_write(nwout, vn_iotah, iotas(1:ns))
   CALL cdf_write(nwout, vn_mass, mass/mu0)

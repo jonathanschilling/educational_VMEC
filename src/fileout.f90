@@ -75,8 +75,10 @@ SUBROUTINE fileout(ier_flag)
      ! Call WROUT to write output
      ! or
      ! error message if lterm = false
-     CALL wrout (bzmn_o, azmn_o, clmn, blmn, crmn_o, czmn_e,            &
-                 crmn_e, xsave, gc, loc_ier_flag, lterm)
+     !           bsq,    gsqrt,  bsubu, bsubv, bsubs,  bsupv,
+     CALL wrout (bzmn_o, azmn_o, clmn,  blmn,  crmn_o, czmn_e,            &
+                 crmn_e, xsave,     gc,       loc_ier_flag, lterm)
+     !           bsupu,  rzl_array, gc_array, ier_flag     TODO: lterm omitted in argument list ?
 
      ! These are the last few lines that appear on screen / in the threed1 file
      PRINT 120, TRIM(werror(loc_ier_flag))

@@ -32,9 +32,9 @@ SUBROUTINE printout(i0, delt0, w0)
   betav = wp/wb
   w = w0*twopi*twopi
 
-  den = zero
+  den = zero ! TODO: why? will be set of sum(vp(2:ns)) below anyway...
   specw(1) = one
-  gc = xstore
+  gc = xstore ! TODO: why compute spectral width from backup and not current gc (== physical xc) --> <M> includes scalxc ???
   CALL spectrum (gc(:irzloff), gc(1+irzloff:2*irzloff))
   den = SUM(vp(2:ns))
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))

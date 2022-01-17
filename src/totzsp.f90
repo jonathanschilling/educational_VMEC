@@ -230,7 +230,8 @@ SUBROUTINE convert_sym(rmnss, zmncs)
   REAL(rprec), DIMENSION(ns,0:ntor) :: temp
 
   ! CONVERT FROM INTERNAL REPRESENTATION TO "PHYSICAL" RMNSS, ZMNCS FOURIER FORM
-  ! rmnss = (RMNSS+ZMNCS), zmncs = (RMNSS-ZMNCS)
+  ! rmnss = (RMNSS+ZMNCS)
+  ! zmncs = (RMNSS-ZMNCS)
   IF (lconm1) then
 
      ! This essentially reverts the operation performed at the end of readin().

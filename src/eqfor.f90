@@ -156,32 +156,41 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   CALL calc_fbal(bsubu, bsubv)
 
-  bucof(1) = 0
-  bvcof(1) = c1p5*bvco(2) - cp5*bvco(3)
-
   ! NOTE:  jcuru, jcurv on FULL radial mesh coming out of calc_fbal
   !        They are local (surface-averaged) current densities (NOT integrated in s)
   !        jcurX = (dV/ds)/twopi**2 <JsupX>   for X=u,v
+  bucof(1) = 0
+  bvcof(1) = c1p5*bvco(2) - cp5*bvco(3)
   DO i = 2,ns1
-     equif(i) = equif(i)*vpphi(i)/(ABS(jcurv(i)*chipf(i))               &
-              + ABS(jcuru(i)*phipf(i))+ABS(presgrad(i)*vpphi(i)))
+     equif(i) = equif(i)*vpphi(i) /         &
+                (  ABS(jcurv(i)*chipf(i))   &
+                 + ABS(jcuru(i)*phipf(i))   &
+                 + ABS(presgrad(i)*vpphi(i)))
      bucof(i) = cp5*(buco(i) + buco(i+1))
      bvcof(i) = cp5*(bvco(i) + bvco(i+1))
   END DO
-
   bucof(ns) = c1p5*buco(ns) - cp5*buco(ns1)
   bvcof(ns) = c1p5*bvco(ns) - cp5*bvco(ns1)
 
-  equif(1) = c2p0*equif(2) - equif(3)
-  jcuru(1) = c2p0*jcuru(2) - jcuru(3)
-  jcurv(1) = c2p0*jcurv(2) - jcurv(3)
-  presgrad(1)  = c2p0*presgrad(2) - presgrad(3)
-  presgrad(ns) = c2p0*presgrad(ns1) - presgrad(ns1-1)
-  vpphi(1)  = c2p0*vpphi(2) - vpphi(3)
-  vpphi(ns) = c2p0*vpphi(ns1) - vpphi(ns1-1)
+
+  ! extrapolate full-grid quantites to axis and LCFS
+  equif(1)  = c2p0*equif(2)   - equif(3)
   equif(ns) = c2p0*equif(ns1) - equif(ns1-1)
-  jcuru(ns) = c2p0*jcuru(ns1) - jcuru(ns1-1)
+
+  jcurv(1)  = c2p0*jcurv(2)   - jcurv(3)
   jcurv(ns) = c2p0*jcurv(ns1) - jcurv(ns1-1)
+
+  jcuru(1)  = c2p0*jcuru(2)   - jcuru(3)
+  jcuru(ns) = c2p0*jcuru(ns1) - jcuru(ns1-1)
+
+  presgrad(1)  = c2p0*presgrad(2)   - presgrad(3)
+  presgrad(ns) = c2p0*presgrad(ns1) - presgrad(ns1-1)
+
+  vpphi(1)  = c2p0*vpphi(2)   - vpphi(3)
+  vpphi(ns) = c2p0*vpphi(ns1) - vpphi(ns1-1)
+
+
+
 
   ! NOTE: phipf = phipf_loc/(twopi), phipf_loc ACTUAL (twopi factor) Toroidal flux derivative
   ! SPH/JDH (060211): remove twopi factors from <JSUPU,V> (agree with output in JXBOUT file)
@@ -189,11 +198,21 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   DO js = 1, ns
      es = (js - 1)*hs           ! full-grid s value
      cur0 = fac*vpphi(js)*twopi ! == dV/ds = dV/dPHI * d(PHI/ds)  (V=actual volume)
-     WRITE (nthreed, 30) es, equif(js), fac*phi1(js), iotaf(js),        &
-       jcuru(js)/vpphi(js)/mu0, jcurv(js)/vpphi(js)/mu0,                &
-       cur0/phipf_loc(js), presgrad(js)/phipf_loc(js)/mu0,              &
-       specw(js), presf(js)/mu0, bucof(js), bvcof(js), jdotb(js),       &
-       bdotb(js)
+     WRITE (nthreed, 30)               &
+       es,                             & ! S
+       equif(js),                      & ! <RADIAL FORCE>
+       fac*phi1(js),                   & ! TOROIDAL FLUX
+       iotaf(js),                      & ! IOTA
+       jcuru(js)/vpphi(js)/mu0,        & ! <JSUPU>
+       jcurv(js)/vpphi(js)/mu0,        & ! <JSUPV>
+       cur0/phipf_loc(js),             & ! d(VOL)/d(PHI)
+       presgrad(js)/phipf_loc(js)/mu0, & ! d(PRES)/d(PHI)
+       specw(js),                      & ! <M>
+       presf(js)/mu0,                  & ! PRESF
+       bucof(js),                      & ! <BSUBU>
+       bvcof(js),                      & ! <BSUBV>
+       jdotb(js),                      & ! <J.B>
+       bdotb(js)                         ! <B.B>
   END DO
 30 FORMAT(1p,2e10.2,2e12.4,4e11.3,0p,f7.3,1p,5e11.3)
 
@@ -210,10 +229,12 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   ! Normal is | dr/du X dr/dv | = SQRT [R**2 guu + (RuZv - RvZu)**2]
   ALLOCATE (guu_1u(nznt), surf_area(nznt))
   guu_1u(:nznt) = ru0(ns:nrzt:ns)*ru0(ns:nrzt:ns) + zu0(ns:nrzt:ns)*zu0(ns:nrzt:ns)
-  surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(guu_1u(:nznt))
+
+  surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(guu_1u(:nznt)) ! re-use surf_area to compute circumference
   circum_p = twopi*SUM(surf_area(:nznt))
+
   surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(                             &
-       + (r1(ns:nrzt:ns,0) + r1(ns:nrzt:ns,1))**2*guu_1u(:nznt)         &
+       + (r1(ns:nrzt:ns,0) + r1(ns:nrzt:ns,1))**2 * guu_1u(:nznt)         &
        +((rv(ns:nrzt:ns,0) + rv(ns:nrzt:ns,1))*zu0(ns:nrzt:ns)          &
        - (zv(ns:nrzt:ns,0) + zv(ns:nrzt:ns,1))*ru0(ns:nrzt:ns))**2 )
   surf_area_p = twopi**2*SUM(surf_area(:nznt))
@@ -254,14 +275,14 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   rcen = cp5*(router + rinner)               !geometric center
   n = 0
   n1 = n + 1
-  rcenin = DOT_PRODUCT(rmncc(ns,n1,:mpol1+1:2), mscale(:mpol1:2)*nscale(n))
+  rcenin = DOT_PRODUCT(rmncc(ns,n1,:mpol1+1:2), mscale(:mpol1:2)*nscale(n)) ! TODO: used anywhere?
 
   l = (mpol1+1)/2
   ALLOCATE (t12u(l))
   t12u(:l) = mscale(1:mpol1:2)*nscale(n)
-  aminr2in = DOT_PRODUCT(rmncc(ns,n1,2:mpol1+1:2),t12u(:l))
-  bminz2in = DOT_PRODUCT(zmnsc(ns,n1,2:mpol1+1:2),t12u(:l))
-  bminz2 = DOT_PRODUCT(zmnsc(ns,n1,2:mpol1+1:2),t12u(:l))
+  aminr2in = DOT_PRODUCT(rmncc(ns,n1,2:mpol1+1:2),t12u(:l)) ! TODO: used anywhere?
+  bminz2in = DOT_PRODUCT(zmnsc(ns,n1,2:mpol1+1:2),t12u(:l)) ! TODO: used anywhere?
+  bminz2   = DOT_PRODUCT(zmnsc(ns,n1,2:mpol1+1:2),t12u(:l)) ! TODO: used anywhere?
   DEALLOCATE (t12u)
 
   ! vol av minor radius
@@ -283,16 +304,22 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   rshaf1 = zero
   rshaf2 = zero
   DO js = 2, ns
-     btor_vac(:nznt) = rbtor/r12(js:nrzt:ns)
-     btor1(:nznt) = r12(js:nrzt:ns)*bsupv(js:nrzt:ns)
+     btor_vac(:nznt) = rbtor/r12(js:nrzt:ns) ! TODO: assumes B_tor ~ 1/R ???
      delphid_exact = delphid_exact + SUM( (btor_vac(:nznt)/r12(js:nrzt:ns) - bsupv(js:nrzt:ns))*tau(js:nrzt:ns) )
+
+     btor1(:nznt) = r12(js:nrzt:ns)*bsupv(js:nrzt:ns)
      dbtor(:nznt) = btor1(:nznt)**2 - btor_vac(:nznt)**2
      musubi = musubi - SUM(dbtor(:nznt)*tau(js:nrzt:ns))
+
      phat(:nznt) = bsq(js:nrzt:ns) - cp5*btor_vac(:nznt)**2
      phat(:nznt) = (phat(:nznt) - dbtor(:nznt))*tau(js:nrzt:ns)
      rshaf1 = rshaf1 + SUM(phat(:nznt))
      rshaf2 = rshaf2 + SUM(phat(:nznt)/r12(js:nrzt:ns))
   END DO
+  delphid_exact = anorm*delphid_exact
+  rshaf = rshaf1/rshaf2
+  fpsi0 = c1p5*bvco(2) - cp5*bvco(3)
+  b0 = fpsi0/r00
 
   redge(:nznt) = r1(ns:nrzt:ns,0) + r1(ns:nrzt:ns,1)
   IF (lfreeb .and. ivac.gt.1) THEN
@@ -303,28 +330,25 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   DEALLOCATE (btor_vac, btor1, dbtor)
 
-  delphid_exact = anorm*delphid_exact
-  rshaf = rshaf1/rshaf2
-  fpsi0 = c1p5*bvco(2) - cp5*bvco(3)
-  b0 = fpsi0/r00
+
 
   rmax_surf = MAXVAL(r1(ns:nrzt:ns,0)+r1(ns:nrzt:ns,1))
   rmin_surf = MINVAL(r1(ns:nrzt:ns,0)+r1(ns:nrzt:ns,1))
   zmax_surf = MAXVAL(ABS(z1(ns:nrzt:ns,0)+z1(ns:nrzt:ns,1)))
 
   DO js = 2, ns
-     modb(:nznt) = SQRT(c2p0*(bsq(js:nrzt:ns)-pres(js)))
+     modb(:nznt) = SQRT(c2p0*(bsq(js:nrzt:ns) - pres(js)))
      CALL bextrema (modb, bmin(1,js), bmax(1,js), nzeta, ntheta2)
   END DO
-
-  ! output geometrical, |B| quantities
-  CALL elongation (r1, z1, waist, height)
 
   WRITE (nthreed, 75) bmin(1,ns), bmax(1,ns), bmin(ntheta2,ns), bmax(ntheta2,ns)
 75 FORMAT(/' Magnetic field modulation (averaged over toroidal angle)',/,        &
           1x,71('-')/,' BMIN(u=0)             = ',f14.6/                         &
           ' BMAX(u=0)             = ',f14.6/' BMIN(u=pi)            = ',         &
           f14.6/' BMAX(u=pi)            = ',f14.6/)
+
+  ! output geometrical, |B| quantities
+  CALL elongation (r1, z1, waist, height)
 
   sumbtot = 2*(vnorm*SUM(bsq(2:nrzt)*tau(2:nrzt)) - sump)
   sumbtor = vnorm*SUM(tau(2:nrzt)*(r12(2:nrzt)*bsupv(2:nrzt))**2)
@@ -335,20 +359,22 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   betatot = sump20/sumbtot
   betator = sump20/sumbtor
   VolAvgB = SQRT(ABS(sumbtot/volume_p))
-  IonLarmor = 0.0032_dp/VolAvgB
+  IonLarmor = 0.0032_dp/VolAvgB ! TODO: which ion is assumed here ?
+
   jPS2(2:ns1) = jpar2(2:ns1) - jdotb(2:ns1)**2/bdotb(2:ns1)
-  jpar_perp = SUM(jpar2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
-  jparPS_perp = SUM(jPS2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
-  s2 = SUM(jperp2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
+  jpar_perp   = SUM( jpar2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
+  jparPS_perp = SUM(  jPS2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
+  s2          = SUM(jperp2(2:ns1)*(vp(2:ns1) + vp(3:ns)))
   IF (s2 .ne. zero) THEN
-     jpar_perp = jpar_perp/s2
+     jpar_perp   = jpar_perp  /s2
      jparPS_perp = jparPS_perp/s2
   END IF
-  IF (ntor .gt. 1) THEN
+
+  IF (ntor .gt. 1) THEN ! lthreed ??
   WRITE (nthreed, 80) aspect, kappa_p, volume_p, cross_area_p,          &
      surf_area_p, circum_p, Rmajor_p, Aminor_p, rmin_surf,              &
      rmax_surf, zmax_surf, waist(1), height(1), waist(2), height(2)
-  ELSE
+  ELSE ! axisymmetric
   WRITE (nthreed, 80) aspect, kappa_p, volume_p, cross_area_p,          &
      surf_area_p, circum_p, Rmajor_p, Aminor_p, rmin_surf,              &
      rmax_surf, zmax_surf, waist(1), height(1)
@@ -371,7 +397,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
             ' Full Height(v = 0)    = ',f14.6,' [M]',:,/                &
             ' Waist (v = pi)  in R  = ',f14.6,' [M]',:,/                &
             ' Full Height(v = pi)   = ',f14.6,' [M]')
-  WRITE (nthreed, 85) toroidal_flux, 1.e-6_dp*ctor/mu0, rbtor,          &
+  ! TODO: : means optional in above format?
+
+  WRITE (nthreed, 85) toroidal_flux, 1.e-6_dp/mu0 * ctor, rbtor,        &
          rbtor0, VolAvgB, IonLarmor, jpar_perp, jparPS_perp
 85 FORMAT(' Toroidal Flux         = ',f14.6,' [Wb]',/                   &
           ' Toroidal Current      = ',f14.6,' [MA]',/                   &
@@ -383,12 +411,12 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
           ' <JPS**2>/<J-perp**2>  = ',f14.6,' (Vol. Averaged)',/ )
 
   WRITE (nthreed, 90)
-90 FORMAT(/,71('-'),/,' MORE GEOMETRIC AND PHYSICS QUANTITIES',/,       &
-            71('-'),/,' Toroidal Plane: Phi = 0',/,                     &
-            5x,'j',3x,'psi-psiaxis',9x,'a [M]',3x,'ellipticity',3x,     &
-          'indentation',7x,'d-shape',4x,'rel. shift',6x,'<J||**2>/',4x, &
-          '<JPS**2>/',/,95x,                                            &
-          '<J-perp**2>',3x,'<J-perp**2>'/,' -----',8(2x,12('-')))
+90 FORMAT(/,71('-'),/,&
+            ' MORE GEOMETRIC AND PHYSICS QUANTITIES',/,71('-'),/,&
+            ' Toroidal Plane: Phi = 0',/,                     &
+            5x,'j',3x,'psi-psiaxis',9x,'a [M]',3x,'ellipticity',3x,'indentation',7x,'d-shape',4x,'rel. shift',6x,'<J||**2>/',4x,'<JPS**2>/',/,   &
+            95x,                                                                                                '<J-perp**2>',3x,'<J-perp**2>'/, &
+            ' -----',8(2x,12('-')))
 
   fac = twopi*hs*signgs
   psi(1) = zero

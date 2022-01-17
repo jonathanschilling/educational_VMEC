@@ -5,6 +5,7 @@
 !>        where \f$\pi <a>^2 = \textrm{Area (toroidally averaged)}\f$
 !>        and   \f$2 \pi <R> \textrm{Area} = \textrm{Volume}\f$
 FUNCTION aspectratio()
+  use stel_constants, only: pi
   USE vmec_main
   USE realspace
   USE vmec_io
@@ -20,7 +21,7 @@ FUNCTION aspectratio()
  !       2*pi * <R> * Area = Volume
  ! Use integration by parts to compute as surface integral (Stoke''s theorem)
 
-  pi = 4*ATAN(one)
+  !pi = 4*ATAN(one) ! now from stel_constants
 
   ! Compute Volume and Mean (toroidally averaged) Cross Section Area
 

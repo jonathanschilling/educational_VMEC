@@ -79,7 +79,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   INTEGER, INTENT(in) :: ier_flag
 
   ! reverse ns, mnmax for backwards compatibility
-  REAL(rprec), DIMENSION(mnmax,ns,3*MAX(ntmax/2,1)), INTENT(inout), TARGET :: rzl_array, gc_array
+  REAL(rprec), DIMENSION(mnmax,ns,3*MAX(ntmax/2,1)), INTENT(inout), TARGET :: rzl_array, gc_array ! only used as temporary storage !
   REAL(rprec), DIMENSION(ns,nznt), INTENT(inout) :: bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu
 
   REAL(rprec) :: qfact(ns)
@@ -429,6 +429,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ALLOCATE (xfinal(neqs), stat=js) ! re-use js for allocation return code
   IF (js .ne. 0) STOP 'Allocation error for xfinal in WROUT!'
   xfinal = xc ! ignore passed rzl_array !!!
+  ! TODO: scalxc ???
   ! --> rzl_array is re-used to store temporary  symmetric rmnc, ... !
   ! -->  gc_array is re-used to store temporary asymmetric rmns, ... ! (for lasym)
 
@@ -468,7 +469,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      END WHERE
   END DO
 
-  lmns(:,1) = 0
+  lmns(:,1) = 0 ! TODO: contradicts constant extrapolation above !!!
   raxis_cc(0:ntor) = rmnc(1:ntor+1,1)
   zaxis_cs(0:ntor) = zmns(1:ntor+1,1)
 
@@ -482,7 +483,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         END WHERE
      END DO
 
-     lmnc(:,1) = 0;
+     lmnc(:,1) = 0 ! TODO: contradicts constant extrapolation above !!!
      raxis_cs(0:ntor) = rmns(1:ntor+1,1)
      zaxis_cc(0:ntor) = zmnc(1:ntor+1,1)
   end if
@@ -508,9 +509,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   RADIUS2: DO js = 2, ns
      gmn = 0
      bmn = 0
+
      bsubumn = 0
      bsubvmn = 0
      bsubsmn = 0
+
      bsupumn = 0
      bsupvmn = 0
 
@@ -518,9 +521,12 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         n = NINT(xn_nyq(mn))/nfp
         m = NINT(xm_nyq(mn))
         n1 = ABS(n)
+
         dmult = mscale(m)*nscale(n1)*tmult
         IF (m.eq.0 .or. n.eq.0) dmult = 2*dmult
+
         sgn = SIGN(1, n)
+
         lk = 0
         DO j = 1, ntheta2
            DO k = 1, nzeta
@@ -543,8 +549,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         END DO
      END DO MN2
 
+     ! needed for freeb_data below
      IF (js .eq. ns/2) bmodmn  = bmn(1:mnmax)
      IF (js .eq. ns  ) bmodmn1 = bmn(1:mnmax)
+
      gmnc(:,js) = gmn(:)
      bmnc(:,js) = bmn(:)
      bsubumnc(:,js) = bsubumn(:)
@@ -557,9 +565,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ! endpoint values at magnetic axis
   gmnc(:,1) = 0
   bmnc(:,1) = 0
+
   bsubumnc(:,1) = 0
   bsubvmnc(:,1) = 0
   bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3) ! extrapolation on full grid
+
   bsupumnc(:,1) = 0
   bsupvmnc(:,1) = 0
 
@@ -576,21 +586,28 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
            n = NINT(xn_nyq(mn))/nfp
            m = NINT(xm_nyq(mn))
            n1 = ABS(n)
+
            dmult = mscale(m)*nscale(n1)*tmult
            IF (m.eq.0 .or. n.eq.0) dmult = 2*dmult
+
            sgn = SIGN(1, n)
+
            lk = 0
            jlk = js
            DO j = 1, ntheta2
               DO k = 1, nzeta
                  lk = lk + 1
+
                  tcosi = dmult*(cosmui(j,m)*cosnv(k,n1) + sgn*sinmui(j,m)*sinnv(k,n1))
                  tsini = dmult*(sinmui(j,m)*cosnv(k,n1) - sgn*cosmui(j,m)*sinnv(k,n1))
+
                  bmn(mn)     = bmn(mn)     + tsini*bsqa(jlk)
-                 gmn(mn)     = gmn(mn)     + tsini*gsqrta(jlk,0)
+                 gmn(mn)     = gmn(mn)     + tsini*gsqrta(jlk,0) ! TODO: what is this zero index?
+
                  bsubumn(mn) = bsubumn(mn) + tsini*bsubua(jlk)
                  bsubvmn(mn) = bsubvmn(mn) + tsini*bsubva(jlk)
                  bsubsmn(mn) = bsubsmn(mn) + tcosi*bsubsa(jlk)
+
                  bsupumn(mn) = bsupumn(mn) + tsini*bsupua(jlk)
                  bsupvmn(mn) = bsupvmn(mn) + tsini*bsupva(jlk)
                  jlk = jlk+ns
@@ -678,6 +695,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   overr(1) = 0
   specw(1) = 1
   beta_vol(1) = 0
+
   CALL cdf_write(nwout, vn_iotah, iotas(1:ns))
   CALL cdf_write(nwout, vn_mass, mass/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_presh, pres(1:ns)/mu0) ! NOTE: scaling !!!
@@ -700,11 +718,14 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   IF (lasym) THEN
      CALL cdf_write(nwout, vn_racs, raxis_cs(0:ntor))
      CALL cdf_write(nwout, vn_zacc, zaxis_cc(0:ntor))
+
      CALL cdf_write(nwout, vn_rmns, rmns)
      CALL cdf_write(nwout, vn_zmnc, zmnc)
      CALL cdf_write(nwout, vn_lmnc, lmnc)
+
      CALL cdf_write(nwout, vn_gmns, gmns)
      CALL cdf_write(nwout, vn_bmns, bmns)
+
      CALL cdf_write(nwout, vn_bsubumns, bsubumns)
      CALL cdf_write(nwout, vn_bsubvmns, bsubvmns)
      CALL cdf_write(nwout, vn_bsubsmnc, bsubsmnc)
@@ -729,6 +750,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
                                    bsubsmn, bsupumn, bsupvmn, stat=istat)
 
   ! FREE BOUNDARY DATA
+  ! rmnc1, ... contain the LCFS values at this point
   CALL freeb_data(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)
 
   rzl_array = 0

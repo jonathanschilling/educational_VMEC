@@ -43,23 +43,30 @@ SUBROUTINE symoutput (bsq , gsqrt , bsubu , bsubv ,bsupu,  bsupv , bsubs , &
   DO i = 1, ntheta2
      ir = ntheta1 + 2 - i                 !-theta
      IF (i == 1) ir = 1
-     DO jk = 1, ns*nzeta
+     DO jk = 1, ns*nzeta ! implicit loop over all surfaces
         jka = ireflect(jk)                !-zeta
-        bsqa(jk,i)      = p5*(bsq(jk,i)     -bsq(jka,ir))
-        bsq_0(jk)       = p5*(bsq(jk,i)     +bsq(jka,ir))
-        gsqrta(jk,i)    = p5*(gsqrt(jk,i)   -gsqrt(jka,ir))
-        gsqrt_0(jk)     = p5*(gsqrt(jk,i)   +gsqrt(jka,ir))
-        bsubua(jk,i)    = p5*(bsubu(jk,i)   -bsubu(jka,ir))
-        bsubu_0(jk)     = p5*(bsubu(jk,i)   +bsubu(jka,ir))
-        bsubva(jk,i)    = p5*(bsubv(jk,i)   -bsubv(jka,ir))
-        bsubv_0(jk)     = p5*(bsubv(jk,i)   +bsubv(jka,ir))
-        bsupua(jk,i)    = p5*(bsupu(jk,i)   -bsupu(jka,ir))
-        bsupu_0(jk)     = p5*(bsupu(jk,i)   +bsupu(jka,ir))
-        bsupva(jk,i)    = p5*(bsupv(jk,i)   -bsupv(jka,ir))
-        bsupv_0(jk)     = p5*(bsupv(jk,i)   +bsupv(jka,ir))
+
+        bsqa(jk,i)      = p5*(bsq  (jk,i) - bsq  (jka,ir))
+        bsq_0(jk)       = p5*(bsq  (jk,i) + bsq  (jka,ir))
+
+        gsqrta(jk,i)    = p5*(gsqrt(jk,i) - gsqrt(jka,ir))
+        gsqrt_0(jk)     = p5*(gsqrt(jk,i) + gsqrt(jka,ir))
+
+        bsubua(jk,i)    = p5*(bsubu(jk,i) - bsubu(jka,ir))
+        bsubu_0(jk)     = p5*(bsubu(jk,i) + bsubu(jka,ir))
+
+        bsubva(jk,i)    = p5*(bsubv(jk,i) - bsubv(jka,ir))
+        bsubv_0(jk)     = p5*(bsubv(jk,i) + bsubv(jka,ir))
+
         ! Dominant symmetry reversed
-        bsubsa(jk,i)    = p5*(bsubs(jk,i)   +bsubs(jka,ir))
-        bsubs_0(jk)     = p5*(bsubs(jk,i)   -bsubs(jka,ir))
+        bsubsa(jk,i)    = p5*(bsubs(jk,i) + bsubs(jka,ir))
+        bsubs_0(jk)     = p5*(bsubs(jk,i) - bsubs(jka,ir))
+
+        bsupua(jk,i)    = p5*(bsupu(jk,i) - bsupu(jka,ir))
+        bsupu_0(jk)     = p5*(bsupu(jk,i) + bsupu(jka,ir))
+
+        bsupva(jk,i)    = p5*(bsupv(jk,i) - bsupv(jka,ir))
+        bsupv_0(jk)     = p5*(bsupv(jk,i) + bsupv(jka,ir))
      END DO
 
      bsq(:,i)      = bsq_0(:)

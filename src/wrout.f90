@@ -167,7 +167,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   IF (mnyq .ne. 0) cosmui(:,mnyq) = p5*cosmui(:,mnyq)
   IF (nnyq .ne. 0) cosnv (:,nnyq) = p5*cosnv (:,nnyq)
 
-  ! use wout_file as temporary storage for version number
+  ! use wout_file as temporary storage for parsing version number to REAL
   wout_file = version_
   READ (wout_file, *) vversion
 
@@ -217,9 +217,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_Rmaj, Rmajor_p)
   CALL cdf_define(nwout, vn_vol, volume_p)
   CALL cdf_define(nwout, vn_ftolv, ftolx1)
-  CALL cdf_define(nwout, vn_fsql, fsql)
   CALL cdf_define(nwout, vn_fsqr, fsqr)
   CALL cdf_define(nwout, vn_fsqz, fsqz)
+  CALL cdf_define(nwout, vn_fsql, fsql)
 
   CALL cdf_define(nwout, vn_nextcur, nextcur)
   CALL cdf_define(nwout, vn_extcur, extcur(1:nextcur), dimname=currg)
@@ -272,9 +272,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   qfact=HUGE(qfact)
   WHERE (iotaf(1:ns) .NE. zero) qfact=one/iotaf(1:ns)
-
   CALL cdf_define(nwout, vn_qfact, qfact(1:ns), dimname=r1dim)
   CALL cdf_setatt(nwout, vn_iotaf, ln_qfact)
+
   CALL cdf_define(nwout, vn_presf, presf,       dimname=r1dim)
   CALL cdf_setatt(nwout, vn_presf, ln_presf, units='Pa')
   CALL cdf_define(nwout, vn_phi,   phi,         dimname=r1dim)
@@ -283,7 +283,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_setatt(nwout, vn_phipf, ln_phipf)
   CALL cdf_define(nwout, vn_chi,   chi,         dimname=r1dim)
   CALL cdf_setatt(nwout, vn_chi,   ln_chi, units='wb')
-  CALL cdf_define(nwout, vn_chipf, phipf,       dimname=r1dim)
+  CALL cdf_define(nwout, vn_chipf, phipf,       dimname=r1dim) ! TODO: wrong quantity !!!
   CALL cdf_setatt(nwout, vn_chipf, ln_chipf)
   CALL cdf_define(nwout, vn_jcuru, jcuru,       dimname=r1dim)
   CALL cdf_define(nwout, vn_jcurv, jcurv,       dimname=r1dim)
@@ -298,7 +298,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_buco,  buco,        dimname=r1dim)
   CALL cdf_define(nwout, vn_bvco,  bvco,        dimname=r1dim)
   CALL cdf_define(nwout, vn_vp,    vp(1:ns),    dimname=r1dim)
-  CALL cdf_define(nwout, vn_specw, specw,       dimname=r1dim)
+  CALL cdf_define(nwout, vn_specw, specw,       dimname=r1dim) ! TODO: specw on full grid ?
   CALL cdf_define(nwout, vn_phip,  phips(1:ns), dimname=r1dim)
   CALL cdf_define(nwout, vn_overr, overr(1:ns), dimname=r1dim)
 
@@ -416,6 +416,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      CALL cdf_write(nwout, vn_mgmode, mgrid_mode)
   ENDIF
   IF (lfreeb) THEN
+     ! TODO: write current labels
      CALL cdf_write(nwout, vn_potvac, potvac)
   END IF
 
@@ -425,9 +426,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_pmod_nyq, xm_nyq)
   CALL cdf_write(nwout, vn_tmod_nyq, xn_nyq)
 
-  ALLOCATE (xfinal(neqs), stat=js)
+  ALLOCATE (xfinal(neqs), stat=js) ! re-use js for allocation return code
   IF (js .ne. 0) STOP 'Allocation error for xfinal in WROUT!'
-  xfinal = xc
+  xfinal = xc ! ignore passed rzl_array !!!
+  ! --> rzl_array is re-used to store temporary  symmetric rmnc, ... !
+  ! -->  gc_array is re-used to store temporary asymmetric rmns, ... ! (for lasym)
 
   ! MUST CONVERT m=1 MODES... FROM INTERNAL TO PHYSICAL FORM
   ! Extrapolation of m=0 Lambda (cs) modes, which are not evolved at j=1, done in CONVERT
@@ -501,6 +504,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
                      bsupva, bsubsa )
   END IF
 
+  ! Fourier-transform derived quantities for each surface individually
   RADIUS2: DO js = 2, ns
      gmn = 0
      bmn = 0
@@ -550,11 +554,12 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      bsupvmnc(:,js) = bsupvmn(:)
   END DO RADIUS2
 
+  ! endpoint values at magnetic axis
   gmnc(:,1) = 0
   bmnc(:,1) = 0
   bsubumnc(:,1) = 0
   bsubvmnc(:,1) = 0
-  bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3)
+  bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3) ! extrapolation on full grid
   bsupumnc(:,1) = 0
   bsupvmnc(:,1) = 0
 
@@ -652,13 +657,13 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   CALL cdf_write(nwout, vn_iotaf, iotaf(1:ns))
   CALL cdf_write(nwout, vn_qfact, qfact(1:ns))
-  CALL cdf_write(nwout, vn_presf, presf/mu0)
+  CALL cdf_write(nwout, vn_presf, presf/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_phi, phi)
-  CALL cdf_write(nwout, vn_phipf, twopi*signgs*phipf)
+  CALL cdf_write(nwout, vn_phipf, twopi*signgs*phipf) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_chi, chi)
-  CALL cdf_write(nwout, vn_chipf, twopi*signgs*chipf)
-  CALL cdf_write(nwout, vn_jcuru, jcuru/mu0)
-  CALL cdf_write(nwout, vn_jcurv, jcurv/mu0)
+  CALL cdf_write(nwout, vn_chipf, twopi*signgs*chipf) ! NOTE: scaling !!!
+  CALL cdf_write(nwout, vn_jcuru, jcuru/mu0) ! NOTE: scaling !!!
+  CALL cdf_write(nwout, vn_jcurv, jcurv/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_jdotb, jdotb)
   CALL cdf_write(nwout, vn_bgrv, bdotgradv)
 
@@ -674,8 +679,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   specw(1) = 1
   beta_vol(1) = 0
   CALL cdf_write(nwout, vn_iotah, iotas(1:ns))
-  CALL cdf_write(nwout, vn_mass, mass/mu0)
-  CALL cdf_write(nwout, vn_presh, pres(1:ns)/mu0)
+  CALL cdf_write(nwout, vn_mass, mass/mu0) ! NOTE: scaling !!!
+  CALL cdf_write(nwout, vn_presh, pres(1:ns)/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_betah, beta_vol)
   CALL cdf_write(nwout, vn_buco, buco)
   CALL cdf_write(nwout, vn_bvco, bvco)

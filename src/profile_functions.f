@@ -64,18 +64,20 @@
       REAL(rprec) :: xx, pcurr, x, xp, temp_num, temp_denom
       CHARACTER(len=20) :: pcurr_type_lc
 
+      ! knots and weights for 10-point Gauss-Legendre quadrature
       INTEGER, PARAMETER          :: gln = 10
       INTEGER                     :: gli
       REAL(rprec), DIMENSION(gln), PARAMETER :: glx = (/                       &
      &   0.01304673574141414, 0.06746831665550774, 0.1602952158504878,         &
-     &   0.2833023029353764, 0.4255628305091844, 0.5744371694908156,           &
-     &   0.7166976970646236, 0.8397047841495122, 0.9325316833444923,           &
-     &   0.9869532642585859 /)
+     &   0.2833023029353764,  0.4255628305091844,  0.5744371694908156,         &
+     &   0.7166976970646236,  0.8397047841495122,  0.9325316833444923,         &
+     &   0.9869532642585859  /)
       REAL(rprec), DIMENSION(gln), PARAMETER :: glw = (/                       &
-     &   0.03333567215434407, 0.0747256745752903, 0.1095431812579910,          &
-     &   0.1346333596549982, 0.1477621123573764, 0.1477621123573764,           &
-     &   0.1346333596549982, 0.1095431812579910, 0.0747256745752903,           &
+     &   0.03333567215434407, 0.0747256745752903,  0.1095431812579910,         &
+     &   0.1346333596549982,  0.1477621123573764,  0.1477621123573764,         &
+     &   0.1346333596549982,  0.1095431812579910,  0.0747256745752903,         &
      &   0.03333567215434407 /)
+
       REAL(rprec) :: g1,g2,g3,g4,a8,a12
 
 !-----------------------------------------------
@@ -85,6 +87,7 @@
 !
 !  Start of executable code
 
+      ! limit radial location to 1, even if bloat factor expands profile further
       x = MIN (ABS(xx * bloat), one)
       ioff = LBOUND(ac,1)            ! Expected to be zero.
 
@@ -101,8 +104,8 @@
 !  Gauss-Legendre Quadrature to get I(s)
          DO gli = 1,gln
             xp = x * glx(gli)
-            pcurr = pcurr + glw(gli) * ac(0) * (exp(-(xp / ac(1)) ** 2)        &
-     &         - exp(-(1 / ac(1)) ** 2))
+            pcurr = pcurr + glw(gli) * ac(0) * (  exp(-(xp / ac(1)) ** 2)        &
+     &                                          - exp(-( 1 / ac(1)) ** 2))
          END DO
          pcurr = pcurr * x     ! correct for x interval
 
@@ -335,8 +338,6 @@
 !    nice_quadratic    quadratic with rerranged coefficients.
 !    line_segment      Linearly interpolated line segments
 !    power_series      Power Series (Default)
-!    True -  ai parameterization specifies q-profile (= 1 / iota)
-!    False - ai parameterization is for iota-profile
 
 !    Local Variables
 !  i                integer counter
@@ -436,7 +437,7 @@
 !       a2 is the shift of iota(1/2) from the straight line value
 !          (Thus, a2 = 0 gives a linear iota profile.
          piota = ai(0) * (one - x) + ai(1) * x + 4 * ai(2) *                   &
-     &      x * (one - x)
+     &                                           x * (one - x)
 
       CASE('line_segment')
 !!  Linearly interpolated line segments to determine the iotabar profile.

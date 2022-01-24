@@ -216,9 +216,9 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">!  Gauss-Legendre Quadrature to get I(s)</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>         <span class="keywordflow">DO</span> gli = 1,gln</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            xp = x * glx(gli)</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> = <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> + glw(gli) * <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(0) * (  exp(-(xp / <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(1)) ** 2<span class="comment">)        &amp;</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span>     &amp;                                          - exp(-( 1 / <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(1)) ** 2<span class="comment">))</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span><span class="keywordflow">         END DO</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> = <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> + glw(gli) * <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(0) * (exp(-(xp / <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(1)) ** 2) <span class="comment">       &amp;</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span>     &amp;                                        - exp(-( 1 / <a class="code hl_variable" href="../../d8/dbf/namespacevmec__input.html#a1586243cee1e2c1eeddfac244e343ee6">ac</a>(1)) ** 2))</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keywordflow">         END DO</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>         <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> = <a class="code hl_function" href="../../da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0">pcurr</a> * x     <span class="comment">! correct for x interval</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      <span class="keywordflow">CASE</span> (<span class="stringliteral">&#39;two_power&#39;</span>)</div>
@@ -782,7 +782,7 @@ $(document).ready(function(){initNavTree('da/dc8/profile__functions_8f_source.ht
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/dc8/profile__functions_8f.html">profile_functions.f</a></li>
-    <li class="footer">Generated on Mon Jan 24 2022 11:40:52 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Jan 24 2022 21:32:44 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

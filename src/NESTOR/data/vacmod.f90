@@ -4,15 +4,13 @@ MODULE vacmod
   USE vacmod0
   USE vac_persistent
   USE vparams, ONLY: zero, one, c2p0, cp5, mu0
+  use vmec_input, only: vac_1_2
 
   IMPLICIT NONE
 
 
 
   integer, save :: icall = 0
-
-
-
 
   REAL(rprec), PARAMETER :: p5 = cp5
   REAL(rprec), PARAMETER :: two = c2p0
@@ -186,8 +184,13 @@ subroutine allocate_nestor
      stop 'could not allocate m_map, n_map'
   end if
 
-  ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
-  IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
+  if (vac_1_2 .eq. 1) then
+    ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
+    IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
+  else ! vac2 and vac3 always work with the sin+cos full arrays!
+    ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv), stat=istat2)
+    IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
+  end if
 
   brv=0
   bphiv=0

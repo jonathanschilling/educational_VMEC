@@ -263,7 +263,6 @@ SUBROUTINE funct3d (ier_flag)
                           lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
            else
              if (ntor .gt. 0) then ! Stellarator version
-!              print *, "ctor = ", ctor
                ! vac2: fully 3d case (does not work for axisymmetric case)
                call vac2_vacuum(rmnc, rmns, zmns, zmnc, xm, xn, &
                                 ctor, rbtor, ivacskip, ivac, mnmax, ntheta3)
@@ -362,6 +361,8 @@ SUBROUTINE funct3d (ier_flag)
         !print *, "max bsqvac = ", maxval(bsqvac)
 
         if (open_dbg_context("rbsq")) then
+
+          print *, "rbsq; nzeta=",nzeta, " ntheta3=",ntheta3
 
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
 

@@ -8,6 +8,8 @@ project (VMEC Fortran C CXX)
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package (NetCDF MODULE REQUIRED)
 
+find_package (FFTW MODULE REQUIRED COMPONENTS DOUBLE_LIB)
+
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "ON")
 
 # Set a directories to build all binary files.
@@ -39,15 +41,28 @@ else ()
 	message (FATAL_ERROR "Failed to find the required netcdf libraries.")
 endif ()
 
+if (FFTW_DOUBLE_LIB_FOUND)
+	message (STATUS "Using fftw")
+	include_directories (${FFTW_INCLUDE_DIRS})
+else ()
+	message (FATAL_ERROR "Failed to find the required fftw library.")
+endif ()
+
 set (vmec_sources "")
 add_subdirectory(src)
 add_subdirectory(json-fortran)
+
+# if you have access to the vac2 and vac3 versions of NESTOR (contact me),
+# they are included here
+add_subdirectory(src/vac2)
+add_subdirectory(src/vac3)
 
 add_library (vmec STATIC ${vmec_sources})
 set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 target_include_directories(vmec PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 
 target_link_libraries (vmec PUBLIC ${NETCDF_LIBRARIES})
+target_link_libraries (vmec PUBLIC ${FFTW_DOUBLE_LIB})
 
 if (BLAS_FOUND)
 	target_link_libraries (vmec PUBLIC ${BLAS_LIBRARIES})

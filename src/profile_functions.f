@@ -104,8 +104,8 @@
 !  Gauss-Legendre Quadrature to get I(s)
          DO gli = 1,gln
             xp = x * glx(gli)
-            pcurr = pcurr + glw(gli) * ac(0) * (  exp(-(xp / ac(1)) ** 2)        &
-     &                                          - exp(-( 1 / ac(1)) ** 2))
+            pcurr = pcurr + glw(gli) * ac(0) * (exp(-(xp / ac(1)) ** 2)        &
+     &                                        - exp(-( 1 / ac(1)) ** 2))
          END DO
          pcurr = pcurr * x     ! correct for x interval
 

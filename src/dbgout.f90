@@ -106,16 +106,16 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_phys_gc
   else if (trim(context_name) .eq. "multigrid_result") then
     open_dbg_context         = dump_multigrid_result
+
+    ! multigrid_result needs to be written once at end of many iterations,
+    ! so the usual should_write logic needs to be broken here
+    should_write = .true.
+
   else if (trim(context_name) .eq. "bcovar_fileout") then
     open_dbg_context         = dump_bcovar_fileout
   else if (trim(context_name) .eq. "bss") then
     open_dbg_context         = dump_bss
 
-
-
-    ! multigrid_result needs to be written once at end of many iterations,
-    ! so the usual should_write logic needs to be broken here
-    should_write = .true.
 
   ! NESTOR
   else if (trim(context_name) .eq. "vac1n_vacuum") then

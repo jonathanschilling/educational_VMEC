@@ -12,7 +12,7 @@ FUNCTION aspectratio()
   IMPLICIT NONE
 
   INTEGER :: lk, l
-  REAL(rprec) :: rb, zub, pi, t1, aspectratio
+  REAL(rprec) :: rb, zub, t1, aspectratio ! pi,
 
  ! routine for computing aspect-ratio (independent of elongation):
  ! A = <R>/<ab>**.5

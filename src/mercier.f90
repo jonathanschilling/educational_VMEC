@@ -41,7 +41,6 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: zt
   REAL(rprec), DIMENSION(ns,nznt,0:1), INTENT(in)    :: zz
   REAL(rprec), DIMENSION(ns*nznt),     INTENT(in)    :: bsubu
-  REAL(rprec), DIMENSION(ns),          INTENT(in)    :: iotas
   REAL(rprec), DIMENSION(ns),          INTENT(in)    :: vp
   REAL(rprec), DIMENSION(ns),          INTENT(in)    :: phips
   REAL(rprec), DIMENSION(ns),          INTENT(in)    :: pres
@@ -143,7 +142,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
     gtt(:) = rtf(:)*rtf(:) + ztf(:)*ztf(:) ! g_uu
 
-    gpp(i,:) = gsqrt_full(i,:)**2
+    gpp(i,:) = gsqrt_full(i,:)**2 &
                / (  gtt(:)*r1f(:)**2                &
                   + (rtf(:)*zzf(:) - rzf(:)*ztf(:))**2) ! 1/gpp
   END DO

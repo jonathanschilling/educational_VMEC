@@ -414,8 +414,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 90 FORMAT(/,71('-'),/,&
             ' MORE GEOMETRIC AND PHYSICS QUANTITIES',/,71('-'),/,&
             ' Toroidal Plane: Phi = 0',/,                     &
-            5x,'j',3x,'psi-psiaxis',9x,'a [M]',3x,'ellipticity',3x,'indentation',7x,'d-shape',4x,'rel. shift',6x,'<J||**2>/',4x,'<JPS**2>/',/,   &
-            95x,                                                                                                '<J-perp**2>',3x,'<J-perp**2>'/, &
+            5x,'j',3x,'psi-psiaxis',9x,'a [M]',3x,'ellipticity',3x,'indentation',&
+            7x,'d-shape',4x,'rel. shift',6x,'<J||**2>/',4x,'<JPS**2>/',/,   &
+            95x,                          '<J-perp**2>',3x,'<J-perp**2>'/, &
             ' -----',8(2x,12('-')))
 
   fac = twopi*hs*signgs

@@ -256,12 +256,24 @@ SUBROUTINE funct3d (ier_flag)
         end if
 
         if (.not. lexternal_nestor) then
-           ! use internal NESTOR
-           CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                                    &
-                        ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
-                        lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
-
-        else
+           if (vac_1_2 .eq. 1) then
+             ! vac1: use default NESTOR
+             CALL vacuum (rmnc, rmns, zmns, zmnc, xm, xn,                                    &
+                          ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
+                          lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
+           else
+             if (ntor .gt. 0) then ! Stellarator version
+!              print *, "ctor = ", ctor
+               ! vac2: fully 3d case (does not work for axisymmetric case)
+               call vac2_vacuum(rmnc, rmns, zmns, zmnc, xm, xn, &
+                                ctor, rbtor, ivacskip, ivac, mnmax, ntheta3)
+             else ! ntor == 0 --> Tokamak version
+               ! axisymmetric special case
+               call vac3_vacuum(rmnc, rmns, zmns, zmnc, xm, &
+                                ctor, ivacskip, ivac, mnmax)
+             end if ! ntor .gt. 0
+           end if ! vac_1_2
+        else ! lexternal_nestor
            ! construct command with argument for stand-alone external NESTOR
            write(nestor_cmd, "(A,X,A)") trim(nestor_executable), trim(vac_file)
 
@@ -270,7 +282,7 @@ SUBROUTINE funct3d (ier_flag)
            call system(nestor_cmd)
 
            !print *, "system call to NESTOR finished"
-        end if
+        end if ! lexternal_nestor
 
         if (ldump_vacuum_ref) then
            ! construct filename for reference NESTOR output

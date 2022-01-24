@@ -167,6 +167,7 @@ subroutine vmec
               EXIT
            end if
 
+
            ! If this point is reached, the current multi-grid step should have properly converged.
            ! Now dump the current state vector for debugging.
            if (open_dbg_context("multigrid_result")) then

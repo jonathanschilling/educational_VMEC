@@ -62,11 +62,10 @@ MODULE vmec_input
   LOGICAL                           :: lfreeb
   LOGICAL                           :: lasym
 
-  ! switch between implementations of NESTOR:
-  ! vac1 (magnetic scalar potential, both Stellarator and Tokamak)
-  ! vac2/vac3 (surface current density, Stellarator/Tokamak)
-  ! Only vac1 is available in educational_VMEC.
-  ! Therefore, this flag is ignored here.
+  !> switch between implementations of NESTOR:
+  !> vac1 (magnetic scalar potential, both Stellarator and Tokamak)
+  !> vac2/vac3 (surface current density, Stellarator/Tokamak)
+  !> Only vac1 is available in educational_VMEC by default.
   integer                           :: vac_1_2
 
   ! RESET lbsubs DEFAULT FLAG TO FALSE TO CAPTURE CURRENT SHEETS!
@@ -294,6 +293,8 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   phiedge = 1
 
   mgrid_file = 'NONE'
+
+  vac_1_2 = 1 ! vac1 NESTOR by default
 
   lfreeb = .true.
   lasym = .false.

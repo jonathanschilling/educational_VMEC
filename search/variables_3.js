@@ -19,7 +19,7 @@ var searchData=
   ['dp_16',['dp',['../db/dcb/namespacestel__kinds.html#a1b8eb9b17bcf3eddadaa1754b9d0c165',1,'stel_kinds']]],
   ['drv_17',['drv',['../dd/df2/namespacevacmod.html#afbcad9be62d0ea8db9575d72c9b45567',1,'vacmod']]],
   ['dsave_18',['dsave',['../dd/df2/namespacevacmod.html#a959cbeecbdb8c96efe45eff49d1aab79',1,'vacmod']]],
-  ['dshear_19',['dshear',['../dc/d06/namespacevmercier.html#a92397e5c7ce05cc057fc1b1e0ab25062',1,'vmercier::dshear()'],['../db/dae/namespaceread__wout__mod.html#ad8e878cbf1ead53c340819d2ee953627',1,'read_wout_mod::dshear()']]],
+  ['dshear_19',['dshear',['../db/dae/namespaceread__wout__mod.html#ad8e878cbf1ead53c340819d2ee953627',1,'read_wout_mod::dshear()'],['../dc/d06/namespacevmercier.html#a92397e5c7ce05cc057fc1b1e0ab25062',1,'vmercier::dshear()']]],
   ['dsiext_20',['dsiext',['../d1/d41/namespacemgrid__mod.html#a1cec8b884ffc737f1d5b2ff449f36073',1,'mgrid_mod']]],
   ['dsilabel_21',['dsilabel',['../d1/d41/namespacemgrid__mod.html#ad0e5b76a994482eab2d68c0d8ef6d68b',1,'mgrid_mod']]],
   ['dsiobt_22',['dsiobt',['../db/dae/namespaceread__wout__mod.html#a513ec2db308b4b3cba980315d24e16a5',1,'read_wout_mod']]],
@@ -70,6 +70,15 @@ var searchData=
   ['dump_5fvac1n_5fsolver_67',['dump_vac1n_solver',['../d8/dbf/namespacevmec__input.html#ab25852e02b73dd958288afd4df916397',1,'vmec_input']]],
   ['dump_5fvac1n_5fsurface_68',['dump_vac1n_surface',['../d8/dbf/namespacevmec__input.html#a7f680eacbb780a8cdd418779ead7211b',1,'vmec_input']]],
   ['dump_5fvac1n_5fvacuum_69',['dump_vac1n_vacuum',['../d8/dbf/namespacevmec__input.html#a2648bcdf30cbc344a8e51526cb4415a4',1,'vmec_input']]],
-  ['dump_5fvolume_70',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
-  ['dwell_71',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
+  ['dump_5fvac2_5fanalin_70',['dump_vac2_analin',['../d8/dbf/namespacevmec__input.html#a1f8d530d4c3bcff494b3e28878bd70a8',1,'vmec_input']]],
+  ['dump_5fvac2_5fanalyt_71',['dump_vac2_analyt',['../d8/dbf/namespacevmec__input.html#a000f3e62c18d5e2c381294dce24b980f',1,'vmec_input']]],
+  ['dump_5fvac2_5fbexmat_72',['dump_vac2_bexmat',['../d8/dbf/namespacevmec__input.html#a453490037488cbffdfce187b5d2b8c57',1,'vmec_input']]],
+  ['dump_5fvac2_5fbsqvac_73',['dump_vac2_bsqvac',['../d8/dbf/namespacevmec__input.html#ab6d0351efd074bc8de55444b97f7fe0c',1,'vmec_input']]],
+  ['dump_5fvac2_5ffoumat_74',['dump_vac2_foumat',['../d8/dbf/namespacevmec__input.html#a268e30890dc48f346eaef239811d0a2a',1,'vmec_input']]],
+  ['dump_5fvac2_5fmatrix_75',['dump_vac2_matrix',['../d8/dbf/namespacevmec__input.html#a124df3d6871e59c38800b4e0a84ac866',1,'vmec_input']]],
+  ['dump_5fvac2_5fprecal_76',['dump_vac2_precal',['../d8/dbf/namespacevmec__input.html#a1e81aa150ea00cb516654ea1e32c3cad',1,'vmec_input']]],
+  ['dump_5fvac2_5fsurface_77',['dump_vac2_surface',['../d8/dbf/namespacevmec__input.html#a0051545d591f94667d3caacac2ef8837',1,'vmec_input']]],
+  ['dump_5fvac2_5fvacuum_78',['dump_vac2_vacuum',['../d8/dbf/namespacevmec__input.html#a40375dd17b404192e0dd9606630c2cdd',1,'vmec_input']]],
+  ['dump_5fvolume_79',['dump_volume',['../d8/dbf/namespacevmec__input.html#a5b66a9de88da42cdd94f9516628b97bd',1,'vmec_input']]],
+  ['dwell_80',['dwell',['../dc/d06/namespacevmercier.html#a480921f11b52dea48cc6bc7d63bc37f9',1,'vmercier::dwell()'],['../db/dae/namespaceread__wout__mod.html#a752187c4b66ab9133e90bc8e30da4b6e',1,'read_wout_mod::dwell()']]]
 ];

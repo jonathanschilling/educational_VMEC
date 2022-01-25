@@ -364,7 +364,7 @@ SUBROUTINE funct3d (ier_flag)
 
           print *, "rbsq; nzeta=",nzeta, " ntheta3=",ntheta3
 
-          call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
+          call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns)) ! TODO: this triggers valgrind; uninitialized memory ?
 
           call close_dbg_out()
         end if

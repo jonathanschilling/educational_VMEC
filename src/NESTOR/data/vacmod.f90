@@ -184,13 +184,8 @@ subroutine allocate_nestor
      stop 'could not allocate m_map, n_map'
   end if
 
-  if (vac_1_2 .eq. 1) then
-    ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
-    IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
-  else ! vac2 and vac3 always work with the sin+cos full arrays!
-    ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv), stat=istat2)
-    IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
-  end if
+  ALLOCATE (brv(nuv2), bphiv(nuv2), bzv(nuv2), bsqvac(nuv2), stat=istat2)
+  IF (istat2.ne.0) STOP 'allocation error #2 in allocate_nestor'
 
   brv=0
   bphiv=0

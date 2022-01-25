@@ -465,7 +465,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>          print *, <span class="stringliteral">&quot;rbsq; nzeta=&quot;</span>,<a class="code hl_variable" href="../../db/dc0/namespacenestor__io.html#a233cf20e2b43103446e6b9c9e41092c9">nzeta</a>, <span class="stringliteral">&quot; ntheta3=&quot;</span>,ntheta3</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>          <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rbsq&quot;</span>, <a class="code hl_variable" href="../../db/dc0/namespacenestor__io.html#a233cf20e2b43103446e6b9c9e41092c9">nzeta</a>, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a589bbb8c02098efe14d62d0276b59e11">rbsq</a>(ns:nrzt:ns))</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>          <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rbsq&quot;</span>, <a class="code hl_variable" href="../../db/dc0/namespacenestor__io.html#a233cf20e2b43103446e6b9c9e41092c9">nzeta</a>, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a589bbb8c02098efe14d62d0276b59e11">rbsq</a>(ns:nrzt:ns)) <span class="comment">! TODO: this triggers valgrind; uninitialized memory ?</span></div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>          <span class="keyword">call </span>close_dbg_out()</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="keywordflow">        end if</span></div>
@@ -667,7 +667,7 @@ $(document).ready(function(){initNavTree('d3/d4f/funct3d_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d4f/funct3d_8f90.html">funct3d.f90</a></li>
-    <li class="footer">Generated on Mon Jan 24 2022 22:02:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Jan 25 2022 16:18:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 </body>

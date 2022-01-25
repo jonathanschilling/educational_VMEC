@@ -137,6 +137,16 @@ MODULE vmec_input
   logical :: dump_vac1n_solver  = .false.
   logical :: dump_vac1n_bsqvac  = .false.
 
+  logical :: dump_vac2_vacuum   = .false.
+  logical :: dump_vac2_precal   = .false.
+  logical :: dump_vac2_surface  = .false.
+  logical :: dump_vac2_bexmat   = .false.
+  logical :: dump_vac2_matrix   = .false.
+  logical :: dump_vac2_foumat   = .false.
+  logical :: dump_vac2_analin   = .false.
+  logical :: dump_vac2_analyt   = .false.
+  logical :: dump_vac2_bsqvac   = .false.
+
 
 
   NAMELIST /indata/ &
@@ -227,7 +237,7 @@ MODULE vmec_input
      dump_bcovar_fileout     , &
      dump_bss, &
      vac_1_2, &
-     dump_vac1n_vacuum,  &
+     dump_vac1n_vacuum,  & ! NESTOR vac1
      dump_vac1n_precal,  &
      dump_vac1n_surface, &
      dump_vac1n_bextern, &
@@ -236,7 +246,16 @@ MODULE vmec_input
      dump_vac1n_fourp,   &
      dump_vac1n_fouri,   &
      dump_vac1n_solver,  &
-     dump_vac1n_bsqvac
+     dump_vac1n_bsqvac, &
+     dump_vac2_vacuum , & ! NESTOR vac2
+     dump_vac2_precal , &
+     dump_vac2_surface, &
+     dump_vac2_bexmat , &
+     dump_vac2_matrix , &
+     dump_vac2_foumat , &
+     dump_vac2_analin , &
+     dump_vac2_analyt , &
+     dump_vac2_bsqvac
 
 
 CONTAINS

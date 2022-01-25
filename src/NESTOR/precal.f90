@@ -231,6 +231,7 @@ SUBROUTINE precal
   precal_done = .true.
 
   if (open_dbg_context("vac1n_precal", id=icall)) then
+
     call add_int("nvper", nvper)
     call add_int("nuv_tan", nuv_tan)
 

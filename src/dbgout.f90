@@ -117,7 +117,7 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_bss
 
 
-  ! NESTOR
+  ! NESTOR vac1
   else if (trim(context_name) .eq. "vac1n_vacuum") then
     open_dbg_context         = dump_vac1n_vacuum
   else if (trim(context_name) .eq. "vac1n_precal") then
@@ -139,6 +139,17 @@ function open_dbg_context(context_name, repetition, id)
   else if (trim(context_name) .eq. "vac1n_bsqvac") then
     open_dbg_context         = dump_vac1n_bsqvac
 
+  ! NESTOR vac2
+  else if (trim(context_name) .eq. "vac2_vacuum") then
+    open_dbg_context         = dump_vac2_vacuum
+  else if (trim(context_name) .eq. "vac2_precal") then
+    open_dbg_context         = dump_vac2_precal
+  else if (trim(context_name) .eq. "vac2_surface") then
+    open_dbg_context         = dump_vac2_surface
+  else if (trim(context_name) .eq. "vac2_bexmat") then
+    open_dbg_context         = dump_vac2_bexmat
+
+
   ! default
   else
     write(*,*) "unknown debug output context: '",trim(context_name),"'"
@@ -152,7 +163,7 @@ function open_dbg_context(context_name, repetition, id)
 
     ! debugging output into separate folder "input_extension"
     output_folder = trim(input_extension) // "/" // trim(context_name)
-    CALL system("mkdir -p "//trim(output_folder))
+    CALL system("mkdir -p "//trim(output_folder)) ! NOTE: This only works on Linux/Unix !!!
 
     if (present(id)) then
       if (present(repetition)) then
@@ -171,7 +182,7 @@ function open_dbg_context(context_name, repetition, id)
                                   trim(context_name),  &
                                   ns, iter2, repetition, &
                                   trim(input_extension)
-      else
+      else ! default: ns, iter2 for filename
         write(dump_filename, 999) trim(output_folder), &
                                   trim(context_name),  &
                                   ns, iter2, trim(input_extension)

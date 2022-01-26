@@ -148,6 +148,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac2_surface
   else if (trim(context_name) .eq. "vac2_bexmat") then
     open_dbg_context         = dump_vac2_bexmat
+  else if (trim(context_name) .eq. "vac2_matrix") then
+    open_dbg_context         = dump_vac2_matrix
 
 
   ! default

@@ -146,6 +146,7 @@ MODULE vmec_input
   logical :: dump_vac2_analin   = .false.
   logical :: dump_vac2_analyt   = .false.
   logical :: dump_vac2_foumat   = .false.
+  logical :: dump_vac2_linsys   = .false.
   logical :: dump_vac2_bsqvac   = .false.
 
 
@@ -247,16 +248,17 @@ MODULE vmec_input
      dump_vac1n_fourp,   &
      dump_vac1n_fouri,   &
      dump_vac1n_solver,  &
-     dump_vac1n_bsqvac, &
-     dump_vac2_vacuum , & ! NESTOR vac2
-     dump_vac2_precal , &
-     dump_vac2_surface, &
-     dump_vac2_bexmat , &
-     dump_vac2_matrix , &
+     dump_vac1n_bsqvac,  &
+     dump_vac2_vacuum,   & ! NESTOR vac2
+     dump_vac2_precal,   &
+     dump_vac2_surface,  &
+     dump_vac2_bexmat,   &
+     dump_vac2_matrix,   &
      dump_vac2_foumat_unreg , &
-     dump_vac2_analin , &
-     dump_vac2_analyt , &
-     dump_vac2_foumat , &
+     dump_vac2_analin,   &
+     dump_vac2_analyt,   &
+     dump_vac2_foumat,   &
+     dump_vac2_linsys,   &
      dump_vac2_bsqvac
 
 

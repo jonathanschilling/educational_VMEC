@@ -158,6 +158,9 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac2_analyt
   else if (trim(context_name) .eq. "vac2_foumat") then
     open_dbg_context         = dump_vac2_foumat
+  else if (trim(context_name) .eq. "vac2_linsys") then
+    open_dbg_context         = dump_vac2_linsys
+    
 
 
   ! default

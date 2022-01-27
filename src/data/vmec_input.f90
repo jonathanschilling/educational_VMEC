@@ -147,6 +147,7 @@ MODULE vmec_input
   logical :: dump_vac2_analyt   = .false.
   logical :: dump_vac2_foumat   = .false.
   logical :: dump_vac2_linsys   = .false.
+  logical :: dump_vac2_linslv   = .false.
   logical :: dump_vac2_bsqvac   = .false.
 
 
@@ -259,6 +260,7 @@ MODULE vmec_input
      dump_vac2_analyt,   &
      dump_vac2_foumat,   &
      dump_vac2_linsys,   &
+     dump_vac2_linslv,   &
      dump_vac2_bsqvac
 
 

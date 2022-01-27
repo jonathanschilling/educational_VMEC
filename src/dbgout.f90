@@ -162,7 +162,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_vac2_linsys
   else if (trim(context_name) .eq. "vac2_linslv") then
     open_dbg_context         = dump_vac2_linslv
-        
+  else if (trim(context_name) .eq. "vac2_bsqvac") then
+    open_dbg_context         = dump_vac2_bsqvac
 
 
   ! default

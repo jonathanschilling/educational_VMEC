@@ -142,9 +142,10 @@ MODULE vmec_input
   logical :: dump_vac2_surface  = .false.
   logical :: dump_vac2_bexmat   = .false.
   logical :: dump_vac2_matrix   = .false.
-  logical :: dump_vac2_foumat   = .false.
+  logical :: dump_vac2_foumat_unreg = .false.
   logical :: dump_vac2_analin   = .false.
   logical :: dump_vac2_analyt   = .false.
+  logical :: dump_vac2_foumat   = .false.
   logical :: dump_vac2_bsqvac   = .false.
 
 
@@ -252,9 +253,10 @@ MODULE vmec_input
      dump_vac2_surface, &
      dump_vac2_bexmat , &
      dump_vac2_matrix , &
-     dump_vac2_foumat , &
+     dump_vac2_foumat_unreg , &
      dump_vac2_analin , &
      dump_vac2_analyt , &
+     dump_vac2_foumat , &
      dump_vac2_bsqvac
 
 

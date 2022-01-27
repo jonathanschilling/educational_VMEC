@@ -583,6 +583,7 @@ var namespaces_dup =
       [ "dump_vac2_bsqvac", "d8/dbf/namespacevmec__input.html#ab6d0351efd074bc8de55444b97f7fe0c", null ],
       [ "dump_vac2_foumat", "d8/dbf/namespacevmec__input.html#a268e30890dc48f346eaef239811d0a2a", null ],
       [ "dump_vac2_foumat_unreg", "d8/dbf/namespacevmec__input.html#aae52f9f2ebc0adf746422d20bf9a1873", null ],
+      [ "dump_vac2_linslv", "d8/dbf/namespacevmec__input.html#a59bf044959bdf4ae6a62c3960f3881ab", null ],
       [ "dump_vac2_linsys", "d8/dbf/namespacevmec__input.html#acb2cccb1fb70feeab232b6e1d714655c", null ],
       [ "dump_vac2_matrix", "d8/dbf/namespacevmec__input.html#a124df3d6871e59c38800b4e0a84ac866", null ],
       [ "dump_vac2_precal", "d8/dbf/namespacevmec__input.html#a1e81aa150ea00cb516654ea1e32c3cad", null ],

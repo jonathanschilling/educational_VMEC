@@ -532,7 +532,7 @@ SUBROUTINE bcovar (lu, lv)
     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt) ! will be undone again in jxbforce...
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-    if (open_dbg_context("bcovar_fileout")) then
+    if (open_dbg_context("bcovar_fileout", id=0)) then
 
       call add_real_3d("lu_e", ns, nzeta, ntheta3, lu(:nrzt,0))
       call add_real_3d("lv_e", ns, nzeta, ntheta3, lv(:nrzt,0))

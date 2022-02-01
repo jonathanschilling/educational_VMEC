@@ -548,6 +548,7 @@ var namespaces_dup =
       [ "dump_guess_axis", "d8/dbf/namespacevmec__input.html#a1ab18706b83ddbb3982eb30c013587bd", null ],
       [ "dump_interp", "d8/dbf/namespacevmec__input.html#a9495d7b36be1d8815574e1c6ca51ba27", null ],
       [ "dump_jacobian", "d8/dbf/namespacevmec__input.html#a3ce0e9393c56963910a2ec05676246fb", null ],
+      [ "dump_jxbforce_bsub_lowpass", "d8/dbf/namespacevmec__input.html#aabb14487704aa4b41441f53fa116a2dc", null ],
       [ "dump_lambda_forces", "d8/dbf/namespacevmec__input.html#a3983385450a26dfc9fd589fa20517967", null ],
       [ "dump_lamcal", "d8/dbf/namespacevmec__input.html#a69adb221677ee4b6bfeb6e23f7032e62", null ],
       [ "dump_lulv_comb", "d8/dbf/namespacevmec__input.html#aae5724d8ffb632b177ac6c7371cf6770", null ],

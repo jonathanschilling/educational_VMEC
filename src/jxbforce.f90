@@ -24,6 +24,9 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   USE vmec_params, ONLY: signgs, mnyq, nnyq, successful_term_flag
   USE realspace,   ONLY: shalf, wint, guu, guv, gvv, r1, ru, rv, zu, zv, phip
   USE ezcdf
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: bsupu
@@ -327,15 +330,26 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   IF (lasym) CALL fsym_invfft (bsubsu, bsubsv)
 
 
+  if (open_dbg_context("jxbforce_bsub_lowpass", id=0)) then
 
+    call add_real_3d("bsubu_e",  ns, nzeta, ntheta3, bsubu(:,:,0))
+    call add_real_3d("bsubv_e",  ns, nzeta, ntheta3, bsubv(:,:,0))
+    call add_real_3d("bsubu_o",  ns, nzeta, ntheta3, bsubu(:,:,1))
+    call add_real_3d("bsubv_o",  ns, nzeta, ntheta3, bsubv(:,:,1))
 
+    call add_real_4d("bsubsu", ns, 2, nzeta, ntheta3, bsubsu, order=(/1, 4, 2, 3/))
+    call add_real_4d("bsubsv", ns, 2, nzeta, ntheta3, bsubsv, order=(/1, 4, 2, 3/))
 
+    call add_real_3d("bsubuv", ns, nzeta, ntheta3, bsubuv)
+    call add_real_3d("bsubvu", ns, nzeta, ntheta3, bsubvu)
 
+    if (lprint) then
+      call add_real_4d("bsubsmn", 2, ns, mpol, 2*ntor+1, bsubsmn, &
+        order=(/ 4, 1, 2, 3 /))
+    end if
 
-
-
-
-
+    call close_dbg_out()
+  end if
 
   ! SKIPS Bsubs Correction - uses Bsubs from metric elements
   IF (lbsubs) then
@@ -343,7 +357,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   ! Compute corrected Bsubs coefficients (brhomn) (impacts currents)
   ! by solving es dot (KXB - gradp_parallel) = 0 equation for brhomn in REAL SPACE
   ! Can be written Bsupu d(bs)/du + Bsupv d(bs)/dv = RHS (jxb below), bs==bsubs
-  
+
   ! ANIMEC:
   ! brho==sigma B_s, pp1 and pp2 are the Jacobian times the hot particle parallel
   ! pressure radial gradient Amplitudes on the full integer mesh
@@ -391,7 +405,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      izeta (js,:) = bsubsv(js,:,0)
 
      IF (info .ne. 0) CYCLE ! skip until next iteration of radial loop
-     
+
      bsubsu(js,:,:) = 0
      bsubsv(js,:,:) = 0
      bsubs_s = 0
@@ -420,15 +434,15 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
            DO k = 1, nzeta
               lk = k
               DO j = 1, ntheta2
-              
+
                  tsin1 = sinmu(j,m)*cosnv(k,n)
                  tsin2 = cosmu(j,m)*sinnv(k,n)
                  bsubs_s(lk) = bsubs_s(lk) + tsin1*bsubsmn1 + tsin2*bsubsmn2
-              
+
                  tcosm1 = cosmum(j,m)*cosnv(k,n)
                  tcosm2 = sinmum(j,m)*sinnv(k,n)
                  bsubsu(js,lk,0) = bsubsu(js,lk,0) + tcosm1*bsubsmn1 + tcosm2*bsubsmn2
-                 
+
                  tcosn1 = sinmu(j,m)*sinnvn(k,n)
                  tcosn2 = cosmu(j,m)*cosnvn(k,n)
                  bsubsv(js,lk,0) = bsubsv(js,lk,0) + tcosn1*bsubsmn1 + tcosn2*bsubsmn2
@@ -437,11 +451,11 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
                  tcos1 = cosmu(j,m)*cosnv(k,n)
                  tcos2 = sinmu(j,m)*sinnv(k,n)
                  bsubs_a(lk) = bsubs_a(lk) + tcos1*bsubsmn3 + tcos2*bsubsmn4
-                 
+
                  tsinm1 = sinmum(j,m)*cosnv(k,n)
                  tsinm2 = cosmum(j,m)*sinnv(k,n)
                  bsubsu(js,lk,1) = bsubsu(js,lk,1) + tsinm1*bsubsmn3 + tsinm2*bsubsmn4
-                 
+
                  tsinn1 = cosmu(j,m)*sinnvn(k,n)
                  tsinn2 = sinmu(j,m)*cosnvn(k,n)
                  bsubsv(js,lk,1) = bsubsv(js,lk,1) + tsinn1*bsubsmn3 + tsinn2*bsubsmn4
@@ -555,7 +569,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   avforce = 0
   aminfor = 0
   amaxfor = 0
-  
+
   dnorm1 = twopi*twopi
 
   DO js = 2, ns1
@@ -573,43 +587,43 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
      kperpu(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))* pprime(:)/sqgb2
      kperpv(:nznt) =-cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))* pprime(:)/sqgb2
-     
+
      kp2(:nznt)=cp5*(    kperpu**2        * (guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
                      + 2*kperpu*kperpv    * (guv(js+1:nrzt:ns) + guv(js:nrzt:ns)) &
                      +          kperpv**2 * (gvv(js+1:nrzt:ns) + gvv(js:nrzt:ns)))
-            
+
      itheta(js,:nznt) =  bsubsv(js,:nznt,0) - ohs*(bsubv(js+1,:nznt,0) - bsubv(js,:nznt,0))
      izeta(js,:nznt)  = -bsubsu(js,:nznt,0) + ohs*(bsubu(js+1,:nznt,0) - bsubu(js,:nznt,0))
-     
+
      itheta(js,:nznt) = itheta(js,:nznt)/mu0
      izeta(js,:nznt)  = izeta(js,:nznt)/mu0
-     
+
      ! can be computed above (before lbsubs, where this appears as well)
      sqrtg(:) = cp5*(gsqrt(js,:) + gsqrt(js+1,:))
-     
+
      bsupu1(:nznt) = cp5*(bsupu(js+1,:nznt)*gsqrt(js+1,:) + bsupu(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
      bsupv1(:nznt) = cp5*(bsupv(js+1,:nznt)*gsqrt(js+1,:) + bsupv(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
-     
+
      bsubu1(:nznt) = cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))
      bsubv1(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))
-     
+
      jxb(:nznt) = ovp*(itheta(js,:nznt) * bsupv1(:nznt) - izeta (js,:nznt) * bsupu1(:nznt))
-     
+
      bdotk(js,:nznt) = itheta(js,:nznt) * bsubu1(:nznt) + izeta (js,:nznt) * bsubv1(:nznt)
-     
+
      pprime(:nznt) = ovp*pprime(:nznt)
      pnorm = one/(ABS(pprime(1)) + EPSILON(pprime(1)))
-     
+
      amaxfor(js) = MAXVAL(jxb(:nznt) - pprime(:))*pnorm
      aminfor(js) = MINVAL(jxb(:nznt) - pprime(:))*pnorm
-     
+
      avforce(js) = SUM(wint(2:nrzt:ns)*(jxb(:nznt) - pprime(:)))
-     
+
      amaxfor(js) = 100*MIN(amaxfor(js), 9.999_dp)
      aminfor(js) = 100*MAX(aminfor(js),-9.999_dp)
-     
+
      pprim(js) = SUM(wint(js:nrzt:ns)*pprime(:))
-     
+
      ! Compute <K dot B>, <B sup v> = signgs*phip
      ! jpar2 = <j||**2>, jperp2 = <j-perp**2>,  with <...> = flux surface average
 
@@ -617,7 +631,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      bdotb(js) = dnorm1*tjnorm*SUM(sqgb2(:nznt)   *wint(2:nrzt:ns))
 
      bdotgradv(js) = cp5*dnorm1*tjnorm*(phip(js) + phip(js+1)) ! TODO: could also use phips here?
-     
+
      jpar2(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)**2 * wint(2:nrzt:ns)/sqgb2(:nznt))
      jperp2(js)= dnorm1*tjnorm*SUM(kp2(:nznt)*wint(2:nrzt:ns)*sqrtg(:nznt))
 
@@ -628,27 +642,27 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
            DO lt = 1, ntheta3
               lk = lz + nzeta*(lt-1)
               ! lu (js,lz,lt ) =  lt
-              
+
               jsupu3 (js,lz,lt) = ovp*itheta(js,lk)
               jsupv3 (js,lz,lt) = ovp*izeta(js,lk)
               jsups3 (js,lz,lt) = ovp*(bsubuv(js,lk) - bsubvu(js,lk))/mu0
-              
+
               bsupu3 (js,lz,lt) = bsupu1(lk)
               bsupv3 (js,lz,lt) = bsupv1(lk)
-              
+
               jcrossb (js,lz,lt) = jxb(lk)
               jxb_gradp (js,lz,lt) = (jxb(lk) - pprime(lk))
               jdotb_sqrtg (js,lz,lt) = ovp*bdotk(js,lk)
-              
+
               sqrtg3(js,lz,lt) = sqrtg(lk)*ovp
-              
+
               bsubu3(js,lz,lt) = bsubu(js,lk,0)
               bsubv3(js,lz,lt) = bsubv(js,lk,0)
               bsubs3(js,lz,lt) = bsubs(js,lk)
            END DO
         END DO
      ENDIF ! lprint_flag
-     
+
   END DO ! radial
 
   ! Need in wrout
@@ -674,6 +688,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)
 
 
+
+
+
+  ! TODO: debug ouput for "JXBOUT" case
 
 
 
@@ -753,7 +771,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
   ! COMPUTE MERCIER CRITERION
   bdotk = mu0*bdotk
-                   
+
   !            gsqrt, bsq, bdotj, iotas, wint
   CALL Mercier(gsqrt, bsq, bdotk, iotas, wint, &
   !            r1, rt, rz, zt, zz

@@ -122,8 +122,11 @@ MODULE vmec_input
   logical :: dump_tomnspa             = .false.
   logical :: dump_multigrid_result    = .false.
   logical :: dump_rbsq                = .false.
-  logical :: dump_bcovar_fileout      = .false.
-  logical :: dump_bss                 = .false.
+
+  ! fileout
+  logical :: dump_bcovar_fileout        = .false.
+  logical :: dump_bss                   = .false.
+  logical :: dump_jxbforce_bsub_lowpass = .false.
 
   ! debugging output flags for NESTOR
   logical :: dump_vac1n_vacuum  = .false.
@@ -200,7 +203,8 @@ MODULE vmec_input
      lfreeb,        &
      lasym,         &
      lbsubs,        &
-     max_dump                , &
+     vac_1_2,       &
+     max_dump                , & ! dbgout
      dump_add_fluxes         , &
      dump_metric             , &
      dump_volume             , &
@@ -237,30 +241,30 @@ MODULE vmec_input
      dump_tomnspa            , &
      dump_multigrid_result   , &
      dump_rbsq               , &
-     dump_bcovar_fileout     , &
-     dump_bss, &
-     vac_1_2, &
-     dump_vac1n_vacuum,  & ! NESTOR vac1
-     dump_vac1n_precal,  &
-     dump_vac1n_surface, &
-     dump_vac1n_bextern, &
-     dump_vac1n_analyt,  &
-     dump_vac1n_greenf,  &
-     dump_vac1n_fourp,   &
-     dump_vac1n_fouri,   &
-     dump_vac1n_solver,  &
-     dump_vac1n_bsqvac,  &
-     dump_vac2_vacuum,   & ! NESTOR vac2
-     dump_vac2_precal,   &
-     dump_vac2_surface,  &
-     dump_vac2_bexmat,   &
-     dump_vac2_matrix,   &
+     dump_bcovar_fileout       , & ! dbgout from fileout
+     dump_bss                  , &
+     dump_jxbforce_bsub_lowpass, &
+     dump_vac1n_vacuum  , & ! NESTOR vac1
+     dump_vac1n_precal  , &
+     dump_vac1n_surface , &
+     dump_vac1n_bextern , &
+     dump_vac1n_analyt  , &
+     dump_vac1n_greenf  , &
+     dump_vac1n_fourp   , &
+     dump_vac1n_fouri   , &
+     dump_vac1n_solver  , &
+     dump_vac1n_bsqvac  , &
+     dump_vac2_vacuum       , & ! NESTOR vac2
+     dump_vac2_precal       , &
+     dump_vac2_surface      , &
+     dump_vac2_bexmat       , &
+     dump_vac2_matrix       , &
      dump_vac2_foumat_unreg , &
-     dump_vac2_analin,   &
-     dump_vac2_analyt,   &
-     dump_vac2_foumat,   &
-     dump_vac2_linsys,   &
-     dump_vac2_linslv,   &
+     dump_vac2_analin       , &
+     dump_vac2_analyt       , &
+     dump_vac2_foumat       , &
+     dump_vac2_linsys       , &
+     dump_vac2_linslv       , &
      dump_vac2_bsqvac
 
 

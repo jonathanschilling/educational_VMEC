@@ -55,7 +55,7 @@ SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
      bsubs(l) = bsupu(l)*gsu(l) + bsupv(l)*gsv(l)
   END DO
 
-  if (open_dbg_context("bss")) then
+  if (open_dbg_context("bss", id=0)) then
 
     call add_real_3d("rv12",  ns, nzeta, ntheta3, rv12)
     call add_real_3d("zv12",  ns, nzeta, ntheta3, zv12)
@@ -66,9 +66,9 @@ SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
     call add_real_3d("gsu",   ns, nzeta, ntheta3, gsu)
     call add_real_3d("gsv",   ns, nzeta, ntheta3, gsv)
 
-    call add_real_3d("br",    ns, nzeta, ntheta3, br)
+    call add_real_3d("br",    ns, nzeta, ntheta3, br  )
     call add_real_3d("bphi",  ns, nzeta, ntheta3, bphi)
-    call add_real_3d("bz",    ns, nzeta, ntheta3, bz)
+    call add_real_3d("bz",    ns, nzeta, ntheta3, bz  )
 
     call add_real_3d("bsubs", ns, nzeta, ntheta3, bsubs)
 

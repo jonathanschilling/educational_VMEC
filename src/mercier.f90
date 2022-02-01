@@ -227,4 +227,6 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   CLOSE (nmerc)
 
+  ! TODO: debug output for "MERCIER" case
+
 END SUBROUTINE mercier

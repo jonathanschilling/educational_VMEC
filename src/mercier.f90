@@ -205,10 +205,10 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 190 FORMAT(/,6x,'S',8x,'DMerc',8x,'DShear',7x,'DCurr',7x,'DWell',7x,'Dgeod',/,100('-'))
 
   DO i = 2,ns1
-     tpp(i) = (twopi*twopi)*tpp(i)
-     tjb(i) = (twopi*twopi)*tjb(i)
-     tbb(i) = (twopi*twopi)*tbb(i)
-     tjj(i) = (twopi*twopi)*tjj(i)
+     tpp(i) = tpp(i) * (twopi*twopi)
+     tjb(i) = tjb(i) * (twopi*twopi)
+     tbb(i) = tbb(i) * (twopi*twopi)
+     tjj(i) = tjj(i) * (twopi*twopi)
 
      Dshear(i) = shear(i) * shear(i)/4
      Dcurr(i)  =-shear(i) * (tjb(i) - ip(i) *tbb(i))
@@ -227,6 +227,20 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   CLOSE (nmerc)
 
-  ! TODO: debug output for "MERCIER" case
+  if (open_dbg_context("mercier", id=0)) then
+
+
+
+
+
+    call add_real_1d("sj",     ns, sj)
+    call add_real_1d("Dshear", ns, Dshear)
+    call add_real_1d("Dcurr",  ns, Dcurr)
+    call add_real_1d("Dwell",  ns, Dwell)
+    call add_real_1d("Dgeod",  ns, Dgeod)
+    call add_real_1d("DMerc",  ns, DMerc)
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE mercier

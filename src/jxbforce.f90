@@ -12,8 +12,8 @@
 !> @param bsubsv tangential derivate of covariant component of magnetic field \f$\partial B_s / \partial \zeta\f$  (?)
 !> @param gsqrt Jacobian \f$\sqrt{g}\f$
 !> @param bsq modulus of magnetic field \f$|\mathbf{B}|^2\f$
-!> @param itheta index in poloidal direction
-!> @param izeta index in toroidal direction
+!> @param itheta poloidal current
+!> @param izeta toroidal current
 !> @param brho radial component of magnetic field \f$B_\rho\f$ (?)
 !> @param ier_flag error flag
 SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
@@ -332,10 +332,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
   if (open_dbg_context("jxbforce_bsub_lowpass", id=0)) then
 
-    call add_real_3d("bsubu_e",  ns, nzeta, ntheta3, bsubu(:,:,0))
-    call add_real_3d("bsubv_e",  ns, nzeta, ntheta3, bsubv(:,:,0))
-    call add_real_3d("bsubu_o",  ns, nzeta, ntheta3, bsubu(:,:,1))
-    call add_real_3d("bsubv_o",  ns, nzeta, ntheta3, bsubv(:,:,1))
+    call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu(:,:,0))
+    call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv(:,:,0))
+    call add_real_3d("bsubu_o", ns, nzeta, ntheta3, bsubu(:,:,1))
+    call add_real_3d("bsubv_o", ns, nzeta, ntheta3, bsubv(:,:,1))
 
     call add_real_4d("bsubsu", ns, 2, nzeta, ntheta3, bsubsu, order=(/1, 4, 2, 3/))
     call add_real_4d("bsubsv", ns, 2, nzeta, ntheta3, bsubsv, order=(/1, 4, 2, 3/))
@@ -350,6 +350,11 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
     call close_dbg_out()
   end if
+
+
+
+
+
 
   ! SKIPS Bsubs Correction - uses Bsubs from metric elements
   IF (lbsubs) then
@@ -546,6 +551,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
        jdotb_sqrtg(ns,nzeta,ntheta3), sqrtg3(ns,nzeta,ntheta3),     &
        phin(ns), toroidal_angle(nzeta), stat=j)
 
+  ! delete incoming leftovers
+  itheta = 0.0_dp
+  izeta  = 0.0_dp
+
   bsubs3      = 0
   bsubv3      = 0
   bsubu3      = 0
@@ -688,11 +697,37 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)
 
 
+  if (open_dbg_context("jxbout", id=0)) then
 
+    call add_real_3d("itheta",  ns, nzeta, ntheta3, itheta)
+    call add_real_3d("izeta",   ns, nzeta, ntheta3, izeta)
+    call add_real_3d("bdotk",   ns, nzeta, ntheta3, bdotk)
 
+    call add_real_1d("amaxfor",   ns, amaxfor)
+    call add_real_1d("aminfor",   ns, aminfor)
+    call add_real_1d("avforce",   ns, avforce)
+    call add_real_1d("pprim",     ns, pprim)
+    call add_real_1d("jdotb",     ns, jdotb)
+    call add_real_1d("bdotb",     ns, bdotb)
+    call add_real_1d("bdotgradv", ns, bdotgradv)
+    call add_real_1d("jpar2",     ns, jpar2)
+    call add_real_1d("jperp2",    ns, jperp2)
 
-  ! TODO: debug ouput for "JXBOUT" case
+    call add_real_3d("jsupu3",      ns, nzeta, ntheta3, jsupu3)
+    call add_real_3d("jsupv3",      ns, nzeta, ntheta3, jsupv3)
+    call add_real_3d("jsups3",      ns, nzeta, ntheta3, jsups3)
+    call add_real_3d("bsupu3",      ns, nzeta, ntheta3, bsupu3)
+    call add_real_3d("bsupv3",      ns, nzeta, ntheta3, bsupv3)
+    call add_real_3d("jcrossb",     ns, nzeta, ntheta3, jcrossb)
+    call add_real_3d("jxb_gradp",   ns, nzeta, ntheta3, jxb_gradp)
+    call add_real_3d("jdotb_sqrtg", ns, nzeta, ntheta3, jdotb_sqrtg)
+    call add_real_3d("sqrtg3",      ns, nzeta, ntheta3, sqrtg3)
+    call add_real_3d("bsubu3",      ns, nzeta, ntheta3, bsubu3)
+    call add_real_3d("bsubv3",      ns, nzeta, ntheta3, bsubv3)
+    call add_real_3d("bsubs3",      ns, nzeta, ntheta3, bsubs3)
 
+    call close_dbg_out()
+  end if
 
 
 

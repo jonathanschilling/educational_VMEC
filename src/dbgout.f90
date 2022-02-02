@@ -117,6 +117,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_bss
   else if (trim(context_name) .eq. "jxbforce_bsub_lowpass") then
     open_dbg_context         = dump_jxbforce_bsub_lowpass
+  else if (trim(context_name) .eq. "jxbout") then
+    open_dbg_context         = dump_jxbout
 
 
 

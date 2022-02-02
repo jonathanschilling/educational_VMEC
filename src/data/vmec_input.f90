@@ -127,6 +127,7 @@ MODULE vmec_input
   logical :: dump_bcovar_fileout        = .false.
   logical :: dump_bss                   = .false.
   logical :: dump_jxbforce_bsub_lowpass = .false.
+  logical :: dump_jxbout                = .false.
 
   ! debugging output flags for NESTOR
   logical :: dump_vac1n_vacuum  = .false.
@@ -244,6 +245,7 @@ MODULE vmec_input
      dump_bcovar_fileout       , & ! dbgout from fileout
      dump_bss                  , &
      dump_jxbforce_bsub_lowpass, &
+     dump_jxbout               , &
      dump_vac1n_vacuum  , & ! NESTOR vac1
      dump_vac1n_precal  , &
      dump_vac1n_surface , &

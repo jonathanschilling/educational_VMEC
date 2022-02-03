@@ -127,6 +127,13 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_threed1_geomag
   else if (trim(context_name) .eq. "threed1_volquant") then
     open_dbg_context         = dump_threed1_volquant
+  else if (trim(context_name) .eq. "threed1_axis") then
+    open_dbg_context         = dump_threed1_axis
+  else if (trim(context_name) .eq. "threed1_beta") then
+    open_dbg_context         = dump_threed1_beta
+  else if (trim(context_name) .eq. "threed1_shafrint") then
+    open_dbg_context         = dump_threed1_shafrint
+
 
 
 

@@ -61,6 +61,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin,    &
      zmax, zmin, yr1u, yz1u, waist(2), height(2)
   REAL(rprec) d_of_kappa, loc_jpar_perp, loc_jparPs_perp
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: rax_symm, zax_symm, rax_asym, zax_asym
 
 
   ! POINTER ASSOCIATIONS
@@ -705,6 +706,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
              '    n     rmag       zmag        rmag        zmag',/,     &
              '        (cos nv)   (sin nv)    (sin nv)    (cos nv)',/)
   loff = LBOUND(rmags,1)
+
+  allocate(rax_symm(0:ntor), zax_symm(0:ntor), rax_asym(0:ntor), zax_asym(0:ntor))
+
   DO n = 0, ntor
      n1 = n + loff
 
@@ -712,6 +716,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
      tz = t1
      IF (.not.lthreed) tz = 0
+
+     rax_symm(n) =  t1*rmags(n1)
+     zax_symm(n) = -tz*zmags(n1)
+     IF (lasym) THEN
+       rax_asym(n) = -tz*rmaga(n1)
+       zax_asym(n) =  t1*zmaga(n1)
+     else
+       rax_asym(n) = 0.0_dp
+       zax_asym(n) = 0.0_dp
+     end if
 
      IF (lasym) THEN
         WRITE (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1)), -tz*rmaga(n1),   t1*zmaga(n1)
@@ -721,9 +735,15 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END DO
 820 FORMAT(i5,1p,4e12.4)
 
+  if (open_dbg_context("threed1_axis", id=0)) then
 
+    call add_real_1d("rax_symm", ntor+1, rax_symm)
+    call add_real_1d("zax_symm", ntor+1, zax_symm)
+    call add_real_1d("rax_asym", ntor+1, rax_asym)
+    call add_real_1d("zax_asym", ntor+1, zax_asym)
 
-
+    call close_dbg_out()
+  end if
 
   betstr = c2p0*SQRT(sump2/volume_p)/(sumbtot/volume_p)
 
@@ -738,11 +758,18 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            ' Peak Beta            = ',f14.6,/,                          &
            ' Beta-star            = ',f14.6,/)
 
+  if (open_dbg_context("threed1_beta", id=0)) then
 
+    call add_real("betatot", betatot)
+    call add_real("betapol", betapol)
+    call add_real("betator", betator)
 
+    call add_real("rbtor",   rbtor)
+    call add_real("betaxis", betaxis)
+    call add_real("betstr",  betstr)
 
-
-
+    call close_dbg_out()
+  end if
 
   ! Shafranov surface integrals s1,s2
   ! Plasma Physics vol 13, pp 757-762 (1971)
@@ -852,5 +879,32 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            ' (3*Betai + Li - Mui)/[2*(s1+s2)] - 1',/,                   &
            ' Radial force balance = ',3(f14.6,4x),/,                    &
            ' (Betai + Li + Mui)/(2*s2) - 1',/)
+
+
+  if (open_dbg_context("threed1_shafrint", id=0)) then
+
+    call add_real("scaling_ratio", scaling_ratio)
+
+    call add_real("rlao", rlao)
+    call add_real("flao", flao)
+    call add_real("fgeo", fgeo)
+
+    call add_real("smaleli", smaleli)
+    call add_real("betai",   betai)
+    call add_real("musubi",  musubi)
+    call add_real("lambda",  lambda)
+
+    call add_real("s11", s11)
+    call add_real("s12", s12)
+    call add_real("s13", s13)
+    call add_real("s2", s2)
+    call add_real("s3", s3)
+
+    call add_real("delta1", delta1)
+    call add_real("delta2", delta2)
+    call add_real("delta3", delta3)
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE eqfor

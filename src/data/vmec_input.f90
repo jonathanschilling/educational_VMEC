@@ -128,6 +128,10 @@ MODULE vmec_input
   logical :: dump_bss                   = .false.
   logical :: dump_jxbforce_bsub_lowpass = .false.
   logical :: dump_jxbout                = .false.
+  logical :: dump_mercier               = .false.
+  logical :: dump_threed1_firstTable    = .false.
+  logical :: dump_threed1_geomag        = .false.
+  logical :: dump_threed1_volquant      = .false.
 
   ! debugging output flags for NESTOR
   logical :: dump_vac1n_vacuum  = .false.
@@ -246,6 +250,10 @@ MODULE vmec_input
      dump_bss                  , &
      dump_jxbforce_bsub_lowpass, &
      dump_jxbout               , &
+     dump_mercier              , &
+     dump_threed1_firstTable   , &
+     dump_threed1_geomag       , &
+     dump_threed1_volquant     , &
      dump_vac1n_vacuum  , & ! NESTOR vac1
      dump_vac1n_precal  , &
      dump_vac1n_surface , &

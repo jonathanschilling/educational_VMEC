@@ -119,6 +119,14 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_jxbforce_bsub_lowpass
   else if (trim(context_name) .eq. "jxbout") then
     open_dbg_context         = dump_jxbout
+  else if (trim(context_name) .eq. "mercier") then
+    open_dbg_context         = dump_mercier
+  else if (trim(context_name) .eq. "threed1_firstTable") then
+    open_dbg_context         = dump_threed1_firstTable
+  else if (trim(context_name) .eq. "threed1_geomag") then
+    open_dbg_context         = dump_threed1_geomag
+  else if (trim(context_name) .eq. "threed1_volquant") then
+    open_dbg_context         = dump_threed1_volquant
 
 
 

@@ -24,9 +24,12 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
                    bsubu, vp, phips, pres, ns, nznt)
   USE safe_open_mod
   USE vmercier
-  USE vmec_input, ONLY: input_extension
+  USE vmec_input, ONLY: input_extension, nzeta
   USE vparams, ONLY: one, zero, twopi, nmercier0
   use stel_kinds, only: dp
+
+  use vmec_dim, only: ntheta3
+  use dbgout
 
   IMPLICIT NONE
 
@@ -169,7 +172,8 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
     tjj(i) = SUM(jdotb(:)*wint(i:nrzt:ns))              ! <(j*b)2/b**2*|grad-phi|**3>
   END DO
 
-  DEALLOCATE (gpp, gsqrt_full, b2, stat=i)
+!  moved to end of routine for dbgout
+!  DEALLOCATE (gpp, gsqrt_full, b2, stat=i)
 
   ! REFERENCE: BAUER, BETANCOURT, GARABEDIAN, MHD Equilibrium and Stability of Stellarators
   ! We break up the Omega-subs into a positive shear term (Dshear) and a net current term, Dcurr
@@ -227,20 +231,43 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
   CLOSE (nmerc)
 
+  ! fixup for comparison
+  sj(1)  = 0.0_dp
+  sj(ns) = 1.0_dp
+
   if (open_dbg_context("mercier", id=0)) then
 
+    call add_real("sign_jac", sign_jac)
 
+    call add_real_1d("phip_real", ns-1, phip_real(2:ns))
+    call add_real_1d("vp_real",   ns-1, vp_real(2:ns))
+    call add_real_1d("torcur",    ns-1, torcur(2:ns))
 
+    call add_real_1d("shear", ns-2, shear(2:ns1))
+    call add_real_1d("vpp",   ns-2, vpp(2:ns1))
+    call add_real_1d("presp", ns-2, presp(2:ns1))
+    call add_real_1d("ip",    ns-2, ip(2:ns1))
 
+    call add_real_3d("gsqrt_full", ns-2, nzeta, ntheta3, gsqrt_full(2:ns1,:))
+    call add_real_3d("bdotj",      ns  , nzeta, ntheta3, bdotj)
+    call add_real_3d("gpp",        ns-2, nzeta, ntheta3, gpp(2:ns1,:))
+    call add_real_3d("b2",         ns-1, nzeta, ntheta3, b2(2:ns,:))
 
-    call add_real_1d("sj",     ns, sj)
-    call add_real_1d("Dshear", ns, Dshear)
-    call add_real_1d("Dcurr",  ns, Dcurr)
-    call add_real_1d("Dwell",  ns, Dwell)
-    call add_real_1d("Dgeod",  ns, Dgeod)
-    call add_real_1d("DMerc",  ns, DMerc)
+    call add_real_1d("tpp", ns-2, tpp(2:ns1))
+    call add_real_1d("tbb", ns-2, tbb(2:ns1))
+    call add_real_1d("tjb", ns-2, tjb(2:ns1))
+    call add_real_1d("tjj", ns-2, tjj(2:ns1))
+
+    call add_real_1d("sj",     ns  , sj)
+    call add_real_1d("Dshear", ns-2, Dshear(2:ns1))
+    call add_real_1d("Dcurr",  ns-2, Dcurr(2:ns1))
+    call add_real_1d("Dwell",  ns-2, Dwell(2:ns1))
+    call add_real_1d("Dgeod",  ns-2, Dgeod(2:ns1))
+    call add_real_1d("DMerc",  ns-2, DMerc(2:ns1))
 
     call close_dbg_out()
   end if
+
+  DEALLOCATE (gpp, gsqrt_full, b2, stat=i)
 
 END SUBROUTINE mercier

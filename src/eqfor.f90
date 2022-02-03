@@ -24,6 +24,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   USE vmec_io
   USE mgrid_mod
   USE stel_constants, ONLY: pi
+
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER :: ier_flag
@@ -57,7 +60,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      toroidal_flux, vnorm, xmax,                    &
      xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin,    &
      zmax, zmin, yr1u, yz1u, waist(2), height(2)
-  REAL(rprec) d_of_kappa
+  REAL(rprec) d_of_kappa, loc_jpar_perp, loc_jparPs_perp
 
 
   ! POINTER ASSOCIATIONS
@@ -98,6 +101,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   CALL jxbforce (bsupu, bsupv, bsubu, bsubv, crmn_o, rcon,   zcon, &
                  gsqrt, bsq, curtheta, izeta, brho, ier_flag)
   !              gsqrt, bsq, itheta,   izeta, brho, ier_flag
+
+
+
+
+
+
+
 
   ! HALF-MESH VOLUME-AVERAGED BETA
   tau(1) = 0
@@ -216,7 +226,48 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END DO
 30 FORMAT(1p,2e10.2,2e12.4,4e11.3,0p,f7.3,1p,5e11.3)
 
+  if (open_dbg_context("threed1_firstTable", id=0)) then
+
+    call add_real_1d("beta_vol", ns-1, beta_vol(2:ns))
+    call add_real_1d("overr",    ns-1, overr(2:ns))
+
+    call add_real("betaxis", betaxis)
+
+    call add_real_1d("presf",     ns, presf)
+    call add_real_1d("phipf_loc", ns, phipf_loc)
+    call add_real_1d("phi1", ns, phi1)
+    call add_real_1d("chi1", ns, chi1)
+    call add_real_1d("chi",  ns, chi)
+
+    call add_real_1d("iotaf",  ns, iotaf)
+
+    call add_real_1d("specw",  ns, specw)
+
+    call add_real_1d("equif",  ns, equif)
+
+    call add_real_1d("bucof",  ns, bucof)
+    call add_real_1d("bvcof",  ns, bvcof)
+
+    call add_real_1d("jcurv",  ns, jcurv)
+    call add_real_1d("jcuru",  ns, jcuru)
+
+    call add_real_1d("presgrad", ns, presgrad)
+    call add_real_1d("vpphi",    ns, vpphi)
+
+    call add_real_1d("jdotb",    ns, jdotb)
+    call add_real_1d("bdotb",    ns, bdotb)
+
+    call close_dbg_out()
+  end if
+
   DEALLOCATE (phipf_loc)
+
+
+
+
+
+
+
 
   ! MAKE SURE WOUT FILE DOES NOT REQUIRE ANY STUFF COMPUTED BELOW....
 
@@ -311,6 +362,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      dbtor(:nznt) = btor1(:nznt)**2 - btor_vac(:nznt)**2
      musubi = musubi - SUM(dbtor(:nznt)*tau(js:nrzt:ns))
 
+     ! phat is temporarily re-used for something else...
      phat(:nznt) = bsq(js:nrzt:ns) - cp5*btor_vac(:nznt)**2
      phat(:nznt) = (phat(:nznt) - dbtor(:nznt))*tau(js:nrzt:ns)
      rshaf1 = rshaf1 + SUM(phat(:nznt))
@@ -329,8 +381,6 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END IF
 
   DEALLOCATE (btor_vac, btor1, dbtor)
-
-
 
   rmax_surf = MAXVAL(r1(ns:nrzt:ns,0)+r1(ns:nrzt:ns,1))
   rmin_surf = MINVAL(r1(ns:nrzt:ns,0)+r1(ns:nrzt:ns,1))
@@ -370,7 +420,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      jparPS_perp = jparPS_perp/s2
   END IF
 
-  IF (ntor .gt. 1) THEN ! lthreed ??
+  IF (ntor .gt. 1) THEN ! lthreed ?? ntor>1 means ntor .ge. 2 --> ntor=1 is already non-axisymmetric!
   WRITE (nthreed, 80) aspect, kappa_p, volume_p, cross_area_p,          &
      surf_area_p, circum_p, Rmajor_p, Aminor_p, rmin_surf,              &
      rmax_surf, zmax_surf, waist(1), height(1), waist(2), height(2)
@@ -514,17 +564,17 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         yshift(js) = (r1(1+lt,0)-rgeo)/(xmax - xmin)
 
         IF (jperp2(js) .eq. zero) jperp2(js) = EPSILON(jperp2(js))
-        jpar_perp = jpar2(js)/jperp2(js)
+        loc_jpar_perp = jpar2(js)/jperp2(js)
         IF (js .lt. ns) THEN
-           jparPS_perp = jPS2(js)/jperp2(js)
+           loc_jparPS_perp = jPS2(js)/jperp2(js)
         ELSE
-           jparPS_perp = zero
+           loc_jparPS_perp = zero
         END IF
 
         IF (nplanes .eq. 1) THEN
            WRITE (nthreed, 120) js, psi(js), ygeo(js), yellip(js),      &
-              yinden(js), ytrian(js), yshift(js), jpar_perp,            &
-              jparPS_perp
+              yinden(js), ytrian(js), yshift(js), loc_jpar_perp,            &
+              loc_jparPS_perp
         ELSE
            WRITE (nthreed, 120) js, psi(js), ygeo(js), yellip(js),      &
               yinden(js), ytrian(js), yshift(js)
@@ -534,6 +584,84 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
  95 FORMAT(/,71('-'),/,' Toroidal Plane: Phi = 180/Nfp',/,71('-'),/)
 120 FORMAT(1x,i5,6f14.5,1p,3e14.2)
+
+  if (open_dbg_context("threed1_geomag", id=0)) then
+
+    call add_real("anorm", anorm)
+    call add_real("vnorm", vnorm)
+    call add_real("toroidal_flux", toroidal_flux)
+
+    call add_real_2d("surf_area", nzeta, ntheta3, surf_area)
+
+    call add_real("circum_p", circum_p)
+    call add_real("surf_area_p", surf_area_p)
+
+    call add_real("volume_p",     volume_p)
+    call add_real("cross_area_p", cross_area_p)
+    call add_real("Rmajor_p",     Rmajor_p)
+    call add_real("Aminor_p",     Aminor_p)
+    call add_real("aspect",       aspect)
+
+    call add_real("kappa_p", kappa_p)
+    call add_real("rcen", rcen)
+    call add_real("rcenin", rcenin)
+    call add_real("aminr2in", aminr2in)
+    call add_real("bminz2in", bminz2in)
+    call add_real("bminz2", bminz2)
+    call add_real("aminr1", aminr1)
+    call add_real("sump", sump)
+    call add_real("pavg", pavg)
+
+    call add_real("delphid_exact", delphid_exact)
+    call add_real("musubi", musubi)
+    call add_real("rshaf1", rshaf1)
+    call add_real("rshaf2", rshaf2)
+    call add_real("rshaf", rshaf)
+    call add_real("fpsi0", fpsi0)
+    call add_real("b0", b0)
+
+    call add_real_2d("redge", nzeta, ntheta3, redge)
+    call add_real_2d("phat",  nzeta, ntheta3, phat)
+
+    call add_real("rmax_surf", rmax_surf)
+    call add_real("rmin_surf", rmin_surf)
+    call add_real("zmax_surf", zmax_surf)
+
+    call add_real("bmin_1_ns", bmin(1,ns))
+    call add_real("bmax_1_ns", bmax(1,ns))
+    call add_real("bmin_ntheta2_ns", bmin(ntheta2,ns))
+    call add_real("bmax_ntheta2_ns", bmax(ntheta2,ns))
+
+    call add_real_1d("waist",  2, waist)
+    call add_real_1d("height", 2, height)
+
+    call add_real("sumbtot", sumbtot)
+    call add_real("sumbtor", sumbtor)
+    call add_real("sumbpol", sumbpol)
+    call add_real("betapol", betapol)
+    call add_real("sump20", sump20)
+    call add_real("sump2", sump2)
+    call add_real("betatot", betatot)
+    call add_real("betator", betator)
+    call add_real("VolAvgB", VolAvgB)
+    call add_real("IonLarmor", IonLarmor)
+
+    call add_real_1d("jPS2", ns-2, jPS2(2:ns1))
+
+    call add_real("s2", s2)
+    call add_real("jpar_perp", jpar_perp)
+    call add_real("jparPS_perp", jparPS_perp)
+
+    call add_real_1d("psi", ns, psi)
+
+    call add_real_1d("ygeo",   ns,   ygeo)
+    call add_real_1d("yinden", ns-1, yinden(2:ns))
+    call add_real_1d("yellip", ns-1, yellip(2:ns))
+    call add_real_1d("ytrian", ns-1, ytrian(2:ns))
+    call add_real_1d("yshift", ns-1, yshift(2:ns))
+
+    call close_dbg_out()
+  end if
 
   WRITE (nthreed, 130)
 130 FORMAT(//,' Magnetic Fields and Pressure',/,1x,71('-'))
@@ -552,7 +680,25 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            ' b**2/(2 mu0)     = ',2e14.6,/,&
            ' EKIN (3/2p)      = ',2e14.6,/)
 
+  if (open_dbg_context("threed1_volquant", id=0)) then
 
+    call add_real("int_p", sump/mu0)
+    call add_real("avg_p", pavg/mu0)
+
+    call add_real("int_bpol", fac*sumbpol)
+    call add_real("avg_bpol", fac*sumbpol/volume_p)
+
+    call add_real("int_btor", fac*sumbtor)
+    call add_real("avg_btor", fac*sumbtor/volume_p)
+
+    call add_real("int_modb", fac*sumbtot)
+    call add_real("avg_modb", fac*sumbtot/volume_p)
+
+    call add_real("int_ekin", c1p5*sump/mu0)
+    call add_real("avg_ekin", c1p5*pavg/mu0)
+
+    call close_dbg_out()
+  end if
 
   WRITE (nthreed, 800)
 800 FORMAT(/,' MAGNETIC AXIS COEFFICIENTS'/,                            &

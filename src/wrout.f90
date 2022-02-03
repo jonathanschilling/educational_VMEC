@@ -74,6 +74,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   USE safe_open_mod
   USE mgrid_mod
+
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ier_flag

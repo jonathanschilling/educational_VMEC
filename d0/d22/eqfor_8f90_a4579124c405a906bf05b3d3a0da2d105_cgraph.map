@@ -1,16 +1,16 @@
 <map id="eqfor" name="eqfor">
-<area shape="rect" id="node1" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="5,107,56,133"/>
+<area shape="rect" id="node1" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="5,132,56,159"/>
 <area shape="rect" id="node2" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="107,5,182,32"/>
 <area shape="rect" id="node3" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="123,56,166,83"/>
-<area shape="rect" id="node5" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="107,107,182,133"/>
-<area shape="rect" id="node6" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="104,157,185,184"/>
-<area shape="rect" id="node7" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="111,208,178,235"/>
-<area shape="rect" id="node4" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="233,81,405,108"/>
-<area shape="rect" id="node8" href="$d9/d8e/fext__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="289,132,350,159"/>
-<area shape="rect" id="node9" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="285,183,353,209"/>
-<area shape="rect" id="node10" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="277,233,362,260"/>
-<area shape="rect" id="node11" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="282,284,357,311"/>
-<area shape="rect" id="node13" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="287,335,352,361"/>
-<area shape="rect" id="node12" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="515,284,572,311"/>
-<area shape="rect" id="node14" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="453,335,633,361"/>
+<area shape="rect" id="node4" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="371,157,543,184"/>
+<area shape="rect" id="node5" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="107,157,182,184"/>
+<area shape="rect" id="node6" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="104,208,185,235"/>
+<area shape="rect" id="node7" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="111,309,178,336"/>
+<area shape="rect" id="node8" href="$d9/d8e/fext__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="245,411,307,437"/>
+<area shape="rect" id="node9" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="242,461,310,488"/>
+<area shape="rect" id="node10" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="233,259,319,285"/>
+<area shape="rect" id="node11" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="239,360,313,387"/>
+<area shape="rect" id="node13" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="243,309,309,336"/>
+<area shape="rect" id="node12" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="428,360,485,387"/>
+<area shape="rect" id="node14" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="367,309,547,336"/>
 </map>

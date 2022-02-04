@@ -75,8 +75,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   USE safe_open_mod
   USE mgrid_mod
 
-  use dbgout
-
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ier_flag
@@ -116,13 +114,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: bsupumnc, bsupumns, bsupvmnc, bsupvmns
 
 
-
   ! THIS SUBROUTINE CREATES THE FILE WOUT.
   ! IT CONTAINS THE CYLINDRICAL COORDINATE SPECTRAL COEFFICIENTS
   ! RMN,ZMN (full), LMN (half_mesh - CONVERTED FROM INTERNAL full REPRESENTATION),
   ! AS WELL AS COEFFICIENTS (ON NYQ MESH) FOR COMPUTED QUANTITIES:
   ! BSQ, BSUPU,V, BSUBU,V, GSQRT (HALF); BSUBS (FULL-CONVERTED IN JXBFORCE)
-
 
 
   ! Pointer assignments for storage arrays
@@ -275,6 +271,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   qfact=HUGE(qfact)
   WHERE (iotaf(1:ns) .NE. zero) qfact=one/iotaf(1:ns)
+
   CALL cdf_define(nwout, vn_qfact, qfact(1:ns), dimname=r1dim)
   CALL cdf_setatt(nwout, vn_iotaf, ln_qfact)
 
@@ -463,7 +460,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   ! INTERPOLATE LAMBDA ONTO HALF-MESH FOR BACKWARDS CONSISTENCY WITH EARLIER VERSIONS OF VMEC
   ! AND SMOOTHS POSSIBLE UNPHYSICAL "WIGGLE" ON RADIAL MESH
-  WHERE (NINT(xm) .le. 1) lmns(:,1) = lmns(:,2)
+  WHERE (NINT(xm) .le. 1) lmns(:,1) = lmns(:,2) ! constant extrapolation of lambda
   DO js = ns,2,-1
      WHERE (MOD(NINT(xm),2) .eq. 0)
         lmns(:,js) = p5*(lmns(:,js) + lmns(:,js-1))
@@ -472,7 +469,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      END WHERE
   END DO
 
-  lmns(:,1) = 0 ! TODO: contradicts constant extrapolation above !!!
+  lmns(:,1) = 0 ! NOTE: needed constant extrapolation above only in averaging step!
   raxis_cc(0:ntor) = rmnc(1:ntor+1,1)
   zaxis_cs(0:ntor) = zmns(1:ntor+1,1)
 
@@ -486,7 +483,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
         END WHERE
      END DO
 
-     lmnc(:,1) = 0 ! TODO: contradicts constant extrapolation above !!!
+     lmnc(:,1) = 0 ! NOTE: needed constant extrapolation above only in averaging step!
      raxis_cs(0:ntor) = rmns(1:ntor+1,1)
      zaxis_cc(0:ntor) = zmnc(1:ntor+1,1)
   end if

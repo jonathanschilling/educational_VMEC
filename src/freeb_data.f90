@@ -13,6 +13,9 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
   USE vmec_main
   USE vacmod, only: brv, bphiv, bzv, bsqvac, potvac, mnpd, xmpot, xnpot
   USE realspace, ONLY: r1, z1
+
+  use dbgout
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(mnmax) :: rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1
@@ -22,12 +25,17 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
   REAL(rprec) :: zeta, potsin, potcos
   REAL(rprec), ALLOCATABLE, DIMENSION(:) :: rb, phib, zb
 
+  logical :: dbgout_active
+
   ! WRITE OUT EDGE VALUES OF FIELDS TO FORT.NEDGE0 (INCLUDE REFLECTED POINT)
   ! NOTE: BR, BPHI, BZ WERE COMPUTED IN BSS, CALLED FROM EQFOR
   IF (ivac.le.0 .or. .not.lfreeb) RETURN
 
+
   ALLOCATE (rb(2*nznt), phib(2*nznt), zb(2*nznt), stat=l)
   IF (l .ne. 0) STOP 'allocation error in freeb_data'
+
+  dbgout_active = open_dbg_context("freeb_data", id=0)
 
   nedge = 0
   lkr = nznt
@@ -100,6 +108,27 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
     END DO
   end do
 
+  if (dbgout_active) then
+
+    call add_real_2d("rb",   nzeta, ntheta3, rb)
+    call add_real_2d("phib", nzeta, ntheta3, phib)
+    call add_real_2d("zb",   nzeta, ntheta3, zb)
+
+    call add_real_2d("bsqmhdi", nzeta, ntheta3, bsqsav(:,1))
+    call add_real_2d("bsqvaci", nzeta, ntheta3, bsqsav(:,2))
+    call add_real_2d("bsqmhdf", nzeta, ntheta3, bsqsav(:,3))
+    call add_real_2d("bsqvacf", nzeta, ntheta3, bsqvac)
+
+    call add_real_2d("bredge", nzeta, ntheta3, bredge)
+    call add_real_2d("bpedge", nzeta, ntheta3, bpedge)
+    call add_real_2d("bzedge", nzeta, ntheta3, bzedge)
+
+    call add_real_2d("brv",    nzeta, ntheta2, brv)
+    call add_real_2d("bphiv",  nzeta, ntheta2, bphiv)
+    call add_real_2d("bzv",    nzeta, ntheta2, bzv)
+
+  end if
+
   ! allocated in eqfor
   DEALLOCATE (rb, phib, zb, bredge, bpedge, bzedge, stat=l)
 
@@ -152,5 +181,13 @@ SUBROUTINE freeb_data (rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)
   END IF
 
   WRITE (nthreed, *)
+
+  if (dbgout_active) then
+
+    ! For now, skip output of geometry and potvac,
+    ! since these are contained (and checked) in wout already.
+
+    call close_dbg_out()
+  end if
 
 END SUBROUTINE freeb_data

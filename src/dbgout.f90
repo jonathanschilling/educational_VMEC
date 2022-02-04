@@ -133,8 +133,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_threed1_beta
   else if (trim(context_name) .eq. "threed1_shafrint") then
     open_dbg_context         = dump_threed1_shafrint
-
-
+  else if (trim(context_name) .eq. "freeb_data") then
+    open_dbg_context         = dump_freeb_data
 
 
   ! NESTOR vac1

@@ -135,6 +135,7 @@ MODULE vmec_input
   logical :: dump_threed1_axis          = .false.
   logical :: dump_threed1_beta          = .false.
   logical :: dump_threed1_shafrint      = .false.
+  logical :: dump_freeb_data            = .false.
 
   ! debugging output flags for NESTOR
   logical :: dump_vac1n_vacuum  = .false.
@@ -260,6 +261,7 @@ MODULE vmec_input
      dump_threed1_axis         , &
      dump_threed1_beta         , &
      dump_threed1_shafrint     , &
+     dump_freeb_data           , &
      dump_vac1n_vacuum  , & ! NESTOR vac1
      dump_vac1n_precal  , &
      dump_vac1n_surface , &

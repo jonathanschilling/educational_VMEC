@@ -60,17 +60,17 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62",
-"d2/d01/mgrid__mod_8f.html#ac1f79bdc8f93245d70df0b3d5fdfc846",
-"d5/d62/residue__mhd_8f90.html",
-"d8/d68/vparams_8f90.html#ad72d715a2a3c5b5528f6522746a6e60c",
-"db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c",
-"db/dae/namespaceread__wout__mod.html#a101ac31fc24f2b9aaf7b38220ea9b114",
-"db/dae/namespaceread__wout__mod.html#aa79c7653ae9cf08fb601d19e02c53eec",
-"db/dc0/namespacenestor__io.html#ad893fedbb0675ff3e7697c837b65d5dc",
-"dd/df2/namespacevacmod.html#ad72a67e8bc59ed04867d87ce50cfdc3e",
-"df/d61/read__wout__mod_8f.html#a2ac87cf13bbeb2ad748be50eda31d11f",
-"df/d61/read__wout__mod_8f.html#ac5783e9b78d7bdab9eb0b00ffc6b61cb"
+"d1/d6c/namespacevmec__main.html#a04979f1c0b31bc89eaba86c1a8cce239",
+"d2/d01/mgrid__mod_8f.html#ac148c99f377c08f73bcabb0ee3201d1b",
+"d5/d26/magnetic__fluxes_8f90_source.html",
+"d8/d68/vparams_8f90.html#acb273c9c669df2a69478dfbe4e4cdd7e",
+"db/d2d/namespacevmec__io.html#a4dffa740de8b7c4446ad19bd0d79164f",
+"db/dae/namespaceread__wout__mod.html#a0e4234f76296d1832b8ac276f7804da9",
+"db/dae/namespaceread__wout__mod.html#aa6b15522a6c0d1bf9994a31588063297",
+"db/dc0/namespacenestor__io.html#ad37d6f9149efb458d0f95d1ce0ff07f6",
+"dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855",
+"df/d61/read__wout__mod_8f.html#a29b319d8372fbd9e6b918c18941499fc",
+"df/d61/read__wout__mod_8f.html#ac30c522c4e80f4c40f5de9379055331e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

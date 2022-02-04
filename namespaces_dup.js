@@ -542,6 +542,7 @@ var namespaces_dup =
       [ "dump_fixaray", "d8/dbf/namespacevmec__input.html#a1e276a4c9a3459a58d9fcb0affabfc79", null ],
       [ "dump_forcenorms_tcon", "d8/dbf/namespacevmec__input.html#abd25baa020afdc84e63359647352fd67", null ],
       [ "dump_forces", "d8/dbf/namespacevmec__input.html#a81296e34dd0ba56f35e776274770864c", null ],
+      [ "dump_freeb_data", "d8/dbf/namespacevmec__input.html#a32a7cb70492abb3d86861a7695a77377", null ],
       [ "dump_fsq", "d8/dbf/namespacevmec__input.html#a5c6e56838ebc995ec1cdbce5aece69ba", null ],
       [ "dump_fsq1", "d8/dbf/namespacevmec__input.html#a3702f7a28e9b68d271dd049aac18db9d", null ],
       [ "dump_funct3d_geometry", "d8/dbf/namespacevmec__input.html#a3cc8881555f2cdfeb9b4db4f53078961", null ],

@@ -1,96 +1,96 @@
 <map id="xvmec" name="xvmec">
-<area shape="rect" id="node1" title="Main program of VMEC." alt="" coords="5,2007,65,2033"/>
-<area shape="rect" id="node2" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,2007,168,2033"/>
-<area shape="rect" id="node3" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="259,1424,326,1451"/>
-<area shape="rect" id="node9" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="1341,917,1513,944"/>
-<area shape="rect" id="node56" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="433,1576,489,1603"/>
-<area shape="rect" id="node71" href="$d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3" title="allocate and fill some fixed&#45;size arrays (only depending on Fourier resolution)." alt="" coords="263,765,322,792"/>
-<area shape="rect" id="node72" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="729,2007,860,2033"/>
-<area shape="rect" id="node73" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="561,2007,663,2033"/>
-<area shape="rect" id="node74" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="1149,2260,1263,2287"/>
-<area shape="rect" id="node76" href="$d1/d41/namespacemgrid__mod.html#a1badf08429cd96cebc8ecc22782e87ac" title=" " alt="" coords="216,2108,369,2135"/>
-<area shape="rect" id="node77" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="239,1880,346,1907"/>
-<area shape="rect" id="node82" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="766,2361,823,2388"/>
-<area shape="rect" id="node94" href="$dc/dc0/reset__params_8f90.html#a1e4885cb769926141cce2069c6406e78" title="Reset some flow&#45;control parameters to their default values." alt="" coords="242,2361,343,2388"/>
-<area shape="rect" id="node4" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="431,935,491,961"/>
-<area shape="rect" id="node25" href="$d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" title="Save current or restore previous good state vector and reduce time step." alt="" coords="753,1399,837,1425"/>
-<area shape="rect" id="node52" href="$d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e" title="Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian." alt="" coords="569,183,655,209"/>
-<area shape="rect" id="node53" href="$d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797" title="Print iteration progress to screen and threed1 output file." alt="" coords="429,1449,494,1476"/>
-<area shape="rect" id="node55" href="$dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="430,1627,493,1653"/>
-<area shape="rect" id="node5" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="579,935,645,961"/>
-<area shape="rect" id="node6" href="$d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4" title="Fourier&#45;space bandpass filter on constraint force for spectral condensation." alt="" coords="770,993,819,1020"/>
-<area shape="rect" id="node7" href="$d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" title="Compute the covariant components of the magnetic field , ." alt="" coords="966,369,1027,396"/>
-<area shape="rect" id="node13" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="762,1500,827,1527"/>
-<area shape="rect" id="node14" href="$de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0" title="Compute the real&#45;space MHD forces." alt="" coords="967,775,1026,801"/>
-<area shape="rect" id="node15" href="$d8/dc3/jacobian_8f90.html#af346f65d2aa225d9ede6e0f23add6142" title="Evaulate the Jacobian of the transform from flux&#45; to cylindrical coordinates." alt="" coords="961,825,1032,852"/>
-<area shape="rect" id="node16" href="$db/da1/nestor__io_8f90.html#a67b1cb19f12a5860a25a89dbd3dfd9c9" title=" " alt="" coords="725,1095,865,1121"/>
-<area shape="rect" id="node17" href="$db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32" title="Compute invariant residuals." alt="" coords="763,572,827,599"/>
-<area shape="rect" id="node23" href="$d3/d96/residue__con_8f90.html#a8b2d4eb1bd167c336b39b899858e7bfb" title="Compute invariant residuals." alt="" coords="749,471,841,497"/>
-<area shape="rect" id="node24" href="$d5/d62/residue__mhd_8f90.html#a3ed729a2f8c8d70e4d2fef05c9dfc4c8" title="Compute invariant residuals." alt="" coords="747,521,843,548"/>
-<area shape="rect" id="node26" href="$d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed." alt="" coords="757,1044,832,1071"/>
-<area shape="rect" id="node27" href="$da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" title="Symmetrize , &#160;and ." alt="" coords="765,673,824,700"/>
-<area shape="rect" id="node28" href="$d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="961,1399,1033,1425"/>
-<area shape="rect" id="node29" href="$d8/db9/tomnsp__con_8f90.html#a2e8c98805decf1c832d812e19d9577dd" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="745,775,845,801"/>
-<area shape="rect" id="node30" href="$d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="759,1247,831,1273"/>
-<area shape="rect" id="node31" href="$d8/db9/tomnsp__con_8f90.html#ac9e62cd03062ffcb2abc0d0ff59503e3" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="745,825,845,852"/>
-<area shape="rect" id="node32" href="$dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space." alt="" coords="763,1297,827,1324"/>
-<area shape="rect" id="node34" href="$dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space." alt="" coords="763,1348,827,1375"/>
-<area shape="rect" id="node36" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="761,1145,829,1172"/>
-<area shape="rect" id="node50" href="$db/da1/nestor__io_8f90.html#a771059753d70a579e9443aa7ca5a991e" title=" " alt="" coords="727,876,862,903"/>
-<area shape="rect" id="node51" href="$db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" title=" " alt="" coords="719,927,871,969"/>
-<area shape="rect" id="node8" href="$d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie..." alt="" coords="1165,335,1247,361"/>
-<area shape="rect" id="node10" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="1169,588,1243,615"/>
-<area shape="rect" id="node11" href="$d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" title="Normalization parameters for ." alt="" coords="1176,284,1236,311"/>
-<area shape="rect" id="node12" href="$d4/da9/precondn_8f90.html#a54a485235e0627efdd733b95d2c8f328" title="Compute preconditioning matrix elements for , &#160;force." alt="" coords="1169,385,1243,412"/>
-<area shape="rect" id="node18" href="$db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="947,623,1047,649"/>
-<area shape="rect" id="node19" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="967,471,1026,497"/>
-<area shape="rect" id="node20" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="957,572,1036,599"/>
-<area shape="rect" id="node21" href="$d8/d86/scalfor_8f90.html#a2ef9c34d20ddf30cb7b15fe35066b8ca" title="Build forces from different contributions." alt="" coords="966,521,1027,548"/>
-<area shape="rect" id="node22" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="1177,537,1235,564"/>
-<area shape="rect" id="node33" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="945,1500,1048,1527"/>
-<area shape="rect" id="node35" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="949,1551,1045,1577"/>
-<area shape="rect" id="node37" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="965,1145,1029,1172"/>
-<area shape="rect" id="node40" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="968,1348,1025,1375"/>
-<area shape="rect" id="node41" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="965,968,1029,995"/>
-<area shape="rect" id="node48" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="1399,2159,1456,2185"/>
-<area shape="rect" id="node49" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="964,1221,1029,1248"/>
-<area shape="rect" id="node38" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="1178,1145,1234,1172"/>
-<area shape="rect" id="node39" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="1178,1095,1234,1121"/>
-<area shape="rect" id="node42" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="1178,31,1234,57"/>
-<area shape="rect" id="node45" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="1183,943,1229,969"/>
-<area shape="rect" id="node46" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="1181,993,1231,1020"/>
-<area shape="rect" id="node47" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="1177,1044,1235,1071"/>
-<area shape="rect" id="node43" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="1389,5,1466,32"/>
-<area shape="rect" id="node44" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="1385,56,1469,83"/>
-<area shape="rect" id="node54" href="$de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" title="Compute the spectral width of the surface geometry Fourier coefficients." alt="" coords="757,1449,833,1476"/>
-<area shape="rect" id="node57" href="$d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="769,1804,820,1831"/>
-<area shape="rect" id="node68" href="$de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" title="Write the output files of VMEC." alt="" coords="585,1652,639,1679"/>
-<area shape="rect" id="node58" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="959,1753,1034,1780"/>
-<area shape="rect" id="node59" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="975,1652,1018,1679"/>
-<area shape="rect" id="node60" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="956,1804,1037,1831"/>
-<area shape="rect" id="node61" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="963,1956,1030,1983"/>
-<area shape="rect" id="node62" href="$d9/d8e/fext__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="1175,1905,1237,1932"/>
-<area shape="rect" id="node63" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="1172,1956,1240,1983"/>
-<area shape="rect" id="node64" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="1163,2007,1249,2033"/>
-<area shape="rect" id="node65" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="1169,2108,1243,2135"/>
-<area shape="rect" id="node66" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="1173,2159,1239,2185"/>
-<area shape="rect" id="node67" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="1337,2493,1517,2520"/>
-<area shape="rect" id="node69" href="$d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217" title="Write out edge values of fields." alt="" coords="753,1652,836,1679"/>
-<area shape="rect" id="node70" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="753,1703,836,1729"/>
-<area shape="rect" id="node75" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="1340,2260,1515,2287"/>
-<area shape="rect" id="node78" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="417,1956,505,1983"/>
-<area shape="rect" id="node80" href="$dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee" title="Interpolate , &#160;and &#160;on full grid." alt="" coords="434,1855,489,1881"/>
-<area shape="rect" id="node81" href="$d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2" title="Compute phip and iota profiles on full grid." alt="" coords="430,1905,493,1932"/>
-<area shape="rect" id="node79" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="553,1956,671,1983"/>
-<area shape="rect" id="node83" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="945,2361,1048,2388"/>
-<area shape="rect" id="node85" href="$d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry." alt="" coords="931,2311,1063,2337"/>
-<area shape="rect" id="node86" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="963,2620,1030,2647"/>
-<area shape="rect" id="node88" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="952,2423,1041,2449"/>
-<area shape="rect" id="node91" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="919,2544,1075,2571"/>
-<area shape="rect" id="node84" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="1125,2311,1287,2337"/>
-<area shape="rect" id="node87" href="$d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" title="Open output files." alt="" coords="1145,2645,1267,2672"/>
-<area shape="rect" id="node89" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="1125,2362,1287,2403"/>
-<area shape="rect" id="node90" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="1135,2427,1277,2469"/>
-<area shape="rect" id="node92" href="$d1/d41/namespacemgrid__mod.html#acadb9c6d09345e3d8f91f5800ad7d452" title=" " alt="" coords="1123,2544,1289,2571"/>
-<area shape="rect" id="node93" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="1129,2595,1283,2621"/>
+<area shape="rect" id="node1" title="Main program of VMEC." alt="" coords="5,2285,65,2312"/>
+<area shape="rect" id="node2" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,2285,168,2312"/>
+<area shape="rect" id="node3" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="259,1855,326,1881"/>
+<area shape="rect" id="node9" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="1341,1221,1513,1248"/>
+<area shape="rect" id="node56" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="433,1247,489,1273"/>
+<area shape="rect" id="node71" href="$d4/dd1/fixaray_8f90.html#aca9a4c886a9423b95e8a9336071de2e3" title="allocate and fill some fixed&#45;size arrays (only depending on Fourier resolution)." alt="" coords="583,2336,641,2363"/>
+<area shape="rect" id="node72" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="729,2184,860,2211"/>
+<area shape="rect" id="node73" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="561,2235,663,2261"/>
+<area shape="rect" id="node74" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="1149,2671,1263,2697"/>
+<area shape="rect" id="node76" href="$d1/d41/namespacemgrid__mod.html#a1badf08429cd96cebc8ecc22782e87ac" title=" " alt="" coords="216,2387,369,2413"/>
+<area shape="rect" id="node77" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="239,2108,346,2135"/>
+<area shape="rect" id="node82" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="766,2437,823,2464"/>
+<area shape="rect" id="node94" href="$dc/dc0/reset__params_8f90.html#a1e4885cb769926141cce2069c6406e78" title="Reset some flow&#45;control parameters to their default values." alt="" coords="242,2700,343,2727"/>
+<area shape="rect" id="node4" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="431,1779,491,1805"/>
+<area shape="rect" id="node25" href="$d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" title="Save current or restore previous good state vector and reduce time step." alt="" coords="753,1931,837,1957"/>
+<area shape="rect" id="node52" href="$d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e" title="Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian." alt="" coords="569,1829,655,1856"/>
+<area shape="rect" id="node53" href="$d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797" title="Print iteration progress to screen and threed1 output file." alt="" coords="429,1500,494,1527"/>
+<area shape="rect" id="node55" href="$dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="430,1981,493,2008"/>
+<area shape="rect" id="node5" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="579,1297,645,1324"/>
+<area shape="rect" id="node6" href="$d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4" title="Fourier&#45;space bandpass filter on constraint force for spectral condensation." alt="" coords="770,1069,819,1096"/>
+<area shape="rect" id="node7" href="$d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" title="Compute the covariant components of the magnetic field , ." alt="" coords="966,1171,1027,1197"/>
+<area shape="rect" id="node13" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="964,689,1029,716"/>
+<area shape="rect" id="node14" href="$de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0" title="Compute the real&#45;space MHD forces." alt="" coords="967,1272,1026,1299"/>
+<area shape="rect" id="node15" href="$d8/dc3/jacobian_8f90.html#af346f65d2aa225d9ede6e0f23add6142" title="Evaulate the Jacobian of the transform from flux&#45; to cylindrical coordinates." alt="" coords="759,1323,830,1349"/>
+<area shape="rect" id="node16" href="$db/da1/nestor__io_8f90.html#a67b1cb19f12a5860a25a89dbd3dfd9c9" title=" " alt="" coords="725,1525,865,1552"/>
+<area shape="rect" id="node17" href="$db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32" title="Compute invariant residuals." alt="" coords="763,1373,827,1400"/>
+<area shape="rect" id="node23" href="$d3/d96/residue__con_8f90.html#a8b2d4eb1bd167c336b39b899858e7bfb" title="Compute invariant residuals." alt="" coords="749,1424,841,1451"/>
+<area shape="rect" id="node24" href="$d5/d62/residue__mhd_8f90.html#a3ed729a2f8c8d70e4d2fef05c9dfc4c8" title="Compute invariant residuals." alt="" coords="747,1475,843,1501"/>
+<area shape="rect" id="node26" href="$d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed." alt="" coords="757,1728,832,1755"/>
+<area shape="rect" id="node27" href="$da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" title="Symmetrize , &#160;and ." alt="" coords="765,1576,824,1603"/>
+<area shape="rect" id="node28" href="$d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="759,1120,831,1147"/>
+<area shape="rect" id="node29" href="$d8/db9/tomnsp__con_8f90.html#a2e8c98805decf1c832d812e19d9577dd" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="745,1627,845,1653"/>
+<area shape="rect" id="node30" href="$d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="759,1779,831,1805"/>
+<area shape="rect" id="node31" href="$d8/db9/tomnsp__con_8f90.html#ac9e62cd03062ffcb2abc0d0ff59503e3" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="745,1677,845,1704"/>
+<area shape="rect" id="node32" href="$dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space." alt="" coords="763,740,827,767"/>
+<area shape="rect" id="node34" href="$dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space." alt="" coords="763,689,827,716"/>
+<area shape="rect" id="node36" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="761,841,829,868"/>
+<area shape="rect" id="node50" href="$db/da1/nestor__io_8f90.html#a771059753d70a579e9443aa7ca5a991e" title=" " alt="" coords="727,952,862,979"/>
+<area shape="rect" id="node51" href="$db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" title=" " alt="" coords="719,1003,871,1045"/>
+<area shape="rect" id="node8" href="$d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie..." alt="" coords="1165,1171,1247,1197"/>
+<area shape="rect" id="node10" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="1169,867,1243,893"/>
+<area shape="rect" id="node11" href="$d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" title="Normalization parameters for ." alt="" coords="1176,1272,1236,1299"/>
+<area shape="rect" id="node12" href="$d4/da9/precondn_8f90.html#a54a485235e0627efdd733b95d2c8f328" title="Compute preconditioning matrix elements for , &#160;force." alt="" coords="1169,1323,1243,1349"/>
+<area shape="rect" id="node18" href="$db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="947,1576,1047,1603"/>
+<area shape="rect" id="node19" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="967,1424,1026,1451"/>
+<area shape="rect" id="node20" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="957,1475,1036,1501"/>
+<area shape="rect" id="node21" href="$d8/d86/scalfor_8f90.html#a2ef9c34d20ddf30cb7b15fe35066b8ca" title="Build forces from different contributions." alt="" coords="966,1525,1027,1552"/>
+<area shape="rect" id="node22" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="1177,1627,1235,1653"/>
+<area shape="rect" id="node33" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="945,639,1048,665"/>
+<area shape="rect" id="node35" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="949,588,1045,615"/>
+<area shape="rect" id="node37" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="965,892,1029,919"/>
+<area shape="rect" id="node40" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="968,841,1025,868"/>
+<area shape="rect" id="node41" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="965,956,1029,983"/>
+<area shape="rect" id="node48" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="1399,107,1456,133"/>
+<area shape="rect" id="node49" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="1173,563,1239,589"/>
+<area shape="rect" id="node38" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="1178,765,1234,792"/>
+<area shape="rect" id="node39" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="1178,715,1234,741"/>
+<area shape="rect" id="node42" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="1178,259,1234,285"/>
+<area shape="rect" id="node45" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="1183,917,1229,944"/>
+<area shape="rect" id="node46" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="1181,1019,1231,1045"/>
+<area shape="rect" id="node47" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="1177,968,1235,995"/>
+<area shape="rect" id="node43" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="1389,233,1466,260"/>
+<area shape="rect" id="node44" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="1385,284,1469,311"/>
+<area shape="rect" id="node54" href="$de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc" title="Compute the spectral width of the surface geometry Fourier coefficients." alt="" coords="757,639,833,665"/>
+<area shape="rect" id="node57" href="$d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="769,284,820,311"/>
+<area shape="rect" id="node68" href="$de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" title="Write the output files of VMEC." alt="" coords="767,588,822,615"/>
+<area shape="rect" id="node58" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="959,183,1034,209"/>
+<area shape="rect" id="node59" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="975,335,1018,361"/>
+<area shape="rect" id="node60" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="956,233,1037,260"/>
+<area shape="rect" id="node61" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="963,132,1030,159"/>
+<area shape="rect" id="node62" href="$d9/d8e/fext__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="1175,107,1237,133"/>
+<area shape="rect" id="node63" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="1172,157,1240,184"/>
+<area shape="rect" id="node64" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="1163,5,1249,32"/>
+<area shape="rect" id="node65" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="1169,56,1243,83"/>
+<area shape="rect" id="node66" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="1173,461,1239,488"/>
+<area shape="rect" id="node67" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="1337,2417,1517,2444"/>
+<area shape="rect" id="node69" href="$d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217" title="Write out edge values of fields." alt="" coords="955,537,1038,564"/>
+<area shape="rect" id="node70" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="955,436,1038,463"/>
+<area shape="rect" id="node75" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="1340,2671,1515,2697"/>
+<area shape="rect" id="node78" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="417,2184,505,2211"/>
+<area shape="rect" id="node80" href="$dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee" title="Interpolate , &#160;and &#160;on full grid." alt="" coords="434,2133,489,2160"/>
+<area shape="rect" id="node81" href="$d7/d61/profil1d_8f90.html#a2bc38da2d3b36d16295159df2f8573e2" title="Compute phip and iota profiles on full grid." alt="" coords="430,2083,493,2109"/>
+<area shape="rect" id="node79" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="553,2184,671,2211"/>
+<area shape="rect" id="node83" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="945,2599,1048,2625"/>
+<area shape="rect" id="node85" href="$d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry." alt="" coords="931,2477,1063,2504"/>
+<area shape="rect" id="node86" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="963,2427,1030,2453"/>
+<area shape="rect" id="node88" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="952,2368,1041,2395"/>
+<area shape="rect" id="node91" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="919,2528,1075,2555"/>
+<area shape="rect" id="node84" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="1125,2620,1287,2647"/>
+<area shape="rect" id="node87" href="$d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" title="Open output files." alt="" coords="1145,2468,1267,2495"/>
+<area shape="rect" id="node89" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="1125,2351,1287,2393"/>
+<area shape="rect" id="node90" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="1135,2286,1277,2327"/>
+<area shape="rect" id="node92" href="$d1/d41/namespacemgrid__mod.html#acadb9c6d09345e3d8f91f5800ad7d452" title=" " alt="" coords="1123,2519,1289,2545"/>
+<area shape="rect" id="node93" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="1129,2569,1283,2596"/>
 </map>

@@ -117,148 +117,187 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../dd/df2/namespacevacmod.html">vacmod</a>, <span class="keywordtype">only</span>: <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>, mnpd, xmpot, xnpot</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d7/d0e/namespacerealspace.html">realspace</a>, <span class="keywordtype">ONLY</span>: <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>, <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(mnmax)</span> :: rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">INTEGER</span> :: iprint, nzskip, l, k, lk, mn,                           &amp;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>             mn0, n, nedge, iu, iv, nl, lkr</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">  REAL</span>(rprec) :: zeta, potsin, potcos</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">ALLOCATABLE</span>, <span class="keywordtype">DIMENSION(:)</span> :: rb, phib, zb</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="comment">! WRITE OUT EDGE VALUES OF FIELDS TO FORT.NEDGE0 (INCLUDE REFLECTED POINT)</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="comment">! NOTE: BR, BPHI, BZ WERE COMPUTED IN BSS, CALLED FROM EQFOR</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a>.le.0 .or. .not.lfreeb) <span class="keywordflow">RETURN</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keyword">ALLOCATE</span> (rb(2*nznt), phib(2*nznt), zb(2*nznt), stat=l)</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordflow">IF</span> (l .ne. 0) stop <span class="stringliteral">&#39;allocation error in freeb_data&#39;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  nedge = 0</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  lkr = nznt</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">DO</span> iv = 1,nzeta</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>     zeta = (twopi*(iv-1))/(nzeta*nfp)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>     <span class="keywordflow">DO</span> iu = 1,ntheta3</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        lk = iv + nzeta*(iu-1)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        nl = ns*lk</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        nedge = nedge+1</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        rb(lk)   = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,1)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        phib(lk) = zeta</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        zb(lk)   = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,1)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="comment">! INCLUDE -u,-v POINTS HERE BY STELLARATOR SYMMETRY</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">IF</span> (.not.lasym .and. (iu.ne.1 .and. iu.ne.ntheta2)) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>          lkr = lkr + 1</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>          nedge = nedge+1</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>          rb(lkr)   = rb(lk)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>          phib(lkr) =-phib(lk)</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>          zb(lkr)   =-zb(lk)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lkr) = -<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lkr) =  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lkr) =  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordflow">        ENDIF</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordflow">  END DO</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">! WRITE OUT (TO THREED1 FILE) VACUUM INFORMATION</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">IF</span> (.not.lfreeb) <span class="keywordflow">THEN</span> <span class="comment">! TODO: should be handled by check for (... .or. .not.lfreeb) above already</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>     <span class="keyword">DEALLOCATE</span> (rb, phib, zb, stat=l)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     <span class="keywordflow">RETURN</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordflow">  END IF</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="comment">! TODO: below outputs only up to ntheta2, so why compute full theta range above?</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">use </span><a class="code hl_namespace" href="../../d8/dfd/namespacedbgout.html">dbgout</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(mnmax)</span> :: rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordtype">INTEGER</span> :: iprint, nzskip, l, k, lk, mn,                           &amp;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>             mn0, n, nedge, iu, iv, nl, lkr</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">  REAL</span>(rprec) :: zeta, potsin, potcos</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">ALLOCATABLE</span>, <span class="keywordtype">DIMENSION(:)</span> :: rb, phib, zb</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">logical</span> :: dbgout_active</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">! WRITE OUT EDGE VALUES OF FIELDS TO FORT.NEDGE0 (INCLUDE REFLECTED POINT)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">! NOTE: BR, BPHI, BZ WERE COMPUTED IN BSS, CALLED FROM EQFOR</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a>.le.0 .or. .not.lfreeb) <span class="keywordflow">RETURN</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">ALLOCATE</span> (rb(2*nznt), phib(2*nznt), zb(2*nznt), stat=l)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">IF</span> (l .ne. 0) stop <span class="stringliteral">&#39;allocation error in freeb_data&#39;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  dbgout_active = <a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;freeb_data&quot;</span>, id=0)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  nedge = 0</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  lkr = nznt</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">DO</span> iv = 1,nzeta</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>     zeta = (twopi*(iv-1))/(nzeta*nfp)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>     <span class="keywordflow">DO</span> iu = 1,ntheta3</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        lk = iv + nzeta*(iu-1)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        nl = ns*lk</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        nedge = nedge+1</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        rb(lk)   = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(nl,1)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        phib(lk) = zeta</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        zb(lk)   = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(nl,1)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="comment">! INCLUDE -u,-v POINTS HERE BY STELLARATOR SYMMETRY</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">IF</span> (.not.lasym .and. (iu.ne.1 .and. iu.ne.ntheta2)) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>          lkr = lkr + 1</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>          nedge = nedge+1</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>          rb(lkr)   = rb(lk)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>          phib(lkr) =-phib(lk)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          zb(lkr)   =-zb(lk)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lkr) = -<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lkr) =  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>          <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lkr) =  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordflow">        ENDIF</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordflow">  END DO</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  nzskip = 1 + nzeta/6</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">! iprint == 1</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">WRITE</span> (nthreed, 750)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>750 <span class="keyword">FORMAT</span>(/,3x,<span class="stringliteral">&#39;NF*PHI&#39;</span>,7x,<span class="stringliteral">&#39; Rb &#39;</span>,8x,<span class="stringliteral">&#39; Zb &#39;</span>,&amp;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>             6x,<span class="stringliteral">&#39;BSQMHDI&#39;</span>,5x,<span class="stringliteral">&#39;BSQVACI&#39;</span>,      &amp;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>             5x,<span class="stringliteral">&#39;BSQMHDF&#39;</span>,5x,<span class="stringliteral">&#39;BSQVACF&#39;</span>,/)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordflow">DO</span> l = 1, nzeta, nzskip</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    zeta = (360.0_dp*(l - 1))/nzeta</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">! WRITE OUT (TO THREED1 FILE) VACUUM INFORMATION</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordflow">IF</span> (.not.lfreeb) <span class="keywordflow">THEN</span> <span class="comment">! TODO: should be handled by check for (... .or. .not.lfreeb) above already</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>     <span class="keyword">DEALLOCATE</span> (rb, phib, zb, stat=l)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>     <span class="keywordflow">RETURN</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordflow">  END IF</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="comment">! TODO: below outputs only up to ntheta2, so why compute full theta range above?</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  nzskip = 1 + nzeta/6</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">DO</span> k = 1, ntheta2</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      lk = l + nzeta*(k - 1)</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <span class="keyword">WRITE</span> (nthreed, 770) zeta, rb(lk), zb(lk), &amp;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                           (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(lk,n),n=1,3), <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(lk)</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>770 <span class="keyword">FORMAT</span>(1p,e10.2,6e12.4)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keywordflow">    END DO</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keywordflow">  end do</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="comment">! iprint == 1</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keyword">WRITE</span> (nthreed, 750)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>750 <span class="keyword">FORMAT</span>(/,3x,<span class="stringliteral">&#39;NF*PHI&#39;</span>,7x,<span class="stringliteral">&#39; Rb &#39;</span>,8x,<span class="stringliteral">&#39; Zb &#39;</span>,&amp;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>             6x,<span class="stringliteral">&#39;BSQMHDI&#39;</span>,5x,<span class="stringliteral">&#39;BSQVACI&#39;</span>,      &amp;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>             5x,<span class="stringliteral">&#39;BSQMHDF&#39;</span>,5x,<span class="stringliteral">&#39;BSQVACF&#39;</span>,/)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordflow">DO</span> l = 1, nzeta, nzskip</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    zeta = (360.0_dp*(l - 1))/nzeta</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="comment">! iprint == 2</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">WRITE</span> (nthreed, 760)</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>760 <span class="keyword">FORMAT</span>(/,3x,<span class="stringliteral">&#39;NF*PHI&#39;</span>,7x,<span class="stringliteral">&#39; Rb &#39;</span>,8x,<span class="stringliteral">&#39; Zb &#39;</span>,&amp;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>             6x,<span class="stringliteral">&#39;BR&#39;</span>, 8x,<span class="stringliteral">&#39;BPHI&#39;</span>, 6x,<span class="stringliteral">&#39;BZ&#39;</span>,  &amp;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>             8x,<span class="stringliteral">&#39;BRv&#39;</span>,7x,<span class="stringliteral">&#39;BPHIv&#39;</span>,5x,<span class="stringliteral">&#39;BZv&#39;</span>,/)</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordflow">DO</span> l = 1, nzeta, nzskip</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    zeta = (360.0_dp*(l - 1))/nzeta</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">DO</span> k = 1, ntheta2</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      lk = l + nzeta*(k - 1)</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keyword">WRITE</span> (nthreed, 780) zeta,       rb(lk),     zb(lk),      &amp;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                           <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk), <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk), <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk),  &amp;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                           <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>(lk),    <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>(lk),  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>(lk)</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>780 <span class="keyword">FORMAT</span>(1p,e10.2,2e12.4,6e10.2)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keywordflow">    END DO</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keywordflow">  end do</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="comment">! allocated in eqfor</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keyword">DEALLOCATE</span> (rb, phib, zb, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>, stat=l)</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="comment">! DIAGNO v1 input ???</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>     <span class="keyword">WRITE</span> (nthreed, 900)</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>900 <span class="keyword">FORMAT</span>(//,3x,<span class="stringliteral">&#39;nb&#39;</span>,2x,<span class="stringliteral">&#39;mb&#39;</span>,&amp;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>              6x,<span class="stringliteral">&#39;rbc&#39;</span>,9x,<span class="stringliteral">&#39;zbs&#39;</span>,9x,<span class="stringliteral">&#39;rbs&#39;</span>,9x,<span class="stringliteral">&#39;zbc&#39;</span>,      &amp;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>              6x,<span class="stringliteral">&#39;vacpot_s&#39;</span>,   4x,<span class="stringliteral">&#39;vacpot_c&#39;</span>, &amp;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>              2x,<span class="stringliteral">&#39;|B|_c(s=.5)&#39;</span>,1x,<span class="stringliteral">&#39;|B|_c(s=1.)&#39;</span>/)</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>     <span class="keywordflow">DO</span> mn = 1, mnmax</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        potsin = 0</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        potcos = 0</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>              potsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>              potcos = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0+mnpd)</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>              <span class="keywordflow">EXIT</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordflow">           END IF</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>     <span class="keyword">WRITE</span> (nthreed, 910) nint(xn(mn)/nfp), nint(xm(mn)), &amp;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        rmnc(mn), zmns(mn), rmns(mn), zmnc(mn),           &amp;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        potsin,     potcos,                               &amp;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        bmodmn(mn), bmodmn1(mn)</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>910 <span class="keyword">FORMAT</span>(i5,i4,1p,10e12.4) <span class="comment">! TODO: only 8 real?</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordflow">ELSE</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>     <span class="keyword">WRITE</span> (nthreed, 800)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>800 <span class="keyword">FORMAT</span>(//,3x,<span class="stringliteral">&#39;nb&#39;</span>,2x,<span class="stringliteral">&#39;mb&#39;</span>,  &amp;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>              6x,<span class="stringliteral">&#39;rbc&#39;</span>,9x,<span class="stringliteral">&#39;zbs&#39;</span>,&amp;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>              6x,<span class="stringliteral">&#39;vacpot_s&#39;</span>,    &amp;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>              2x,<span class="stringliteral">&#39;|B|_c(s=.5)&#39;</span>,1x,<span class="stringliteral">&#39;|B|_c(s=1.)&#39;</span>/)</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>     <span class="keywordflow">DO</span> mn = 1, mnmax</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        potsin = 0</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>              potsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>              <span class="keywordflow">EXIT</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keywordflow">           END IF</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="keywordflow">        END DO</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keyword">WRITE</span> (nthreed, 810) nint(xn(mn)/nfp), nint(xm(mn)),            &amp;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            rmnc(mn), zmns(mn), &amp;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            potsin,             &amp;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            bmodmn(mn), bmodmn1(mn)</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>810 <span class="keyword">FORMAT</span>(i5,i4,1p,7e12.4) <span class="comment">! TODO: only 5 REAL ???</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keywordflow">     END DO</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="keywordflow">  END IF</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keyword">WRITE</span> (nthreed, *)</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">DO</span> k = 1, ntheta2</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      lk = l + nzeta*(k - 1)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keyword">WRITE</span> (nthreed, 770) zeta, rb(lk), zb(lk), &amp;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                           (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(lk,n),n=1,3), <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>(lk)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>770 <span class="keyword">FORMAT</span>(1p,e10.2,6e12.4)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keywordflow">    END DO</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keywordflow">  end do</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="comment">! iprint == 2</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">WRITE</span> (nthreed, 760)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>760 <span class="keyword">FORMAT</span>(/,3x,<span class="stringliteral">&#39;NF*PHI&#39;</span>,7x,<span class="stringliteral">&#39; Rb &#39;</span>,8x,<span class="stringliteral">&#39; Zb &#39;</span>,&amp;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>             6x,<span class="stringliteral">&#39;BR&#39;</span>, 8x,<span class="stringliteral">&#39;BPHI&#39;</span>, 6x,<span class="stringliteral">&#39;BZ&#39;</span>,  &amp;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>             8x,<span class="stringliteral">&#39;BRv&#39;</span>,7x,<span class="stringliteral">&#39;BPHIv&#39;</span>,5x,<span class="stringliteral">&#39;BZv&#39;</span>,/)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordflow">DO</span> l = 1, nzeta, nzskip</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    zeta = (360.0_dp*(l - 1))/nzeta</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">DO</span> k = 1, ntheta2</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      lk = l + nzeta*(k - 1)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="keyword">WRITE</span> (nthreed, 780) zeta,       rb(lk),     zb(lk),      &amp;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                           <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>(lk), <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>(lk), <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>(lk),  &amp;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                           <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>(lk),    <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>(lk),  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>(lk)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>780 <span class="keyword">FORMAT</span>(1p,e10.2,2e12.4,6e10.2)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keywordflow">    END DO</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keywordflow">  end do</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">if</span> (dbgout_active) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;rb&quot;</span>,   nzeta, ntheta3, rb)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;phib&quot;</span>, nzeta, ntheta3, phib)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;zb&quot;</span>,   nzeta, ntheta3, zb)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqmhdi&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(:,1))</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqvaci&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(:,2))</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqmhdf&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa03b9c0193141fd8821ab3e370cabcce">bsqsav</a>(:,3))</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bsqvacf&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a>)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bredge&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bpedge&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bzedge&quot;</span>, nzeta, ntheta3, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;brv&quot;</span>,    nzeta, ntheta2, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a83e5e95e9786a71e39365724567111e7">brv</a>)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bphiv&quot;</span>,  nzeta, ntheta2, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">call </span>add_real_2d(<span class="stringliteral">&quot;bzv&quot;</span>,    nzeta, ntheta2, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a3f50984fae7d8ff213cd113c3a5502c2">bzv</a>)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="comment">! allocated in eqfor</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keyword">DEALLOCATE</span> (rb, phib, zb, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a052fa02a018421af8e190fd988db9b62">bredge</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aad9451590052e3c7081d6f3ad56673a1">bpedge</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae0645669e2877c810707fd69f89d4451">bzedge</a>, stat=l)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="comment">! DIAGNO v1 input ???</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>     <span class="keyword">WRITE</span> (nthreed, 900)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>900 <span class="keyword">FORMAT</span>(//,3x,<span class="stringliteral">&#39;nb&#39;</span>,2x,<span class="stringliteral">&#39;mb&#39;</span>,&amp;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>              6x,<span class="stringliteral">&#39;rbc&#39;</span>,9x,<span class="stringliteral">&#39;zbs&#39;</span>,9x,<span class="stringliteral">&#39;rbs&#39;</span>,9x,<span class="stringliteral">&#39;zbc&#39;</span>,      &amp;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>              6x,<span class="stringliteral">&#39;vacpot_s&#39;</span>,   4x,<span class="stringliteral">&#39;vacpot_c&#39;</span>, &amp;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>              2x,<span class="stringliteral">&#39;|B|_c(s=.5)&#39;</span>,1x,<span class="stringliteral">&#39;|B|_c(s=1.)&#39;</span>/)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>     <span class="keywordflow">DO</span> mn = 1, mnmax</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        potsin = 0</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        potcos = 0</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>              potsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>              potcos = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0+mnpd)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>              <span class="keywordflow">EXIT</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keywordflow">           END IF</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>     <span class="keyword">WRITE</span> (nthreed, 910) nint(xn(mn)/nfp), nint(xm(mn)), &amp;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        rmnc(mn), zmns(mn), rmns(mn), zmnc(mn),           &amp;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        potsin,     potcos,                               &amp;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        bmodmn(mn), bmodmn1(mn)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>910 <span class="keyword">FORMAT</span>(i5,i4,1p,10e12.4) <span class="comment">! TODO: only 8 real?</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">ELSE</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>     <span class="keyword">WRITE</span> (nthreed, 800)</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>800 <span class="keyword">FORMAT</span>(//,3x,<span class="stringliteral">&#39;nb&#39;</span>,2x,<span class="stringliteral">&#39;mb&#39;</span>,  &amp;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>              6x,<span class="stringliteral">&#39;rbc&#39;</span>,9x,<span class="stringliteral">&#39;zbs&#39;</span>,&amp;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>              6x,<span class="stringliteral">&#39;vacpot_s&#39;</span>,    &amp;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>              2x,<span class="stringliteral">&#39;|B|_c(s=.5)&#39;</span>,1x,<span class="stringliteral">&#39;|B|_c(s=1.)&#39;</span>/)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>     <span class="keywordflow">DO</span> mn = 1, mnmax</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        potsin = 0</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">DO</span> mn0 = 1, mnpd</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>           <span class="keywordflow">IF</span> ( (nint(xnpot(mn0)).eq.nint(xn(mn))) .and.                &amp;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                (nint(xmpot(mn0)).eq.nint(xm(mn))) ) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>              potsin = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a602a7a7e2e36b0d52efa57de5fabf5ee">potvac</a>(mn0)</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>              <span class="keywordflow">EXIT</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="keywordflow">           END IF</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keywordflow">        END DO</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keyword">WRITE</span> (nthreed, 810) nint(xn(mn)/nfp), nint(xm(mn)),            &amp;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            rmnc(mn), zmns(mn), &amp;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            potsin,             &amp;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            bmodmn(mn), bmodmn1(mn)</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>810 <span class="keyword">FORMAT</span>(i5,i4,1p,7e12.4) <span class="comment">! TODO: only 5 REAL ???</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="keywordflow">     END DO</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="keywordflow">  END IF</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  <span class="keyword">WRITE</span> (nthreed, *)</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordflow">if</span> (dbgout_active) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="comment">! For now, skip output of geometry and potvac,</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="comment">! since these are contained (and checked) in wout already.</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div>
 <div class="ttc" id="afreeb__data_8f90_html_a71de251d01e145a30e3f710ac705f217"><div class="ttname"><a href="../../d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217">freeb_data</a></div><div class="ttdeci">subroutine freeb_data(rmnc, zmns, rmns, zmnc, bmodmn, bmodmn1)</div><div class="ttdoc">Write out edge values of fields.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d87/freeb__data_8f90_source.html#l00012">freeb_data.f90:13</a></div></div>
+<div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
+<div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
 <div class="ttc" id="anamespacerealspace_html"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html">realspace</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00002">realspace.f90:2</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_a937d85c71022f8871c8cc064655fb046"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">realspace::z1</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable, target z1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00011">realspace.f90:11</a></div></div>
 <div class="ttc" id="anamespacerealspace_html_ab65b4b8100f333047e3cb71a66ca0f6a"><div class="ttname"><a href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">realspace::r1</a></div><div class="ttdeci">real(rprec), dimension(:,:), allocatable r1</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df9/realspace_8f90_source.html#l00008">realspace.f90:8</a></div></div>
@@ -280,7 +319,7 @@ $(document).ready(function(){initNavTree('d1/d87/freeb__data_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d1/d87/freeb__data_8f90.html">freeb_data.f90</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 18:59:06 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Fri Feb 4 2022 18:57:52 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"d5/d26/magnetic__fluxes_8f90_source.html":[3,0,0,42],
 "d5/d62/residue__mhd_8f90.html":[3,0,0,58],
 "d5/d62/residue__mhd_8f90.html#a3ed729a2f8c8d70e4d2fef05c9dfc4c8":[3,0,0,58,0],
 "d5/d62/residue__mhd_8f90_source.html":[3,0,0,58],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "d8/d68/vparams_8f90.html#aafc96d5b64605b0135b68aabf765de08":[3,0,0,0,11,5],
 "d8/d68/vparams_8f90.html#abf1a71aee936d90b7beb77d11c38b099":[3,0,0,0,11,18],
 "d8/d68/vparams_8f90.html#abfc9050e7830e6e67422cf4bdbb2b7f3":[3,0,0,0,11,16],
-"d8/d68/vparams_8f90.html#ac304a4a078e783242db32f93dac96bbb":[3,0,0,0,11,15],
-"d8/d68/vparams_8f90.html#acb273c9c669df2a69478dfbe4e4cdd7e":[3,0,0,0,11,22]
+"d8/d68/vparams_8f90.html#ac304a4a078e783242db32f93dac96bbb":[3,0,0,0,11,15]
 };

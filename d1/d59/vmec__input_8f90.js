@@ -27,6 +27,7 @@ var vmec__input_8f90 =
     [ "dump_fixaray", "d1/d59/vmec__input_8f90.html#a1e276a4c9a3459a58d9fcb0affabfc79", null ],
     [ "dump_forcenorms_tcon", "d1/d59/vmec__input_8f90.html#abd25baa020afdc84e63359647352fd67", null ],
     [ "dump_forces", "d1/d59/vmec__input_8f90.html#a81296e34dd0ba56f35e776274770864c", null ],
+    [ "dump_freeb_data", "d1/d59/vmec__input_8f90.html#a32a7cb70492abb3d86861a7695a77377", null ],
     [ "dump_fsq", "d1/d59/vmec__input_8f90.html#a5c6e56838ebc995ec1cdbce5aece69ba", null ],
     [ "dump_fsq1", "d1/d59/vmec__input_8f90.html#a3702f7a28e9b68d271dd049aac18db9d", null ],
     [ "dump_funct3d_geometry", "d1/d59/vmec__input_8f90.html#a3cc8881555f2cdfeb9b4db4f53078961", null ],

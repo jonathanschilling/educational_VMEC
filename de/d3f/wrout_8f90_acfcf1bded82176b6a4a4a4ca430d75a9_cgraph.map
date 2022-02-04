@@ -4,5 +4,6 @@
 <area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="108,56,211,83"/>
 <area shape="rect" id="node4" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="111,107,207,133"/>
 <area shape="rect" id="node5" href="$d1/d87/freeb__data_8f90.html#a71de251d01e145a30e3f710ac705f217" title="Write out edge values of fields." alt="" coords="118,157,201,184"/>
-<area shape="rect" id="node6" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="118,208,201,235"/>
+<area shape="rect" id="node7" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="118,208,201,235"/>
+<area shape="rect" id="node6" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="259,157,431,184"/>
 </map>

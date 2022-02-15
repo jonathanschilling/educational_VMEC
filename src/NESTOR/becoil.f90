@@ -16,6 +16,8 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
   USE vacmod
   USE mgrid_mod, ONLY: nr0b, np0b, nz0b, rminb, zminb, rmaxb, zmaxb, delrb, delzb
 
+  use json
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: rad, zee
@@ -37,6 +39,22 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
   !
   ! RAD, ZEE:            ARRAY OF R, Z VALUES (ON FLUX SURFACE)
   !                      AT WHICH B-FIELD IS TO BE DETERMINED
+
+!   if (icount .eq. 0) then
+!     ! dump MGRID contents to text file for comparison with re-created file
+!
+!     call open_dbg_out("mgrid.json")
+!
+!     call add_int("nr0b", nr0b)
+!     call add_int("nz0b", nz0b)
+!     call add_int("np0b", np0b)
+!
+!     call add_real_3d("brvac", nr0b, nz0b, np0b, brvac)
+!     call add_real_3d("bpvac", nr0b, nz0b, np0b, bpvac)
+!     call add_real_3d("bzvac", nr0b, nz0b, np0b, bzvac)
+!
+!     call close_dbg_out()
+!   end if
 
   icount = icount + 1
 
@@ -76,7 +94,7 @@ SUBROUTINE becoil(rad, zee, brvac, bpvac, bzvac)
      brad(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)
      bphi(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)
      bz(i)   = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)
-     
+
   END DO
 
   IF (MOD(icount,25).eq.0) THEN

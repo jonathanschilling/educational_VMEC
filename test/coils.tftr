@@ -1,0 +1,43 @@
+! TFTR coils from:
+! K. M. Ling, S. C. Jardin
+! "The Princeton Spectral Equilibrium Code: PSEC"
+! J. Comp. Phys. 58, 300-355 (1985)
+
+&MGRID_NLI
+    MGRID_EXT = 'tftr'
+    MGRID_MODE = 'S'
+    LSTELL_SYM = .false.
+    IR = 201
+    JZ = 201
+    KP = 1
+    Rmin = 1.0
+    Rmax = 5.0
+    Zmin = -2.0
+    Zmax =  2.0
+/
+
+** coils_dot_starts_below **
+periods   1
+begin filament
+mirror NIL
+ 0.659 0.0 0.253 100 1 OhmicHeating_01
+ 0.767 0.0 1.003  71 1 OhmicHeating_02
+ 0.928 0.0 0.971   4 1 OhmicHeating_03
+ 0.943 0.0 1.066  11 1 OhmicHeating_04
+ 1.002 0.0 1.098   2 1 OhmicHeating_05
+ 1.198 0.0 1.573  26 1 OhmicHeating_06
+ 1.604 0.0 1.842  18 1 OhmicHeating_07
+ 2.332 0.0 2.138   9 1 OhmicHeating_08
+ 3.878 0.0 2.085   6 1 OhmicHeating_09
+ 4.982 0.0 0.673   2 1 OhmicHeating_10
+ 0.670 0.0 0.758  40 2 EquilibriumField_01
+ 0.793 0.0 0.792   7 2 EquilibriumField_02
+ 0.834 0.0 0.826   2 2 EquilibriumField_03
+ 2.839 0.0 2.146  -9 2 EquilibriumField_04
+ 3.880 0.0 1.949 -14 2 EquilibriumField_05
+ 4.874 0.0 0.781 -26 2 EquilibriumField_06
+ 0.717 0.0 1.465 -27 3 VariableCurvature_01
+ 1.604 0.0 2.020  15 3 VariableCurvature_02
+ 2.332 0.0 2.290   4 3 VariableCurvature_03
+ 4.982 0.0 0.851  -3 3 VariableCurvature_04
+end

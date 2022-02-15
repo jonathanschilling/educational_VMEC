@@ -249,7 +249,8 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       ENDIF
 
       IF (ABS((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) THEN
-            ier_flag = 10 ! 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
+!             ier_flag = 10 ! 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
+         print *, 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
       ENDIF
 
    ENDIF

@@ -1,18 +1,17 @@
 <map id="readin" name="readin">
-<area shape="rect" id="node1" title="Read the input file." alt="" coords="5,156,63,183"/>
-<area shape="rect" id="node2" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="145,17,248,44"/>
-<area shape="rect" id="node6" href="$d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry." alt="" coords="131,68,263,95"/>
-<area shape="rect" id="node7" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="163,119,230,145"/>
-<area shape="rect" id="node10" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="111,193,283,220"/>
-<area shape="rect" id="node11" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="152,244,241,271"/>
-<area shape="rect" id="node14" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="119,352,275,379"/>
-<area shape="rect" id="node3" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="333,5,495,32"/>
-<area shape="rect" id="node4" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="357,56,471,83"/>
-<area shape="rect" id="node5" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="548,56,723,83"/>
-<area shape="rect" id="node8" href="$d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" title="Open output files." alt="" coords="353,119,475,145"/>
-<area shape="rect" id="node9" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="545,132,725,159"/>
-<area shape="rect" id="node12" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="333,221,495,262"/>
-<area shape="rect" id="node13" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="343,286,485,327"/>
-<area shape="rect" id="node15" href="$d1/d41/namespacemgrid__mod.html#acadb9c6d09345e3d8f91f5800ad7d452" title=" " alt="" coords="331,352,497,379"/>
-<area shape="rect" id="node16" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="337,403,491,429"/>
+<area shape="rect" id="node1" title="Read the input file." alt="" coords="5,169,63,196"/>
+<area shape="rect" id="node2" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="145,31,248,57"/>
+<area shape="rect" id="node6" href="$d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d" title="Flip the definition of the poloidal angle in the user&#45;provided initial guess for the LCFS geometry." alt="" coords="131,81,263,108"/>
+<area shape="rect" id="node7" href="$d0/d4c/heading_8f90.html#aacf288f9cc770199b74d2e6fcc374450" title="Open output files and print banner message at the top." alt="" coords="163,132,230,159"/>
+<area shape="rect" id="node10" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="111,207,283,233"/>
+<area shape="rect" id="node11" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="152,257,241,284"/>
+<area shape="rect" id="node14" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="119,365,275,392"/>
+<area shape="rect" id="node3" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="331,5,493,32"/>
+<area shape="rect" id="node4" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="355,56,469,83"/>
+<area shape="rect" id="node5" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="544,56,719,83"/>
+<area shape="rect" id="node8" href="$d2/dc3/open__output__files_8f90.html#a8e2e97aad77c7099fa003f98f48d4dfc" title="Open output files." alt="" coords="351,132,473,159"/>
+<area shape="rect" id="node9" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="541,183,721,209"/>
+<area shape="rect" id="node12" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="331,234,493,275"/>
+<area shape="rect" id="node13" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="341,299,483,341"/>
+<area shape="rect" id="node15" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="335,416,489,443"/>
 </map>

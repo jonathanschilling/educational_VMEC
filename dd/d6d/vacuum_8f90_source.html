@@ -342,14 +342,15 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="keywordflow">      ENDIF</span></div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      <span class="keywordflow">IF</span> (abs((plascur - bsubuvac)/rbtor) .gt. 1.e-2_dp) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            ier_flag = 10 <span class="comment">! &#39;VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL&#39;</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keywordflow">      ENDIF</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="keywordflow">   ENDIF</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> + 1</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35">vacuum</a></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment">!             ier_flag = 10 ! &#39;VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL&#39;</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>         print *, <span class="stringliteral">&#39;VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL&#39;</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="keywordflow">      ENDIF</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keywordflow">   ENDIF</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>   <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3">icall</a> + 1</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35">vacuum</a></div>
 <div class="ttc" id="abextern_8f90_html_a90228cc5f358147ae7f59953d6f9cced"><div class="ttname"><a href="../../db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced">bextern</a></div><div class="ttdeci">subroutine bextern(plascur, wint)</div><div class="ttdoc">Compute the total magnetic field due to external coils and the net toroidal plasma current.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d3d/bextern_8f90_source.html#l00008">bextern.f90:9</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
@@ -398,7 +399,7 @@ $(document).ready(function(){initNavTree('dd/d6d/vacuum_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../dd/d6d/vacuum_8f90.html">vacuum.f90</a></li>
-    <li class="footer">Generated on Fri Feb 4 2022 18:57:52 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Fri Feb 18 2022 15:26:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

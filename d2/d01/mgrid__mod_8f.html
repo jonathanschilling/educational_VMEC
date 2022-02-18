@@ -116,15 +116,11 @@ $(document).ready(function(){initNavTree('d2/d01/mgrid__mod_8f.html','../../'); 
 </div><!--header-->
 <div class="contents">
 
-<p>Precomputed table of magnetic field due to confimenent coils.  
-<a href="#details">More...</a></p>
-
 <p><a href="../../d2/d01/mgrid__mod_8f_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Modules</h2></td></tr>
 <tr class="memitem:d1/d41/namespacemgrid__mod"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></td></tr>
-<tr class="memdesc:d1/d41/namespacemgrid__mod"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precomputed table of magnetic field due to confimenent coils. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -140,6 +136,8 @@ Functions/Subroutines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:aac5a5ba3591e2a68bb3ceb53ee91f1e8"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#aac5a5ba3591e2a68bb3ceb53ee91f1e8">mgrid_mod::lnverror</a> =.true.</td></tr>
+<tr class="separator:aac5a5ba3591e2a68bb3ceb53ee91f1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68878aa615d5d4e10a232c5c2af14811"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a68878aa615d5d4e10a232c5c2af14811">mgrid_mod::nlimset</a> = 2</td></tr>
 <tr class="separator:a68878aa615d5d4e10a232c5c2af14811"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ae51d3ee68c19f512cbc6920f207064"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a1ae51d3ee68c19f512cbc6920f207064">mgrid_mod::vn_br0</a> = 'br'</td></tr>
@@ -172,8 +170,24 @@ Variables</h2></td></tr>
 <tr class="separator:a09f69138fb039b68e1a933637bde3f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dc4ee3ae2bba3390fa97d910ad109b0"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a7dc4ee3ae2bba3390fa97d910ad109b0">mgrid_mod::vn_coilcur</a> = 'raw_coil_cur'</td></tr>
 <tr class="separator:a7dc4ee3ae2bba3390fa97d910ad109b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a621b5297c9b967ec96ba7d711a5bb5f1"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a621b5297c9b967ec96ba7d711a5bb5f1">mgrid_mod::vn_flp</a> = 'nobser'</td></tr>
+<tr class="separator:a621b5297c9b967ec96ba7d711a5bb5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bab0d889e8f03ea3495373a62d0d645"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a3bab0d889e8f03ea3495373a62d0d645">mgrid_mod::vn_nobd</a> = 'nobd'</td></tr>
+<tr class="separator:a3bab0d889e8f03ea3495373a62d0d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6907d75ffede73f5fff974dda471aee"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#af6907d75ffede73f5fff974dda471aee">mgrid_mod::vn_nbset</a> = 'nbsets'</td></tr>
+<tr class="separator:af6907d75ffede73f5fff974dda471aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad564947c640b613d6a9e8d6151fa5e4"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#aad564947c640b613d6a9e8d6151fa5e4">mgrid_mod::vn_nbfld</a> = 'nbfld'</td></tr>
+<tr class="separator:aad564947c640b613d6a9e8d6151fa5e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884c289d9e2d9d35db9f29126b3804a1"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a884c289d9e2d9d35db9f29126b3804a1">mgrid_mod::ln_flp</a> = 'flux loops'</td></tr>
+<tr class="separator:a884c289d9e2d9d35db9f29126b3804a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b50b65e30b53f3873a33c3b0d05bc1"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a96b50b65e30b53f3873a33c3b0d05bc1">mgrid_mod::ln_nobd</a> = 'Connected flux loops'</td></tr>
+<tr class="separator:a96b50b65e30b53f3873a33c3b0d05bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4bb12f802afb4149c595df696358b0"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a9e4bb12f802afb4149c595df696358b0">mgrid_mod::ln_nbset</a> = 'B-coil loops'</td></tr>
+<tr class="separator:a9e4bb12f802afb4149c595df696358b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf6fc23f5ec71162209d6c2f8b7e65e9"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#acf6fc23f5ec71162209d6c2f8b7e65e9">mgrid_mod::ln_next</a> = 'External currents'</td></tr>
 <tr class="separator:acf6fc23f5ec71162209d6c2f8b7e65e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ac1f3f10ccca303cdfa9d99a5337e9"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#ac9ac1f3f10ccca303cdfa9d99a5337e9">mgrid_mod::ln_nbfld</a> = 'B-coil measurements'</td></tr>
+<tr class="separator:ac9ac1f3f10ccca303cdfa9d99a5337e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c909a85955eb1f4943d2e411336ece2"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">mgrid_mod::nr0b</a></td></tr>
 <tr class="separator:a2c909a85955eb1f4943d2e411336ece2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade73bbaf66f92d410cd020dee51e62dc"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">mgrid_mod::np0b</a></td></tr>
@@ -307,17 +321,13 @@ Variables</h2></td></tr>
 <tr class="memitem:a1b9493606f8ffdc8b644009bd11c8689"><td class="memItemLeft" align="right" valign="top">character(len=1)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d41/namespacemgrid__mod.html#a1b9493606f8ffdc8b644009bd11c8689">mgrid_mod::mgrid_mode</a></td></tr>
 <tr class="separator:a1b9493606f8ffdc8b644009bd11c8689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Precomputed table of magnetic field due to confimenent coils. </p>
-
-<p class="definition">Definition in file <a class="el" href="../../d2/d01/mgrid__mod_8f_source.html">mgrid_mod.f</a>.</p>
-</div></div><!-- contents -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d2/d01/mgrid__mod_8f.html">mgrid_mod.f</a></li>
-    <li class="footer">Generated on Fri Feb 4 2022 18:57:52 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Fri Feb 18 2022 15:26:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

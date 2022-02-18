@@ -119,105 +119,123 @@ $(document).ready(function(){initNavTree('d6/dc7/becoil_8f90_source.html','../..
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../dd/df2/namespacevacmod.html">vacmod</a></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a>, <span class="keywordtype">ONLY</span>: <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">nr0b</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">np0b</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#aa22e8be5584af96c59bab2c03392b14d">nz0b</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a>, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">use </span>json</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nuv2)</span>, <span class="keywordtype">INTENT(in)</span> :: rad, zee</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nr0b,nz0b,np0b)</span>, <span class="keywordtype">INTENT(in)</span> :: brvac, bpvac, bzvac</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordtype">CHARACTER(LEN=50)</span>, <span class="keywordtype">PARAMETER</span> :: warning = <span class="stringliteral">&#39;Plasma Boundary exceeded Vacuum Grid Size&#39;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nuv2)</span>, <span class="keywordtype">INTENT(in)</span> :: rad, zee</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nr0b,nz0b,np0b)</span>, <span class="keywordtype">INTENT(in)</span> :: brvac, bpvac, bzvac</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">SAVE</span> :: icount = 0</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">INTEGER</span> :: i, kv, ir, jz, ir1, jz1</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">  REAL</span>(rprec) :: rad0, zee0, ri, zj, pr, qz, w22, w21, w12, w11</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">! DETERMINE THE CYLINDRICAL COMPONENTS OF THE EXTERNAL</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">! MAGNETIC FIELD (BR, BP, BZ) AT A FIXED PHI PLANE BY</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">! USING 2-D INTERPOLATION BASED ON THE FOUR POINT FORMULA</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">! IN ABRAMOWITZ AND STEGUN, EQ. 25.2.66</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">!</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="comment">! BRVAC, BPVAC, BZVAC: CYLINDRICAL COMPONENTS OF VACUUM B-FIELD</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">!                      STORED ON R, Z, PHI GRID</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">!</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">! RAD, ZEE:            ARRAY OF R, Z VALUES (ON FLUX SURFACE)</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">!                      AT WHICH B-FIELD IS TO BE DETERMINED</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  icount = icount + 1</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">CHARACTER(LEN=50)</span>, <span class="keywordtype">PARAMETER</span> :: warning = <span class="stringliteral">&#39;Plasma Boundary exceeded Vacuum Grid Size&#39;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">SAVE</span> :: icount = 0</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">INTEGER</span> :: i, kv, ir, jz, ir1, jz1</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">  REAL</span>(rprec) :: rad0, zee0, ri, zj, pr, qz, w22, w21, w12, w11</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">! DETERMINE THE CYLINDRICAL COMPONENTS OF THE EXTERNAL</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">! MAGNETIC FIELD (BR, BP, BZ) AT A FIXED PHI PLANE BY</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">! USING 2-D INTERPOLATION BASED ON THE FOUR POINT FORMULA</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="comment">! IN ABRAMOWITZ AND STEGUN, EQ. 25.2.66</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">!</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">! BRVAC, BPVAC, BZVAC: CYLINDRICAL COMPONENTS OF VACUUM B-FIELD</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">!                      STORED ON R, Z, PHI GRID</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">!</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">! RAD, ZEE:            ARRAY OF R, Z VALUES (ON FLUX SURFACE)</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">!                      AT WHICH B-FIELD IS TO BE DETERMINED</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">DO</span> i = 1, nuv2</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>     <span class="comment">! CHECK THAT BOUNDARY POINTS ARE INSIDE VACUUM GRID.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>     <span class="comment">! IF NOT, SET THEM EQUAL TO LARGEST (OR SMALLEST) VACUUM GRID POINTS</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>     rad0 = min(rad(i), <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>     rad0 = max(rad0,   <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>     zee0 = min(zee(i), <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>)</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>     zee0 = max(zee0,   <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>     <span class="comment">! DETERMINE PHI-PLANE, KV (MUST LIE IN FIRST FIELD PERIOD)</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>     kv = 1 + mod(i - 1,nv)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>     <span class="comment">! Axi-symmetric special case</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>     kv = min(kv, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">np0b</a>)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>     <span class="comment">! DETERMINE INTEGER INDICES (IR,JZ) FOR LOWER LEFT R, Z CORNER GRID POINT</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>     ir = int((rad0 - <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a>) + 1</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>     jz = int((zee0 - <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a>) + 1</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>     ir1 = min(<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">nr0b</a>,ir + 1)</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>     jz1 = min(<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#aa22e8be5584af96c59bab2c03392b14d">nz0b</a>,jz + 1)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     <span class="comment">! COMPUTE RI, ZJ AND PR , QZ AT GRID POINT (IR , JZ)</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>     <span class="comment">! ALSO, COMPUTE WEIGHTS WIJ FOR 4 CORNER GRID POINTS</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>     ri = <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a> + (ir - 1)*<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     zj = <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a> + (jz - 1)*<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     pr = (rad0 - ri)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>     qz = (zee0 - zj)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>     w22 = pr*qz                   <span class="comment">!    p *   q</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>     w21 = pr - w22                <span class="comment">!    p *(1-q)</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>     w12 = qz - w22                <span class="comment">! (1-p)*   q</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>     w11 = 1 + w22 - (pr + qz)     <span class="comment">! (1-p)*(1-q)</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>     <span class="comment">! COMPUTE B FIELD AT R, PHI, Z BY INTERPOLATION</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae9f16d931a5c1a59223bda11531b3e9e">brad</a>(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25a2b10afc2b3bd8fe092619eb71465c">bphi</a>(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">bz</a>(i)   = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>     </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">!   if (icount .eq. 0) then</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">!     ! dump MGRID contents to text file for comparison with re-created file</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">!</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">!     call open_dbg_out(&quot;mgrid.json&quot;)</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">!</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">!     call add_int(&quot;nr0b&quot;, nr0b)</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">!     call add_int(&quot;nz0b&quot;, nz0b)</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">!     call add_int(&quot;np0b&quot;, np0b)</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">!</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">!     call add_real_3d(&quot;brvac&quot;, nr0b, nz0b, np0b, brvac)</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">!     call add_real_3d(&quot;bpvac&quot;, nr0b, nz0b, np0b, bpvac)</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">!     call add_real_3d(&quot;bzvac&quot;, nr0b, nz0b, np0b, bzvac)</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">!</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">!     call close_dbg_out()</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">!   end if</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  icount = icount + 1</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">DO</span> i = 1, nuv2</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>     <span class="comment">! CHECK THAT BOUNDARY POINTS ARE INSIDE VACUUM GRID.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     <span class="comment">! IF NOT, SET THEM EQUAL TO LARGEST (OR SMALLEST) VACUUM GRID POINTS</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>     rad0 = min(rad(i), <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>     rad0 = max(rad0,   <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     zee0 = min(zee(i), <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     zee0 = max(zee0,   <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>     <span class="comment">! DETERMINE PHI-PLANE, KV (MUST LIE IN FIRST FIELD PERIOD)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>     kv = 1 + mod(i - 1,nv)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>     <span class="comment">! Axi-symmetric special case</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>     kv = min(kv, <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">np0b</a>)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     <span class="comment">! DETERMINE INTEGER INDICES (IR,JZ) FOR LOWER LEFT R, Z CORNER GRID POINT</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>     ir = int((rad0 - <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a>) + 1</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     jz = int((zee0 - <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a>) + 1</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>     ir1 = min(<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">nr0b</a>,ir + 1)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>     jz1 = min(<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#aa22e8be5584af96c59bab2c03392b14d">nz0b</a>,jz + 1)</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordflow">IF</span> (mod(icount,25).eq.0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     <span class="comment">! PRINT INFO IF R, Z OUT OF BOX</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     i = 0</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     rad0 = maxval(rad)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     zee0 = maxval(zee)</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>     <span class="keywordflow">IF</span> (rad0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>) i = 1</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>     <span class="keywordflow">IF</span> (zee0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>) i = i + 2</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     ri   = minval(rad)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     zj   = minval(zee)</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     <span class="keywordflow">IF</span> (ri .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>) i = i + 4</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>     <span class="keywordflow">IF</span> (zj .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>) i = i + 8</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>     <span class="keywordflow">IF</span> (i .ne. 0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        print *, warning</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="comment">! WRITE (nthreed, *) warning</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">IF</span> (i/8 .ne. 0) print *,<span class="stringliteral">&#39; zmin = &#39;</span>, zj</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        i = mod(i,8)</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">IF</span> (i/4 .ne. 0) print *,<span class="stringliteral">&#39; rmin = &#39;</span>, ri</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        i = mod(i,4)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">IF</span> (i/2 .ne. 0) print *,<span class="stringliteral">&#39; zmax = &#39;</span>, zee0</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        i = mod(i,2)</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">IF</span> (i .ne. 0) print *,<span class="stringliteral">&#39; rmax = &#39;</span>, rad0</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordflow">  ENDIF</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>     <span class="comment">! COMPUTE RI, ZJ AND PR , QZ AT GRID POINT (IR , JZ)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>     <span class="comment">! ALSO, COMPUTE WEIGHTS WIJ FOR 4 CORNER GRID POINTS</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>     ri = <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a> + (ir - 1)*<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>     zj = <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a> + (jz - 1)*<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>     pr = (rad0 - ri)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">delrb</a></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>     qz = (zee0 - zj)/<a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">delzb</a></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>     w22 = pr*qz                   <span class="comment">!    p *   q</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>     w21 = pr - w22                <span class="comment">!    p *(1-q)</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     w12 = qz - w22                <span class="comment">! (1-p)*   q</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     w11 = 1 + w22 - (pr + qz)     <span class="comment">! (1-p)*(1-q)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>     <span class="comment">! COMPUTE B FIELD AT R, PHI, Z BY INTERPOLATION</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ae9f16d931a5c1a59223bda11531b3e9e">brad</a>(i) = w11*brvac(ir,jz,kv) + w22*brvac(ir1,jz1,kv) + w21*brvac(ir1,jz,kv) + w12*brvac(ir,jz1,kv)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a25a2b10afc2b3bd8fe092619eb71465c">bphi</a>(i) = w11*bpvac(ir,jz,kv) + w22*bpvac(ir1,jz1,kv) + w21*bpvac(ir1,jz,kv) + w12*bpvac(ir,jz1,kv)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>     <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">bz</a>(i)   = w11*bzvac(ir,jz,kv) + w22*bzvac(ir1,jz1,kv) + w21*bzvac(ir1,jz,kv) + w12*bzvac(ir,jz1,kv)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordflow">IF</span> (mod(icount,25).eq.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>     <span class="comment">! PRINT INFO IF R, Z OUT OF BOX</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>     i = 0</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>     rad0 = maxval(rad)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>     zee0 = maxval(zee)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>     <span class="keywordflow">IF</span> (rad0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">rmaxb</a>) i = 1</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>     <span class="keywordflow">IF</span> (zee0 .gt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">zmaxb</a>) i = i + 2</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>     ri   = minval(rad)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>     zj   = minval(zee)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>     <span class="keywordflow">IF</span> (ri .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">rminb</a>) i = i + 4</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>     <span class="keywordflow">IF</span> (zj .lt. <a class="code hl_variable" href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">zminb</a>) i = i + 8</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>     <span class="keywordflow">IF</span> (i .ne. 0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        print *, warning</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="comment">! WRITE (nthreed, *) warning</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">IF</span> (i/8 .ne. 0) print *,<span class="stringliteral">&#39; zmin = &#39;</span>, zj</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        i = mod(i,8)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">IF</span> (i/4 .ne. 0) print *,<span class="stringliteral">&#39; rmin = &#39;</span>, ri</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        i = mod(i,4)</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">IF</span> (i/2 .ne. 0) print *,<span class="stringliteral">&#39; zmax = &#39;</span>, zee0</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        i = mod(i,2)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">IF</span> (i .ne. 0) print *,<span class="stringliteral">&#39; rmax = &#39;</span>, rad0</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordflow">  ENDIF</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div>
 <div class="ttc" id="abecoil_8f90_html_a449b054fb88bdb4cdf73ef8939654bfb"><div class="ttname"><a href="../../d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb">becoil</a></div><div class="ttdeci">subroutine becoil(rad, zee, brvac, bpvac, bzvac)</div><div class="ttdoc">Compute the cylindrical components of the magnetic field due to external coils. by bi-linear interpol...</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dc7/becoil_8f90_source.html#l00013">becoil.f90:14</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdoc">Precomputed table of magnetic field due to confimenent coils.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00005">mgrid_mod.f:5</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a20b0fc2e82883727360cd1e69275eafb"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">mgrid_mod::delzb</a></div><div class="ttdeci">real(rprec) delzb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a2c909a85955eb1f4943d2e411336ece2"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">mgrid_mod::nr0b</a></div><div class="ttdeci">integer nr0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00074">mgrid_mod.f:74</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a54d17788347a59b8682b57f9042eb7b6"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">mgrid_mod::zminb</a></div><div class="ttdeci">real(rprec) zminb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a841b334dd2bb782236b3e6091713b540"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">mgrid_mod::zmaxb</a></div><div class="ttdeci">real(rprec) zmaxb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a95fc6357072e479e0d5185378186396d"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">mgrid_mod::rminb</a></div><div class="ttdeci">real(rprec) rminb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_a9c6fed1e8465d41122baab2a2bc162d4"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">mgrid_mod::rmaxb</a></div><div class="ttdeci">real(rprec) rmaxb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_aa22e8be5584af96c59bab2c03392b14d"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#aa22e8be5584af96c59bab2c03392b14d">mgrid_mod::nz0b</a></div><div class="ttdeci">integer nz0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00074">mgrid_mod.f:74</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_ac1f79bdc8f93245d70df0b3d5fdfc846"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">mgrid_mod::delrb</a></div><div class="ttdeci">real(rprec) delrb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00081">mgrid_mod.f:81</a></div></div>
-<div class="ttc" id="anamespacemgrid__mod_html_ade73bbaf66f92d410cd020dee51e62dc"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">mgrid_mod::np0b</a></div><div class="ttdeci">integer np0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00074">mgrid_mod.f:74</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html">mgrid_mod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00001">mgrid_mod.f:1</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a20b0fc2e82883727360cd1e69275eafb"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a20b0fc2e82883727360cd1e69275eafb">mgrid_mod::delzb</a></div><div class="ttdeci">real(rprec) delzb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a2c909a85955eb1f4943d2e411336ece2"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a2c909a85955eb1f4943d2e411336ece2">mgrid_mod::nr0b</a></div><div class="ttdeci">integer nr0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00077">mgrid_mod.f:77</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a54d17788347a59b8682b57f9042eb7b6"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a54d17788347a59b8682b57f9042eb7b6">mgrid_mod::zminb</a></div><div class="ttdeci">real(rprec) zminb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a841b334dd2bb782236b3e6091713b540"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a841b334dd2bb782236b3e6091713b540">mgrid_mod::zmaxb</a></div><div class="ttdeci">real(rprec) zmaxb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a95fc6357072e479e0d5185378186396d"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a95fc6357072e479e0d5185378186396d">mgrid_mod::rminb</a></div><div class="ttdeci">real(rprec) rminb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_a9c6fed1e8465d41122baab2a2bc162d4"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#a9c6fed1e8465d41122baab2a2bc162d4">mgrid_mod::rmaxb</a></div><div class="ttdeci">real(rprec) rmaxb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_aa22e8be5584af96c59bab2c03392b14d"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#aa22e8be5584af96c59bab2c03392b14d">mgrid_mod::nz0b</a></div><div class="ttdeci">integer nz0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00077">mgrid_mod.f:77</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_ac1f79bdc8f93245d70df0b3d5fdfc846"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#ac1f79bdc8f93245d70df0b3d5fdfc846">mgrid_mod::delrb</a></div><div class="ttdeci">real(rprec) delrb</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00084">mgrid_mod.f:84</a></div></div>
+<div class="ttc" id="anamespacemgrid__mod_html_ade73bbaf66f92d410cd020dee51e62dc"><div class="ttname"><a href="../../d1/d41/namespacemgrid__mod.html#ade73bbaf66f92d410cd020dee51e62dc">mgrid_mod::np0b</a></div><div class="ttdeci">integer np0b</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d01/mgrid__mod_8f_source.html#l00077">mgrid_mod.f:77</a></div></div>
 <div class="ttc" id="anamespacevacmod_html"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html">vacmod</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00002">vacmod.f90:2</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_a25a2b10afc2b3bd8fe092619eb71465c"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#a25a2b10afc2b3bd8fe092619eb71465c">vacmod::bphi</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bphi</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00095">vacmod.f90:95</a></div></div>
 <div class="ttc" id="anamespacevacmod_html_ad472475fd1a6b3a1c886ed1c309b0855"><div class="ttname"><a href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">vacmod::bz</a></div><div class="ttdeci">real(rprec), dimension(:), allocatable bz</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dce/vacmod_8f90_source.html#l00096">vacmod.f90:96</a></div></div>
@@ -228,7 +246,7 @@ $(document).ready(function(){initNavTree('d6/dc7/becoil_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d6/dc7/becoil_8f90.html">becoil.f90</a></li>
-    <li class="footer">Generated on Fri Feb 4 2022 18:57:52 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Fri Feb 18 2022 15:26:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

@@ -49,8 +49,12 @@ SUBROUTINE fixaray
   IF (istat1.ne.0) STOP 'allocation error in fixaray: istat1'
   IF (istat2.ne.0) STOP 'allocation error in fixaray: istat2'
 
+  ! normalization factor for surface integrals,
+  ! in particular, forward Fourier transforms (tomnsp*)
   dnorm = one/(nzeta*(ntheta2-1))
-  IF (lasym) dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
+  IF (lasym) then
+    dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
+  end if
 
   ! (from vmec_params)
   ! array for norming theta-trig functions (internal use only)
@@ -58,10 +62,10 @@ SUBROUTINE fixaray
   ! and analogously for zeta/v
   mscale(0) = 1
   nscale(0) = 1
-  mscale(1:mnyq) = mscale(0)/osqrt2
-  nscale(1:nnyq) = nscale(0)/osqrt2
+  mscale(1:mnyq) = mscale(0)/osqrt2 ! == sqrt(2)
+  nscale(1:nnyq) = nscale(0)/osqrt2 ! == sqrt(2)
 
-  r0scale = mscale(0)*nscale(0)
+  r0scale = mscale(0)*nscale(0) ! == 1
 
   ! GENERALLY, ONLY NEED THIS FROM 1, ntheta2 EXCEPT IN GETBRHO ROUTINE
   DO i = 1, ntheta3
@@ -73,16 +77,32 @@ SUBROUTINE fixaray
         cosmui(i,m) = dnorm*cosmu(i,m)
         cosmui3(i,m) = cosmui(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
         sinmui(i,m) = dnorm*sinmu(i,m)
+
         IF (i.EQ.1 .OR. i.EQ.ntheta2) then
+           ! Trapezoidal integration requires a factor of 1/2 for the first and the last point.
+           ! This is also reflected in the absense of a factor of 2
+           ! in the X_0 and X_{n-1} terms of the REDFT00 in FFTW.
+
+           ! Note that this is done also in the case of an asymmetric run!
+           ! There, cosmui is only used up to ntheta2 anyway...
+
            cosmui(i,m)=cosmui(i,m)/2
         end if
-        IF (ntheta2 .EQ. ntheta3) then
+        ! Note: cosmui done here
+
+        IF (ntheta2 .EQ. ntheta3) then ! equivalent to !lasym
            ! cosmui3 was preset from cosmui above,
            ! but in previous check cosmui could have changed,
            ! so update cosmui3 again in case it matters
            ! this is for stellarator symmetry, so lasym==.false.
+
+           ! Note that cosmui3 is only ever used to construct the wint array.
+           ! where only the m=0 component of cosmui3 enters.
+
            cosmui3(i,m) = cosmui(i,m)
         end if
+        ! Note: cosmui3 done here
+
         cosmum(i,m) = cosmu(i,m)*(m)
         sinmum(i,m) =-sinmu(i,m)*(m)
         cosmumi(i,m)= cosmui(i,m)*(m)

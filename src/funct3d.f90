@@ -114,8 +114,8 @@ SUBROUTINE funct3d (ier_flag)
   l0pi = ns*(1 + nzeta*(ntheta2 - 1))
   rinner = r1(l0pi,0) + r1(l0pi,1)
 
-  r00 = r1(1,0) ! contrib from only even m
-  z00 = z1(1,0) ! contrib from only even m
+  r00 = r1(1,0) ! contrib from only even m since sqrt(s)=0 at axis
+  z00 = z1(1,0) ! contrib from only even m since sqrt(s)=0 at axis
 
 !   print *, "r00 = ", r00
 
@@ -124,7 +124,8 @@ SUBROUTINE funct3d (ier_flag)
   ! --> see Hirshman, Schwenn & Nührenberg: summation of even-m and odd-m*sqrt(s)
 
 ! #ifndef _HBANGLE
-  rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt) ! odd-m entries need to be scaled appropriately
+  ! odd-m entries need to be scaled appropriately
+  rcon(:nrzt,0) = rcon(:nrzt,0) + rcon(:nrzt,1)*sqrts(:nrzt)
   zcon(:nrzt,0) = zcon(:nrzt,0) + zcon(:nrzt,1)*sqrts(:nrzt)
 ! #end /* ndef _HBANGLE */
 

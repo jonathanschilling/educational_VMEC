@@ -39,7 +39,7 @@ SUBROUTINE symrzl(r1s, rus, rvs, z1s, zus, zvs, lus, lvs, rcons, zcons, &
 
   ! FIRST SUM SYMMETRIC, ANTISYMMETRIC PIECES ON EXTENDED INTERVAL, THETA = [PI,2*PI]
   DO mpar = 0, 1
-     DO i = 1 + ntheta2, ntheta1
+     DO i = 1 + ntheta2, ntheta1 ! pi, ..., 2*pi
         ir = ntheta1 + 2 - i                 !-theta --> (ntheta1+1) - (i-1)
         DO jk = 1, ns*nzeta
            jka = ireflect(jk)                !-zeta

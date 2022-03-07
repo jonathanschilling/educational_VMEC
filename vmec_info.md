@@ -1,6 +1,6 @@
 ## DISCLAIMER
 
-You are using a beta version of the PROGRAM VMEC, which is currently
+You are using a beta version of the program `VMEC`, which is currently
 under development by S. P. Hirshman at the Fusion Energy Division,
 Oak Ridge National Laboratory.  Please report any problems or comments
 to him.  As a beta version, this program is subject to change
@@ -8,73 +8,95 @@ and improvement without notice.
 
 1. CODE SYNOPSIS
 
-   THIS PROGRAM - VMEC (Variational Moments Equilibrium Code)  -
-   SOLVES THREE-DIMENSIONAL MHD EQUILIBRIUM EQUATIONS USING
-   FOURIER SPECTRAL (MOMENTS) METHODS. A CYLINDRICAL COORDINATE
-   REPRESENTATION IS USED (R-Z COORDINATES). THE POLOIDAL
-   ANGLE VARIABLE IS RENORMALIZED THROUGH THE STREAM FUNCTION
-   LAMBDA, WHICH IS SELF-CONSISTENTLY DETERMINED AND DIFFERENCED
-   VARIATIONALLY ON THE HALF-RADIAL MESH. THE POLOIDAL ANGLE IS
-   DETERMINED BY MINIMIZING <M> = m\*\*2 S(m) , WHERE S(m) = Rm\*\*2 + Zm\*\*2 .
-   AN EVEN-ODD DECOMPOSITION IN THE POLOIDAL MODE
-   NO. OF R,Z, AND LAMDA IS USED TO IMPROVE RADIAL RESOLUTION.
-   A FREE-BOUNDARY OPTION IS AVAILABLE (FOR lfreeb=T), WITH A
-   USER-SUPPLIED DATA-FILE "MGRID" NEEDED TO COMPUTE THE PLASMA
-   VACUUM FIELD COMPONENTS BR, BPHI, BZ (see SUBROUTINE BECOIL)
-
-   THE MAGNETIC FIELD IS REPRESENTED INTERNALLY AS FOLLOWS:
-
-    B(s,u,v) = grad(phiT) X ( grad(u) + grad(lambda) ) + iota(s) * grad(v) X grad(phiT)
-
-   WHERE phiT is the toroidal flux (called phi in code) and
-   u,v are the poloidal, toroidal angles, respectively.
-
+   This progam - VMEC (Variational Moments Equilibrium Code) - 
+   solves three-dimensional MHD equilibrium equations using
+   Fourier spectral (moments) methods.
+   A cylindrical coordinate representation is used (R-Z coordinates).
+   The poloidal angle variable is renormalized
+   through the stream function lambda,
+   which is self-consistently determined
+   and differenced variationally on the half-radial mesh.
+   The poloidal angle is determined by minimizing
+   `<M> = m**2 S(m)`, where `S(m) = Rm**2 + Zm**2`.
+   An even-odd decomposition in the poloidal mode number
+   of R, Z and lambda is used to improve radial resolution.
+   A free-boundary option is available (for `lfreeb = T`),
+   with a user-supplied data file `MGRID`
+   needed to compute the plasma vacuum field components
+   `BR`, `BPHI` and `BZ` (see subroutine `BECOIL`).
+   
+   The magnetic field is represented internally as follows:
+   
+   ```
+   B(s,u,v) = grad(phiT) X ( grad(u) + grad(lambda) ) + iota(s) * grad(v) X grad(phiT)
+   ```
+   
+   where `phiT` is the toroidal flux (called `phi` in the code)
+   and `u`, `v` are the poloidal, toroidal angles, respectively.
+   
 2. ADDITIONAL CODES REQUIRED
-   For the fixed boundary calculation, the user must provide the Fourier
-   coefficients for the plasma boundary (the last surface outside of which
-   the pressure gradient vanishes). For ALL but the simplest geometry, the
-   SCRUNCH code (available from R. Wieland), based on the DESCUR curve-fitting
-   code, can be used to produce the optimized VMEC Fourier representation for
-   an arbritrary closed boundary (it need not be a 'star-like' DOmain, nor
-   need it possess vertical, or 'stellarator', symmetry).
 
-   For the free boundary calculation, the MAKEGRID code (available upon
-   request) is needed to create a binary Green''s FUNCTION table for the
-   vacuum magnetic field(s) and, IF data analysis is to be done, flux and
-   field loops as well. The user provides a SUBROUTINE (BFIELD) which can be
-   called at an arbitrary spatial location and which should RETURN the three
-   cylindrical components of the vacuum field at that point. (Similary,
-   locations of diagnostic flux loops, Rogowski coils, etc. are required IF
-   equilibrium reconstruction is to be done.)
+   For the fixed boundary calculation, the user must provide
+   the Fourier coefficients for the plasma boundary
+   (the last surface outside of which the pressure gradient vanishes).
+   For all but the simplest geometry,
+   the `SCRUNCH` code (available from R. Wieland),
+   based on the `DESCUR` curve-fitting code,
+   can be used to produce the optimized VMEC Fourier representation
+   for an arbritrary closed boundary
+   (it need not be a 'star-like' Domain,
+   nor need it possess vertical, or 'stellarator', symmetry).
 
-   Plotting is handled by a stand-alone package, PROUT.NCARG (written by
-   R. M. Wieland). It uses NCAR-graphics calls and reads the primary VMEC output
-   file, WOUT.EXT, WHERE 'EXT' is the command-line extension of the INPUT file.
+   For the free boundary calculation,
+   the `MAKEGRID` code (available upon request)
+   is needed to create a binary Green's Function table
+   for the vacuum magnetic field(s) and,
+   if data analysis is to be done,
+   flux and field loops as well.
+   The user provides a subroutine (`BFIELD`)
+   which can be called at an arbitrary spatial location
+   and which should return the three cylindrical components
+   of the vacuum field at that point.
+   (Similary, locations of diagnostic flux loops, Rogowski coils, etc.
+   are required if equilibrium reconstruction is to be done.)
+
+   Plotting is handled by a stand-alone package,
+   `PROUT.NCARG` (written by R. M. Wieland).
+   It uses NCAR-graphics calls and reads the primary VMEC output file,
+   `WOUT.EXT`, where `ext` is the command-line extension of the input file.
 
 3. UNIX SCRIPT SETUP PARAMETERS
-   The VMEC source code (vmec.lsqh) is actually a UNIX script file which uses
-   the C-precompiler to produce both the machine-specific Fortran source and a
-   make-file specific to ANY one of the following platforms:
 
-   IBM-RISC6000, CRAY, ALPHA (DEC-STATION), HP-UX WORKSTATION,
-   WINDOWS-NT, DEC-VMS
+   The VMEC source code (`vmec.lsqh`) is actually a UNIX script file
+   which uses the C-preprocessor
+   to produce both the machine-specific Fortran source
+   and a `Makefile` specific to any one of the following platforms:
+
+   * IBM-RISC6000
+   * CRAY
+   * ALPHA (DEC-STATION)
+   * HP-UX WORKSTATION
+   * WINDOWS-NT
+   * DEC-VMS
 
    Additional platforms are easy to add to the existing script as required.
 
 4. FORTRAN PARAMETER STATEMENTS set by user
-   In the Fortran-90 version of VMEC these PARAMETER statements have
-   been replaced by dynamic memory allocation. So the user should set the
-   run-time parameters ns (through ns_array), mpol, ntor in the NAMELIST INDATA.
+
+   In the Fortran-90 version of VMEC these `PARAMETER`
+   statements have been replaced by dynamic memory allocation.
+   So the user should set the run-time parameters
+   `ns` (through `ns_array`), `mpol`, `ntor` in the namelist `INDATA`.
 
 ### Added features since last edition
-1. Implemented preconditioning algorithm for R,Z
+1. Implemented preconditioning algorithm for R, Z
 2. The physical (unpreconditioned) residuals are used
    to determine the level of convergence
 3. The original (MOMCON) scaling of lambda is used, i.e.,
-   Bsupu = phip*(iota - lamda[sub]v)/SQRT(g). This is needed to
-   maintain consistency with the time-stepper for arbitrary PHIP.
+   `Bsupu = phip*(iota - lamda[sub]v)/SQRT(g)`.
+   This is needed to maintain consistency with the time-stepper for arbitrary `PHIP`.
 
-WRITTEN BY S. P. HIRSHMAN (8/28/85 - REVISED 3/1/86) BASED ON
+Written by S. P. Hirshman (8/28/85 - revised 3/1/86) based on
 1. S. P. Hirshman and J. C. Whitson, Phys. Fluids 26, 3553 (1983).
 2. S. P. Hirshman and H. K. Meier, Phys. Fluids 28, 1387 (1985).
 3. S. P. Hirshman and D. K. Lee, Comp. Phys. Comm. 39, 161 (1986).

@@ -133,10 +133,10 @@ $(document).ready(function(){initNavTree('da/d11/symrzl_8f90_source.html','../..
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        ir = ntheta1 + 2 - i                 <span class="comment">!-theta --&gt; (ntheta1+1) - (i-1)</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">DO</span> jk = 1, ns*nzeta</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>           jka = <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ac523d415be1865ef549b6a55a98fdd1a">ireflect</a>(jk)                <span class="comment">!-zeta</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>           r1s(jk,i,mpar) = r1s(jka,ir,mpar) - r1a(jka,ir,mpar)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>           rus(jk,i,mpar) =-rus(jka,ir,mpar) + rua(jka,ir,mpar)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>           z1s(jk,i,mpar) =-z1s(jka,ir,mpar) + z1a(jka,ir,mpar)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>           zus(jk,i,mpar) = zus(jka,ir,mpar) - zua(jka,ir,mpar)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>           r1s(jk,i,mpar) = r1s(jka,ir,mpar) - r1a(jka,ir,mpar) <span class="comment">! R  has even parity --&gt; r1s is mirrored without sign change, r1a ( odd parity) is mirrored with    sign change</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>           rus(jk,i,mpar) =-rus(jka,ir,mpar) + rua(jka,ir,mpar) <span class="comment">! Ru has odd  parity --&gt; rus is mirrored with    sign change, rua (even parity) is mirrored without sign change</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>           z1s(jk,i,mpar) =-z1s(jka,ir,mpar) + z1a(jka,ir,mpar) <span class="comment">! Z  has odd  parity --&gt; z1s is mirrored with    sign change, z1a (even parity) is mirrored without sign change</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>           zus(jk,i,mpar) = zus(jka,ir,mpar) - zua(jka,ir,mpar) <span class="comment">! ...</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>           lus(jk,i,mpar) = lus(jka,ir,mpar) - lua(jka,ir,mpar)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>           rcons(jk,i,mpar)= rcons(jka,ir,mpar)-rcona(jka,ir,mpar)</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>           zcons(jk,i,mpar)=-zcons(jka,ir,mpar)+zcona(jka,ir,mpar)</div>
@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('da/d11/symrzl_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../da/d11/symrzl_8f90.html">symrzl.f90</a></li>
-    <li class="footer">Generated on Mon Mar 7 2022 18:21:17 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Tue Mar 8 2022 18:52:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

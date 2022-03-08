@@ -43,10 +43,10 @@ SUBROUTINE symrzl(r1s, rus, rvs, z1s, zus, zvs, lus, lvs, rcons, zcons, &
         ir = ntheta1 + 2 - i                 !-theta --> (ntheta1+1) - (i-1)
         DO jk = 1, ns*nzeta
            jka = ireflect(jk)                !-zeta
-           r1s(jk,i,mpar) = r1s(jka,ir,mpar) - r1a(jka,ir,mpar)
-           rus(jk,i,mpar) =-rus(jka,ir,mpar) + rua(jka,ir,mpar)
-           z1s(jk,i,mpar) =-z1s(jka,ir,mpar) + z1a(jka,ir,mpar)
-           zus(jk,i,mpar) = zus(jka,ir,mpar) - zua(jka,ir,mpar)
+           r1s(jk,i,mpar) = r1s(jka,ir,mpar) - r1a(jka,ir,mpar) ! R  has even parity --> r1s is mirrored without sign change, r1a ( odd parity) is mirrored with    sign change
+           rus(jk,i,mpar) =-rus(jka,ir,mpar) + rua(jka,ir,mpar) ! Ru has odd  parity --> rus is mirrored with    sign change, rua (even parity) is mirrored without sign change
+           z1s(jk,i,mpar) =-z1s(jka,ir,mpar) + z1a(jka,ir,mpar) ! Z  has odd  parity --> z1s is mirrored with    sign change, z1a (even parity) is mirrored without sign change
+           zus(jk,i,mpar) = zus(jka,ir,mpar) - zua(jka,ir,mpar) ! ...
            lus(jk,i,mpar) = lus(jka,ir,mpar) - lua(jka,ir,mpar)
            rcons(jk,i,mpar)= rcons(jka,ir,mpar)-rcona(jka,ir,mpar)
            zcons(jk,i,mpar)=-zcons(jka,ir,mpar)+zcona(jka,ir,mpar)

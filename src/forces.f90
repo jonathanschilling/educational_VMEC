@@ -225,7 +225,8 @@ SUBROUTINE forces
 
 
 
-
+     ! no need for sqrt(s) scaling of odd-m contributions,
+     ! since free-boundary contribution enters at LCFS where s=1 ==> sqrt(s)=1
      armn_e(ns:nrzt:ns) = armn_e(ns:nrzt:ns) + zu0(ns:nrzt:ns)*rbsq(1:nznt)
      armn_o(ns:nrzt:ns) = armn_o(ns:nrzt:ns) + zu0(ns:nrzt:ns)*rbsq(1:nznt)
      azmn_e(ns:nrzt:ns) = azmn_e(ns:nrzt:ns) - ru0(ns:nrzt:ns)*rbsq(1:nznt)

@@ -5,16 +5,16 @@
 !> \brief Symmetrize forces on restricted \f$\theta\f$ interval \f$(0 \leq \theta \leq \pi \f$
 !>        so cos, sin integrals can be performed.
 !>
-!> @param ars
-!> @param brs
-!> @param crs
-!> @param azs
-!> @param bzs
-!> @param czs
-!> @param bls
-!> @param cls
-!> @param rcs
-!> @param zcs
+!> @param ars contribution to A^R       with even parity (equal to parity of A^R       in symmetric case)
+!> @param brs contribution to B^R       with  odd parity (equal to parity of B^R       in symmetric case)
+!> @param crs contribution to C^R       with  odd parity (equal to parity of C^R       in symmetric case)
+!> @param azs contribution to A^Z       with  odd parity (equal to parity of A^Z       in symmetric case)
+!> @param bzs contribution to B^Z       with even parity (equal to parity of B^Z       in symmetric case)
+!> @param czs contribution to C^Z       with even parity (equal to parity of C^Z       in symmetric case)
+!> @param bls contribution to B^lambda  with even parity (equal to parity of B^lambda  in symmetric case)
+!> @param cls contribution to C^lambda  with even parity (equal to parity of C^lambda  in symmetric case)
+!> @param rcs contribution to F^{R_con} with even parity (equal to parity of F^{R_con} in symmetric case)
+!> @param zcs contribution to F^{Z_con} with  odd parity (equal to parity of F^{Z_con} in symmetric case)
 !> @param ara
 !> @param bra
 !> @param cra
@@ -41,7 +41,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   INTEGER :: mpar, ir, i, jk, jka, j, k
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: ars_0, brs_0, azs_0, &
                 bzs_0, bls_0, rcs_0, zcs_0, crs_0, czs_0, cls_0
-                
+
   logical :: dbg_symforce
 
   i = ns*nzeta
@@ -58,7 +58,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
     call add_real_4d("bls", ns, 2, nzeta, ntheta3, bls, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("rcs", ns, 2, nzeta, ntheta3, rcs, order=(/ 1, 3, 4, 2 /) )
     call add_real_4d("zcs", ns, 2, nzeta, ntheta3, zcs, order=(/ 1, 3, 4, 2 /) )
-    
+
     if (lthreed) then
       call add_real_4d("crs", ns, 2, nzeta, ntheta3, crs, order=(/ 1, 3, 4, 2 /) )
       call add_real_4d("czs", ns, 2, nzeta, ntheta3, czs, order=(/ 1, 3, 4, 2 /) )
@@ -68,7 +68,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
       call add_null("czs")
       call add_null("cls")
     end if
-    
+
   end if ! dump_symforce
 
   ! SYMMETRIZE FORCES ON RESTRICTED THETA INTERVAL (0 <= u <= pi)
@@ -76,6 +76,8 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
   !
   ! ARS(v,u) = .5*( ARS(v,u) + ARS(-v,-u) )     ! * COS(mu - nv)
   ! ARA(v,u) = .5*( ARS(v,u) - ARS(-v,-u) )     ! * SIN(mu - nv)
+  !
+  ! See also Theorem 26 (Parity Decomposition) in Boyd, "Chebychev and Fourier Spectral Methods".
   DO mpar = 0, 1
      DO i = 1, ntheta2
 
@@ -87,22 +89,25 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
         DO jk = 1, ns*nzeta
            jka = ireflect(jk)                !-zeta
 
-           ara(jk,i,mpar) = p5*(ars(jk,i,mpar)-ars(jka,ir,mpar))
+           ara(jk,i,mpar) = p5*(ars(jk,i,mpar)-ars(jka,ir,mpar)) ! std. parity
            ars_0(jk)      = p5*(ars(jk,i,mpar)+ars(jka,ir,mpar))
-           bra(jk,i,mpar) = p5*(brs(jk,i,mpar)+brs(jka,ir,mpar))
+           bra(jk,i,mpar) = p5*(brs(jk,i,mpar)+brs(jka,ir,mpar)) ! rev. parity
            brs_0(jk)      = p5*(brs(jk,i,mpar)-brs(jka,ir,mpar))
+           ! cr only in lthreed case (see below)
 
-           aza(jk,i,mpar) = p5*(azs(jk,i,mpar)+azs(jka,ir,mpar))
+           aza(jk,i,mpar) = p5*(azs(jk,i,mpar)+azs(jka,ir,mpar)) ! rev. parity
            azs_0(jk)      = p5*(azs(jk,i,mpar)-azs(jka,ir,mpar))
-           bza(jk,i,mpar) = p5*(bzs(jk,i,mpar)-bzs(jka,ir,mpar))
+           bza(jk,i,mpar) = p5*(bzs(jk,i,mpar)-bzs(jka,ir,mpar)) ! std. parity
            bzs_0(jk)      = p5*(bzs(jk,i,mpar)+bzs(jka,ir,mpar))
+           ! cz only in lthreed case (see below)
 
-           bla(jk,i,mpar) = p5*(bls(jk,i,mpar)-bls(jka,ir,mpar))
+           bla(jk,i,mpar) = p5*(bls(jk,i,mpar)-bls(jka,ir,mpar)) ! std. parity
            bls_0(jk)      = p5*(bls(jk,i,mpar)+bls(jka,ir,mpar))
+           ! cl only in lthreed case (see below)
 
-           rca(jk,i,mpar) = p5*(rcs(jk,i,mpar)-rcs(jka,ir,mpar))
+           rca(jk,i,mpar) = p5*(rcs(jk,i,mpar)-rcs(jka,ir,mpar)) ! std. parity
            rcs_0(jk)      = p5*(rcs(jk,i,mpar)+rcs(jka,ir,mpar))
-           zca(jk,i,mpar) = p5*(zcs(jk,i,mpar)+zcs(jka,ir,mpar))
+           zca(jk,i,mpar) = p5*(zcs(jk,i,mpar)+zcs(jka,ir,mpar)) ! rev. parity
            zcs_0(jk)      = p5*(zcs(jk,i,mpar)-zcs(jka,ir,mpar))
         END DO
 
@@ -120,13 +125,13 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
            DO jk = 1, ns*nzeta
               jka = ireflect(jk)
 
-              cra(jk,i,mpar) = p5*(crs(jk,i,mpar)+crs(jka,ir,mpar))
+              cra(jk,i,mpar) = p5*(crs(jk,i,mpar)+crs(jka,ir,mpar)) ! rev. parity
               crs_0(jk)      = p5*(crs(jk,i,mpar)-crs(jka,ir,mpar))
 
-              cza(jk,i,mpar) = p5*(czs(jk,i,mpar)-czs(jka,ir,mpar))
+              cza(jk,i,mpar) = p5*(czs(jk,i,mpar)-czs(jka,ir,mpar)) ! std. parity
               czs_0(jk)      = p5*(czs(jk,i,mpar)+czs(jka,ir,mpar))
 
-              cla(jk,i,mpar) = p5*(cls(jk,i,mpar)-cls(jka,ir,mpar))
+              cla(jk,i,mpar) = p5*(cls(jk,i,mpar)-cls(jka,ir,mpar)) ! std. parity
               cls_0(jk)      = p5*(cls(jk,i,mpar)+cls(jka,ir,mpar))
            END DO
 
@@ -136,7 +141,7 @@ SUBROUTINE symforce(ars, brs, crs, azs, bzs, czs, bls, cls, rcs, zcs, &
         ENDIF
 
      END DO
-     
+
      ! clear remainder of arrays for debug output
      DO i = ntheta2+1, ntheta3
        ara(:,i,mpar) = 0.0_dp

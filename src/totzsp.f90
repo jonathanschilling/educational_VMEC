@@ -61,10 +61,6 @@ SUBROUTINE totzsps(rzl_array, r11, ru1, rv1, z11, zu1, zv1, lu1, lv1, rcn1, zcn1
   ! This is the inverse Fourier transform from the (odd-m-scaled-by-1/sqrt(s))-xc
   ! given in rzl_array to real space. Tangential derivatives are also computed.
 
-  ! CONVERT FROM INTERNAL XC REPRESENTATION FOR m=1 MODES, R+(stored at rss) = .5(rss + zcs),
-  ! R-(stored at zcs) = .5(rss - zcs), TO EXTERNAL ("PHYSICAL") rss, zcs FORMS. NEED THIS EVEN
-  ! WHEN COMPUTING HESSIAN FOR FREE BOUNDARY (rmnss, zmncs at JS=NS needed in vacuum call)
-  !
   ! WHEN COMPUTING PRECONDITIONER, USE FASTER HESSIAN VERSION (totzsps_hess) INSTEAD.
   rmncc => rzl_array(:,:,:,rcc)               ! COS(mu) COS(nv)
   zmnsc => rzl_array(:,:,:,zsc+ntmax)         ! SIN(mu) COS(nv)

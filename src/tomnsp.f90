@@ -55,6 +55,7 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   frzl_array = 0
 
+  ! exclude forces on boundary if free-boundary module is not active
   jmax = ns
   IF (ivac .lt. 1) jmax = ns1
 
@@ -64,7 +65,8 @@ SUBROUTINE tomnsps(frzl_array,       &
   ! FZmn = AZmn - d(BZmn)/du + d(CZmn)/dv
   ! FLmn =      - d(BLmn)/du + d(CLmn)/dv
   !
-  ! NOTE: sinmumi = -m sin(mu),  sinnvn = -n sin(nv)
+  ! NOTE: sinmumi = -m sin(mu)
+  !       sinnvn  = -n sin(nv)
   DO m = 0, mpol1
 
      mparity = MOD(m,2)
@@ -104,7 +106,7 @@ SUBROUTINE tomnsps(frzl_array,       &
         work1(:, 5) = work1(:, 5) + tempz(:)*cosmui(i,m) + bzmn(jll:nsl,mparity)*sinmumi(i,m)
         work1(:, 6) = work1(:, 6) - czmn(jll:nsl,mparity)*cosmui(i,m)
         work1(:, 8) = work1(:, 8) - czmn(jll:nsl,mparity)*sinmui(i,m)
-        
+
         work1(:, 9) = work1(:, 9) + blmn(jll:nsl,mparity)*sinmumi(i,m)
         work1(:,10) = work1(:,10) - clmn(jll:nsl,mparity)*cosmui(i,m)
         work1(:,12) = work1(:,12) - clmn(jll:nsl,mparity)*sinmui(i,m)

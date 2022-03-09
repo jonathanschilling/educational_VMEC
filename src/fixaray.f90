@@ -109,7 +109,7 @@ SUBROUTINE fixaray
            ! where only the m=0 component of cosmui3 enters.
 
            !cosmui3(i,m) = cosmui(i,m)
-           cosmui3(i,m) = dnorm3*cosmu(i,m)
+           cosmui3(i,m) = cosmui(i,m)/dnorm*dnorm3
         end if
         ! Note: cosmui3 done here
 

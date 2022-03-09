@@ -17,7 +17,7 @@
   EXTCUR(13)  = -3.560589388468855E+05
 
   DELT =   9.00E-01
-  LASYM = F
+  LASYM = T
   NFP =    1
   NCURR =    0
   MPOL =   12

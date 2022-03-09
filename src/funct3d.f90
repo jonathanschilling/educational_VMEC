@@ -411,7 +411,7 @@ SUBROUTINE funct3d (ier_flag)
                          r1,   ru,   rv,   z1,   zu,   zv, extra3, extra4, extra1, extra2   )
 
         ! NOT NECESSARY (EVEN THOUGH CORRECT) --> why?
-        ! gc = 2*gc
+        !gc = 2*gc
      END IF
 
      ! FOURIER-TRANSFORM MHD FORCES TO (M,N)-SPACE
@@ -429,6 +429,14 @@ SUBROUTINE funct3d (ier_flag)
                       extra3, extra4, extra1, extra2)
         call tomnspa_con(gc_con, brmn_con, bzmn_con, extra1, extra2)
      end if
+
+     IF (lasym) THEN
+       ! NOT NECESSARY (EVEN THOUGH CORRECT) --> why?
+       !gc     = 2*gc
+       !gc_con = 2*gc_con
+     end if
+
+
 
      ! COMPUTE FORCE RESIDUALS (RAW AND PRECONDITIONED)
      gc     = gc     * scalxc    !!IS THIS CORRECT: SPH010214?

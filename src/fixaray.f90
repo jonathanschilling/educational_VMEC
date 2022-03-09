@@ -18,7 +18,7 @@ SUBROUTINE fixaray
 
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
-  REAL(rprec):: argi, arg, argj, dnorm
+  REAL(rprec):: argi, arg, argj, dnorm, dnorm3
   logical :: dbg_fixaray
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
@@ -52,9 +52,17 @@ SUBROUTINE fixaray
   ! normalization factor for surface integrals,
   ! in particular, forward Fourier transforms (tomnsp*)
   dnorm = one/(nzeta*(ntheta2-1))
+  dnorm3 = dnorm
   IF (lasym) then
-    dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
+    !dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
+    dnorm3 = one/(nzeta*ntheta3)     !Fix, SPH012314
   end if
+  ! TODO: Something is weird here.
+  !In any case (symmetric or asymmetric), the Fourier integrals in tomnsp* and alias
+  ! (the only place where dnorm is used through cosmui, sinmui, etc.) are ever only taken over [0, pi] corresponding to 1, ..., ntheta2.
+  ! However, wint is based on cosmui3 is based on dnorm, and this is based on ntheta3.
+  ! For the asymmetric case, the norm in wint thus has to be 1/(nzeta*ntheta3).
+  ! Try to do this by introducing dnorm3 and keep dnorm fixed...
 
   ! (from vmec_params)
   ! array for norming theta-trig functions (internal use only)
@@ -75,7 +83,8 @@ SUBROUTINE fixaray
         cosmu(i,m) = COS(arg)*mscale(m)
         sinmu(i,m) = SIN(arg)*mscale(m)
         cosmui(i,m) = dnorm*cosmu(i,m)
-        cosmui3(i,m) = cosmui(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
+        !cosmui3(i,m) = cosmui(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
+        cosmui3(i,m) = dnorm3*cosmu(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
         sinmui(i,m) = dnorm*sinmu(i,m)
 
         IF (i.EQ.1 .OR. i.EQ.ntheta2) then
@@ -99,7 +108,8 @@ SUBROUTINE fixaray
            ! Note that cosmui3 is only ever used to construct the wint array.
            ! where only the m=0 component of cosmui3 enters.
 
-           cosmui3(i,m) = cosmui(i,m)
+           !cosmui3(i,m) = cosmui(i,m)
+           cosmui3(i,m) = dnorm3*cosmu(i,m)
         end if
         ! Note: cosmui3 done here
 

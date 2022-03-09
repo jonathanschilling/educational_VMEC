@@ -65,8 +65,8 @@ SUBROUTINE tomnsps(frzl_array,       &
   ! FZmn = AZmn - d(BZmn)/du + d(CZmn)/dv
   ! FLmn =      - d(BLmn)/du + d(CLmn)/dv
   !
-  ! NOTE: sinmumi = -m sin(mu)
-  !       sinnvn  = -n sin(nv)
+  ! NOTE: sinmumi = -m     sin(mu)
+  !       sinnvn  = -n*nfp sin(nv)
   DO m = 0, mpol1
 
      mparity = MOD(m,2)

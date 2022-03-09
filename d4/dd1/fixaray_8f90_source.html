@@ -219,7 +219,7 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>           <span class="comment">! where only the m=0 component of cosmui3 enters.</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>           <span class="comment">!cosmui3(i,m) = cosmui(i,m)</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>           cosmui3(i,m) = dnorm3*cosmu(i,m)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>           cosmui3(i,m) = cosmui(i,m)/dnorm*dnorm3</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordflow">        end if</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="comment">! Note: cosmui3 done here</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
@@ -392,7 +392,7 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/dd1/fixaray_8f90.html">fixaray.f90</a></li>
-    <li class="footer">Generated on Wed Mar 9 2022 14:45:02 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+    <li class="footer">Generated on Wed Mar 9 2022 15:41:44 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
 </body>

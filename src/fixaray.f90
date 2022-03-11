@@ -49,20 +49,19 @@ SUBROUTINE fixaray
   IF (istat1.ne.0) STOP 'allocation error in fixaray: istat1'
   IF (istat2.ne.0) STOP 'allocation error in fixaray: istat2'
 
-  ! normalization factor for surface integrals,
-  ! in particular, forward Fourier transforms (tomnsp*)
+  ! Normalization factor for forward Fourier transforms (e.g. tomnsp*)
+  ! In any case (symmetric or asymmetric), the Fourier integrals in tomnsp* and alias
+  ! (the only place where dnorm is used through cosmui, sinmui, etc.)
+  ! are ever only taken over [0, pi] corresponding to 1, ..., ntheta2.
   dnorm = one/(nzeta*(ntheta2-1))
-  dnorm3 = dnorm
-  IF (lasym) then
-    !dnorm = one/(nzeta*ntheta3)     !Fix, SPH012314
-    dnorm3 = one/(nzeta*ntheta3)     !Fix, SPH012314
-  end if
-  ! TODO: Something is weird here.
-  !In any case (symmetric or asymmetric), the Fourier integrals in tomnsp* and alias
-  ! (the only place where dnorm is used through cosmui, sinmui, etc.) are ever only taken over [0, pi] corresponding to 1, ..., ntheta2.
-  ! However, wint is based on cosmui3 is based on dnorm, and this is based on ntheta3.
+
+  ! Normalization factor for surface integrals/averages (wint is based on cosmui3).
   ! For the asymmetric case, the norm in wint thus has to be 1/(nzeta*ntheta3).
-  ! Try to do this by introducing dnorm3 and keep dnorm fixed...
+  IF (lasym) then
+    dnorm3 = one/(nzeta*ntheta1)
+  else
+    dnorm3 = one/(nzeta*(ntheta2-1))
+  end if
 
   ! (from vmec_params)
   ! array for norming theta-trig functions (internal use only)
@@ -82,42 +81,33 @@ SUBROUTINE fixaray
         arg = argi*m
         cosmu(i,m) = COS(arg)*mscale(m)
         sinmu(i,m) = SIN(arg)*mscale(m)
-        cosmui(i,m) = dnorm*cosmu(i,m)
-        !cosmui3(i,m) = cosmui(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
-        cosmui3(i,m) = dnorm3*cosmu(i,m)          ! Use this if integration over FULL 1,ntheta3 interval
-        sinmui(i,m) = dnorm*sinmu(i,m)
 
+        cosmui(i,m) = dnorm*cosmu(i,m)
+        sinmui(i,m) = dnorm*sinmu(i,m)
         IF (i.EQ.1 .OR. i.EQ.ntheta2) then
            ! Trapezoidal integration requires a factor of 1/2 for the first and the last point.
-           ! This is also reflected in the absense of a factor of 2
-           ! in the X_0 and X_{n-1} terms of the REDFT00 in FFTW.
-
            ! Note that this is done also in the case of an asymmetric run!
            ! There, cosmui is only used up to ntheta2 anyway...
-
-           cosmui(i,m)=cosmui(i,m)/2
+           cosmui(i,m)=cosmui(i,m)/2.0_dp
         end if
-        ! Note: cosmui done here
 
-        IF (ntheta2 .EQ. ntheta3) then ! equivalent to !lasym
-           ! cosmui3 was preset from cosmui above,
-           ! but in previous check cosmui could have changed,
-           ! so update cosmui3 again in case it matters
-           ! this is for stellarator symmetry, so lasym==.false.
-
+        ! Use this if integration over FULL 1,ntheta3 interval
+        cosmui3(i,m) = dnorm3*cosmu(i,m)
+        IF (.not.lasym .and. (i.eq.1 .or. i.eq.ntheta2)) then
+        !IF (.not.lasym .and. i.ne.1 .and. i.ne.ntheta2) then
            ! Note that cosmui3 is only ever used to construct the wint array.
            ! where only the m=0 component of cosmui3 enters.
 
-           !cosmui3(i,m) = cosmui(i,m)
-           cosmui3(i,m) = cosmui(i,m)/dnorm*dnorm3
+           cosmui3(i,m) = cosmui3(i,m)/2.0_dp
+           !cosmui3(i,m) = cosmui3(i,m)*2.0_dp
         end if
-        ! Note: cosmui3 done here
 
-        cosmum(i,m) = cosmu(i,m)*(m)
-        sinmum(i,m) =-sinmu(i,m)*(m)
-        cosmumi(i,m)= cosmui(i,m)*(m)
-        cosmumi3(i,m) = cosmui3(i,m)*m
-        sinmumi(i,m)=-sinmui(i,m)*(m)
+        cosmum(i,m)   = cosmu(i,m)*(m)
+        sinmum(i,m)   =-sinmu(i,m)*(m)
+        cosmumi(i,m)  = cosmui(i,m)*(m)
+        sinmumi(i,m)  =-sinmui(i,m)*(m)
+
+        cosmumi3(i,m) = cosmui3(i,m)*m ! used nowhere in educational_VMEC
      END DO
   END DO
 

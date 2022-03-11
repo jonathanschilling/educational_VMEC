@@ -33,7 +33,7 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
   integer, intent(in) :: ntheta
   logical, intent(in) :: lasym
 
-  ! START copied from vmec:read_indata
+  ! NOTE copied from vmec:read_indata
   integer :: ntheta1, ntheta2, ntheta3, nznt
 
   !print *, "set_nestor_sizes"

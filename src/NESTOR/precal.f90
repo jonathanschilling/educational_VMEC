@@ -17,7 +17,7 @@ SUBROUTINE precal
   INTEGER :: kp, ku, kuminus, kv, kvminus, i, m, n, mn,            &
              imn, jmn, kmn, l, istat1, smn
   REAL(rprec), DIMENSION(0:mf + nf,0:mf,0:nf) :: cmn
-  REAL(rprec) :: argu, argv, argp, dn1, f1, f2, f3, alp_per
+  REAL(rprec) :: argu, argv, argp, dn1, f1, f2, f3, alp_per, alui
 
 
   ! THIS ROUTINE COMPUTES INITIAL CONSTANTS AND ARRAYS
@@ -31,6 +31,11 @@ SUBROUTINE precal
   alv = pi2/nv      ! (2 pi)/nv
   alp = pi2*onp     ! (2 pi)/nfp
   alvp = onp*alv    ! (2 pi)/(nv * nfp)
+
+  ! cosui, sinui only go from 1 to nu2==ntheta2,
+  ! so this is always only the half-poloidal interval
+  ! Therefore use 1/(ntheta2-1) as delta-theta
+  alui = pi2/(nu2-1) ! (2 pi)/(ntheta2-1)
 
   alp_per = pi2/nvper ! (2 pi)/nvper
 
@@ -137,8 +142,10 @@ SUBROUTINE precal
         END DO
      END DO l40
      DO ku = 1, nu2
-        cosui(m,ku) = cosu(m,ku)*alu*alv*2
-        sinui(m,ku) = sinu(m,ku)*alu*alv*2
+        !cosui(m,ku) = cosu(m,ku)*alu*alv*2
+        cosui(m,ku) = cosu(m,ku)*alui*alv
+        !sinui(m,ku) = sinu(m,ku)*alu*alv*2
+        sinui(m,ku) = sinu(m,ku)*alui*alv
         IF (ku.eq.1 .or. ku.eq.nu2) then
            ! wint-like functionality to take stellarator-symmetric
            ! "folding-over" into first half-period into account

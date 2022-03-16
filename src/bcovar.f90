@@ -444,7 +444,7 @@ SUBROUTINE bcovar (lu, lv)
 
        tcon(ns) = p5*tcon(ns-1)
 
-       IF (lasym) tcon = p5*tcon
+       !IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
        if (open_dbg_context("forceNorms_tcon")) then

@@ -362,11 +362,8 @@ SUBROUTINE funct3d (ier_flag)
         !print *, "max bsqvac = ", maxval(bsqvac)
 
         if (open_dbg_context("rbsq")) then
-
-          print *, "rbsq; nzeta=",nzeta, " ntheta3=",ntheta3
-
-          call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns)) ! TODO: this triggers valgrind; uninitialized memory ?
-
+          ! TODO: this triggers valgrind; uninitialized memory ?
+          call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
           call close_dbg_out()
         end if
 

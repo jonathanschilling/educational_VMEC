@@ -214,7 +214,8 @@
 
   IF (lasym) THEN
      ! CONVERT TO REPRESENTATION WITH RBS(m=1) = ZBC(m=1)
-     delta = ATAN( (rbs(0,1) - zbc(0,1))/(ABS(rbc(0,1)) + ABS(zbs(0,1))) )
+
+     delta = ATAN2(rbs(0,1) - zbc(0,1), rbc(0,1) + zbs(0,1))
      IF (delta .ne. zero) THEN
        DO m = 0,mpol1
          DO n = -ntor,ntor

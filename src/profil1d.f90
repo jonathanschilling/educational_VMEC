@@ -95,6 +95,7 @@ SUBROUTINE profil1d()
     ! should either check if tf .gt. tf_pres_ped
     !          or   eval pmass at min(1, torflux(spres_ped))
     ! for consistency ...
+    ! Also, pedge is re-used here; this actually is the pressure in the whole volume...
     IF (si .gt. spres_ped) THEN
        pedge = pmass(spres_ped)
     ELSE

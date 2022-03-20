@@ -94,12 +94,9 @@ SUBROUTINE fixaray
         ! Use this if integration over FULL 1,ntheta3 interval
         cosmui3(i,m) = dnorm3*cosmu(i,m)
         IF (.not.lasym .and. (i.eq.1 .or. i.eq.ntheta2)) then
-        !IF (.not.lasym .and. i.ne.1 .and. i.ne.ntheta2) then
            ! Note that cosmui3 is only ever used to construct the wint array.
            ! where only the m=0 component of cosmui3 enters.
-
            cosmui3(i,m) = cosmui3(i,m)/2.0_dp
-           !cosmui3(i,m) = cosmui3(i,m)*2.0_dp
         end if
 
         cosmum(i,m)   = cosmu(i,m)*(m)
@@ -107,7 +104,7 @@ SUBROUTINE fixaray
         cosmumi(i,m)  = cosmui(i,m)*(m)
         sinmumi(i,m)  =-sinmui(i,m)*(m)
 
-        cosmumi3(i,m) = cosmui3(i,m)*m ! used nowhere in educational_VMEC
+        cosmumi3(i,m) = cosmui3(i,m)*m ! not used... --> remove?
      END DO
   END DO
 

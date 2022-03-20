@@ -55,6 +55,13 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   ! check calc_fbal output
   if (open_dbg_context("calc_fbal")) then
 
+    ! first and last elements are uninitialized and not needed during the iterations
+    jcurv   (1) = 0.0_dp ; jcurv   (ns) = 0.0_dp
+    jcuru   (1) = 0.0_dp ; jcuru   (ns) = 0.0_dp
+    vpphi   (1) = 0.0_dp ; vpphi   (ns) = 0.0_dp
+    presgrad(1) = 0.0_dp ; presgrad(ns) = 0.0_dp
+    equif   (1) = 0.0_dp ; equif   (ns) = 0.0_dp
+
     call add_real_1d("buco",     ns-1, buco(2:ns))
     call add_real_1d("bvco",     ns-1, bvco(2:ns))
     call add_real_1d("jcurv",    ns,   jcurv)

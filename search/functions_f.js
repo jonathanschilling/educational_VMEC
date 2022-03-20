@@ -7,7 +7,7 @@ var searchData=
   ['set_5fnestor_5fsizes_4',['set_nestor_sizes',['../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a',1,'vacmod0']]],
   ['solver_5',['solver',['../d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220',1,'solver.f90']]],
   ['spectrum_6',['spectrum',['../de/daf/spectrum_8f90.html#afecccf953acda8cefc93e3f955198fcc',1,'spectrum.f90']]],
-  ['spline_5fakima_7',['spline_akima',['../d6/dec/spline__akima_8f.html#a7517a5f00e408c447a9dd0e438f60e52',1,'spline_akima.f']]],
+  ['spline_5fakima_7',['spline_akima',['../de/de4/explore__spline__akima_8f90.html#a7517a5f00e408c447a9dd0e438f60e52',1,'spline_akima(x, y, xx, yy, npts, iflag):&#160;explore_spline_akima.f90'],['../d6/dec/spline__akima_8f.html#a7517a5f00e408c447a9dd0e438f60e52',1,'spline_akima(x, y, xx, yy, npts, iflag):&#160;spline_akima.f']]],
   ['spline_5fakima_5fint_8',['spline_akima_int',['../d1/d95/spline__akima__int_8f.html#a06a168ee52e5ec1d7cab10c19ee37c91',1,'spline_akima_int.f']]],
   ['spline_5fcubic_9',['spline_cubic',['../d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067',1,'spline_cubic.f']]],
   ['spline_5fcubic_5fint_10',['spline_cubic_int',['../de/d64/spline__cubic__int_8f.html#ad67b8e5169554dbccb5cf79f069dc055',1,'spline_cubic_int.f']]],

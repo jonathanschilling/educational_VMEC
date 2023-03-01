@@ -1,9 +1,9 @@
 <map id="spline_nr" name="spline_nr">
-<area shape="rect" id="node1" title=" " alt="" coords="505,104,580,131"/>
-<area shape="rect" id="node2" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="363,104,457,131"/>
-<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="259,29,309,56"/>
-<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="259,104,309,131"/>
-<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="253,179,315,205"/>
-<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,104,205,131"/>
-<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,104,64,131"/>
+<area shape="rect" id="node1" title=" " alt="" coords="505,103,580,128"/>
+<area shape="rect" id="node2" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="363,103,457,128"/>
+<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="259,29,309,55"/>
+<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="259,103,309,128"/>
+<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="253,176,315,201"/>
+<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,103,205,128"/>
+<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,103,64,128"/>
 </map>

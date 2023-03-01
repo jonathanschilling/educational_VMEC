@@ -25,12 +25,7 @@
 var NAVTREE =
 [
   [ "VMEC", "index.html", [
-    [ "Educational VMEC", "index.html", [
-      [ "Building", "index.html#autotoc_md1", null ],
-      [ "Example Execution", "index.html#autotoc_md2", null ],
-      [ "External NESTOR", "index.html#autotoc_md3", null ],
-      [ "Angle Constraint", "index.html#autotoc_md4", null ]
-    ] ],
+    [ "Educational VMEC", "index.html", "index" ],
     [ "Modules", "namespaces.html", [
       [ "Modules List", "namespaces.html", "namespaces_dup" ],
       [ "Module Members", "namespacemembers.html", [
@@ -39,9 +34,9 @@ var NAVTREE =
         [ "Variables", "namespacemembers_vars.html", "namespacemembers_vars" ]
       ] ]
     ] ],
-    [ "Data Types List", "annotated.html", [
+    [ "Data Types", "annotated.html", [
       [ "Data Types List", "annotated.html", "annotated_dup" ],
-      [ "Data Types", "classes.html", null ],
+      [ "Data Type Index", "classes.html", null ],
       [ "Data Fields", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions/Subroutines", "functions_func.html", null ]
@@ -63,14 +58,14 @@ var NAVTREEINDEX =
 "d1/d59/vmec__input_8f90.html#af1cd9999d7f0663a0d310df805aa2d0b",
 "d2/d01/mgrid__mod_8f.html#a96b50b65e30b53f3873a33c3b0d05bc1",
 "d4/dce/vacmod_8f90.html#af35a156c61760afb612fea6df3867602",
-"d8/d68/vparams_8f90.html#a0814be0e76cd3c188c7ace652f3ed034",
-"da/de2/vacmod0_8f90.html#a44567911ba1acbbd44fa39cc6059fbd1",
-"db/dae/namespaceread__wout__mod.html#a03a99ab5d8b665c447848796e7320293",
-"db/dae/namespaceread__wout__mod.html#a9cd9c6b27c13a57bbd22c3d2a1e359ce",
-"db/dc0/namespacenestor__io.html#ab4c214c2297cfa3ebc0438ee5a099bef",
-"dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa",
-"df/d61/read__wout__mod_8f.html#a1c41ab65ba9f20e9042738c8373c83e7",
-"df/d61/read__wout__mod_8f.html#ab47fd764c2953b6b530499910e5a38bb"
+"d8/d68/vparams_8f90.html#a0ca601cf8c7d1b9114b4a307deeeb67a",
+"da/de2/vacmod0_8f90.html#a466ba6bd980d581da32e88b9132bde6e",
+"db/dae/namespaceread__wout__mod.html#a0704c7e356dea6f1e7011584fa36c70d",
+"db/dae/namespaceread__wout__mod.html#a9e9a798e8bb49d02f5a56ced70f24738",
+"db/dc0/namespacenestor__io.html#ab67d0b8e4255345608f6d19ea34f4f6c",
+"dd/df2/namespacevacmod.html#ab4d739d826b48a928c27f59ccf392a7f",
+"df/d61/read__wout__mod_8f.html#a1d96917834104c63f9a5e577c0e0054d",
+"df/d61/read__wout__mod_8f.html#ab5696ab534b4731a11dd226166f71c67"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,4 +1,4 @@
 <map id="forces" name="forces">
-<area shape="rect" id="node1" title="Compute the real&#45;space MHD forces." alt="" coords="5,29,64,56"/>
-<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="112,29,284,56"/>
+<area shape="rect" id="node1" title="Compute the real&#45;space MHD forces." alt="" coords="5,29,64,55"/>
+<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="112,29,284,55"/>
 </map>

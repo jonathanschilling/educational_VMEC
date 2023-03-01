@@ -1,6 +1,6 @@
 <map id="torflux_deriv" name="torflux_deriv">
-<area shape="rect" id="node1" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="357,29,448,56"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,29,205,56"/>
-<area shape="rect" id="node4" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="253,67,309,93"/>
-<area shape="rect" id="node3" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,29,64,56"/>
+<area shape="rect" id="node1" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="357,29,448,55"/>
+<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,29,205,55"/>
+<area shape="rect" id="node4" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="253,67,309,92"/>
+<area shape="rect" id="node3" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,29,64,55"/>
 </map>

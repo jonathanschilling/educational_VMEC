@@ -1,7 +1,7 @@
 <map id="wrout" name="wrout">
-<area shape="rect" id="node1" title="Write the output files of VMEC." alt="" coords="5,81,60,108"/>
-<area shape="rect" id="node2" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="127,5,192,32"/>
-<area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="108,56,211,83"/>
-<area shape="rect" id="node4" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="111,107,207,133"/>
-<area shape="rect" id="node5" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="118,157,201,184"/>
+<area shape="rect" id="node1" title="Write the output files of VMEC." alt="" coords="5,80,60,105"/>
+<area shape="rect" id="node2" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="127,5,192,31"/>
+<area shape="rect" id="node3" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="108,55,211,80"/>
+<area shape="rect" id="node4" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="111,104,207,129"/>
+<area shape="rect" id="node5" href="$db/d40/symoutput_8f90.html#a2489a93ca37b283b9dec6888826083ae" title="Symmetrize some quantities so that they can be output (?)" alt="" coords="118,153,201,179"/>
 </map>

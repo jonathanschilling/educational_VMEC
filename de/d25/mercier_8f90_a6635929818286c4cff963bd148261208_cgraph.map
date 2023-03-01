@@ -1,5 +1,5 @@
 <map id="mercier" name="mercier">
-<area shape="rect" id="node1" title="Evaluate the Mercier stability criterion." alt="" coords="5,55,71,81"/>
-<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="123,29,295,56"/>
-<area shape="rect" id="node3" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="119,80,299,107"/>
+<area shape="rect" id="node1" title="Evaluate the Mercier stability criterion." alt="" coords="5,55,71,80"/>
+<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="123,29,295,55"/>
+<area shape="rect" id="node3" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="119,79,299,104"/>
 </map>

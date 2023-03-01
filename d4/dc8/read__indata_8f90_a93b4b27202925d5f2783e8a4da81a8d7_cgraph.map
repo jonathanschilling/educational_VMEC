@@ -1,6 +1,6 @@
 <map id="read_indata" name="read_indata">
-<area shape="rect" id="node1" title="Read the INDATA namelist from a given input file." alt="" coords="5,71,95,98"/>
-<area shape="rect" id="node2" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="151,5,314,47"/>
-<area shape="rect" id="node3" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="143,71,323,98"/>
-<area shape="rect" id="node4" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="161,123,304,164"/>
+<area shape="rect" id="node1" title="Read the INDATA namelist from a given input file." alt="" coords="5,70,95,95"/>
+<area shape="rect" id="node2" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="151,5,314,45"/>
+<area shape="rect" id="node3" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="143,70,323,95"/>
+<area shape="rect" id="node4" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="161,120,304,160"/>
 </map>

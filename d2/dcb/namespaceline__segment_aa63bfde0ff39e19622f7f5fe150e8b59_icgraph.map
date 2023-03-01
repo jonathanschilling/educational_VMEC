@@ -1,9 +1,9 @@
 <map id="line_segment::line_seg" name="line_segment::line_seg">
-<area shape="rect" id="node1" title=" " alt="" coords="427,157,580,183"/>
-<area shape="rect" id="node2" href="$d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8" title=" " alt="" coords="253,29,379,71"/>
-<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="291,119,341,146"/>
-<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="291,194,341,221"/>
-<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="285,269,347,295"/>
-<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,194,205,221"/>
-<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,194,64,221"/>
+<area shape="rect" id="node1" title=" " alt="" coords="427,155,580,181"/>
+<area shape="rect" id="node2" href="$d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8" title=" " alt="" coords="253,29,379,69"/>
+<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="291,118,341,143"/>
+<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="291,191,341,217"/>
+<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="285,265,347,290"/>
+<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,191,205,217"/>
+<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,191,64,217"/>
 </map>

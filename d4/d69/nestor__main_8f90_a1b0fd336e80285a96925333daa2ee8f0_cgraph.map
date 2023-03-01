@@ -1,26 +1,26 @@
 <map id="nestor" name="nestor">
-<area shape="rect" id="node1" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="5,148,64,175"/>
-<area shape="rect" id="node2" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="118,5,281,32"/>
-<area shape="rect" id="node3" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="112,56,287,83"/>
-<area shape="rect" id="node4" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="125,107,274,149"/>
-<area shape="rect" id="node8" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="128,173,271,214"/>
-<area shape="rect" id="node9" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="165,239,233,265"/>
-<area shape="rect" id="node24" href="$db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" title=" " alt="" coords="123,290,275,331"/>
-<area shape="rect" id="node5" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="335,87,491,113"/>
-<area shape="rect" id="node6" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="539,36,719,63"/>
-<area shape="rect" id="node7" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="551,87,706,113"/>
-<area shape="rect" id="node10" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="381,301,445,328"/>
-<area shape="rect" id="node13" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="767,479,939,505"/>
-<area shape="rect" id="node14" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="384,391,441,417"/>
-<area shape="rect" id="node15" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="381,555,445,581"/>
-<area shape="rect" id="node22" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="384,188,441,215"/>
-<area shape="rect" id="node23" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="380,137,445,164"/>
-<area shape="rect" id="node11" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="601,276,657,303"/>
-<area shape="rect" id="node12" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="601,327,657,353"/>
-<area shape="rect" id="node16" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="601,681,657,708"/>
-<area shape="rect" id="node19" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="605,631,652,657"/>
-<area shape="rect" id="node20" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="603,529,654,556"/>
-<area shape="rect" id="node21" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="599,479,658,505"/>
-<area shape="rect" id="node17" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="814,656,891,683"/>
-<area shape="rect" id="node18" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="811,707,895,733"/>
+<area shape="rect" id="node1" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="5,144,64,169"/>
+<area shape="rect" id="node2" href="$dd/df2/namespacevacmod.html#a30b88ea77408f43e1bedf2c11c0f8d1a" title=" " alt="" coords="118,5,281,31"/>
+<area shape="rect" id="node3" href="$dd/df2/namespacevacmod.html#ade3824460b4eb61403c35f6abe95cd89" title=" " alt="" coords="112,55,287,80"/>
+<area shape="rect" id="node4" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="125,105,274,145"/>
+<area shape="rect" id="node8" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="128,169,271,209"/>
+<area shape="rect" id="node9" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="165,233,233,259"/>
+<area shape="rect" id="node24" href="$db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" title=" " alt="" coords="123,283,275,323"/>
+<area shape="rect" id="node5" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="335,84,491,109"/>
+<area shape="rect" id="node6" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="539,40,719,65"/>
+<area shape="rect" id="node7" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="551,89,706,115"/>
+<area shape="rect" id="node10" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="381,305,445,331"/>
+<area shape="rect" id="node13" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="767,479,939,504"/>
+<area shape="rect" id="node14" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="384,392,441,417"/>
+<area shape="rect" id="node15" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="381,553,445,579"/>
+<area shape="rect" id="node22" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="384,183,441,208"/>
+<area shape="rect" id="node23" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="380,133,445,159"/>
+<area shape="rect" id="node11" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="601,277,657,303"/>
+<area shape="rect" id="node12" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="601,327,657,352"/>
+<area shape="rect" id="node16" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="601,679,657,704"/>
+<area shape="rect" id="node19" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="605,629,652,655"/>
+<area shape="rect" id="node20" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="603,528,654,553"/>
+<area shape="rect" id="node21" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="599,479,658,504"/>
+<area shape="rect" id="node17" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="814,653,891,679"/>
+<area shape="rect" id="node18" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="811,703,895,728"/>
 </map>

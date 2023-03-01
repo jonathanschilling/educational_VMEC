@@ -1,9 +1,9 @@
 <map id="vacmod::free_mem_nestor" name="vacmod::free_mem_nestor">
-<area shape="rect" id="node1" title=" " alt="" coords="635,56,809,83"/>
-<area shape="rect" id="node2" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="472,31,587,57"/>
-<area shape="rect" id="node7" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="500,81,559,108"/>
-<area shape="rect" id="node3" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="321,5,424,32"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,168,57"/>
-<area shape="rect" id="node4" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,5,273,32"/>
-<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,57"/>
+<area shape="rect" id="node1" title=" " alt="" coords="635,56,809,81"/>
+<area shape="rect" id="node2" href="$de/dd6/free__mem__nunv_8f90.html#af9db130c860b00078874db28a8805226" title="Free arrays depending on the number of Fourier coefficients nunv." alt="" coords="472,31,587,56"/>
+<area shape="rect" id="node7" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="500,80,559,105"/>
+<area shape="rect" id="node3" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="321,5,424,31"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,168,56"/>
+<area shape="rect" id="node4" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,5,273,31"/>
+<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,56"/>
 </map>

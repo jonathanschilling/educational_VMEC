@@ -1,7 +1,7 @@
 <map id="spectrum" name="spectrum">
-<area shape="rect" id="node1" title="Compute the spectral width of the surface geometry Fourier coefficients." alt="" coords="444,5,520,32"/>
-<area shape="rect" id="node2" href="$d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797" title="Print iteration progress to screen and threed1 output file." alt="" coords="331,5,396,32"/>
-<area shape="rect" id="node3" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="216,5,283,32"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,168,32"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,32"/>
+<area shape="rect" id="node1" title="Compute the spectral width of the surface geometry Fourier coefficients." alt="" coords="444,5,520,31"/>
+<area shape="rect" id="node2" href="$d7/dc9/printout_8f90.html#ad981fdd1d509a05592ecbea3ef831797" title="Print iteration progress to screen and threed1 output file." alt="" coords="331,5,396,31"/>
+<area shape="rect" id="node3" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="216,5,283,31"/>
+<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,168,31"/>
+<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
 </map>

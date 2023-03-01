@@ -87,11 +87,11 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
 
     call add_real("pfactor0", pfactor0)
 
-    call add_real_1d("blam", ns-1, blam(2:ns))
-    call add_real_1d("clam", ns-1, clam(2:ns))
-    call add_real_1d("dlam", ns-1, dlam(2:ns))
+    call add_real_1d("blam", ns+1, blam)
+    call add_real_1d("clam", ns+1, clam)
+    call add_real_1d("dlam", ns+1, dlam)
 
-    call add_real_3d("faclam", ns, ntor+1, mpol1, faclam(:,:,:,1)) !, order=(/ 2, 3, 1 /) ) ! TODO: check order !
+    call add_real_3d("faclam", ns, ntor+1, mpol, faclam(:ns,0:ntor,0:mpol1,1)) !, order=(/ 2, 3, 1 /) ) ! TODO: check order !
 
     call close_dbg_out()
   end if

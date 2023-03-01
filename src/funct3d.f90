@@ -45,11 +45,11 @@ SUBROUTINE funct3d (ier_flag)
 !  character(len=*), parameter :: nestor_executable = &
 !     "/data2/jonathan/work/code/educational_VMEC/build/bin/xnestor"
 
-  character(len=*), parameter :: nestor_executable = &
-    "python3 /data/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
+!   character(len=*), parameter :: nestor_executable = &
+!     "python3 /data/jonathan/work/code/NESTOR/src/main/python/NESTOR.py"
 
-!    character(len=*), parameter :: nestor_executable = &
-!     "python3 /data/jonathan/work/code/NESTOR/src/main/python/ooNESTOR.py"
+   character(len=*), parameter :: nestor_executable = &
+    "python3 /data/jonathan/work/code/NESTOR/src/main/python/ooNESTOR.py"
 
 !   character(len=*), parameter :: nestor_executable = &
 !     "python3 /home/IPP-HGW/jons/work/code/NESTOR/src/main/python/NESTOR.py"
@@ -58,7 +58,7 @@ SUBROUTINE funct3d (ier_flag)
   logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .false.
+  logical :: ldump_vacuum_ref = .true.
 
   funct3d_calls = funct3d_calls + 1
 

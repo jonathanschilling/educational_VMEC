@@ -123,7 +123,15 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p>The <code>cmake</code> build system for stand-alone VMEC is borrowed from <a href="https://github.com/hiddenSymmetries/VMEC2000">hiddenSymmetries/VMEC2000</a> and from <a href="https://github.com/ORNL-Fusion/LIBSTELL">ORNL-Fusion/LIBSTELL</a>.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Building</h1>
-<p>This is a fairly standard CMake setup, if you are used to it. Here is how it works:</p><ul>
+<p>Required packages on Debian stable are: <code>cmake</code>, <code>gfortran</code>, <code>libnetcdff-dev</code>, <code>libblas-dev</code>, <code>liblapack-dev</code>, <code>libfftw3-dev</code></p>
+<p>You need to download this repository and the included <code>json-fortran</code>. The easiest way to do this is via a recursive <code>git clone</code>:</p>
+<div class="fragment"><div class="line">&gt; git clone --recursive https://github.com/jonathanschilling/educational_VMEC.git</div>
+</div><!-- fragment --><p>Ignore warnings about missing access to <code>src/vac2</code> and <code>src/vac3</code>. After cloning, the <code>json-fortran</code> directory is somewhat messed up and you need to fix that:</p>
+<div class="fragment"><div class="line">&gt; cd educational_VMEC/json-fortran</div>
+<div class="line">&gt; git restore --staged .</div>
+<div class="line">&gt; git checkout .</div>
+<div class="line">&gt; cd ..</div>
+</div><!-- fragment --><p>This is a fairly standard CMake setup, if you are used to it. Here is how it works:</p><ul>
 <li>Create a directory <code>build</code> in the main folder: <code>mkdir build</code></li>
 <li>Go into the <code>build</code> directory: <code>cd build</code></li>
 <li>Run CMake: <code>cmake ..</code></li>
@@ -163,7 +171,7 @@ Angle Constraint</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Apr 5 2023 09:02:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+    <li class="footer">Generated on Wed Apr 5 2023 09:14:03 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>
 </body>

@@ -11,6 +11,26 @@ from [hiddenSymmetries/VMEC2000](https://github.com/hiddenSymmetries/VMEC2000)
 and from [ORNL-Fusion/LIBSTELL](https://github.com/ORNL-Fusion/LIBSTELL).
 
 ## Building
+Required packages on Debian stable are:
+`cmake`, `gfortran`, `libnetcdff-dev`, `libblas-dev`, `liblapack-dev`, `libfftw3-dev`
+
+You need to download this repository and the included `json-fortran`.
+The easiest way to do this is via a recursive `git clone`:
+
+```bash
+> git clone --recursive https://github.com/jonathanschilling/educational_VMEC.git
+```
+
+Ignore warnings about missing access to `src/vac2` and `src/vac3`.
+After cloning, the `json-fortran` directory is somewhat messed up and you need to fix that:
+
+```bash
+> cd educational_VMEC/json-fortran
+> git restore --staged .
+> git checkout .
+> cd ..
+```
+
 This is a fairly standard CMake setup, if you are used to it.
 Here is how it works:
  * Create a directory `build` in the main folder: `mkdir build`

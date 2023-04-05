@@ -172,6 +172,7 @@ SUBROUTINE precal
   END DO
 
   ! Fourier mode number arrays for potsin, potcos
+  ! DANGER: note that these include m=0, n<0 entries !!!
   mn = 0
   DO n = -nf, nf
      DO m = 0, mf

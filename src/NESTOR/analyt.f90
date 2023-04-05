@@ -119,6 +119,11 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
      IF (ivacskip .eq. 0) THEN
         slp = (r1p*fl + ra1p)*tlp + r0p*fl*tlp1 - (r1p + r0p)/sqrtc + sign1*(r0p - r1p)/sqrta
         slm = (r1m*fl + ra1m)*tlm + r0m*fl*tlm1 - (r1m + r0m)/sqrtc + sign1*(r0m - r1m)/sqrta
+
+!         slm = 0.0
+!         slp = 0.0
+
+
         slpm = slp + slm
 
         ! here, tlp/m and slp/m are available for the current value of l

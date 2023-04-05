@@ -26,7 +26,7 @@ SUBROUTINE printout(i0, delt0, w0)
   CHARACTER(LEN=*), PARAMETER :: delt_line  = "    DELT  "
   CHARACTER(LEN=*), PARAMETER :: zaxis_line = "  ZAX(v=0)      "
 
-  REAL(rprec) :: betav, w, avm, den
+  REAL(rprec) :: betav, w, avm, den, some_sum, some_denom
   CHARACTER(len=LEN(iter_line) + LEN(fsq_line) + LEN(raxis_line) + LEN(zaxis_line)) :: print_line
 
   betav = wp/wb
@@ -41,7 +41,14 @@ SUBROUTINE printout(i0, delt0, w0)
   avm = 0.5_dp*avm/den ! volume-averaged spectral width (_av_erage _M_)
 
   IF (ivac .ge. 1 .and. iter2.gt.1) then
-     delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
+     !delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
+
+     some_sum   = SUM(dbsq(:nznt)*wint(2:nrzt:ns))
+     some_denom = SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
+
+     print *, "delbsq = ", some_sum, "/", some_denom
+
+     delbsq = some_sum / some_denom
   end if
 
   IF (i0.eq.1 .and. lfreeb) THEN

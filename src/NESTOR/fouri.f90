@@ -12,9 +12,9 @@
 !> @param lasym
 SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
-  
+
   use dbgout
-  
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(mnpd,nv,nu3,ndim), INTENT(in) :: grpmn
@@ -78,6 +78,9 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   astemp = 0
 
   amatrix = 0
+
+  ! disable singular part for now
+!   bvec = 0
 
   ! PERFORM KV (TOROIDAL ANGLE) TRANSFORM
   DO n = 0, nf
@@ -155,7 +158,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   ! Index of m=0,n=0
   mn0 = 1+mf1*nf
   ! SPH082415: mn0-mf1: (m=0,n=-1 index)
-  amatrix(1:mn0-mf1:mf1, :, 1:ndim*ndim) = 0
+  amatrix(1:mn0-mf1:mf1, :, 1:ndim*ndim) = 0 ! NOTE: those actually ARE excluded using skipZeros()
 
   ! ADD DIAGONAL TERMS TO AMATRIX [THE FIRST TERM IN EQ(3.2) OF PKM]
   DO mn = 1, mnpd
@@ -191,22 +194,26 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      ! Cos-Cos'
      amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
   end if
-  
+
   if (open_dbg_context("vac1n_fouri", id=icall)) then
-    
+
+    call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
+
     ! TODO: isym for lasym=.TRUE.
     call add_real_2d("source", nv, nu2, source)
-    
+
     call add_real_2d("bcos", nu2, nf1, bcos)
     call add_real_2d("bsin", nu2, nf1, bsin)
-    
+
     call add_real_4d("actemp", mf1, nf1, nf1, nu3, actemp)
     call add_real_4d("astemp", mf1, nf1, nf1, nu3, astemp)
-    
+
     call add_real_2d("bvec", mf1, nf1, bvec)
-    call add_real_4d("amatrix", mf1, nf1, mf1, nf1, amatrix)
-    
-    call add_real_2d("amatsq", mf1*nf1, mf1*nf1, amatsq)
+!     call add_real_4d("amatrix", mf1, nf1, mf1, nf1, amatrix)
+
+    call add_real_4d("amatrix", nf1, mf1, nf1, mf1, amatrix(:,:,1), order=(/ 2,1,4,3 /))
+
+    call add_real_2d("amatsq", mf1*nf1, mf1*nf1, amatsq) ! only sin-sin part !
 
     call close_dbg_out()
   end if

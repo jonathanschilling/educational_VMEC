@@ -10,7 +10,7 @@ NFP = 5,
 NS_ARRAY = 15, 
 FTOL_ARRAY = 1.0E-20, 
 NITER_array = 25000,
-NSTEP = 200,
+NSTEP = 1  ! 200,
 NTOR = 4,
 MPOL = 5,
 NZETA = 36,
@@ -126,13 +126,15 @@ PRES_SCALE = 432.29080924603676,
 pmass_type = 'two_power',
 
 
-  dump_vac1n_vacuum  = .true.
-  dump_vac1n_precal  = .true.
-  dump_vac1n_surface = .true.
-  dump_vac1n_bextern = .true.
-  dump_vac1n_analyt  = .true.
-  dump_vac1n_greenf  = .true.
-  dump_vac1n_bsqvac  = .true.
+!  dump_vac1n_vacuum  = .true.
+!  dump_vac1n_precal  = .true.
+!  dump_vac1n_surface = .true.
+!  dump_vac1n_bextern = .true.
+!  dump_vac1n_analyt  = .true.
+!  dump_vac1n_greenf  = .true.
+!  dump_vac1n_bsqvac  = .true.
+!  dump_vac1n_solver  = .true.
+!  dump_vac1n_fouri   = .true.
 
 /
 &END

@@ -237,7 +237,7 @@ SUBROUTINE funct3d (ier_flag)
                  r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0), wint(ns:nznt*ns:ns), nznt, &
                  amatsav, bvecsav, mnpd2, bsubvvac)
 
-          ! print *, "dumped reference NESTOR inputs to '"//trim(vac_file)//"'"
+!           print *, "dumped reference NESTOR inputs to '"//trim(vac_file)//"'"
         end if
 
         if (lexternal_nestor) then

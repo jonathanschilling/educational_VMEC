@@ -146,7 +146,7 @@ Example Execution</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Debug Output</h1>
-<p>The <code>dbgout</code> module allows to (optionally) write a bunch of data from within the code into separate json files. Writing these additional quantities is disabled by default and can be enabled by logical flags in the INDATA namelist. A full list of the available flags (ordered by module where they are used) is available is <a href="src/data/vmec_input.f90#L89">vmec_input.f90</a>. A folder named the same as the extension of the input file will be created. In there, subfolders named after each of the enabled <code>dump_*</code> flags will be created (<code>dump_forces=.true.</code> --&gt; <code>forces/</code>) In each of these subfolders, JSON files will be created according to the following naming scheme: <code>forces_&lt;ns&gt;_&lt;iteration&gt;_&lt;occurence&gt;.&lt;extension&gt;.json</code> where</p><ul>
+<p>The <a href="src/dbgout.f90"><code>dbgout</code></a> module allows to (optionally) write a bunch of data from within the code into separate JSON files. Writing these additional quantities is disabled by default and can be enabled by logical flags in the <code>INDATA</code> namelist. A full list of the available flags (ordered by module where they are used) is available in <a href="src/data/vmec_input.f90#L89">vmec_input.f90</a>. A folder named the same as the extension of the input file will be created. In there, subfolders named after each of the enabled <code>dump_*</code> flags will be created (<code>dump_forces=.true.</code> --&gt; <code>forces/</code>) In each of these subfolders, JSON files will be created according to the following naming scheme: <code>forces_&lt;ns&gt;_&lt;iteration&gt;_&lt;occurence&gt;.&lt;extension&gt;.json</code> where</p><ul>
 <li><code>ns</code> is the number of flux surfaces of the respective multi-grid step,</li>
 <li><code>iteration</code> is the iteration number printed to the screen and</li>
 <li><code>occurence</code> is a linear counter used in case the respective quantities need to get dumped more than once in the respective context (e.g. before and after some important subroutine call)</li>
@@ -195,7 +195,7 @@ Angle Constraint</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 15 2023 16:12:37 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Jun 15 2023 16:13:49 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

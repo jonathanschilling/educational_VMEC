@@ -43,6 +43,50 @@ Here is how it works:
  * Change into the `test` dir: `cd test`
  * Run the [Solov'ev test case](https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--): `../build/bin/xvmec input.solovev`
 
+## Debug Output
+
+The `dbgout` module allows to (optionally) write a bunch of data from within the code into separate json files.
+Writing these additional quantities is disabled by default and can be enabled by logical flags in the INDATA namelist.
+A full list of the available flags (ordered by module where they are used) is available is [vmec_input.f90](src/data/vmec_input.f90#L89).
+A folder named the same as the extension of the input file will be created.
+In there, subfolders named after each of the enabled `dump_*` flags will be created (`dump_forces=.true.` --> `forces/`)
+In each of these subfolders, JSON files will be created according to the following naming scheme:
+`forces_<ns>_<iteration>_<occurence>.<extension>.json` where
+- `ns` is the number of flux surfaces of the respective multi-grid step,
+- `iteration` is the iteration number printed to the screen and
+- `occurence` is a linear counter used in case the respective quantities need to get dumped more than once in the respective context (e.g. before and after some important subroutine call)
+
+As a first start, I usually look at JSON files using the Firefox browser, which has a rather nice built-in JSON viewer.
+For plotting, I have written a Python utility [`plot_dbg_json.py`](test/plot_dbg_json.py),
+which can plot the quantities from the JSON files produced by `educational_VMEC`.
+
+Use it as follows:
+1. to plot all quantities (at all flux surfaces) in a given JSON file:
+ 
+   ```
+   ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json
+   ```
+   
+2. the list of quantities to plot can be specified as follows (for quicker iterations, since plotting everything can take a while):
+
+    ```
+    ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12
+    ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12 zu12
+    ```
+   
+3. to plot a subset of flux surfaces (0-based indexing):
+ 
+   ```
+   ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --surfaces 6
+   ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --surfaces 0 5 14
+   ```
+   
+4. to plot a subset of quantities at a subset of surfaces:
+
+   ```
+   ../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12 zu12 --surfaces 6 7
+   ```
+
 ## External NESTOR
 The free-boundary part of VMEC is the Neumann Solver for Toroidal Systems (NESTOR).
 Its source code is in a separate folder [`NESTOR`](src/NESTOR).

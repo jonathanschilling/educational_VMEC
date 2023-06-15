@@ -1,4 +1,5 @@
 <map id="vmec" name="vmec">
-<area shape="rect" id="node1" title="Main driver for VMEC." alt="" coords="113,5,168,31"/>
-<area shape="rect" id="node2" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
+<area shape="rect" id="Node000001" title="Main driver for VMEC." alt="" coords="113,5,166,31"/>
+<area shape="rect" id="Node000002" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,21,65,21,65,16,98,16"/>
 </map>

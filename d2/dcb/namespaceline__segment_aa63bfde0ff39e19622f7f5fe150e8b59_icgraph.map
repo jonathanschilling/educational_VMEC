@@ -1,9 +1,21 @@
 <map id="line_segment::line_seg" name="line_segment::line_seg">
-<area shape="rect" id="node1" title=" " alt="" coords="427,155,580,181"/>
-<area shape="rect" id="node2" href="$d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8" title=" " alt="" coords="253,29,379,69"/>
-<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="291,118,341,143"/>
-<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="291,191,341,217"/>
-<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="285,265,347,290"/>
-<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,191,205,217"/>
-<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,191,64,217"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="423,156,576,181"/>
+<area shape="rect" id="Node000002" href="$d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8" title=" " alt="" coords="251,29,375,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="468,148,374,84,355,73,357,68,377,79,471,144"/>
+<area shape="rect" id="Node000003" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="288,118,338,144"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="417,155,338,139,339,133,418,149"/>
+<area shape="rect" id="Node000004" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="289,192,338,217"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="416,187,339,202,338,197,415,182"/>
+<area shape="rect" id="Node000007" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="283,265,343,291"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="465,191,338,267,335,262,462,187"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="338,16,329,10,313,8,299,10,290,14,287,20,288,28,283,29,281,19,286,11,297,5,313,3,331,5,341,12"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="340,106,331,99,313,97,297,99,288,103,287,109,291,116,286,119,281,110,284,100,295,94,313,92,333,94,343,102"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="340,179,331,173,313,170,297,172,288,177,287,182,291,190,286,192,281,183,284,173,295,167,313,165,333,168,343,175"/>
+<area shape="rect" id="Node000005" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="111,192,203,217"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="274,207,203,207,203,202,274,202"/>
+<area shape="poly" id="edge10_Node000005_Node000005" title=" " alt="" coords="177,179,170,172,157,170,144,172,138,177,137,182,140,190,135,192,131,183,134,173,142,167,157,165,173,168,181,175"/>
+<area shape="rect" id="Node000006" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,192,63,217"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="96,207,63,207,63,202,96,202"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="54,179,47,172,34,170,22,172,15,177,14,182,17,190,12,192,8,183,11,173,20,167,34,165,50,168,58,175"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="340,253,331,246,313,243,297,245,288,250,287,256,291,263,286,266,281,256,284,247,295,240,313,238,333,241,343,248"/>
 </map>

@@ -1,17 +1,39 @@
 <map id="vacuum" name="vacuum">
-<area shape="rect" id="node1" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="5,432,73,457"/>
-<area shape="rect" id="node2" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="122,105,186,131"/>
-<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="341,331,513,356"/>
-<area shape="rect" id="node6" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="125,508,183,533"/>
-<area shape="rect" id="node7" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="122,280,186,305"/>
-<area shape="rect" id="node14" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="125,557,183,583"/>
-<area shape="rect" id="node15" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="121,407,187,432"/>
-<area shape="rect" id="node3" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="236,55,292,80"/>
-<area shape="rect" id="node4" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="236,5,292,31"/>
-<area shape="rect" id="node8" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="236,104,292,129"/>
-<area shape="rect" id="node11" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="241,356,287,381"/>
-<area shape="rect" id="node12" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="239,205,289,231"/>
-<area shape="rect" id="node13" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="235,255,293,280"/>
-<area shape="rect" id="node9" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="389,129,466,155"/>
-<area shape="rect" id="node10" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="385,80,469,105"/>
+<area shape="rect" id="Node000001" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="5,432,73,458"/>
+<area shape="rect" id="Node000002" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="121,105,185,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,431,140,144,145,146,47,432"/>
+<area shape="rect" id="Node000005" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="338,331,510,356"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="73,445,126,446,185,442,243,428,299,408,388,362,391,367,301,412,244,434,185,447,126,452,73,450"/>
+<area shape="rect" id="Node000006" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="125,508,181,534"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="61,456,122,497,119,502,58,460"/>
+<area shape="rect" id="Node000007" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="121,280,185,306"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="48,430,131,316,136,319,52,433"/>
+<area shape="rect" id="Node000014" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="125,557,181,583"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="51,457,81,497,123,544,124,546,121,550,119,548,77,501,47,460"/>
+<area shape="rect" id="Node000015" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="121,407,185,432"/>
+<area shape="poly" id="edge21_Node000001_Node000015" title=" " alt="" coords="72,435,105,427,107,432,74,440"/>
+<area shape="rect" id="Node000003" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="234,55,289,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="181,102,219,84,221,89,183,107"/>
+<area shape="rect" id="Node000004" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="234,5,289,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="166,103,231,40,233,39,236,43,235,44,169,107"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="186,129,237,155,292,191,327,222,358,256,407,317,403,320,354,259,323,226,289,195,235,159,183,134"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="396,332,391,322,394,312,406,306,424,304,445,307,455,314,452,319,443,312,424,309,407,311,398,316,396,321,401,329"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="181,517,233,508,262,499,289,487,325,460,358,428,405,367,409,371,362,432,329,464,292,491,264,504,235,513,182,522"/>
+<area shape="poly" id="edge19_Node000007_Node000005" title=" " alt="" coords="185,296,338,325,337,330,184,301"/>
+<area shape="rect" id="Node000008" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="234,104,289,130"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="160,278,242,141,247,144,164,281"/>
+<area shape="rect" id="Node000011" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="239,356,285,382"/>
+<area shape="poly" id="edge14_Node000007_Node000011" title=" " alt="" coords="174,304,231,345,228,349,171,308"/>
+<area shape="rect" id="Node000012" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="237,205,287,231"/>
+<area shape="poly" id="edge16_Node000007_Node000012" title=" " alt="" coords="172,277,228,238,231,242,175,282"/>
+<area shape="rect" id="Node000013" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="233,255,290,280"/>
+<area shape="poly" id="edge18_Node000007_Node000013" title=" " alt="" coords="184,283,218,275,219,280,185,288"/>
+<area shape="poly" id="edge13_Node000008_Node000005" title=" " alt="" coords="277,129,292,147,359,240,409,317,404,320,354,243,288,150,273,132"/>
+<area shape="rect" id="Node000009" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="386,129,462,155"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="290,118,372,131,371,137,289,124"/>
+<area shape="rect" id="Node000010" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="382,80,466,106"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="289,110,367,98,368,104,290,115"/>
+<area shape="poly" id="edge15_Node000011_Node000005" title=" " alt="" coords="285,363,323,357,324,362,286,368"/>
+<area shape="poly" id="edge17_Node000012_Node000005" title=" " alt="" coords="282,229,396,319,393,324,278,234"/>
+<area shape="poly" id="edge22_Node000015_Node000005" title=" " alt="" coords="185,413,234,404,290,392,378,360,380,365,291,397,236,410,186,418"/>
 </map>

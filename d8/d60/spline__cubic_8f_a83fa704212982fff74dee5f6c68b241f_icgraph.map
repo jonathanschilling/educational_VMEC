@@ -1,9 +1,20 @@
 <map id="spline_nr" name="spline_nr">
-<area shape="rect" id="node1" title=" " alt="" coords="505,103,580,128"/>
-<area shape="rect" id="node2" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="363,103,457,128"/>
-<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="259,29,309,55"/>
-<area shape="rect" id="node4" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="259,103,309,128"/>
-<area shape="rect" id="node7" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="253,176,315,201"/>
-<area shape="rect" id="node5" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,103,205,128"/>
-<area shape="rect" id="node6" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,103,64,128"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="501,103,574,128"/>
+<area shape="rect" id="Node000002" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="359,103,453,128"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="486,118,453,118,453,113,486,113"/>
+<area shape="rect" id="Node000003" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="256,29,306,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="369,97,303,58,306,53,371,92"/>
+<area shape="rect" id="Node000004" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="257,103,306,128"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="344,118,306,118,306,113,344,113"/>
+<area shape="rect" id="Node000007" href="$da/dc8/profile__functions_8f.html#aba5b7c2601ef5c209acc084c9a42ff6d" title=" " alt="" coords="251,176,311,202"/>
+<area shape="poly" id="edge10_Node000002_Node000007" title=" " alt="" coords="371,139,306,178,303,173,369,134"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="302,17,295,10,281,8,269,10,262,14,261,20,264,28,259,30,255,21,258,11,267,5,281,3,297,6,305,13"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="302,90,295,84,281,81,269,83,262,88,261,94,264,101,259,103,255,94,258,85,267,78,281,76,297,79,305,86"/>
+<area shape="rect" id="Node000005" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="111,103,203,128"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="242,118,203,118,203,113,242,113"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="177,90,170,84,157,81,144,83,138,88,137,94,140,101,135,103,131,94,134,85,142,78,157,76,173,79,181,86"/>
+<area shape="rect" id="Node000006" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,103,63,128"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="96,118,63,118,63,113,96,113"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="54,90,47,84,34,81,22,83,15,88,14,94,17,101,12,103,8,94,11,85,20,78,34,76,50,79,58,86"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="302,163,295,157,281,155,269,157,262,161,261,167,264,175,259,177,255,167,258,158,267,152,281,149,297,152,305,159"/>
 </map>

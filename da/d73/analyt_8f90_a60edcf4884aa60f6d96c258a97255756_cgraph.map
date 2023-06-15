@@ -1,6 +1,10 @@
 <map id="analyt" name="analyt">
-<area shape="rect" id="node1" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="5,55,61,80"/>
-<area shape="rect" id="node2" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="157,5,234,31"/>
-<area shape="rect" id="node3" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="153,55,237,80"/>
-<area shape="rect" id="node4" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="109,128,281,153"/>
+<area shape="rect" id="Node000001" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="5,55,61,80"/>
+<area shape="rect" id="Node000002" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="156,5,233,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,55,108,40,141,30,142,35,109,45,62,61"/>
+<area shape="rect" id="Node000003" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="153,55,236,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="61,65,138,65,138,70,61,70"/>
+<area shape="rect" id="Node000004" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="109,128,280,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="62,78,152,119,149,124,60,82"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="167,129,162,119,165,110,176,104,194,101,215,104,225,112,222,116,213,109,194,107,178,109,169,113,167,119,171,126"/>
 </map>

@@ -1,6 +1,9 @@
 <map id="nestor_io::read_nestor_inputs" name="nestor_io::read_nestor_inputs">
-<area shape="rect" id="node1" title=" " alt="" coords="5,23,155,63"/>
-<area shape="rect" id="node2" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="203,31,359,56"/>
-<area shape="rect" id="node3" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="407,5,587,31"/>
-<area shape="rect" id="node4" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="419,55,574,80"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,154,64"/>
+<area shape="rect" id="Node000002" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="202,31,357,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,41,187,41,187,46,154,46"/>
+<area shape="rect" id="Node000003" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="405,5,584,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="357,32,390,28,390,33,358,37"/>
+<area shape="rect" id="Node000004" href="$d1/d41/namespacemgrid__mod.html#aa4818ade7a169c68f8b7c3a225fd287e" title=" " alt="" coords="418,55,571,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="358,50,403,55,403,60,357,55"/>
 </map>

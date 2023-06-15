@@ -1,6 +1,9 @@
 <map id="allocate_ns" name="allocate_ns">
-<area shape="rect" id="node1" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="5,31,93,56"/>
-<area shape="rect" id="node2" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="141,5,259,31"/>
-<area shape="rect" id="node4" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="149,55,251,80"/>
-<area shape="rect" id="node3" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="307,5,437,31"/>
+<area shape="rect" id="Node000001" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="5,31,93,56"/>
+<area shape="rect" id="Node000002" href="$d2/d6a/allocate__funct3d_8f90.html#aa28af836c4a986153f038a50689c152a" title="allocate arrays required in funct3d()" alt="" coords="141,5,257,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,33,126,28,127,33,94,39"/>
+<area shape="rect" id="Node000004" href="$d9/d30/free__mem__ns_8f90.html#a467551106b66f531d5dd780bd24a2d37" title="Free memory depending on the number of flux surfaces ns." alt="" coords="149,55,249,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="94,48,134,55,134,60,93,53"/>
+<area shape="rect" id="Node000003" href="$da/dc7/free__mem__funct3d_8f90.html#ad59355935b77a3f3674383e74d424289" title="Free memory required by funct3d()" alt="" coords="305,5,434,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="258,16,290,16,290,21,258,21"/>
 </map>

@@ -1,7 +1,12 @@
 <map id="free_mem_ns" name="free_mem_ns">
-<area shape="rect" id="node1" title="Free memory depending on the number of flux surfaces ns." alt="" coords="507,31,608,56"/>
-<area shape="rect" id="node2" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="371,5,459,31"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,168,56"/>
-<area shape="rect" id="node3" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="216,5,323,31"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,56"/>
+<area shape="rect" id="Node000001" title="Free memory depending on the number of flux surfaces ns." alt="" coords="503,31,603,56"/>
+<area shape="rect" id="Node000002" href="$d7/df2/allocate__ns_8f90.html#aeb3e662fed5b934054b3febb084ed659" title="allocate arrays depending on the number of flux surfaces ns" alt="" coords="367,5,455,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="487,35,455,29,456,23,488,29"/>
+<area shape="rect" id="Node000004" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,166,56"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="488,46,167,46,167,41,488,41"/>
+<area shape="rect" id="Node000003" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="214,5,319,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,21,320,21,320,16,352,16"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,34,167,41,166,36,199,29"/>
+<area shape="rect" id="Node000005" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,56"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="98,46,65,46,65,41,98,41"/>
 </map>

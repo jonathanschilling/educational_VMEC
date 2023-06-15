@@ -1,6 +1,9 @@
 <map id="guess_axis" name="guess_axis">
-<area shape="rect" id="node1" title="Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian." alt="" coords="331,5,417,31"/>
-<area shape="rect" id="node2" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="216,5,283,31"/>
-<area shape="rect" id="node3" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,168,31"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
+<area shape="rect" id="Node000001" title="Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian." alt="" coords="328,5,415,31"/>
+<area shape="rect" id="Node000002" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="214,5,280,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="313,21,281,21,281,16,313,16"/>
+<area shape="rect" id="Node000003" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,166,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="199,21,167,21,167,16,199,16"/>
+<area shape="rect" id="Node000004" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="98,21,65,21,65,16,98,16"/>
 </map>

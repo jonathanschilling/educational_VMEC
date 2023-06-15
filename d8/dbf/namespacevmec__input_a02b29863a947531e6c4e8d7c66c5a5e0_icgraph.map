@@ -1,7 +1,11 @@
 <map id="vmec_input::read_indata_namelist" name="vmec_input::read_indata_namelist">
-<area shape="rect" id="node1" title=" " alt="" coords="459,5,621,45"/>
-<area shape="rect" id="node2" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="321,13,411,38"/>
-<area shape="rect" id="node3" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="216,13,273,38"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,13,168,38"/>
-<area shape="rect" id="node5" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,13,65,38"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="455,5,616,46"/>
+<area shape="rect" id="Node000002" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="318,13,407,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="440,28,407,28,407,23,440,23"/>
+<area shape="rect" id="Node000003" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="214,13,270,39"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="303,28,271,28,271,23,303,23"/>
+<area shape="rect" id="Node000004" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,13,166,39"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="199,28,167,28,167,23,199,23"/>
+<area shape="rect" id="Node000005" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,13,65,39"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="98,28,65,28,65,23,98,23"/>
 </map>

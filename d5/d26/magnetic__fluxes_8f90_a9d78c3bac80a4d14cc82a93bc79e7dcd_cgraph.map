@@ -1,12 +1,27 @@
 <map id="polflux" name="polflux">
-<area shape="rect" id="node1" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,176,64,201"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,176,205,201"/>
-<area shape="rect" id="node3" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="256,103,307,128"/>
-<area shape="rect" id="node9" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="253,176,309,201"/>
-<area shape="rect" id="node10" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="389,227,479,252"/>
-<area shape="rect" id="node4" href="$d2/dcb/namespaceline__segment.html#aa63bfde0ff39e19622f7f5fe150e8b59" title=" " alt="" coords="357,5,511,31"/>
-<area shape="rect" id="node5" href="$de/de4/explore__spline__akima_8f90.html#a7517a5f00e408c447a9dd0e438f60e52" title=" " alt="" coords="385,55,483,80"/>
-<area shape="rect" id="node6" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="387,104,481,129"/>
-<area shape="rect" id="node8" href="$d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571" title="Convert a string to lower case." alt="" coords="402,153,466,179"/>
-<area shape="rect" id="node7" href="$d8/d60/spline__cubic_8f.html#a83fa704212982fff74dee5f6c68b241f" title=" " alt="" coords="559,104,633,129"/>
+<area shape="rect" id="Node000001" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,176,63,202"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="12,177,8,167,11,158,20,152,34,149,50,152,58,159,54,163,47,157,34,155,22,157,15,161,14,167,17,175"/>
+<area shape="rect" id="Node000002" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="111,176,203,202"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="63,186,96,186,96,192,63,192"/>
+<area shape="poly" id="edge10_Node000002_Node000002" title=" " alt="" coords="135,177,131,167,134,158,143,152,157,149,173,152,180,159,177,163,170,157,157,155,145,157,138,161,137,167,140,175"/>
+<area shape="rect" id="Node000003" href="$da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c" title=" " alt="" coords="254,103,303,128"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="179,173,242,134,245,138,181,178"/>
+<area shape="rect" id="Node000009" href="$d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402" title="Compute the enclosed toroidal magnetic flux." alt="" coords="251,176,306,202"/>
+<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="204,186,236,186,236,192,204,192"/>
+<area shape="rect" id="Node000010" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="385,227,476,252"/>
+<area shape="poly" id="edge15_Node000002_Node000010" title=" " alt="" coords="203,200,252,212,371,230,370,236,250,217,202,205"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="257,103,253,94,256,85,264,78,279,76,294,79,302,86,299,90,292,84,279,81,266,83,260,88,259,94,262,101"/>
+<area shape="rect" id="Node000004" href="$d2/dcb/namespaceline__segment.html#aa63bfde0ff39e19622f7f5fe150e8b59" title=" " alt="" coords="354,5,507,31"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="288,100,315,70,353,40,362,35,365,40,356,44,319,74,292,104"/>
+<area shape="rect" id="Node000005" href="$de/de4/explore__spline__akima_8f90.html#a7517a5f00e408c447a9dd0e438f60e52" title=" " alt="" coords="382,55,479,80"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="303,105,354,89,373,83,374,88,355,94,305,110"/>
+<area shape="rect" id="Node000006" href="$d8/d60/spline__cubic_8f.html#a60e9606a5fa1dcb7f79f9259b8e0d067" title=" " alt="" coords="384,104,477,130"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="304,113,369,114,369,119,304,118"/>
+<area shape="rect" id="Node000008" href="$d1/d4a/tolower_8f90.html#af0b4b410165cce4c9f0e5e6d82d21571" title="Convert a string to lower case." alt="" coords="399,153,462,179"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="305,122,355,140,386,150,384,155,353,145,303,127"/>
+<area shape="rect" id="Node000007" href="$d8/d60/spline__cubic_8f.html#a83fa704212982fff74dee5f6c68b241f" title=" " alt="" coords="555,104,628,130"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="478,114,540,114,540,120,478,120"/>
+<area shape="poly" id="edge12_Node000009_Node000009" title=" " alt="" coords="257,177,253,167,256,158,264,152,279,149,294,152,302,159,299,163,292,157,279,155,266,157,260,161,259,167,262,175"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="308,195,377,219,376,224,306,200"/>
+<area shape="poly" id="edge14_Node000010_Node000010" title=" " alt="" coords="404,228,399,218,402,208,413,202,431,200,450,203,460,210,456,214,448,208,430,205,415,207,407,212,405,218,409,225"/>
 </map>

@@ -1,4 +1,6 @@
 <map id="lamcal" name="lamcal">
-<area shape="rect" id="node1" title="Normalization parameters for ." alt="" coords="5,29,65,55"/>
-<area shape="rect" id="node2" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="113,29,285,55"/>
+<area shape="rect" id="Node000001" title="Normalization parameters for ." alt="" coords="5,29,65,55"/>
+<area shape="rect" id="Node000002" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="113,29,284,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,40,97,40,97,45,65,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="170,30,165,21,168,11,180,5,198,3,219,6,229,13,226,17,217,11,198,8,181,10,172,15,170,20,175,28"/>
 </map>

@@ -1,10 +1,21 @@
 <map id="scalpot" name="scalpot">
-<area shape="rect" id="node1" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="5,148,69,173"/>
-<area shape="rect" id="node2" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="119,47,175,72"/>
-<area shape="rect" id="node5" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="224,135,396,160"/>
-<area shape="rect" id="node6" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="123,148,170,173"/>
-<area shape="rect" id="node7" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="121,197,172,223"/>
-<area shape="rect" id="node8" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="117,247,176,272"/>
-<area shape="rect" id="node3" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="271,5,349,31"/>
-<area shape="rect" id="node4" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="268,55,352,80"/>
+<area shape="rect" id="Node000001" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="5,148,69,174"/>
+<area shape="rect" id="Node000002" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="118,47,173,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,146,118,80,122,84,54,150"/>
+<area shape="rect" id="Node000005" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="222,135,393,160"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="68,146,116,133,162,129,207,130,207,136,162,134,117,138,70,151"/>
+<area shape="rect" id="Node000006" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="122,148,169,174"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="69,158,107,158,107,164,69,164"/>
+<area shape="rect" id="Node000007" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="120,197,171,223"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="68,172,108,190,106,195,66,177"/>
+<area shape="rect" id="Node000008" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="117,247,174,272"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="54,172,118,234,120,235,116,239,115,237,50,176"/>
+<area shape="rect" id="Node000003" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="270,5,346,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="173,50,255,29,256,34,174,55"/>
+<area shape="rect" id="Node000004" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="266,55,349,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="174,58,251,62,251,67,173,64"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="172,71,271,125,268,129,170,75"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="280,136,275,126,278,116,289,110,308,108,328,111,339,118,335,123,326,116,308,113,291,115,282,120,280,125,285,133"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="169,156,207,153,207,158,169,162"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="170,198,258,164,260,169,172,203"/>
 </map>

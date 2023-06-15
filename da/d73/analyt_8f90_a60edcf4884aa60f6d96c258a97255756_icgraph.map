@@ -1,12 +1,22 @@
 <map id="analyt" name="analyt">
-<area shape="rect" id="node1" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="780,56,836,81"/>
-<area shape="rect" id="node2" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="668,56,732,81"/>
-<area shape="rect" id="node3" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="552,56,620,81"/>
-<area shape="rect" id="node4" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="439,31,504,56"/>
-<area shape="rect" id="node10" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="442,80,501,105"/>
-<area shape="rect" id="node5" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="331,5,391,31"/>
-<area shape="rect" id="node9" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="221,56,277,81"/>
-<area shape="rect" id="node6" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="216,7,283,32"/>
-<area shape="rect" id="node7" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,32,168,57"/>
-<area shape="rect" id="node8" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,32,65,57"/>
+<area shape="rect" id="Node000001" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="775,56,830,82"/>
+<area shape="rect" id="Node000002" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="663,56,727,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="759,72,727,72,727,66,759,66"/>
+<area shape="rect" id="Node000003" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="548,56,615,82"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="649,72,616,72,616,66,649,66"/>
+<area shape="rect" id="Node000004" href="$d3/d4f/funct3d_8f90.html#a800bacc22176e16323899df87b55c547" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="436,31,500,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="533,61,500,53,501,48,534,56"/>
+<area shape="rect" id="Node000010" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="439,80,497,106"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="534,82,497,89,496,84,533,76"/>
+<area shape="rect" id="Node000005" href="$de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4" title="Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu..." alt="" coords="328,5,388,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="421,35,387,28,389,22,422,30"/>
+<area shape="rect" id="Node000009" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="220,56,275,82"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="421,51,275,68,275,63,421,46"/>
+<area shape="rect" id="Node000006" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="214,7,280,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="313,21,281,22,281,16,313,16"/>
+<area shape="rect" id="Node000007" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,32,166,58"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="200,33,167,41,166,36,199,28"/>
+<area shape="rect" id="Node000008" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,32,65,58"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="98,48,65,48,65,42,98,42"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="205,62,166,53,167,48,206,57"/>
 </map>

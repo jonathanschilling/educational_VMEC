@@ -1,5 +1,10 @@
 <map id="piota" name="piota">
-<area shape="rect" id="node1" title=" " alt="" coords="253,29,304,55"/>
-<area shape="rect" id="node2" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="112,29,205,55"/>
-<area shape="rect" id="node3" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,29,64,55"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="251,29,300,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="295,17,289,10,276,8,264,10,258,14,256,20,260,28,255,30,251,21,253,11,262,5,276,3,291,6,299,13"/>
+<area shape="rect" id="Node000002" href="$d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f" title="Compute the radial derivative of the enclosed poloidal magnetic flux." alt="" coords="111,29,203,55"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="236,45,203,45,203,40,236,40"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="176,17,170,10,157,8,145,10,139,14,137,20,141,28,136,30,132,21,134,11,143,5,157,3,172,6,180,13"/>
+<area shape="rect" id="Node000003" href="$d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd" title="Compute the enclosed poloidal magnetic flux." alt="" coords="5,29,63,55"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="96,45,63,45,63,40,96,40"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="54,17,47,10,34,8,22,10,15,14,14,20,17,28,12,30,8,21,11,11,20,5,34,3,50,6,58,13"/>
 </map>

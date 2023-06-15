@@ -1,6 +1,10 @@
 <map id="bextern" name="bextern">
-<area shape="rect" id="node1" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="5,55,69,80"/>
-<area shape="rect" id="node2" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="175,5,231,31"/>
-<area shape="rect" id="node3" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="175,55,231,80"/>
-<area shape="rect" id="node4" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="117,128,289,153"/>
+<area shape="rect" id="Node000001" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="5,55,69,80"/>
+<area shape="rect" id="Node000002" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="175,5,230,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,55,116,40,160,27,161,32,117,45,70,60"/>
+<area shape="rect" id="Node000003" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="175,55,230,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="69,65,160,65,160,70,69,70"/>
+<area shape="rect" id="Node000004" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="117,128,288,154"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="69,79,159,119,157,124,67,83"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="174,129,169,119,172,110,184,104,202,101,223,104,234,112,231,116,221,109,202,107,185,109,176,113,174,119,179,126"/>
 </map>

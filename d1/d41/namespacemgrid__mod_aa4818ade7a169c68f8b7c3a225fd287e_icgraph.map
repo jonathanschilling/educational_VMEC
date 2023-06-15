@@ -1,9 +1,15 @@
 <map id="mgrid_mod::sum_bfield" name="mgrid_mod::sum_bfield">
-<area shape="rect" id="node1" title=" " alt="" coords="621,42,776,67"/>
-<area shape="rect" id="node2" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="417,42,573,67"/>
-<area shape="rect" id="node3" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="220,5,369,45"/>
-<area shape="rect" id="node5" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="266,70,323,95"/>
-<area shape="rect" id="node4" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="113,13,172,38"/>
-<area shape="rect" id="node6" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="115,70,170,95"/>
-<area shape="rect" id="node7" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,70,65,95"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="618,42,771,68"/>
+<area shape="rect" id="Node000002" href="$d1/d41/namespacemgrid__mod.html#a202373a45f0c5b1f81076da92a1123d0" title=" " alt="" coords="414,42,570,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="603,58,570,58,570,52,603,52"/>
+<area shape="rect" id="Node000003" href="$db/dc0/namespacenestor__io.html#a84f85fce5232fbd8ee9eca2f2b5adb0c" title=" " alt="" coords="218,5,366,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="399,44,366,39,367,34,400,39"/>
+<area shape="rect" id="Node000005" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="264,70,320,96"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="400,71,321,82,320,76,399,65"/>
+<area shape="rect" id="Node000004" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="113,13,170,39"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="203,28,171,28,171,23,203,23"/>
+<area shape="rect" id="Node000006" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="115,70,168,96"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="249,86,168,86,168,80,249,80"/>
+<area shape="rect" id="Node000007" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,70,65,96"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="100,86,65,86,65,80,100,80"/>
 </map>

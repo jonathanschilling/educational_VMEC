@@ -1,7 +1,12 @@
 <map id="profil3d" name="profil3d">
-<area shape="rect" id="node1" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="371,31,433,56"/>
-<area shape="rect" id="node2" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="236,5,303,31"/>
-<area shape="rect" id="node5" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="216,55,323,80"/>
-<area shape="rect" id="node3" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,168,56"/>
-<area shape="rect" id="node4" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,56"/>
+<area shape="rect" id="Node000001" title="Compute three&#45;dimensional profiles of flux&#45;surface geometry etc." alt="" coords="367,31,430,56"/>
+<area shape="rect" id="Node000002" href="$d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2" title="Iteratively evolve the Fourier coefficients that specify the equilibrium." alt="" coords="234,5,300,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,37,300,27,301,22,354,32"/>
+<area shape="rect" id="Node000005" href="$d9/da6/initialize__radial_8f90.html#a187faea543d3a42bc748511f04b5b7d5" title="Allocates memory for radial arrays and initializes radial profiles." alt="" coords="214,55,319,80"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="354,54,320,61,319,55,353,49"/>
+<area shape="rect" id="Node000003" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,31,166,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,30,167,41,166,36,218,25"/>
+<area shape="rect" id="Node000004" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,31,65,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="98,46,65,46,65,41,98,41"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="199,57,166,51,167,46,200,52"/>
 </map>

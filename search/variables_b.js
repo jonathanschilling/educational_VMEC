@@ -1,7 +1,7 @@
 var searchData=
 [
   ['lamscale_0',['lamscale',['../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43',1,'vmec_params']]],
-  ['lasym_1',['lasym',['../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553',1,'vmec_input::lasym()'],['../db/dae/namespaceread__wout__mod.html#af58cfb60756d7c50bc08b8deba5a082a',1,'read_wout_mod::lasym()'],['../db/dc0/namespacenestor__io.html#abd176370d7af48c1040d23bef04f6bd2',1,'nestor_io::lasym()']]],
+  ['lasym_1',['lasym',['../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553',1,'vmec_input::lasym'],['../db/dae/namespaceread__wout__mod.html#af58cfb60756d7c50bc08b8deba5a082a',1,'read_wout_mod::lasym'],['../db/dc0/namespacenestor__io.html#abd176370d7af48c1040d23bef04f6bd2',1,'nestor_io::lasym']]],
   ['lbsubs_2',['lbsubs',['../d8/dbf/namespacevmec__input.html#ae3eadff8c916355456de0affcbcf9722',1,'vmec_input']]],
   ['lconm1_3',['lconm1',['../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb',1,'vmec_main']]],
   ['lflip_4',['lflip',['../d1/d6c/namespacevmec__main.html#ae046e355769fd9cd301ec342dfaee24c',1,'vmec_main']]],
@@ -139,6 +139,6 @@ var searchData=
   ['ln_5fzmnc_136',['ln_zmnc',['../db/dae/namespaceread__wout__mod.html#a6af29438c399a04e3a7ca4764993278a',1,'read_wout_mod']]],
   ['ln_5fzmns_137',['ln_zmns',['../db/dae/namespaceread__wout__mod.html#ad49b45f68d8f87f46d1216d2acdd8611',1,'read_wout_mod']]],
   ['lnverror_138',['lnverror',['../d1/d41/namespacemgrid__mod.html#aac5a5ba3591e2a68bb3ceb53ee91f1e8',1,'mgrid_mod']]],
-  ['lthreed_139',['lthreed',['../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86',1,'vmec_main::lthreed()'],['../db/dae/namespaceread__wout__mod.html#a8d42b54e64d4e5429d08f9bcd7985225',1,'read_wout_mod::lthreed()']]],
+  ['lthreed_139',['lthreed',['../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86',1,'vmec_main::lthreed'],['../db/dae/namespaceread__wout__mod.html#a8d42b54e64d4e5429d08f9bcd7985225',1,'read_wout_mod::lthreed']]],
   ['lwout_5fopened_140',['lwout_opened',['../db/dae/namespaceread__wout__mod.html#a969ea861f0e4f6c89d6b607475c74a76',1,'read_wout_mod']]]
 ];

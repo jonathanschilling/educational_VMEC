@@ -45,9 +45,9 @@ Here is how it works:
 
 ## Debug Output
 
-The `dbgout` module allows to (optionally) write a bunch of data from within the code into separate json files.
-Writing these additional quantities is disabled by default and can be enabled by logical flags in the INDATA namelist.
-A full list of the available flags (ordered by module where they are used) is available is [vmec_input.f90](src/data/vmec_input.f90#L89).
+The [`dbgout`](src/dbgout.f90) module allows to (optionally) write a bunch of data from within the code into separate JSON files.
+Writing these additional quantities is disabled by default and can be enabled by logical flags in the `INDATA` namelist.
+A full list of the available flags (ordered by module where they are used) is available in [vmec_input.f90](src/data/vmec_input.f90#L89).
 A folder named the same as the extension of the input file will be created.
 In there, subfolders named after each of the enabled `dump_*` flags will be created (`dump_forces=.true.` --> `forces/`)
 In each of these subfolders, JSON files will be created according to the following naming scheme:

@@ -58,7 +58,7 @@ SUBROUTINE funct3d (ier_flag)
   logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .true.
+  logical :: ldump_vacuum_ref = .false.
 
 
 

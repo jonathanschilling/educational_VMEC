@@ -145,12 +145,36 @@ Example Execution</h1>
 <li>Run the <a href="https://princetonuniversity.github.io/FOCUS/notes/Coil_design_codes_benchmark.html#Equiblirium--">Solov'ev test case</a>: <code>../build/bin/xvmec input.solovev</code></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
+Debug Output</h1>
+<p>The <code>dbgout</code> module allows to (optionally) write a bunch of data from within the code into separate json files. Writing these additional quantities is disabled by default and can be enabled by logical flags in the INDATA namelist. A full list of the available flags (ordered by module where they are used) is available is <a href="src/data/vmec_input.f90#L89">vmec_input.f90</a>. A folder named the same as the extension of the input file will be created. In there, subfolders named after each of the enabled <code>dump_*</code> flags will be created (<code>dump_forces=.true.</code> --&gt; <code>forces/</code>) In each of these subfolders, JSON files will be created according to the following naming scheme: <code>forces_&lt;ns&gt;_&lt;iteration&gt;_&lt;occurence&gt;.&lt;extension&gt;.json</code> where</p><ul>
+<li><code>ns</code> is the number of flux surfaces of the respective multi-grid step,</li>
+<li><code>iteration</code> is the iteration number printed to the screen and</li>
+<li><code>occurence</code> is a linear counter used in case the respective quantities need to get dumped more than once in the respective context (e.g. before and after some important subroutine call)</li>
+</ul>
+<p>As a first start, I usually look at JSON files using the Firefox browser, which has a rather nice built-in JSON viewer. For plotting, I have written a Python utility <a href="test/plot_dbg_json.py"><code>plot_dbg_json.py</code></a>, which can plot the quantities from the JSON files produced by <code>educational_VMEC</code>.</p>
+<p>Use it as follows:</p><ol type="1">
+<li><p class="startli">to plot all quantities (at all flux surfaces) in a given JSON file:</p>
+<div class="fragment"><div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json</div>
+</div><!-- fragment --></li>
+<li><p class="startli">the list of quantities to plot can be specified as follows (for quicker iterations, since plotting everything can take a while):</p>
+<div class="fragment"><div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12</div>
+<div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12 zu12</div>
+</div><!-- fragment --></li>
+<li><p class="startli">to plot a subset of flux surfaces (0-based indexing):</p>
+<div class="fragment"><div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --surfaces 6</div>
+<div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --surfaces 0 5 14</div>
+</div><!-- fragment --></li>
+<li><p class="startli">to plot a subset of quantities at a subset of surfaces:</p>
+<div class="fragment"><div class="line">../../plot_dbg_json.py forces_00015_000001_01.test.vmec.json --quantities ru12 zu12 --surfaces 6 7</div>
+</div><!-- fragment --></li>
+</ol>
+<h1><a class="anchor" id="autotoc_md4"></a>
 External NESTOR</h1>
 <p>The free-boundary part of VMEC is the Neumann Solver for Toroidal Systems (NESTOR). Its source code is in a separate folder <a href="src/NESTOR"><code>NESTOR</code></a>. The appropriate reference is <a href="https://doi.org/10.1016/0021-9991(86)90055-0">https://doi.org/10.1016/0021-9991(86)90055-0</a> .</p>
 <p>This version of NESTOR can be run stand-alone. It reads its inputs from a netCDF file and writes its outputs into another netCDF file. The main executable of this stand-alone version of NESTOR is <a href="src/NESTOR/nestor_main.f90"><code>nestor_main.f90</code></a>. The input and output files are read and written in <a href="src/NESTOR/data/nestor_io.f90"><code>nestor_io.f90</code></a>.</p>
 <p>This version of VMEC can be configured to dump the corresponding input and output files, but still run the compiled-in version of NESTOR. This is enabled via the logical flag <code>ldump_vacuum_ref</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>.</p>
 <p>Also, an external NESTOR implementation can be called instead of using the compiled-in version of NESTOR. This is enabled via the logical flag <code>lexternal_nestor</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>. The corresponding system call to execute the external NESTOR implementation has to be specified in <code>nestor_executable</code> in <a href="src/funct3d.f90"><code>funct3d.f90</code></a>.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Angle Constraint</h1>
 <p>The poloidal angle-like coordinate is a priori not uniquely defined and needs special care. The version of VMEC from the STELLOPT repo had essentially two options for this. They were alternatively compiled in via the preprocessor flag <code>_HBANGLE</code>.</p>
 <ol type="1">
@@ -171,7 +195,7 @@ Angle Constraint</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jun 15 2023 15:59:08 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Jun 15 2023 16:12:37 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

@@ -49,7 +49,8 @@ The [`dbgout`](src/dbgout.f90) module allows to (optionally) write a bunch of da
 Writing these additional quantities is disabled by default and can be enabled by logical flags in the `INDATA` namelist.
 A full list of the available flags (ordered by module where they are used) is available in [vmec_input.f90](src/data/vmec_input.f90#L89).
 A folder named the same as the extension of the input file will be created.
-In there, subfolders named after each of the enabled `dump_*` flags will be created (`dump_forces=.true.` --> `forces/`)
+In there, subfolders named after each of the enabled `dump_*` flags will be created.
+For example, put `dump_forces=.true.` into `input.solovev` and the folder `solovev/forces/` will be created and JSON files will appear in there.
 In each of these subfolders, JSON files will be created according to the following naming scheme:
 `forces_<ns>_<iteration>_<occurence>.<extension>.json` where
 - `ns` is the number of flux surfaces of the respective multi-grid step,

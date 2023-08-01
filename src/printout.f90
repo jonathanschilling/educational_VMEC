@@ -41,7 +41,7 @@ SUBROUTINE printout(i0, delt0, w0)
   avm = 0.5_dp*avm/den ! volume-averaged spectral width (_av_erage _M_)
 
   IF (ivac .ge. 1 .and. iter2.gt.1) then
-     delbsq = SUM(dbsq(:nznt)*wint(2:nrzt:ns))/SUM(bsqsav(:nznt,3)*wint(2:nrzt:ns))
+     delbsq = SUM( dbsq(:nznt)*wint(2:nrzt:ns) ) / SUM( bsqsav(:nznt,3)*wint(2:nrzt:ns) )
   end if
 
   IF (i0.eq.1 .and. lfreeb) THEN

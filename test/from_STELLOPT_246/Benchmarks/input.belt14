@@ -1,0 +1,47 @@
+!-  5-MAR-95 15:41:59 wieland 83738s03t290 83738 2.90003   sq_all:s_v18s.ang
+--------------------------------------------------------------------------------
+c  In general, for "on/off" switches, think "1=on", "0=off"
+c
+c iopt_raxis:     = 1 (default) finds optimum Raxis value automatically
+c                 = 0 freezes Raxis at the namelist value
+c
+c imatch_phiedge: = 1 (default) matches PHIEDGE to namelist value
+c                 = 0 attempts to find phiedge automatically so as
+c                     to match the minor radius based on the outboard
+c                     pressure
+c
+c *_sigma         > 0 means use this as an absolute sigma
+c                 < 0 means apply the abs of this as the percent error
+c
+--------------------------------------------------------------------------------
+ &INDATA
+ TIME_SLICE =  0.000E+00, DELT =  1.100E+00,
+ NS_ARRAY =  16 31 61
+ MPOL = 14
+ TCON0 = .05
+ FTOL_ARRAY = 2*1.E-6, 1.000E-14, NITER = 10000, NSTEP =   100, NVACSKIP =    12,
+ NFP =     1, NCURR =     0, GAMMA =  0.000E+00,
+ AI =      2.354498895432447, -9.907517672615517, 42.86570171033211,    
+           -122.8693254810872, 188.6838680668763, -143.1773314731515,    
+           42.19838185779675,    
+ AM =      0.2762993401771816E7, -1.398637555311701E7,
+           6.435929178901299E7, -19.13351221515564E7,
+           30.46522063279099E7, -23.99696824024823E7,
+           7.363942466650127E7,
+ RBC(0,0) =   3.0000E+00    ZBS(0,0) =   0.0000E+00
+ RBC(0,1) =   5.1510E-01    ZBS(0,1) =   5.7971E-01
+ RBC(0,3) =  -8.1089E-02    ZBS(0,3) =   8.0291E-02
+ RBC(0,5) =   2.5041E-02    ZBS(0,5) =  -4.5956E-02
+ RBC(0,7) =  -7.5482E-03    ZBS(0,7) =   2.6029E-02
+ RBC(0,9) =   1.5224E-03    ZBS(0,9) =  -1.3810E-02
+ RBC(0,11) =   2.6844E-04    ZBS(0,11) =   6.6025E-03
+ RBC(0,13) =  -5.4838E-04    ZBS(0,13) =  -2.6986E-03
+ RBC(0,15) =   4.3273E-04    ZBS(0,15) =   7.8034E-04
+ RBC(0,17) =  -2.8113E-04    ZBS(0,17) =   7.0423E-05
+ RAXIS =  3.000E+00, ZAXIS =  0.000E+00,
+ CURTOR =  1.582E+06,  SIGMA_CURRENT = -7.000E-03, 
+ EXTCUR = -6.800E+01, -1.070E+01,  1.435E+01, -1.405E+01,  2.498E-02, 
+  0.000E+00,  0.000E+00,  0.000E+00,  0.000E+00,  0.000E+00, 
+ PHIEDGE =-1.3534E+01,
+ /
+ &END

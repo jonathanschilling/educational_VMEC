@@ -1,0 +1,4 @@
+&VSEQ
+NSEQ = 2
+EXTENSION = "dshape14", "dshape20"
+&END

@@ -1,0 +1,29 @@
+ &INDATA
+  MGRID_FILE = 'NONE                            '
+  LOPTIM =  F
+  DELT =  1.0
+  TCON0 =  2.
+  NFP =  3
+  NCURR =  1
+  MPOL =  8  NTOR =  8
+  NS_ARRAY =  33 249
+  NITER =  45000
+  NSTEP =  200
+  NVACSKIP =  3
+  GAMMA =   0.00000000E+00
+  FTOL_ARRAY =   1.00000E-05 1.E-09
+  PHIEDGE =   1.072855
+  CURTOR =  -2.0132E-05
+  SPRES_PED =   1.0000E+00
+  AM =
+   1.0e-8, -1.0e-8, 9*0.0
+  AI =  11*0.0
+  AC =  11*0.0
+  RAXIS =   2.9000E+00 0.0000E+00 0.0000E+00
+  ZAXIS =   0.0000E+00 0.0000E+00 0.0000E+00
+ RBC(  0, 0) =   2.9000E+00    ZBS(  0, 0) =   0.0000E+00
+ RBC(  1, 1) =  -5.1000E-01    ZBS(  1, 1) =   5.1000E-01
+ RBC(  0, 1) =   1.0000E+00    ZBS(  0, 1) =   1.0000E+00
+ RBC(  1, 4) =  -.01    ZBS(  1, 4) =   .01
+ RBC(  1, 6) =  -.01    ZBS(  1, 6) =   -.01
+ &END

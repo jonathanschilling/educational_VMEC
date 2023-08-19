@@ -26,6 +26,7 @@ SUBROUTINE bextern(plascur, wint)
   ! NOTE THAT BEXN = - BEX * DS IS THE EFFECTIVE SOURCE TERM
   !
   ! COMPUTE B FROM COILS ON THE PLASMA BOUNDARY
+  ! This sets brad, bphi and bz to the interpolated field from the mgrid.
   CALL becoil(r1b, z1b, bvac(1,1), bvac(1,2), bvac(1,3))
 
   ! COMPUTE B (ON PLASMA BOUNDARY) FROM NET TOROIDAL PLASMA CURRENT
@@ -33,6 +34,7 @@ SUBROUTINE bextern(plascur, wint)
   ! BIOT-SAVART LAW IS USED TO COMPUTE THE FIELD AT THE PLASMA SURFACE
   !
   ! USE BEXU, BEXV, BEXN AS TEMPORARY STORAGE FOR BX, BY, BZ
+  ! --> add to interpolated field from mgrid
   CALL belicu (plascur, bexu, bexv, bexn, cosuv, sinuv, r1b, z1b)
   DO i = 1, nuv2  
      brad(i) = brad(i) + bexu(i)*cosuv(i) + bexv(i)*sinuv(i)

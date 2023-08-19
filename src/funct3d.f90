@@ -58,7 +58,13 @@ SUBROUTINE funct3d (ier_flag)
   logical :: lexternal_nestor = .false.
 
   !> dump reference input for and output of NESTOR when using internal NESTOR
-  logical :: ldump_vacuum_ref = .true.
+  logical :: ldump_vacuum_ref = .false.
+
+
+
+
+
+
 
   funct3d_calls = funct3d_calls + 1
 
@@ -263,15 +269,17 @@ SUBROUTINE funct3d (ier_flag)
                           ctor, rbtor, wint(ns:nznt*ns:ns), ivacskip, ivac, mnmax, ier_flag, &
                           lasym, signgs, r1(1:ns*nzeta:ns,0), z1(1:ns*nzeta:ns,0))
            else
-             if (ntor .gt. 0) then ! Stellarator version
-               ! vac2: fully 3d case (does not work for axisymmetric case)
-               call vac2_vacuum(rmnc, rmns, zmns, zmnc, xm, xn, &
-                                ctor, rbtor, ivacskip, ivac, mnmax, ntheta3)
-             else ! ntor == 0 --> Tokamak version
-               ! axisymmetric special case
-               call vac3_vacuum(rmnc, rmns, zmns, zmnc, xm, &
-                                ctor, ivacskip, ivac, mnmax)
-             end if ! ntor .gt. 0
+!             if (ntor .gt. 0) then ! Stellarator version
+!               ! vac2: fully 3d case (does not work for axisymmetric case)
+!               call vac2_vacuum(rmnc, rmns, zmns, zmnc, xm, xn, &
+!                                ctor, rbtor, ivacskip, ivac, mnmax, ntheta3)
+!             else ! ntor == 0 --> Tokamak version
+!               ! axisymmetric special case
+!               call vac3_vacuum(rmnc, rmns, zmns, zmnc, xm, &
+!                                ctor, ivacskip, ivac, mnmax)
+!             end if ! ntor .gt. 0
+             stop "vac_1_2 not available. Un-comment vac2 and vac3 folder inclusion in main CMakeLists.txt"// &
+                  " and comment in call to vac2_vacuum and vac3_vacuum in src/funct3d.f90 to enable it."
            end if ! vac_1_2
         else ! lexternal_nestor
            ! construct command with argument for stand-alone external NESTOR

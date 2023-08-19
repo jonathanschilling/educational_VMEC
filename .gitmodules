@@ -1,6 +1,6 @@
 [submodule "json-fortran"]
 	path = json-fortran
-	url = git@github.com:jonathanschilling/json-fortran.git
+	url = https://github.com/jonathanschilling/json-fortran.git
 [submodule "src/vac2"]
 	path = src/vac2
 	url = git@github.com:jonathanschilling/vac2.git

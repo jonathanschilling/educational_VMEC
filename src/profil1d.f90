@@ -153,11 +153,13 @@ SUBROUTINE profil1d()
     call add_real_1d("iotas", ns-1, iotas(2:ns))
     call add_real_1d("icurv", ns-1, icurv(2:ns))
     call add_real_1d("mass",  ns-1, mass(2:ns))
+
     call add_real_1d("sqrts", ns,   sqrts(:ns))
     call add_real_1d("phipf", ns,   phipf)
     call add_real_1d("chipf", ns,   chipf)
     call add_real_1d("iotaf", ns,   iotaf)
     call add_real_1d("bdamp", ns,   bdamp)
+
     call add_real_1d("sm",    ns,   sm)
     call add_real_1d("sp",    ns+1, sp)
 

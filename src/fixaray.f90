@@ -32,7 +32,7 @@ SUBROUTINE fixaray
   mnyq = MAX(0, 2*mnyq0, 2*mpol1)
   nnyq = MAX(0, 2*nnyq0, 2*ntor)
 
-  mnmax_nyq = nnyq/2+1+mnyq*(nnyq+1)/2
+  mnmax_nyq = nnyq/2 + 1 + mnyq/2 * (2 * nnyq/2 + 1)
 
   ALLOCATE(cosmu(ntheta3,0:mnyq),  sinmu(ntheta3,0:mnyq),           &
            cosmum(ntheta3,0:mnyq), sinmum(ntheta3,0:mnyq),          &

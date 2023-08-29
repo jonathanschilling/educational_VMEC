@@ -119,6 +119,10 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   CALL scalfor (gcz, azm, bzm, azd, bzd, crd, jedge, skip_scalfor_dbg)
 ! #end /* ndef _HBANGLE */
 
+  !SPH: THIS IS NOT INVARIANT UNDER PHIP->A*PHIP, AM->A**2*AM IN PROFIL1D
+  !     (EXTCUR -> A*EXTCUR for FREE BOUNDARY)
+  gcl = faclam*gcl
+
   ! dump forces after scalfor has been applied
   if (open_dbg_context("scalfor_out")) then
 
@@ -134,16 +138,13 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 
     call add_real_4d("gcr", ntmax, ns, ntor1, mpol, gcr, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("gcz", ntmax, ns, ntor1, mpol, gcz, order=(/ 2, 3, 4, 1 /) )
+    call add_real_4d("gcl", ntmax, ns, ntor1, mpol, gcl, order=(/ 2, 3, 4, 1 /) )
 
     call close_dbg_out()
   end if
 
   !SPH: add fnorm1 ~ 1/R**2, since preconditioned forces gcr,gcz ~ Rmn or Zmn
   CALL getfsq (gcr, gcz, fsqr1, fsqz1, fnorm1, m1) ! m1 is simply == 1 --> include edge
-
-  !SPH: THIS IS NOT INVARIANT UNDER PHIP->A*PHIP, AM->A**2*AM IN PROFIL1D
-  !     (EXTCUR -> A*EXTCUR for FREE BOUNDARY)
-  gcl = faclam*gcl
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 

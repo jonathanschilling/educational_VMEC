@@ -586,6 +586,7 @@ var namespaces_dup =
       [ "dump_threed1_volquant", "d8/dbf/namespacevmec__input.html#ae70a617793cfcd6f94e5a365cde864f0", null ],
       [ "dump_tomnspa", "d8/dbf/namespacevmec__input.html#a767bfe05a8310cc7eed0baa1fe68bf13", null ],
       [ "dump_tomnsps", "d8/dbf/namespacevmec__input.html#a695413b2b07adf4131b2dc85a2b26663", null ],
+      [ "dump_totzsp_input", "d8/dbf/namespacevmec__input.html#a69038ccafb5a5833a3e0412819091cf7", null ],
       [ "dump_vac1n_analyt", "d8/dbf/namespacevmec__input.html#ab639483d2228d47c8acc768c5dece5f4", null ],
       [ "dump_vac1n_bextern", "d8/dbf/namespacevmec__input.html#a2f14918a1007c2102854fd7c01008c22", null ],
       [ "dump_vac1n_bsqvac", "d8/dbf/namespacevmec__input.html#a9c5345851ef7954393ef0eeb0b0f0134", null ],

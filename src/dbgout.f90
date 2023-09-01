@@ -64,6 +64,8 @@ function open_dbg_context(context_name, repetition, id)
     open_dbg_context         = dump_spectral_constraint
   else if (trim(context_name) .eq. "forces") then
     open_dbg_context         = dump_forces
+  else if (trim(context_name) .eq. "totzsp_input") then
+    open_dbg_context         = dump_totzsp_input
   else if (trim(context_name) .eq. "funct3d_geometry") then
     open_dbg_context         = dump_funct3d_geometry
   else if (trim(context_name) .eq. "rbsq") then

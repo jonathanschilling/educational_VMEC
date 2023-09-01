@@ -161,8 +161,8 @@ MODULE vmec_main
   integer :: iter2   !< total number of iterations
   integer :: ivac    !< counts number of free-boundary iterations
 
-  integer :: vacuum_calls = 0
-  integer :: profil3d_calls = 0
-  integer :: funct3d_calls = 0
+  integer :: vacuum_calls
+  integer :: profil3d_calls
+  integer :: funct3d_calls
 
 END MODULE vmec_main

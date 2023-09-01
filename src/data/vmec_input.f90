@@ -101,6 +101,7 @@ MODULE vmec_input
   logical :: dump_fixaray             = .false.
   logical :: dump_spectral_constraint = .false.
   logical :: dump_forces              = .false.
+  logical :: dump_totzsp_input        = .false.
   logical :: dump_funct3d_geometry    = .false.
   logical :: dump_constraint_force    = .false.
   logical :: dump_guess_axis          = .false.
@@ -229,6 +230,7 @@ MODULE vmec_input
      dump_fixaray            , &
      dump_spectral_constraint, &
      dump_forces             , &
+     dump_totzsp_input       , &
      dump_funct3d_geometry   , &
      dump_constraint_force   , &
      dump_guess_axis         , &

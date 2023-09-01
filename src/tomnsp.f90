@@ -147,7 +147,7 @@ SUBROUTINE tomnsps(frzl_array,       &
 
   DEALLOCATE (work1, tempr, tempz)
 
-  if (open_dbg_context("tomnsps")) then
+  if (open_dbg_context("tomnsps", funct3d_calls)) then
 
     call add_real_3d("frcc", ns, ntor1, mpol, frcc)
     call add_real_3d("fzsc", ns, ntor1, mpol, fzsc)
@@ -295,7 +295,7 @@ SUBROUTINE tomnspa(frzl_array,       &
 
   DEALLOCATE (work1, temp1, temp3)
 
-  if (open_dbg_context("tomnspa")) then
+  if (open_dbg_context("tomnspa", funct3d_calls)) then
 
     call add_real_3d("frsc", ns, ntor1, mpol, frsc)
     call add_real_3d("fzcc", ns, ntor1, mpol, fzcc)

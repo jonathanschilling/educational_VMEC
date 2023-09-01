@@ -127,13 +127,13 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
     ! iflag = 1 --> Z
     dbg_open = .false.
     if (iflag.eq.0) then
-      dbg_open = open_dbg_context("scalfor_R")
+      dbg_open = open_dbg_context("scalfor_R", funct3d_calls)
     end if
     if (iflag.eq.1) then
       if (dbg_open) then
         stop "how can dbg_open be true here ?"
       end if
-      dbg_open = open_dbg_context("scalfor_Z")
+      dbg_open = open_dbg_context("scalfor_Z", funct3d_calls)
     end if
       
     if (dbg_open) then

@@ -7,7 +7,7 @@ SUBROUTINE reset_params
 
   USE vmec_main, ONLY: ivac, ftolv, fsqr, fsqz, fsq,      &
                        res0, delt0r, iter1, iter2, ijacob, first, &
-                       lconm1, z00, vacuum_calls
+                       lconm1, z00
   USE vmec_input, ONLY: delt
   USE stel_constants, only: zero
   USE mgrid_mod, ONLY: nextcur, mgrid_mode
@@ -44,7 +44,5 @@ SUBROUTINE reset_params
   !> Assume scaled mode; read in from mgrid in free-bdy mode
   mgrid_mode = 'S'
   nextcur = 0
-
-  vacuum_calls = 0
 
 END SUBROUTINE reset_params

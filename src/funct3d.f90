@@ -15,7 +15,7 @@ SUBROUTINE funct3d (ier_flag)
   USE vmec_main
   USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2, bsubvvac
   use nestor_io, only: write_nestor_outputs
-  USE vmec_params, ONLY: bad_jacobian_flag, signgs
+  USE vmec_params, ONLY: bad_jacobian_flag, signgs, ntmax
   USE realspace
   USE vforces
   USE xstuff
@@ -75,6 +75,11 @@ SUBROUTINE funct3d (ier_flag)
   ! CONVERT ODD M TO 1/SQRT(S) INTERNAL REPRESENTATION
   ! temprary use of gc (force) for scaled xc (position)
   gc(:neqs) = xc(:neqs)*scalxc(:neqs)
+
+  if (open_dbg_context("totzsp_input", funct3d_calls)) then
+    call add_real_5d("gc", 3, ntmax, ns, ntor1, mpol, gc(:neqs), order=(/ 3, 4, 5, 2, 1 /) )
+    call close_dbg_out()
+  end if
 
   ! INVERSE FOURIER TRANSFORM TO S,THETA,ZETA SPACE
   ! R, Z, AND LAMBDA ARRAYS IN FOURIER SPACE
@@ -369,7 +374,7 @@ SUBROUTINE funct3d (ier_flag)
 
         !print *, "max bsqvac = ", maxval(bsqvac)
 
-        if (open_dbg_context("rbsq")) then
+        if (open_dbg_context("rbsq", funct3d_calls)) then
           ! TODO: this triggers valgrind; uninitialized memory ?
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
           call close_dbg_out()
@@ -394,7 +399,7 @@ SUBROUTINE funct3d (ier_flag)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
 
-     if (open_dbg_context("constraint_force")) then
+     if (open_dbg_context("constraint_force", funct3d_calls)) then
 
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
        call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       )

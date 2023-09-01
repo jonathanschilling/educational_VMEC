@@ -29,6 +29,8 @@ SUBROUTINE bcovar (lu, lv)
   INTEGER :: l, js, ndim, lk, ku, m, n, rzl
   REAL(rprec) :: r2, volume, curpol_temp
 
+  integer :: dim_j, dim_k, dim_l, linear_index
+
 ! #ifndef _HBANGLE
   REAL(rprec) :: arnorm, aznorm, tcon_mul
 ! #end /* ndef _HBANGLE */
@@ -130,7 +132,7 @@ SUBROUTINE bcovar (lu, lv)
   ! g_vv contains all up to R^2 here; so add R^2 term now
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
-  if (open_dbg_context("metric")) then
+  if (open_dbg_context("metric", funct3d_calls)) then
 
       call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt)
       call add_real_3d("guu",   ns, nzeta, ntheta3, guu  )
@@ -166,7 +168,7 @@ SUBROUTINE bcovar (lu, lv)
   end if
 
   ! check plasma volume computation
-  if (open_dbg_context("volume")) then
+  if (open_dbg_context("volume", funct3d_calls)) then
 
     call add_real_1d("vp", ns+1, vp)
     call add_real("voli", voli)
@@ -203,7 +205,7 @@ SUBROUTINE bcovar (lu, lv)
   bsupu(ndim)=0
   bsupv(ndim)=0
 
-  if (open_dbg_context("bcontrav")) then
+  if (open_dbg_context("bcontrav", funct3d_calls)) then
 
     call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu)
     call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv)
@@ -250,7 +252,7 @@ SUBROUTINE bcovar (lu, lv)
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
 
-  if (open_dbg_context("bcov")) then
+  if (open_dbg_context("bcov", funct3d_calls)) then
 
     call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh)
     call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh)
@@ -267,7 +269,7 @@ SUBROUTINE bcovar (lu, lv)
   ! COMPUTE LAMBDA FULL MESH FORCES
   ! NOTE: bsubu_e is used here ONLY as a temporary array (TODO: for what?)
   lvv = phipog(:ndim)*gvv
-  bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0)
+  bsubv_e(1:nrzt) = p5*(lvv(1:nrzt)+lvv(2:ndim))*lu(1:nrzt,0) ! already on full-grid
 
 !   if (iter2.eq.2) then
 !     write(*,*) "bsubv_e(1)  first step: ", bsubv_e(1)
@@ -276,8 +278,24 @@ SUBROUTINE bcovar (lu, lv)
   lvv = lvv*shalf
   bsubu_e(:nrzt) = guv(:nrzt)*bsupu(:nrzt)
   bsubu_e(ndim) = 0
+
+!   ! printout for comparison
+!   do dim_j = 1, ns
+!     do dim_k = 1, nzeta
+!       do dim_l = 1, ntheta3
+!         linear_index = ((dim_l-1) * nzeta + dim_k-1) * ns + dim_j-1 + 1
+!         write(44, *) dim_j, dim_k, dim_l, &
+! !           bsubv_e(linear_index), &
+!           p5*(lvv(linear_index) + lvv(linear_index+1)), & !   *lu(linear_index,1)
+!           lu(linear_index,1)
+!       end do ! dim_l
+!     end do ! dim_k
+!   end do ! dim_j
+!
+!   if (iter2 .eq. 2) stop
+
   bsubv_e(1:nrzt) = bsubv_e(1:nrzt)                                 &
-              + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        &
+              + p5*((lvv(1:nrzt) + lvv(2:ndim))*lu(1:nrzt,1)        & ! interp to full grid done here
               +      bsubu_e(1:nrzt) + bsubu_e(2:ndim))
 
 !   if (iter2.eq.2) then
@@ -287,7 +305,7 @@ SUBROUTINE bcovar (lu, lv)
 !       lu(1,1), bsubu_e(1), bsubu_e(2)
 !   end if
 
-   if (open_dbg_context("lambda_forces")) then
+   if (open_dbg_context("lambda_forces", funct3d_calls)) then
 
     call add_real_3d("lvv",     ns,    nzeta, ntheta3, lvv    )
     call add_real_4d("lu",      ns, 2, nzeta, ntheta3, lu, order=(/1, 3, 4, 2 /))
@@ -335,13 +353,25 @@ SUBROUTINE bcovar (lu, lv)
   ! IF (ANY(bsubuh(1:ndim:ns) .ne. zero)) STOP 'BSUBUH != 0 AT JS=1'
   ! IF (ANY(bsubvh(1:ndim:ns) .ne. zero)) STOP 'BSUBVH != 0 AT JS=1'
 
+!   ! printout for comparison
+!   do dim_j = 1, ns
+!     do dim_k = 1, nzeta
+!       do dim_l = 1, ntheta3
+!         linear_index = ((dim_l-1) * nzeta + dim_k-1) * ns + dim_j-1 + 1
+!         write(44, *) dim_j, dim_k, dim_l, p5*(bsubvh(linear_index) + bsubvh(linear_index + 1)), bsubv_e(linear_index)
+!       end do ! dim_l
+!     end do ! dim_k
+!   end do ! dim_j
+!
+!   if (iter2 .eq. 2) stop
+
   ! AVERAGE LAMBDA FORCES ONTO FULL RADIAL MESH
   ! USE BLENDING FOR bsubv_e FOR NUMERICAL STABILITY NEAR AXIS
   bsubu_e(1:nrzt) =  p5*                (bsubuh(1:nrzt) + bsubuh(2:ndim))
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (open_dbg_context("bcov_full")) then
+  if (open_dbg_context("bcov_full", funct3d_calls)) then
 
     call add_real("rbtor0", rbtor0)
     call add_real("rbtor",  rbtor)
@@ -378,7 +408,7 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, sin01)
 
        ! check preconditioner output
-       if (open_dbg_context("precondn")) then
+       if (open_dbg_context("precondn", funct3d_calls)) then
 
          call add_real_2d("arm", ns+1, 2, arm)
          call add_real_2d("ard", ns+1, 2, ard)
@@ -447,7 +477,7 @@ SUBROUTINE bcovar (lu, lv)
        !IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (open_dbg_context("forceNorms_tcon")) then
+       if (open_dbg_context("forceNorms_tcon", funct3d_calls)) then
 
          call add_real("volume", volume)
          call add_real("r2",     MAX(wb,wp)/volume)
@@ -480,7 +510,7 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (open_dbg_context("lulv_comb")) then
+     if (open_dbg_context("lulv_comb", funct3d_calls)) then
 
        call add_real_3d("bsubu_e", ns,    nzeta, ntheta3, bsubu_e )
        call add_real_3d("bsubv_e", ns,    nzeta, ntheta3, bsubv_e )
@@ -532,7 +562,7 @@ SUBROUTINE bcovar (lu, lv)
     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt) ! will be undone again in jxbforce...
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-    if (open_dbg_context("bcovar_fileout", id=0)) then
+    if (open_dbg_context("bcovar_fileout", funct3d_calls, id=0)) then
 
       call add_real_3d("lu_e", ns, nzeta, ntheta3, lu(:nrzt,0))
       call add_real_3d("lv_e", ns, nzeta, ntheta3, lv(:nrzt,0))

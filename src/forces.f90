@@ -61,7 +61,7 @@ SUBROUTINE forces
   ! if lthreed:
   !  rv, zv
 
-  dbg_forces = open_dbg_context("forces")
+  dbg_forces = open_dbg_context("forces", funct3d_calls)
   if (dbg_forces) then
 
     call add_real_3d("lu_e",        ns, nzeta, ntheta3, lu_e     )

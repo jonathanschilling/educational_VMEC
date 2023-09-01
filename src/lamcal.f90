@@ -83,7 +83,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   END DO
 
   ! check lamcal output
-  if (open_dbg_context("lamcal")) then
+  if (open_dbg_context("lamcal", funct3d_calls)) then
 
     call add_real("pfactor0", pfactor0)
 

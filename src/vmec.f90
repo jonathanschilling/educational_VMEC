@@ -81,6 +81,9 @@ subroutine vmec
 
   ier_flag = norm_term_flag
 
+  profil3d_calls = 0
+  funct3d_calls = 0
+  vacuum_calls = 0
 
   ! INITIALIZE PARAMETERS
   CALL reset_params ! no further calls

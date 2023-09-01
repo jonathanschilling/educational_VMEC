@@ -57,10 +57,6 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
 
   IF (ns_old .ne. ns) then
-     
-     profil3d_calls = 0
-     funct3d_calls  = 0
-  
   
      ! ALLOCATE NS-DEPENDENT ARRAYS
      CALL allocate_ns(linterp, neqs_old)

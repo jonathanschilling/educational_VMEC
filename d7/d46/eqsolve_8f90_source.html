@@ -315,14 +315,15 @@ $(document).ready(function(){initNavTree('d7/d46/eqsolve_8f90_source.html','../.
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="comment">! this makes ivac=1 --&gt; ivac=2</span></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a> = <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a> + 1</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="keywordflow">     ENDIF</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keywordflow">  END DO</span> iter_loop</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  <span class="comment">! write MHD energy at end of iterations for current number of surfaces</span></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <span class="keyword">WRITE</span> (nthreed, 60) w0*twopi**2</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>60 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; MHD Energy = &#39;</span>,1p,e12.6)</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="keywordflow">  END DO</span> iter_loop</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <span class="comment">! write MHD energy at end of iterations for current number of surfaces</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  <span class="keyword">WRITE</span> (nthreed, 60) w0*twopi**2</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>60 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; MHD Energy = &#39;</span>,1p,e12.6)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
 </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2">eqsolve</a></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2">eqsolve</a></div>
 <div class="ttc" id="aeqsolve_8f90_html_ab740b09d1b651e2ab8a60c5d552df0c2"><div class="ttname"><a href="../../d7/d46/eqsolve_8f90.html#ab740b09d1b651e2ab8a60c5d552df0c2">eqsolve</a></div><div class="ttdeci">subroutine eqsolve(ier_flag)</div><div class="ttdoc">Iteratively evolve the Fourier coefficients that specify the equilibrium.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d46/eqsolve_8f90_source.html#l00007">eqsolve.f90:8</a></div></div>
 <div class="ttc" id="aevolve_8f90_html_a8103e838be03904e03551e04f6b396e4"><div class="ttname"><a href="../../de/da9/evolve_8f90.html#a8103e838be03904e03551e04f6b396e4">evolve</a></div><div class="ttdeci">subroutine evolve(time_step, ier_flag, liter_flag)</div><div class="ttdoc">Take a single time step in Fourier space to evolve the Fourier coefficients describing the equilibriu...</div><div class="ttdef"><b>Definition</b> <a href="../../de/da9/evolve_8f90_source.html#l00011">evolve.f90:12</a></div></div>
 <div class="ttc" id="aguess__axis_8f90_html_a375e34fe4656d4c51d5013939bf5617e"><div class="ttname"><a href="../../d5/dfd/guess__axis_8f90.html#a375e34fe4656d4c51d5013939bf5617e">guess_axis</a></div><div class="ttdeci">subroutine guess_axis(r1, z1, ru0, zu0)</div><div class="ttdoc">Computes guess for magnetic axis if user guess leads to initial sign change of Jacobian.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/dfd/guess__axis_8f90_source.html#l00010">guess_axis.f90:11</a></div></div>
@@ -363,7 +364,7 @@ $(document).ready(function(){initNavTree('d7/d46/eqsolve_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d46/eqsolve_8f90.html">eqsolve.f90</a></li>
-    <li class="footer">Generated on Fri Sep 1 2023 15:26:05 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Sep 5 2023 09:21:49 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -18,19 +18,24 @@ MODULE vmec_params
 
   INTEGER, PARAMETER :: norm_term_flag       =  0
   INTEGER, PARAMETER :: bad_jacobian_flag    =  1
+  ! 2 not used anymore?
+  ! 3: 'VMEC INDATA ERROR: NCURR.ne.1 but BLOAT.ne.1.'
   INTEGER, PARAMETER :: jac75_flag           =  4
   INTEGER, PARAMETER :: input_error_flag     =  5
+  ! 6 not used anymore?
   INTEGER, PARAMETER :: phiedge_error_flag   =  7
-  INTEGER, PARAMETER :: ns_error_flag        =  8
-  INTEGER, PARAMETER :: misc_error_flag      =  9
+  INTEGER, PARAMETER :: ns_error_flag        =  8 ! 'NS ARRAY MUST NOT BE ALL ZEROES'
+  INTEGER, PARAMETER :: misc_error_flag      =  9 ! (can happen in mgrid_mod)
+  ! 10: 'VAC-VMEC I_TOR MISMATCH : BOUNDARY MAY ENCLOSE EXT. COIL'
   INTEGER, PARAMETER :: successful_term_flag = 11 ! ftol force criterion has been met
 
-  INTEGER, PARAMETER :: restart_flag     =  1
-  INTEGER, PARAMETER :: readin_flag      =  2
-  INTEGER, PARAMETER :: timestep_flag    =  4
-  INTEGER, PARAMETER :: output_flag      =  8
-  INTEGER, PARAMETER :: cleanup_flag     = 16
-  INTEGER, PARAMETER :: reset_jacdt_flag = 32
+  ! These denote(d) bits in the call to runvmec().
+  INTEGER, PARAMETER :: restart_flag     =  1 ! (1 << 0)
+  INTEGER, PARAMETER :: readin_flag      =  2 ! (1 << 1)
+  INTEGER, PARAMETER :: timestep_flag    =  4 ! (1 << 2)
+  INTEGER, PARAMETER :: output_flag      =  8 ! (1 << 3)
+  INTEGER, PARAMETER :: cleanup_flag     = 16 ! (1 << 4)
+  INTEGER, PARAMETER :: reset_jacdt_flag = 32 ! (1 << 5)
 
   REAL(rprec), PARAMETER :: pdamp = 0.05_dp
   CHARACTER(LEN=*), PARAMETER :: version_ = '8.52'

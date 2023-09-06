@@ -36,15 +36,23 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   res0   = -1
   delt0  = delt
 
-  ! INITIALIZE MESH-DEPENDENT SCALARS
+  ! start: INITIALIZE MESH-DEPENDENT SCALARS
+
+  ! radial grid: only depends on ns
   ns = nsval
   ns1 = ns-1
   hs = one/ns1
-  ohs = one/hs ! == ns1 ?
+  ohs = one/hs ! == ns1, but real-valued variant to avoid some kind of roundoff error ?
+
+  ! real-space grid on surfaces
+  nrzt = ns*nznt
+
+  ! Fourier-space resolution
   mns = ns*mnsize ! number of flux surfaces * number of Fourier coeffs per surface --> total size of Fourier basis (n>=0)
   irzloff = ntmax*mns ! total number of Fourier coeffs for each of R, Z and Lambda --> including (lasym, lthreed)-dependent ntmax
-  nrzt = nznt*ns
   neqs = 3*irzloff ! degrees of freedom == total number of (R,Z,Lambda) Fourier coefficients
+
+  ! end: INITIALIZE MESH-DEPENDENT SCALARS
 
   WRITE (nthreed, 10) ns, mnmax, ftolv, niterv
   PRINT 10, ns, mnmax, ftolv, niterv
@@ -57,7 +65,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   linterp = (ns_old.lt.ns .and. ns_old.ne.0)
 
   IF (ns_old .ne. ns) then
-  
+
      ! ALLOCATE NS-DEPENDENT ARRAYS
      CALL allocate_ns(linterp, neqs_old)
 

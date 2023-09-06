@@ -163,6 +163,10 @@ SUBROUTINE eqsolve(ier_flag)
         first = 3
      ENDIF
 
+
+
+
+
      IF (first .ne. 1) THEN
         ! Retrieve previous good state
         CALL restart_iter(delt0r)
@@ -182,6 +186,9 @@ SUBROUTINE eqsolve(ier_flag)
         ! count iterations
         iter2 = iter2 + 1
      ENDIF
+
+
+
 
      ! ivac gets set to 1 in vacuum() of NESTOR
      IF (ivac .eq. 1) THEN

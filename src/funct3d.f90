@@ -385,6 +385,7 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(:nznt,1) = bzmn_o(ns:nrzt:ns) ! initial magnetic field at boundary
            bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary
         ENDIF
+
      ENDIF
   ENDIF ! free-boundary contribution
 

@@ -31,7 +31,6 @@ var searchData=
   ['presf_28',['presf',['../d1/d6c/namespacevmec__main.html#a4fe56c216cd983e7e579dfab8738d9fd',1,'vmec_main::presf'],['../db/dae/namespaceread__wout__mod.html#a22de99ba619525f32d5ffc4da74f0517',1,'read_wout_mod::presf']]],
   ['presgrad_29',['presgrad',['../d1/d6c/namespacevmec__main.html#ac0915cff966c32dc856a19adca0d265e',1,'vmec_main']]],
   ['presmid_30',['presmid',['../db/dae/namespaceread__wout__mod.html#a319f262ae5961efc90fd406f3af88627',1,'read_wout_mod']]],
-  ['profil3d_5fcalls_31',['profil3d_calls',['../d1/d6c/namespacevmec__main.html#a2266ac88874496ac5a0f60c797ac43a7',1,'vmec_main']]],
-  ['psi_32',['psi',['../d1/d6c/namespacevmec__main.html#a9d3b4db7b3a8af981708b8a659a0926b',1,'vmec_main']]],
-  ['psiext_33',['psiext',['../d1/d41/namespacemgrid__mod.html#a4f68e9be5694a02e2c84245c6b6cb81a',1,'mgrid_mod']]]
+  ['psi_31',['psi',['../d1/d6c/namespacevmec__main.html#a9d3b4db7b3a8af981708b8a659a0926b',1,'vmec_main']]],
+  ['psiext_32',['psiext',['../d1/d41/namespacemgrid__mod.html#a4f68e9be5694a02e2c84245c6b6cb81a',1,'mgrid_mod']]]
 ];

@@ -10,7 +10,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   USE vmec_main, ONLY: buco, bvco, equif,             &
                        jcurv, jcuru, chipf, vp, pres, &
                        phipf, vpphi, presgrad, ohs,   &
-                       input_extension, iter2, funct3d_calls
+                       input_extension, iter2, num_eqsolve_retries
   USE vmec_params, ONLY: signgs
   USE vmec_dim, ONLY: ns, nrzt, ns1
   USE realspace, ONLY: wint
@@ -53,7 +53,7 @@ SUBROUTINE calc_fbal(bsubu, bsubv)
   equif(ns) = 0
 
   ! check calc_fbal output
-  if (open_dbg_context("calc_fbal", funct3d_calls)) then
+  if (open_dbg_context("calc_fbal", num_eqsolve_retries)) then
 
     ! first and last elements are uninitialized and not needed during the iterations
     jcurv   (1) = 0.0_dp ; jcurv   (ns) = 0.0_dp

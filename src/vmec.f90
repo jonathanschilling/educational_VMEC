@@ -81,9 +81,11 @@ subroutine vmec
 
   ier_flag = norm_term_flag
 
-  profil3d_calls = 0
-  funct3d_calls = 0
+  ! initial reset of global counters for debugging output
   vacuum_calls = 0
+  num_eqsolve_retries = 0
+  !profil3d_calls = 0
+  !funct3d_calls = 0
 
   ! INITIALIZE PARAMETERS
   CALL reset_params ! no further calls

@@ -103,13 +103,13 @@ MODULE vmec_main
   REAL(rprec) :: fedge
   REAL(rprec) :: wb !< magnetic energy: volume integral over B^2/2
   REAL(rprec) :: wp !< kinetic/thermal energy (from pressure)
-  
+
   ! force residuals due to constraint force alone
   REAL(rprec) :: fsqr_con = 1
   REAL(rprec) :: fsqz_con = 1
   REAL(rprec) :: fsqr1_con
   REAL(rprec) :: fsqz1_con
-  
+
   ! force residuals due to MHD force alone
   REAL(rprec) :: fsqr_mhd = 1
   REAL(rprec) :: fsqz_mhd = 1
@@ -162,7 +162,8 @@ MODULE vmec_main
   integer :: ivac    !< counts number of free-boundary iterations
 
   integer :: vacuum_calls
-  integer :: profil3d_calls
-  integer :: funct3d_calls
+!  integer :: profil3d_calls
+!  integer :: funct3d_calls
+  integer :: num_eqsolve_retries
 
 END MODULE vmec_main

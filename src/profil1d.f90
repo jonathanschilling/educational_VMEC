@@ -138,7 +138,7 @@ SUBROUTINE profil1d()
   sp(0) = 0
   sp(1) = sm(2)
 
-  if (open_dbg_context("profil1d")) then
+  if (open_dbg_context("profil1d", num_eqsolve_retries)) then
 
     call add_real("torflux_edge", torflux_edge)
     call add_real("polflux_edge", polflux_edge)

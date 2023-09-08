@@ -22,9 +22,9 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   INTEGER :: js, l, lk, lt, lz, ntype, m, n, mn
   REAL(rprec), DIMENSION(0:ntor,ntmax) :: rold, zold
   REAL(rprec) :: sm0, t1, facj, si, rax1, zax1
-  INTEGER :: jcount, jk, k  
+  INTEGER :: jcount, jk, k
 
-  profil3d_calls = profil3d_calls + 1
+!  profil3d_calls = profil3d_calls + 1
 
   ! expant to full surface grid
   DO js = 1, ns
@@ -128,6 +128,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
               ! Do not overwrite r,z if read in from wout file AND in free bdy mode
               ! For fixed boundary, edge values MAY have been perturbed, so must execute this loop
               IF (.not.lreset .and. lfreeb) CYCLE
+              ! == execute what is below if (lreset .or. .not. lfreeb)
 
               ! below code segment does the extrapolation
               ! of the boundary Fourier coefficients into the plasma volume
@@ -136,6 +137,8 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
                  IF (.not.lreset) CYCLE        !Freeze axis if read in from wout file
                  ! above instruction cycles all n for m=0 --> skip axis, as said above!
+                 ! == execute what is below if (lreset)
+                 ! --> m=0 contributions only get updated if lreset == true
 
                  ! subtraction of the edge value of rmn, zmn is probably left-over
                  ! from the restart feature from a previous wout file
@@ -240,7 +243,7 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
   scalxc(1+2*irzloff:3*irzloff) = scalxc(:irzloff)
 
   ! dump all relevant output to a text file
-  if (open_dbg_context("profil3d", profil3d_calls)) then
+  if (open_dbg_context("profil3d", num_eqsolve_retries)) then
 
     call add_real_3d("scalxc", ns, ntor1, mpol, scalxc(:irzloff))
     call add_real_4d("rmn", ntmax, ns, ntor1, mpol, rmn, order=(/ 2, 3, 4, 1 /) )
@@ -248,5 +251,5 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
 
     call close_dbg_out()
   end if
-  
+
 END SUBROUTINE profil3d

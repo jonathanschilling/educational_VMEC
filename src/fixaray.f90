@@ -238,7 +238,7 @@ SUBROUTINE fixaray
     call close_dbg_out()
   end if
 
-  if (open_dbg_context("spectral_constraint")) then
+  if (open_dbg_context("spectral_constraint", num_eqsolve_retries)) then
 
     ! xmpq is allocated statically, so need size here explicitly!
     call add_real_2d("xmpq", mpol, 3, xmpq(0:mpol1,1:3))

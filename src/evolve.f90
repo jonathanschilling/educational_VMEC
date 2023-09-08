@@ -87,7 +87,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   fac = one/(one + dtau)
 
   ! debugging output: xc, xcdot, gc before time step; xc and xcdot also after time step
-  dbg_evolve = open_dbg_context("evolve", funct3d_calls)
+  dbg_evolve = open_dbg_context("evolve", num_eqsolve_retries)
   if (dbg_evolve) then
     call add_real_5d("xc_before",    3, ntmax, ns, ntor1, mpol, xc,    order=(/ 3, 4, 5, 2, 1 /) )
     call add_real_5d("xcdot_before", 3, ntmax, ns, ntor1, mpol, xcdot, order=(/ 3, 4, 5, 2, 1 /) )

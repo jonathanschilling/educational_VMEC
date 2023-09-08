@@ -127,15 +127,15 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
     ! iflag = 1 --> Z
     dbg_open = .false.
     if (iflag.eq.0) then
-      dbg_open = open_dbg_context("scalfor_R", funct3d_calls)
+      dbg_open = open_dbg_context("scalfor_R", num_eqsolve_retries)
     end if
     if (iflag.eq.1) then
       if (dbg_open) then
         stop "how can dbg_open be true here ?"
       end if
-      dbg_open = open_dbg_context("scalfor_Z", funct3d_calls)
+      dbg_open = open_dbg_context("scalfor_Z", num_eqsolve_retries)
     end if
-      
+
     if (dbg_open) then
       call add_real_3d("ax", ns, ntor1, mpol, ax)
       call add_real_3d("bx", ns, ntor1, mpol, bx)

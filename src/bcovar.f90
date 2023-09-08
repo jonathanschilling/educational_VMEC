@@ -132,7 +132,7 @@ SUBROUTINE bcovar (lu, lv)
   ! g_vv contains all up to R^2 here; so add R^2 term now
   gvv(2:nrzt) = gvv(2:nrzt) + r12sq(2:nrzt)
 
-  if (open_dbg_context("metric", funct3d_calls)) then
+  if (open_dbg_context("metric", num_eqsolve_retries)) then
 
       call add_real_3d("gsqrt", ns, nzeta, ntheta3, gsqrt)
       call add_real_3d("guu",   ns, nzeta, ntheta3, guu  )
@@ -163,12 +163,13 @@ SUBROUTINE bcovar (lu, lv)
   DO js = 2, ns
      vp(js) = signgs*SUM(gsqrt(js:nrzt:ns)*wint(js:nrzt:ns))
   END DO
+
   IF (iter2 .eq. 1) then
     voli = twopi*twopi*hs*SUM(vp(2:ns))
   end if
 
   ! check plasma volume computation
-  if (open_dbg_context("volume", funct3d_calls)) then
+  if (open_dbg_context("volume", num_eqsolve_retries)) then
 
     call add_real_1d("vp", ns+1, vp)
     call add_real("voli", voli)
@@ -205,7 +206,7 @@ SUBROUTINE bcovar (lu, lv)
   bsupu(ndim)=0
   bsupv(ndim)=0
 
-  if (open_dbg_context("bcontrav", funct3d_calls)) then
+  if (open_dbg_context("bcontrav", num_eqsolve_retries)) then
 
     call add_real_3d("bsupu", ns, nzeta, ntheta3, bsupu)
     call add_real_3d("bsupv", ns, nzeta, ntheta3, bsupv)
@@ -252,7 +253,7 @@ SUBROUTINE bcovar (lu, lv)
      bsq(js:nrzt:ns) = bsq(js:nrzt:ns) + pres(js)
   END DO
 
-  if (open_dbg_context("bcov", funct3d_calls)) then
+  if (open_dbg_context("bcov", num_eqsolve_retries)) then
 
     call add_real_3d("bsubuh", ns, nzeta, ntheta3, bsubuh)
     call add_real_3d("bsubvh", ns, nzeta, ntheta3, bsubvh)
@@ -305,7 +306,7 @@ SUBROUTINE bcovar (lu, lv)
 !       lu(1,1), bsubu_e(1), bsubu_e(2)
 !   end if
 
-   if (open_dbg_context("lambda_forces", funct3d_calls)) then
+   if (open_dbg_context("lambda_forces", num_eqsolve_retries)) then
 
     call add_real_3d("lvv",     ns,    nzeta, ntheta3, lvv    )
     call add_real_4d("lu",      ns, 2, nzeta, ntheta3, lu, order=(/1, 3, 4, 2 /))
@@ -371,7 +372,7 @@ SUBROUTINE bcovar (lu, lv)
   bsubv_e(1:nrzt) =        lvv(1:nrzt) *        bsubv_e(1:nrzt)           &
                    + p5*(1-lvv(1:nrzt))*(bsubvh(1:nrzt) + bsubvh(2:ndim))
 
-  if (open_dbg_context("bcov_full", funct3d_calls)) then
+  if (open_dbg_context("bcov_full", num_eqsolve_retries)) then
 
     call add_real("rbtor0", rbtor0)
     call add_real("rbtor",  rbtor)
@@ -408,7 +409,7 @@ SUBROUTINE bcovar (lu, lv)
                      azm, azd, bzm, bzd, crd, sin01)
 
        ! check preconditioner output
-       if (open_dbg_context("precondn", funct3d_calls)) then
+       if (open_dbg_context("precondn", num_eqsolve_retries)) then
 
          call add_real_2d("arm", ns+1, 2, arm)
          call add_real_2d("ard", ns+1, 2, ard)
@@ -477,7 +478,7 @@ SUBROUTINE bcovar (lu, lv)
        !IF (lasym) tcon = p5*tcon
 ! #end /* ndef _HBANGLE */
 
-       if (open_dbg_context("forceNorms_tcon", funct3d_calls)) then
+       if (open_dbg_context("forceNorms_tcon", num_eqsolve_retries)) then
 
          call add_real("volume", volume)
          call add_real("r2",     MAX(wb,wp)/volume)
@@ -510,7 +511,7 @@ SUBROUTINE bcovar (lu, lv)
      lv(2:nrzt,0) = bsq(2:nrzt)*tau(2:nrzt)
      lu(2:nrzt,0) = bsq(2:nrzt)*r12(2:nrzt)
 
-     if (open_dbg_context("lulv_comb", funct3d_calls)) then
+     if (open_dbg_context("lulv_comb", num_eqsolve_retries)) then
 
        call add_real_3d("bsubu_e", ns,    nzeta, ntheta3, bsubu_e )
        call add_real_3d("bsubv_e", ns,    nzeta, ntheta3, bsubv_e )
@@ -562,7 +563,7 @@ SUBROUTINE bcovar (lu, lv)
     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt) ! will be undone again in jxbforce...
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-    if (open_dbg_context("bcovar_fileout", funct3d_calls, id=0)) then
+    if (open_dbg_context("bcovar_fileout", num_eqsolve_retries, id=0)) then
 
       call add_real_3d("lu_e", ns, nzeta, ntheta3, lu(:nrzt,0))
       call add_real_3d("lv_e", ns, nzeta, ntheta3, lv(:nrzt,0))

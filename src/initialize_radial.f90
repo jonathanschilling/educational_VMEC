@@ -25,6 +25,9 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
   ! print *, "initialize_radial"
 
+  ! !!! THIS must be the ONLY place where this gets set to zero !!!
+  num_eqsolve_retries = 0
+
   ! Set timestep control parameters
   fsq    = one
 
@@ -86,6 +89,7 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
      ! TODO: lreset .and. .not.linter?
      ! If xc is overwritten by interp() anyway, why bother to initialize it in profil3d()?
+     ! I guess this also triggers computing the new scalxc...
      CALL profil3d(xc(1), xc(1+irzloff), lreset_internal)
 
      ! first.eq.1 at entry of restart_iter means to store xc in xstore

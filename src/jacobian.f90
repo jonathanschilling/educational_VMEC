@@ -4,7 +4,7 @@
 !> \brief Evaulate the Jacobian of the transform from flux- to cylindrical coordinates.
 !>
 SUBROUTINE jacobian
-  USE vmec_main, ONLY: ohs, nrzt, first, iter2, funct3d_calls
+  USE vmec_main, ONLY: ohs, nrzt, first, iter2, num_eqsolve_retries
   USE vmec_params, ONLY: meven, modd
   use vmec_input, only: input_extension, nzeta, dump_jacobian
   USE realspace
@@ -63,9 +63,17 @@ SUBROUTINE jacobian
   temp(:) = tau(2:nrzt:ns)
   tau(1:nrzt:ns) = temp(:)
 
+! TEST FOR SIGN CHANGE IN JACOBIAN
+  taumax = MAXVAL(tau(2:nrzt))
+  taumin = MINVAL(tau(2:nrzt))
+  IF (taumax*taumin .lt. zero) then
+     ! bad jacobian !
+     first = 2
+  end if
+
   ! check output from jacobian()
-  if (open_dbg_context("jacobian", funct3d_calls)) then
- 
+  if (open_dbg_context("jacobian", num_eqsolve_retries)) then
+
     call add_real_3d("r12",  ns, nzeta, ntheta3, r12 )
     call add_real_3d("ru12", ns, nzeta, ntheta3, ru12)
     call add_real_3d("zu12", ns, nzeta, ntheta3, zu12)
@@ -73,15 +81,11 @@ SUBROUTINE jacobian
     call add_real_3d("zs",   ns, nzeta, ntheta3, zs  )
     call add_real_3d("tau",  ns, nzeta, ntheta3, tau )
 
-    call close_dbg_out()
-  end if
+    call add_real("taumax", taumax)
+    call add_real("taumin", taumin)
+    call add_int("irst", first)
 
-! TEST FOR SIGN CHANGE IN JACOBIAN
-  taumax = MAXVAL(tau(2:nrzt))
-  taumin = MINVAL(tau(2:nrzt))
-  IF (taumax*taumin .lt. zero) then
-     ! bad jacobian !
-     first = 2
+    call close_dbg_out()
   end if
 
 END SUBROUTINE jacobian

@@ -73,7 +73,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   ! bsupu contains -dLambda/dZeta*lamscale and now needs to get chip/sqrt(g) added, as outlined in bcovar above the call to this routine.
   bsupu(:nrzt) = bsupu(:nrzt) + chip(:nrzt)*overg(:nrzt)
 
-  if (open_dbg_context("add_fluxes", funct3d_calls)) then
+  if (open_dbg_context("add_fluxes", num_eqsolve_retries)) then
 
     call add_real_1d("chips", ns-1, chips(2:ns)) ! half-grid
     call add_real_1d("iotas", ns-1, iotas(2:ns)) ! half-grid

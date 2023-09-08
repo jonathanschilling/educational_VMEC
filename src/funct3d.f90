@@ -66,7 +66,7 @@ SUBROUTINE funct3d (ier_flag)
 
 
 
-  funct3d_calls = funct3d_calls + 1
+!  funct3d_calls = funct3d_calls + 1
 
   ! POINTER ALIASES
   lu => czmn
@@ -76,7 +76,7 @@ SUBROUTINE funct3d (ier_flag)
   ! temprary use of gc (force) for scaled xc (position)
   gc(:neqs) = xc(:neqs)*scalxc(:neqs)
 
-  if (open_dbg_context("totzsp_input", funct3d_calls)) then
+  if (open_dbg_context("totzsp_input", num_eqsolve_retries)) then
     call add_real_5d("gc", 3, ntmax, ns, ntor1, mpol, gc(:neqs), order=(/ 3, 4, 5, 2, 1 /) )
     call close_dbg_out()
   end if
@@ -100,7 +100,7 @@ SUBROUTINE funct3d (ier_flag)
                   armn, brmn, extra3, azmn, bzmn, extra4, blmn, clmn, extra1, extra2    )
   ENDIF
 
-  if (open_dbg_context("funct3d_geometry", funct3d_calls)) then
+  if (open_dbg_context("funct3d_geometry", num_eqsolve_retries)) then
 
       call add_real_4d("r1",   ns, 2, nzeta, ntheta3,   r1, order=(/ 1, 3, 4, 2 /) ) ! in reality: ns, nzeta, ntheta3, 2
       call add_real_4d("ru",   ns, 2, nzeta, ntheta3,   ru, order=(/ 1, 3, 4, 2 /) )
@@ -205,6 +205,7 @@ SUBROUTINE funct3d (ier_flag)
      end if
 
      IF (nvskip0 .eq. 0) then
+        ! only happens once at program startup?
         nvskip0 = MAX(1, nvacskip)
      end if
 
@@ -374,7 +375,7 @@ SUBROUTINE funct3d (ier_flag)
 
         !print *, "max bsqvac = ", maxval(bsqvac)
 
-        if (open_dbg_context("rbsq", funct3d_calls)) then
+        if (open_dbg_context("rbsq", num_eqsolve_retries)) then
           ! TODO: this triggers valgrind; uninitialized memory ?
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq(ns:nrzt:ns))
           call close_dbg_out()
@@ -386,7 +387,7 @@ SUBROUTINE funct3d (ier_flag)
            bsqsav(:nznt,2) = bsqvac(:nznt)      ! initial NESTOR |B|^2 at boundary
         ENDIF
 
-     ENDIF
+     ENDIF ! ivac .ge. 0
   ENDIF ! free-boundary contribution
 
   IF (iequi .NE. 1) THEN
@@ -400,7 +401,7 @@ SUBROUTINE funct3d (ier_flag)
      CALL alias (gcon, extra1(:,0), gc, gc(1+mns), gc(1+2*mns), extra1(:,1)) ! temporary re-use of extra1(:,1) for g_ss
 ! #end /* ndef _HBANGLE */
 
-     if (open_dbg_context("constraint_force", funct3d_calls)) then
+     if (open_dbg_context("constraint_force", num_eqsolve_retries)) then
 
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
        call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       )

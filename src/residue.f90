@@ -53,7 +53,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! dump physical forces
-  if (open_dbg_context("phys_gc", funct3d_calls)) then
+  if (open_dbg_context("phys_gc", num_eqsolve_retries)) then
 
     call add_real_4d("gcr", ntmax, ns, ntor1, mpol, gcr, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("gcz", ntmax, ns, ntor1, mpol, gcz, order=(/ 2, 3, 4, 1 /) )
@@ -82,7 +82,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql = fnormL*SUM(gcl*gcl)
   fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
 
-  if (open_dbg_context("fsq", funct3d_calls)) then
+  if (open_dbg_context("fsq", num_eqsolve_retries)) then
 
     call add_real("r0scale", r0scale) ! TODO: move to debug output of fixaray
     call add_real("r1", r1)
@@ -105,7 +105,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   IF (lasym)   CALL scale_m1(gcr(:,:,1,rsc), gcz(:,:,1,zcc))
 
   ! dump forces after scale_m1 has been applied
-  if (open_dbg_context("scale_m1", funct3d_calls)) then
+  if (open_dbg_context("scale_m1", num_eqsolve_retries)) then
 
     call add_real_4d("gcr", ntmax, ns, ntor1, mpol, gcr, order=(/ 2, 3, 4, 1 /) )
     call add_real_4d("gcz", ntmax, ns, ntor1, mpol, gcz, order=(/ 2, 3, 4, 1 /) )
@@ -124,7 +124,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   gcl = faclam*gcl
 
   ! dump forces after scalfor has been applied
-  if (open_dbg_context("scalfor_out", funct3d_calls)) then
+  if (open_dbg_context("scalfor_out", num_eqsolve_retries)) then
 
     call add_real_2d("arm", ns+1, 2, arm)
     call add_real_2d("ard", ns+1, 2, ard)
@@ -148,7 +148,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   fsql1 = hs*SUM(gcl*gcl)
   !030514      fsql1 = hs*lamscale**2*SUM(gcl*gcl)
 
-  if (open_dbg_context("fsq1", funct3d_calls)) then
+  if (open_dbg_context("fsq1", num_eqsolve_retries)) then
 
     call add_real("fnorm1", fnorm1)
     call add_real("fsqr1", fsqr1)

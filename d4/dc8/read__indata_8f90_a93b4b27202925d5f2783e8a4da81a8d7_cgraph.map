@@ -1,9 +1,9 @@
 <map id="read_indata" name="read_indata">
 <area shape="rect" id="Node000001" title="Read the INDATA namelist from a given input file." alt="" coords="5,70,94,96"/>
 <area shape="rect" id="Node000002" href="$d8/dbf/namespacevmec__input.html#a02b29863a947531e6c4e8d7c66c5a5e0" title=" " alt="" coords="151,5,312,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,67,150,48,152,54,94,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,67,149,49,151,54,94,72"/>
 <area shape="rect" id="Node000003" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="142,70,321,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,80,127,80,127,86,94,86"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,80,126,80,126,86,94,86"/>
 <area shape="rect" id="Node000004" href="$d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a" title=" " alt="" coords="161,120,302,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="94,94,152,112,150,118,92,99"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="94,94,151,112,149,117,92,99"/>
 </map>

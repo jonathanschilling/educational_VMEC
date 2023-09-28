@@ -1,13 +1,13 @@
 <map id="vacmod0::set_nestor_sizes" name="vacmod0::set_nestor_sizes">
 <area shape="rect" id="Node000001" title=" " alt="" coords="455,23,596,64"/>
 <area shape="rect" id="Node000002" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="334,5,391,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="440,33,391,25,392,20,441,28"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="439,33,391,25,392,20,440,27"/>
 <area shape="rect" id="Node000003" href="$d4/dc8/read__indata_8f90.html#a93b4b27202925d5f2783e8a4da81a8d7" title="Read the INDATA namelist from a given input file." alt="" coords="318,55,407,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="440,59,408,64,407,58,439,53"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="440,59,408,64,407,58,439,54"/>
 <area shape="rect" id="Node000004" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="214,55,270,80"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="303,70,271,70,271,65,303,65"/>
 <area shape="rect" id="Node000005" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,55,166,80"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="199,70,167,70,167,65,199,65"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="198,70,167,70,167,65,198,65"/>
 <area shape="rect" id="Node000006" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,55,65,80"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="98,70,65,70,65,65,98,65"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="97,70,65,70,65,65,97,65"/>
 </map>

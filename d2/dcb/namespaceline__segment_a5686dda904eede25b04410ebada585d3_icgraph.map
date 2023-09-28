@@ -1,9 +1,9 @@
 <map id="line_segment::line_seg_int" name="line_segment::line_seg_int">
 <area shape="rect" id="Node000001" title=" " alt="" coords="178,71,302,111"/>
 <area shape="rect" id="Node000002" href="$d2/dcb/namespaceline__segment.html#ad646e194dc6269ad6d052e6a7689b7c8" title=" " alt="" coords="5,29,130,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,75,129,67,131,62,164,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,75,129,67,131,62,163,70"/>
 <area shape="rect" id="Node000003" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="42,118,93,144"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="164,111,94,128,93,123,162,106"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="95,16,85,10,67,8,51,10,42,14,38,20,40,28,34,29,33,19,38,10,50,5,68,3,87,5,98,12"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="98,108,89,100,67,97,49,99,40,104,38,110,44,117,40,120,33,111,36,100,47,94,68,92,91,95,101,104"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="163,112,94,128,93,123,162,106"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="95,16,85,10,67,8,51,10,42,14,38,20,40,28,34,29,33,19,38,10,50,5,68,3,86,5,98,11"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="98,107,88,100,67,97,49,99,40,104,38,110,44,117,40,120,33,111,36,100,47,94,68,92,90,95,101,103"/>
 </map>

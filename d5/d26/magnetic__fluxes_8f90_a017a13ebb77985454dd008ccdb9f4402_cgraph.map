@@ -1,7 +1,7 @@
 <map id="torflux" name="torflux">
 <area shape="rect" id="Node000001" title="Compute the enclosed toroidal magnetic flux." alt="" coords="5,29,61,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="12,30,8,21,10,11,19,5,33,3,49,6,56,13,53,17,46,10,33,8,21,10,15,14,13,20,17,28"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="12,30,8,21,10,11,19,5,33,3,48,5,56,12,53,16,46,10,33,8,21,10,15,14,13,20,17,28"/>
 <area shape="rect" id="Node000002" href="$d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09" title="Compute the radial derivative of the enclosed toroidal magnetic flux." alt="" coords="109,29,199,55"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="61,40,94,40,94,45,61,45"/>
-<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="132,30,129,21,131,11,140,5,154,3,169,6,177,13,174,17,167,10,154,8,142,10,135,14,134,20,137,28"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="61,40,93,40,93,45,61,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="132,30,129,21,131,11,140,5,154,3,169,5,177,12,174,16,167,10,154,8,142,10,135,14,134,20,137,28"/>
 </map>

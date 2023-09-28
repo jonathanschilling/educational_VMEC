@@ -1,8 +1,8 @@
 <map id="line_segment::line_seg_test" name="line_segment::line_seg_test">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,29,130,70"/>
-<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="32,29,30,19,36,10,49,5,68,3,88,5,100,12,98,17,87,10,67,8,50,10,39,15,35,20,37,28"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="32,29,30,19,36,10,49,5,68,3,88,5,100,11,98,16,86,10,67,8,50,10,39,15,35,20,37,28"/>
 <area shape="rect" id="Node000002" href="$d2/dcb/namespaceline__segment.html#aa63bfde0ff39e19622f7f5fe150e8b59" title=" " alt="" coords="178,8,330,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,37,163,32,164,37,130,43"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,37,162,32,163,37,130,43"/>
 <area shape="rect" id="Node000003" href="$d2/dcb/namespaceline__segment.html#a5686dda904eede25b04410ebada585d3" title=" " alt="" coords="192,57,316,98"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,56,178,64,177,69,130,62"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="130,56,177,64,176,69,130,62"/>
 </map>

@@ -1,123 +1,123 @@
 <map id="funct3d" name="funct3d">
 <area shape="rect" id="Node000001" title="Evaluate the three&#45;dimensional MHD energy functional. Think of this as the &quot;forward model&quot; that tells..." alt="" coords="5,684,70,710"/>
 <area shape="rect" id="Node000002" href="$d5/de7/alias_8f90.html#a971bf2e3997d8e5ed08c060b651c88c4" title="Fourier&#45;space bandpass filter on constraint force for spectral condensation." alt="" coords="169,5,218,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="36,684,37,564,46,375,55,275,69,181,89,103,101,73,116,48,133,33,154,23,156,28,136,38,120,52,106,75,94,105,75,182,61,275,51,375,42,565,41,684"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="36,684,37,564,46,375,55,275,69,181,89,103,101,73,116,48,133,33,153,24,155,29,136,38,120,52,106,75,94,105,75,182,61,275,51,375,42,565,41,684"/>
 <area shape="rect" id="Node000003" href="$d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8" title="Compute the covariant components of the magnetic field , ." alt="" coords="338,608,398,634"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="53,681,81,661,117,644,171,629,227,621,323,617,323,622,227,626,172,634,119,649,84,666,56,686"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="53,681,81,661,117,644,171,629,226,621,322,617,322,622,227,626,172,634,119,649,84,666,56,686"/>
 <area shape="rect" id="Node000005" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="598,683,769,708"/>
-<area shape="poly" id="edge17_Node000001_Node000005" title=" " alt="" coords="47,682,75,648,116,613,207,561,283,529,363,510,467,492,510,483,529,483,551,492,576,508,598,529,634,577,660,626,676,668,671,670,655,629,630,580,594,533,573,513,548,497,528,489,510,488,468,497,364,515,285,534,209,565,119,618,79,652,51,685"/>
+<area shape="poly" id="edge17_Node000001_Node000005" title=" " alt="" coords="47,682,75,648,116,613,207,561,283,529,363,510,467,492,510,483,529,483,551,492,576,508,598,529,634,577,660,626,676,667,671,669,655,628,629,579,594,532,573,513,548,497,528,489,510,488,468,497,364,515,285,534,209,565,119,618,79,652,51,685"/>
 <area shape="rect" id="Node000009" href="$db/d74/convert_8f90.html#ae6d3862ea21a8d39210a79c6955b5b75" title="Convert internal mode representation to standard form for output (coefficients of cos(mu&#45;nv),..." alt="" coords="161,760,226,786"/>
-<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="63,708,119,738,148,752,146,757,116,743,60,713"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="63,708,119,738,148,752,145,757,116,743,60,713"/>
 <area shape="rect" id="Node000010" href="$de/d0c/forces_8f90.html#a7b4708aaec3cc94526474c16bc3a16f0" title="Compute the real&#45;space MHD forces." alt="" coords="340,1135,397,1160"/>
-<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="71,697,181,712,236,726,257,735,271,746,289,769,302,793,310,816,313,839,311,885,301,931,291,978,287,1025,294,1072,304,1097,319,1122,328,1131,325,1135,315,1125,299,1099,289,1074,281,1025,286,977,296,930,306,885,308,840,305,817,297,795,285,772,267,749,254,740,234,731,180,717,70,702"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="71,697,181,712,236,726,257,735,271,746,289,769,302,793,310,816,313,839,311,885,301,931,291,978,287,1025,294,1072,304,1097,319,1122,328,1130,324,1134,315,1125,299,1099,289,1074,281,1025,286,977,296,930,306,885,308,840,305,817,297,795,285,772,267,749,254,740,234,731,180,717,70,702"/>
 <area shape="rect" id="Node000011" href="$d8/dc3/jacobian_8f90.html#af346f65d2aa225d9ede6e0f23add6142" title="Evaulate the Jacobian of the transform from flux&#45; to cylindrical coordinates." alt="" coords="474,56,543,82"/>
-<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="36,683,38,578,47,414,57,328,71,249,90,184,102,158,116,139,153,107,195,84,241,68,289,59,337,54,383,53,459,59,459,64,383,59,337,60,290,64,243,74,197,89,156,112,120,143,107,161,95,186,76,250,62,329,52,414,43,578,41,683"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="36,683,38,578,47,414,57,328,71,249,90,184,102,158,116,139,152,107,195,84,241,68,289,59,337,54,382,53,458,59,458,64,382,59,337,60,290,64,243,74,197,89,155,112,120,143,107,161,95,186,76,250,62,329,52,414,43,578,41,683"/>
 <area shape="rect" id="Node000012" href="$db/da1/nestor__io_8f90.html#a67b1cb19f12a5860a25a89dbd3dfd9c9" title=" " alt="" coords="124,809,263,835"/>
 <area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="48,709,76,752,96,776,119,796,126,800,123,805,116,800,92,779,71,755,43,712"/>
 <area shape="rect" id="Node000013" href="$db/d5a/residue_8f90.html#a2390b3cf93196383bbe960acb85b3e32" title="Compute invariant residuals." alt="" coords="162,304,225,330"/>
-<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="37,683,44,635,58,562,81,479,115,398,138,365,164,338,168,341,143,368,120,401,86,481,63,564,49,635,43,684"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="37,683,44,635,58,562,81,479,115,398,138,365,164,338,168,342,142,369,120,401,86,481,63,564,49,635,43,684"/>
 <area shape="rect" id="Node000019" href="$d3/d96/residue__con_8f90.html#a8b2d4eb1bd167c336b39b899858e7bfb" title="Compute invariant residuals." alt="" coords="148,255,239,280"/>
-<area shape="poly" id="edge27_Node000001_Node000019" title=" " alt="" coords="37,683,43,604,57,486,81,369,97,322,116,290,132,277,136,281,120,293,102,324,86,370,63,487,49,604,42,684"/>
+<area shape="poly" id="edge27_Node000001_Node000019" title=" " alt="" coords="37,683,43,604,57,486,81,369,97,322,116,290,131,278,135,282,120,293,102,324,86,370,63,487,49,604,42,684"/>
 <area shape="rect" id="Node000020" href="$d5/d62/residue__mhd_8f90.html#a3ed729a2f8c8d70e4d2fef05c9dfc4c8" title="Compute invariant residuals." alt="" coords="146,205,241,231"/>
-<area shape="poly" id="edge32_Node000001_Node000020" title=" " alt="" coords="37,684,42,596,54,463,65,394,78,330,95,277,116,240,130,229,134,233,120,244,100,279,83,331,70,395,60,464,47,596,42,684"/>
+<area shape="poly" id="edge32_Node000001_Node000020" title=" " alt="" coords="37,684,42,596,54,463,65,394,78,330,95,277,116,240,130,229,133,233,120,244,100,279,83,331,70,395,60,464,47,596,42,684"/>
 <area shape="rect" id="Node000021" href="$d5/d6e/restart__iter_8f90.html#ace7df67e039f0ebf69200f91d3cb16cc" title="Save current or restore previous good state vector and reduce time step." alt="" coords="152,859,235,884"/>
-<area shape="poly" id="edge37_Node000001_Node000021" title=" " alt="" coords="45,709,68,775,90,813,119,845,139,857,137,862,116,850,86,816,64,777,40,711"/>
+<area shape="poly" id="edge37_Node000001_Node000021" title=" " alt="" coords="45,709,68,775,90,813,119,845,139,857,136,862,116,850,86,816,64,777,40,711"/>
 <area shape="rect" id="Node000022" href="$d4/df3/symforce_8f90.html#a169610bcc5544fc8e16ad1e10ac85dcb" title="Symmetrize forces on restricted &#160;interval &#160;so cos, sin integrals can be performed." alt="" coords="331,107,405,132"/>
-<area shape="poly" id="edge38_Node000001_Node000022" title=" " alt="" coords="36,684,40,587,51,440,61,362,75,291,93,232,116,191,136,171,160,155,213,133,267,121,316,117,316,122,268,127,215,138,163,160,140,176,120,194,98,234,80,292,66,363,56,440,45,588,42,684"/>
+<area shape="poly" id="edge38_Node000001_Node000022" title=" " alt="" coords="36,684,40,587,51,440,61,362,75,291,93,232,116,191,136,171,160,156,213,133,267,122,315,117,316,122,268,127,214,139,163,160,140,176,120,194,98,234,80,292,66,363,56,440,45,588,42,684"/>
 <area shape="rect" id="Node000023" href="$da/d11/symrzl_8f90.html#ac5df1aefe2e993d4416c52c8a727b817" title="Symmetrize , &#160;and ." alt="" coords="164,908,223,934"/>
-<area shape="poly" id="edge40_Node000001_Node000023" title=" " alt="" coords="43,710,49,746,62,796,85,849,100,873,119,895,134,905,150,912,148,916,131,910,116,899,96,877,80,852,57,798,44,748,38,711"/>
+<area shape="poly" id="edge40_Node000001_Node000023" title=" " alt="" coords="43,710,49,746,62,796,85,849,100,873,119,895,134,905,150,911,148,916,131,909,116,899,96,877,80,852,57,798,44,748,38,711"/>
 <area shape="rect" id="Node000024" href="$d0/d6f/tomnsp_8f90.html#a6c7345c0aa0f13f311650d9633e6ecf8" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="473,356,544,382"/>
-<area shape="poly" id="edge41_Node000001_Node000024" title=" " alt="" coords="36,683,39,639,50,577,60,544,74,511,92,480,116,453,251,421,457,377,459,382,252,426,119,458,97,483,79,513,65,545,55,578,45,640,42,684"/>
+<area shape="poly" id="edge41_Node000001_Node000024" title=" " alt="" coords="36,683,39,639,50,577,60,544,74,511,92,480,116,453,250,421,457,377,458,382,252,426,119,458,97,483,79,513,65,545,55,578,45,640,42,684"/>
 <area shape="rect" id="Node000025" href="$d8/db9/tomnsp__con_8f90.html#a2e8c98805decf1c832d812e19d9577dd" title="Fourier&#45;transform anti&#45;symmetric forces from real space to Fourier space." alt="" coords="144,957,243,983"/>
-<area shape="poly" id="edge43_Node000001_Node000025" title=" " alt="" coords="42,710,45,754,56,817,66,851,79,885,97,916,120,944,131,953,128,958,116,948,93,919,74,887,61,853,51,818,40,755,36,710"/>
+<area shape="poly" id="edge43_Node000001_Node000025" title=" " alt="" coords="42,710,45,754,56,817,66,851,79,885,97,916,120,944,131,953,128,957,116,948,93,919,74,887,61,853,51,818,40,755,36,710"/>
 <area shape="rect" id="Node000026" href="$d0/d6f/tomnsp_8f90.html#aec4b11e4f55e18c6bfc0348c263e31db" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="473,405,544,431"/>
-<area shape="poly" id="edge44_Node000001_Node000026" title=" " alt="" coords="37,683,43,646,56,596,79,544,96,520,116,499,154,472,189,455,223,447,257,444,330,444,372,441,419,434,458,426,459,431,420,439,372,447,330,449,258,449,224,452,191,460,157,476,119,503,100,523,84,546,61,598,48,647,43,684"/>
+<area shape="poly" id="edge44_Node000001_Node000026" title=" " alt="" coords="37,683,43,646,56,596,79,544,96,520,116,499,154,472,189,455,223,447,257,444,330,444,372,441,419,434,457,426,458,431,420,439,372,447,330,449,258,449,224,452,191,460,157,476,119,503,100,523,84,546,61,598,48,647,43,684"/>
 <area shape="rect" id="Node000027" href="$d8/db9/tomnsp__con_8f90.html#ac9e62cd03062ffcb2abc0d0ff59503e3" title="Fourier&#45;transform symmetric forces from real space to Fourier space." alt="" coords="144,1007,243,1032"/>
-<area shape="poly" id="edge46_Node000001_Node000027" title=" " alt="" coords="41,710,41,762,50,838,60,880,74,921,94,960,120,994,132,1003,129,1007,116,997,89,962,69,923,55,881,45,839,36,763,36,710"/>
+<area shape="poly" id="edge46_Node000001_Node000027" title=" " alt="" coords="41,710,41,762,50,838,60,880,74,921,94,960,120,994,131,1003,128,1007,116,997,89,962,69,923,55,881,45,839,36,763,36,710"/>
 <area shape="rect" id="Node000028" href="$dc/d49/totzsp_8f90.html#a8c3f89c23a3be79d0f993c5031f7eab5" title="Inverse&#45;Fourier&#45;transform anti&#45;symmetric part of geometry from Fourier space to real space." alt="" coords="162,1056,225,1082"/>
-<area shape="poly" id="edge47_Node000001_Node000028" title=" " alt="" coords="43,710,51,779,66,879,89,978,104,1017,120,1043,132,1053,148,1060,146,1065,130,1058,116,1047,99,1019,84,980,61,880,45,780,37,710"/>
+<area shape="poly" id="edge47_Node000001_Node000028" title=" " alt="" coords="43,710,51,779,66,879,89,978,104,1017,120,1043,132,1053,148,1060,145,1065,130,1058,116,1047,99,1019,84,980,61,880,45,780,37,710"/>
 <area shape="rect" id="Node000030" href="$dc/d49/totzsp_8f90.html#ac4756c0f66a5a01d9c08334a98a61b21" title="Inverse&#45;Fourier&#45;transform symmetric part of geometry from Fourier space to real space." alt="" coords="162,1105,225,1131"/>
-<area shape="poly" id="edge49_Node000001_Node000030" title=" " alt="" coords="42,710,49,788,63,903,86,1017,102,1062,120,1092,133,1103,148,1110,146,1114,130,1107,116,1096,97,1064,81,1019,58,904,44,789,37,711"/>
+<area shape="poly" id="edge49_Node000001_Node000030" title=" " alt="" coords="42,710,49,788,63,903,86,1017,102,1062,120,1092,132,1103,148,1109,146,1114,130,1107,116,1096,97,1064,81,1019,58,904,44,789,37,711"/>
 <area shape="rect" id="Node000032" href="$dd/d6d/vacuum_8f90.html#a0acbc18d2ab7664835d797b42ce49a35" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="160,659,227,684"/>
-<area shape="poly" id="edge51_Node000001_Node000032" title=" " alt="" coords="70,689,144,677,145,682,71,694"/>
+<area shape="poly" id="edge51_Node000001_Node000032" title=" " alt="" coords="70,689,144,677,144,682,71,694"/>
 <area shape="rect" id="Node000046" href="$db/da1/nestor__io_8f90.html#a771059753d70a579e9443aa7ca5a991e" title=" " alt="" coords="126,1155,261,1180"/>
-<area shape="poly" id="edge73_Node000001_Node000046" title=" " alt="" coords="42,710,47,796,60,926,71,994,84,1056,100,1107,120,1142,121,1143,117,1147,116,1145,95,1109,79,1057,65,995,55,927,42,797,37,710"/>
+<area shape="poly" id="edge73_Node000001_Node000046" title=" " alt="" coords="42,710,47,796,60,926,71,994,84,1056,100,1107,120,1142,121,1143,117,1146,116,1145,95,1109,79,1057,65,995,55,927,42,797,37,710"/>
 <area shape="rect" id="Node000047" href="$db/dc0/namespacenestor__io.html#a288cc8f23cbfe1484ec6815381cc25c8" title=" " alt="" coords="118,1205,269,1245"/>
-<area shape="poly" id="edge74_Node000001_Node000047" title=" " alt="" coords="42,710,47,804,59,948,69,1024,83,1094,99,1151,120,1191,121,1192,117,1196,115,1194,94,1153,77,1095,64,1025,54,949,41,804,37,710"/>
+<area shape="poly" id="edge74_Node000001_Node000047" title=" " alt="" coords="42,710,47,804,59,948,69,1024,83,1094,99,1151,120,1191,120,1192,116,1195,115,1194,94,1153,77,1095,64,1025,54,949,41,804,37,710"/>
 <area shape="rect" id="Node000004" href="$d8/d7d/add__fluxes_8f90.html#a988e7013ef02301b9cfbde5b8068d5af" title="Add the magnetic fluxes to the tangential derivatives of &#160;to arrive at the contravariant magnetic fie..." alt="" coords="467,608,550,634"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="399,618,453,618,453,624,399,624"/>
-<area shape="poly" id="edge10_Node000003_Node000005" title=" " alt="" coords="398,606,430,596,468,588,510,586,550,593,584,608,614,628,662,670,659,674,611,632,581,613,549,598,509,591,469,593,431,601,400,611"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="399,618,452,618,452,624,399,624"/>
+<area shape="poly" id="edge10_Node000003_Node000005" title=" " alt="" coords="398,606,430,596,468,588,510,586,550,593,583,608,614,628,661,669,658,673,611,632,581,612,549,598,509,591,469,593,431,601,400,611"/>
 <area shape="rect" id="Node000006" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="472,657,545,683"/>
 <area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="400,629,459,650,457,655,398,634"/>
 <area shape="rect" id="Node000007" href="$d4/d51/lamcal_8f90.html#aae66bdcec0bbb969704413d933148096" title="Normalization parameters for ." alt="" coords="479,707,538,732"/>
-<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="387,632,469,693,473,696,470,701,466,698,384,636"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="387,632,469,693,473,696,470,700,466,698,384,636"/>
 <area shape="rect" id="Node000008" href="$d4/da9/precondn_8f90.html#a54a485235e0627efdd733b95d2c8f328" title="Compute preconditioning matrix elements for , &#160;force." alt="" coords="471,507,546,532"/>
-<area shape="poly" id="edge11_Node000003_Node000008" title=" " alt="" coords="386,605,476,539,479,543,389,610"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="542,632,639,674,637,679,540,637"/>
-<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="654,684,648,674,651,664,664,658,683,656,706,659,716,666,713,671,704,664,683,661,665,663,655,668,653,673,658,681"/>
-<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="546,673,583,678,582,684,545,678"/>
-<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="538,713,583,707,583,712,539,718"/>
-<area shape="poly" id="edge14_Node000010_Node000005" title=" " alt="" coords="399,1157,421,1169,435,1182,444,1195,453,1205,468,1214,491,1223,511,1228,529,1226,548,1215,562,1200,575,1180,600,1126,621,1059,638,983,663,833,677,723,682,724,669,834,643,984,626,1060,605,1128,580,1183,566,1204,551,1219,530,1231,510,1233,490,1228,466,1219,450,1210,440,1198,431,1186,418,1174,396,1161"/>
-<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="524,81,539,100,552,122,583,199,609,279,648,437,671,574,682,668,677,668,666,575,643,438,604,280,578,201,547,125,534,103,520,84"/>
-<area shape="poly" id="edge22_Node000013_Node000005" title=" " alt="" coords="226,322,317,340,551,341,589,375,618,415,641,460,658,508,678,598,684,668,679,668,672,599,653,509,636,463,614,418,585,378,549,346,317,345,225,328"/>
+<area shape="poly" id="edge11_Node000003_Node000008" title=" " alt="" coords="386,605,475,540,478,544,389,610"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="542,632,638,673,636,678,540,637"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="654,684,648,674,651,664,664,658,683,656,705,659,716,665,713,670,703,664,683,661,665,663,655,668,653,673,658,681"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="546,673,583,678,582,683,545,678"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="538,713,582,707,583,712,539,718"/>
+<area shape="poly" id="edge14_Node000010_Node000005" title=" " alt="" coords="399,1157,421,1169,435,1182,444,1195,453,1205,468,1214,491,1223,511,1228,529,1226,548,1215,562,1200,575,1181,600,1127,621,1059,638,984,663,834,677,724,682,724,669,835,643,985,626,1060,605,1129,580,1183,566,1204,551,1219,530,1231,510,1233,490,1228,466,1219,450,1210,440,1198,431,1186,418,1174,396,1161"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="524,81,539,100,552,122,583,199,609,278,648,436,671,574,682,667,677,668,666,574,642,437,604,280,578,201,547,125,534,103,520,84"/>
+<area shape="poly" id="edge22_Node000013_Node000005" title=" " alt="" coords="226,322,317,340,551,341,588,375,618,415,641,460,658,507,677,597,684,667,679,667,672,598,653,508,636,462,614,418,585,378,549,346,317,345,225,328"/>
 <area shape="rect" id="Node000014" href="$db/d5a/residue_8f90.html#a29cc4a06a22a55dc9b1bf7252ebcc9ed" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="319,304,418,330"/>
-<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="225,314,304,314,304,320,225,320"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="225,314,303,314,303,320,225,320"/>
 <area shape="rect" id="Node000015" href="$d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e" title="Compute total force residual on flux surfaces." alt="" coords="340,156,397,182"/>
-<area shape="poly" id="edge21_Node000013_Node000015" title=" " alt="" coords="225,310,247,303,267,291,285,267,291,243,298,218,315,191,325,183,328,187,319,195,302,220,296,244,290,270,271,295,249,308,226,315"/>
+<area shape="poly" id="edge21_Node000013_Node000015" title=" " alt="" coords="225,310,247,303,267,291,285,267,291,243,298,218,315,191,324,184,327,188,319,195,302,220,296,244,290,270,271,295,249,308,226,315"/>
 <area shape="rect" id="Node000016" href="$db/d5a/residue_8f90.html#aaf8d684a58b8bf9dfdecfdb925960780" title="Compute internal gr , gz required for &#160;constraint." alt="" coords="330,205,407,231"/>
-<area shape="poly" id="edge23_Node000013_Node000016" title=" " alt="" coords="225,308,247,301,268,291,282,279,291,267,301,254,315,240,321,236,324,241,319,244,305,257,296,270,286,282,270,295,249,306,226,313"/>
+<area shape="poly" id="edge23_Node000013_Node000016" title=" " alt="" coords="225,308,247,301,268,291,282,279,291,267,301,254,315,240,320,237,323,241,319,244,305,257,296,270,286,282,270,295,249,306,226,313"/>
 <area shape="rect" id="Node000017" href="$d8/d86/scalfor_8f90.html#a2ef9c34d20ddf30cb7b15fe35066b8ca" title="Build forces from different contributions." alt="" coords="338,255,398,280"/>
-<area shape="poly" id="edge24_Node000013_Node000017" title=" " alt="" coords="225,305,323,277,324,282,226,311"/>
-<area shape="poly" id="edge25_Node000017_Node000005" title=" " alt="" coords="399,262,433,261,474,265,515,276,551,297,590,339,620,387,643,439,660,492,679,593,684,667,679,668,673,594,655,494,638,441,615,389,586,342,548,302,513,281,473,270,433,266,399,267"/>
+<area shape="poly" id="edge24_Node000013_Node000017" title=" " alt="" coords="225,305,322,278,324,283,226,311"/>
+<area shape="poly" id="edge25_Node000017_Node000005" title=" " alt="" coords="399,262,433,261,474,265,515,276,551,297,590,339,620,387,643,438,660,492,679,592,684,667,679,667,673,593,655,493,638,440,615,389,586,342,548,302,513,281,473,270,433,266,399,267"/>
 <area shape="rect" id="Node000018" href="$db/d40/tridslv_8f90.html#abf5399c0154abe7424c54d7fa9eb69db" title="Solve a tridiagonal system of equations." alt="" coords="480,204,537,230"/>
-<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="398,254,465,229,467,234,400,259"/>
-<area shape="poly" id="edge28_Node000019_Node000014" title=" " alt="" coords="240,278,307,297,305,302,239,283"/>
-<area shape="poly" id="edge29_Node000019_Node000015" title=" " alt="" coords="238,255,268,241,282,229,291,217,301,204,315,191,325,185,328,189,319,195,305,208,296,220,286,233,270,246,241,259"/>
-<area shape="poly" id="edge30_Node000019_Node000016" title=" " alt="" coords="239,252,315,230,316,236,240,257"/>
-<area shape="poly" id="edge31_Node000019_Node000017" title=" " alt="" coords="239,265,323,265,323,270,239,270"/>
-<area shape="poly" id="edge33_Node000020_Node000014" title=" " alt="" coords="243,227,270,240,286,253,296,265,305,278,319,291,324,294,321,299,315,295,301,281,291,268,282,256,268,244,240,232"/>
-<area shape="poly" id="edge34_Node000020_Node000015" title=" " alt="" coords="241,202,324,178,326,183,242,207"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="398,254,465,230,467,235,400,259"/>
+<area shape="poly" id="edge28_Node000019_Node000014" title=" " alt="" coords="240,278,306,297,305,302,239,283"/>
+<area shape="poly" id="edge29_Node000019_Node000015" title=" " alt="" coords="238,255,268,241,282,229,291,217,301,204,315,191,324,185,327,189,319,195,305,208,296,220,286,233,270,246,241,259"/>
+<area shape="poly" id="edge30_Node000019_Node000016" title=" " alt="" coords="239,252,314,231,315,236,240,257"/>
+<area shape="poly" id="edge31_Node000019_Node000017" title=" " alt="" coords="239,265,322,265,322,270,239,270"/>
+<area shape="poly" id="edge33_Node000020_Node000014" title=" " alt="" coords="243,227,270,240,286,253,296,265,305,278,319,291,323,294,320,298,315,295,301,281,291,268,282,256,268,244,240,232"/>
+<area shape="poly" id="edge34_Node000020_Node000015" title=" " alt="" coords="241,202,324,178,325,184,242,207"/>
 <area shape="poly" id="edge35_Node000020_Node000016" title=" " alt="" coords="241,216,314,216,314,221,241,221"/>
-<area shape="poly" id="edge36_Node000020_Node000017" title=" " alt="" coords="242,229,324,253,323,258,241,234"/>
-<area shape="poly" id="edge39_Node000022_Node000005" title=" " alt="" coords="406,122,441,129,480,142,519,162,552,190,594,248,627,314,650,383,667,452,677,518,683,579,686,668,680,668,678,579,672,519,662,453,645,384,622,316,590,251,548,193,516,166,478,147,440,134,405,127"/>
-<area shape="poly" id="edge42_Node000024_Node000005" title=" " alt="" coords="539,380,552,391,578,425,601,462,638,540,664,612,679,668,673,669,658,614,633,542,597,465,574,428,548,395,536,384"/>
-<area shape="poly" id="edge45_Node000026_Node000005" title=" " alt="" coords="531,429,552,448,593,506,628,567,674,668,669,670,623,569,589,509,548,452,528,433"/>
+<area shape="poly" id="edge36_Node000020_Node000017" title=" " alt="" coords="242,229,324,252,322,257,241,234"/>
+<area shape="poly" id="edge39_Node000022_Node000005" title=" " alt="" coords="406,122,441,129,480,142,519,162,552,190,594,248,626,313,650,382,667,451,677,517,683,577,686,667,680,667,678,578,672,518,661,452,645,383,621,315,589,251,548,193,516,166,478,147,440,134,405,127"/>
+<area shape="poly" id="edge42_Node000024_Node000005" title=" " alt="" coords="539,380,552,391,578,425,601,462,638,540,663,612,679,667,673,669,658,613,633,542,597,465,574,428,548,395,536,384"/>
+<area shape="poly" id="edge45_Node000026_Node000005" title=" " alt="" coords="531,429,552,448,593,506,628,566,674,667,669,669,623,569,588,509,548,452,528,433"/>
 <area shape="rect" id="Node000029" href="$dc/d49/totzsp_8f90.html#aff13f873fb632d486fdffc6ee97857c6" title="Convert from internal representation to &quot;physical&quot; rmnsc, zmncc Fourier form." alt="" coords="317,1184,419,1210"/>
-<area shape="poly" id="edge48_Node000028_Node000029" title=" " alt="" coords="226,1071,249,1078,271,1091,288,1111,296,1131,303,1151,319,1171,322,1174,319,1178,315,1175,299,1153,291,1133,284,1114,267,1095,247,1083,225,1076"/>
+<area shape="poly" id="edge48_Node000028_Node000029" title=" " alt="" coords="226,1071,249,1078,271,1091,288,1111,296,1131,303,1151,319,1171,322,1173,318,1177,315,1175,299,1153,291,1133,284,1114,267,1095,247,1083,225,1076"/>
 <area shape="rect" id="Node000031" href="$dc/d49/totzsp_8f90.html#a3264ce8fefaa7ede632c4147049aadc5" title="Convert from internal representation to &quot;physical&quot; rmnss, zmncs Fourier form." alt="" coords="321,1233,416,1259"/>
-<area shape="poly" id="edge50_Node000030_Node000031" title=" " alt="" coords="226,1120,249,1128,271,1140,288,1160,296,1180,303,1200,319,1220,322,1223,319,1227,315,1224,299,1203,291,1182,284,1163,267,1144,247,1133,225,1126"/>
-<area shape="poly" id="edge56_Node000032_Node000005" title=" " alt="" coords="226,683,271,707,294,727,304,736,318,744,381,764,432,770,484,766,549,753,601,736,646,714,649,718,603,741,550,758,485,771,432,775,379,769,316,749,301,741,290,731,267,711,223,687"/>
+<area shape="poly" id="edge50_Node000030_Node000031" title=" " alt="" coords="226,1120,249,1128,271,1140,288,1160,296,1180,303,1200,319,1220,322,1223,318,1227,315,1224,299,1203,291,1182,284,1163,267,1144,247,1133,225,1126"/>
+<area shape="poly" id="edge56_Node000032_Node000005" title=" " alt="" coords="226,683,271,707,294,727,304,736,318,744,381,764,432,770,484,766,549,753,601,736,646,714,648,719,603,741,550,758,485,771,432,775,379,769,316,749,301,741,290,731,267,711,223,687"/>
 <area shape="rect" id="Node000033" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="337,859,400,884"/>
-<area shape="poly" id="edge52_Node000032_Node000033" title=" " alt="" coords="228,677,251,686,271,702,284,719,292,737,297,770,301,803,308,820,319,838,329,848,325,852,315,841,303,822,296,804,292,771,287,738,280,722,267,705,248,691,226,682"/>
+<area shape="poly" id="edge52_Node000032_Node000033" title=" " alt="" coords="228,677,251,686,271,702,284,719,292,737,297,770,301,803,308,820,319,838,328,847,325,851,315,841,303,822,296,804,292,771,287,738,280,722,267,705,248,691,226,682"/>
 <area shape="rect" id="Node000036" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="340,984,396,1010"/>
 <area shape="poly" id="edge57_Node000032_Node000036" title=" " alt="" coords="229,676,251,686,271,702,291,733,301,763,304,792,302,821,300,879,306,911,319,945,341,972,337,975,315,947,300,912,295,879,297,820,298,792,296,764,286,736,267,705,249,690,226,681"/>
 <area shape="rect" id="Node000037" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="337,1085,400,1111"/>
-<area shape="poly" id="edge59_Node000032_Node000037" title=" " alt="" coords="228,675,251,685,271,702,297,743,309,782,312,819,309,855,303,932,306,974,319,1021,333,1048,349,1072,345,1075,328,1051,315,1023,301,975,298,932,304,855,306,819,304,783,292,745,267,705,249,690,226,680"/>
+<area shape="poly" id="edge59_Node000032_Node000037" title=" " alt="" coords="228,675,251,685,271,702,297,743,309,782,312,819,309,855,303,932,306,974,319,1021,333,1048,349,1072,344,1075,328,1051,315,1023,301,975,298,932,304,855,306,819,304,783,292,745,267,705,249,690,226,680"/>
 <area shape="rect" id="Node000044" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="340,908,396,934"/>
-<area shape="poly" id="edge70_Node000032_Node000044" title=" " alt="" coords="229,676,251,686,271,702,288,727,295,752,296,800,297,847,304,870,319,895,329,904,325,908,315,899,299,873,291,848,291,800,290,753,283,730,267,705,248,690,227,681"/>
+<area shape="poly" id="edge70_Node000032_Node000044" title=" " alt="" coords="229,676,251,686,271,702,288,727,295,752,296,800,297,847,304,870,319,895,328,903,324,907,315,899,299,873,291,848,291,800,290,753,283,730,267,705,248,690,227,681"/>
 <area shape="rect" id="Node000045" href="$d6/d03/surface_8f90.html#ad7b6446e720a806f41f10dd1eb0b6f88" title="Evaluate the geometry of the LCFS and tangential derivatives." alt="" coords="336,708,400,734"/>
-<area shape="poly" id="edge71_Node000032_Node000045" title=" " alt="" coords="228,678,323,705,321,711,227,683"/>
-<area shape="poly" id="edge55_Node000033_Node000005" title=" " alt="" coords="401,882,421,893,435,908,444,922,453,934,469,944,491,952,509,956,528,954,548,944,577,923,601,896,621,867,638,835,661,773,675,722,680,723,666,774,642,837,625,869,605,900,580,927,551,948,529,959,509,961,489,957,466,949,450,938,440,925,431,911,418,898,399,886"/>
+<area shape="poly" id="edge71_Node000032_Node000045" title=" " alt="" coords="228,678,322,705,321,710,227,683"/>
+<area shape="poly" id="edge55_Node000033_Node000005" title=" " alt="" coords="401,882,421,893,435,908,444,922,453,934,469,944,491,952,509,956,528,954,548,944,576,923,600,897,621,867,637,836,661,773,674,723,680,724,666,775,642,838,625,870,605,900,580,927,551,948,529,959,509,961,489,957,466,949,450,938,440,925,431,911,418,898,399,886"/>
 <area shape="rect" id="Node000034" href="$d6/dc7/becoil_8f90.html#a449b054fb88bdb4cdf73ef8939654bfb" title="Compute the cylindrical components of the magnetic field due to external coils. by bi&#45;linear interpol..." alt="" coords="481,859,536,884"/>
-<area shape="poly" id="edge53_Node000033_Node000034" title=" " alt="" coords="400,869,466,869,466,874,400,874"/>
+<area shape="poly" id="edge53_Node000033_Node000034" title=" " alt="" coords="400,869,465,869,465,874,400,874"/>
 <area shape="rect" id="Node000035" href="$d9/dda/belicu_8f90.html#a53e6f162ca96069b8d93e131069ddf5d" title="Magnetic field due to net toroidal current modeled by a filament along the magnetic axis." alt="" coords="481,908,536,934"/>
 <area shape="poly" id="edge54_Node000033_Node000035" title=" " alt="" coords="401,880,468,904,466,909,399,885"/>
-<area shape="poly" id="edge58_Node000036_Node000005" title=" " alt="" coords="397,997,430,997,470,993,511,982,548,963,576,937,600,907,620,875,637,841,661,775,674,722,680,724,666,776,642,843,625,877,604,911,580,941,551,967,513,987,471,998,431,1002,397,1002"/>
-<area shape="poly" id="edge69_Node000037_Node000005" title=" " alt="" coords="402,1107,421,1120,437,1141,444,1161,452,1179,469,1195,491,1205,510,1209,528,1206,548,1195,562,1181,575,1162,598,1110,619,1046,637,973,662,829,676,723,682,724,668,830,642,975,624,1047,603,1112,579,1165,566,1184,551,1199,530,1211,510,1214,489,1210,466,1199,447,1182,439,1163,432,1143,418,1124,399,1112"/>
+<area shape="poly" id="edge58_Node000036_Node000005" title=" " alt="" coords="397,997,430,997,470,993,511,982,548,963,576,937,600,908,620,875,637,841,661,776,674,723,679,724,666,777,642,843,625,878,604,911,580,941,551,967,513,987,471,998,431,1002,397,1002"/>
+<area shape="poly" id="edge69_Node000037_Node000005" title=" " alt="" coords="402,1107,421,1120,437,1141,444,1161,452,1179,469,1195,491,1205,510,1209,528,1206,548,1195,562,1181,575,1162,598,1111,619,1046,636,974,662,830,676,724,682,724,668,831,642,975,624,1048,603,1113,579,1165,566,1185,551,1199,530,1211,510,1214,489,1210,466,1199,447,1182,439,1163,432,1143,418,1124,399,1112"/>
 <area shape="rect" id="Node000038" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="481,1311,536,1336"/>
-<area shape="poly" id="edge60_Node000037_Node000038" title=" " alt="" coords="402,1106,421,1120,442,1150,452,1177,458,1205,470,1240,496,1296,492,1299,465,1242,453,1207,447,1178,438,1152,417,1124,399,1111"/>
+<area shape="poly" id="edge60_Node000037_Node000038" title=" " alt="" coords="402,1106,421,1120,442,1150,452,1177,458,1205,470,1240,496,1295,491,1298,465,1242,453,1207,447,1178,438,1152,417,1124,399,1111"/>
 <area shape="rect" id="Node000041" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="485,1109,532,1135"/>
 <area shape="poly" id="edge64_Node000037_Node000041" title=" " alt="" coords="401,1101,471,1113,470,1118,400,1106"/>
 <area shape="rect" id="Node000042" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="483,1159,534,1184"/>
-<area shape="poly" id="edge66_Node000037_Node000042" title=" " alt="" coords="399,1109,421,1120,473,1149,470,1153,418,1125,397,1114"/>
+<area shape="poly" id="edge66_Node000037_Node000042" title=" " alt="" coords="399,1109,421,1120,473,1148,470,1153,418,1125,397,1114"/>
 <area shape="rect" id="Node000043" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="480,1060,537,1086"/>
 <area shape="poly" id="edge68_Node000037_Node000043" title=" " alt="" coords="400,1090,464,1078,465,1083,401,1095"/>
-<area shape="poly" id="edge63_Node000038_Node000005" title=" " alt="" coords="530,1308,548,1290,587,1214,618,1133,641,1050,658,968,675,822,679,723,685,723,681,823,663,969,647,1051,623,1135,592,1217,552,1293,534,1312"/>
+<area shape="poly" id="edge63_Node000038_Node000005" title=" " alt="" coords="530,1308,548,1290,587,1215,618,1134,641,1051,658,969,675,823,679,724,685,724,681,824,663,970,646,1052,623,1135,592,1217,552,1293,534,1312"/>
 <area shape="rect" id="Node000039" href="$df/df3/analysum_8f90.html#aa51b1a5786e7b5719fe2ca679efc66b0" title="Compute the (m=0 or n=0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;sin..." alt="" coords="645,1335,722,1360"/>
 <area shape="poly" id="edge61_Node000038_Node000039" title=" " alt="" coords="537,1325,631,1338,630,1343,536,1330"/>
 <area shape="rect" id="Node000040" href="$d1/d90/analysum2_8f90.html#a47a0d185131a197c6fc62ee5d68d62fb" title="Compute the (m&gt;0 and n&gt;0) part of the DFT of the analytical Fourier transforms of the equivalently&#45;si..." alt="" coords="642,1285,725,1311"/>
-<area shape="poly" id="edge62_Node000038_Node000040" title=" " alt="" coords="536,1317,627,1304,627,1309,537,1322"/>
-<area shape="poly" id="edge65_Node000041_Node000005" title=" " alt="" coords="531,1110,548,1096,580,1050,606,999,627,945,644,892,667,795,677,723,682,724,672,796,649,894,632,947,611,1001,584,1053,552,1100,534,1114"/>
-<area shape="poly" id="edge67_Node000042_Node000005" title=" " alt="" coords="532,1159,548,1146,583,1092,611,1034,633,973,650,913,670,802,678,723,683,724,675,803,655,914,638,975,616,1036,587,1095,552,1149,536,1163"/>
-<area shape="poly" id="edge72_Node000045_Node000005" title=" " alt="" coords="401,728,468,742,509,746,549,742,597,729,641,712,643,717,599,734,550,747,509,752,467,747,400,733"/>
+<area shape="poly" id="edge62_Node000038_Node000040" title=" " alt="" coords="536,1317,626,1304,627,1309,537,1322"/>
+<area shape="poly" id="edge65_Node000041_Node000005" title=" " alt="" coords="531,1110,548,1096,580,1050,606,999,627,946,644,893,666,795,677,724,682,724,672,796,649,894,632,948,611,1001,584,1053,552,1100,534,1114"/>
+<area shape="poly" id="edge67_Node000042_Node000005" title=" " alt="" coords="532,1159,548,1146,582,1093,611,1034,633,974,650,913,670,803,678,723,683,724,675,804,655,914,638,975,616,1036,587,1095,552,1149,536,1163"/>
+<area shape="poly" id="edge72_Node000045_Node000005" title=" " alt="" coords="401,728,468,742,509,746,549,742,597,729,640,713,642,717,599,734,550,747,509,752,467,747,400,733"/>
 </map>

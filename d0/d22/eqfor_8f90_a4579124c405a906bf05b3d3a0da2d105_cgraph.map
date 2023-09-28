@@ -1,34 +1,34 @@
 <map id="eqfor" name="eqfor">
 <area shape="rect" id="Node000001" title="Basis physics analysis and evaluaton of force balance. This is where most of the contents of the thre..." alt="" coords="5,131,56,156"/>
 <area shape="rect" id="Node000002" href="$d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5" title="Computes minimum and maximum &#160;along &#160;between two angle lines ( )." alt="" coords="107,5,181,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="37,129,63,87,102,40,104,38,108,42,106,44,67,90,41,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="37,129,63,87,102,40,104,38,107,42,106,44,67,90,41,131"/>
 <area shape="rect" id="Node000003" href="$d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b" title="Computes br, bphi, bz, bsubs on half&#45;radial mesh." alt="" coords="123,55,165,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="50,128,110,87,113,91,53,132"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="50,128,109,87,112,92,53,132"/>
 <area shape="rect" id="Node000004" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="368,156,540,182"/>
-<area shape="poly" id="edge18_Node000001_Node000004" title=" " alt="" coords="56,140,169,140,317,148,354,152,353,157,316,153,169,146,56,146"/>
+<area shape="poly" id="edge18_Node000001_Node000004" title=" " alt="" coords="56,140,169,140,317,148,353,152,353,157,316,153,169,146,56,146"/>
 <area shape="rect" id="Node000005" href="$d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6" title="Compute flux&#45;surface averaged radial force balance ." alt="" coords="107,156,181,182"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="56,146,93,155,92,160,55,152"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="56,146,92,155,91,160,55,152"/>
 <area shape="rect" id="Node000006" href="$d4/d21/elongation_8f90.html#ad09a13ed71a559093ad6f28eef38c9c7" title="Compute Waist thickness and height in &#160;symmetry planes." alt="" coords="104,205,184,231"/>
-<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="51,155,105,192,110,195,107,199,102,196,48,159"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="51,155,105,192,109,195,106,199,102,196,48,159"/>
 <area shape="rect" id="Node000007" href="$d6/d53/jxbforce_8f90.html#aef04f343b688724d6ec0ee8f2a9db7c1" title="Program for computing local &#160;force balance." alt="" coords="111,307,177,332"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="42,155,129,293,124,296,38,158"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="166,67,234,76,317,97,372,120,420,146,418,151,370,125,315,102,233,82,165,72"/>
-<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="424,157,418,147,421,138,434,132,454,129,477,132,488,139,485,144,475,137,454,135,435,137,425,141,423,147,428,154"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="42,155,128,292,124,295,38,158"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="166,67,234,76,317,97,372,120,420,146,417,150,370,125,315,102,233,82,165,72"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="424,157,418,147,421,138,434,132,454,129,476,132,487,138,485,143,474,137,454,135,435,137,425,141,423,147,428,154"/>
 <area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="181,166,353,166,353,172,181,172"/>
-<area shape="poly" id="edge17_Node000007_Node000004" title=" " alt="" coords="156,304,188,274,231,243,306,208,380,184,382,189,308,213,233,247,191,278,159,308"/>
+<area shape="poly" id="edge17_Node000007_Node000004" title=" " alt="" coords="156,304,188,274,231,243,306,208,379,184,381,189,308,213,233,247,191,278,159,308"/>
 <area shape="rect" id="Node000008" href="$d9/d8e/fext__fft_8f90.html#a5558cd119122c53bb067ab7fc61b9fee" title="Extends &#160;from ntheta2 interval to full ntheta3 interval in angle ." alt="" coords="244,405,304,431"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="160,330,234,392,238,395,235,399,230,396,157,335"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="160,330,234,392,238,395,234,399,230,396,157,335"/>
 <area shape="rect" id="Node000009" href="$da/d22/fsym__fft_8f90.html#a019fe7da811a16aec5f0726e33df73ba" title="Contract bs,bu,bv from full nu interval to half&#45;u interval so cos, sin integrals can be performed on ..." alt="" coords="241,455,308,480"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="154,331,185,383,208,414,234,442,236,444,233,448,230,445,204,417,181,386,150,334"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="154,331,185,383,208,414,234,442,236,443,232,447,230,445,204,417,181,386,150,334"/>
 <area shape="rect" id="Node000010" href="$d4/d23/fsym__invfft_8f90.html#a50d31cc0bfc47f4d0241f5154c78ef2b" title="Extends function from ntheta2 to ntheta3 range." alt="" coords="232,257,316,283"/>
-<area shape="poly" id="edge11_Node000007_Node000010" title=" " alt="" coords="176,305,224,286,225,291,178,310"/>
+<area shape="poly" id="edge11_Node000007_Node000010" title=" " alt="" coords="176,305,223,287,225,292,178,310"/>
 <area shape="rect" id="Node000011" href="$d1/d9b/getbsubs_8f90.html#a5090459bbac22499a3c1c6a97740cd1b" title="Solves the radial force balance &#160;for &#160;in real space using collocation." alt="" coords="237,356,311,382"/>
-<area shape="poly" id="edge12_Node000007_Node000011" title=" " alt="" coords="178,329,225,348,224,353,176,334"/>
+<area shape="poly" id="edge12_Node000007_Node000011" title=" " alt="" coords="178,329,225,347,223,352,176,334"/>
 <area shape="rect" id="Node000013" href="$de/d25/mercier_8f90.html#a6635929818286c4cff963bd148261208" title="Evaluate the Mercier stability criterion." alt="" coords="242,307,306,332"/>
 <area shape="poly" id="edge14_Node000007_Node000013" title=" " alt="" coords="177,317,227,317,227,322,177,322"/>
 <area shape="rect" id="Node000012" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="426,356,482,382"/>
 <area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="312,366,411,366,411,372,312,372"/>
-<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="299,304,315,293,378,240,429,190,432,194,382,244,318,298,302,308"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="299,304,315,293,378,240,428,191,432,195,381,244,318,298,302,308"/>
 <area shape="rect" id="Node000014" href="$d0/d29/namespacesafe__open__mod.html#aab207f9769415b0cccd91260a8382eeb" title=" " alt="" coords="364,307,544,332"/>
-<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="307,317,350,317,350,322,307,322"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="307,317,349,317,349,322,307,322"/>
 </map>

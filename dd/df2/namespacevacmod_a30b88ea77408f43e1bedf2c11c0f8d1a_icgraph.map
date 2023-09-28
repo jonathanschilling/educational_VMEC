@@ -1,13 +1,13 @@
 <map id="vacmod::allocate_nestor" name="vacmod::allocate_nestor">
 <area shape="rect" id="Node000001" title=" " alt="" coords="468,31,629,56"/>
 <area shape="rect" id="Node000002" href="$d7/d8c/allocate__nunv_8f90.html#a1fb4098498daa9bd7a8487120397c1a7" title="allocate arrays depending on the number of Fourier coefficients nunv" alt="" coords="318,5,420,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="453,33,420,28,420,23,453,27"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="452,33,420,28,420,23,453,27"/>
 <area shape="rect" id="Node000006" href="$d4/d69/nestor__main_8f90.html#a1b0fd336e80285a96925333daa2ee8f0" title="Main program of stand&#45;alone version of NESTOR." alt="" coords="340,55,398,80"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="454,59,398,66,398,61,453,54"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="453,59,398,66,398,61,452,54"/>
 <area shape="rect" id="Node000003" href="$d8/da3/readin_8f90.html#a60f2bfd8fc6f7c3e027a8f91ef0c7b25" title="Read the input file." alt="" coords="214,5,270,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="303,21,271,21,271,16,303,16"/>
 <area shape="rect" id="Node000004" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,5,166,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="199,21,167,21,167,16,199,16"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="198,21,167,21,167,16,198,16"/>
 <area shape="rect" id="Node000005" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,5,65,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="98,21,65,21,65,16,98,16"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="97,21,65,21,65,16,97,16"/>
 </map>

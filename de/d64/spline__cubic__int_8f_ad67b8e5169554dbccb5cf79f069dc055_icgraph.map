@@ -1,6 +1,6 @@
 <map id="spline_cubic_int" name="spline_cubic_int">
 <area shape="rect" id="Node000001" title=" " alt="" coords="104,29,218,55"/>
 <area shape="rect" id="Node000002" href="$da/dc8/profile__functions_8f.html#a5bfa30ed89583073252fb965b7cf69e0" title=" " alt="" coords="5,29,56,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,45,56,45,56,40,89,40"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="52,17,45,10,30,8,17,10,10,14,9,20,13,28,8,30,3,21,6,11,15,5,31,3,47,6,56,13"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,45,56,45,56,40,88,40"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="52,16,45,10,30,8,17,10,10,14,9,20,13,28,8,30,3,21,6,11,15,5,31,3,47,5,55,12"/>
 </map>

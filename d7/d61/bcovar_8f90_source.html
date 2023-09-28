@@ -658,17 +658,17 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">! FOR FORCE BALANCE AND RETURN (IEQUI=1)</span></div>
 <div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <span class="comment">! final call from fileout --&gt; compute additional stuff</span></div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keywordflow">DO</span> js = ns-1,2,-1</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keywordflow">DO</span> js = ns-1,2,-1 <span class="comment">! from the ~edge inward</span></div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns <span class="comment">! every grid point on the flux surfaces</span></div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>          bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)</div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span><span class="keywordflow">       END DO</span></div>
 <div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span><span class="keywordflow">    END DO</span></div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>    <span class="comment">! ADJUST &lt;bsubvh&gt; AFTER MESH-BLENDING</span></div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordflow">DO</span> js = 2, ns</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordflow">DO</span> js = 2, ns <span class="comment">! local on half-grid?</span></div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>       curpol_temp = fpsi(js) - sum(bsubvh(js:nrzt:ns)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(js:nrzt:ns))</div>
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span> </div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>       <span class="keywordflow">DO</span> l = js, nrzt, ns <span class="comment">! all grid points on flux surface</span></div>
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>          bsubvh(l) = bsubvh(l) + curpol_temp</div>
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span><span class="keywordflow">       END DO</span></div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span><span class="keywordflow">    END DO</span></div>
@@ -680,7 +680,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    bsubu_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubu_e(:nrzt) <span class="comment">! will be undone again in jxbforce...</span></div>
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    bsubv_o(:nrzt) = <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(:nrzt)*bsubv_e(:nrzt)</div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bcovar_fileout&quot;</span>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab38d66f9ae158a4318f7699d1d47bbd4">num_eqsolve_retries</a>, id=0)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bcovar_fileout&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span> </div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;lu_e&quot;</span>, ns, nzeta, ntheta3, lu(:nrzt,0))</div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>      <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;lv_e&quot;</span>, ns, nzeta, ntheta3, lv(:nrzt,0))</div>
@@ -792,7 +792,7 @@ $(document).ready(function(){initNavTree('d7/d61/bcovar_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d61/bcovar_8f90.html">bcovar.f90</a></li>
-    <li class="footer">Generated on Thu Sep 28 2023 07:47:29 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Sep 28 2023 18:02:31 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

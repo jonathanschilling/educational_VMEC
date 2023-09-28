@@ -111,6 +111,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
    ! Compute u (=theta), v (=zeta) derivatives of B sub s
 
   ! fixup input coming from bss: zero terms past magnetic axis
+  ! NOTE: FIXME: This is actually the target array for the interpolation to the half-grid !!!
+  ! TODO: This should probably be `bsubsh(1,:) = 0` instead !!!
   bsubs(1,:) = 0
 
   lprint_flag = (ier_flag.eq.successful_term_flag)
@@ -151,7 +153,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
             bsubua(nznt1,0:1), bsubva(nznt1,0:1),                   &
             bsupv1(nznt), bsubu1(nznt), bsubv1(nznt),               &
             bsubsmn(ns,0:mnyq,-nnyq:nnyq,0:1),                      &
-            bsubs_s(nznt), bsubs_a(nznt), sqrtg(nznt),              &
+            bsubs_s(nznt),      bsubs_a(nznt),      sqrtg(nznt),    &
             bsubu_s(nznt1,0:1), bsubu_a(nznt1,0:1),                 &
             bsubv_s(nznt1,0:1), bsubv_a(nznt1,0:1), stat=j)
   IF (j .ne. 0) STOP 'Allocation error in jxbforce'
@@ -187,12 +189,12 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
                        bsubs_a, bsubu_a, bsubv_a)
      ELSE
         bsubs_s(:) = bsubs(js,:)
-        bsubu_s = bsubu(js,:,:)
-        bsubv_s = bsubv(js,:,:)
+        bsubu_s    = bsubu(js,:,:)
+        bsubv_s    = bsubv(js,:,:)
      END IF
 
      ! FOURIER LOW-PASS FILTER bsubX
-     DO m = 0, mpol1
+     DO m = 0, mpol1 ! 0, 1, ..., (mpol-1)
         mparity = MOD(m, 2)
         DO n = 0, ntor
 
@@ -367,6 +369,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   ! brho==sigma B_s, pp1 and pp2 are the Jacobian times the hot particle parallel
   ! pressure radial gradient Amplitudes on the full integer mesh
   correct_bsubs: DO js = 2, ns-1
+
      jxb(:) = cp5*(gsqrt(js,:) + gsqrt(js+1,:)) ! re-use jxb array for Jacobian on full grid
      bsupu1(:) = cp5*(bsupu(js,:)*gsqrt(js,:) + bsupu(js+1,:)*gsqrt(js+1,:))
      bsupv1(:) = cp5*(bsupv(js,:)*gsqrt(js,:) + bsupv(js+1,:)*gsqrt(js+1,:))

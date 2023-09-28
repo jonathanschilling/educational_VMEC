@@ -541,17 +541,17 @@ SUBROUTINE bcovar (lu, lv)
     ! FOR FORCE BALANCE AND RETURN (IEQUI=1)
 
     ! final call from fileout --> compute additional stuff
-    DO js = ns-1,2,-1
-       DO l = js, nrzt, ns
+    DO js = ns-1,2,-1 ! from the ~edge inward
+       DO l = js, nrzt, ns ! every grid point on the flux surfaces
           bsubvh(l) = 2*bsubv_e(l) - bsubvh(l+1)
        END DO
     END DO
 
     ! ADJUST <bsubvh> AFTER MESH-BLENDING
-    DO js = 2, ns
+    DO js = 2, ns ! local on half-grid?
        curpol_temp = fpsi(js) - SUM(bsubvh(js:nrzt:ns)*wint(js:nrzt:ns))
 
-       DO l = js, nrzt, ns
+       DO l = js, nrzt, ns ! all grid points on flux surface
           bsubvh(l) = bsubvh(l) + curpol_temp
        END DO
     END DO
@@ -563,7 +563,7 @@ SUBROUTINE bcovar (lu, lv)
     bsubu_o(:nrzt) = shalf(:nrzt)*bsubu_e(:nrzt) ! will be undone again in jxbforce...
     bsubv_o(:nrzt) = shalf(:nrzt)*bsubv_e(:nrzt)
 
-    if (open_dbg_context("bcovar_fileout", num_eqsolve_retries, id=0)) then
+    if (open_dbg_context("bcovar_fileout", id=0)) then
 
       call add_real_3d("lu_e", ns, nzeta, ntheta3, lu(:nrzt,0))
       call add_real_3d("lv_e", ns, nzeta, ntheta3, lv(:nrzt,0))

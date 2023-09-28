@@ -39,8 +39,11 @@ SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
            gsu(nrzt), gsv(nrzt))
 
   DO l = 2, nrzt
+
      rv12(l)  = p5*(rv(l,0)+rv(l-1,0) + shalf(l)*(rv(l,1) + rv(l-1,1)))
      zv12(l)  = p5*(zv(l,0)+zv(l-1,0) + shalf(l)*(zv(l,1) + zv(l-1,1)))
+
+     ! -------------
 
      rs12(l)  = rs(l) + dshalfds*(r1(l,1) + r1(l-1,1))/shalf(l)
      zs12(l)  = zs(l) + dshalfds*(z1(l,1) + z1(l-1,1))/shalf(l)
@@ -48,11 +51,14 @@ SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
      gsu(l)   = rs12(l)*ru12(l) + zs12(l)*zu12(l)
      gsv(l)   = rs12(l)*rv12(l) + zs12(l)*zv12(l)
 
+     bsubs(l) = bsupu(l)*gsu(l) + bsupv(l)*gsv(l)
+
+     ! -------------
+
      br(l)    = bsupu(l)*ru12(l) + bsupv(l)*rv12(l)
      bphi(l)  = bsupv(l)*r12(l)
      bz(l)    = bsupu(l)*zu12(l) + bsupv(l)*zv12(l)
 
-     bsubs(l) = bsupu(l)*gsu(l) + bsupv(l)*gsv(l)
   END DO
 
   if (open_dbg_context("bss", id=0)) then

@@ -9,7 +9,7 @@
 !> @param nsnew new number of flux surfaces
 !> @param nsold old number of flux surfaces
 SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
-  USE vmec_main, ONLY: dp, rprec, mnsize, input_extension
+  USE vmec_main, ONLY: dp, rprec, mnsize
   USE vmec_params, ONLY: ntmax
   USE vmec_persistent, ONLY: ixm
   use vmec_dim
@@ -26,7 +26,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
   REAL(rprec), PARAMETER :: zero=0, one=1
 
-  INTEGER :: ntype, js, mn
+  INTEGER :: ntype, js
   integer, dimension(nsnew) :: js1, js2
   REAL(rprec) :: hsold
   real(rprec), dimension(nsnew) :: sj, s1, xint
@@ -47,20 +47,27 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
      ! radial interpolation from old, coarse state vector to new, finer state vector
      DO js = 1, nsnew
+
         sj(js) = REAL(js - 1, rprec)/(nsnew - 1)
+
         js1(js) = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)
         js2(js) = MIN(js1(js) + 1, nsold)
+
         s1(js) = (js1(js) - 1)*hsold
+
         xint(js) = (sj(js) - s1(js))/hsold
         xint(js) = MIN(one, xint(js))
         xint(js) = MAX(zero,xint(js))
+
         xnew(js,:,ntype) = (   (one - xint(js))*xold(js1(js),:,ntype) &
                              +        xint(js) *xold(js2(js),:,ntype)   )/scalxc(js,:,1)
      END DO
 
      ! Zero M=1 modes at origin
+     ! Actually, all odd-m modes are zeroed!
      WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
         xnew(1,:,ntype) = 0
+
   END DO
 
   if (open_dbg_context("interp")) then

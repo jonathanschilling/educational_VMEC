@@ -185,9 +185,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
         bu1=>bsubu(js,:,:)
         bv1=>bsubv(js,:,:)
         CALL fsym_fft (bs1,     bu1,     bv1,     &
-                       bsubs_s, bsubu_s, bsubv_s, &
-                       bsubs_a, bsubu_a, bsubv_a)
+                       bsubs_s, bsubu_s, bsubv_s, & !     stellarator-symmetric parts
+                       bsubs_a, bsubu_a, bsubv_a)   ! non-stellarator-symmetric parts
      ELSE
+        ! only stellarator-symmetric parts
         bsubs_s(:) = bsubs(js,:)
         bsubu_s    = bsubu(js,:,:)
         bsubv_s    = bsubv(js,:,:)
@@ -224,25 +225,25 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
            DO k = 1, nzeta
               lk = k
               DO j = 1, ntheta2
-                 tsini1 = sinmui(j,m)*cosnv(k,n)*dnorm1
-                 tsini2 = cosmui(j,m)*sinnv(k,n)*dnorm1
-                 tcosi1 = cosmui(j,m)*cosnv(k,n)*dnorm1
-                 tcosi2 = sinmui(j,m)*sinnv(k,n)*dnorm1
+                 tsini1 = sinmui(j,m)*cosnv(k,n)*dnorm1 ! sin-cos
+                 tsini2 = cosmui(j,m)*sinnv(k,n)*dnorm1 ! cos-sin
+                 tcosi1 = cosmui(j,m)*cosnv(k,n)*dnorm1 ! cos-cos
+                 tcosi2 = sinmui(j,m)*sinnv(k,n)*dnorm1 ! sin-sin
 
-                 bsubsmn1 = bsubsmn1 + tsini1*bsubs_s(lk)
-                 bsubsmn2 = bsubsmn2 + tsini2*bsubs_s(lk)
-                 bsubvmn1 = bsubvmn1 + tcosi1*bsubv_s(lk, mparity)
-                 bsubvmn2 = bsubvmn2 + tcosi2*bsubv_s(lk, mparity)
-                 bsubumn1 = bsubumn1 + tcosi1*bsubu_s(lk, mparity)
-                 bsubumn2 = bsubumn2 + tcosi2*bsubu_s(lk, mparity)
+                 bsubsmn1 = bsubsmn1 + tsini1*bsubs_s(lk)          ! sin-cos
+                 bsubsmn2 = bsubsmn2 + tsini2*bsubs_s(lk)          ! cos-sin
+                 bsubvmn1 = bsubvmn1 + tcosi1*bsubv_s(lk, mparity) ! cos-cos
+                 bsubvmn2 = bsubvmn2 + tcosi2*bsubv_s(lk, mparity) ! sin-sin
+                 bsubumn1 = bsubumn1 + tcosi1*bsubu_s(lk, mparity) ! cos-cos
+                 bsubumn2 = bsubumn2 + tcosi2*bsubu_s(lk, mparity) ! sin-sin
 
                  IF (lasym) THEN
-                 bsubsmn3 = bsubsmn3 + tcosi1*bsubs_a(lk)
-                 bsubsmn4 = bsubsmn4 + tcosi2*bsubs_a(lk)
-                 bsubvmn3 = bsubvmn3 + tsini1*bsubv_a(lk, mparity)
-                 bsubvmn4 = bsubvmn4 + tsini2*bsubv_a(lk, mparity)
-                 bsubumn3 = bsubumn3 + tsini1*bsubu_a(lk, mparity)
-                 bsubumn4 = bsubumn4 + tsini2*bsubu_a(lk, mparity)
+                 bsubsmn3 = bsubsmn3 + tcosi1*bsubs_a(lk)          ! cos-cos
+                 bsubsmn4 = bsubsmn4 + tcosi2*bsubs_a(lk)          ! sin-sin
+                 bsubvmn3 = bsubvmn3 + tsini1*bsubv_a(lk, mparity) ! sin-cos
+                 bsubvmn4 = bsubvmn4 + tsini2*bsubv_a(lk, mparity) ! cos-sin
+                 bsubumn3 = bsubumn3 + tsini1*bsubu_a(lk, mparity) ! sin-cos
+                 bsubumn4 = bsubumn4 + tsini2*bsubu_a(lk, mparity) ! cos-sin
                  END IF
 
                  lk = lk + nzeta
@@ -334,14 +335,19 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
   if (open_dbg_context("jxbforce_bsub_lowpass", id=0)) then
 
+    ! overwrite in-place; half-grid
     call add_real_3d("bsubu_e", ns, nzeta, ntheta3, bsubu(:,:,0))
     call add_real_3d("bsubv_e", ns, nzeta, ntheta3, bsubv(:,:,0))
     call add_real_3d("bsubu_o", ns, nzeta, ntheta3, bsubu(:,:,1))
     call add_real_3d("bsubv_o", ns, nzeta, ntheta3, bsubv(:,:,1))
 
-    call add_real_4d("bsubsu", ns, 2, nzeta, ntheta3, bsubsu, order=(/1, 4, 2, 3/))
-    call add_real_4d("bsubsv", ns, 2, nzeta, ntheta3, bsubsv, order=(/1, 4, 2, 3/))
+    ! newly computed; full-grid
+    call add_real_3d("bsubsu_e", ns, nzeta, ntheta3, bsubsu(:,:,0)) ! order=(/1, 4, 2, 3/))
+    call add_real_3d("bsubsu_o", ns, nzeta, ntheta3, bsubsu(:,:,1)) ! order=(/1, 4, 2, 3/))
+    call add_real_3d("bsubsv_e", ns, nzeta, ntheta3, bsubsv(:,:,0)) ! order=(/1, 4, 2, 3/))
+    call add_real_3d("bsubsv_o", ns, nzeta, ntheta3, bsubsv(:,:,1)) ! order=(/1, 4, 2, 3/))
 
+    ! newly computed; full-grid
     call add_real_3d("bsubuv", ns, nzeta, ntheta3, bsubuv)
     call add_real_3d("bsubvu", ns, nzeta, ntheta3, bsubvu)
 

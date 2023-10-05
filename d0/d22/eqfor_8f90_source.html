@@ -747,282 +747,287 @@ $(document).ready(function(){initNavTree('d0/d22/eqfor_8f90_source.html','../../
 <div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;bmin_ntheta2_ns&quot;</span>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a71c4a7c02b0330b0593fce78d7c0b6ac">bmin</a>(ntheta2,ns))</div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;bmax_ntheta2_ns&quot;</span>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a46edf6de2104bb0e7e3a3bd3eda7ad23">bmax</a>(ntheta2,ns))</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span> </div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;waist&quot;</span>,  2, waist)</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;height&quot;</span>, 2, height)</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span> </div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbtot&quot;</span>, sumbtot)</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbtor&quot;</span>, sumbtor)</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbpol&quot;</span>, sumbpol)</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betapol&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>)</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sump20&quot;</span>, sump20)</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sump2&quot;</span>, sump2)</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betatot&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>)</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betator&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a>)</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;VolAvgB&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae0dfd9adbd49b87d38b8d5ee49df398e">volavgb</a>)</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;IonLarmor&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a1c21d56b5a656a08c546e68fc9a6fc5c">ionlarmor</a>)</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;jPS2&quot;</span>, ns-2, jps2(2:ns1))</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span> </div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s2&quot;</span>, s2)</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;jpar_perp&quot;</span>, jpar_perp)</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;jparPS_perp&quot;</span>, jparps_perp)</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span> </div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;psi&quot;</span>, ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a9d3b4db7b3a8af981708b8a659a0926b">psi</a>)</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span> </div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;ygeo&quot;</span>,   ns,   <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a039ae0f68d441387e3d51e0e87834ecd">ygeo</a>)</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yinden&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a62184eee089db3e4831b37c15a87e43a">yinden</a>(2:ns))</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yellip&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ac39d3e143511325526d7c46faa279d8f">yellip</a>(2:ns))</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;ytrian&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab4c8910e5edf135a5a17bdcf0ccf1ed6">ytrian</a>(2:ns))</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yshift&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a2ed3177986b3760fb62f0d8325097205">yshift</a>(2:ns))</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span> </div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>  <span class="keyword">WRITE</span> (nthreed, 130)</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>130 <span class="keyword">FORMAT</span>(//,<span class="stringliteral">&#39; Magnetic Fields and Pressure&#39;</span>,/,1x,71(<span class="stringliteral">&#39;-&#39;</span>))</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>  fac = cp5/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a></div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  <span class="keyword">WRITE</span> (nthreed, 140)                    &amp;</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>     sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>,      pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>,             &amp;</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>     fac*sumbpol,   fac*sumbpol/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>     fac*sumbtor,   fac*sumbtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>     fac*sumbtot,   fac*sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>     c1p5*sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>, c1p5*pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a></div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>140 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; Volume Integrals (Joules) and Volume Averages (Pascals)&#39;</span>,/,&amp;</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>           24x,<span class="stringliteral">&#39;Integral&#39;</span>,6x,<span class="stringliteral">&#39;Average&#39;</span>,/,        &amp;</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>           <span class="stringliteral">&#39; pressure         = &#39;</span>,1p,2e14.6,/,&amp;</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>           <span class="stringliteral">&#39; bpol**2 /(2 mu0) = &#39;</span>,2e14.6,/, &amp;</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>           <span class="stringliteral">&#39; btor**2/(2 mu0)  = &#39;</span>,2e14.6,/, &amp;</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>           <span class="stringliteral">&#39; b**2/(2 mu0)     = &#39;</span>,2e14.6,/,&amp;</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>           <span class="stringliteral">&#39; EKIN (3/2p)      = &#39;</span>,2e14.6,/)</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span> </div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_volquant&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span> </div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_p&quot;</span>, sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_p&quot;</span>, pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>    <span class="keywordflow">IF</span> (ntor .gt. 1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>        <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;waist&quot;</span>,  2, waist)</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>        <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;height&quot;</span>, 2, height)</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>        <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;waist&quot;</span>,  1, waist(1))</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>        <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;height&quot;</span>, 1, height(1))</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span><span class="keywordflow">    end if</span></div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span> </div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbtot&quot;</span>, sumbtot)</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbtor&quot;</span>, sumbtor)</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sumbpol&quot;</span>, sumbpol)</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betapol&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>)</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sump20&quot;</span>, sump20)</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;sump2&quot;</span>, sump2)</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betatot&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>)</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betator&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a>)</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;VolAvgB&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae0dfd9adbd49b87d38b8d5ee49df398e">volavgb</a>)</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;IonLarmor&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a1c21d56b5a656a08c546e68fc9a6fc5c">ionlarmor</a>)</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span> </div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;jPS2&quot;</span>, ns-2, jps2(2:ns1))</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span> </div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s2&quot;</span>, s2)</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;jpar_perp&quot;</span>, jpar_perp)</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;jparPS_perp&quot;</span>, jparps_perp)</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span> </div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;psi&quot;</span>, ns, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a9d3b4db7b3a8af981708b8a659a0926b">psi</a>)</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span> </div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;ygeo&quot;</span>,   ns,   <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a039ae0f68d441387e3d51e0e87834ecd">ygeo</a>)</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yinden&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a62184eee089db3e4831b37c15a87e43a">yinden</a>(2:ns))</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yellip&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ac39d3e143511325526d7c46faa279d8f">yellip</a>(2:ns))</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;ytrian&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab4c8910e5edf135a5a17bdcf0ccf1ed6">ytrian</a>(2:ns))</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;yshift&quot;</span>, ns-1, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a2ed3177986b3760fb62f0d8325097205">yshift</a>(2:ns))</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span> </div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>  <span class="keyword">WRITE</span> (nthreed, 130)</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>130 <span class="keyword">FORMAT</span>(//,<span class="stringliteral">&#39; Magnetic Fields and Pressure&#39;</span>,/,1x,71(<span class="stringliteral">&#39;-&#39;</span>))</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>  fac = cp5/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a></div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>  <span class="keyword">WRITE</span> (nthreed, 140)                    &amp;</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>     sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>,      pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>,             &amp;</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>     fac*sumbpol,   fac*sumbpol/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>     fac*sumbtor,   fac*sumbtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>     fac*sumbtot,   fac*sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>, &amp;</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>     c1p5*sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>, c1p5*pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a></div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>140 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; Volume Integrals (Joules) and Volume Averages (Pascals)&#39;</span>,/,&amp;</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>           24x,<span class="stringliteral">&#39;Integral&#39;</span>,6x,<span class="stringliteral">&#39;Average&#39;</span>,/,        &amp;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>           <span class="stringliteral">&#39; pressure         = &#39;</span>,1p,2e14.6,/,&amp;</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>           <span class="stringliteral">&#39; bpol**2 /(2 mu0) = &#39;</span>,2e14.6,/, &amp;</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>           <span class="stringliteral">&#39; btor**2/(2 mu0)  = &#39;</span>,2e14.6,/, &amp;</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>           <span class="stringliteral">&#39; b**2/(2 mu0)     = &#39;</span>,2e14.6,/,&amp;</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>           <span class="stringliteral">&#39; EKIN (3/2p)      = &#39;</span>,2e14.6,/)</div>
 <div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span> </div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_bpol&quot;</span>, fac*sumbpol)</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_bpol&quot;</span>, fac*sumbpol/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span> </div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_btor&quot;</span>, fac*sumbtor)</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_btor&quot;</span>, fac*sumbtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span> </div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_modb&quot;</span>, fac*sumbtot)</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_modb&quot;</span>, fac*sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span> </div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_ekin&quot;</span>, c1p5*sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_ekin&quot;</span>, c1p5*pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span> </div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span> </div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>  <span class="keyword">WRITE</span> (nthreed, 800)</div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>800 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; MAGNETIC AXIS COEFFICIENTS&#39;</span>/,                            &amp;</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>             <span class="stringliteral">&#39;    n     rmag       zmag        rmag        zmag&#39;</span>,/,     &amp;</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>             <span class="stringliteral">&#39;        (cos nv)   (sin nv)    (sin nv)    (cos nv)&#39;</span>,/)</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>  loff = lbound(rmags,1)</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span> </div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>  <span class="keyword">allocate</span>(rax_symm(0:ntor), zax_symm(0:ntor), rax_asym(0:ntor), zax_asym(0:ntor))</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span> </div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>  <span class="keywordflow">DO</span> n = 0, ntor</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>     n1 = n + loff</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_volquant&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_p&quot;</span>, sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_p&quot;</span>, pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span> </div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_bpol&quot;</span>, fac*sumbpol)</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_bpol&quot;</span>, fac*sumbpol/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span> </div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_btor&quot;</span>, fac*sumbtor)</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_btor&quot;</span>, fac*sumbtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span> </div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_modb&quot;</span>, fac*sumbtot)</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_modb&quot;</span>, fac*sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span> </div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;int_ekin&quot;</span>, c1p5*sump/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;avg_ekin&quot;</span>, c1p5*pavg/<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>)</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span> </div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span> </div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>  <span class="keyword">WRITE</span> (nthreed, 800)</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>800 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; MAGNETIC AXIS COEFFICIENTS&#39;</span>/,                            &amp;</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>             <span class="stringliteral">&#39;    n     rmag       zmag        rmag        zmag&#39;</span>,/,     &amp;</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>             <span class="stringliteral">&#39;        (cos nv)   (sin nv)    (sin nv)    (cos nv)&#39;</span>,/)</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>  loff = lbound(rmags,1)</div>
 <div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span> </div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>     t1 = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(0)*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>  <span class="keyword">allocate</span>(rax_symm(0:ntor), zax_symm(0:ntor), rax_asym(0:ntor), zax_asym(0:ntor))</div>
 <div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span> </div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>     tz = t1</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>     <span class="keywordflow">IF</span> (.not.<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) tz = 0</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>  <span class="keywordflow">DO</span> n = 0, ntor</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>     n1 = n + loff</div>
 <div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>     rax_symm(n) =  t1*rmags(n1)</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>     zax_symm(n) = -tz*zmags(n1)</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>       rax_asym(n) = -tz*rmaga(n1)</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>       zax_asym(n) =  t1*zmaga(n1)</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>     <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>       rax_asym(n) = 0.0_dp</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>       zax_asym(n) = 0.0_dp</div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span><span class="keywordflow">     end if</span></div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span> </div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>        <span class="keyword">WRITE</span> (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1)), -tz*rmaga(n1),   t1*zmaga(n1)</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>     <span class="keywordflow">ELSE</span></div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>        <span class="keyword">WRITE</span> (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1))</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span><span class="keywordflow">     END IF</span></div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span><span class="keywordflow">  END DO</span></div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>820 <span class="keyword">FORMAT</span>(i5,1p,4e12.4)</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span> </div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_axis&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span> </div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rax_symm&quot;</span>, ntor+1, rax_symm)</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zax_symm&quot;</span>, ntor+1, zax_symm)</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rax_asym&quot;</span>, ntor+1, rax_asym)</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zax_asym&quot;</span>, ntor+1, zax_asym)</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>     t1 = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(0)*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n)</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>     tz = t1</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>     <span class="keywordflow">IF</span> (.not.<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ac815c089a079d08356f5740573842c86">lthreed</a>) tz = 0</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span> </div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>     rax_symm(n) =  t1*rmags(n1)</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>     zax_symm(n) = -tz*zmags(n1)</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>       rax_asym(n) = -tz*rmaga(n1)</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>       zax_asym(n) =  t1*zmaga(n1)</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>     <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>       rax_asym(n) = 0.0_dp</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>       zax_asym(n) = 0.0_dp</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><span class="keywordflow">     end if</span></div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span> </div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>     <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>        <span class="keyword">WRITE</span> (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1)), -tz*rmaga(n1),   t1*zmaga(n1)</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>     <span class="keywordflow">ELSE</span></div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>        <span class="keyword">WRITE</span> (nthreed, 820) n, t1*rmags(n1), (-tz*zmags(n1))</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span><span class="keywordflow">     END IF</span></div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>820 <span class="keyword">FORMAT</span>(i5,1p,4e12.4)</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> </div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_axis&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span> </div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>  betstr = c2p0*sqrt(sump2/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)/(sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rax_symm&quot;</span>, ntor+1, rax_symm)</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zax_symm&quot;</span>, ntor+1, zax_symm)</div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;rax_asym&quot;</span>, ntor+1, rax_asym)</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <span class="keyword">call </span>add_real_1d(<span class="stringliteral">&quot;zax_asym&quot;</span>, ntor+1, zax_asym)</div>
 <div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span> </div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>  <span class="keyword">WRITE</span> (nthreed, 150) <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a></div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>150 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; From volume averages over plasma, betas are&#39;</span>,/,          &amp;</div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>             <span class="stringliteral">&#39; beta total    = &#39;</span>,f14.6,/, &amp;</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>             <span class="stringliteral">&#39; beta poloidal = &#39;</span>,f14.6,/, &amp;</div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>             <span class="stringliteral">&#39; beta toroidal = &#39;</span>,f14.6,/  )</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span> </div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>  <span class="keyword">WRITE</span> (nthreed, 160) <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a97fb3013acd88db592e130d2aafdfd80">betaxis</a>, betstr <span class="comment">! TODO: should this maybe be bsubvvac ?</span></div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>160 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; R * Btor-vac         = &#39;</span>,f14.6,<span class="stringliteral">&#39; [Wb/M]&#39;</span>,/,                &amp;</div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>           <span class="stringliteral">&#39; Peak Beta            = &#39;</span>,f14.6,/,                          &amp;</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>           <span class="stringliteral">&#39; Beta-star            = &#39;</span>,f14.6,/)</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span> </div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>  betstr = c2p0*sqrt(sump2/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)/(sumbtot/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>)</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span> </div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>  <span class="keyword">WRITE</span> (nthreed, 150) <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a></div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>150 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; From volume averages over plasma, betas are&#39;</span>,/,          &amp;</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>             <span class="stringliteral">&#39; beta total    = &#39;</span>,f14.6,/, &amp;</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>             <span class="stringliteral">&#39; beta poloidal = &#39;</span>,f14.6,/, &amp;</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>             <span class="stringliteral">&#39; beta toroidal = &#39;</span>,f14.6,/  )</div>
 <div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span> </div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_beta&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span> </div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betatot&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>)</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betapol&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>)</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betator&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a>)</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span> </div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;rbtor&quot;</span>,   <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a>)</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betaxis&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a97fb3013acd88db592e130d2aafdfd80">betaxis</a>)</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betstr&quot;</span>,  betstr)</div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span> </div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span> </div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>  <span class="comment">! Shafranov surface integrals s1,s2</span></div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>  <span class="comment">! Plasma Physics vol 13, pp 757-762 (1971)</span></div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>  <span class="comment">! Also, s3 = .5*S3, defined in Lao, Nucl. Fusion 25, p.1421 (1985)</span></div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>  <span class="comment">! Note: if ctor = 0, use Int(Bsupu*Bsubu dV) for ctor*ctor/R</span></div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>  <span class="comment">! Phys. Fluids B, Vol 5 (1993) p 3121, Eq. 9a-9d</span></div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>  <span class="keyword">ALLOCATE</span> (rbps1u(nznt), bpol2vac(nznt))</div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>  <span class="keywordflow">IF</span> (lfreeb .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a>.gt.1) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>     bpol2vac = 2*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a> - <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a></div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>  <span class="keywordflow">ELSE</span></div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>     bpol2vac = 2*(c1p5*bsq(ns:nrzt:ns)   - cp5*bsq(ns-1:nrzt:ns))       &amp;</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>              -  ((c1p5*bsupv(ns:nrzt:ns) - cp5*bsupv(ns-1:nrzt:ns))     &amp;</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>              * redge)**2</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span><span class="keywordflow">  END IF</span></div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span> </div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>  <span class="comment">! Compute current-like norm (factor) in Eq.(8), &lt;a&gt; * int(Bpol**2 * dA)</span></div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>  <span class="comment">! where &lt;a&gt; == 2*pi*Rs in Eq. 8 is the effective minor radius = Vol/Asurf</span></div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>  <span class="comment">! (corrects wrong description of Rs in paper, which is NOT the major radius)</span></div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>  <span class="comment">! This aminr1 = 1/2 the &quot;correct&quot; aminr1</span></div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>  aminr1 = <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a8e06968a15fabc62798c0b2b18b7af23">surf_area_p</a></div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>  factor = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>**2 * aminr1 * sum(bpol2vac*surf_area)</div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>  factor = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>/factor</div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>  facnorm = factor * <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>**2</div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span> </div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>  <span class="comment">! Lao&#39;s definition of normalization factor</span></div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>  scaling_ratio = (<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>*curtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a8dab464c2f41d5c2202e99c007d89f8e">circum_p</a>)**2 * <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a></div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>  scaling_ratio = scaling_ratio*factor</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span> </div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>  rbps1u(:nznt) = facnorm*redge(:nznt)*phat(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(ns:nznt*ns:ns) <span class="comment">! TODO: why not use nrzt instead of nznt*ns ?</span></div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>  sigr0 = sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(ns:nrzt:ns))</div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>  sigr1 = sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(ns:nrzt:ns)*redge(:nznt))</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>  sigz1 =-sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a8c1dec7050f35ebbd2480dbc2c40362a">ru0</a>(ns:nrzt:ns)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(ns:nrzt:ns,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(ns:nrzt:ns,1)))</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>  <span class="keyword">DEALLOCATE</span> (redge, phat, rbps1u, bpol2vac, surf_area)</div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span> </div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>  er = sigr1 + sigz1</div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span> </div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>  <span class="comment">! LAO, NUCL.FUS. 25 (1985) 1421</span></div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>  rlao = <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>/(<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>*<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a>)</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>  flao = rshaf/rlao</div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>  fgeo = rshaf/rcen</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>  <span class="keyword">WRITE</span> (nthreed, 160) <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a97fb3013acd88db592e130d2aafdfd80">betaxis</a>, betstr <span class="comment">! TODO: should this maybe be bsubvvac ?</span></div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>160 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; R * Btor-vac         = &#39;</span>,f14.6,<span class="stringliteral">&#39; [Wb/M]&#39;</span>,/,                &amp;</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>           <span class="stringliteral">&#39; Peak Beta            = &#39;</span>,f14.6,/,                          &amp;</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>           <span class="stringliteral">&#39; Beta-star            = &#39;</span>,f14.6,/)</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_beta&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betatot&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310">betatot</a>)</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betapol&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c">betapol</a>)</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betator&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69">betator</a>)</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;rbtor&quot;</span>,   <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a0c45daa3a31429f255f84841121324df">rbtor</a>)</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betaxis&quot;</span>, <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a97fb3013acd88db592e130d2aafdfd80">betaxis</a>)</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betstr&quot;</span>,  betstr)</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span> </div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span> </div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>  <span class="comment">! Shafranov surface integrals s1,s2</span></div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>  <span class="comment">! Plasma Physics vol 13, pp 757-762 (1971)</span></div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>  <span class="comment">! Also, s3 = .5*S3, defined in Lao, Nucl. Fusion 25, p.1421 (1985)</span></div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>  <span class="comment">! Note: if ctor = 0, use Int(Bsupu*Bsubu dV) for ctor*ctor/R</span></div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>  <span class="comment">! Phys. Fluids B, Vol 5 (1993) p 3121, Eq. 9a-9d</span></div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>  <span class="keyword">ALLOCATE</span> (rbps1u(nznt), bpol2vac(nznt))</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>  <span class="keywordflow">IF</span> (lfreeb .and. <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8fcc8e91c9349bd9a5f248787d5cf5ac">ivac</a>.gt.1) <span class="keywordflow">THEN</span></div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>     bpol2vac = 2*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a06909a4b247dc8ec0552ade9a4060cfd">bsqvac</a> - <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a>*<a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab4c7594357e8ad454a8424d5ad7050aa">bphiv</a></div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>  <span class="keywordflow">ELSE</span></div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>     bpol2vac = 2*(c1p5*bsq(ns:nrzt:ns)   - cp5*bsq(ns-1:nrzt:ns))       &amp;</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>              -  ((c1p5*bsupv(ns:nrzt:ns) - cp5*bsupv(ns-1:nrzt:ns))     &amp;</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>              * redge)**2</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span><span class="keywordflow">  END IF</span></div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>  <span class="comment">! Compute current-like norm (factor) in Eq.(8), &lt;a&gt; * int(Bpol**2 * dA)</span></div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>  <span class="comment">! where &lt;a&gt; == 2*pi*Rs in Eq. 8 is the effective minor radius = Vol/Asurf</span></div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>  <span class="comment">! (corrects wrong description of Rs in paper, which is NOT the major radius)</span></div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>  <span class="comment">! This aminr1 = 1/2 the &quot;correct&quot; aminr1</span></div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>  aminr1 = <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a8e06968a15fabc62798c0b2b18b7af23">surf_area_p</a></div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>  factor = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>**2 * aminr1 * sum(bpol2vac*surf_area)</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>  factor = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>/factor</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>  facnorm = factor * <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>**2</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span> </div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>  <span class="comment">! Lao&#39;s definition of normalization factor</span></div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>  scaling_ratio = (<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#aacc15e6304f57f2e3348130567ad1931">mu0</a>*curtor/<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#a8dab464c2f41d5c2202e99c007d89f8e">circum_p</a>)**2 * <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a></div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>  scaling_ratio = scaling_ratio*factor</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span> </div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>  rbps1u(:nznt) = facnorm*redge(:nznt)*phat(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a37d15ca10ad42849859a4f3177c66010">wint</a>(ns:nznt*ns:ns) <span class="comment">! TODO: why not use nrzt instead of nznt*ns ?</span></div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>  sigr0 = sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(ns:nrzt:ns))</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>  sigr1 = sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a0aeb5452c4ce9d7dca3c463af823a9ae">zu0</a>(ns:nrzt:ns)*redge(:nznt))</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>  sigz1 =-sum(rbps1u(:nznt)*<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a8c1dec7050f35ebbd2480dbc2c40362a">ru0</a>(ns:nrzt:ns)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(ns:nrzt:ns,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(ns:nrzt:ns,1)))</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>  <span class="keyword">DEALLOCATE</span> (redge, phat, rbps1u, bpol2vac, surf_area)</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span> </div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>  er = sigr1 + sigz1</div>
 <div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span> </div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>  smaleli = factor*sumbpol</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>  betai   = 2*factor*sump</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>  musubi  = vnorm*factor*musubi</div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>  lambda = cp5*smaleli + betai</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>  <span class="comment">! LAO, NUCL.FUS. 25 (1985) 1421</span></div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>  rlao = <a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#ae723f39387867a3647dbd5ed91fe5c9f">volume_p</a>/(<a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#a24f1215d41cba993a117bf8a60bd35f1">twopi</a>*<a class="code hl_variable" href="../../db/d2d/namespacevmec__io.html#aa6b324659fff402e01aed1eabe75e6e0">cross_area_p</a>)</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>  flao = rshaf/rlao</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>  fgeo = rshaf/rcen</div>
 <div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span> </div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>  <span class="comment">! Shafranov def. based on RT, Eq.(12)</span></div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>  s11 = er - rshaf*sigr0</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span> </div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>  <span class="comment">! R = Rgeometric</span></div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>  s12 = er - rcen*sigr0</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span> </div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>  <span class="comment">! R = RLao</span></div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>  s13 = er - rlao*sigr0</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>  s2  = sigr0*rshaf</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span> </div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>  <span class="comment">! 1/2 S3 in Eq.(14c)</span></div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>  s3  = sigz1</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span> </div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>  delta1 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af3e1192258fe53b2791b692a9505ca08">zero</a></div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>  delta2 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a> - fgeo</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>  delta3 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a> - flao</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span> </div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>  <span class="keyword">WRITE</span> (nthreed, 168)</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>168 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; Shafranov Surface Integrals&#39;</span>,/                             &amp;</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>           <span class="stringliteral">&#39; Ref: S. P. Hirshman, Phys. Fluids B, 5, (1993) 3119&#39;</span>,/,    &amp;</div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>           <span class="stringliteral">&#39; Note: s1 = S1/2, s2 = S2/2, where &#39;</span>,                       &amp;</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>           <span class="stringliteral">&#39; s1,s2 are the Shafranov definitions,&#39;</span>,/,                   &amp;</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>           <span class="stringliteral">&#39; and s3 = S3/2, where S3 is Lao&#39;</span><span class="stringliteral">&#39;s definition.&#39;</span>,/,          &amp;</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>           <span class="stringliteral">&#39; The quantity lsubi gives the ratio of volume poloidal&#39;</span>,    &amp;</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>         /,<span class="stringliteral">&#39; field energy to the field energy estimated from the&#39;</span>,      &amp;</div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>         /,<span class="stringliteral">&#39; surface integral in Eq.8.&#39;</span>,/,1x,22(<span class="stringliteral">&#39;-&#39;</span>),/)</div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span> </div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>  <span class="keyword">WRITE</span> (nthreed, 170) rshaf, rcen, rlao, scaling_ratio,                &amp;</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>     s3, smaleli, musubi, betai, lambda</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>170 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; RT (Pressure-weighted)  = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>           <span class="stringliteral">&#39; RG (Geometric)          = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>           <span class="stringliteral">&#39; RL (Vol/2*pi*Area-Lao)  = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>           <span class="stringliteral">&#39; Poloidal Field Energy&#39;</span>,/,                                  &amp;</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>           <span class="stringliteral">&#39; Normalization Ratio     = &#39;</span>,f14.6,<span class="stringliteral">&#39; (Lao/Hirshman)&#39;</span>,//,    &amp;</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>           <span class="stringliteral">&#39; s3                      = &#39;</span>,f14.6,/,                       &amp;</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>           <span class="stringliteral">&#39; lsubi                   = &#39;</span>,f14.6,/,                       &amp;</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>           <span class="stringliteral">&#39; musubi                  = &#39;</span>,f14.6,/,                       &amp;</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>           <span class="stringliteral">&#39; betai                   = &#39;</span>,f14.6,/,                       &amp;</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>           <span class="stringliteral">&#39; lambda                  = &#39;</span>,f14.6,/)</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span> </div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>  <span class="keyword">WRITE</span> (nthreed, 174) &amp;</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>     delta1, delta2, delta3,                             &amp; <span class="comment">! delta = 1 - RT/R</span></div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>     s11, s12, s13,                                      &amp; <span class="comment">! s1</span></div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>     s2, s2/fgeo, s2/flao,                               &amp; <span class="comment">! s2</span></div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>     musubi + s11, musubi + s12, musubi + s13,           &amp; <span class="comment">! betai (Mui + s1)</span></div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>     cp5*s11 + s2, cp5*s12 + s2/fgeo, cp5*s13 + s2/flao, &amp; <span class="comment">! lambda (s1/2 + s2)</span></div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>     cp5*(3*betai+smaleli-musubi)/(s11+s2     ) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp; <span class="comment">! 1st Shafr&#39;&#39;v relation</span></div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>     cp5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp; <span class="comment">! (3*Betai + Li - Mui)/[2*(s1+s2)] - 1</span></div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>     cp5*(3*betai+smaleli-musubi)/(s13+s2/flao) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp;</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>     cp5     *(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,           &amp; <span class="comment">! Radial force balance</span></div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>     cp5*fgeo*(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,           &amp; <span class="comment">!(Betai + Li + Mui)/(2*s2) - 1</span></div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>     cp5*flao*(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a></div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>174 <span class="keyword">FORMAT</span>(/,32x,<span class="stringliteral">&#39;R = RT&#39;</span>,12x,<span class="stringliteral">&#39;R = RG&#39;</span>,12x,<span class="stringliteral">&#39;R = RL&#39;</span>,/,                  &amp;</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>           20x,3(10x,8(<span class="stringliteral">&#39;-&#39;</span>)),/,                                         &amp;</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>           <span class="stringliteral">&#39; delta = 1 - RT/R     = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>           <span class="stringliteral">&#39; s1                   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>           <span class="stringliteral">&#39; s2                   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>           <span class="stringliteral">&#39; betai (Mui + s1)     = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>           <span class="stringliteral">&#39; lambda (s1/2 + s2)   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>           <span class="stringliteral">&#39; 1st Shafr&#39;</span><span class="stringliteral">&#39;v relation = &#39;</span>,3(f14.6,4x),/,                   &amp;</div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>           <span class="stringliteral">&#39; (3*Betai + Li - Mui)/[2*(s1+s2)] - 1&#39;</span>,/,                   &amp;</div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>           <span class="stringliteral">&#39; Radial force balance = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>           <span class="stringliteral">&#39; (Betai + Li + Mui)/(2*s2) - 1&#39;</span>,/)</div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span> </div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span> </div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_shafrint&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span> </div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;scaling_ratio&quot;</span>, scaling_ratio)</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>  smaleli = factor*sumbpol</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>  betai   = 2*factor*sump</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>  musubi  = vnorm*factor*musubi</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>  lambda = cp5*smaleli + betai</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span> </div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>  <span class="comment">! Shafranov def. based on RT, Eq.(12)</span></div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>  s11 = er - rshaf*sigr0</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span> </div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>  <span class="comment">! R = Rgeometric</span></div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>  s12 = er - rcen*sigr0</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span> </div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>  <span class="comment">! R = RLao</span></div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>  s13 = er - rlao*sigr0</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>  s2  = sigr0*rshaf</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span> </div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>  <span class="comment">! 1/2 S3 in Eq.(14c)</span></div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>  s3  = sigz1</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span> </div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>  delta1 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af3e1192258fe53b2791b692a9505ca08">zero</a></div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>  delta2 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a> - fgeo</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>  delta3 = <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a> - flao</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span> </div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>  <span class="keyword">WRITE</span> (nthreed, 168)</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>168 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; Shafranov Surface Integrals&#39;</span>,/                             &amp;</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>           <span class="stringliteral">&#39; Ref: S. P. Hirshman, Phys. Fluids B, 5, (1993) 3119&#39;</span>,/,    &amp;</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>           <span class="stringliteral">&#39; Note: s1 = S1/2, s2 = S2/2, where &#39;</span>,                       &amp;</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>           <span class="stringliteral">&#39; s1,s2 are the Shafranov definitions,&#39;</span>,/,                   &amp;</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>           <span class="stringliteral">&#39; and s3 = S3/2, where S3 is Lao&#39;</span><span class="stringliteral">&#39;s definition.&#39;</span>,/,          &amp;</div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>           <span class="stringliteral">&#39; The quantity lsubi gives the ratio of volume poloidal&#39;</span>,    &amp;</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>         /,<span class="stringliteral">&#39; field energy to the field energy estimated from the&#39;</span>,      &amp;</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>         /,<span class="stringliteral">&#39; surface integral in Eq.8.&#39;</span>,/,1x,22(<span class="stringliteral">&#39;-&#39;</span>),/)</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span> </div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>  <span class="keyword">WRITE</span> (nthreed, 170) rshaf, rcen, rlao, scaling_ratio,                &amp;</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>     s3, smaleli, musubi, betai, lambda</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>170 <span class="keyword">FORMAT</span>(<span class="stringliteral">&#39; RT (Pressure-weighted)  = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>           <span class="stringliteral">&#39; RG (Geometric)          = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>           <span class="stringliteral">&#39; RL (Vol/2*pi*Area-Lao)  = &#39;</span>,f14.6,<span class="stringliteral">&#39; [M]&#39;</span>,/,                &amp;</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>           <span class="stringliteral">&#39; Poloidal Field Energy&#39;</span>,/,                                  &amp;</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>           <span class="stringliteral">&#39; Normalization Ratio     = &#39;</span>,f14.6,<span class="stringliteral">&#39; (Lao/Hirshman)&#39;</span>,//,    &amp;</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>           <span class="stringliteral">&#39; s3                      = &#39;</span>,f14.6,/,                       &amp;</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>           <span class="stringliteral">&#39; lsubi                   = &#39;</span>,f14.6,/,                       &amp;</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>           <span class="stringliteral">&#39; musubi                  = &#39;</span>,f14.6,/,                       &amp;</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>           <span class="stringliteral">&#39; betai                   = &#39;</span>,f14.6,/,                       &amp;</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>           <span class="stringliteral">&#39; lambda                  = &#39;</span>,f14.6,/)</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span> </div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>  <span class="keyword">WRITE</span> (nthreed, 174) &amp;</div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>     delta1, delta2, delta3,                             &amp; <span class="comment">! delta = 1 - RT/R</span></div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>     s11, s12, s13,                                      &amp; <span class="comment">! s1</span></div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>     s2, s2/fgeo, s2/flao,                               &amp; <span class="comment">! s2</span></div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>     musubi + s11, musubi + s12, musubi + s13,           &amp; <span class="comment">! betai (Mui + s1)</span></div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>     cp5*s11 + s2, cp5*s12 + s2/fgeo, cp5*s13 + s2/flao, &amp; <span class="comment">! lambda (s1/2 + s2)</span></div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>     cp5*(3*betai+smaleli-musubi)/(s11+s2     ) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp; <span class="comment">! 1st Shafr&#39;&#39;v relation</span></div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>     cp5*(3*betai+smaleli-musubi)/(s12+s2/fgeo) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp; <span class="comment">! (3*Betai + Li - Mui)/[2*(s1+s2)] - 1</span></div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>     cp5*(3*betai+smaleli-musubi)/(s13+s2/flao) - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,   &amp;</div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>     cp5     *(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,           &amp; <span class="comment">! Radial force balance</span></div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>     cp5*fgeo*(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a>,           &amp; <span class="comment">!(Betai + Li + Mui)/(2*s2) - 1</span></div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>     cp5*flao*(betai+smaleli+musubi)/s2 - <a class="code hl_variable" href="../../df/d0c/namespacestel__constants.html#af26b3cceb76b3b524b8d710321f5d476">one</a></div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>174 <span class="keyword">FORMAT</span>(/,32x,<span class="stringliteral">&#39;R = RT&#39;</span>,12x,<span class="stringliteral">&#39;R = RG&#39;</span>,12x,<span class="stringliteral">&#39;R = RL&#39;</span>,/,                  &amp;</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>           20x,3(10x,8(<span class="stringliteral">&#39;-&#39;</span>)),/,                                         &amp;</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>           <span class="stringliteral">&#39; delta = 1 - RT/R     = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>           <span class="stringliteral">&#39; s1                   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>           <span class="stringliteral">&#39; s2                   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>           <span class="stringliteral">&#39; betai (Mui + s1)     = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>           <span class="stringliteral">&#39; lambda (s1/2 + s2)   = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>           <span class="stringliteral">&#39; 1st Shafr&#39;</span><span class="stringliteral">&#39;v relation = &#39;</span>,3(f14.6,4x),/,                   &amp;</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>           <span class="stringliteral">&#39; (3*Betai + Li - Mui)/[2*(s1+s2)] - 1&#39;</span>,/,                   &amp;</div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>           <span class="stringliteral">&#39; Radial force balance = &#39;</span>,3(f14.6,4x),/,                    &amp;</div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>           <span class="stringliteral">&#39; (Betai + Li + Mui)/(2*s2) - 1&#39;</span>,/)</div>
 <div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span> </div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;rlao&quot;</span>, rlao)</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;flao&quot;</span>, flao)</div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;fgeo&quot;</span>, fgeo)</div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span> </div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;smaleli&quot;</span>, smaleli)</div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betai&quot;</span>,   betai)</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;musubi&quot;</span>,  musubi)</div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;lambda&quot;</span>,  lambda)</div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span> </div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;threed1_shafrint&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span> </div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;scaling_ratio&quot;</span>, scaling_ratio)</div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span> </div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;rlao&quot;</span>, rlao)</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;flao&quot;</span>, flao)</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;fgeo&quot;</span>, fgeo)</div>
 <div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span> </div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s11&quot;</span>, s11)</div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s12&quot;</span>, s12)</div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s13&quot;</span>, s13)</div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s2&quot;</span>, s2)</div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s3&quot;</span>, s3)</div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span> </div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta1&quot;</span>, delta1)</div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta2&quot;</span>, delta2)</div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta3&quot;</span>, delta3)</div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span> </div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span> </div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;smaleli&quot;</span>, smaleli)</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;betai&quot;</span>,   betai)</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;musubi&quot;</span>,  musubi)</div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;lambda&quot;</span>,  lambda)</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span> </div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s11&quot;</span>, s11)</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s12&quot;</span>, s12)</div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s13&quot;</span>, s13)</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s2&quot;</span>, s2)</div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;s3&quot;</span>, s3)</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span> </div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta1&quot;</span>, delta1)</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta2&quot;</span>, delta2)</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>    <span class="keyword">call </span>add_real(<span class="stringliteral">&quot;delta3&quot;</span>, delta3)</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span> </div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span> </div>
 </div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105">eqfor</a></div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d0/d22/eqfor_8f90.html#a4579124c405a906bf05b3d3a0da2d105">eqfor</a></div>
 <div class="ttc" id="abextrema_8f90_html_aba3f90e7c94f19661c0eea471f1e05a5"><div class="ttname"><a href="../../d9/d25/bextrema_8f90.html#aba3f90e7c94f19661c0eea471f1e05a5">bextrema</a></div><div class="ttdeci">subroutine bextrema(modb, bmin, bmax, nzeta, ntheta)</div><div class="ttdoc">Computes minimum and maximum  along  between two angle lines ( ).</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d25/bextrema_8f90_source.html#l00011">bextrema.f90:12</a></div></div>
 <div class="ttc" id="abss_8f90_html_acdfd6dccfb28d75e1de40c6822f5736b"><div class="ttname"><a href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div><div class="ttdeci">subroutine bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)</div><div class="ttdoc">Computes br, bphi, bz, bsubs on half-radial mesh.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d77/bss_8f90_source.html#l00017">bss.f90:18</a></div></div>
 <div class="ttc" id="acalc__fbal_8f90_html_a6cdc3d21c48f66aeaff8ab5e639641b6"><div class="ttname"><a href="../../d9/dff/calc__fbal_8f90.html#a6cdc3d21c48f66aeaff8ab5e639641b6">calc_fbal</a></div><div class="ttdeci">subroutine calc_fbal(bsubu, bsubv)</div><div class="ttdoc">Compute flux-surface averaged radial force balance .</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dff/calc__fbal_8f90_source.html#l00008">calc_fbal.f90:9</a></div></div>
@@ -1150,7 +1155,7 @@ $(document).ready(function(){initNavTree('d0/d22/eqfor_8f90_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d0/d22/eqfor_8f90.html">eqfor.f90</a></li>
-    <li class="footer">Generated on Thu Oct 5 2023 08:48:25 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 5 2023 17:15:17 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

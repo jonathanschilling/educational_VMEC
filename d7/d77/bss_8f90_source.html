@@ -150,53 +150,69 @@ $(document).ready(function(){initNavTree('d7/d77/bss_8f90_source.html','../../')
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>           rs12(nrzt), zs12(nrzt), &amp;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>           gsu(nrzt), gsv(nrzt))</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">DO</span> l = 2, nrzt</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>     rv12(l)  = p5*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,0)+<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l-1,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l-1,1)))</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>     zv12(l)  = p5*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,0)+<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l-1,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l-1,1)))</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>     <span class="comment">! -------------</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">! initialize first entry, as this is otherwise never set and floats around -&gt; noise in Git!</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  rv12(1) = zero</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  zv12(1) = zero</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  rs12(1) = zero</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  zs12(1) = zero</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>     rs12(l)  = rs(l) + dshalfds*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l-1,1))/<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>     zs12(l)  = zs(l) + dshalfds*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l-1,1))/<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  gsu(1) = zero</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  gsv(1) = zero</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>     gsu(l)   = rs12(l)*ru12(l) + zs12(l)*zu12(l)</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>     gsv(l)   = rs12(l)*rv12(l) + zs12(l)*zv12(l)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>     bsubs(l) = bsupu(l)*gsu(l) + bsupv(l)*gsv(l)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>     <span class="comment">! -------------</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>     br(l)    = bsupu(l)*ru12(l) + bsupv(l)*rv12(l)</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>     bphi(l)  = bsupv(l)*r12(l)</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>     bz(l)    = bsupu(l)*zu12(l) + bsupv(l)*zv12(l)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  bsubs(1) = zero</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  br(1)   = zero</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  bphi(1) = zero</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  bz(1)   = zero</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">DO</span> l = 2, nrzt</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>     rv12(l)  = p5*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,0)+<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l-1,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a08bab4dd4b3d0633fe56766d803924cf">rv</a>(l-1,1)))</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>     zv12(l)  = p5*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,0)+<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l-1,0) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a383383fc94e7bd16bacf948e23a1a5b3">zv</a>(l-1,1)))</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>     <span class="comment">! -------------</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bss&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;rv12&quot;</span>,  ns, nzeta, ntheta3, rv12)</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;zv12&quot;</span>,  ns, nzeta, ntheta3, zv12)</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;rs12&quot;</span>,  ns, nzeta, ntheta3, rs12)</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;zs12&quot;</span>,  ns, nzeta, ntheta3, zs12)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>     rs12(l)  = rs(l) + dshalfds*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#ab65b4b8100f333047e3cb71a66ca0f6a">r1</a>(l-1,1))/<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>     zs12(l)  = zs(l) + dshalfds*(<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l,1) + <a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a937d85c71022f8871c8cc064655fb046">z1</a>(l-1,1))/<a class="code hl_variable" href="../../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35">shalf</a>(l)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     gsu(l)   = rs12(l)*ru12(l) + zs12(l)*zu12(l)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     gsv(l)   = rs12(l)*rv12(l) + zs12(l)*zv12(l)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>     bsubs(l) = bsupu(l)*gsu(l) + bsupv(l)*gsv(l)</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;gsu&quot;</span>,   ns, nzeta, ntheta3, gsu)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;gsv&quot;</span>,   ns, nzeta, ntheta3, gsv)</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;br&quot;</span>,    ns, nzeta, ntheta3, br  )</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bphi&quot;</span>,  ns, nzeta, ntheta3, bphi)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bz&quot;</span>,    ns, nzeta, ntheta3, bz  )</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubs&quot;</span>, ns, nzeta, ntheta3, bsubs)</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">call </span>close_dbg_out()</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordflow">  end if</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keyword">deallocate</span>(rv12, zv12, rs12, zs12, gsu, gsv)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>     <span class="comment">! -------------</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>     br(l)    = bsupu(l)*ru12(l) + bsupv(l)*rv12(l)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>     bphi(l)  = bsupv(l)*r12(l)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     bz(l)    = bsupu(l)*zu12(l) + bsupv(l)*zv12(l)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordflow">  END DO</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;bss&quot;</span>, id=0)) <span class="keywordflow">then</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;rv12&quot;</span>,  ns, nzeta, ntheta3, rv12)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;zv12&quot;</span>,  ns, nzeta, ntheta3, zv12)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;rs12&quot;</span>,  ns, nzeta, ntheta3, rs12)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;zs12&quot;</span>,  ns, nzeta, ntheta3, zs12)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;gsu&quot;</span>,   ns, nzeta, ntheta3, gsu)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;gsv&quot;</span>,   ns, nzeta, ntheta3, gsv)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;br&quot;</span>,    ns, nzeta, ntheta3, br  )</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bphi&quot;</span>,  ns, nzeta, ntheta3, bphi)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bz&quot;</span>,    ns, nzeta, ntheta3, bz  )</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">call </span>add_real_3d(<span class="stringliteral">&quot;bsubs&quot;</span>, ns, nzeta, ntheta3, bsubs)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">call </span>close_dbg_out()</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keywordflow">  end if</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keyword">deallocate</span>(rv12, zv12, rs12, zs12, gsu, gsv)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div>
 <div class="ttc" id="abss_8f90_html_acdfd6dccfb28d75e1de40c6822f5736b"><div class="ttname"><a href="../../d7/d77/bss_8f90.html#acdfd6dccfb28d75e1de40c6822f5736b">bss</a></div><div class="ttdeci">subroutine bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)</div><div class="ttdoc">Computes br, bphi, bz, bsubs on half-radial mesh.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d77/bss_8f90_source.html#l00017">bss.f90:18</a></div></div>
 <div class="ttc" id="anamespacedbgout_html"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html">dbgout</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d25/dbgout_8f90_source.html#l00001">dbgout.f90:1</a></div></div>
 <div class="ttc" id="anamespacedbgout_html_acdd1612a38e44b6469dc03d9d1c6ceed"><div class="ttname"><a href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">dbgout::open_dbg_context</a></div><div class="ttdeci">logical function open_dbg_context(context_name, repetition, id)</div><div class="ttdoc">check if any output is desired for the current iteration check if the given context should be openend...</div><div class="ttdef"><b>Definition</b> <a href="../../da/d25/dbgout_8f90_source.html#l00014">dbgout.f90:15</a></div></div>
@@ -213,7 +229,7 @@ $(document).ready(function(){initNavTree('d7/d77/bss_8f90_source.html','../../')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d77/bss_8f90.html">bss.f90</a></li>
-    <li class="footer">Generated on Thu Oct 5 2023 08:48:25 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Oct 5 2023 17:15:17 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

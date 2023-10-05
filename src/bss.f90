@@ -38,6 +38,22 @@ SUBROUTINE bss(r12, rs, zs, ru12, zu12, bsubs, bsupu, bsupv, br, bphi, bz)
            rs12(nrzt), zs12(nrzt), &
            gsu(nrzt), gsv(nrzt))
 
+  ! initialize first entry, as this is otherwise never set and floats around -> noise in Git!
+  rv12(1) = zero
+  zv12(1) = zero
+
+  rs12(1) = zero
+  zs12(1) = zero
+
+  gsu(1) = zero
+  gsv(1) = zero
+
+  bsubs(1) = zero
+
+  br(1)   = zero
+  bphi(1) = zero
+  bz(1)   = zero
+
   DO l = 2, nrzt
 
      rv12(l)  = p5*(rv(l,0)+rv(l-1,0) + shalf(l)*(rv(l,1) + rv(l-1,1)))

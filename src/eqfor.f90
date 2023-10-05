@@ -633,8 +633,13 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
     call add_real("bmin_ntheta2_ns", bmin(ntheta2,ns))
     call add_real("bmax_ntheta2_ns", bmax(ntheta2,ns))
 
-    call add_real_1d("waist",  2, waist)
-    call add_real_1d("height", 2, height)
+    IF (ntor .gt. 1) THEN
+        call add_real_1d("waist",  2, waist)
+        call add_real_1d("height", 2, height)
+    else
+        call add_real_1d("waist",  1, waist(1))
+        call add_real_1d("height", 1, height(1))
+    end if
 
     call add_real("sumbtot", sumbtot)
     call add_real("sumbtor", sumbtor)

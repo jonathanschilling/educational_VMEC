@@ -518,7 +518,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
   ! Compute end point values for bsubs
   bsubs(1,:)  = 2*bsubs(2,:)  - bsubs(3,:)
-  bsubs(ns,:) = 2*bsubs(ns,:) - bsubs(ns-1,:) ! TODO: from ns, ns-1 to ns ???
+  !bsubs(ns,:) = 2*bsubs(ns,:) - bsubs(ns-1,:) ! TODO: from ns, ns-1 to ns ???
+  bsubs(ns,:) = 2*bsubs(ns-1,:) - bsubs(ns-2,:)
 
 
 
@@ -690,7 +691,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   jdotb(1)  = c2p0*jdotb(   2) - jdotb(   3)
   jdotb(ns) = c2p0*jdotb(ns-1) - jdotb(ns-2)
 
-  bdotb(1)  = c2p0*bdotb(   3) - bdotb(   2) ! TODO: 2 <--> 3 ???
+  !bdotb(1)  = c2p0*bdotb(   3) - bdotb(   2) ! TODO: 2 <--> 3 ???
+  bdotb(1)  = c2p0*bdotb(   2) - bdotb(   3)
   bdotb(ns) = c2p0*bdotb(ns-1) - bdotb(ns-2)
 
   bdotgradv(1)  = c2p0*bdotgradv(   2) - bdotgradv(   3)
@@ -702,7 +704,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   jperp2(1)  = 0
   jperp2(ns) = 0
 
-  pprim( 1) = 2*pprim(ns-1) - pprim(ns-2) ! TODO: what is going on here ??
+  !pprim( 1) = 2*pprim(ns-1) - pprim(ns-2) ! TODO: what is going on here ??
+  pprim( 1) = 2*pprim(   2) - pprim(   3)
   pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)
 
 

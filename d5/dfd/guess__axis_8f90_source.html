@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,nzeta,ntheta3)</span>,     <span class="keywordtype">INTENT(in)</span> :: ru0, zu0</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordtype">INTEGER</span>, <span class="keywordtype">PARAMETER</span> :: limpts = 61</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp, two = 2</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: p5 = 0.5_dp, two = 2.0_dp</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordtype">INTEGER</span> :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">!  REAL(rprec), DIMENSION(nzeta) :: rcom, zcom</span></div>
@@ -231,8 +231,8 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>     zmax = maxval(z1b(iv,:))</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>     <span class="comment">! initial guess for new axis: center of grid</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>     rcom(iv) = (rmax + rmin)/2</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>     zcom(iv) = (zmax + zmin)/2</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>     rcom(iv) = (rmax + rmin)/2.0_dp</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>     zcom(iv) = (zmax + zmin)/2.0_dp</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>     <span class="comment">! Estimate jacobian based on boundary and 1/2 surface</span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>     ds = (ns - ns12)*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a2f41223cbac50df3309e516d00894c51">hs</a></div>
@@ -243,13 +243,13 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        tau0(iv,iu) = ru12(iv,iu)*zs(iv,iu) - zu12(iv,iu)*rs(iv,iu)</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="keywordflow">     END DO</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>     mintau = 0</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>     mintau = 0.0_dp</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>     <span class="keywordflow">DO</span> nlim = 1, limpts</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        zlim = zmin + ((zmax - zmin)*(nlim-1))/(limpts-1)</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">IF</span> (.not.lasym .and. (iv.eq.1 .or. iv.eq.nzeta/2+1)) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>           zlim = 0</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>           zlim = 0.0_dp</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>           <span class="keywordflow">IF</span> (nlim .gt. 1) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>              <span class="keywordflow">EXIT</span></div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="keywordflow">           end if</span></div>
@@ -357,7 +357,7 @@ $(document).ready(function(){initNavTree('d5/dfd/guess__axis_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/dfd/guess__axis_8f90.html">guess_axis.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -144,11 +144,11 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keyword">ALLOCATE</span> (work(ns*nzeta,4), gcona(ns*nzeta,ntheta3))</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  gcons = 0</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  gcona = 0</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  gcons = 0.0_dp</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  gcona = 0.0_dp</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  gcs = 0;  gsc = 0</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  gcc = 0;  gss = 0</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  gcs = 0.0_dp;  gsc = 0.0_dp</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  gcc = 0.0_dp;  gss = 0.0_dp</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">! The start of this loop at m=1 and its end at mpol1-1=mpol-2</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">! is what makes this routine a Fourier-space bandpass filter.</span></div>
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordflow">     END DO</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>     <span class="comment">! INVERSE FOURIER TRANSFORM DE-ALIASED GCON</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     work = 0</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     work = 0.0_dp</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>     <span class="keywordflow">DO</span> n = 0, ntor</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">DO</span> k = 1, nzeta</div>
@@ -252,7 +252,7 @@ $(document).ready(function(){initNavTree('d5/de7/alias_8f90_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/de7/alias_8f90.html">alias.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

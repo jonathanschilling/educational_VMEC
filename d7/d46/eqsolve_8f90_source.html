@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('d7/d46/eqsolve_8f90_source.html','../.
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">! OR</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> .EQ. 2) <span class="keywordflow">THEN</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>     <a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> = 0</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>     <a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a> = 0.0_dp</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>     <span class="keyword">CALL </span><a class="code hl_function" href="../../dd/d75/profil3d_8f90.html#a67d2774ceac255f1e1f75e54f4679e9c">profil3d</a> (<a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1), <a class="code hl_variable" href="../../d9/d3c/namespacexstuff.html#a3f67cbc56e41aa2c8c8bf6a0561b0200">xc</a>(1+<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a0c433ca884dcd789eeca5e0332cefa19">irzloff</a>), lreset_internal)</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a6aa35fa9bd824253791a4029b33a6f3c">first</a> = 1 <span class="comment">! tells restart_iter to store current xc in xstore</span></div>
@@ -329,7 +329,7 @@ $(document).ready(function(){initNavTree('d7/d46/eqsolve_8f90_source.html','../.
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="keywordflow">  END DO</span> iter_loop</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="comment">! write MHD energy at end of iterations for current number of surfaces</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keyword">WRITE</span> (nthreed, 60) w0*twopi**2</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keyword">WRITE</span> (nthreed, 60) w0*twopi**2.0_dp</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>60 <span class="keyword">FORMAT</span>(/,<span class="stringliteral">&#39; MHD Energy = &#39;</span>,1p,e12.6)</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
 </div>
@@ -375,7 +375,7 @@ $(document).ready(function(){initNavTree('d7/d46/eqsolve_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d7/d46/eqsolve_8f90.html">eqsolve.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

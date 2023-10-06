@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsnew,mnsize,3*ntmax)</span>, <span class="keywordtype">INTENT(in)</span>    :: scalxc</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(nsold,mnsize,3*ntmax)</span>, <span class="keywordtype">intent(inout)</span> :: xold</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero=0, one=1</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero=0.0_dp, one=1.0_dp</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">INTEGER</span> :: ntype, js</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordtype">integer</span>, <span class="keywordtype">dimension(nsnew)</span> :: js1, js2</div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">IF</span> (nsold .le. 0) <span class="keywordflow">RETURN</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  hsold = one/(nsold - 1)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  hsold = one/(nsold - 1.0_dp)</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">! INTERPOLATE R,Z AND LAMBDA ON FULL GRID</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)</span></div>
@@ -161,17 +161,17 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>     <span class="comment">! extrapolation to axis for odd-m modes (?)</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>     <span class="keywordflow">WHERE</span> (mod(<a class="code hl_variable" href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">ixm</a>(:<a class="code hl_variable" href="../../d2/d10/namespacevmec__dim.html#aaf4da97323f472965cb578e2c0414a37">mnsize</a>), 2) .eq. 1) &amp;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>       xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>       xold(1,:,ntype) = 2.0_dp*xold(2,:,ntype) - xold(3,:,ntype)</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>     <span class="comment">! radial interpolation from old, coarse state vector to new, finer state vector</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>     <span class="keywordflow">DO</span> js = 1, nsnew</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        sj(js) = real(js - 1, rprec)/(nsnew - 1)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        sj(js) = real(js - 1, rprec)/(nsnew - 1.0_dp)</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        js1(js) = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        js2(js) = min(js1(js) + 1, nsold)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        s1(js) = (js1(js) - 1)*hsold</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        s1(js) = (js1(js) - 1.0_dp)*hsold</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        xint(js) = (sj(js) - s1(js))/hsold</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        xint(js) = min(one, xint(js))</div>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>     <span class="comment">! Zero M=1 modes at origin</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     <span class="comment">! Actually, all odd-m modes are zeroed!</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>     <span class="keywordflow">WHERE</span> (mod(<a class="code hl_variable" href="../../dd/d2f/namespacevmec__persistent.html#af7aad46efbcb1acadd4560829f32a47e">ixm</a>(:<a class="code hl_variable" href="../../d2/d10/namespacevmec__dim.html#aaf4da97323f472965cb578e2c0414a37">mnsize</a>), 2) .eq. 1) &amp;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        xnew(1,:,ntype) = 0</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        xnew(1,:,ntype) = 0.0_dp</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordflow">  END DO</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
@@ -224,7 +224,7 @@ $(document).ready(function(){initNavTree('dc/df5/interp_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dc/df5/interp_8f90.html">interp.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

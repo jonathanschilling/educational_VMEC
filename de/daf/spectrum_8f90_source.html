@@ -162,10 +162,10 @@ $(document).ready(function(){initNavTree('de/daf/spectrum_8f90_source.html','../
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">DO</span> n = 0,ntor</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      <span class="keywordflow">DO</span> m = 1,mpol1</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>         scale_fac = (<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n))**2</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>         scale_fac = (<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(m)*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(n))**2.0_dp</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>         <span class="keywordflow">DO</span> js = 2,ns</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            t1(js) =(rmn(js,n,m,ntype)**2 + zmn(js,n,m,ntype)**2)*scale_fac</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            t1(js) =(rmn(js,n,m,ntype)**2.0_dp + zmn(js,n,m,ntype)**2.0_dp)*scale_fac</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordflow">         END DO</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>         dnumer(2:ns) = dnumer(2:ns) + t1(2:ns)*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,3)</div>
@@ -200,7 +200,7 @@ $(document).ready(function(){initNavTree('de/daf/spectrum_8f90_source.html','../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/daf/spectrum_8f90.html">spectrum.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

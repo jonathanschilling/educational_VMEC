@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordflow">  end if</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">! COMPUTE INVARIANT RESIDUALS</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  r1 = one/(2*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>)**2 <span class="comment">! --&gt; actually look at r1*fnorm --&gt; scaling factor for forces (?)</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  r1 = one/(2.0_dp*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#acf03b5740d108231c7b629c5303f1538">r0scale</a>)**2.0_dp <span class="comment">! --&gt; actually look at r1*fnorm --&gt; scaling factor for forces (?)</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  jedge = 0</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK</span></div>
@@ -200,7 +200,7 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keyword">CALL </span><a class="code hl_function" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a> (gcr, gcz, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4002e0f155490bd177d04aa68ab203a1">fsqr</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a440b89349441bfd4014f72d0bf02635e">fsqz</a>, r1*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a>, jedge)</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a1f3fe61ee7bbabc082cfdb7dcd2d3675">fsql</a> = <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a8bfab87e5d302dfb6b3949f1826e4b18">fnorml</a>*sum(gcl*gcl)</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a> = r1*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> * sum(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#abaa72d4f70f4b947e76144eeabfe2783">fedge</a> = r1*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a53cec450305260beef2d65e731f87416">fnorm</a> * sum(gcr(ns,:,:,:)**2.0_dp + gcz(ns,:,:,:)**2.0_dp)</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed">open_dbg_context</a>(<span class="stringliteral">&quot;fsq&quot;</span>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab38d66f9ae158a4318f7699d1d47bbd4">num_eqsolve_retries</a>)) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
@@ -310,7 +310,7 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>     <span class="comment">! ensure that the m=1 constraint is satisfied exactly</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>     <span class="comment">! --&gt; the corresponding m=1 coeffs of R,Z are constrained to be zero</span></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>     <span class="comment">!     and thus must not be &quot;forced&quot; (by the time evol using gc) away from zero</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>     gcz = 0</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>     gcz = 0.0_dp</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keywordflow">  end if</span></div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
 </div>
@@ -397,7 +397,7 @@ $(document).ready(function(){initNavTree('db/d5a/residue_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d5a/residue_8f90.html">residue.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

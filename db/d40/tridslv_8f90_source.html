@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('db/d40/tridslv_8f90_source.html','../.
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,0:mnd1)</span> :: a, d, b</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">DIMENSION(ns,0:mnd1, nrhs)</span>, <span class="keywordtype">INTENT(inout)</span> :: c</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero = 0, one = 1</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: zero = 0.0_dp, one = 1.0_dp</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">INTEGER</span> :: mn, in, i0, in1, jrhs</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">ALLOCATABLE</span>, <span class="keywordtype">DIMENSION(:,:)</span> :: alf</div>
@@ -165,10 +165,10 @@ $(document).ready(function(){initNavTree('db/d40/tridslv_8f90_source.html','../.
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>     in1 = jmin(mn)-1</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>     <span class="keywordflow">IF</span> (in1 .ge. in) <span class="keywordflow">THEN</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">!         print *, &quot;in1 &gt;= i&quot;, in1, &quot; at &quot;, mn</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        d(in:in1, mn) = 1</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        c(in:in1, mn, 1:nrhs) = 0</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        b(in:in1, mn) = 0</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        a(in:in1, mn) = 0</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        d(in:in1, mn) = 1.0_dp</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        c(in:in1, mn, 1:nrhs) = 0.0_dp</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        b(in:in1, mn) = 0.0_dp</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        a(in:in1, mn) = 0.0_dp</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keywordflow">     END IF</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordflow">  END DO</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
@@ -211,7 +211,7 @@ $(document).ready(function(){initNavTree('db/d40/tridslv_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../db/d40/tridslv_8f90.html">tridslv.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

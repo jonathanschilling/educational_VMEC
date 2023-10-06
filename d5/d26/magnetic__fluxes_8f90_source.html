@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('d5/d26/magnetic__fluxes_8f90_source.ht
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">! some ad-hoc trapezoidal integration radially outward to given x</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">! with a fixed number (100) of quadrature nodes?</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  h = 1.e-2_dp*x</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">torflux</a> = 0</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">torflux</a> = 0.0_dp</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">DO</span> i=1,101</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>     xi = (i-1)*h</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>     <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">torflux</a> = <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a017a13ebb77985454dd008ccdb9f4402">torflux</a> + <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a909f811a00045c6fef3c379defc1ed09">torflux_deriv</a>(xi)</div>
@@ -202,7 +202,7 @@ $(document).ready(function(){initNavTree('d5/d26/magnetic__fluxes_8f90_source.ht
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="comment">! some ad-hoc trapezoidal integration radially outward to given x</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="comment">! with a fixed number (100) of quadrature nodes?</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  h = 1.e-2_dp*x</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">polflux</a> = 0</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">polflux</a> = 0.0_dp</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordflow">DO</span> i=1,101</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>     xi = (i-1)*h</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>     <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">polflux</a> = <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#a9d78c3bac80a4d14cc82a93bc79e7dcd">polflux</a> + <a class="code hl_function" href="../../d5/d26/magnetic__fluxes_8f90.html#ad5e5642d688664c85a181c2d1fd6497f">polflux_deriv</a>(xi)</div>
@@ -220,14 +220,14 @@ $(document).ready(function(){initNavTree('d5/d26/magnetic__fluxes_8f90_source.ht
 <div class="ttc" id="anamespacestel__kinds_html_ad5ec246eb6bc70cd89f4e3209ba62b2d"><div class="ttname"><a href="../../db/dcb/namespacestel__kinds.html#ad5ec246eb6bc70cd89f4e3209ba62b2d">stel_kinds::rprec</a></div><div class="ttdeci">integer, parameter rprec</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d97/stel__kinds_8f90_source.html#l00010">stel_kinds.f90:10</a></div></div>
 <div class="ttc" id="anamespacevmec__input_html"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html">vmec_input</a></div><div class="ttdef"><b>Definition</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00002">vmec_input.f90:2</a></div></div>
 <div class="ttc" id="anamespacevmec__input_html_a07ea1753cb9431b04317b12a5a3de630"><div class="ttname"><a href="../../d8/dbf/namespacevmec__input.html#a07ea1753cb9431b04317b12a5a3de630">vmec_input::aphi</a></div><div class="ttdeci">real(rprec), dimension(1:20) aphi</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d59/vmec__input_8f90_source.html#l00046">vmec_input.f90:46</a></div></div>
-<div class="ttc" id="aprofile__functions_8f_html_a437348e2a0ee2ababaeca2205a78b85c"><div class="ttname"><a href="../../da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c">piota</a></div><div class="ttdeci">real(rprec) function piota(x)</div><div class="ttdef"><b>Definition</b> <a href="../../da/dc8/profile__functions_8f_source.html#l00340">profile_functions.f:341</a></div></div>
+<div class="ttc" id="aprofile__functions_8f_html_a437348e2a0ee2ababaeca2205a78b85c"><div class="ttname"><a href="../../da/dc8/profile__functions_8f.html#a437348e2a0ee2ababaeca2205a78b85c">piota</a></div><div class="ttdeci">real(rprec) function piota(x)</div><div class="ttdef"><b>Definition</b> <a href="../../da/dc8/profile__functions_8f_source.html#l00341">profile_functions.f:342</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d5/d26/magnetic__fluxes_8f90.html">magnetic_fluxes.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

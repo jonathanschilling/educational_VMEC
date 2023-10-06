@@ -381,8 +381,8 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="keywordflow">     END IF</span></div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keywordflow">  ENDIF</span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aae4c3feb5770704097d08d628531f3df">rmn_bdy</a> = 0</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a51d27a702e13d15c1b122a20a8c4c779">zmn_bdy</a> = 0</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aae4c3feb5770704097d08d628531f3df">rmn_bdy</a> = 0.0_dp</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a51d27a702e13d15c1b122a20a8c4c779">zmn_bdy</a> = 0.0_dp</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  <span class="comment">! NOTE: INDICES START AT 1, NOT 0, FOR POINTERS,</span></div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  <span class="comment">!       EVEN THOUGH THEY START AT ZERO FOR RMN_BDY</span></div>
@@ -489,7 +489,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  rtest = sum(rbcc(1:ntor1,mj))</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  ztest = sum(zbsc(1:ntor1,mj))</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae046e355769fd9cd301ec342dfaee24c">lflip</a>=(rtest*ztest .lt. zero)</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a> = -1</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a> = -1.0_dp</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keywordflow">IF</span> (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae046e355769fd9cd301ec342dfaee24c">lflip</a>) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>     <span class="comment">! (rtest*ztest &lt; 0) means that rtest and ztest have different signs</span></div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>     <span class="keyword">CALL </span><a class="code hl_function" href="../../d2/d33/namespacetheta__flip.html#a1177c598a2b1378ae34fecfba906634d">flip_theta</a>(<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aae4c3feb5770704097d08d628531f3df">rmn_bdy</a>, <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a51d27a702e13d15c1b122a20a8c4c779">zmn_bdy</a>)</div>
@@ -619,7 +619,7 @@ $(document).ready(function(){initNavTree('d8/da3/readin_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/da3/readin_8f90.html">readin.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

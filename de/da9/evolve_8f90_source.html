@@ -199,7 +199,7 @@ $(document).ready(function(){initNavTree('de/da9/evolve_8f90_source.html','../..
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">! averaging over ndamp entries : 1/ndamp*sum(otau)</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a957e5682b43ea465ca3894391b5f6745">otav</a> = sum(<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a7a75d5c04f27f81156daa0ccf75d62b9">otau</a>(:<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#adb614b7a2823ad95c6e08f89c1028a63">ndamp</a>))/<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#adb614b7a2823ad95c6e08f89c1028a63">ndamp</a></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  dtau = time_step*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a957e5682b43ea465ca3894391b5f6745">otav</a>/2</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  dtau = time_step*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a957e5682b43ea465ca3894391b5f6745">otav</a>/2.0_dp</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  b1  = one - dtau</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  fac = one/(one + dtau)</div>
@@ -262,7 +262,7 @@ $(document).ready(function(){initNavTree('de/da9/evolve_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../de/da9/evolve_8f90.html">evolve.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

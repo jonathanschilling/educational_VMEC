@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>     <span class="keywordflow">DO</span> js = 2, ns</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="comment">! solve Eqn. (11) of the ORMEC paper for each flux surface</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        top = <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#afa27ff9660af5f8390fed850ffe7242e">icurv</a>(js) <span class="comment">! offset: this makes the zero-current algorithm a constrained-current algorithm</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        bot = 0</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        bot = 0.0_dp</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">DO</span> l = js, nrzt, ns</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>           <span class="comment">! bsupu contains -d(lambda)/d( zeta)*lamscale+phipf on entry (?)</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>           <span class="comment">! bsupv contains  d(lambda)/d(theta)*lamscale       on entry (?)</span></div>
@@ -181,8 +181,8 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">! half-grid to full-grid for chi-prime and iota below</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">chipf</a>(2:ns1) = (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(2:ns1) + <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(3:ns1+1))/2</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">chipf</a>(ns)    = 2*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(ns)-<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(ns1)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">chipf</a>(2:ns1) = (<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(2:ns1) + <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(3:ns1+1))/2.0_dp</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aa571f88addf704703d895f72934d6759">chipf</a>(ns)    = 2.0_dp*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(ns)-<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a4c63bf2f4c29b85aca6416baac881b7d">chips</a>(ns1)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">! Do not compute iota too near origin</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#a956201e36438e3e1c04b16942621023d">iotaf</a>(1)  = c1p5*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aeec11c572d79c8b9bdfae7abd05962e4">iotas</a>(2) - cp5*<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#aeec11c572d79c8b9bdfae7abd05962e4">iotas</a>(3)     <span class="comment">!zero gradient near axis</span></div>
@@ -230,7 +230,7 @@ $(document).ready(function(){initNavTree('d8/d7d/add__fluxes_8f90_source.html','
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d8/d7d/add__fluxes_8f90.html">add_fluxes.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:40 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -135,9 +135,9 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: two=2</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: two=2.0_dp</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: pexp=4 <span class="comment">! for &lt;M&gt; spectral width screen diagnostic</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">  REAL</span>(rprec), <span class="keywordtype">PARAMETER</span> :: pexp=4.0_dp <span class="comment">! for &lt;M&gt; spectral width screen diagnostic</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">INTEGER</span> :: i, m, j, n, mn, mn1, nmin0, istat1, istat2</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">INTEGER</span> :: mnyq0, nnyq0</div>
@@ -178,22 +178,22 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="comment">! In any case (symmetric or asymmetric), the Fourier integrals in tomnsp* and alias</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="comment">! (the only place where dnorm is used through cosmui, sinmui, etc.)</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">! are ever only taken over [0, pi] corresponding to 1, ..., ntheta2.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  dnorm = one/(nzeta*(ntheta2-1))</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  dnorm = one/(nzeta*(ntheta2-1.0_dp))</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">! Normalization factor for surface integrals/averages (wint is based on cosmui3).</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">! For the asymmetric case, the norm in wint thus has to be 1/(nzeta*ntheta3).</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">IF</span> (lasym) <span class="keywordflow">then</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    dnorm3 = one/(nzeta*ntheta1)</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    dnorm3 = one/(nzeta*(ntheta2-1))</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    dnorm3 = one/(nzeta*(ntheta2-1.0_dp))</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordflow">  end if</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="comment">! (from vmec_params)</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">! array for norming theta-trig functions (internal use only)</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="comment">! so that the discrete SUM[cos(mu)*cos(m&#39;u)] = .5 delta(m,m&#39;)</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">! and analogously for zeta/v</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(0) = 1</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(0) = 1</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(0) = 1.0_dp</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(0) = 1.0_dp</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(1:<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a89db7b825f86806bbe9a7494eb228810">mnyq</a>) = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a55aab435b8ab31d43f83825d371a75fe">mscale</a>(0)/osqrt2 <span class="comment">! == sqrt(2)</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(1:<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a90e843b526b4662c4c42c05048b3e99c">nnyq</a>) = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#acb07091c2a3d31fe07129dd42c2bd733">nscale</a>(0)/osqrt2 <span class="comment">! == sqrt(2)</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
@@ -254,11 +254,11 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  mn = 0</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  mn1 = 0</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">DO</span> m = 0, mpol1</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,1) = m*(m - 1)   <span class="comment">! used for spectral constraint force --&gt; m^2-m</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,1) = m*(m - 1.0_dp)   <span class="comment">! used for spectral constraint force --&gt; m^2-m</span></div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>     <span class="comment">! xmpq(m,2:3) are ONLY used for screen diagnostic &lt;M&gt; !!!</span></div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,2) = m**pexp     <span class="comment">! m^p     with p = pexp = 4</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,3) = m**(pexp+1) <span class="comment">! m^(p+q) with q = 1</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>     <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(m,3) = m**(pexp+1.0_dp) <span class="comment">! m^(p+q) with q = 1</span></div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>     <span class="comment">! compute ixm == _i_nteger version of xm</span></div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>     <span class="keywordflow">DO</span> n = 0, ntor</div>
@@ -344,7 +344,7 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="comment">! _fac_tor for _con_straint</span></div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(0) = zero</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(1:mpol1-1) = -0.25_dp*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>/<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(2:mpol1,1)**2</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(1:mpol1-1) = -0.25_dp*<a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027">signgs</a>/<a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ab7337be528b5a288510f31052f7d5061">xmpq</a>(2:mpol1,1)**2.0_dp</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  <a class="code hl_variable" href="../../d1/d6c/namespacevmec__main.html#ae4673c06c7bea73380d1705bfc8bb8e3">faccon</a>(mpol1) = zero</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="keywordflow">if</span> (dbg_fixaray) <span class="keywordflow">then</span></div>
@@ -405,7 +405,7 @@ $(document).ready(function(){initNavTree('d4/dd1/fixaray_8f90_source.html','../.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d4/dd1/fixaray_8f90.html">fixaray.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('d0/d6f/tomnsp_8f90_source.html','../..
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ioff = lbound(frcc,2)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  joff = lbound(frcc,3)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  frzl_array = 0</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  frzl_array = 0.0_dp</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">! exclude forces on boundary if free-boundary module is not active</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  jmax = ns</div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('d0/d6f/tomnsp_8f90_source.html','../..
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>     j2 = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a390b1760d50df0bd43a86096b219a5a5">jmin2</a>(m)</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>     jl = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a4951d69603a739ae3d1ece2829f4c1fe">jlam</a>(m)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     work1 = 0</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>     work1 = 0.0_dp</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>     <span class="comment">! DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 &lt; U &lt; PI)</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>     l = 0</div>
@@ -332,7 +332,7 @@ $(document).ready(function(){initNavTree('d0/d6f/tomnsp_8f90_source.html','../..
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>     j2 = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a390b1760d50df0bd43a86096b219a5a5">jmin2</a>(m)</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>     jl = <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#a4951d69603a739ae3d1ece2829f4c1fe">jlam</a>(m)</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>     work1 = 0</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>     work1 = 0.0_dp</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>     <span class="comment">! DO THETA (U) TRANSFORM FIRST</span></div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>     <span class="keywordflow">DO</span> i = 1, ntheta2</div>
@@ -444,7 +444,7 @@ $(document).ready(function(){initNavTree('d0/d6f/tomnsp_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d0/d6f/tomnsp_8f90.html">tomnsp.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:16 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

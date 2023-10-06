@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('d3/d3a/getfsq_8f90_source.html','../..
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="foldopen" id="foldopen00012" data-start="" data-end="">
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">   12</a></span><span class="keyword">SUBROUTINE </span><a class="code hl_function" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a>(gcr, gcz, gnormr, gnormz, gnorm, medge)</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, <span class="keywordtype">ONLY</span>: rprec, ns, ns1, mnsize</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d6c/namespacevmec__main.html">vmec_main</a>, <span class="keywordtype">ONLY</span>: rprec, ns, ns1, mnsize, dp</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../d1/d74/namespacevmec__params.html">vmec_params</a>, <span class="keywordtype">ONLY</span>: <a class="code hl_variable" href="../../d1/d74/namespacevmec__params.html#ad3c490e03f80af81375898a02206693c">ntmax</a></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
@@ -142,8 +142,8 @@ $(document).ready(function(){initNavTree('d3/d3a/getfsq_8f90_source.html','../..
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="comment">! so  if medge==0, exclude contribution from LCFS</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="comment">! and if medge==1, also take contribution from LCFS into account</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  jsmax = ns1 + medge</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  gnormr = gnorm * sum(gcr(:jsmax,:)**2)</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  gnormz = gnorm * sum(gcz(:jsmax,:)**2)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  gnormr = gnorm * sum(gcr(:jsmax,:)**2.0_dp)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  gnormz = gnorm * sum(gcz(:jsmax,:)**2.0_dp)</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">END SUBROUTINE </span><a class="code hl_function" href="../../d3/d3a/getfsq_8f90.html#a7b636db95ff23aaea849bd65fba7aa2e">getfsq</a></div>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('d3/d3a/getfsq_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../d3/d3a/getfsq_8f90.html">getfsq.f90</a></li>
-    <li class="footer">Generated on Fri Oct 6 2023 15:15:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 6 2023 15:57:41 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

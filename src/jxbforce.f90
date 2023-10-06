@@ -592,8 +592,11 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   dnorm1 = twopi*twopi
 
   DO js = 2, ns1
+
      ovp = c2p0/(vp(js+1) + vp(js))/dnorm1
+
      tjnorm = ovp*signgs
+
      sqgb2(:nznt) =   gsqrt(js+1,:nznt) * (bsq(js+1,:nznt)-pres(js+1)) &
                     + gsqrt(js  ,:nznt) * (bsq(js  ,:nznt)-pres(js  ))
 
@@ -601,11 +604,11 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      ! IF (ANY(sqgb2(:nznt)*signgs .le. zero)) &
      !   STOP ' SQGB2 <= 0 in JXBFORCE'
 
-     ! ! dp/ds here
+     ! dp/ds here
      pprime(:) = ohs*(pres(js+1)-pres(js))/mu0
 
-     kperpu(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))* pprime(:)/sqgb2
-     kperpv(:nznt) =-cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))* pprime(:)/sqgb2
+     kperpu(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))*pprime(:)/sqgb2
+     kperpv(:nznt) =-cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))*pprime(:)/sqgb2
 
      kp2(:nznt)=cp5*(    kperpu**2        * (guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
                      + 2*kperpu*kperpv    * (guv(js+1:nrzt:ns) + guv(js:nrzt:ns)) &
@@ -620,8 +623,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      ! can be computed above (before lbsubs, where this appears as well)
      sqrtg(:) = cp5*(gsqrt(js,:) + gsqrt(js+1,:))
 
-     bsupu1(:nznt) = cp5*(bsupu(js+1,:nznt)*gsqrt(js+1,:) + bsupu(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
-     bsupv1(:nznt) = cp5*(bsupv(js+1,:nznt)*gsqrt(js+1,:) + bsupv(js,:nznt)  *gsqrt(js,:)) / sqrtg(:)
+     bsupu1(:nznt) = cp5*(bsupu(js+1,:nznt)*gsqrt(js+1,:) + bsupu(js,:nznt)*gsqrt(js,:)) / sqrtg(:)
+     bsupv1(:nznt) = cp5*(bsupv(js+1,:nznt)*gsqrt(js+1,:) + bsupv(js,:nznt)*gsqrt(js,:)) / sqrtg(:)
 
      bsubu1(:nznt) = cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))
      bsubv1(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))
@@ -636,10 +639,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      amaxfor(js) = MAXVAL(jxb(:nznt) - pprime(:))*pnorm
      aminfor(js) = MINVAL(jxb(:nznt) - pprime(:))*pnorm
 
-     avforce(js) = SUM(wint(2:nrzt:ns)*(jxb(:nznt) - pprime(:)))
-
      amaxfor(js) = 100*MIN(amaxfor(js), 9.999_dp)
      aminfor(js) = 100*MAX(aminfor(js),-9.999_dp)
+
+     avforce(js) = SUM(wint(2:nrzt:ns)*(jxb(:nznt) - pprime(:)))
 
      pprim(js) = SUM(wint(js:nrzt:ns)*pprime(:))
 

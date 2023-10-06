@@ -20,6 +20,7 @@ SUBROUTINE fixaray
   INTEGER :: mnyq0, nnyq0
   REAL(rprec):: argi, arg, argj, dnorm, dnorm3
   logical :: dbg_fixaray
+  real(rprec), allocatable :: arg_mu(:,:), arg_nv(:,:)
 
  ! COMPUTE TRIGONOMETRIC FUNCTION ARRAYS
  ! NOTE: ARRAYS ALLOCATED HERE ARE GLOBAL AND ARE DEALLOCATED IN FILEOUT
@@ -45,6 +46,7 @@ SUBROUTINE fixaray
   ALLOCATE(xm(mnmax), xn(mnmax), ixm(mnsize), jmin3(0:mnsize-1),    &
            xm_nyq(mnmax_nyq), xn_nyq(mnmax_nyq),                    &
            mscale(0:mnyq), nscale(0:nnyq), stat=istat2)
+  allocate(arg_mu(ntheta3,0:mnyq), arg_nv(nzeta,0:nnyq))
 
   IF (istat1.ne.0) STOP 'allocation error in fixaray: istat1'
   IF (istat2.ne.0) STOP 'allocation error in fixaray: istat2'
@@ -79,6 +81,9 @@ SUBROUTINE fixaray
      argi = twopi*(i-1)/ntheta1
      DO m = 0, mnyq
         arg = argi*m
+
+        arg_mu(i,m) = arg
+
         cosmu(i,m) = COS(arg)*mscale(m)
         sinmu(i,m) = SIN(arg)*mscale(m)
 
@@ -112,6 +117,9 @@ SUBROUTINE fixaray
      argj = twopi*(j-1)/nzeta
      DO n = 0, nnyq
         arg = argj*(n)
+
+        arg_nv(j,n) = arg
+
         cosnv(j,n) = COS(arg)*nscale(n)
         sinnv(j,n) = SIN(arg)*nscale(n)
         cosnvn(j,n) =  cosnv(j,n)*(n*nfp)
@@ -150,6 +158,9 @@ SUBROUTINE fixaray
 
   dbg_fixaray = open_dbg_context("fixaray")
   if (dbg_fixaray) then
+
+    call add_real_2d("arg_mu",    ntheta2, mnyq+1, arg_mu(1:ntheta2,:))
+    call add_real_2d("arg_nv",    nzeta,   nnyq+1, arg_nv(1:ntheta2,:))
 
     call add_real_2d("cosmu",    ntheta2, mnyq+1, cosmu(1:ntheta2,:))
     call add_real_2d("sinmu",    ntheta2, mnyq+1, sinmu(1:ntheta2,:))

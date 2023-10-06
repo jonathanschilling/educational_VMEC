@@ -610,9 +610,9 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      kperpu(:nznt) = cp5*(bsubv(js+1,:nznt,0) + bsubv(js,:nznt,0))*pprime(:)/sqgb2
      kperpv(:nznt) =-cp5*(bsubu(js+1,:nznt,0) + bsubu(js,:nznt,0))*pprime(:)/sqgb2
 
-     kp2(:nznt)=cp5*(    kperpu**2        * (guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
-                     + 2*kperpu*kperpv    * (guv(js+1:nrzt:ns) + guv(js:nrzt:ns)) &
-                     +          kperpv**2 * (gvv(js+1:nrzt:ns) + gvv(js:nrzt:ns)))
+     kp2(:nznt)=cp5*(    kperpu**2.0_dp        * (guu(js+1:nrzt:ns) + guu(js:nrzt:ns)) &
+                     + 2.0_dp*kperpu*kperpv    * (guv(js+1:nrzt:ns) + guv(js:nrzt:ns)) &
+                     +          kperpv**2.0_dp * (gvv(js+1:nrzt:ns) + gvv(js:nrzt:ns)))
 
      itheta(js,:nznt) =  bsubsv(js,:nznt,0) - ohs*(bsubv(js+1,:nznt,0) - bsubv(js,:nznt,0))
      izeta(js,:nznt)  = -bsubsu(js,:nznt,0) + ohs*(bsubu(js+1,:nznt,0) - bsubu(js,:nznt,0))
@@ -639,23 +639,23 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
      amaxfor(js) = MAXVAL(jxb(:nznt) - pprime(:))*pnorm
      aminfor(js) = MINVAL(jxb(:nznt) - pprime(:))*pnorm
 
-     amaxfor(js) = 100*MIN(amaxfor(js), 9.999_dp)
-     aminfor(js) = 100*MAX(aminfor(js),-9.999_dp)
+     amaxfor(js) = 100.0_dp*MIN(amaxfor(js), 9.999_dp)
+     aminfor(js) = 100.0_dp*MAX(aminfor(js),-9.999_dp)
 
-     avforce(js) = SUM(wint(2:nrzt:ns)*(jxb(:nznt) - pprime(:)))
+     avforce(js) = SUM(wint(js:nrzt:ns)*(jxb(:nznt) - pprime(:)))
 
      pprim(js) = SUM(wint(js:nrzt:ns)*pprime(:))
 
      ! Compute <K dot B>, <B sup v> = signgs*phip
      ! jpar2 = <j||**2>, jperp2 = <j-perp**2>,  with <...> = flux surface average
 
-     jdotb(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)*wint(2:nrzt:ns))
-     bdotb(js) = dnorm1*tjnorm*SUM(sqgb2(:nznt)   *wint(2:nrzt:ns))
+     jdotb(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)*wint(js:nrzt:ns))
+     bdotb(js) = dnorm1*tjnorm*SUM(sqgb2(:nznt)   *wint(js:nrzt:ns))
 
      bdotgradv(js) = cp5*dnorm1*tjnorm*(phip(js) + phip(js+1)) ! TODO: could also use phips here?
 
-     jpar2(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)**2 * wint(2:nrzt:ns)/sqgb2(:nznt))
-     jperp2(js)= dnorm1*tjnorm*SUM(kp2(:nznt)*wint(2:nrzt:ns)*sqrtg(:nznt))
+     jpar2(js) = dnorm1*tjnorm*SUM(bdotk(js,:nznt)**2 * wint(js:nrzt:ns)/sqgb2(:nznt))
+     jperp2(js)= dnorm1*tjnorm*SUM(kp2(:nznt)*wint(js:nrzt:ns)*sqrtg(:nznt))
 
      IF (lprint_flag) THEN
         phin(js) = phi(js)/phi(ns)
@@ -708,8 +708,8 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   jperp2(ns) = 0
 
   !pprim( 1) = 2*pprim(ns-1) - pprim(ns-2) ! TODO: what is going on here ??
-  pprim( 1) = 2*pprim(   2) - pprim(   3)
-  pprim(ns) = 2*pprim(ns-1) - pprim(ns-2)
+  pprim( 1) = 2.0_dp*pprim(   2) - pprim(   3)
+  pprim(ns) = 2.0_dp*pprim(ns-1) - pprim(ns-2)
 
 
   if (open_dbg_context("jxbout", id=0)) then

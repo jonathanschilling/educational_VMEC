@@ -1,6 +1,6 @@
 module theta_flip
   implicit none
-  
+
 ! Subroutines with optional arguments need to be put into a separate module
 ! to get the detection of arguments to work correctly.
 ! See also: https://stackoverflow.com/a/3122736
@@ -27,11 +27,11 @@ SUBROUTINE flip_theta(rmn, zmn, lmn)
   LOGICAL :: l_lmn
 
   ! FLIP THETA -> PI - THETA (INITIALLY, TO MAKE JACOBIAN < 0)
-  mul1=-1
+  mul1=-1.0_dp
 
   ! logical flag to indicate that lambda coeffs shall be flipped as well
   l_lmn = PRESENT(lmn)
-  
+
   DO m=1,mpol1
 
      ! here, mul1 == (-1)**mod(m, 2)

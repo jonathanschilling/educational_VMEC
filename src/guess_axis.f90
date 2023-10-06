@@ -20,7 +20,7 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   REAL(rprec), DIMENSION(ns,nzeta,ntheta3),     INTENT(in) :: ru0, zu0
 
   INTEGER, PARAMETER :: limpts = 61
-  REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2
+  REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2.0_dp
 
   INTEGER :: iv, iu, iu_r, ivminus, nlim, ns12, klim, n
 !  REAL(rprec), DIMENSION(nzeta) :: rcom, zcom
@@ -112,8 +112,8 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
      zmax = MAXVAL(z1b(iv,:))
 
      ! initial guess for new axis: center of grid
-     rcom(iv) = (rmax + rmin)/2
-     zcom(iv) = (zmax + zmin)/2
+     rcom(iv) = (rmax + rmin)/2.0_dp
+     zcom(iv) = (zmax + zmin)/2.0_dp
 
      ! Estimate jacobian based on boundary and 1/2 surface
      ds = (ns - ns12)*hs
@@ -124,13 +124,13 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
         tau0(iv,iu) = ru12(iv,iu)*zs(iv,iu) - zu12(iv,iu)*rs(iv,iu)
      END DO
 
-     mintau = 0
+     mintau = 0.0_dp
 
      DO nlim = 1, limpts
         zlim = zmin + ((zmax - zmin)*(nlim-1))/(limpts-1)
 
         IF (.not.lasym .and. (iv.eq.1 .or. iv.eq.nzeta/2+1)) THEN
-           zlim = 0
+           zlim = 0.0_dp
            IF (nlim .gt. 1) then
               EXIT
            end if

@@ -46,7 +46,7 @@ SUBROUTINE residue_mhd (gcr, gcz, gcl, fsqrz, old_fsqz)
 ! #end /* ndef _HBANGLE */
 
   ! COMPUTE INVARIANT RESIDUALS
-  r1 = one/(2*r0scale)**2 ! --> actually look at r1*fnorm --> scaling factor for forces (?)
+  r1 = one/(2.0_dp*r0scale)**2.0_dp ! --> actually look at r1*fnorm --> scaling factor for forces (?)
   jedge = 0
 
   ! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK

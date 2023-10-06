@@ -66,10 +66,10 @@ SUBROUTINE bcovar (lu, lv)
                   + zu(1:nrzt,modd )*zu(1:nrzt,modd ))
 
   luu(1:nrzt)   = (  ru(1:nrzt,meven)*ru(1:nrzt,modd)                        &
-                   + zu(1:nrzt,meven)*zu(1:nrzt,modd))*2
+                   + zu(1:nrzt,meven)*zu(1:nrzt,modd))*2.0_dp
 
   ! temporary re-use of phipog for contribution to g_vv^o from R^2
-  phipog(1:nrzt)= 2* r1(1:nrzt,meven)*r1(1:nrzt,modd)
+  phipog(1:nrzt)= 2.0_dp * r1(1:nrzt,meven)*r1(1:nrzt,modd)
   !do l=1,2*ns
   !  print *, l, r1(l,meven), r1(l,modd), phipog(l)
   !end do
@@ -89,7 +89,7 @@ SUBROUTINE bcovar (lu, lv)
                    ( rv(1:nrzt,modd )*rv(1:nrzt,modd )                      &
                    + zv(1:nrzt,modd )*zv(1:nrzt,modd ) )
      lvv(1:nrzt)   =(rv(1:nrzt,meven)*rv(1:nrzt,modd )                      &
-                   + zv(1:nrzt,meven)*zv(1:nrzt,modd ))*2
+                   + zv(1:nrzt,meven)*zv(1:nrzt,modd ))*2.0_dp
   END IF
 
   ! contribution to g_vv^e from R^2
@@ -155,11 +155,11 @@ SUBROUTINE bcovar (lu, lv)
   WHERE (gsqrt(2:ndim) .ne. zero) phipog(2:ndim) = one/gsqrt(2:ndim)
 
   ! 1/sqrt(g) is zero(since undefined) at the magnetic axis
-  phipog(1:ndim:ns) = 0
+  phipog(1:ndim:ns) = 0.0_dp
 
   ! compute plasma volume profile (vp) and total volume (voli)
-  vp(1) = 0
-  vp(ns+1) = 0
+  vp(1) = 0.0_dp
+  vp(ns+1) = 0.0_dp
   DO js = 2, ns
      vp(js) = signgs*SUM(gsqrt(js:nrzt:ns)*wint(js:nrzt:ns))
   END DO
@@ -199,12 +199,12 @@ SUBROUTINE bcovar (lu, lv)
                                        + shalf(2:nrzt)*(lu(2:nrzt,1) + lu(1:nrzt-1,1))  )
 
   ! first point at (u,v)=(0,0) on axis
-  bsupu(1)=0
-  bsupv(1)=0
+  bsupu(1)=0.0_dp
+  bsupv(1)=0.0_dp
 
   ! v8.49: add ndim points --> TODO: likely not needed anymore, reconstruction-related?
-  bsupu(ndim)=0
-  bsupv(ndim)=0
+  bsupu(ndim)=0.0_dp
+  bsupv(ndim)=0.0_dp
 
   if (open_dbg_context("bcontrav", num_eqsolve_retries)) then
 
@@ -231,8 +231,8 @@ SUBROUTINE bcovar (lu, lv)
   bsubvh(1:nrzt) = guv(1:nrzt)*bsupu(1:nrzt) + gvv(1:nrzt)*bsupv(1:nrzt)
 
   ! v8.49 --> TODO: likely not needed anymore, reconstruction-related?
-  bsubuh(ndim) = 0
-  bsubvh(ndim) = 0
+  bsubuh(ndim) = 0.0_dp
+  bsubvh(ndim) = 0.0_dp
 
   ! COMPUTE MAGNETIC AND KINETIC PRESSURE ON RADIAL HALF-MESH
   ! bsq = |B|^2/2 = 0.5*(B^u*B_u + B^v*B_v)

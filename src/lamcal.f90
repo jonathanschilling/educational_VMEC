@@ -18,7 +18,7 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
 
   REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: overg, guu, guv, gvv
 
-  REAL(rprec), PARAMETER :: damping_fac=2
+  REAL(rprec), PARAMETER :: damping_fac=2.0_dp
 
   INTEGER :: m,n,js
   REAL(rprec) :: tnn, tnm, tmm, power, pfactor0, pfactor
@@ -29,21 +29,21 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
   blam(1) = blam(2) ! constant extrapolation to axis
   clam(1) = clam(2) ! constant extrapolation to axis
   dlam(1) = dlam(2) ! constant extrapolation to axis
-  blam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
-  clam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
-  dlam(ns+1) =  0   ! virtual "ghost" point beyond LCFS
+  blam(ns+1) =  0.0_dp   ! virtual "ghost" point beyond LCFS
+  clam(ns+1) =  0.0_dp   ! virtual "ghost" point beyond LCFS
+  dlam(ns+1) =  0.0_dp   ! virtual "ghost" point beyond LCFS
   DO js = 2, ns
      blam(js) = cp5*(blam(js) + blam(js+1))
      clam(js) = cp5*(clam(js) + clam(js+1))
      dlam(js) = cp5*(dlam(js) + dlam(js+1))
   END DO
 
-  faclam = 0
-  pfactor0 = damping_fac/(2*r0scale*lamscale)**2
+  faclam = 0.0_dp
+  pfactor0 = damping_fac/(2.0_dp*r0scale*lamscale)**2.0_dp
 
   DO m = 0, mpol1
      tmm = m*m
-     power = MIN(tmm/256, 8._dp)
+     power = MIN(tmm/256.0_dp, 8._dp)
 
      pfactor = pfactor0
      DO n = 0, ntor
@@ -52,8 +52,8 @@ SUBROUTINE lamcal(overg, guu, guv, gvv)
         ! sometimes helps convergence
         ! IF (n .gt. 1) pfactor = pfactor0/4
 
-        tnn = (n*nfp)**2
-        tnm = 2*m*n*nfp
+        tnn = (n*nfp)**2.0_dp
+        tnm = 2.0_dp*m*n*nfp
         DO js = jlam(m), ns
 
            ! b: coupling between n and n ?

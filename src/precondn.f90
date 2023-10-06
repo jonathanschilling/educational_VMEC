@@ -51,13 +51,13 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
   !               ~ 2*r0scale**2 <...>
   ALLOCATE (ax(ns+1,4), bx(ns+1,4), ptau(nznt), ptau2(nznt))
 
-  ax = 0
-  bx = 0
-  cx = 0
-  temp = 0
+  ax = 0.0_dp
+  bx = 0.0_dp
+  cx = 0.0_dp
+  temp = 0.0_dp
 
   ! pfactor = -2*r0scale**2       !v8.50
-  pfactor = -4*r0scale**2        !restored in v8.51
+  pfactor = -4.0_dp*r0scale**2.0_dp        !restored in v8.51
 
   DO js = 2,ns
     ! COMPUTE DOMINANT (1/DELTA-S)**2 PRECONDITIONING MATRIX ELEMENTS
@@ -98,19 +98,19 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
     axm(js,1) =-ax(js,1)
     axd(js,1) = ax(js,1) + ax(js+1,1)
     axm(js,2) = ax(js,2) * sm(js) * sp(js-1)
-    axd(js,2) = ax(js,3)*sm(js)**2 + ax(js+1,4)*sp(js)**2
+    axd(js,2) = ax(js,3)*sm(js)**2.0_dp + ax(js+1,4)*sp(js)**2.0_dp
     bxm(js,1) = bx(js,1)
     bxm(js,2) = bx(js,1) * sm(js) * sp(js-1)
     bxd(js,1) = bx(js,2) + bx(js+1,3)
-    bxd(js,2) = bx(js,2)*sm(js)**2 + bx(js+1,3)*sp(js)**2
+    bxd(js,2) = bx(js,2)*sm(js)**2.0_dp + bx(js+1,3)*sp(js)**2.0_dp
     cx(js)    = cx(js) + cx(js+1)
     temp(js) = signgs*(temp(js) + temp(js+1))
   END DO
 
-  axm(ns+1,:) = 0
-  axd(ns+1,:) = 0
-  bxm(ns+1,:) = 0
-  bxd(ns+1,:) = 0
+  axm(ns+1,:) = 0.0_dp
+  axd(ns+1,:) = 0.0_dp
+  bxm(ns+1,:) = 0.0_dp
+  bxd(ns+1,:) = 0.0_dp
 
   DEALLOCATE (ax, bx, ptau, ptau2)
 

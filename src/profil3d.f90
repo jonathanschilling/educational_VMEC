@@ -32,9 +32,9 @@ SUBROUTINE profil3d(rmn, zmn, lreset)
      chip(js:nrzt:ns) = chips(js)
   END DO
 
-  phip(nrzt+1) = 0
-  faclam = 0
-  wint(1:nrzt:ns) = 0
+  phip(nrzt+1) = 0.0_dp
+  faclam = 0.0_dp
+  wint(1:nrzt:ns) = 0.0_dp
 
   lk = 0
   DO lt = 1, ntheta3

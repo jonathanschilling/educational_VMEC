@@ -162,8 +162,8 @@ SUBROUTINE funct3d (ier_flag)
      ! SLOWLY IN FREE-BOUNDARY VACUUM LOOP (BELOW)
      DO l = 1, ns
         ! value of rcon(ns) is scaled into the volume proportional to s
-        rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
-        zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2
+        rcon0(l:nrzt:ns) = rcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2.0_dp
+        zcon0(l:nrzt:ns) = zcon(ns:nrzt:ns,0) * sqrts(l:nrzt:ns)**2.0_dp
      END DO
   ENDIF
 ! #end /* ndef _HBANGLE */

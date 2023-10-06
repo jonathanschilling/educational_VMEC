@@ -12,9 +12,9 @@ SUBROUTINE fixaray
 
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: two=2
+  REAL(rprec), PARAMETER :: two=2.0_dp
 
-  REAL(rprec), PARAMETER :: pexp=4 ! for <M> spectral width screen diagnostic
+  REAL(rprec), PARAMETER :: pexp=4.0_dp ! for <M> spectral width screen diagnostic
 
   INTEGER :: i, m, j, n, mn, mn1, nmin0, istat1, istat2
   INTEGER :: mnyq0, nnyq0
@@ -55,22 +55,22 @@ SUBROUTINE fixaray
   ! In any case (symmetric or asymmetric), the Fourier integrals in tomnsp* and alias
   ! (the only place where dnorm is used through cosmui, sinmui, etc.)
   ! are ever only taken over [0, pi] corresponding to 1, ..., ntheta2.
-  dnorm = one/(nzeta*(ntheta2-1))
+  dnorm = one/(nzeta*(ntheta2-1.0_dp))
 
   ! Normalization factor for surface integrals/averages (wint is based on cosmui3).
   ! For the asymmetric case, the norm in wint thus has to be 1/(nzeta*ntheta3).
   IF (lasym) then
     dnorm3 = one/(nzeta*ntheta1)
   else
-    dnorm3 = one/(nzeta*(ntheta2-1))
+    dnorm3 = one/(nzeta*(ntheta2-1.0_dp))
   end if
 
   ! (from vmec_params)
   ! array for norming theta-trig functions (internal use only)
   ! so that the discrete SUM[cos(mu)*cos(m'u)] = .5 delta(m,m')
   ! and analogously for zeta/v
-  mscale(0) = 1
-  nscale(0) = 1
+  mscale(0) = 1.0_dp
+  nscale(0) = 1.0_dp
   mscale(1:mnyq) = mscale(0)/osqrt2 ! == sqrt(2)
   nscale(1:nnyq) = nscale(0)/osqrt2 ! == sqrt(2)
 
@@ -131,11 +131,11 @@ SUBROUTINE fixaray
   mn = 0
   mn1 = 0
   DO m = 0, mpol1
-     xmpq(m,1) = m*(m - 1)   ! used for spectral constraint force --> m^2-m
+     xmpq(m,1) = m*(m - 1.0_dp)   ! used for spectral constraint force --> m^2-m
 
      ! xmpq(m,2:3) are ONLY used for screen diagnostic <M> !!!
      xmpq(m,2) = m**pexp     ! m^p     with p = pexp = 4
-     xmpq(m,3) = m**(pexp+1) ! m^(p+q) with q = 1
+     xmpq(m,3) = m**(pexp+1.0_dp) ! m^(p+q) with q = 1
 
      ! compute ixm == _i_nteger version of xm
      DO n = 0, ntor
@@ -221,7 +221,7 @@ SUBROUTINE fixaray
 
   ! _fac_tor for _con_straint
   faccon(0) = zero
-  faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2
+  faccon(1:mpol1-1) = -0.25_dp*signgs/xmpq(2:mpol1,1)**2.0_dp
   faccon(mpol1) = zero
 
   if (dbg_fixaray) then

@@ -29,11 +29,11 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
 
   ALLOCATE (work(ns*nzeta,4), gcona(ns*nzeta,ntheta3))
 
-  gcons = 0
-  gcona = 0
+  gcons = 0.0_dp
+  gcona = 0.0_dp
 
-  gcs = 0;  gsc = 0
-  gcc = 0;  gss = 0
+  gcs = 0.0_dp;  gsc = 0.0_dp
+  gcc = 0.0_dp;  gss = 0.0_dp
 
   ! The start of this loop at m=1 and its end at mpol1-1=mpol-2
   ! is what makes this routine a Fourier-space bandpass filter.
@@ -75,7 +75,7 @@ SUBROUTINE alias(gcons, ztemp, gcs, gsc, gcc, gss)
      END DO
 
      ! INVERSE FOURIER TRANSFORM DE-ALIASED GCON
-     work = 0
+     work = 0.0_dp
 
      DO n = 0, ntor
         DO k = 1, nzeta

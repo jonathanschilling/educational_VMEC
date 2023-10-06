@@ -203,7 +203,7 @@
         ENDIF
 !  Note that spline_akima_int integrates with ac_aux_s(1) as the lower limit.
 !  Assumption here is that lower limit is s = 0. Check this assumption.
-        IF (ABS(ac_aux_s(1)) .gt. 0.0001) THEN
+        IF (ABS(ac_aux_s(1)) .gt. 0.0001_dp) THEN
            WRITE(*,*) ' Error in profile_functions, Akima_spline_Ip'
            WRITE(*,*) ' ABS(ac_aux_s(1)) .gt. 0.0001'
            WRITE(*,*) ' Fix This. Stopping'
@@ -247,7 +247,7 @@
         ENDIF
 !  Note that spline_cubic_int integrates with ac_aux_s(1) as the lower limit.
 !  Assumption here is that lower limit is s = 0. Check this assumption.
-        IF (ABS(ac_aux_s(1)) .gt. 0.0001) THEN
+        IF (ABS(ac_aux_s(1)) .gt. 0.0001_dp) THEN
            WRITE(*,*) ' Error in profile_functions, cubic_spline_Ip'
            WRITE(*,*) ' ABS(ac_aux_s(1)) .gt. 0.0001'
            WRITE(*,*) ' Fix This. Stopping'
@@ -258,17 +258,18 @@
 !  Parameterization for I(s)
 !  Added by SPH 2010-05-26
          DO i = 7, ioff, -1
-            pcurr = x*pcurr + ac(i)/(i-ioff+1)
+            pcurr = x*pcurr + ac(i)/(i-ioff+1.0_dp)
          END DO
          pcurr = x*pcurr
 
          i=8
          IF (ac(i+3) .le. 0._dp ) THEN
-            ac(i:i+4) = 0
+            ac(i:i+4) = 0.0_dp
             ac(i+3) = 1.0e30_dp
          ELSE
             ac(i+4) = 1.0_dp/
-     1     (TANH(2*ac(i+2)/ac(i+3))-TANH(2*(ac(i+2)-1)/ac(i+3)))
+     1     (TANH(2.0_dp*ac(i+2)/ac(i+3))-
+     2      TANH(2.0_dp*(ac(i+2)-1)/ac(i+3)))
          END IF
 
          a8 =MAX(ac(i+8),0.01_dp)
@@ -279,8 +280,8 @@
          g2= (x-ac(i+11))/a12
          g4= (-ac(i+11))/a12
          pcurr = pcurr + ac(i+4) * ac(i+0) *
-     1 ( TANH( 2*ac(i+2)/ac(i+3) )
-     2  -TANH( 2*(ac(i+2)-SQRT(x))/ac(i+3) ) )
+     1 ( TANH( 2.0_dp*ac(i+2)/ac(i+3) )
+     2  -TANH( 2.0_dp*(ac(i+2)-SQRT(x))/ac(i+3) ) )
      3  +ac(i+5)*( TANH(g1) - TANH(g3) )
      4  +ac(i+9)*( TANH(g2) - TANH(g4) )
 
@@ -371,7 +372,7 @@
       REAL(rprec) :: x, piota, temp_num, temp_denom
       CHARACTER(len=20) :: piota_type_lc
 !-----------------------------------------------
-      piota = 0
+      piota = 0.0_dp
       ioff = LBOUND(ai,1)            ! Expected to be zero.
 
 !  Convert to Lower Case, to avoid typo issues
@@ -593,16 +594,17 @@
 
          i = 16
          IF (am(i+3) .le. 0._dp ) THEN
-            am(i:i+4) = 0
+            am(i:i+4) = 0.0_dp
             am(i+3) = 1.0e30_dp
          ELSE
             am(i+4) = 1.0_dp/
-     1     (TANH(2*am(i+2)/am(i+3))-TANH(2*(am(i+2)-1)/am(i+3)))
+     1     (TANH(2.0_dp*am(i+2)/am(i+3))-
+     2      TANH(2.0_dp*(am(i+2)-1)/am(i+3)))
          END IF
 
          pmass = pmass + am(i+4) * am(i+1) *
-     1 ( TANH( 2*(am(i+2)-SQRT(x))/am(i+3) )
-     2  -TANH( 2*(am(i+2)-1._dp)  /am(i+3) ) )
+     1 ( TANH( 2.0_dp*(am(i+2)-SQRT(x))/am(i+3) )
+     2  -TANH( 2.0_dp*(am(i+2)-1._dp)  /am(i+3) ) )
 
       CASE('rational') !
 !  Ratio of polynomials.

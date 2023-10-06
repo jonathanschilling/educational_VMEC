@@ -13,7 +13,7 @@ MODULE stel_constants
   REAL(dp), PARAMETER :: pio2 = 2.0_dp * datan(1.0_dp) ! pi/2
   REAL(dp), PARAMETER :: twopi = 8.0_dp * datan(1.0_dp) ! 2.0_dp*pi
   REAL(dp), PARAMETER :: sqrt2 = 1.41421356237309504880168872_dp
-  REAL(dp), PARAMETER :: degree = twopi / 360
+  REAL(dp), PARAMETER :: degree = twopi / 360_dp
   REAL(dp), PARAMETER :: one = 1.0_dp
   REAL(dp), PARAMETER :: zero = 0.0_dp
 

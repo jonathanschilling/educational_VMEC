@@ -24,7 +24,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
   REAL(rprec), DIMENSION(nsnew,mnsize,3*ntmax), INTENT(in)    :: scalxc
   REAL(rprec), DIMENSION(nsold,mnsize,3*ntmax), intent(inout) :: xold
 
-  REAL(rprec), PARAMETER :: zero=0, one=1
+  REAL(rprec), PARAMETER :: zero=0.0_dp, one=1.0_dp
 
   INTEGER :: ntype, js
   integer, dimension(nsnew) :: js1, js2
@@ -33,7 +33,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
   IF (nsold .le. 0) RETURN
 
-  hsold = one/(nsold - 1)
+  hsold = one/(nsold - 1.0_dp)
 
   ! INTERPOLATE R,Z AND LAMBDA ON FULL GRID
   ! (EXTRAPOLATE M=1 MODES,OVER SQRT(S), TO ORIGIN)
@@ -43,17 +43,17 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
 
      ! extrapolation to axis for odd-m modes (?)
      WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
-       xold(1,:,ntype) = 2*xold(2,:,ntype) - xold(3,:,ntype)
+       xold(1,:,ntype) = 2.0_dp*xold(2,:,ntype) - xold(3,:,ntype)
 
      ! radial interpolation from old, coarse state vector to new, finer state vector
      DO js = 1, nsnew
 
-        sj(js) = REAL(js - 1, rprec)/(nsnew - 1)
+        sj(js) = REAL(js - 1, rprec)/(nsnew - 1.0_dp)
 
         js1(js) = 1 + ((js - 1)*(nsold - 1))/(nsnew - 1)
         js2(js) = MIN(js1(js) + 1, nsold)
 
-        s1(js) = (js1(js) - 1)*hsold
+        s1(js) = (js1(js) - 1.0_dp)*hsold
 
         xint(js) = (sj(js) - s1(js))/hsold
         xint(js) = MIN(one, xint(js))
@@ -66,7 +66,7 @@ SUBROUTINE interp(xnew, xold, scalxc, nsnew, nsold)
      ! Zero M=1 modes at origin
      ! Actually, all odd-m modes are zeroed!
      WHERE (MOD(ixm(:mnsize), 2) .eq. 1) &
-        xnew(1,:,ntype) = 0
+        xnew(1,:,ntype) = 0.0_dp
 
   END DO
 

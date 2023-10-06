@@ -48,7 +48,7 @@ SUBROUTINE tomnsps_con(frzl_array,       &
   ioff = LBOUND(frcc,2)
   joff = LBOUND(frcc,3)
 
-  frzl_array = 0
+  frzl_array = 0.0_dp
 
   jmax = ns
   IF (ivac .lt. 1) jmax = ns1
@@ -68,7 +68,7 @@ SUBROUTINE tomnsps_con(frzl_array,       &
      j2 = jmin2(m)
      jl = jlam(m)
 
-     work1 = 0
+     work1 = 0.0_dp
 
      ! DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 < U < PI)
      l = 0
@@ -177,7 +177,7 @@ SUBROUTINE tomnspa_con(frzl_array,       &
      j2 = jmin2(m)
      jl = jlam(m)
 
-     work1 = 0
+     work1 = 0.0_dp
 
      ! DO THETA (U) TRANSFORM FIRST
      DO i = 1, ntheta2

@@ -16,7 +16,7 @@ SUBROUTINE jacobian
 
   IMPLICIT NONE
 
-  REAL(rprec), PARAMETER :: zero=0, p5=0.5_dp, p25=p5*p5
+  REAL(rprec), PARAMETER :: zero=0.0_dp, p5=0.5_dp, p25=p5*p5
 
   INTEGER :: l, js, ku, lk
   REAL(rprec) :: taumax, taumin, dshalfds=p25, temp(nrzt/ns) ! TODO: nrzt/ns == nznt?

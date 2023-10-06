@@ -104,11 +104,11 @@ SUBROUTINE forces
   guus => extra4(:,1) ! output or temp
 
   ! zero values at axis
-  lu_e(1:ndim:ns) = 0 ! fixup input
-  lv_e(1:ndim:ns) = 0 ! fixup input
-  guu(1:ndim:ns) = 0 ! fixup input
-  guv(1:ndim:ns) = 0 ! fixup input
-  gvv(1:ndim:ns) = 0 ! fixup input
+  lu_e(1:ndim:ns) = 0.0_dp ! fixup input
+  lv_e(1:ndim:ns) = 0.0_dp ! fixup input
+  guu(1:ndim:ns) = 0.0_dp ! fixup input
+  guv(1:ndim:ns) = 0.0_dp ! fixup input
+  gvv(1:ndim:ns) = 0.0_dp ! fixup input
 
   guus = guu*shalf ! output or temp
   guvs = guv*shalf ! output or temp

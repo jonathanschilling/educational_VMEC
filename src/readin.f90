@@ -260,8 +260,8 @@
      END IF
   ENDIF
 
-  rmn_bdy = 0
-  zmn_bdy = 0
+  rmn_bdy = 0.0_dp
+  zmn_bdy = 0.0_dp
 
   ! NOTE: INDICES START AT 1, NOT 0, FOR POINTERS,
   !       EVEN THOUGH THEY START AT ZERO FOR RMN_BDY
@@ -368,7 +368,7 @@
   rtest = SUM(rbcc(1:ntor1,mj))
   ztest = SUM(zbsc(1:ntor1,mj))
   lflip=(rtest*ztest .lt. zero)
-  signgs = -1
+  signgs = -1.0_dp
   IF (lflip) then
      ! (rtest*ztest < 0) means that rtest and ztest have different signs
      CALL flip_theta(rmn_bdy, zmn_bdy)

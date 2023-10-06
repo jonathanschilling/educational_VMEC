@@ -37,9 +37,9 @@ SUBROUTINE profil1d()
   r00 = rmn_bdy(0,0,rcc)
 
   ! zero fluxes and current at magnetic axis
-  phips(1) = 0
-  chips(1) = 0
-  icurv(1) = 0
+  phips(1) = 0.0_dp
+  chips(1) = 0.0_dp
+  icurv(1) = 0.0_dp
 
   ! half-grid quantities: s_i are shifted inwards by 0.5 grid points
   DO i = 2,ns
@@ -50,11 +50,11 @@ SUBROUTINE profil1d()
      iotas(i) = piota(tf) ! evaluate iota profile
      icurv(i) = pcurr(tf) ! evaluate current profile
   END DO
-  phips(ns+1) = 2*phips(ns)-phips(ns-1) ! virtual point outside the LCFS
+  phips(ns+1) = 2.0_dp*phips(ns)-phips(ns-1) ! virtual point outside the LCFS
 
   ! Compute lamscale factor for "normalizing" lambda (needed for scaling hessian)
-  lamscale = SQRT(hs*SUM(phips(2:ns)**2))
-  IF (lamscale .EQ. 0) STOP 'PHIP == 0: ERROR!'
+  lamscale = SQRT(hs*SUM(phips(2:ns)**2.0_dp))
+  IF (lamscale .EQ. 0.0_dp) STOP 'PHIP == 0: ERROR!'
 
   IF (lflip) THEN
      iotas = -iotas
@@ -63,7 +63,7 @@ SUBROUTINE profil1d()
 
   ! full-grid quantities
   DO i = 1,ns
-     si = hs*(i-1)
+     si = hs*(i-1.0_dp)
      tf = MIN(one, torflux(si))
      phipf(i) = torflux_edge * torflux_deriv(si)
      chipf(i) = torflux_edge * polflux_deriv(si)
@@ -104,7 +104,7 @@ SUBROUTINE profil1d()
     mass(i) = pedge*(ABS(vpnorm)*r00)**gamma
   END DO
 
-  pres(:ns+1) = 0
+  pres(:ns+1) = 0.0_dp
 
   DO i = 1, ns
 
@@ -113,20 +113,20 @@ SUBROUTINE profil1d()
      shalf(i:nrzt:ns) = SQRT(si)
 
      ! sqrt(s_i) for full-grid s values
-     si = hs*(i-1)
+     si = hs*(i-1.0_dp)
      sqrts(i:nrzt:ns) = SQRT(si)
 
      ! TODO: what is this _exactly_?
      ! just observing, this is a linear profile on the half-grid
      ! which is at 2*pdamp == 0.1 at the axis
      ! and at              ca. 0  at the LCFS
-     bdamp(i) = 2*pdamp*(1-si)
+     bdamp(i) = 2.0_dp*pdamp*(1.0_dp-si)
   END DO
 
   ! Avoid round-off
-  sqrts(ns:nrzt:ns) = 1 ! boundary  value
-  shalf(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of shalf (see ndim in allocate_ns)
-  sqrts(nrzt+1) = 1 ! no scaling for the weird hidden value at the end of sqrts (see ndim in allocate_ns)
+  sqrts(ns:nrzt:ns) = 1.0_dp ! boundary  value
+  shalf(nrzt+1) = 1.0_dp ! no scaling for the weird hidden value at the end of shalf (see ndim in allocate_ns)
+  sqrts(nrzt+1) = 1.0_dp ! no scaling for the weird hidden value at the end of sqrts (see ndim in allocate_ns)
 
   ! sm, sp used mainly in 1d preconditioner?
   DO i = 2,ns
@@ -134,8 +134,8 @@ SUBROUTINE profil1d()
      sp(i) = shalf(i+1)/sqrts(i)
   ENDDO
 
-  sm(1) = 0
-  sp(0) = 0
+  sm(1) = 0.0_dp
+  sp(0) = 0.0_dp
   sp(1) = sm(2)
 
   if (open_dbg_context("profil1d", num_eqsolve_retries)) then

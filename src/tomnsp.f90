@@ -53,7 +53,7 @@ SUBROUTINE tomnsps(frzl_array,       &
   ioff = LBOUND(frcc,2)
   joff = LBOUND(frcc,3)
 
-  frzl_array = 0
+  frzl_array = 0.0_dp
 
   ! exclude forces on boundary if free-boundary module is not active
   jmax = ns
@@ -75,7 +75,7 @@ SUBROUTINE tomnsps(frzl_array,       &
      j2 = jmin2(m)
      jl = jlam(m)
 
-     work1 = 0
+     work1 = 0.0_dp
 
      ! DO THETA (U) INTEGRATION FIRST ON HALF INTERVAL (0 < U < PI)
      l = 0
@@ -231,7 +231,7 @@ SUBROUTINE tomnspa(frzl_array,       &
      j2 = jmin2(m)
      jl = jlam(m)
 
-     work1 = 0
+     work1 = 0.0_dp
 
      ! DO THETA (U) TRANSFORM FIRST
      DO i = 1, ntheta2

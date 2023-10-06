@@ -50,9 +50,9 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
   ALLOCATE (ax(ns,0:ntor,0:mpol1), bx(ns,0:ntor,0:mpol1), dx(ns,0:ntor,0:mpol1))
 
   ! clean state since not all entries are assigned
-  ax = 0
-  dx = 0
-  bx = 0
+  ax = 0.0_dp
+  dx = 0.0_dp
+  bx = 0.0_dp
 
   jmax = ns
   IF (ivac .lt. 1) jmax = ns1
@@ -66,9 +66,9 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
      mp = MOD(m,2) + 1
      DO n = 0, ntor
         DO js = jmin2(m), jmax
-           ax(js,n,m) = -(axm(js+1,mp) + bxm(js+1,mp)*m**2)
-           bx(js,n,m) = -(axm(js,mp) + bxm(js,mp)*m**2)
-           dx(js,n,m) = -(axd(js,mp) + bxd(js,mp)*m**2 + cx(js)*(n*nfp)**2)
+           ax(js,n,m) = -(axm(js+1,mp) + bxm(js+1,mp)*m**2.0_dp)
+           bx(js,n,m) = -(axm(js,mp) + bxm(js,mp)*m**2.0_dp)
+           dx(js,n,m) = -(axd(js,mp) + bxd(js,mp)*m**2.0_dp + cx(js)*(n*nfp)**2.0_dp)
         END DO
 
         IF (m .eq. 1) THEN
@@ -88,19 +88,19 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
     ! SMALL EDGE PEDESTAL NEEDED TO IMPROVE CONVERGENCE
     ! IN PARTICULAR, NEEDED TO ACCOUNT FOR POTENTIAL ZERO
     ! EIGENVALUE DUE TO NEUMANN (GRADIENT) CONDITION AT EDGE
-     dx(ns,:,0:1)     = (1+  edge_pedestal)*dx(ns,:,0:1)
-     dx(ns,:,2:mpol1) = (1+2*edge_pedestal)*dx(ns,:,2:mpol1)
+     dx(ns,:,0:1)     = (1.0_dp+  edge_pedestal)*dx(ns,:,0:1)
+     dx(ns,:,2:mpol1) = (1.0_dp+2.0_dp*edge_pedestal)*dx(ns,:,2:mpol1)
 
      ! STABILIZATION ALGORITHM FOR ZC_00(NS)
      ! FOR UNSTABLE CASE, HAVE TO FLIP SIGN OF -FAC -> +FAC FOR CONVERGENCE
      ! COEFFICIENT OF < Ru (R Pvac)> ~ -fac*(z-zeq) WHERE fac (EIGENVALUE, OR
      ! FIELD INDEX) DEPENDS ON THE EQUILIBRIUM MAGNETIC FIELD AND CURRENT,
      ! AND zeq IS THE EQUILIBRIUM EDGE VALUE OF Z00
-      mult_fac = MIN(fac, fac*hs*15)
+      mult_fac = MIN(fac, fac*hs*15.0_dp)
 
       IF (iflag .eq. 1) THEN
          ! METHOD 1: SUBTRACT (INSTABILITY) Pedge ~ fac*z/hs FROM PRECONDITIONER AT EDGE
-         dx(ns,0,0) = dx(ns,0,0)*(1-mult_fac)/(1+edge_pedestal)
+         dx(ns,0,0) = dx(ns,0,0)*(1.0_dp-mult_fac)/(1.0_dp+edge_pedestal)
       END IF
   ENDIF
 

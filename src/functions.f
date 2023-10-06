@@ -41,7 +41,7 @@
       two_power_gs = 1.0
       DO i = 3, 18, 3
          two_power_gs = two_power_gs +                                         &
-     &                  b(i)*exp(-((x - b(i+1))/b(i+2))**2)
+     &                  b(i)*exp(-((x - b(i+1))/b(i+2))**2.0_dp)
       END DO
       two_power_gs = two_power_gs*two_power(x,b)
 

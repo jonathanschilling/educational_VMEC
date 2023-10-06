@@ -43,9 +43,9 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
   ! radial grid: only depends on ns
   ns = nsval
-  ns1 = ns-1
+  ns1 = ns-1.0_dp
   hs = one/ns1
-  ohs = one/hs ! == ns1, but real-valued variant to avoid some kind of roundoff error ?
+  ohs = ns1 ! one/hs ! == ns1, but real-valued variant to avoid some kind of roundoff error ?
 
   ! real-space grid on surfaces
   nrzt = ns*nznt
@@ -79,9 +79,9 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
      END IF
 
      ! reset Fourier coefficients vector if lreset was specified
-     xcdot = 0
+     xcdot = 0.0_dp
      IF (lreset_internal) THEN
-       xc = 0
+       xc = 0.0_dp
      END IF
 
      ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES

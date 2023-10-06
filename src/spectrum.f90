@@ -41,10 +41,10 @@ SUBROUTINE spectrum(rmn, zmn)
     DO n = 0,ntor
       DO m = 1,mpol1
 
-         scale_fac = (mscale(m)*nscale(n))**2
+         scale_fac = (mscale(m)*nscale(n))**2.0_dp
 
          DO js = 2,ns
-            t1(js) =(rmn(js,n,m,ntype)**2 + zmn(js,n,m,ntype)**2)*scale_fac
+            t1(js) =(rmn(js,n,m,ntype)**2.0_dp + zmn(js,n,m,ntype)**2.0_dp)*scale_fac
          END DO
 
          dnumer(2:ns) = dnumer(2:ns) + t1(2:ns)*xmpq(m,3)

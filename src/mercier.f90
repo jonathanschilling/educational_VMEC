@@ -50,7 +50,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   INTEGER,                             INTENT(in)    :: ns
   INTEGER,                             INTENT(in)    :: nznt
 
-  REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2
+  REAL(rprec), PARAMETER :: p5 = 0.5_dp, two = 2.0_dp
 
   INTEGER :: ns1, i, imercier0, nmerc = nmercier0, nrzt
   REAL(rprec) :: sign_jac, hs, sqs, denom
@@ -134,7 +134,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
     bdotj(i,:) = bdotj(i,:)/gsqrt_full(i,:)
     gsqrt_full(i,:) = gsqrt_full(i,:)/phip_real(i)
 
-    sj(i) = hs*(i-1)
+    sj(i) = hs*(i-1.0_dp)
     sqs = SQRT(sj(i)) ! sqrt(s) on full grid
 
     rtf(:) = rt(i,:,0) + sqs*rt(i,:,1)     ! dR/dTheta
@@ -145,9 +145,9 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
 
     gtt(:) = rtf(:)*rtf(:) + ztf(:)*ztf(:) ! g_uu
 
-    gpp(i,:) = gsqrt_full(i,:)**2 &
-               / (  gtt(:)*r1f(:)**2                &
-                  + (rtf(:)*zzf(:) - rzf(:)*ztf(:))**2) ! 1/gpp
+    gpp(i,:) = gsqrt_full(i,:)**2.0_dp &
+               / (  gtt(:)*r1f(:)**2.0_dp                &
+                  + (rtf(:)*zzf(:) - rzf(:)*ztf(:))**2.0_dp) ! 1/gpp
   END DO
 
   ! COMPUTE SURFACE AVERAGES OVER dS/|grad-PHI|**3 => |Jac| du dv / |grad-PHI|**2
@@ -214,7 +214,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
      tbb(i) = tbb(i) * (twopi*twopi)
      tjj(i) = tjj(i) * (twopi*twopi)
 
-     Dshear(i) = shear(i) * shear(i)/4
+     Dshear(i) = shear(i) * shear(i)/4.0_dp
      Dcurr(i)  =-shear(i) * (tjb(i) - ip(i) *tbb(i))
      Dwell(i)  = presp(i) * (vpp(i) - presp(i) *tpp(i))*tbb(i)
      Dgeod(i)  = tjb(i) *tjb(i)  - tbb(i) *tjj(i)

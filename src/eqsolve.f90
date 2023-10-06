@@ -39,7 +39,7 @@ SUBROUTINE eqsolve(ier_flag)
   ! OR
   ! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
   IF (first .EQ. 2) THEN
-     xc = 0
+     xc = 0.0_dp
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
 
      first = 1 ! tells restart_iter to store current xc in xstore
@@ -207,7 +207,7 @@ SUBROUTINE eqsolve(ier_flag)
   END DO iter_loop
 
   ! write MHD energy at end of iterations for current number of surfaces
-  WRITE (nthreed, 60) w0*twopi**2
+  WRITE (nthreed, 60) w0*twopi**2.0_dp
 60 FORMAT(/,' MHD Energy = ',1p,e12.6)
 
 END SUBROUTINE eqsolve

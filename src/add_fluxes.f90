@@ -34,7 +34,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
      DO js = 2, ns
         ! solve Eqn. (11) of the ORMEC paper for each flux surface
         top = icurv(js) ! offset: this makes the zero-current algorithm a constrained-current algorithm
-        bot = 0
+        bot = 0.0_dp
         DO l = js, nrzt, ns
            ! bsupu contains -d(lambda)/d( zeta)*lamscale+phipf on entry (?)
            ! bsupv contains  d(lambda)/d(theta)*lamscale       on entry (?)
@@ -63,8 +63,8 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
 
   ! half-grid to full-grid for chi-prime and iota below
 
-  chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2
-  chipf(ns)    = 2*chips(ns)-chips(ns1)
+  chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2.0_dp
+  chipf(ns)    = 2.0_dp*chips(ns)-chips(ns1)
 
   ! Do not compute iota too near origin
   iotaf(1)  = c1p5*iotas(2) - cp5*iotas(3)     !zero gradient near axis

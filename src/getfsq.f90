@@ -10,7 +10,7 @@
 !> @param gnorm normalization factor for forces
 !> @param medge =0: exclude contribution from LCFS; =1: include LCFS contribution
 SUBROUTINE getfsq(gcr, gcz, gnormr, gnormz, gnorm, medge)
-  USE vmec_main, ONLY: rprec, ns, ns1, mnsize
+  USE vmec_main, ONLY: rprec, ns, ns1, mnsize, dp
   USE vmec_params, ONLY: ntmax
   IMPLICIT NONE
 
@@ -25,7 +25,7 @@ SUBROUTINE getfsq(gcr, gcz, gnormr, gnormz, gnorm, medge)
   ! so  if medge==0, exclude contribution from LCFS
   ! and if medge==1, also take contribution from LCFS into account
   jsmax = ns1 + medge
-  gnormr = gnorm * SUM(gcr(:jsmax,:)**2)
-  gnormz = gnorm * SUM(gcz(:jsmax,:)**2)
+  gnormr = gnorm * SUM(gcr(:jsmax,:)**2.0_dp)
+  gnormz = gnorm * SUM(gcz(:jsmax,:)**2.0_dp)
 
 END SUBROUTINE getfsq

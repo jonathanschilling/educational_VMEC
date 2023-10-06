@@ -81,7 +81,7 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
   ! averaging over ndamp entries : 1/ndamp*sum(otau)
   otav = SUM(otau(:ndamp))/ndamp
 
-  dtau = time_step*otav/2
+  dtau = time_step*otav/2.0_dp
 
   b1  = one - dtau
   fac = one/(one + dtau)

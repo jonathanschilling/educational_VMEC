@@ -91,9 +91,9 @@ MODULE vmec_main
   REAL(rprec) :: z00
   REAL(rprec) :: fsqsum0
   REAL(rprec) :: fnorm
-  REAL(rprec) :: fsqr = 1
-  REAL(rprec) :: fsqz = 1
-  REAL(rprec) :: fsql = 1
+  REAL(rprec) :: fsqr = 1.0_dp
+  REAL(rprec) :: fsqz = 1.0_dp
+  REAL(rprec) :: fsql = 1.0_dp
   REAL(rprec) :: fnorm1
   REAL(rprec) :: fnorml
   REAL(rprec) :: fsqr1
@@ -105,14 +105,14 @@ MODULE vmec_main
   REAL(rprec) :: wp !< kinetic/thermal energy (from pressure)
 
   ! force residuals due to constraint force alone
-  REAL(rprec) :: fsqr_con = 1
-  REAL(rprec) :: fsqz_con = 1
+  REAL(rprec) :: fsqr_con = 1.0_dp
+  REAL(rprec) :: fsqz_con = 1.0_dp
   REAL(rprec) :: fsqr1_con
   REAL(rprec) :: fsqz1_con
 
   ! force residuals due to MHD force alone
-  REAL(rprec) :: fsqr_mhd = 1
-  REAL(rprec) :: fsqz_mhd = 1
+  REAL(rprec) :: fsqr_mhd = 1.0_dp
+  REAL(rprec) :: fsqz_mhd = 1.0_dp
   REAL(rprec) :: fsqr1_mhd
   REAL(rprec) :: fsqz1_mhd
 

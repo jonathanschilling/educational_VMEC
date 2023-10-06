@@ -63,7 +63,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   end if
 
   ! COMPUTE INVARIANT RESIDUALS
-  r1 = one/(2*r0scale)**2 ! --> actually look at r1*fnorm --> scaling factor for forces (?)
+  r1 = one/(2.0_dp*r0scale)**2.0_dp ! --> actually look at r1*fnorm --> scaling factor for forces (?)
   jedge = 0
 
   ! SPH-JAH013108: MUST INCLUDE EDGE FORCE (INITIALLY) FOR V3FITA TO WORK
@@ -80,7 +80,7 @@ SUBROUTINE residue (gcr, gcz, gcl, fsqrz, old_fsqz)
   CALL getfsq (gcr, gcz, fsqr, fsqz, r1*fnorm, jedge)
 
   fsql = fnormL*SUM(gcl*gcl)
-  fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2 + gcz(ns,:,:,:)**2)
+  fedge = r1*fnorm * SUM(gcr(ns,:,:,:)**2.0_dp + gcz(ns,:,:,:)**2.0_dp)
 
   if (open_dbg_context("fsq", num_eqsolve_retries)) then
 
@@ -192,7 +192,7 @@ SUBROUTINE constrain_m1(gcr, gcz, old_fsqz)
      ! ensure that the m=1 constraint is satisfied exactly
      ! --> the corresponding m=1 coeffs of R,Z are constrained to be zero
      !     and thus must not be "forced" (by the time evol using gc) away from zero
-     gcz = 0
+     gcz = 0.0_dp
   end if
 
 END SUBROUTINE constrain_m1

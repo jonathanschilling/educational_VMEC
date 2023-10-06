@@ -61,7 +61,7 @@ FUNCTION torflux (x)
   ! some ad-hoc trapezoidal integration radially outward to given x
   ! with a fixed number (100) of quadrature nodes?
   h = 1.E-2_dp*x
-  torflux = 0
+  torflux = 0.0_dp
   DO i=1,101
      xi = (i-1)*h
      torflux = torflux + torflux_deriv(xi)
@@ -85,7 +85,7 @@ FUNCTION polflux (x)
   ! some ad-hoc trapezoidal integration radially outward to given x
   ! with a fixed number (100) of quadrature nodes?
   h = 1.E-2_dp*x
-  polflux = 0
+  polflux = 0.0_dp
   DO i=1,101
      xi = (i-1)*h
      polflux = polflux + polflux_deriv(xi)

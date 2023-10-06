@@ -23,7 +23,7 @@ SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
   REAL(rprec), DIMENSION(ns,0:mnd1) :: a, d, b
   REAL(rprec), DIMENSION(ns,0:mnd1, nrhs), INTENT(inout) :: c
 
-  REAL(rprec), PARAMETER :: zero = 0, one = 1
+  REAL(rprec), PARAMETER :: zero = 0.0_dp, one = 1.0_dp
 
   INTEGER :: mn, in, i0, in1, jrhs
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: alf
@@ -51,10 +51,10 @@ SUBROUTINE tridslv(a, d, b, c, jmin, jmax, mnd1, ns, nrhs)
      in1 = jmin(mn)-1
      IF (in1 .ge. in) THEN
 !         print *, "in1 >= i", in1, " at ", mn
-        d(in:in1, mn) = 1
-        c(in:in1, mn, 1:nrhs) = 0
-        b(in:in1, mn) = 0
-        a(in:in1, mn) = 0
+        d(in:in1, mn) = 1.0_dp
+        c(in:in1, mn, 1:nrhs) = 0.0_dp
+        b(in:in1, mn) = 0.0_dp
+        a(in:in1, mn) = 0.0_dp
      END IF
   END DO
 

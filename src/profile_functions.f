@@ -103,7 +103,7 @@
       x = MIN (ABS(xx * bloat), one)
       ioff = LBOUND(ac,1)            ! Expected to be zero.
 
-      pcurr = 0
+      pcurr = 0.0_dp
 
 !  Convert to Lower Case, to avoid typo issues
       pcurr_type_lc = pcurr_type
@@ -116,8 +116,9 @@
 !  Gauss-Legendre Quadrature to get I(s)
          DO gli = 1,gln
             xp = x * glx(gli)
-            pcurr = pcurr + glw(gli) * ac(0) * (exp(-(xp / ac(1)) ** 2)        &
-     &                                        - exp(-( 1 / ac(1)) ** 2))
+            pcurr = pcurr + glw(gli) * ac(0) *
+     &       (exp(-(xp / ac(1)) ** 2.0_dp)
+     &      - exp(-( 1.0_dp / ac(1)) ** 2.0_dp))
          END DO
          pcurr = pcurr * x     ! correct for x interval
 
@@ -133,7 +134,8 @@
          !pcurr = pcurr * x     ! correct for x interval
          DO gli = 1,gln
             xp = x * glx(gli)
-            pcurr = pcurr + glw(gli) * ac(0) * ((1-xp**ac(1))**ac(2))
+            pcurr = pcurr + glw(gli) * ac(0) *
+     &              ((1.0_dp-xp**ac(1))**ac(2))
          END DO
          pcurr = pcurr * x     ! correct for x interval
 
@@ -158,8 +160,8 @@
       IF (x .ge. one) THEN
          pcurr = ac(0) + ac(1) + ac(5) + ac(9) + ac(13) + ac(17)
       ELSE
-          pcurr = ac(0) +                                                      &
-     &       (2/pi) * (ac(1) * atan(ac(2)*x**ac(3)/(1-x)**ac(4)) +             &
+          pcurr = ac(0) + (2.0_dp/pi) *                                                      &
+     &                (ac(1) * atan(ac(2)*x**ac(3)/(1-x)**ac(4)) +             &
      &                 ac(5) * atan(ac(6)*x**ac(7)/(1-x)**ac(8)) +             &
      &                 ac(9) * atan(ac(10)*x**ac(11)/(1-x)**ac(12)) +          &
      &                 ac(13) * atan(ac(14)*x**ac(15)/(1-x)**ac(16)) +         &
@@ -319,7 +321,7 @@
 !  I-prime(s) = Sum(i,0,-)[ac(i) * s ** i]
 !  Analytic integration to get I(s)
          DO i = UBOUND(ac,1), ioff, -1
-            pcurr = x*pcurr + ac(i)/(i-ioff+1)
+            pcurr = x*pcurr + ac(i)/(i-ioff+1.0_dp)
          END DO
          IF (TRIM(pcurr_type_lc) .ne. 'power_series') THEN
             WRITE(*,*) 'Unrecognized pcurr_type:', pcurr_type
@@ -388,8 +390,8 @@
       IF (x .ge. one) THEN
          piota = ai(0) + ai(1) + ai(5) + ai(9) + ai(13) + ai(17)
       ELSE
-          piota = ai(0) +                                                      &
-     &       (2/pi) * (ai(1) * atan(ai(2)*x**ai(3)/(1-x)**ai(4)) +             &
+          piota = ai(0) + (2.0_dp/pi) *                                                    &
+     &                (ai(1) * atan(ai(2)*x**ai(3)/(1-x)**ai(4)) +             &
      &                 ai(5) * atan(ai(6)*x**ai(7)/(1-x)**ai(8)) +             &
      &                 ai(9) * atan(ai(10)*x**ai(11)/(1-x)**ai(12)) +          &
      &                 ai(13) * atan(ai(14)*x**ai(15)/(1-x)**ai(16)) +         &
@@ -519,7 +521,7 @@
 !     NOTE: On entry, am is in pascals. pmass internal units are mu0*pascals (B**2 units)
       x = MIN (ABS(xx * bloat), 1._dp)
 
-      pmass = 0
+      pmass = 0.0_dp
       ioff = LBOUND(am,1)            ! Expected to be zero.
 
 !  Convert to Lower Case, to avoid typo issues
@@ -534,8 +536,8 @@
 !  Below current as of 2010-05-26
 !  p(s) = (am(0) / c) * (exp(-(s/am(1))**2) - exp(-(1/am(1))**2)
 !  c =  (1 - exp(-(1/am(1))**2)     ! so that p(0) = am(0).
-         pmass = (am(0)/(one - exp(-(one / am(1)) ** 2))) *                    &
-     &      (exp(-(x / am(1)) ** 2) - exp(-(one / am(1)) ** 2))
+         pmass = (am(0)/(one - exp(-(one / am(1)) ** 2.0_dp))) *                    &
+     &      (exp(-(x / am(1)) ** 2.0_dp) -exp(-(one / am(1)) ** 2.0_dp))
 
       CASE ('two_power')
 !  Two power profile

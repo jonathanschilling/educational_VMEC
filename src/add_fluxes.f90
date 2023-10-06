@@ -20,6 +20,7 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
   REAL(rprec), DIMENSION(nrzt), INTENT(inout) :: bsupu, bsupv
 
   INTEGER :: js, l, ku, lk
+  REAL(rprec), dimension(3) :: topSum, botSum
   REAL(rprec) :: top, bot
 
   ! I think this is the "zero-current algorithm" published in section 2.3 of
@@ -46,7 +47,9 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
         IF (phips(js) .ne. zero) then
            iotas(js) = chips(js)/phips(js)
         end if
-     END DO
+     END DO ! js
+
+!      stop
   else ! ncurr .eq. 0
      ! given iota profile: compute chips from iotas, phips
      ! do not touch innermost/first entry in chips, which should not be used anyway

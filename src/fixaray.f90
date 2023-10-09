@@ -159,8 +159,8 @@ SUBROUTINE fixaray
   dbg_fixaray = open_dbg_context("fixaray")
   if (dbg_fixaray) then
 
-    call add_real_2d("arg_mu",    ntheta3, mnyq+1, arg_mu)
-    call add_real_2d("arg_nv",    nzeta,   nnyq+1, arg_nv)
+    call add_real_2d("arg_mu",    ntheta3, mnyq+1, arg_mu(1:ntheta3, 0:mnyq))
+    call add_real_2d("arg_nv",    nzeta,   nnyq+1, arg_nv(1:nzeta,   0:nnyq))
 
     call add_real_2d("cosmu",    ntheta2, mnyq+1, cosmu(1:ntheta2,:))
     call add_real_2d("sinmu",    ntheta2, mnyq+1, sinmu(1:ntheta2,:))

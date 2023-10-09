@@ -121,7 +121,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      overr(i) = SUM(tau(i:nrzt:ns)/r12(i:nrzt:ns)) / vp(i)
   END DO
 
-  ! extrapolate volume-averaged beta profile to magnetic axis
+  ! extrapolate surface-averaged beta profile to magnetic axis
   betaxis = c1p5*beta_vol(2) - cp5*beta_vol(3)
 
   WRITE (nthreed, 5)

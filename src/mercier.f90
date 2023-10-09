@@ -5,7 +5,7 @@
 !>
 !> @param gsqrt Jacobian \f$\sqrt{g}\f$
 !> @param bsq modulus of magnetic field \f$|\mathbf{B}|\f$
-!> @param bdotj parallel current density \f$\mathbf{B} \cdot \mathbf{j}\f$
+!> @param bdotj parallel current density \f$\mathbf{B} \cdot \mathbf{j}\f$; mu0 * bdotk from jxbforce
 !> @param iotas rotational transform profile
 !> @param wint normalization constant for flux-surface integrals
 !> @param r1 \f$R\f$
@@ -131,7 +131,7 @@ SUBROUTINE mercier(gsqrt, bsq, bdotj, iotas, wint, &
   !         Gsqrt_FULL = JACOBIAN/PHIP == jacobian based on flux (on full mesh)
   DO i = 2, ns1
     gsqrt_full(i,:) = p5*(gsqrt(i,:) + gsqrt(i+1,:))
-    bdotj(i,:) = bdotj(i,:)/gsqrt_full(i,:)
+    bdotj     (i,:) = bdotj(i,:)/gsqrt_full(i,:)
     gsqrt_full(i,:) = gsqrt_full(i,:)/phip_real(i)
 
     sj(i) = hs*(i-1.0_dp)

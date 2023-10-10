@@ -123,6 +123,7 @@ MODULE vmec_input
   logical :: dump_tomnspa             = .false.
   logical :: dump_multigrid_result    = .false.
   logical :: dump_rbsq                = .false.
+  logical :: dump_printout            = .false.
 
   ! fileout
   logical :: dump_bcovar_fileout        = .false.
@@ -252,6 +253,7 @@ MODULE vmec_input
      dump_tomnspa            , &
      dump_multigrid_result   , &
      dump_rbsq               , &
+     dump_printout           , &
      dump_bcovar_fileout       , & ! dbgout from fileout
      dump_bss                  , &
      dump_jxbforce_bsub_lowpass, &

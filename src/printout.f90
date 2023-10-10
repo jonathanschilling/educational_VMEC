@@ -10,6 +10,10 @@ SUBROUTINE printout(i0, delt0, w0)
   USE vmec_main
   USE realspace
   USE xstuff
+  use vmec_params, only: ntmax
+
+  use dbgout
+
   IMPLICIT NONE
 
   INTEGER :: i0
@@ -40,9 +44,21 @@ SUBROUTINE printout(i0, delt0, w0)
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))
   avm = 0.5_dp*avm/den ! volume-averaged spectral width (_av_erage _M_)
 
+  delbsq = 0.0_dp ! default output in case of fixed-boundary run
   IF (ivac .ge. 1 .and. iter2.gt.1) then
      delbsq = SUM( dbsq(:nznt)*wint(2:nrzt:ns) ) / SUM( bsqsav(:nznt,3)*wint(2:nrzt:ns) )
   end if
+
+  if (open_dbg_context("printout")) then
+    call add_real("betav", betav)
+    call add_real("avm", avm)
+    call add_real("delbsq", delbsq)
+
+    call add_real_5d("gc", 3, ntmax, ns, ntor1, mpol, gc, order=(/ 3, 4, 5, 2, 1 /) )
+    call add_real_1d("specw", ns, specw)
+
+    call close_dbg_out()
+  end if ! printout
 
   IF (i0.eq.1 .and. lfreeb) THEN
      print_line = iter_lines // " " // raxis_line

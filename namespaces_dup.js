@@ -568,6 +568,7 @@ var namespaces_dup =
       [ "dump_multigrid_result", "d8/dbf/namespacevmec__input.html#a5f8d58daa8225d7e86456fbf83ddd425", null ],
       [ "dump_phys_gc", "d8/dbf/namespacevmec__input.html#aa973f17fd11e9778b4ab77f24c42c0a1", null ],
       [ "dump_precondn", "d8/dbf/namespacevmec__input.html#a2309fd4dda6b2f2ed24fc24c2e00300e", null ],
+      [ "dump_printout", "d8/dbf/namespacevmec__input.html#a13e6d3e70bdbb49388b069e27501085e", null ],
       [ "dump_profil1d", "d8/dbf/namespacevmec__input.html#abf12e8a9f30a08ae42cef04fb72a7fb4", null ],
       [ "dump_profil3d", "d8/dbf/namespacevmec__input.html#acee53407f837b677e3c52a7d8902fcb6", null ],
       [ "dump_rbsq", "d8/dbf/namespacevmec__input.html#a059ba4e6c7ded6a36d4cfdcf0ffb3871", null ],

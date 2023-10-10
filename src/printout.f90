@@ -32,6 +32,7 @@ SUBROUTINE printout(i0, delt0, w0)
 
   REAL(rprec) :: betav, w, avm, den
   CHARACTER(len=LEN(iter_line) + LEN(fsq_line) + LEN(raxis_line) + LEN(zaxis_line)) :: print_line
+  logical :: dbgout_printout
 
   betav = wp/wb
   w = w0*twopi*twopi
@@ -39,6 +40,13 @@ SUBROUTINE printout(i0, delt0, w0)
   den = zero ! TODO: why? will be set of sum(vp(2:ns)) below anyway...
   specw(1) = one
   gc = xstore ! TODO: why compute spectral width from backup and not current gc (== physical xc) --> <M> includes scalxc ???
+
+  dbgout_printout = open_dbg_context("printout", num_eqsolve_retries)
+  if (dbgout_printout) then
+    ! dump gc before it gets modified by spectrum() below
+    call add_real_5d("gc", 3, ntmax, ns, ntor1, mpol, gc, order=(/ 3, 4, 5, 2, 1 /) )
+  end if ! dbgout_printout
+
   CALL spectrum (gc(:irzloff), gc(1+irzloff:2*irzloff))
   den = SUM(vp(2:ns))
   avm = DOT_PRODUCT(vp(2:ns), specw(2:ns)+specw(1:ns-1))
@@ -49,12 +57,11 @@ SUBROUTINE printout(i0, delt0, w0)
      delbsq = SUM( dbsq(:nznt)*wint(2:nrzt:ns) ) / SUM( bsqsav(:nznt,3)*wint(2:nrzt:ns) )
   end if
 
-  if (open_dbg_context("printout")) then
+  if (dbgout_printout) then
     call add_real("betav", betav)
     call add_real("avm", avm)
     call add_real("delbsq", delbsq)
 
-    call add_real_5d("gc", 3, ntmax, ns, ntor1, mpol, gc, order=(/ 3, 4, 5, 2, 1 /) )
     call add_real_1d("specw", ns, specw)
 
     call close_dbg_out()

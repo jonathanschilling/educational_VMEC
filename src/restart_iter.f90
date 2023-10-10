@@ -19,7 +19,7 @@ SUBROUTINE restart_iter(time_step)
 !   if (first .ne. 1) then
 !     print *, "bad jacobian --> restart_iter (first = ", first, ")"
 !   end if
-  
+
   SELECT CASE (first)
   case(2)
      ! restore previous good state

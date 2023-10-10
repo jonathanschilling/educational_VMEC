@@ -40,6 +40,7 @@ SUBROUTINE eqsolve(ier_flag)
   ! RESTART FROM INITIAL PROFILE, BUT WITH A SMALLER TIME-STEP
   IF (first .EQ. 2) THEN
      xc = 0.0_dp
+
      CALL profil3d (xc(1), xc(1+irzloff), lreset_internal)
 
      first = 1 ! tells restart_iter to store current xc in xstore

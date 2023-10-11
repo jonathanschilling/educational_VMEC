@@ -285,9 +285,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(guu_1u(:nznt)) ! re-use surf_area to compute circumference
   circum_p = twopi*SUM(surf_area(:nznt))
 
-  surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(                             &
+  surf_area(:nznt) = wint(ns:nrzt:ns)*SQRT(                               &
        + (r1(ns:nrzt:ns,0) + r1(ns:nrzt:ns,1))**2 * guu_1u(:nznt)         &
-       +((rv(ns:nrzt:ns,0) + rv(ns:nrzt:ns,1))*zu0(ns:nrzt:ns)          &
+       +((rv(ns:nrzt:ns,0) + rv(ns:nrzt:ns,1))*zu0(ns:nrzt:ns)            &
        - (zv(ns:nrzt:ns,0) + zv(ns:nrzt:ns,1))*ru0(ns:nrzt:ns))**2 )
   surf_area_p = twopi**2*SUM(surf_area(:nznt))
   DEALLOCATE (guu_1u)
@@ -378,7 +378,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   IF (lfreeb .and. ivac.gt.1) THEN
      phat = bsqvac - cp5*(bsubvvac/redge)**2
   ELSE
-     phat = c1p5*bsq(ns:nrzt:ns) - cp5*bsq(ns-1:nrzt:ns) - cp5*(rbtor/redge(:))**2
+     phat = c1p5*bsq(ns:nrzt:ns) - cp5*bsq(ns-1:nrzt:ns) &
+            - cp5*(rbtor/redge(:))**2
   END IF
 
   DEALLOCATE (btor_vac, btor1, dbtor)

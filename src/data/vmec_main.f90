@@ -46,11 +46,11 @@ MODULE vmec_main
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: specw !< spectral width (diagnostic)
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: tcon !< constraint-force multiplier
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: psi
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: yellip
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: yinden
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ytrian
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: yshift
-  REAL(rprec), DIMENSION(:), ALLOCATABLE :: ygeo
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: yellip
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: yinden
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ytrian
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: yshift
+  REAL(rprec), DIMENSION(:,:), ALLOCATABLE :: ygeo
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: overr
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: pres !< pressure profile
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: vp !< radial derivative of enclosed volume

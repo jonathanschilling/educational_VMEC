@@ -52,8 +52,8 @@ SUBROUTINE allocate_ns (linterp, neqs_old)
             jcuru(ns), jcurv(ns), jdotb(ns), buco(ns), bvco(ns),    &
             bucof(ns), bvcof(ns), chi(ns),                          &
             bdotgradv(ns), equif(ns), specw(ns), tcon(ns),          &
-            psi(ns),yellip(ns),yinden(ns), ytrian(ns),yshift(ns),   &
-            ygeo(ns),overr(ns), faclam(ns,0:ntor,0:mpol1,ntmax),    &
+            psi(ns),yellip(2,ns),yinden(2,ns), ytrian(2,ns),yshift(2,ns),   &
+            ygeo(2,ns),overr(ns), faclam(ns,0:ntor,0:mpol1,ntmax),    &
             iotas(nsp1), phips(nsp1), chips(nsp1), pres(nsp1),      &
             beta_vol(ns), jperp2(ns), jpar2(ns), bdotb(ns),         &
             phipf(ns), chipf(ns), blam(nsp1), clam(nsp1),           &

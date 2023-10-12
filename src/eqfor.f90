@@ -480,8 +480,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   END DO
   DEALLOCATE (r3v)
 
+  ! initialize to known conents for dbgout of axisymmetric run
+  ygeo   = 0.0_dp
+  yinden = 0.0_dp
+  yellip = 0.0_dp
+  ytrian = 0.0_dp
+  yshift = 0.0_dp
+
   ! nphi-plane, noff = 1,....,nzeta
   PLANES: DO nplanes = 1, 2
+
      IF (nplanes .eq. 1) THEN
         ! nphi=0
         noff = 1
@@ -492,12 +500,14 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         noff = 1+nzeta/2
      END IF
 
-     ygeo(1) = zero
+     ygeo(nplanes, 1) = zero
      DO js = 2, ns
+
         zmin =  HUGE(zmin)
         zmax = -HUGE(zmax)
         xmin =  HUGE(xmin)
         xmax = -HUGE(xmax)
+
         rzmax = zero
 
         ! Theta = 0 to pi in upper half of X-Z plane
@@ -506,7 +516,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            n1 = noff
            IF (icount .eq. 2) then
               ! (twopi-v), reflected plane
-              n1 = MOD(nzeta+1-noff,nzeta)+1
+              n1 = MOD(nzeta-(noff-1),nzeta)+1
            end if
            loff = js + ns*(n1-1)
 
@@ -521,7 +531,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
               IF (yz1u .ge. zmax) THEN
                  zmax = ABS(yz1u)
                  rzmax = yr1u
-              ELSE IF (yz1u .le. zmin) THEN
+              ELSEIF (yz1u .le. zmin) THEN
                  zmin = yz1u
                  rzmin = yr1u
               END IF
@@ -529,14 +539,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
               IF (yr1u .ge. xmax) THEN
                  xmax = yr1u
                  zxmax = yz1u
-              ELSE IF (yr1u .le. xmin) THEN
+              ELSEIF (yr1u .le. xmin) THEN
                  xmin = yr1u
                  zxmin = yz1u
               END IF
 
               loff = loff + ns*nzeta
-           END DO
-        END DO
+           END DO ! itheta
+        END DO ! icount
+
+        ! ----------
 
         ! theta=180
         lpi = ns*((noff-1) + nzeta*(ntheta2-1))
@@ -547,41 +559,51 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
         xmida = r1(js+lpi,0) + sqrts(js)*r1(js+lpi,1)
         xmidb = r1(js+lt,0)  + sqrts(js)*r1(js+lt,1)
 
+        ! ----------
+
         ! Geometric major radius
         rgeo = cp5*(xmidb + xmida)
 
         ! Geometric minor radius
-        ygeo(js) = cp5*(xmidb - xmida)
+        ygeo(nplanes, js) = cp5*(xmidb - xmida)
 
         ! Geometric indentation
-        yinden(js) = (xmida - xmin)/(xmax - xmin)
+        yinden(nplanes, js) = (xmida - xmin)/(xmax - xmin)
 
         ! Geometric ellipticity
-        yellip(js) = ( zmax - zmin)/(xmax - xmin)
+        yellip(nplanes, js) = ( zmax - zmin)/(xmax - xmin)
 
         ! Geometric triangularity
-        ytrian(js) = (rgeo - rzmax)/(xmax - xmin)
+        ytrian(nplanes, js) = (rgeo - rzmax)/(xmax - xmin)
 
         ! Geometric shift measured from magnetic axis
-        yshift(js) = (r1(1+lt,0)-rgeo)/(xmax - xmin)
+        yshift(nplanes, js) = (r1(1+lt,0)-rgeo)/(xmax - xmin)
 
-        IF (jperp2(js) .eq. zero) jperp2(js) = EPSILON(jperp2(js))
+        ! --- start independent stuff
+        IF (jperp2(js) .eq. zero) &
+            jperp2(js) = EPSILON(jperp2(js))
+
         loc_jpar_perp = jpar2(js)/jperp2(js)
         IF (js .lt. ns) THEN
            loc_jparPS_perp = jPS2(js)/jperp2(js)
         ELSE
            loc_jparPS_perp = zero
         END IF
+        ! --- end independent stuff
 
         IF (nplanes .eq. 1) THEN
-           WRITE (nthreed, 120) js, psi(js), ygeo(js), yellip(js),      &
-              yinden(js), ytrian(js), yshift(js), loc_jpar_perp,            &
+           WRITE (nthreed, 120) js, psi(js),            &
+              ygeo(nplanes, js), yellip(nplanes, js),      &
+              yinden(nplanes, js), ytrian(nplanes, js), &
+              yshift(nplanes, js), loc_jpar_perp,       &
               loc_jparPS_perp
         ELSE
-           WRITE (nthreed, 120) js, psi(js), ygeo(js), yellip(js),      &
-              yinden(js), ytrian(js), yshift(js)
+           WRITE (nthreed, 120) js, psi(js), &
+              ygeo(nplanes, js), yellip(nplanes, js),   &
+              yinden(nplanes, js), ytrian(nplanes, js), &
+              yshift(nplanes, js)
         END IF
-     END DO
+     END DO ! js
   END DO PLANES
 
  95 FORMAT(/,71('-'),/,' Toroidal Plane: Phi = 180/Nfp',/,71('-'),/)
@@ -661,11 +683,11 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
     call add_real_1d("psi", ns, psi)
 
-    call add_real_1d("ygeo",   ns,   ygeo)
-    call add_real_1d("yinden", ns-1, yinden(2:ns))
-    call add_real_1d("yellip", ns-1, yellip(2:ns))
-    call add_real_1d("ytrian", ns-1, ytrian(2:ns))
-    call add_real_1d("yshift", ns-1, yshift(2:ns))
+    call add_real_2d("ygeo",   2, ns,   ygeo)
+    call add_real_2d("yinden", 2, ns-1, yinden(:,2:ns))
+    call add_real_2d("yellip", 2, ns-1, yellip(:,2:ns))
+    call add_real_2d("ytrian", 2, ns-1, ytrian(:,2:ns))
+    call add_real_2d("yshift", 2, ns-1, yshift(:,2:ns))
 
     call close_dbg_out()
   end if

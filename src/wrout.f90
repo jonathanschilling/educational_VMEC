@@ -751,7 +751,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   ! FREE BOUNDARY DATA
   ! rmnc1, ... contain the LCFS values at this point
-!   CALL freeb_data(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)
+  CALL freeb_data(rmnc1, zmns1, rmns1, zmnc1, bmodmn, bmodmn1)
 
   rzl_array = 0
 

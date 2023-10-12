@@ -118,11 +118,11 @@ var vmec__main_8f90 =
     [ "wp", "de/d7d/vmec__main_8f90.html#a2f2ff7fefa481523f175f845bedb5c28", null ],
     [ "xcl0", "de/d7d/vmec__main_8f90.html#ad5a00dbf3cdeba085029db93bb9c452f", null ],
     [ "xmpq", "de/d7d/vmec__main_8f90.html#ab7337be528b5a288510f31052f7d5061", null ],
-    [ "yellip", "de/d7d/vmec__main_8f90.html#ac39d3e143511325526d7c46faa279d8f", null ],
-    [ "ygeo", "de/d7d/vmec__main_8f90.html#a039ae0f68d441387e3d51e0e87834ecd", null ],
-    [ "yinden", "de/d7d/vmec__main_8f90.html#a62184eee089db3e4831b37c15a87e43a", null ],
-    [ "yshift", "de/d7d/vmec__main_8f90.html#a2ed3177986b3760fb62f0d8325097205", null ],
-    [ "ytrian", "de/d7d/vmec__main_8f90.html#ab4c8910e5edf135a5a17bdcf0ccf1ed6", null ],
+    [ "yellip", "de/d7d/vmec__main_8f90.html#af52094649eea7bd4a9d93b5e3e1e000d", null ],
+    [ "ygeo", "de/d7d/vmec__main_8f90.html#a0e9b1c9f278ee12b3db0633b882e6a4f", null ],
+    [ "yinden", "de/d7d/vmec__main_8f90.html#a8a93babefa4babdec0c4357b8a49782c", null ],
+    [ "yshift", "de/d7d/vmec__main_8f90.html#a97432e73e88c2fa5010abc3cd30a1489", null ],
+    [ "ytrian", "de/d7d/vmec__main_8f90.html#a32b8ee36221d81f7e021d6e41e0725ac", null ],
     [ "z00", "de/d7d/vmec__main_8f90.html#a749c44c3b79ebe175adb7c68bc757a87", null ],
     [ "zmn_bdy", "de/d7d/vmec__main_8f90.html#a51d27a702e13d15c1b122a20a8c4c779", null ]
 ];

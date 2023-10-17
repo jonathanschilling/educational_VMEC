@@ -26,6 +26,9 @@ function open_dbg_context(context_name, repetition, id)
   character(len=255) :: output_folder
   logical            :: should_write, file_exists
 
+  ! enable semi-pretty-printing JSON data
+  json_pretty_print = .true.
+
   ! check if debug out should be written at all
   if (present(id)) then
     should_write = id.le.max_dump

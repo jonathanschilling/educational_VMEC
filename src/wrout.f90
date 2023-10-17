@@ -283,7 +283,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_setatt(nwout, vn_phipf, ln_phipf)
   CALL cdf_define(nwout, vn_chi,   chi,         dimname=r1dim)
   CALL cdf_setatt(nwout, vn_chi,   ln_chi, units='wb')
-  CALL cdf_define(nwout, vn_chipf, phipf,       dimname=r1dim) ! TODO: wrong quantity !!!
+  !CALL cdf_define(nwout, vn_chipf, phipf,       dimname=r1dim) ! TODO: wrong quantity !!!
+  CALL cdf_define(nwout, vn_chipf, chipf,       dimname=r1dim)
   CALL cdf_setatt(nwout, vn_chipf, ln_chipf)
   CALL cdf_define(nwout, vn_jcuru, jcuru,       dimname=r1dim)
   CALL cdf_define(nwout, vn_jcurv, jcurv,       dimname=r1dim)
@@ -298,7 +299,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_buco,  buco,        dimname=r1dim)
   CALL cdf_define(nwout, vn_bvco,  bvco,        dimname=r1dim)
   CALL cdf_define(nwout, vn_vp,    vp(1:ns),    dimname=r1dim)
-  CALL cdf_define(nwout, vn_specw, specw,       dimname=r1dim) ! TODO: specw on full grid ?
+  CALL cdf_define(nwout, vn_specw, specw,       dimname=r1dim) ! NOTE: specw on full grid
   CALL cdf_define(nwout, vn_phip,  phips(1:ns), dimname=r1dim)
   CALL cdf_define(nwout, vn_overr, overr(1:ns), dimname=r1dim)
 
@@ -426,6 +427,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_pmod_nyq, xm_nyq)
   CALL cdf_write(nwout, vn_tmod_nyq, xn_nyq)
 
+
+  ! here start the convert-to-regular-Fourier-output part
+
+
   ALLOCATE (xfinal(neqs), stat=js) ! re-use js for allocation return code
   IF (js .ne. 0) STOP 'Allocation error for xfinal in WROUT!'
   xfinal = xc ! ignore passed rzl_array !!!
@@ -487,6 +492,13 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      raxis_cs(0:ntor) = rmns(1:ntor+1,1)
      zaxis_cc(0:ntor) = zmnc(1:ntor+1,1)
   end if
+
+
+
+
+
+  ! here comes the realspace-to-Fourier transform part...
+
 
   ! COMPUTE |B| = SQRT(|B|**2) and store in bsq, bsqa
   DO js = 2, ns
@@ -568,6 +580,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   bsubumnc(:,1) = 0
   bsubvmnc(:,1) = 0
+
+  ! NOTE: This assumes that bsubs (from which bsubsmns is computed) is on the full grid.
+  ! However, since crmn_o is passed as bsubs in fileout(),
+  ! HERE, bsubs is ACTUALLY on the HALF-grid !!! WTF ???
+  ! (The full-grid bsubs array is a LOCAL variable in jxbforce().)
   bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3) ! extrapolation on full grid
 
   bsupumnc(:,1) = 0
@@ -713,6 +730,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_mwell, Dwell(2:ns1))
   CALL cdf_write(nwout, vn_mcurr, Dcurr(2:ns1))
   CALL cdf_write(nwout, vn_mgeo, Dgeod(2:ns1))
+
   CALL cdf_write(nwout, vn_equif, equif(2:ns1))
 
   IF (lasym) THEN

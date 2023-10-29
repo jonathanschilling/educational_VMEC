@@ -73,8 +73,8 @@ SUBROUTINE precondn(lu1, bsq, gsqrt, r12, &
       t2 = cp25*(xue(l)/shalf(js) + xuo(l))/shalf(js)
       t3 = cp25*(xue(l-1)/shalf(js) + xuo(l-1))/shalf(js)
       ax(js,1) = ax(js,1) + ptau(lk)*t1*t1
-      ax(js,2) = ax(js,2) + ptau(lk)*(-t1+t3)*(t1+t2)
-      ax(js,3) = ax(js,3) + ptau(lk)*(t1+t2)*(t1+t2)
+      ax(js,2) = ax(js,2) + ptau(lk)*(-t1+t3)*( t1+t2)
+      ax(js,3) = ax(js,3) + ptau(lk)*( t1+t2)*( t1+t2)
       ax(js,4) = ax(js,4) + ptau(lk)*(-t1+t3)*(-t1+t3)
     END DO
 

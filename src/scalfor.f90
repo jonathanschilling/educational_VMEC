@@ -98,7 +98,7 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
      ! AND zeq IS THE EQUILIBRIUM EDGE VALUE OF Z00
       mult_fac = MIN(fac, fac*hs*15.0_dp)
 
-      IF (iflag .eq. 1) THEN
+      IF (iflag .eq. 1) THEN ! this is only active for z
          ! METHOD 1: SUBTRACT (INSTABILITY) Pedge ~ fac*z/hs FROM PRECONDITIONER AT EDGE
          dx(ns,0,0) = dx(ns,0,0)*(1.0_dp-mult_fac)/(1.0_dp+edge_pedestal)
       END IF

@@ -1,7 +1,8 @@
 var namespaces_dup =
 [
     [ "dbgout", "d8/dfd/namespacedbgout.html", [
-      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed", null ]
+      [ "open_dbg_context", "d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed", null ],
+      [ "skip_dbgout_collison", "d8/dfd/namespacedbgout.html#ab36f644dea9bcaf68e53a0f08861e8b3", null ]
     ] ],
     [ "functions", "df/d36/namespacefunctions.html", [
       [ "function_test", "df/d36/namespacefunctions.html#ac8a7a9050ac08bc732ab08c620621024", null ],
@@ -398,7 +399,6 @@ var namespaces_dup =
       [ "guu_b", "dd/df2/namespacevacmod.html#aa54c67fe26e20cca0057f1d6a25a6fa7", null ],
       [ "guv_b", "dd/df2/namespacevacmod.html#ac3d5effce915731468aaee36482541e9", null ],
       [ "gvv_b", "dd/df2/namespacevacmod.html#ab8dcbab065f715e5d306b0ddf0c42146", null ],
-      [ "icall", "dd/df2/namespacevacmod.html#a051663172110b9e2d26acf19c295a2b3", null ],
       [ "m_map_wrt", "dd/df2/namespacevacmod.html#ad07231309e5ad23d3fa65219a48235d7", null ],
       [ "n_map_wrt", "dd/df2/namespacevacmod.html#acea4ed5211d0bcd5e0eba968d94f3ff4", null ],
       [ "onp", "dd/df2/namespacevacmod.html#af92375b8749db7fad7461ab58d741e09", null ],
@@ -616,10 +616,10 @@ var namespaces_dup =
       [ "ftol_default", "d8/dbf/namespacevmec__input.html#acfa4350fed57ca0d400c990820fad910", null ],
       [ "gamma", "d8/dbf/namespacevmec__input.html#a4f4ad4130df6b89923c091874fc7d65f", null ],
       [ "input_extension", "d8/dbf/namespacevmec__input.html#a9a2d3f078e710d7acddcd4a97f5a269b", null ],
+      [ "iter2_to_dump", "d8/dbf/namespacevmec__input.html#acb4221a0cbf376204870d0342e6c2fdd", null ],
       [ "lasym", "d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553", null ],
       [ "lbsubs", "d8/dbf/namespacevmec__input.html#ae3eadff8c916355456de0affcbcf9722", null ],
       [ "lfreeb", "d8/dbf/namespacevmec__input.html#a2a939cc67d1bd46be74f843de71a6b0e", null ],
-      [ "max_dump", "d8/dbf/namespacevmec__input.html#a9a83b674203af9d3054769fc948a78d8", null ],
       [ "mfilter_fbdy", "d8/dbf/namespacevmec__input.html#acf6b12a478233a5e7c2afa585e9f8d73", null ],
       [ "mgrid_file", "d8/dbf/namespacevmec__input.html#a89f118af3bd13c4c82f2658e87c6339c", null ],
       [ "mpol", "d8/dbf/namespacevmec__input.html#ad23b27aa1648d81036ade421ef1a0944", null ],
@@ -635,6 +635,7 @@ var namespaces_dup =
       [ "ntheta", "d8/dbf/namespacevmec__input.html#a2db2a2c181b423ace37600fd6b49820a", null ],
       [ "ntor", "d8/dbf/namespacevmec__input.html#ac6f2567548169008268f14d0bc8ca4b8", null ],
       [ "ntor_default", "d8/dbf/namespacevmec__input.html#ae70a9badb49f3e431418359ad0f4bea4", null ],
+      [ "num_iter2_to_dump", "d8/dbf/namespacevmec__input.html#aa331e65307acafe62990f565f9821bb4", null ],
       [ "nvacskip", "d8/dbf/namespacevmec__input.html#a8c41130955e25f6268587e769ca668eb", null ],
       [ "nzeta", "d8/dbf/namespacevmec__input.html#acdf327762893b41f2bbe147f5825e396", null ],
       [ "pcurr_type", "d8/dbf/namespacevmec__input.html#a2abb983ca41c050eb79b503f4a0520e6", null ],

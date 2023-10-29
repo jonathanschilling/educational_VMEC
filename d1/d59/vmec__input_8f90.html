@@ -149,6 +149,8 @@ Variables</h2></td></tr>
 <tr class="separator:afed4796a7ee4e7b8e879d79542380131"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa4350fed57ca0d400c990820fad910" id="r_acfa4350fed57ca0d400c990820fad910"><td class="memItemLeft" align="right" valign="top">real(rprec), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#acfa4350fed57ca0d400c990820fad910">vmec_input::ftol_default</a> = 1.E-10_dp</td></tr>
 <tr class="separator:acfa4350fed57ca0d400c990820fad910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa331e65307acafe62990f565f9821bb4" id="r_aa331e65307acafe62990f565f9821bb4"><td class="memItemLeft" align="right" valign="top">integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#aa331e65307acafe62990f565f9821bb4">vmec_input::num_iter2_to_dump</a> = 20</td></tr>
+<tr class="separator:aa331e65307acafe62990f565f9821bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0cc4e8af292085788e013dffad82886" id="r_ab0cc4e8af292085788e013dffad82886"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#ab0cc4e8af292085788e013dffad82886">vmec_input::nfp</a></td></tr>
 <tr class="separator:ab0cc4e8af292085788e013dffad82886"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af26e121e53eae32bc88ceaade7c767d6" id="r_af26e121e53eae32bc88ceaade7c767d6"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#af26e121e53eae32bc88ceaade7c767d6">vmec_input::ncurr</a></td></tr>
@@ -253,9 +255,9 @@ Variables</h2></td></tr>
 <tr class="separator:a89f118af3bd13c4c82f2658e87c6339c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a2d3f078e710d7acddcd4a97f5a269b" id="r_a9a2d3f078e710d7acddcd4a97f5a269b"><td class="memItemLeft" align="right" valign="top">character(len=100)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a9a2d3f078e710d7acddcd4a97f5a269b">vmec_input::input_extension</a></td></tr>
 <tr class="separator:a9a2d3f078e710d7acddcd4a97f5a269b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a83b674203af9d3054769fc948a78d8" id="r_a9a83b674203af9d3054769fc948a78d8"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a9a83b674203af9d3054769fc948a78d8">vmec_input::max_dump</a> = 2</td></tr>
-<tr class="memdesc:a9a83b674203af9d3054769fc948a78d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum number of iterations for which to dump data  <br /></td></tr>
-<tr class="separator:a9a83b674203af9d3054769fc948a78d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb4221a0cbf376204870d0342e6c2fdd" id="r_acb4221a0cbf376204870d0342e6c2fdd"><td class="memItemLeft" align="right" valign="top">integer, dimension(<a class="el" href="../../d8/dbf/namespacevmec__input.html#aa331e65307acafe62990f565f9821bb4">num_iter2_to_dump</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#acb4221a0cbf376204870d0342e6c2fdd">vmec_input::iter2_to_dump</a></td></tr>
+<tr class="memdesc:acb4221a0cbf376204870d0342e6c2fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">values of iter2 for which to dump data  <br /></td></tr>
+<tr class="separator:acb4221a0cbf376204870d0342e6c2fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b259d90d62fc4c3aaa522114d40d58" id="r_a18b259d90d62fc4c3aaa522114d40d58"><td class="memItemLeft" align="right" valign="top">logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dbf/namespacevmec__input.html#a18b259d90d62fc4c3aaa522114d40d58">vmec_input::dump_add_fluxes</a> = .false.</td></tr>
 <tr class="memdesc:a18b259d90d62fc4c3aaa522114d40d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">individual flags to control debug output loosely related to similarly-named routines (checkpoints along iterations)  <br /></td></tr>
 <tr class="separator:a18b259d90d62fc4c3aaa522114d40d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -408,7 +410,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_c1be8d27e7f84178e95f152701110b19.html">data</a></li><li class="navelem"><a class="el" href="../../d1/d59/vmec__input_8f90.html">vmec_input.f90</a></li>
-    <li class="footer">Generated on Sun Oct 29 2023 19:20:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Oct 29 2023 21:12:15 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

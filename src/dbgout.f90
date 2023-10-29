@@ -2,6 +2,8 @@ module dbgout
   use json
   implicit none
 
+  logical :: skip_dbgout_collison = .false.
+
 contains
 
 !> check if any output is desired for the current iteration
@@ -25,16 +27,24 @@ function open_dbg_context(context_name, repetition, id)
   character(len=255) :: dump_filename
   character(len=255) :: output_folder
   logical            :: should_write, file_exists
+  integer            :: iter_value_to_use, i
 
   ! enable semi-pretty-printing JSON data
   json_pretty_print = .true.
 
-  ! check if debug out should be written at all
   if (present(id)) then
-    should_write = id.le.max_dump
+    iter_value_to_use = id
   else
-    should_write = iter2.le.max_dump
+    iter_value_to_use = iter2
   end if
+
+  ! check if debug out should be written at all
+  should_write = .false.
+  do i = 1, num_iter2_to_dump
+    if (iter_value_to_use .eq. iter2_to_dump(i)) then
+      should_write = .true.
+    end if
+  end do ! num_iter2_to_dump
 
   ! check if requested context is enabled by input flags
   if      (trim(context_name) .eq. "add_fluxes") then
@@ -239,6 +249,11 @@ function open_dbg_context(context_name, repetition, id)
     ! check if file already exists (and stop in that case)
     inquire(file=trim(dump_filename), exist=file_exists)
     if (file_exists) then
+      if (skip_dbgout_collison) then
+        ! Temporary hack to skip overwriting a file
+        ! without halting the algorithm.
+        return
+      end if
       stop "debug output file already exists: '"//trim(dump_filename)//"'"
     end if
 

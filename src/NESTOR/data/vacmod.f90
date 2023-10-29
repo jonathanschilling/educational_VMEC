@@ -8,7 +8,7 @@ MODULE vacmod
 
   IMPLICIT NONE
 
-  integer, save :: icall = 0
+  ! integer, save :: icall = 0
 
   REAL(rprec), PARAMETER :: p5 = cp5
   REAL(rprec), PARAMETER :: two = c2p0

@@ -14,6 +14,7 @@
 SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)
   USE vacmod, vm_grpmn => grpmn
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
   IMPLICIT NONE
 
   INTEGER, INTENT(in) :: ivacskip
@@ -164,7 +165,7 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
      tlpm = tlp + tlm
   END DO LLOOP
 
-  if (open_dbg_context("vac1n_analyt", id=icall)) then
+  if (open_dbg_context("vac1n_analyt", num_eqsolve_retries)) then
 
     call add_real_3d("all_tlp", mf+nf+1, nv, nu3, all_tlp)
     call add_real_3d("all_tlm", mf+nf+1, nv, nu3, all_tlm)

@@ -29,6 +29,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   use vmec_main, only: input_extension
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -83,7 +84,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
   ! potential = SUM potsin*SIN(mu - nv) + potcos*COS(mu - nv)
 
   ! write inputs to NESTOR
-  if (open_dbg_context("vac1n_vacuum", id=icall)) then
+  if (open_dbg_context("vac1n_vacuum", num_eqsolve_retries)) then
 
     call add_real_1d("rmnc", mnmax, rmnc)
     call add_real_1d("zmns", mnmax, zmns)
@@ -129,7 +130,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
    ! stand-alone for debugging: working on scalpot at the moment
    ! return
 
-   vac1n_solver_active = open_dbg_context("vac1n_solver", id=icall)
+   vac1n_solver_active = open_dbg_context("vac1n_solver", num_eqsolve_retries)
    if (vac1n_solver_active) then
      call add_real_2d("amatrix", mnpd2, mnpd2, amatrix)
      call add_real_1d("potvac_in", mnpd2, potvac)
@@ -200,7 +201,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
       bzv(i)   = zub(i)*bsupu + zvb(i)*bsupv
    END DO
 
-   if (open_dbg_context("vac1n_bsqvac", id=icall)) then
+   if (open_dbg_context("vac1n_bsqvac", num_eqsolve_retries)) then
 
     call add_real_1d("potsin", mnpd, potsin)
     if (lasym) then
@@ -255,6 +256,6 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
 
    ENDIF
 
-   icall = icall + 1
+   !icall = icall + 1
 
 END SUBROUTINE vacuum

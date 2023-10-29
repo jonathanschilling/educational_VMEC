@@ -9,6 +9,7 @@ SUBROUTINE fourp (grpmn, grp)
   USE vacmod, vm_grpmn => grpmn
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -93,7 +94,7 @@ SUBROUTINE fourp (grpmn, grp)
 
   END DO ! ku
 
-  if (open_dbg_context("vac1n_fourp", id=icall)) then
+  if (open_dbg_context("vac1n_fourp", num_eqsolve_retries)) then
 
     ! NOTE: This is the sum of the results from analyt and fourp!
     call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)

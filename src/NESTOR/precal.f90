@@ -7,6 +7,7 @@ SUBROUTINE precal
   USE vacmod
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -233,7 +234,7 @@ SUBROUTINE precal
 
   precal_done = .true.
 
-  if (open_dbg_context("vac1n_precal", id=icall)) then
+  if (open_dbg_context("vac1n_precal", num_eqsolve_retries)) then
 
     call add_int("nvper", nvper)
     call add_int("nuv_tan", nuv_tan)

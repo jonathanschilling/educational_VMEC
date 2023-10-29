@@ -12,7 +12,10 @@
 !> @param n_map
 SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
    USE vacmod, vm_amatrix => amatrix
+
    use dbgout
+   use vmec_main, only: num_eqsolve_retries
+
    IMPLICIT NONE
 
    INTEGER, INTENT(in) :: ivacskip
@@ -64,7 +67,7 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
          gstore = gstore + bexni(ip)*green(:,ip)
       END DO
 
-      if (open_dbg_context("vac1n_greenf", id=icall)) then
+      if (open_dbg_context("vac1n_greenf", num_eqsolve_retries)) then
 
         call add_real_4d("green",  nv, nu, nv, nu3, green)
         call add_real_4d("greenp", nv, nu, nv, nu3, greenp)
@@ -78,11 +81,11 @@ SUBROUTINE scalpot(bvec, amatrix, wint, ivacskip, lasym, m_map, n_map)
       ! AND STORE IN GRPMN (NOTE THAT GRPMN IS ADDED TO THE ANALYTIC PIECE IN EQ. 2.14,
       ! - COMPUTED IN ANALYT - WHICH HAS THE APPROPRIATE SIN, COS FACTORS ALREADY)
       CALL fourp (grpmn, greenp)
-      
+
       ! COMPUTE FOURIER INTEGRAL OF GRADIENT (GRPMN) OVER PRIMED MESH IN EQ. 2.14
       ! AND SOURCE (GSTORE) OVER UNPRIMED MESH IN EQ. 2.16
       CALL fouri (grpmn, gstore, amatrix, amatsav, bvec, wint, lasym)
-      
+
       ! debugging: focus on Fourier transforms in fouri for now
       ! return
 

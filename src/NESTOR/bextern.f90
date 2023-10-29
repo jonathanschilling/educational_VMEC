@@ -10,6 +10,7 @@ SUBROUTINE bextern(plascur, wint)
   USE mgrid_mod, ONLY: bvac
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -36,7 +37,7 @@ SUBROUTINE bextern(plascur, wint)
   ! USE BEXU, BEXV, BEXN AS TEMPORARY STORAGE FOR BX, BY, BZ
   ! --> add to interpolated field from mgrid
   CALL belicu (plascur, bexu, bexv, bexn, cosuv, sinuv, r1b, z1b)
-  DO i = 1, nuv2  
+  DO i = 1, nuv2
      brad(i) = brad(i) + bexu(i)*cosuv(i) + bexv(i)*sinuv(i)
      bphi(i) = bphi(i) - bexu(i)*sinuv(i) + bexv(i)*cosuv(i)
      bz(i)   = bz(i) + bexn(i)
@@ -57,7 +58,7 @@ SUBROUTINE bextern(plascur, wint)
   ! NOTE: BEXN == NP*F = -B0 dot [Xu cross Xv] NP        (see PKM, Eq. 2.13)
   bexni(:nuv2) = wint(:nuv2)*bexn(:nuv2)*pi2*pi2
 
-  if (open_dbg_context("vac1n_bextern", id=icall)) then
+  if (open_dbg_context("vac1n_bextern", num_eqsolve_retries)) then
 
     call add_real_2d("brad", nv, nu3, brad)
     call add_real_2d("bphi", nv, nu3, bphi)

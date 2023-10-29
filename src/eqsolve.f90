@@ -12,6 +12,8 @@ SUBROUTINE eqsolve(ier_flag)
   USE realspace
   USE xstuff
 
+  use dbgout, only: skip_dbgout_collison
+
   IMPLICIT NONE
 
   INTEGER, intent(inout) :: ier_flag
@@ -34,6 +36,11 @@ SUBROUTINE eqsolve(ier_flag)
 
   ! COMPUTE INITIAL R, Z AND MAGNETIC FLUX PROFILES
 20 CONTINUE ! try again
+
+  ! !!! THIS must be the ONLY place where this gets incremented !!!
+  num_eqsolve_retries = num_eqsolve_retries + 1
+
+  ! print *, "goto 20, num_eqsolve_retries = ", num_eqsolve_retries
 
   ! RECOMPUTE INITIAL PROFILE, BUT WITH IMPROVED AXIS
   ! OR
@@ -59,9 +66,6 @@ SUBROUTINE eqsolve(ier_flag)
 
   ! FORCE ITERATION LOOP
   iter_loop: DO WHILE (liter_flag)
-
-     ! !!! THIS must be the ONLY place where this gets incremented !!!
-     num_eqsolve_retries = num_eqsolve_retries + 1
 
      ! ADVANCE FOURIER AMPLITUDES OF R, Z, AND LAMBDA
      CALL evolve (delt0r, ier_flag, liter_flag)
@@ -175,6 +179,10 @@ SUBROUTINE eqsolve(ier_flag)
         ! Retrieve previous good state
         CALL restart_iter(delt0r)
         iter1 = iter2
+
+        ! This breaks the dbgout logic, in that the same iter2 and num_eqsolve_retries combination is touched twice.
+        ! Hence, allow ONCE to overwrite the output file.
+        skip_dbgout_collison = .true.
      ELSE
         ! Increment time step and printout every nstep iterations
         ! status report due or
@@ -189,6 +197,10 @@ SUBROUTINE eqsolve(ier_flag)
 
         ! count iterations
         iter2 = iter2 + 1
+
+        ! Disable again the temporary overwrite that was allowed above.
+        ! Trust on VMEC to reach this branch in the next iteration.
+        skip_dbgout_collison = .false.
      ENDIF
 
 

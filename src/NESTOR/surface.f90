@@ -16,6 +16,7 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   USE vacmod
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -121,7 +122,7 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
     rsinuv(i) = r1b(i)*sinuv(i)
   END DO
 
-  if (open_dbg_context("vac1n_surface", id=icall)) then
+  if (open_dbg_context("vac1n_surface", num_eqsolve_retries)) then
     call add_real_2d("r1b", nv, nu,  r1b) ! nu !
     call add_real_2d("rub", nv, nu3, rub)
     call add_real_2d("rvb", nv, nu3, rvb)

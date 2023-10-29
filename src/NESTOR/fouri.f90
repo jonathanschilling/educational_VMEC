@@ -14,6 +14,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
 
   use dbgout
+  use vmec_main, only: num_eqsolve_retries
 
   IMPLICIT NONE
 
@@ -198,7 +199,7 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
   end if
 
-  if (open_dbg_context("vac1n_fouri", id=icall)) then
+  if (open_dbg_context("vac1n_fouri", num_eqsolve_retries)) then
 
     ! TODO: isym for lasym=.TRUE.
     call add_real_2d("source", nv, nu2, source)

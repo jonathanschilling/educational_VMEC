@@ -13,7 +13,7 @@
 SUBROUTINE funct3d (ier_flag)
 
   USE vmec_main
-  USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2, bsubvvac, nestor_icall => icall
+  USE vacmod, ONLY: bsqvac, amatsav, bvecsav, mnpd2, bsubvvac
   use nestor_io, only: write_nestor_outputs
   USE vmec_params, ONLY: bad_jacobian_flag, signgs, ntmax
   USE realspace
@@ -377,7 +377,7 @@ SUBROUTINE funct3d (ier_flag)
 
         !print *, "max bsqvac = ", maxval(bsqvac)
 
-        if (open_dbg_context("rbsq", id=nestor_icall)) then
+        if (open_dbg_context("rbsq", num_eqsolve_retries)) then
           call add_real_2d("rbsq", nzeta, ntheta3, rbsq)
           call close_dbg_out()
         end if

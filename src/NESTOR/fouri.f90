@@ -12,9 +12,9 @@
 !> @param lasym
 SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   USE vacmod, vm_amatrix => amatrix, vm_grpmn => grpmn
-  
+
   use dbgout
-  
+
   IMPLICIT NONE
 
   REAL(rprec), DIMENSION(mnpd,nv,nu3,ndim), INTENT(in) :: grpmn
@@ -68,7 +68,8 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      END DO
   END DO
 
-  ! 0.5 from above symmetrization maybe?
+  ! 0.5 from above symmetrization
+  ! 1/nfp to match 1/nfp in alp in cmns (2 pi of alp alreafy somewhere else (???))
   source = p5*onp*source ! TODO: why is this required?
 
   ! INITIALIZE RUNNING-SUM ARRAYS
@@ -76,8 +77,6 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
   bsin = 0
   actemp = 0
   astemp = 0
-
-  amatrix = 0
 
   ! PERFORM KV (TOROIDAL ANGLE) TRANSFORM
   DO n = 0, nf
@@ -88,6 +87,9 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
            bcos(:,n,isym) = bcos(:,n,isym) + cosn*source(kvi,:,isym)
            bsin(:,n,isym) = bsin(:,n,isym) + sinn*source(kvi,:,isym)
 
+           ! first index: mnpd == (mf + 1) * (2 * nf + 1)
+           ! second index: 2 * nf + 1
+           ! third index: nu3
            actemp(:,n,:,isym) = actemp(:,n,:,isym) + cosn*grpmn(:,kvi,:,isym)
            astemp(:,n,:,isym) = astemp(:,n,:,isym) + sinn*grpmn(:,kvi,:,isym)
 
@@ -98,15 +100,19 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
               actemp(:,(-n),:,isym) =  actemp(:,n,:,isym)
               astemp(:,(-n),:,isym) = -astemp(:,n,:,isym)
            ENDIF
-        END DO
-     END DO
-  END DO
+        END DO ! isym
+     END DO ! kvi
+  END DO ! n
+
+
+
+  amatrix = 0
 
   ! PERFORM KU (POLOIDAL ANGLE) TRANSFORM
   DO m = 0, mf
      DO kui = 1, nu2
-        cosm = cosui(m,kui)
-        sinm = sinui(m,kui)
+        cosm = cosui(m,kui) ! includes (2 pi)^2 via alu, alv
+        sinm = sinui(m,kui) ! includes (2 pi)^2 via alu, alv
         bvec(m,-nf:nf,1)    = bvec(m,-nf:nf,1) + bcos(kui,-nf:nf,1)*sinm - bsin(kui,-nf:nf,1)*cosm
         IF (lasym) THEN
            bvec(m,-nf:nf,2) = bvec(m,-nf:nf,2) + bcos(kui,-nf:nf,2)*cosm + bsin(kui,-nf:nf,2)*sinm
@@ -191,21 +197,21 @@ SUBROUTINE fouri(grpmn, gsource, amatrix, amatsq, bvec, wint, lasym)
      ! Cos-Cos'
      amatsq(1+mnpd:mnpd2,1+mnpd:mnpd2) = amatrix(:,:,4)
   end if
-  
+
   if (open_dbg_context("vac1n_fouri", id=icall)) then
-    
+
     ! TODO: isym for lasym=.TRUE.
     call add_real_2d("source", nv, nu2, source)
-    
+
     call add_real_2d("bcos", nu2, nf1, bcos)
     call add_real_2d("bsin", nu2, nf1, bsin)
-    
+
     call add_real_4d("actemp", mf1, nf1, nf1, nu3, actemp)
     call add_real_4d("astemp", mf1, nf1, nf1, nu3, astemp)
-    
+
     call add_real_2d("bvec", mf1, nf1, bvec)
     call add_real_4d("amatrix", mf1, nf1, mf1, nf1, amatrix)
-    
+
     call add_real_2d("amatsq", mf1*nf1, mf1*nf1, amatsq)
 
     call close_dbg_out()

@@ -18,6 +18,7 @@ SUBROUTINE bextern(plascur, wint)
   REAL(rprec), DIMENSION(nuv2), INTENT(in) :: wint
 
   INTEGER :: i
+  logical :: dbgout_active
 
   ! exterior Neumann problem
 
@@ -29,6 +30,19 @@ SUBROUTINE bextern(plascur, wint)
   ! COMPUTE B FROM COILS ON THE PLASMA BOUNDARY
   ! This sets brad, bphi and bz to the interpolated field from the mgrid.
   CALL becoil(r1b, z1b, bvac(1,1), bvac(1,2), bvac(1,3))
+
+  dbgout_active = open_dbg_context("vac1n_bextern", num_eqsolve_retries)
+  if (dbgout_active) then
+
+    ! these are only from the mgrid at this point
+    call add_real_2d("mgrid_brad", nv, nu3, brad)
+    call add_real_2d("mgrid_bphi", nv, nu3, bphi)
+    call add_real_2d("mgrid_bz",   nv, nu3, bz)
+
+    ! This should be in Amperes.
+    call add_real("axis_current", plascur/mu0)
+
+  end if ! dbgout_active
 
   ! COMPUTE B (ON PLASMA BOUNDARY) FROM NET TOROIDAL PLASMA CURRENT
   ! THE NET CURRENT IS MODELLED AS A WIRE AT THE MAGNETIC AXIS, AND THE
@@ -58,8 +72,12 @@ SUBROUTINE bextern(plascur, wint)
   ! NOTE: BEXN == NP*F = -B0 dot [Xu cross Xv] NP        (see PKM, Eq. 2.13)
   bexni(:nuv2) = wint(:nuv2)*bexn(:nuv2)*pi2*pi2
 
-  if (open_dbg_context("vac1n_bextern", num_eqsolve_retries)) then
+  if (dbgout_active) then
 
+    ! axis geometry used in belicu
+    call add_real_2d("xpts_axis", 3, nvper * nv + 1, xpts)
+
+    ! these are now mgrid + axis-current
     call add_real_2d("brad", nv, nu3, brad)
     call add_real_2d("bphi", nv, nu3, bphi)
     call add_real_2d("bz",   nv, nu3, bz)

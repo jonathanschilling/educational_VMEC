@@ -15,7 +15,7 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
 
   USE vacmod, vm_bz => bz
 
-  use abscab
+  use abscab, only: magneticFieldPolygonFilament
 
   IMPLICIT NONE
 
@@ -33,13 +33,8 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
   ! net toroidal plasma current in A
   current = torcur/mu0
 
-  ! first point (at index 0) is equal to last point --> closed curve
-  i = 0
-  xpts(1, i) = raxis_nestor(nv)*(cosper(nvper)*cosuv(nv) - sinper(nvper)*sinuv(nv))
-  xpts(2, i) = raxis_nestor(nv)*(sinper(nvper)*cosuv(nv) + cosper(nvper)*sinuv(nv))
-  xpts(3, i) = zaxis_nestor(nv)
-
   ! loops over source geometry
+  i = 0
   DO kper = 1, nvper
      DO kv = 1, nv
         i = i + 1
@@ -50,6 +45,11 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
         xpts(3, i) = zaxis_nestor(kv)
      end do
   end do
+
+  ! last point is equal to first point --> closed curve
+  xpts(1, nvp+1) = xpts(1, 1)
+  xpts(2, nvp+1) = xpts(2, 1)
+  xpts(3, nvp+1) = xpts(3, 1)
 
   DO j = 1, nuv2
     ! evaluation positions
@@ -62,7 +62,7 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
   magnetic_field = 0.0_dp
 
   ! use ABSCAB to compute the line-current-along-axis magnetic field contribution
-  call magneticFieldPolygonFilament(nvper * nv + 1, xpts(:,0:nvper*nv), current, &
+  call magneticFieldPolygonFilament(nvper * nv + 1, xpts, current, &
                                     nuv2, eval_pos, magnetic_field)
 
   bx(:) = magnetic_field(1,:)

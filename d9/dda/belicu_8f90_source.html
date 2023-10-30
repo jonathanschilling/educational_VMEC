@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">USE </span><a class="code hl_namespace" href="../../dd/df2/namespacevacmod.html">vacmod</a>, vm_bz =&gt; <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ad472475fd1a6b3a1c886ed1c309b0855">bz</a></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordtype">use </span>abscab</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordtype">use </span>abscab, <span class="keywordtype">only</span>: magneticfieldpolygonfilament</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">IMPLICIT NONE</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
@@ -148,23 +148,23 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">! net toroidal plasma current in A</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  current = torcur/mu0</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! first point (at index 0) is equal to last point --&gt; closed curve</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">! loops over source geometry</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  i = 0</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(nv)*(cosper(nvper)*cosuv(nv) - sinper(nvper)*sinuv(nv))</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(nv)*(sinper(nvper)*cosuv(nv) + cosper(nvper)*sinuv(nv))</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(nv)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">DO</span> kper = 1, nvper</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>     <span class="keywordflow">DO</span> kv = 1, nv</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        i = i + 1</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">! loops over source geometry</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">DO</span> kper = 1, nvper</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>     <span class="keywordflow">DO</span> kv = 1, nv</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        i = i + 1</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="comment">! xpts == xpt of _s_ource (current filament)</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(cosper(kper)*cosuv(kv) - sinper(kper)*sinuv(kv))</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(kv)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordflow">     end do</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordflow">  end do</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="comment">! xpts == xpt of _s_ource (current filament)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(cosper(kper)*cosuv(kv) - sinper(kper)*sinuv(kv))</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a98a42b167c483260928b42669c98b448">raxis_nestor</a>(kv)*(sinper(kper)*cosuv(kv) + cosper(kper)*sinuv(kv))</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, i) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#ab8640908fd03f2f712f053753c6ad13c">zaxis_nestor</a>(kv)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordflow">     end do</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordflow">  end do</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">! last point is equal to first point --&gt; closed curve</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, nvp+1) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(1, 1)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, nvp+1) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(2, 1)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, nvp+1) = <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(3, 1)</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">DO</span> j = 1, nuv2</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">! evaluation positions</span></div>
@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  magnetic_field = 0.0_dp</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">! use ABSCAB to compute the line-current-along-axis magnetic field contribution</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">call </span>magneticfieldpolygonfilament(nvper * nv + 1, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>(:,0:nvper*nv), current, &amp;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">call </span>magneticfieldpolygonfilament(nvper * nv + 1, <a class="code hl_variable" href="../../dd/df2/namespacevacmod.html#a5688359d2d2154dbe51196432264c23f">xpts</a>, current, &amp;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                                    nuv2, eval_pos, magnetic_field)</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  bx(:) = magnetic_field(1,:)</div>
@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('d9/dda/belicu_8f90_source.html','../..
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9f219409ba88cc5ba382894b69fd2c30.html">NESTOR</a></li><li class="navelem"><a class="el" href="../../d9/dda/belicu_8f90.html">belicu.f90</a></li>
-    <li class="footer">Generated on Mon Oct 30 2023 12:04:07 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 30 2023 13:34:35 for VMEC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -7,3 +7,6 @@
 [submodule "src/vac3"]
 	path = src/vac3
 	url = git@github.com:jonathanschilling/vac3.git
+[submodule "abscab-fortran"]
+	path = abscab-fortran
+	url = https://github.com/jonathanschilling/abscab-fortran

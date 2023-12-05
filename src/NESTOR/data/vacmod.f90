@@ -229,8 +229,9 @@ subroutine allocate_nestor
   IF (i .ne. 0) STOP 'allocation error in bextern'
 
   ! from tolicu
-  ! need 0:nvp for "virtual" point at index 0 which is equal to last point for closed curve
-  ALLOCATE (xpts(3,0:nvp), stat=i)
+  ! need nvp+1 for "virtual" point at last index,
+  ! which is equal to first point for a closed curve
+  ALLOCATE (xpts(3,nvp+1), stat=i)
   IF (i .ne. 0) STOP ' allocation error in tolicu'
 
   ! from scalpot

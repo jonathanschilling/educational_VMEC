@@ -115,6 +115,11 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   LLOOP: DO l = 0, mf + nf
      fl = fl1
 
+     ! here, tlp/m are available for the current value of l
+     ! --> save into matrix for debugging
+     all_tlp(l,:) = tlp
+     all_tlm(l,:) = tlm
+
      ! COMPUTE SL+ and SL- , Eq (A17)
      ! SLP(M): SL+(-)
      IF (ivacskip .eq. 0) THEN
@@ -122,10 +127,8 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
         slm = (r1m*fl + ra1m)*tlm + r0m*fl*tlm1 - (r1m + r0m)/sqrtc + sign1*(r0m - r1m)/sqrta
         slpm = slp + slm
 
-        ! here, tlp/m and slp/m are available for the current value of l
+        ! here, slp/m are available for the current value of l
         ! --> save into matrix for debugging
-        all_tlp(l,:) = tlp
-        all_tlm(l,:) = tlm
         all_slp(l,:) = slp
         all_slm(l,:) = slm
      ENDIF
@@ -169,11 +172,12 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
 
     call add_real_3d("all_tlp", mf+nf+1, nv, nu3, all_tlp)
     call add_real_3d("all_tlm", mf+nf+1, nv, nu3, all_tlm)
-    call add_real_2d("bvec", mf1, nf1, bvec)
+    call add_real_2d("bvec", mf1, nf1, bvec) ! (mf+1)x(2*nf+1)x(ndim: 1 or 2)
+
     if (ivacskip .eq. 0) then
       call add_real_3d("all_slp", mf+nf+1, nv, nu3, all_slp)
       call add_real_3d("all_slm", mf+nf+1, nv, nu3, all_slm)
-      call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
+      call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn) ! missing dim: (ndim: 1 or 2)
     else
       call add_null("all_slp")
       call add_null("all_slm")

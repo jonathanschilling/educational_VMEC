@@ -15,6 +15,8 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
 
   USE vacmod, vm_bz => bz
 
+  use abscab, only: magneticFieldPolygonFilament
+
   IMPLICIT NONE
 
   REAL(rprec), INTENT(in) :: torcur
@@ -23,10 +25,6 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
 
   REAL(rprec) :: current
   INTEGER :: i, j, kper, kv
-  REAL(rprec), DIMENSION(3) :: xpt, bvec, dvec, Ri_vec
-
-  ! quantities from Hanson & Hirshman, "Compact expressions for the Biot-Savart fields of a filamentary segment" (2002)
-  REAL(rprec) :: L, Ri, Rf, Ri_p_Rf, Bmag
 
   real(rprec), dimension(3, nuv2) :: eval_pos, magnetic_field
 

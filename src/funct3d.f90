@@ -404,6 +404,14 @@ SUBROUTINE funct3d (ier_flag)
 
      if (open_dbg_context("constraint_force", num_eqsolve_retries)) then
 
+       call add_real_3d("rcon",  ns, nzeta, ntheta3, rcon(:nrzt,0))
+       call add_real_3d("rcon0", ns, nzeta, ntheta3, rcon0(:nrzt))
+       call add_real_3d("ru0",   ns, nzeta, ntheta3, ru0(:nrzt))
+
+       call add_real_3d("zcon",  ns, nzeta, ntheta3, zcon(:nrzt,0))
+       call add_real_3d("zcon0", ns, nzeta, ntheta3, zcon0(:nrzt))
+       call add_real_3d("zu0",   ns, nzeta, ntheta3, zu0(:nrzt))
+
        call add_real_3d("extra1", ns, nzeta, ntheta3, extra1(:,0))
        call add_real_3d("gcon",   ns, nzeta, ntheta3, gcon       )
 

@@ -51,6 +51,7 @@ endif ()
 set (vmec_sources "")
 add_subdirectory(src)
 add_subdirectory(json-fortran)
+add_subdirectory(abscab-fortran)
 
 # if you have access to the vac2 and vac3 versions of NESTOR (contact me), they are included here
 #add_subdirectory(src/vac2)

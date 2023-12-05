@@ -26,6 +26,9 @@ SUBROUTINE belicu(torcur, bx, by, bz, cos1, sin1, rp, zp)
   REAL(rprec) :: current
   INTEGER :: i, j, kper, kv
 
+  REAL(rprec) :: L, Ri, Rf, Ri_p_Rf, Bmag
+  REAL(rprec), dimension(3) :: dvec, xpt, Ri_vec
+
   real(rprec), dimension(3, nuv2) :: eval_pos, magnetic_field
 
   ! If .true., use ABSCAB for computing the magnetic field contribution

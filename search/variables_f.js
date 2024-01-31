@@ -9,7 +9,7 @@ var searchData=
   ['phidiam_6',['phidiam',['../db/dae/namespaceread__wout__mod.html#adfee529cbce7bf38378b0f1ab4da2258',1,'read_wout_mod']]],
   ['phiedge_7',['phiedge',['../d8/dbf/namespacevmec__input.html#aaf5b17af6d3386548606873e6889886c',1,'vmec_input']]],
   ['phiedge_5ferror_5fflag_8',['phiedge_error_flag',['../d1/d74/namespacevmec__params.html#a2ff3cb442e65ea610c682b200bc3ef56',1,'vmec_params']]],
-  ['phip_9',['phip',['../db/dae/namespaceread__wout__mod.html#a552185e1a9e07b2bbce4f84325ee8d4d',1,'read_wout_mod::phip'],['../d7/d0e/namespacerealspace.html#aebe004046e295dc9a4f149de810309b7',1,'realspace::phip']]],
+  ['phip_9',['phip',['../d7/d0e/namespacerealspace.html#aebe004046e295dc9a4f149de810309b7',1,'realspace::phip'],['../db/dae/namespaceread__wout__mod.html#a552185e1a9e07b2bbce4f84325ee8d4d',1,'read_wout_mod::phip']]],
   ['phipf_10',['phipf',['../d1/d6c/namespacevmec__main.html#af25579de1c0c445f09c2efc505991a3b',1,'vmec_main::phipf'],['../db/dae/namespaceread__wout__mod.html#a46244b08bc136ab0e4f69a6883122a90',1,'read_wout_mod::phipf']]],
   ['phips_11',['phips',['../d1/d6c/namespacevmec__main.html#ad18165373a8f8b0a4a939cefceb654cf',1,'vmec_main']]],
   ['pi_12',['pi',['../df/d0c/namespacestel__constants.html#a2fb1f735b8ff5f0b6244f18e7ad55ca9',1,'stel_constants']]],

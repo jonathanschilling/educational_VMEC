@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['b0_0',['b0',['../db/dae/namespaceread__wout__mod.html#a8dd931ef4e7cd426ecd80c4dc5369b6f',1,'read_wout_mod::b0'],['../db/d2d/namespacevmec__io.html#ad8db1871767da475caad556fac9ca469',1,'vmec_io::b0']]],
+  ['b0_0',['b0',['../db/d2d/namespacevmec__io.html#ad8db1871767da475caad556fac9ca469',1,'vmec_io::b0'],['../db/dae/namespaceread__wout__mod.html#a8dd931ef4e7cd426ecd80c4dc5369b6f',1,'read_wout_mod::b0']]],
   ['b_5fchi_1',['b_chi',['../d1/d41/namespacemgrid__mod.html#a2d8bad548f10d40b1bc75ba105a35cf6',1,'mgrid_mod']]],
   ['bad_5fjacobian_5fflag_2',['bad_jacobian_flag',['../d1/d74/namespacevmec__params.html#a1b03181cb863861ace0116ff9c0fc1b9',1,'vmec_params']]],
   ['bbc_3',['bbc',['../db/dae/namespaceread__wout__mod.html#aa5e1e8e874b204ed8e3408d187fa4b53',1,'read_wout_mod']]],
@@ -11,7 +11,7 @@ var searchData=
   ['bdotb_8',['bdotb',['../d1/d6c/namespacevmec__main.html#adb976e15d8adf079dde1d923716a0740',1,'vmec_main']]],
   ['bdotgradv_9',['bdotgradv',['../d1/d6c/namespacevmec__main.html#a8f47c9a2c8f7af2402f2d8488b33fab4',1,'vmec_main::bdotgradv'],['../db/dae/namespaceread__wout__mod.html#af86f859fa4d8bf5c2878b6a897678b97',1,'read_wout_mod::bdotgradv']]],
   ['beta_5fvol_10',['beta_vol',['../d1/d6c/namespacevmec__main.html#aeb2ac73bcda494fa24364a63c31e2675',1,'vmec_main::beta_vol'],['../db/dae/namespaceread__wout__mod.html#a7243a53a3b5fb0efe5bef483c081d1da',1,'read_wout_mod::beta_vol']]],
-  ['betapol_11',['betapol',['../db/dae/namespaceread__wout__mod.html#ae2230bec2acf6fe3b92ca6c7f1b6c205',1,'read_wout_mod::betapol'],['../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c',1,'vmec_io::betapol']]],
+  ['betapol_11',['betapol',['../db/d2d/namespacevmec__io.html#a6b3deff357500ddb418e676620cd7d5c',1,'vmec_io::betapol'],['../db/dae/namespaceread__wout__mod.html#ae2230bec2acf6fe3b92ca6c7f1b6c205',1,'read_wout_mod::betapol']]],
   ['betator_12',['betator',['../db/d2d/namespacevmec__io.html#a877c0724092a5f6eaf51e896eb2dcb69',1,'vmec_io::betator'],['../db/dae/namespaceread__wout__mod.html#a42ef665ba6154ffa0fae7be6d8516ff3',1,'read_wout_mod::betator']]],
   ['betatot_13',['betatot',['../db/d2d/namespacevmec__io.html#ad51cccf149550cd7c83cf54c7ee35310',1,'vmec_io::betatot'],['../db/dae/namespaceread__wout__mod.html#aa6b15522a6c0d1bf9994a31588063297',1,'read_wout_mod::betatot']]],
   ['betaxis_14',['betaxis',['../db/d2d/namespacevmec__io.html#a97fb3013acd88db592e130d2aafdfd80',1,'vmec_io::betaxis'],['../db/dae/namespaceread__wout__mod.html#a9365fba3f0744975b2265c6a68294d7e',1,'read_wout_mod::betaxis']]],

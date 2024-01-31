@@ -20,7 +20,7 @@ var searchData=
   ['mgrid_5fpath_5fold_17',['mgrid_path_old',['../d1/d41/namespacemgrid__mod.html#aee6c93a814462b7f74cfaff804472c4e',1,'mgrid_mod']]],
   ['misc_5ferror_5fflag_18',['misc_error_flag',['../d1/d74/namespacevmec__params.html#a770048a460b118fe557192dc1917dcac',1,'vmec_params']]],
   ['mn1dim_19',['mn1dim',['../db/dc0/namespacenestor__io.html#a9a6dc6d9b60ae8aefc515c12139595d7',1,'nestor_io']]],
-  ['mnmax_20',['mnmax',['../db/dc0/namespacenestor__io.html#a18ec95a15c36caccee79d560c56f2aba',1,'nestor_io::mnmax'],['../db/dae/namespaceread__wout__mod.html#a8b5982f090066f3ea986e2de2cdfca35',1,'read_wout_mod::mnmax'],['../d2/d10/namespacevmec__dim.html#a1f81de6ec48228bd78b7c60381b0da61',1,'vmec_dim::mnmax']]],
+  ['mnmax_20',['mnmax',['../d2/d10/namespacevmec__dim.html#a1f81de6ec48228bd78b7c60381b0da61',1,'vmec_dim::mnmax'],['../db/dc0/namespacenestor__io.html#a18ec95a15c36caccee79d560c56f2aba',1,'nestor_io::mnmax'],['../db/dae/namespaceread__wout__mod.html#a8b5982f090066f3ea986e2de2cdfca35',1,'read_wout_mod::mnmax']]],
   ['mnmax_5fnyq_21',['mnmax_nyq',['../d2/d10/namespacevmec__dim.html#a2371b5af4a23bcdd5137b41177e5ee79',1,'vmec_dim::mnmax_nyq'],['../db/dae/namespaceread__wout__mod.html#a6b49487a8b96519c6a1a404a24d487cb',1,'read_wout_mod::mnmax_nyq']]],
   ['mnpd_22',['mnpd',['../d2/d04/namespacevacmod0.html#a44567911ba1acbbd44fa39cc6059fbd1',1,'vacmod0']]],
   ['mnpd2_23',['mnpd2',['../d2/d04/namespacevacmod0.html#a00ff67be61e210d2db60a6a0584c1756',1,'vacmod0']]],

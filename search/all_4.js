@@ -13,7 +13,7 @@ var searchData=
   ['example_20execution_10',['Example Execution',['../index.html#autotoc_md2',1,'']]],
   ['execution_11',['Example Execution',['../index.html#autotoc_md2',1,'']]],
   ['explore_5fspline_5fakima_2ef90_12',['explore_spline_akima.f90',['../de/de4/explore__spline__akima_8f90.html',1,'']]],
-  ['extcur_13',['extcur',['../d8/dbf/namespacevmec__input.html#aabe72ad80fc933f4d79871a7190e8d7e',1,'vmec_input::extcur'],['../db/dae/namespaceread__wout__mod.html#a26f65896faf7b57ea4fa5aae7f5c0ec1',1,'read_wout_mod::extcur'],['../db/dc0/namespacenestor__io.html#a330679b204a7b8de496ab6582864b94d',1,'nestor_io::extcur']]],
+  ['extcur_13',['extcur',['../d8/dbf/namespacevmec__input.html#aabe72ad80fc933f4d79871a7190e8d7e',1,'vmec_input::extcur'],['../db/dc0/namespacenestor__io.html#a330679b204a7b8de496ab6582864b94d',1,'nestor_io::extcur'],['../db/dae/namespaceread__wout__mod.html#a26f65896faf7b57ea4fa5aae7f5c0ec1',1,'read_wout_mod::extcur']]],
   ['external_20nestor_14',['External NESTOR',['../index.html#autotoc_md4',1,'']]],
   ['extra1_15',['extra1',['../d7/d0e/namespacerealspace.html#a77205e9228501d2a0b4cac9fccb42524',1,'realspace']]],
   ['extra2_16',['extra2',['../d7/d0e/namespacerealspace.html#ae090572875428770c681f3012ca4e22b',1,'realspace']]],

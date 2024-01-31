@@ -22,7 +22,7 @@ var searchData=
   ['dp_19',['dp',['../db/dcb/namespacestel__kinds.html#a1b8eb9b17bcf3eddadaa1754b9d0c165',1,'stel_kinds']]],
   ['drv_20',['drv',['../dd/df2/namespacevacmod.html#afbcad9be62d0ea8db9575d72c9b45567',1,'vacmod']]],
   ['dsave_21',['dsave',['../dd/df2/namespacevacmod.html#a959cbeecbdb8c96efe45eff49d1aab79',1,'vacmod']]],
-  ['dshear_22',['dshear',['../db/dae/namespaceread__wout__mod.html#ad8e878cbf1ead53c340819d2ee953627',1,'read_wout_mod::dshear'],['../dc/d06/namespacevmercier.html#a92397e5c7ce05cc057fc1b1e0ab25062',1,'vmercier::dshear']]],
+  ['dshear_22',['dshear',['../dc/d06/namespacevmercier.html#a92397e5c7ce05cc057fc1b1e0ab25062',1,'vmercier::dshear'],['../db/dae/namespaceread__wout__mod.html#ad8e878cbf1ead53c340819d2ee953627',1,'read_wout_mod::dshear']]],
   ['dsiext_23',['dsiext',['../d1/d41/namespacemgrid__mod.html#a1cec8b884ffc737f1d5b2ff449f36073',1,'mgrid_mod']]],
   ['dsilabel_24',['dsilabel',['../d1/d41/namespacemgrid__mod.html#ad0e5b76a994482eab2d68c0d8ef6d68b',1,'mgrid_mod']]],
   ['dsiobt_25',['dsiobt',['../db/dae/namespaceread__wout__mod.html#a513ec2db308b4b3cba980315d24e16a5',1,'read_wout_mod']]],

@@ -33,7 +33,7 @@ var searchData=
   ['nlim_5fmax_30',['nlim_max',['../d1/d41/namespacemgrid__mod.html#add53308ff2a4747853518d154fde5353',1,'mgrid_mod']]],
   ['nlimset_31',['nlimset',['../d1/d41/namespacemgrid__mod.html#a68878aa615d5d4e10a232c5c2af14811',1,'mgrid_mod']]],
   ['nmercier0_32',['nmercier0',['../d5/dde/namespacevparams.html#a3a3e635cd6309b65e5be00621efebf1a',1,'vparams']]],
-  ['nnyq_33',['nnyq',['../db/dae/namespaceread__wout__mod.html#a101ac31fc24f2b9aaf7b38220ea9b114',1,'read_wout_mod::nnyq'],['../d1/d74/namespacevmec__params.html#a90e843b526b4662c4c42c05048b3e99c',1,'vmec_params::nnyq']]],
+  ['nnyq_33',['nnyq',['../d1/d74/namespacevmec__params.html#a90e843b526b4662c4c42c05048b3e99c',1,'vmec_params::nnyq'],['../db/dae/namespaceread__wout__mod.html#a101ac31fc24f2b9aaf7b38220ea9b114',1,'read_wout_mod::nnyq']]],
   ['nobd_34',['nobd',['../d1/d41/namespacemgrid__mod.html#a0c231a70d9c0e81465ce4abb879147f0',1,'mgrid_mod']]],
   ['nobser_35',['nobser',['../d1/d41/namespacemgrid__mod.html#aea15ae7c9ed5d17517bfa913a323d2f1',1,'mgrid_mod']]],
   ['norm_5fterm_5fflag_36',['norm_term_flag',['../d1/d74/namespacevmec__params.html#ad8fa37453c9082488ab00c0b0db6660c',1,'vmec_params']]],

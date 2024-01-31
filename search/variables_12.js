@@ -30,7 +30,7 @@ var searchData=
   ['snz_27',['snz',['../dd/df2/namespacevacmod.html#a525b0bd5dc2078735f3f7a11a81fcee1',1,'vacmod']]],
   ['source_28',['source',['../dd/df2/namespacevacmod.html#a8f10574ed4023a5008247397f6066b6d',1,'vacmod']]],
   ['sp_29',['sp',['../d1/d6c/namespacevmec__main.html#a1d5fe1984da8208d574364e875ea8d38',1,'vmec_main']]],
-  ['specw_30',['specw',['../db/dae/namespaceread__wout__mod.html#a72696a1c65f5ccd67d68e2728f4c3511',1,'read_wout_mod::specw'],['../d1/d6c/namespacevmec__main.html#a9511ed475e7749eb1431dbfeace65a54',1,'vmec_main::specw']]],
+  ['specw_30',['specw',['../d1/d6c/namespacevmec__main.html#a9511ed475e7749eb1431dbfeace65a54',1,'vmec_main::specw'],['../db/dae/namespaceread__wout__mod.html#a72696a1c65f5ccd67d68e2728f4c3511',1,'read_wout_mod::specw']]],
   ['spres_5fped_31',['spres_ped',['../d8/dbf/namespacevmec__input.html#ab492cf43926f6a9b49660b310a04d7c9',1,'vmec_input']]],
   ['sqad1u_32',['sqad1u',['../dd/df2/namespacevacmod.html#a1e5b20af640eec900b5025b65b4e9862',1,'vacmod']]],
   ['sqad2u_33',['sqad2u',['../dd/df2/namespacevacmod.html#a60f03e5917b4fbecc709a88cd77ffd3f',1,'vacmod']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['lamscale_0',['lamscale',['../d1/d74/namespacevmec__params.html#ab8fd791b05dbad1394bd42c7a06b6b43',1,'vmec_params']]],
-  ['lasym_1',['lasym',['../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553',1,'vmec_input::lasym'],['../db/dae/namespaceread__wout__mod.html#af58cfb60756d7c50bc08b8deba5a082a',1,'read_wout_mod::lasym'],['../db/dc0/namespacenestor__io.html#abd176370d7af48c1040d23bef04f6bd2',1,'nestor_io::lasym']]],
+  ['lasym_1',['lasym',['../d8/dbf/namespacevmec__input.html#aa44376c0bdcded8b56e0fe70c11c6553',1,'vmec_input::lasym'],['../db/dc0/namespacenestor__io.html#abd176370d7af48c1040d23bef04f6bd2',1,'nestor_io::lasym'],['../db/dae/namespaceread__wout__mod.html#af58cfb60756d7c50bc08b8deba5a082a',1,'read_wout_mod::lasym']]],
   ['lbsubs_2',['lbsubs',['../d8/dbf/namespacevmec__input.html#ae3eadff8c916355456de0affcbcf9722',1,'vmec_input']]],
   ['lconm1_3',['lconm1',['../d1/d6c/namespacevmec__main.html#a9b2a6aba679ac68870f0a29c0529e7fb',1,'vmec_main']]],
   ['lflip_4',['lflip',['../d1/d6c/namespacevmec__main.html#ae046e355769fd9cd301ec342dfaee24c',1,'vmec_main']]],

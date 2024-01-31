@@ -17,7 +17,7 @@ var searchData=
   ['input_5fextension_14',['input_extension',['../d8/dbf/namespacevmec__input.html#a9a2d3f078e710d7acddcd4a97f5a269b',1,'vmec_input::input_extension'],['../db/dc0/namespacenestor__io.html#a64f6d9c6de908f9121aad36b31e374bb',1,'nestor_io::input_extension'],['../db/dae/namespaceread__wout__mod.html#abc599782b5f091e06d938b4d0c03f532',1,'read_wout_mod::input_extension']]],
   ['interp_15',['interp',['../dc/df5/interp_8f90.html#a5bac7725cb89730c4bd187e158dc36ee',1,'interp.f90']]],
   ['interp_2ef90_16',['interp.f90',['../dc/df5/interp_8f90.html',1,'']]],
-  ['ionlarmor_17',['ionlarmor',['../db/dae/namespaceread__wout__mod.html#afb5583245c7e16a5bc7bc5a92408680a',1,'read_wout_mod::ionlarmor'],['../db/d2d/namespacevmec__io.html#a1c21d56b5a656a08c546e68fc9a6fc5c',1,'vmec_io::ionlarmor']]],
+  ['ionlarmor_17',['ionlarmor',['../db/d2d/namespacevmec__io.html#a1c21d56b5a656a08c546e68fc9a6fc5c',1,'vmec_io::ionlarmor'],['../db/dae/namespaceread__wout__mod.html#afb5583245c7e16a5bc7bc5a92408680a',1,'read_wout_mod::ionlarmor']]],
   ['iotaf_18',['iotaf',['../d1/d6c/namespacevmec__main.html#a956201e36438e3e1c04b16942621023d',1,'vmec_main::iotaf'],['../db/dae/namespaceread__wout__mod.html#a6c7d434e13f51c5edace629a52898af0',1,'read_wout_mod::iotaf']]],
   ['iotas_19',['iotas',['../d1/d6c/namespacevmec__main.html#aeec11c572d79c8b9bdfae7abd05962e4',1,'vmec_main::iotas'],['../db/dae/namespaceread__wout__mod.html#ab325d61028b95ddbdce1e485621d6294',1,'read_wout_mod::iotas']]],
   ['ipnodes_20',['ipnodes',['../db/dae/namespaceread__wout__mod.html#a4f4bcd56df641153b1a63ebfd6ef888a',1,'read_wout_mod']]],

@@ -13,7 +13,7 @@ var searchData=
   ['set_5fnestor_5fsizes_10',['set_nestor_sizes',['../d2/d04/namespacevacmod0.html#a4be777018e003400355a27b190d7d39a',1,'vacmod0']]],
   ['shalf_11',['shalf',['../d7/d0e/namespacerealspace.html#a7d8443013667c86adb97cb957c8b5d35',1,'realspace']]],
   ['shear_12',['shear',['../db/dae/namespaceread__wout__mod.html#aad4b6157a5cd07bdb9370c8b15bce0ad',1,'read_wout_mod']]],
-  ['signgs_13',['signgs',['../db/dc0/namespacenestor__io.html#ad171095dd8c4753fa3e8c2990175056b',1,'nestor_io::signgs'],['../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027',1,'vmec_params::signgs']]],
+  ['signgs_13',['signgs',['../d1/d74/namespacevmec__params.html#a518e8dfd22eeab87812b7b4d24dd7027',1,'vmec_params::signgs'],['../db/dc0/namespacenestor__io.html#ad171095dd8c4753fa3e8c2990175056b',1,'nestor_io::signgs']]],
   ['sin01_14',['sin01',['../dd/d2f/namespacevmec__persistent.html#a2a2d5c44661e223755ba1a550ae166c5',1,'vmec_persistent']]],
   ['sinmu_15',['sinmu',['../dd/d2f/namespacevmec__persistent.html#a7acdde5979068e45a4809957f1484faa',1,'vmec_persistent']]],
   ['sinmui_16',['sinmui',['../dd/d2f/namespacevmec__persistent.html#a0e3080920c0ec3ec4b15b1a17e091ace',1,'vmec_persistent']]],

@@ -236,6 +236,11 @@ SUBROUTINE precal
 
   if (open_dbg_context("vac1n_precal", num_eqsolve_retries)) then
 
+    call add_real_2d("cosu1", nuv2, mf+1, cosu1)
+    call add_real_2d("sinu1", nuv2, mf+1, sinu1)
+    call add_real_2d("cosv1", nuv2, nf+1, cosv1)
+    call add_real_2d("sinv1", nuv2, nf+1, sinv1)
+
     call add_int("nvper", nvper)
     call add_int("nuv_tan", nuv_tan)
 

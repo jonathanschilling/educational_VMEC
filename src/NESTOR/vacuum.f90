@@ -125,7 +125,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
    ! NOTE: all fine up to here against NESTOR.py
 
    ! Determine scalar magnetic potential POTVAC
-   CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt)
+   CALL scalpot (potvac, amatrix, wint, ivac_skip, lasym, m_map_wrt, n_map_wrt, ivac)
 
    ! stand-alone for debugging: working on scalpot at the moment
    ! return

@@ -11,13 +11,13 @@
 !> @param n_map
 !> @param grpmn_m_map
 !> @param grpmn_n_map
-SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map)
+SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn_n_map, ivac)
   USE vacmod, vm_grpmn => grpmn
   use dbgout
   use vmec_main, only: num_eqsolve_retries
   IMPLICIT NONE
 
-  INTEGER, INTENT(in) :: ivacskip
+  INTEGER, INTENT(in) :: ivacskip, ivac
   REAL(rprec), INTENT(out) :: grpmn(nuv2*mnpd2)
   REAL(rprec), INTENT(out) :: bvec(mnpd2)
   real(rprec), intent(out) :: m_map(mnpd2)
@@ -70,16 +70,16 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   ! R0P(M): Coefficient of l*T(l-1)+(-) in eq (A17)
   ! RA1P(M):Coefficient of Tl+(-) in eq (A17)
 
-  adp  = guu_b  + guv_b  + gvv_b
-  adm  = guu_b  - guv_b  + gvv_b
-  cma  = gvv_b  - guu_b
-  sqrtc  = two*SQRT(gvv_b)
-  sqrta  = two*SQRT(guu_b)
-  sqad1u = SQRT(adp)
-  sqad2u = SQRT(adm)
+  adp  = guu_b  + guv_b  + gvv_b ! ok
+  adm  = guu_b  - guv_b  + gvv_b ! ok
+  cma  = gvv_b  - guu_b ! ok
+  sqrtc  = two*SQRT(gvv_b) ! ok
+  sqrta  = two*SQRT(guu_b) ! ok
+  sqad1u = SQRT(adp) ! ok
+  sqad2u = SQRT(adm) ! ok
 
   ! INITIALIZE VECTORS
-  bvec = 0
+  bvec = 0 ! ok
   IF (ivacskip .eq. 0) THEN
      grpmn = 0
 
@@ -100,20 +100,20 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   ! TLP(M): TL+(-)
   ! TLP(M)1:T(L-1)+(-)
   ! TLP(M)2:T(L-2)+(-)
-  tlp1 = 0
-  tlm1 = 0
-  tlp  = one/sqad1u*log((sqad1u*sqrtc + adp + cma)/(sqad1u*sqrta - adp + cma))
-  tlm  = one/sqad2u*log((sqad2u*sqrtc + adm + cma)/(sqad2u*sqrta - adm + cma))
-  tlpm = tlp  + tlm
+  tlp1 = 0 ! ok
+  tlm1 = 0 ! ok
+  tlp  = one/sqad1u*log((sqad1u*sqrtc + adp + cma)/(sqad1u*sqrta - adp + cma)) ! ok
+  tlm  = one/sqad2u*log((sqad2u*sqrtc + adm + cma)/(sqad2u*sqrta - adm + cma)) ! ok
+  tlpm = tlp  + tlm ! ok
 
   ! BEGIN L-SUM IN EQ (A14) TO COMPUTE Imn (and Kmn) INTEGRALS
   ! NOTE THAT IN THE LOOP OVER L BELOW: L == |m - n| + 2L_A14
   ! THUS, L BELOW IS THE INDEX OF THE T+- (S+-)
-  sign1 = 1
-  fl1 = 0
+  sign1 = 1 ! ok
+  fl1 = 0 ! ok
 
   LLOOP: DO l = 0, mf + nf
-     fl = fl1
+     fl = fl1 ! ok
 
      ! here, tlp/m are available for the current value of l
      ! --> save into matrix for debugging
@@ -133,6 +133,12 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
         all_slm(l,:) = slm
      ENDIF
 
+!      if (ivac .eq. 0) then
+!        ! print *, tlpm
+!        ! print *, tlp
+!        ! print *, tlm
+!      end if
+
      ! BEGIN MODE NUMBER (m,n) LOOP
      DO n = 0, nf
         DO m = 0, mf
@@ -151,17 +157,21 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
         END DO
      END DO
 
+!      if (ivac .eq. 0) then
+!        print *, bvec
+!      end if
+
      ! UPDATE "TL's" (FOR L -> L+1) USING EQ (A15)
-     tlp2 = tlp1
-     tlm2 = tlm1
-     tlp1 = tlp
-     tlm1 = tlm
+     tlp2 = tlp1 ! ok
+     tlm2 = tlm1 ! ok
+     tlp1 = tlp ! ok
+     tlm1 = tlm ! ok
 
      ! next l
-     fl1  = fl1 + 1
+     fl1  = fl1 + 1 ! ok
 
      ! (-1)**l (next l now)
-     sign1 = -sign1
+     sign1 = -sign1 ! ok
 
      tlp = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlp1 - fl*adm*tlp2)/(adp*fl1)
      tlm = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlm1 - fl*adp*tlm2)/(adm*fl1)

@@ -1,12 +1,12 @@
 <map id="vacuum" name="vacuum">
 <area shape="rect" id="Node000001" title="Compute the vacuum contribution to the free&#45;boundary energy functional." alt="" coords="5,432,73,458"/>
-<area shape="rect" id="Node000002" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="121,105,185,131"/>
+<area shape="rect" id="Node000002" href="$db/d3d/bextern_8f90.html#a90228cc5f358147ae7f59953d6f9cced" title="Compute the total magnetic field due to external coils and the net toroidal plasma current." alt="" coords="121,105,184,131"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,431,140,145,145,147,47,432"/>
 <area shape="rect" id="Node000005" href="$d8/dfd/namespacedbgout.html#acdd1612a38e44b6469dc03d9d1c6ceed" title="check if any output is desired for the current iteration check if the given context should be openend..." alt="" coords="338,331,510,356"/>
 <area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="73,445,126,446,185,442,242,429,298,408,388,362,390,367,300,413,244,434,185,447,126,452,73,450"/>
 <area shape="rect" id="Node000006" href="$dd/d98/precal_8f90.html#a0dae73e848a4757092d7e9786d073d3d" title="Pre&#45;compute constant terms required for NESTOR." alt="" coords="125,508,181,534"/>
 <area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="61,456,121,497,118,501,58,460"/>
-<area shape="rect" id="Node000007" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="121,280,185,306"/>
+<area shape="rect" id="Node000007" href="$d0/d19/scalpot_8f90.html#afb9e58849c5a27e486bdf4106f8bb84e" title="Compute all required terms for solving for the scalar magnetic potential." alt="" coords="121,280,184,306"/>
 <area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="48,430,131,317,135,320,52,433"/>
 <area shape="rect" id="Node000014" href="$d7/d39/solver_8f90.html#a1e815013ed24a9dddc80410103f4a220" title="Solve a linear system of equations using dgesv." alt="" coords="125,557,181,583"/>
 <area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="51,457,81,497,123,544,124,545,120,549,119,548,77,501,47,460"/>
@@ -22,9 +22,9 @@
 <area shape="poly" id="edge19_Node000007_Node000005" title=" " alt="" coords="185,296,337,325,336,330,184,301"/>
 <area shape="rect" id="Node000008" href="$da/d73/analyt_8f90.html#a60edcf4884aa60f6d96c258a97255756" title="Compute the analytical&#45;and&#45;numerical 4D Fourier integrals over the equivalently&#45;singular functions." alt="" coords="234,104,289,130"/>
 <area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="160,278,242,142,247,145,164,281"/>
-<area shape="rect" id="Node000011" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="239,356,285,382"/>
+<area shape="rect" id="Node000011" href="$d6/d77/fouri_8f90.html#a0f902f8d584a395f9db7175079d273c7" title="Compute Fourier integrals and build amatrix." alt="" coords="238,356,285,382"/>
 <area shape="poly" id="edge14_Node000007_Node000011" title=" " alt="" coords="174,304,231,344,228,349,171,308"/>
-<area shape="rect" id="Node000012" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="237,205,287,231"/>
+<area shape="rect" id="Node000012" href="$d0/d1c/fourp_8f90.html#add725dd420251115fd60182dc992503c" title="Perform Fourier integrals of Green&#39;s function kernel." alt="" coords="236,205,287,231"/>
 <area shape="poly" id="edge16_Node000007_Node000012" title=" " alt="" coords="172,277,227,238,230,242,175,282"/>
 <area shape="rect" id="Node000013" href="$df/d2d/greenf_8f90.html#acd9d25905cc799c9fcd4d08a3cbb1e65" title="Compute the regularized evaluation of the Green&#39;s function and the source term." alt="" coords="233,255,290,280"/>
 <area shape="poly" id="edge18_Node000007_Node000013" title=" " alt="" coords="184,283,217,275,218,280,185,288"/>

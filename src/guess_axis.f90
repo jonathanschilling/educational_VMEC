@@ -184,6 +184,10 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
   ! debugging output from guess_axis
   if (open_dbg_context("guess_axis")) then
 
+    ! axis geometry on entry into this routine
+    call add_real_1d("raxis_in" , ivmax, r1(1,1:ivmax,1,0) )
+    call add_real_1d("zaxis_in" , ivmax, z1(1,1:ivmax,1,0) )
+
     call add_real_2d("r1b" , ivmax, ntheta1, r1b(1:ivmax,:) )
     call add_real_2d("z1b" , ivmax, ntheta1, z1b(1:ivmax,:) )
     call add_real_2d("rub" , ivmax, ntheta1, rub(1:ivmax,:) )

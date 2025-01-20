@@ -55,18 +55,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/d59/vmec__input_8f90.html#aed2709bd6d5a68d069df2d2250094fb8",
-"d2/d01/mgrid__mod_8f.html#a959b0397700f704c8699fe3072aeec80",
-"d4/dce/vacmod_8f90.html#af18bca5b4da4765e1d137bfd66343b8d",
-"d8/d68/vparams_8f90.html#a0814be0e76cd3c188c7ace652f3ed034",
-"da/dc8/profile__functions_8f_source.html",
-"db/dae/namespaceread__wout__mod.html#a010724424b70cdcb21adde373c778a7f",
-"db/dae/namespaceread__wout__mod.html#a9afdbef2dc277e5ea00bcdace6daaca7",
-"db/dc0/namespacenestor__io.html#aa747ca7ea242dec32405cdba51a9b7c8",
-"dd/df2/namespacevacmod.html#aad650964b1edc2a1ee7cc7e29eb2b8f0",
-"df/d61/read__wout__mod_8f.html#a1bb09916f554136bf570ece4ab9ac430",
-"df/d61/read__wout__mod_8f.html#ab38119a3573ba9f5cd6400e843233b11"
+"d1/d6c/namespacevmec__main.html#afa27ff9660af5f8390fed850ffe7242e",
+"d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8",
+"da/d25/dbgout_8f90.html",
+"db/dae/namespaceread__wout__mod.html#a75476f248b02035b923f64db00971830",
+"db/dc0/namespacenestor__io.html#a34710c925fa8116bda499b387d7cb489",
+"dd/df2/namespacevacmod.html#a91e8c6cbe9be1fe2d354cd80e0c630b2"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';

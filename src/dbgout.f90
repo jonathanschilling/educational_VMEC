@@ -204,7 +204,6 @@ function open_dbg_context(context_name, repetition, id)
   else if (trim(context_name) .eq. "vac2_bsqvac") then
     open_dbg_context         = dump_vac2_bsqvac
 
-
   ! default
   else
     write(*,*) "unknown debug output context: '",trim(context_name),"'"
@@ -252,6 +251,7 @@ function open_dbg_context(context_name, repetition, id)
       if (skip_dbgout_collison) then
         ! Temporary hack to skip overwriting a file
         ! without halting the algorithm.
+        open_dbg_context = .false.
         return
       end if
       stop "debug output file already exists: '"//trim(dump_filename)//"'"

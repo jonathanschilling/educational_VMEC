@@ -43,10 +43,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
     vn_presf, vn_phi, vn_phipf, vn_jcuru, vn_jcurv, vn_iotah,       &
     vn_chi, vn_chipf,                                               &
     vn_mass, vn_presh, vn_betah, vn_buco, vn_bvco, vn_vp, vn_specw, &
-    vn_phip, vn_jdotb, vn_overr, vn_bgrv, vn_merc, vn_mshear,       &
-    vn_mwell, vn_mcurr, vn_mgeo, vn_equif, vn_fsq, vn_wdot,         &
-    vn_extcur, vn_curlab, vn_rmnc, vn_zmns, vn_lmns, vn_gmnc,       &
-    vn_bmnc, vn_bsubumnc, vn_bsubvmnc, vn_bsubsmns,                 &
+    vn_phip, vn_jdotb, vn_bdotb, vn_overr, vn_bgrv, vn_merc,        &
+    vn_mshear, vn_mwell, vn_mcurr, vn_mgeo, vn_equif, vn_fsq,       &
+    vn_wdot, vn_extcur, vn_curlab, vn_rmnc, vn_zmns, vn_lmns,       &
+    vn_gmnc, vn_bmnc, vn_bsubumnc, vn_bsubvmnc, vn_bsubsmns,        &
     vn_bsupumnc, vn_bsupvmnc, vn_rmns, vn_zmnc, vn_lmnc, vn_gmns,   &
     vn_bmns, vn_bsubumns, vn_bsubvmns, vn_bsubsmnc, vn_bsupumns,    &
     vn_bsupvmns, vn_rbc, vn_zbs, vn_rbs, vn_zbc, vn_potvac,         &
@@ -64,10 +64,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
     ln_ai_aux_s, ln_ai_aux_f, ln_chi, ln_chipf,                     &
     ln_presf, ln_phi, ln_phipf, ln_jcuru, ln_jcurv, ln_iotah,       &
     ln_mass, ln_presh, ln_betah, ln_buco, ln_bvco, ln_vp, ln_specw, &
-    ln_vol, ln_phip, ln_jdotb, ln_bgrv, ln_merc, ln_mshear,         &
-    ln_mwell, ln_mcurr, ln_mgeo, ln_equif, ln_fsq, ln_wdot,         &
-    ln_extcur, ln_curlab, ln_rmnc, ln_zmns, ln_lmns, ln_gmnc,       &
-    ln_bmnc, ln_bsubumnc, ln_bsubvmnc, ln_bsubsmns,                 &
+    ln_vol, ln_phip, ln_jdotb, ln_bdotb, ln_bgrv, ln_merc,          &
+    ln_mshear, ln_mwell, ln_mcurr, ln_mgeo, ln_equif, ln_fsq,       &
+    ln_wdot, ln_extcur, ln_curlab, ln_rmnc, ln_zmns, ln_lmns,       &
+    ln_gmnc, ln_bmnc, ln_bsubumnc, ln_bsubvmnc, ln_bsubsmns,        &
     ln_bsupumnc, ln_bsupvmnc, ln_rmns, ln_zmnc, ln_lmnc, ln_gmns,   &
     ln_bmns, ln_bsubumns, ln_bsubvmns, ln_bsubsmnc, ln_bsupumns,    &
     ln_bsupvmns, ln_rbc, ln_zbs, ln_rbs, ln_zbc, ln_potvac
@@ -304,6 +304,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_overr, overr(1:ns), dimname=r1dim)
 
   CALL cdf_define(nwout, vn_jdotb, jdotb, dimname=r1dim)
+  CALL cdf_define(nwout, vn_bdotb, bdotb, dimname=r1dim)
   CALL cdf_define(nwout, vn_bgrv, bdotgradv, dimname=r1dim)
 
   CALL cdf_define(nwout, vn_merc,   Dmerc,  dimname=r1dim)
@@ -699,6 +700,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_write(nwout, vn_jcuru, jcuru/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_jcurv, jcurv/mu0) ! NOTE: scaling !!!
   CALL cdf_write(nwout, vn_jdotb, jdotb)
+  CALL cdf_write(nwout, vn_bdotb, bdotb)
   CALL cdf_write(nwout, vn_bgrv, bdotgradv)
 
   ! HALF-MESH quantities

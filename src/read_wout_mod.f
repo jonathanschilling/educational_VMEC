@@ -63,7 +63,7 @@ C-----------------------------------------------
      T  vn_mass = 'mass', vn_presh = 'pres', vn_betah = 'beta_vol',
      U  vn_buco = 'buco', vn_bvco = 'bvco', vn_vp = 'vp',
      V  vn_specw = 'specw', vn_phip = 'phips', vn_jdotb = 'jdotb',
-     W  vn_overr = 'over_r',
+     W  vn_bdotb = 'bdotb', vn_overr = 'over_r',
      X  vn_bgrv = 'bdotgradv', vn_merc = 'DMerc', vn_mshear = 'DShear',
      Y  vn_mwell = 'DWell', vn_mcurr = 'DCurr', vn_mgeo = 'DGeod',
      Z  vn_equif = 'equif', vn_fsq = 'fsqt', vn_wdot = 'wdot',
@@ -146,7 +146,8 @@ C-----------------------------------------------
      4  ln_bvco = 'bsubv half', ln_vp = 'volume deriv half',
      5  ln_specw = 'Spectral width half',
      6  ln_phip = 'tor flux deriv over 2pi half',
-     7  ln_jdotb = 'J dot B', ln_bgrv = 'B dot grad v',
+     7  ln_jdotb = 'J dot B', ln_bdotb = 'B dot B',
+     7  ln_bgrv = 'B dot grad v',
      8  ln_merc = 'Mercier criterion', ln_mshear = 'Shear Mercier',
      9  ln_mwell = 'Well Mercier', ln_mcurr = 'Current Mercier',
      1  ln_mgeo = 'Geodesic Mercier', ln_equif='Average force balance',
@@ -220,7 +221,7 @@ C-----------------------------------------------
      1   iotas, iotaf, presf, phipf, mass, pres, beta_vol, xm, xn,
      1   qfact, chipf, phi, chi,
      2   xm_nyq, xn_nyq, phip, buco, bvco, vp, overr, jcuru, jcurv,
-     3   specw, jdotb, bdotgradv, fsqt, wdot, am, ac, ai,
+     3   specw, jdotb, bdotb, bdotgradv, fsqt, wdot, am, ac, ai,
      3   am_aux_s, am_aux_f, ac_aux_s, ac_aux_f, ai_aux_s, ai_aux_f,
      3   Dmerc, Dshear, Dwell, Dcurr, Dgeod, equif, extcur,
      4   sknots, ystark, y2stark, pknots, ythom, y2thom,
@@ -462,6 +463,8 @@ C-----------------------------------------------
 
       CALL cdf_inquire(nwout, vn_jdotb, dimlens)
       ALLOCATE (jdotb(dimlens(1)), stat = ierror)
+      CALL cdf_inquire(nwout, vn_bdotb, dimlens)
+      ALLOCATE (bdotb(dimlens(1)), stat = ierror)
       CALL cdf_inquire(nwout, vn_bgrv, dimlens)
       ALLOCATE (bdotgradv(dimlens(1)), stat = ierror)
 
@@ -634,6 +637,7 @@ C-----------------------------------------------
       CALL cdf_read(nwout, vn_specw, specw)
       CALL cdf_read(nwout, vn_phip, phip)
       CALL cdf_read(nwout, vn_jdotb, jdotb)
+      CALL cdf_read(nwout, vn_bdotb, bdotb)
       CALL cdf_read(nwout, vn_bgrv, bdotgradv)
 
 !     MERCIER_CRITERION
@@ -798,7 +802,7 @@ C-----------------------------------------------
      2  bsubvmnc, bsubsmns, bsupumnc, bsupvmnc, currvmnc, iotas, mass,
      3  pres, beta_vol, phip, buco, bvco, phi, vp, jcuru, am, ac, ai,
      4  jcurv, specw, Dmerc, Dshear, Dwell, Dcurr, Dgeod, equif, jdotb,
-     5  bdotgradv, raxis, zaxis, fsqt, wdot, stat = istat(3))
+     5  bdotb, bdotgradv, raxis, zaxis, fsqt, wdot, stat = istat(3))
 
       IF (ALLOCATED(chipf)) DEALLOCATE (chipf, chi)
 

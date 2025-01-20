@@ -180,7 +180,8 @@ SUBROUTINE eqsolve(ier_flag)
         CALL restart_iter(delt0r)
         iter1 = iter2
 
-        ! This breaks the dbgout logic, in that the same iter2 and num_eqsolve_retries combination is touched twice.
+        ! This breaks the dbgout logic, in that the same iter2
+        ! and num_eqsolve_retries combination is touched twice.
         ! Hence, allow ONCE to overwrite the output file.
         skip_dbgout_collison = .true.
      ELSE

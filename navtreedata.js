@@ -58,10 +58,11 @@ var NAVTREEINDEX =
 "d1/d6c/namespacevmec__main.html#afa27ff9660af5f8390fed850ffe7242e",
 "d7/d61/bcovar_8f90.html#a1e1624195f0c0c7daa9f49d83bae5ce8",
 "da/d25/dbgout_8f90.html",
-"db/dae/namespaceread__wout__mod.html#a75476f248b02035b923f64db00971830",
-"db/dc0/namespacenestor__io.html#a34710c925fa8116bda499b387d7cb489",
-"dd/df2/namespacevacmod.html#a91e8c6cbe9be1fe2d354cd80e0c630b2"
+"db/dae/namespaceread__wout__mod.html#a74ec39cbf7e9b4cfc012ad92b2b3b2a6",
+"db/dc0/namespacenestor__io.html#a233cf20e2b43103446e6b9c9e41092c9",
+"dd/df2/namespacevacmod.html#a8ca6b2ddf9854cbd2de1d2e7d1dd4748"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
 var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

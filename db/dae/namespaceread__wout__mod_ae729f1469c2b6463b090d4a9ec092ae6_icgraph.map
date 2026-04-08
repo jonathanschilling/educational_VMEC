@@ -1,0 +1,13 @@
+<map id="read_wout_mod::compute_currents" name="read_wout_mod::compute_currents">
+<area shape="rect" id="Node000001" title=" " alt="" coords="549,35,718,75"/>
+<area shape="rect" id="Node000002" href="$d7/d93/interfaceread__wout__mod_1_1read__wout__file.html#a3bd75e8e4d1250d3bbb61e266bbd4a62" title=" " alt="" coords="317,5,501,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="533,45,501,40,502,35,534,39"/>
+<area shape="rect" id="Node000003" href="$de/d3f/wrout_8f90.html#acfcf1bded82176b6a4a4a4ca430d75a9" title="Write the output files of VMEC." alt="" coords="382,70,436,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="533,70,436,82,436,77,533,65"/>
+<area shape="rect" id="Node000004" href="$d0/d71/fileout_8f90.html#a7228e984aaf2c38bd772e3d846fab7af" title="Write the output files." alt="" coords="214,70,269,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="367,86,270,86,270,80,367,80"/>
+<area shape="rect" id="Node000005" href="$db/d61/vmec_8f90.html#a6d38ab7be2f9d818da4541e1d352ea23" title="Main driver for VMEC." alt="" coords="113,70,166,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="198,86,166,86,166,80,198,80"/>
+<area shape="rect" id="Node000006" href="$db/d61/vmec_8f90.html#ace5bdf043bb85c8f0a9fc582bdb55725" title="Main program of VMEC." alt="" coords="5,70,65,96"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="97,86,65,86,65,80,97,80"/>
+</map>

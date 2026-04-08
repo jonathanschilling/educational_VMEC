@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['educational_20vmec_0',['Educational VMEC',['../index.html',1,'']]]
+  ['angle_20constraint_0',['Angle Constraint',['../index.html#autotoc_md5',1,'']]]
 ];

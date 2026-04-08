@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="Symmetrize some quantities so that they can be output (?)">
+<g id="a_Node000001"><a xlink:title="Symmetrize some quantities so that they can be output (?).">
 <polygon fill="#999999" stroke="#666666" points="371,-19.25 310,-19.25 310,0 371,0 371,-19.25"/>
 <text text-anchor="middle" x="340.5" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">symoutput</text>
 </a>

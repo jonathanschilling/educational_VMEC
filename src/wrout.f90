@@ -50,6 +50,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
     vn_bsupumnc, vn_bsupvmnc, vn_rmns, vn_zmnc, vn_lmnc, vn_gmns,   &
     vn_bmns, vn_bsubumns, vn_bsubvmns, vn_bsubsmnc, vn_bsupumns,    &
     vn_bsupvmns, vn_rbc, vn_zbs, vn_rbs, vn_zbc, vn_potvac,         &
+    vn_currumnc, vn_currvmnc, vn_currumns, vn_currvmns,             &
+    Compute_Currents,                                               &
     ln_version, ln_extension, ln_mgrid,                             &
     ln_magen, ln_therm, ln_gam, ln_maxr, ln_minr, ln_maxz, ln_fp,   &
     ln_radnod, ln_polmod, ln_tormod, ln_maxmod, ln_maxit,           &
@@ -70,7 +72,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
     ln_gmnc, ln_bmnc, ln_bsubumnc, ln_bsubvmnc, ln_bsubsmns,        &
     ln_bsupumnc, ln_bsupvmnc, ln_rmns, ln_zmnc, ln_lmnc, ln_gmns,   &
     ln_bmns, ln_bsubumns, ln_bsubvmns, ln_bsubsmnc, ln_bsupumns,    &
-    ln_bsupvmns, ln_rbc, ln_zbs, ln_rbs, ln_zbc, ln_potvac
+    ln_bsupvmns, ln_rbc, ln_zbs, ln_rbs, ln_zbc, ln_potvac,         &
+    ln_currumnc, ln_currvmnc, ln_currumns, ln_currvmns
 
   USE safe_open_mod
   USE mgrid_mod
@@ -102,7 +105,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
                  ftolx1
   REAL(rprec), POINTER, DIMENSION(:,:) :: rmnc, rmns, zmns, zmnc, lmns, lmnc
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: gmnc, bmnc, gmns, bmns, &
-    bsubumnc, bsubvmnc, bsubsmns, bsubumns, bsubvmns, bsubsmnc
+    bsubumnc, bsubvmnc, bsubsmns, bsubumns, bsubvmns, bsubsmnc,     &
+    currumnc, currvmnc, currumns, currvmns
   REAL(rprec), DIMENSION(mnmax) :: rmnc1, zmns1, lmns1,             &
      rmns1, zmnc1, lmnc1, bmodmn, bmodmn1
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: gmn, bmn,               &
@@ -112,6 +116,8 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
 
   ! ELIMINATE THESE EVENTUALLY
   REAL(rprec), ALLOCATABLE, DIMENSION(:,:) :: bsupumnc, bsupumns, bsupvmnc, bsupvmns
+
+  INTEGER :: ierr_curr
 
 
   ! THIS SUBROUTINE CREATES THE FILE WOUT.
@@ -140,12 +146,16 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ALLOCATE (gmnc(mnmax_nyq,ns), bmnc(mnmax_nyq,ns),               &
             bsubumnc(mnmax_nyq,ns), bsubvmnc(mnmax_nyq,ns),       &
             bsubsmns(mnmax_nyq,ns), bsupumnc(mnmax_nyq,ns),       &
-            bsupvmnc(mnmax_nyq,ns), stat=istat)
+            bsupvmnc(mnmax_nyq,ns),                               &
+            currumnc(mnmax_nyq,ns), currvmnc(mnmax_nyq,ns),       &
+            stat=istat)
   IF (lasym) THEN
     ALLOCATE (gmns(mnmax_nyq,ns), bmns(mnmax_nyq,ns),             &
               bsubumns(mnmax_nyq,ns), bsubvmns(mnmax_nyq,ns),     &
               bsubsmnc(mnmax_nyq,ns), bsupumns(mnmax_nyq,ns),     &
-              bsupvmns(mnmax_nyq,ns), stat=istat)
+              bsupvmns(mnmax_nyq,ns),                             &
+              currumns(mnmax_nyq,ns), currvmns(mnmax_nyq,ns),     &
+              stat=istat)
   END IF
   IF (istat .ne. 0) STOP 'Error allocating arrays in VMEC WROUT'
 
@@ -342,6 +352,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   CALL cdf_define(nwout, vn_bsupumnc, bsupumnc, dimname=r3dim)
   CALL cdf_define(nwout, vn_bsupvmnc, bsupvmnc, dimname=r3dim)
 
+  CALL cdf_define(nwout, vn_currumnc, currumnc, dimname=r3dim)
+  CALL cdf_setatt(nwout, vn_currumnc, ln_currumnc)
+  CALL cdf_define(nwout, vn_currvmnc, currvmnc, dimname=r3dim)
+  CALL cdf_setatt(nwout, vn_currvmnc, ln_currvmnc)
+
   IF (lasym) then
      CALL cdf_define(nwout, vn_rmns, rmns, dimname=r2dim)
      CALL cdf_setatt(nwout, vn_rmns, ln_rmns, units='m')
@@ -363,6 +378,11 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      ! ELIMINATE THESE EVENTUALLY: DON'T NEED THEM
      CALL cdf_define(nwout, vn_bsupumns, bsupumns, dimname=r3dim)
      CALL cdf_define(nwout, vn_bsupvmns, bsupvmns, dimname=r3dim)
+
+     CALL cdf_define(nwout, vn_currumns, currumns, dimname=r3dim)
+     CALL cdf_setatt(nwout, vn_currumns, ln_currumns)
+     CALL cdf_define(nwout, vn_currvmns, currvmns, dimname=r3dim)
+     CALL cdf_setatt(nwout, vn_currvmns, ln_currvmns)
   end if
 
   !================================
@@ -651,6 +671,22 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      bsupvmns(:,1) = 0
   end if
 
+  ! Compute current density Fourier coefficients from covariant B components.
+  ! Reuses Compute_Currents from read_wout_mod, following PARVMEC wrout.f.
+  ! Allocate dummy asymmetric arrays when lasym=.false. since
+  ! Compute_Currents requires all arguments to be present.
+  IF (.NOT. lasym) THEN
+     ALLOCATE (bsubsmnc(mnmax_nyq,ns), bsubumns(mnmax_nyq,ns),        &
+               bsubvmns(mnmax_nyq,ns),                                 &
+               currumns(mnmax_nyq,ns), currvmns(mnmax_nyq,ns),         &
+               stat=istat)
+     bsubsmnc = 0;  bsubumns = 0;  bsubvmns = 0
+  END IF
+  CALL Compute_Currents(bsubsmnc, bsubsmns, bsubumnc, bsubumns,       &
+                        bsubvmnc, bsubvmns,                            &
+                        xm_nyq, xn_nyq, mnmax_nyq, lasym, ns,         &
+                        currumnc, currvmnc, currumns, currvmns)
+
   ! WRITE OUT ARRAYS
   CALL cdf_write(nwout, vn_racc, raxis_cc(0:ntor))
   CALL cdf_write(nwout, vn_zacs, zaxis_cs(0:ntor))
@@ -666,6 +702,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ! GET RID OF THESE EVENTUALLY: DON'T NEED THEM (can express in terms of lambdas)
   CALL cdf_write(nwout, vn_bsupumnc, bsupumnc)
   CALL cdf_write(nwout, vn_bsupvmnc, bsupvmnc)
+
+  CALL cdf_write(nwout, vn_currumnc, currumnc)      !Full mesh
+  CALL cdf_write(nwout, vn_currvmnc, currvmnc)      !Full mesh
 
   ! FULL-MESH quantities
   ! NOTE: jdotb is in units_of_A (1/mu0 incorporated in jxbforce...)
@@ -753,6 +792,9 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
      ! GET RID OF THESE EVENTUALLY: DON'T NEED THEM
      CALL cdf_write(nwout, vn_bsupumns, bsupumns)
      CALL cdf_write(nwout, vn_bsupvmns, bsupvmns)
+
+     CALL cdf_write(nwout, vn_currumns, currumns)      !Full mesh
+     CALL cdf_write(nwout, vn_currvmns, currvmns)      !Full mesh
   END IF
 
   CALL cdf_close(nwout)
@@ -764,8 +806,10 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   ! DEALLOCATIONS
   IF (ALLOCATED(gmnc)) DEALLOCATE(gmnc, bmnc, bsubumnc, bsubvmnc, &
                                   bsubsmns, bsupumnc, bsupvmnc )
-  IF (ALLOCATED(gmns)) DEALLOCATE(gmns, bmns, bsubumns, bsubvmns, &
-                                  bsubsmnc, bsupumns, bsupvmns )
+  IF (ALLOCATED(gmns)) DEALLOCATE(gmns, bmns, bsupumns, bsupvmns)
+  IF (ALLOCATED(bsubumns)) DEALLOCATE(bsubumns, bsubvmns, bsubsmnc)
+  IF (ALLOCATED(currumnc)) DEALLOCATE(currumnc, currvmnc)
+  IF (ALLOCATED(currumns)) DEALLOCATE(currumns, currvmns)
   IF (ALLOCATED(gmn))  DEALLOCATE (gmn, bmn, bsubumn, bsubvmn, &
                                    bsubsmn, bsupumn, bsupvmn, stat=istat)
 

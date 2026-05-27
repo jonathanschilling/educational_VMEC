@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a></p>
+<p><a href="https://github.com/jonathanschilling/educational_VMEC/actions/workflows/build.yml"><img src="https://github.com/jonathanschilling/educational_VMEC/actions/workflows/build.yml/badge.svg?branch=master" alt="Build and test" style="pointer-events: none;" class="inline"/></a></p>
 <p>This is a heavily stripped-down version of the serial implementation of VMEC 8.52. It is forked from the <span class="tt">v251</span> branch of the <a href="https://github.com/PrincetonUniversity/STELLOPT">STELLOPT</a> repository.</p>
 <p>The goal of this project is to have a version of VMEC which only computes the Stellarator MHD equilibrium and nothing more.</p>
 <p>The <span class="tt">cmake</span> build system for stand-alone VMEC is borrowed from <a href="https://github.com/hiddenSymmetries/VMEC2000">hiddenSymmetries/VMEC2000</a> and from <a href="https://github.com/ORNL-Fusion/LIBSTELL">ORNL-Fusion/LIBSTELL</a>.</p>
@@ -153,11 +154,6 @@ Building</h1>
 <p>Required packages on Debian stable are: <span class="tt">cmake</span>, <span class="tt">gfortran</span>, <span class="tt">libnetcdff-dev</span>, <span class="tt">libblas-dev</span>, <span class="tt">liblapack-dev</span>, <span class="tt">libfftw3-dev</span></p>
 <p>You need to download this repository and the included <span class="tt">json-fortran</span>. The easiest way to do this is via a recursive <span class="tt">git clone</span>:</p>
 <div class="fragment"><div class="line">&gt; git clone --recursive https://github.com/jonathanschilling/educational_VMEC.git</div>
-</div><!-- fragment --><p>Ignore warnings about missing access to <span class="tt">src/vac2</span> and <span class="tt">src/vac3</span>. After cloning, the <span class="tt">json-fortran</span> directory is somewhat messed up and you need to fix that:</p>
-<div class="fragment"><div class="line">&gt; cd educational_VMEC/json-fortran</div>
-<div class="line">&gt; git restore --staged .</div>
-<div class="line">&gt; git checkout .</div>
-<div class="line">&gt; cd ..</div>
 </div><!-- fragment --><p>This is a fairly standard CMake setup, if you are used to it. Here is how it works:</p><ul>
 <li>Create a directory <span class="tt">build</span> in the main folder: <span class="tt">mkdir build</span></li>
 <li>Go into the <span class="tt">build</span> directory: <span class="tt">cd build</span></li>

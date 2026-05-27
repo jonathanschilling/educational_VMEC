@@ -53,10 +53,6 @@ add_subdirectory(src)
 add_subdirectory(json-fortran)
 add_subdirectory(abscab-fortran)
 
-# if you have access to the vac2 and vac3 versions of NESTOR (contact me), they are included here
-#add_subdirectory(src/vac2)
-#add_subdirectory(src/vac3)
-
 add_library (vmec STATIC ${vmec_sources})
 set_target_properties (vmec PROPERTIES Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)
 target_include_directories(vmec PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY}/vmec)

@@ -1,5 +1,7 @@
 ## Educational VMEC
 
+[![Build and test](https://github.com/jonathanschilling/educational_VMEC/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/jonathanschilling/educational_VMEC/actions/workflows/build.yml)
+
 This is a heavily stripped-down version of the serial implementation of VMEC 8.52.
 It is forked from the `v251` branch of the [STELLOPT](https://github.com/PrincetonUniversity/STELLOPT) repository.
 
@@ -19,16 +21,6 @@ The easiest way to do this is via a recursive `git clone`:
 
 ```bash
 > git clone --recursive https://github.com/jonathanschilling/educational_VMEC.git
-```
-
-Ignore warnings about missing access to `src/vac2` and `src/vac3`.
-After cloning, the `json-fortran` directory is somewhat messed up and you need to fix that:
-
-```bash
-> cd educational_VMEC/json-fortran
-> git restore --staged .
-> git checkout .
-> cd ..
 ```
 
 This is a fairly standard CMake setup, if you are used to it.

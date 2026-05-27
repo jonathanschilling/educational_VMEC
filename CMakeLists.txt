@@ -84,3 +84,7 @@ target_link_libraries (xvmec vmec)
 add_executable (xnestor ${CMAKE_CURRENT_SOURCE_DIR}/src/NESTOR/nestor_main.f90)
 target_link_libraries (xnestor vmec)
 
+### unit tests
+enable_testing ()
+add_subdirectory (test/unit)
+

@@ -50,18 +50,20 @@
      >               dxloc(-1:iv+1)
 !    >               (xloc(0:iv+2)-xloc(-1:iv+1))
 ! values for i=0, -1 and iv, iv+1 by quadratic extrapolation:
+! the right edge mirrors the left: use the right-edge curvature cr (not cl)
+! for the upper phantom points, so the interpolant is orientation-independent.
       cl = (m(2)-m(1))/(xloc(3)-xloc(1))
       bl = m(1) - cl*(xloc(2)-xloc(1))
-      cr = (m(iv-2)-m(iv-1))/(xloc(iv)-xloc(iv-2))
-      br = m(iv-2) - cr*(xloc(iv-1)-xloc(iv-2))
+      cr = (m(iv-1)-m(iv-2))/(xloc(iv)-xloc(iv-2))
+      br = m(iv-1) - cr*(xloc(iv-1)-xloc(iv))
       yloc( 0)=yloc(1)+bl*(xloc( 0)-xloc(1))+
      >               cl*(xloc( 0)-xloc(1))**2
       yloc(-1)=yloc(1)+bl*(xloc(-1)-xloc(1))+
      >               cl*(xloc(-1)-xloc(1))**2
       yloc(iv+1)=yloc(iv)+br*(xloc(iv+1)-xloc(iv))+
-     >               cl*(xloc(iv+1)-xloc(iv))**2
+     >               cr*(xloc(iv+1)-xloc(iv))**2
       yloc(iv+2)=yloc(iv)+br*(xloc(iv+2)-xloc(iv))+
-     >               cl*(xloc(iv+2)-xloc(iv))**2
+     >               cr*(xloc(iv+2)-xloc(iv))**2
 ! rest of linear derivatives
       m(-1) = (yloc(0)-yloc(-1))/(xloc(0)-xloc(-1))
       m( 0) = (yloc(1)-yloc( 0))/(xloc(1)-xloc( 0))

@@ -74,7 +74,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
     IF (rcs .gt. 0) THEN
       rmaga => rzl_array(1,:,0,rcs)
     ELSE
-      ! ntor = 0: there is no cos(mu)sin(nv) basis type, so rcs == 0 would point outside rzl_array
+      ! ntor = 0: the cos(mu)sin(nv) basis type does not exist (rcs == 0)
       ALLOCATE(axis_zero(ntor+1))
       axis_zero = 0
       rmaga => axis_zero

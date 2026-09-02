@@ -62,6 +62,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      zmax, zmin, yr1u, yz1u, waist(2), height(2)
   REAL(rprec) d_of_kappa, loc_jpar_perp, loc_jparPs_perp
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: rax_symm, zax_symm, rax_asym, zax_asym
+  REAL(rprec), DIMENSION(:), ALLOCATABLE, TARGET :: axis_zero
 
 
   ! POINTER ASSOCIATIONS
@@ -70,7 +71,14 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   rmncc => rzl_array(:,:,:,rcc)
   zmnsc => rzl_array(:,:,:,zsc+ntmax)
   IF (lasym) THEN
-    rmaga => rzl_array(1,:,0,rcs)
+    IF (rcs .gt. 0) THEN
+      rmaga => rzl_array(1,:,0,rcs)
+    ELSE
+      ! ntor = 0: there is no cos(mu)sin(nv) basis type, so rcs == 0 would point outside rzl_array
+      ALLOCATE(axis_zero(ntor+1))
+      axis_zero = 0
+      rmaga => axis_zero
+    END IF
     zmaga => rzl_array(1,:,0,zcc+ntmax)
   END IF
 

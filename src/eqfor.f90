@@ -390,7 +390,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
   DO js = 2, ns
      modb(:nznt) = SQRT(c2p0*(bsq(js:nrzt:ns) - pres(js)))
-     CALL bextrema (modb, bmin(1,js), bmax(1,js), nzeta, ntheta2)
+     ! one poloidal line per stored theta point: ntheta2 for stellarator symmetry, ntheta1 for lasym
+     CALL bextrema (modb, bmin(1,js), bmax(1,js), nzeta, ntheta3)
   END DO
 
   WRITE (nthreed, 75) bmin(1,ns), bmax(1,ns), bmin(ntheta2,ns), bmax(ntheta2,ns)

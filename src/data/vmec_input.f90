@@ -359,6 +359,9 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   am_aux_s(:) = -1
   ac_aux_s(:) = -1
   ai_aux_s(:) = -1
+  am_aux_f(:) = 0
+  ac_aux_f(:) = 0
+  ai_aux_f(:) = 0
 
   ! by default, dump first two iterations
   iter2_to_dump(:) = 0

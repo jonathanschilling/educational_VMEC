@@ -177,6 +177,9 @@ subroutine allocate_nestor
             raxis_nestor(nv), zaxis_nestor(nv), stat=istat1)
   IF (istat1.ne.0) STOP 'allocation error #3 in allocate_nestor'
 
+  ! The solver fills the first mnpd2 entries only; the whole array is written to the wout file.
+  potvac = 0
+
   allocate(m_map_wrt(mnpd2), n_map_wrt(mnpd2), stat=istat1)
   if (istat1 .ne. 0) then
      stop 'could not allocate m_map, n_map'

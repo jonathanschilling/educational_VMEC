@@ -38,6 +38,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   INTEGER :: i, icount, itheta, js, l, loff,                       &
      lpi, lt, n, n1, noff,                          &
      iv, iu, lk, nplanes
+  INTEGER :: npass, nscan
   REAL(rprec), DIMENSION(:), POINTER :: rmags, zmags, rmaga, zmaga
   REAL(rprec), DIMENSION(:,:,:), POINTER :: rmncc,zmnsc
   REAL(rprec), DIMENSION(ns) :: phi1, chi1, jPS2
@@ -510,8 +511,16 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
 
         rzmax = zero
 
-        ! Theta = 0 to pi in upper half of X-Z plane
-        DO icount = 1,2 ! TODO: why second loop over toroidal offset ?
+        ! Under stellarator symmetry only theta in [0, pi] is stored and the second pass
+        ! supplies the other half of the contour from the reflected plane with Z -> -Z.
+        ! A lasym run stores the complete contour, which is scanned in a single pass.
+        npass = 2
+        nscan = ntheta2
+        IF (lasym) THEN
+           npass = 1
+           nscan = ntheta3
+        END IF
+        DO icount = 1, npass
            ! nphi-plane, n1 = noff,...,nzeta
            n1 = noff
            IF (icount .eq. 2) then
@@ -523,7 +532,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
            t1 = one
            IF (icount .eq. 2) t1 = -one
 
-           DO itheta = 1,ntheta2
+           DO itheta = 1, nscan
               yr1u = r1(loff,0) + sqrts(js)*r1(loff,1)
               yz1u = z1(loff,0) + sqrts(js)*z1(loff,1)
               yz1u = t1*yz1u

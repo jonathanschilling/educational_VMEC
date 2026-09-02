@@ -63,8 +63,9 @@ SUBROUTINE add_fluxes(overg, bsupu, bsupv)
 
   ! half-grid to full-grid for chi-prime and iota below
 
+  chipf(1)     = c1p5*chips(2)  - cp5*chips(3)
   chipf(2:ns1) = (chips(2:ns1) + chips(3:ns1+1))/2.0_dp
-  chipf(ns)    = 2.0_dp*chips(ns)-chips(ns1)
+  chipf(ns)    = c1p5*chips(ns) - cp5*chips(ns1)
 
   ! Do not compute iota too near origin
   iotaf(1)  = c1p5*iotas(2) - cp5*iotas(3)     !zero gradient near axis

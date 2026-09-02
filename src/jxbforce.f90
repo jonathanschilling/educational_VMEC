@@ -211,9 +211,6 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
            bsubvmn1 = 0
            bsubvmn2 = 0
            IF (lasym) THEN
-              ! SPH012314 in FixAray
-              dnorm1 = 2*dnorm1
-
               bsubsmn3 = 0
               bsubsmn4 = 0
               bsubumn3 = 0

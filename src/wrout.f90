@@ -529,8 +529,6 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   tmult = p5/r0scale**2
   !SPH: FIXED THIS 03-05-07 TO CALL symmetrization routine
   IF (lasym) THEN
-     ! Changed integration norm in fixaray, SPH012314
-     tmult = 2*tmult
      bsubs(1,:) = 0
      CALL symoutput (bsq,   gsqrt,  bsubu,  bsubv,  bsupu,   &
                      bsupv,  bsubs,                          &

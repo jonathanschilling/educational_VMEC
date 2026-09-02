@@ -110,6 +110,9 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
    ! K = CURL(B) is the "effective" current (=J for isotropic pressure)
    ! Compute u (=theta), v (=zeta) derivatives of B sub s
 
+  ! Only js = 2..ns-1 are filled below, but every row is read in the radial loop.
+  bsubs = 0
+
   ! fixup input coming from bss: zero terms past magnetic axis
   ! NOTE: FIXME: This is actually the target array for the interpolation to the half-grid !!!
   ! TODO: This should probably be `bsubsh(1,:) = 0` instead !!!

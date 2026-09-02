@@ -160,7 +160,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      phi1(i) = phi1(i-1) + hs*phip(i)
      chi1(i) = chi1(i-1) + hs*(phip(i)*iotas(i))
   END DO
-  chi = twopi*chi1
+  chi = twopi*signgs*chi1 ! same sign convention as phi (fileout) and the phipf, chipf written by wrout
 
 
 

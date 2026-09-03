@@ -7,7 +7,8 @@
 !> @param bsupv contravariant component of magnetic field \f$B^\zeta\f$
 !> @param bsubu covariant component of magnetic field \f$B_\theta\f$
 !> @param bsubv covariant component of magnetic field \f$B_\zeta\f$
-!> @param bsubsh covariant component of magnetic field \f$B_s\f$ on half grid from bss()
+!> @param bsubsh covariant component of magnetic field \f$B_s\f$: on the half grid
+!>        from bss() on entry, on the full grid on exit
 !> @param bsubsu tangential derivate of covariant component of magnetic field \f$\partial B_s / \partial \theta\f$ (?)
 !> @param bsubsv tangential derivate of covariant component of magnetic field \f$\partial B_s / \partial \zeta\f$  (?)
 !> @param gsqrt Jacobian \f$\sqrt{g}\f$
@@ -33,7 +34,7 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: bsupv
   REAL(rprec), DIMENSION(ns,nznt,0:1), TARGET, INTENT(inout) :: bsubu
   REAL(rprec), DIMENSION(ns,nznt,0:1), TARGET, INTENT(inout) :: bsubv
-  REAL(rprec), DIMENSION(ns,nznt), INTENT(in)  :: bsubsh
+  REAL(rprec), DIMENSION(ns,nznt), INTENT(inout) :: bsubsh
   REAL(rprec), DIMENSION(ns,nznt,0:1) :: bsubsu
   REAL(rprec), DIMENSION(ns,nznt,0:1) :: bsubsv
   REAL(rprec), DIMENSION(ns,nznt), INTENT(in) :: gsqrt
@@ -520,6 +521,10 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
   bsubs(1,:)  = 2*bsubs(2,:)  - bsubs(3,:)
   !bsubs(ns,:) = 2*bsubs(ns,:) - bsubs(ns-1,:) ! TODO: from ns, ns-1 to ns ???
   bsubs(ns,:) = 2*bsubs(ns-1,:) - bsubs(ns-2,:)
+
+  ! Return the full-mesh B_s to the caller: wrout transforms this array into
+  ! bsubsmns, which the wout file declares on the full mesh.
+  bsubsh = bsubs
 
 
 

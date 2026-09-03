@@ -602,10 +602,7 @@ SUBROUTINE wrout(bsq, gsqrt, bsubu, bsubv, bsubs, bsupv, bsupu, rzl_array, gc_ar
   bsubumnc(:,1) = 0
   bsubvmnc(:,1) = 0
 
-  ! NOTE: This assumes that bsubs (from which bsubsmns is computed) is on the full grid.
-  ! However, since crmn_o is passed as bsubs in fileout(),
-  ! HERE, bsubs is ACTUALLY on the HALF-grid !!! WTF ???
-  ! (The full-grid bsubs array is a LOCAL variable in jxbforce().)
+  ! bsubs is on the full grid here: jxbforce puts it there.
   bsubsmns(:,1) = 2*bsubsmns(:,2) - bsubsmns(:,3) ! extrapolation on full grid
 
   bsupumnc(:,1) = 0

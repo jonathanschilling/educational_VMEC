@@ -727,8 +727,8 @@ C-----------------------------------------------
 !     Computes current harmonics for currXmn == sqrt(g)*JsupX, X = u,v
 !     [Corrected above "JsubX" to "JsupX", JDH 2010-08-16]
 
-!     NOTE: bsub(s,u,v)mn are on HALF radial grid
-!          (in earlier versions, bsubsmn was on FULL radial grid)
+!     NOTE: bsub(u,v)mn are on the HALF radial grid, bsubsmn on the FULL one,
+!          as in ORNL-Fusion/LIBSTELL read_wout_mod.f90
 
 !
       ohs = (ns_i-1)
@@ -744,8 +744,7 @@ C-----------------------------------------------
 
       DO js = 2, ns_i-1
          WHERE (MOD(INT(xm_nyq_i),2) .EQ. 1)
-            t1 = 0.5_dp*(shalf(js+1)*bsubsmns_i(:,js+1) +
-     &                   shalf(js)  *bsubsmns_i(:,js)) /sfull(js)
+            t1 = bsubsmns_i(:,js)
             bu0 = bsubumnc_i(:,js  )/shalf(js)
             bu1 = bsubumnc_i(:,js+1)/shalf(js+1)
             t2 = ohs*(bu1-bu0)*sfull(js)+0.25_dp*(bu0+bu1)/sfull(js)
@@ -753,7 +752,7 @@ C-----------------------------------------------
             bv1 = bsubvmnc_i(:,js+1)/shalf(js+1)
             t3 = ohs*(bv1-bv0)*sfull(js)+0.25_dp*(bv0+bv1)/sfull(js)
          ELSEWHERE
-            t1 = 0.5_dp*(bsubsmns_i(:,js+1)+bsubsmns_i(:,js))
+            t1 = bsubsmns_i(:,js)
             t2 = ohs*(bsubumnc_i(:,js+1)-bsubumnc_i(:,js))
             t3 = ohs*(bsubvmnc_i(:,js+1)-bsubvmnc_i(:,js))
          ENDWHERE
@@ -783,8 +782,7 @@ C-----------------------------------------------
 
       DO js = 2, ns_i-1
          WHERE (MOD(INT(xm_nyq_i),2) .EQ. 1)
-            t1 = 0.5_dp*(shalf(js+1)*bsubsmnc_i(:,js+1)
-     &          +         shalf(js)  *bsubsmnc_i(:,js)) / sfull(js)
+            t1 = bsubsmnc_i(:,js)
             bu0 = bsubumns_i(:,js  )/shalf(js+1)
             bu1 = bsubumns_i(:,js+1)/shalf(js+1)
             t2 = ohs*(bu1-bu0)*sfull(js) + 0.25_dp*(bu0+bu1)/sfull(js)
@@ -792,7 +790,7 @@ C-----------------------------------------------
             bv1 = bsubvmns_i(:,js+1)/shalf(js+1)
             t3 = ohs*(bv1-bv0)*sfull(js)+0.25_dp*(bv0+bv1)/sfull(js)
          ELSEWHERE
-            t1 = 0.5_dp*(bsubsmnc_i(:,js+1) + bsubsmnc_i(:,js))
+            t1 = bsubsmnc_i(:,js)
             t2 = ohs*(bsubumns_i(:,js+1)-bsubumns_i(:,js))
             t3 = ohs*(bsubvmns_i(:,js+1)-bsubvmns_i(:,js))
          END WHERE

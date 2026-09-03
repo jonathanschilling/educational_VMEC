@@ -519,8 +519,9 @@ SUBROUTINE jxbforce(bsupu, bsupv, bsubu, bsubv, bsubsh, &
 
   ! Compute end point values for bsubs
   bsubs(1,:)  = 2*bsubs(2,:)  - bsubs(3,:)
-  !bsubs(ns,:) = 2*bsubs(ns,:) - bsubs(ns-1,:) ! TODO: from ns, ns-1 to ns ???
-  bsubs(ns,:) = 2*bsubs(ns-1,:) - bsubs(ns-2,:)
+  ! The outermost half point sits between bsubs(ns-1) and the boundary, so
+  ! the boundary value follows from it and one full-mesh point.
+  bsubs(ns,:) = 2*bsubsh(ns,:) - bsubs(ns-1,:)
 
   ! Return the full-mesh B_s to the caller: wrout transforms this array into
   ! bsubsmns, which the wout file declares on the full mesh.

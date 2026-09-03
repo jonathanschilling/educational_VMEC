@@ -69,7 +69,7 @@ SUBROUTINE guess_axis(r1, z1, ru0, zu0)
 
   ns12 = (ns+1)/2
 
-  planes: DO iv = 1, nzeta/2+1
+  planes: DO iv = 1, ivmax
 
      r1b(iv,:ntheta3) = r1(ns,iv,:,0) + r1(ns,iv,:,1)
      z1b(iv,:ntheta3) = z1(ns,iv,:,0) + z1(ns,iv,:,1)

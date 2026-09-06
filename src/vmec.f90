@@ -42,6 +42,8 @@ subroutine vmec
   INTEGER :: ns_old=0
   INTEGER :: igrid
   INTEGER :: jacob_off
+  REAL(rprec), DIMENSION(0:ntord) :: initial_raxis_cc, initial_raxis_cs
+  REAL(rprec), DIMENSION(0:ntord) :: initial_zaxis_cc, initial_zaxis_cs
 
   integer :: i, js
 
@@ -98,6 +100,11 @@ subroutine vmec
 
      ! COMPUTE NS-INVARIANT ARRAYS
      CALL fixaray
+
+     initial_raxis_cc = raxis_cc
+     initial_raxis_cs = raxis_cs
+     initial_zaxis_cc = zaxis_cc
+     initial_zaxis_cs = zaxis_cs
 
      ns_old = 0
      delt0r = delt
@@ -199,10 +206,18 @@ subroutine vmec
         ! if did not converge only because jacobian was bad
         ! and the intermediate ns=3 run was not performed yet (jacob_off is still == 0),
         ! retry the whole thing again
-        IF (ier_flag.ne.bad_jacobian_flag) THEN
+        IF (ier_flag.ne.bad_jacobian_flag .or. jacob_off.ne.0 .or. &
+            igrid.ne.1 .or. ns_array(1).le.3) THEN
            exit ! jacob_off loop
            ! otherwise, retry with initial ns=3 to fix bad jacobian
         END IF
+
+        ! Initialize a cold three-surface mesh from the input axis.
+        ns_old = 0
+        raxis_cc = initial_raxis_cc
+        raxis_cs = initial_raxis_cs
+        zaxis_cc = initial_zaxis_cc
+        zaxis_cs = initial_zaxis_cs
 
      ! if ier_flag .eq. bad_jacobian_flag, repeat once again with ns=3 before
      end do ! jacob_off = 0, 1

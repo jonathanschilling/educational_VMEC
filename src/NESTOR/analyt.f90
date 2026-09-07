@@ -174,14 +174,28 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
     call add_real_3d("all_tlm", mf+nf+1, nv, nu3, all_tlm)
     call add_real_2d("bvec", mf1, nf1, bvec) ! (mf+1)x(2*nf+1)x(ndim: 1 or 2)
 
+    ! second symmetry index, present only for lasym
+    if (lasym .ne. 0) then
+      call add_real_2d("bvec_cos", mf1, nf1, bvec(mnpd+1:))
+    end if
+
     if (ivacskip .eq. 0) then
       call add_real_3d("all_slp", mf+nf+1, nv, nu3, all_slp)
       call add_real_3d("all_slm", mf+nf+1, nv, nu3, all_slm)
       call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn) ! missing dim: (ndim: 1 or 2)
+
+      ! second symmetry index, present only for lasym
+      if (lasym .ne. 0) then
+        call add_real_4d("grpmn_cos", mf1, nf1, nv, nu3, &
+                         grpmn(nuv2*mnpd+1:))
+      end if
     else
       call add_null("all_slp")
       call add_null("all_slm")
       call add_null("grpmn")
+      if (lasym .ne. 0) then
+        call add_null("grpmn_cos")
+      end if
     end if
 
     call close_dbg_out()

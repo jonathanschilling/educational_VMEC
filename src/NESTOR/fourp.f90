@@ -99,6 +99,11 @@ SUBROUTINE fourp (grpmn, grp)
     ! NOTE: This is the sum of the results from analyt and fourp!
     call add_real_4d("grpmn", mf1, nf1, nv, nu3, grpmn)
 
+    ! second symmetry index, present only for lasym
+    if (ndim .eq. 2) then
+      call add_real_4d("grpmn_cos", mf1, nf1, nv, nu3, grpmn(:,:,:,2))
+    end if
+
     call close_dbg_out()
   end if
 

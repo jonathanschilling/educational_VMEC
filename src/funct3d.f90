@@ -31,7 +31,7 @@ SUBROUTINE funct3d (ier_flag)
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
-  REAL(dp) :: presf_ns, delt0, fsqrz, old_fsqz, diff
+  REAL(dp) :: delt0, fsqrz, old_fsqz, diff
   REAL(dp), EXTERNAL :: pmass
 
   CHARACTER(LEN=255) :: vac_file
@@ -349,11 +349,6 @@ SUBROUTINE funct3d (ier_flag)
         !
         ! presf_ns = 1.5_dp*pres(ns) - 0.5_dp*pres(ns1)
         ! MUST NOT BREAK TRI-DIAGONAL RADIAL COUPLING: OFFENDS PRECONDITIONER!
-        presf_ns = pmass(hs*(ns-1.5_dp))
-        IF (presf_ns .ne. zero) then
-           presf_ns = (pmass(1._dp)/presf_ns) * pres(ns)
-        end if
-
         lk = 0
         DO l = ns, nrzt, ns ! loop over all points on LCFS
            lk = lk + 1
@@ -364,7 +359,7 @@ SUBROUTINE funct3d (ier_flag)
            ! total pressure (?) at LCFS
            ! (gcon(l) is only used as a temporary variable here,
            !  since it immediately gets overwritten when entering alias())
-           gcon(l)      = bsqvac(lk) + presf_ns
+           gcon(l)      = bsqvac(lk)
 
            ! edge force contribution (see forces())
            ! --> *HERE* is where the free-boundary computation enters VMEC !

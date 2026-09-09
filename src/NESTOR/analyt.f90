@@ -26,7 +26,7 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   real(rprec), intent(out) :: grpmn_n_map(nuv2*mnpd2)
   integer, intent(in) :: lasym
 
-  INTEGER :: l, n, m
+  INTEGER :: l, n, m, i
   REAL(rprec) :: fl, fl1, sign1
 
   ! ALL EQUATIONS REFER TO THE PAPER BY P. MERKEL (PKM)
@@ -106,6 +106,20 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   tlm  = one/sqad2u*log((sqad2u*sqrtc + adm + cma)/(sqad2u*sqrta - adm + cma))
   tlpm = tlp  + tlm
 
+  ! TABULATE T+ AND T- FOR EVERY L BEFORE THE L-SUM
+  !
+  ! The two homogeneous solutions of Eq (A15) form a pair of modulus
+  ! sqrt(adm/adp) for T+, and its reciprocal for T-, so stepping the
+  ! recurrence upward over mf + nf steps multiplies the rounding of its
+  ! inputs by that factor. Where the growth stays small the upward pass is
+  ! used; where it does not, the same recurrence is run downward from a seed
+  ! far enough above mf + nf that the seed has decayed out of the result by
+  ! the time the pass reaches it.
+  do i = 1, nuv2
+     call recurrence_sum(adm(i), adp(i), sqrtc(i), sqrta(i), cma(i), tlp(i), all_tlp(:,i))
+     call recurrence_sum(adp(i), adm(i), sqrtc(i), sqrta(i), cma(i), tlm(i), all_tlm(:,i))
+  end do
+
   ! BEGIN L-SUM IN EQ (A14) TO COMPUTE Imn (and Kmn) INTEGRALS
   ! NOTE THAT IN THE LOOP OVER L BELOW: L == |m - n| + 2L_A14
   ! THUS, L BELOW IS THE INDEX OF THE T+- (S+-)
@@ -115,10 +129,17 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
   LLOOP: DO l = 0, mf + nf
      fl = fl1
 
-     ! here, tlp/m are available for the current value of l
-     ! --> save into matrix for debugging
-     all_tlp(l,:) = tlp
-     all_tlm(l,:) = tlm
+     ! T+- for this l, and for the one below it
+     tlp = all_tlp(l,:)
+     tlm = all_tlm(l,:)
+     if (l .eq. 0) then
+        tlp1 = 0
+        tlm1 = 0
+     else
+        tlp1 = all_tlp(l-1,:)
+        tlm1 = all_tlm(l-1,:)
+     end if
+     tlpm = tlp + tlm
 
      ! COMPUTE SL+ and SL- , Eq (A17)
      ! SLP(M): SL+(-)
@@ -151,21 +172,11 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
         END DO
      END DO
 
-     ! UPDATE "TL's" (FOR L -> L+1) USING EQ (A15)
-     tlp2 = tlp1
-     tlm2 = tlm1
-     tlp1 = tlp
-     tlm1 = tlm
-
      ! next l
      fl1  = fl1 + 1
 
      ! (-1)**l (next l now)
      sign1 = -sign1
-
-     tlp = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlp1 - fl*adm*tlp2)/(adp*fl1)
-     tlm = ((sqrtc + sign1*sqrta) - (two*fl1 - one)*cma*tlm1 - fl*adp*tlm2)/(adm*fl1)
-     tlpm = tlp + tlm
   END DO LLOOP
 
   if (open_dbg_context("vac1n_analyt", num_eqsolve_retries)) then
@@ -186,5 +197,90 @@ SUBROUTINE analyt(grpmn, bvec, ivacskip, lasym, m_map, n_map, grpmn_m_map, grpmn
 
     call close_dbg_out()
   end if
+
+CONTAINS
+
+!> \brief One step of the T+- recurrence, Eq (A15).
+!>
+!> @param a     ad of the opposite parity to the one being stepped
+!> @param b     ad of the parity being stepped
+!> @param sqrtc 2*sqrt(gvv_b)
+!> @param sqrta 2*sqrt(guu_b)
+!> @param sgn   (-1)**l of the step
+!> @param fl    l
+!> @param fl1   l + 1
+!> @param fl2   2*l + 1
+!> @param cma   gvv_b - guu_b
+!> @param below T(l-1)
+!> @param here  T(l)
+function recurrence(a, b, sqrtc, sqrta, sgn, fl, fl1, fl2, cma, below, here)
+  implicit none
+  real(rprec) :: recurrence
+  real(rprec), intent(in) :: a, b, sqrtc, sqrta, sgn, cma, below, here
+  integer, intent(in) :: fl, fl1, fl2
+
+  recurrence = (sqrtc + sgn*sqrta - fl2*cma*here - fl*a*below)/(b*fl1)
+end function recurrence
+
+!> \brief Tabulate T+ or T- for l = 0 .. mf + nf at one surface point.
+!>
+!> @param a  ad of the opposite parity to the one being tabulated
+!> @param b  ad of the parity being tabulated
+!> @param sqrtc 2*sqrt(gvv_b)
+!> @param sqrta 2*sqrt(guu_b)
+!> @param cma   gvv_b - guu_b
+!> @param t0    T(0), known in closed form
+!> @param tl    the tabulated sequence
+subroutine recurrence_sum(a, b, sqrtc, sqrta, cma, t0, tl)
+  implicit none
+  real(rprec), intent(in) :: a, b, sqrtc, sqrta, cma, t0
+  real(rprec), intent(inout) :: tl(0:mf+nf)
+
+  ! Upward stepping multiplies the rounding of its inputs by
+  ! sqrt(a/b) per step; ten is the growth this tolerates over mf + nf steps.
+  real(rprec), parameter :: max_forward_log_growth = 2.302585092994046_rprec
+  ! A downward pass seeded with zero leaves (b/a)**((top - l)/2) of T(top) in
+  ! T(l); the seed sits far enough above mf + nf for that to fall below 1e-17.
+  real(rprec), parameter :: min_seed_log_decay = 39.14394658089878_rprec
+
+  real(rprec) :: high, current, low, sgn
+  integer :: l, ntail
+
+  if (a .gt. b .and. b .gt. zero .and. (mf + nf)*log(a/b) .gt. two*max_forward_log_growth) then
+     ntail = ceiling(two*min_seed_log_decay/log(a/b))
+     high = 0
+     current = 0
+     if (mod(mf + nf + ntail, 2) .eq. 0) then
+        sgn = -1
+     else
+        sgn = 1
+     end if
+     do l = mf + nf + ntail, mf + nf + 2, -1
+        low = recurrence(b, a, sqrtc, sqrta, sgn, l + 1, l, 2*l + 1, cma, high, current)
+        high = current
+        current = low
+        sgn = -sgn
+     end do
+     do l = mf + nf + 1, 1, -1
+        tl(l - 1) = recurrence(b, a, sqrtc, sqrta, sgn, l + 1, l, 2*l + 1, cma, high, current)
+        high = current
+        current = tl(l - 1)
+        sgn = -sgn
+     end do
+     ! the downward pass fixes the sequence only up to a factor
+     tl(0) = t0
+  else
+     tl(0) = t0
+     sgn = 1
+     do l = 0, mf + nf - 1
+        sgn = -sgn
+        if (l .eq. 0) then
+           tl(l + 1) = recurrence(a, b, sqrtc, sqrta, sgn, l, l + 1, 2*l + 1, cma, zero, tl(l))
+        else
+           tl(l + 1) = recurrence(a, b, sqrtc, sqrta, sgn, l, l + 1, 2*l + 1, cma, tl(l - 1), tl(l))
+        end if
+     end do
+  end if
+end subroutine recurrence_sum
 
 END SUBROUTINE analyt

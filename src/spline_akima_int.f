@@ -71,10 +71,10 @@
       m(iv+1) = (yloc(iv+2)-yloc(iv+1))/(xloc(iv+2)-xloc(iv+1))
 ! calculate weights for derivatives
       dm(-1:iv)= abs(m(0:iv+1)-m(-1:iv))
-      where (dm /= 0._DP) !exclude division by zero
+      where (dm(1:iv)+dm(-1:iv-2) /= 0._DP) !exclude division by zero
         p(1:iv) = dm(1:iv)/(dm(1:iv)+dm(-1:iv-2))
       end where
-      where (dm /= 0._DP) !exclude division by zero
+      where (dm(1:iv)+dm(-1:iv-2) /= 0._DP) !exclude division by zero
         q(1:iv) = dm(-1:iv-2)/(dm(1:iv)+dm(-1:iv-2))
       end where
       t(1:iv) = p(1:iv)*m(0:iv-1)+q(1:iv)*m(1:iv)

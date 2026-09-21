@@ -22,6 +22,7 @@
   INTEGER :: n, iunit, ier_flag_init, i, ni, m, nsmin, mj, isgn, ioff, joff
   REAL(rprec), DIMENSION(:,:), POINTER :: rbcc, rbss, rbcs, rbsc, zbcs, zbsc, zbcc, zbss
   REAL(rprec) :: rtest, ztest, tzc, trc, delta
+  REAL(rprec) :: orient
   REAL(rprec), ALLOCATABLE :: temp(:)
   CHARACTER(LEN=100) :: line, line2
 
@@ -214,8 +215,16 @@
 
   IF (lasym) THEN
      ! CONVERT TO REPRESENTATION WITH RBS(m=1) = ZBC(m=1)
-
-     delta = ATAN2(rbs(0,1) - zbc(0,1), rbc(0,1) + zbs(0,1))
+     ! flip_theta, applied below to a boundary whose m=1 determinant is
+     ! negative, negates ZBC(m=1) and not RBS(m=1), so that boundary takes the
+     ! angle that gives the representation after the flip.
+     orient = SUM(rbc(-ntor:ntor,1))*SUM(zbs(-ntor:ntor,1))                     &
+            - SUM(rbs(-ntor:ntor,1))*SUM(zbc(-ntor:ntor,1))
+     IF (orient .lt. zero) THEN
+        delta = -ATAN2(rbs(0,1) + zbc(0,1), zbs(0,1) - rbc(0,1))
+     ELSE
+        delta = ATAN2(rbs(0,1) - zbc(0,1), rbc(0,1) + zbs(0,1))
+     END IF
      IF (delta .ne. zero) THEN
        DO m = 0,mpol1
          DO n = -ntor,ntor
@@ -365,18 +374,30 @@
   ! CHECK SIGN OF JACOBIAN (SHOULD BE SAME AS SIGNGS)
   m = 1
   mj = m+joff
+  ! An asymmetric boundary has been rotated in the poloidal angle above, to
+  ! put it into the representation with RBS(m=1) = ZBC(m=1). The product
+  ! rtest*ztest is not invariant under that rotation, which can leave it at
+  ! zero for a boundary that does need flipping. The m=1 determinant is.
   rtest = SUM(rbcc(1:ntor1,mj))
   ztest = SUM(zbsc(1:ntor1,mj))
-  lflip=(rtest*ztest .lt. zero)
+  orient = rtest*ztest
+  IF (lasym) THEN
+     orient = orient - SUM(rbsc(1:ntor1,mj))*SUM(zbcc(1:ntor1,mj))
+  END IF
+  lflip=(orient .lt. zero)
   signgs = -1.0_dp
   IF (lflip) then
-     ! (rtest*ztest < 0) means that rtest and ztest have different signs
+     ! a negative m=1 determinant means the boundary is traversed the other way
      CALL flip_theta(rmn_bdy, zmn_bdy)
   end if
 
   rtest = SUM(rbcc(1:ntor1,mj))
   ztest = SUM(zbsc(1:ntor1,mj))
-  if (rtest*ztest .lt. zero) then
+  orient = rtest*ztest
+  IF (lasym) THEN
+     orient = orient - SUM(rbsc(1:ntor1,mj))*SUM(zbcc(1:ntor1,mj))
+  END IF
+  if (orient .lt. zero) then
     stop "flip_theta did not fix it!"
   end if
 

@@ -94,6 +94,12 @@ SUBROUTINE evolve(time_step, ier_flag, liter_flag)
     call add_real_5d("gc",           3, ntmax, ns, ntor1, mpol, gc,    order=(/ 3, 4, 5, 2, 1 /) )
   end if
 
+  ! keep the state whose forces funct3d has just evaluated
+  ! (first.eq.2: funct3d stopped at a bad jacobian before computing gc)
+  IF (first .eq. 1 .or. first .eq. 4) THEN
+     xlast(:neqs) = xc(:neqs)
+  END IF
+
   ! THIS IS THE TIME-STEP ALGORITHM. IT IS ESSENTIALLY A CONJUGATE
   ! GRADIENT METHOD, WITHOUT THE LINE SEARCHES (FLETCHER-REEVES),
   ! BASED ON A METHOD GIVEN BY P. GARABEDIAN

@@ -151,9 +151,9 @@ SUBROUTINE eqsolve(ier_flag)
      res0 = MIN(res0,fsq)
 
      IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
-        ! Store current state (first=1)
+        ! Store the state that evolve evaluated before its last time step
         ! --> was able to reduce force consistenly over at least 10 iterations
-        CALL restart_iter(delt0r)
+        xstore(:neqs) = xlast(:neqs)
      ELSE IF (fsq.gt.100*res0 .and. iter2.gt.iter1) THEN
         ! Residuals are growing in time, reduce time step
         first = 2

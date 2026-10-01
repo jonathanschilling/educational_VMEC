@@ -47,6 +47,9 @@ MODULE xstuff
   !> backup copy of last-known-good xc
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: xstore
 
+  !> xc as of the last valid force evaluation
+  REAL(rprec), DIMENSION(:), ALLOCATABLE :: xlast
+
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: scalxc
 
 END MODULE xstuff

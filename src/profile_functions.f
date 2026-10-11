@@ -158,7 +158,11 @@
 !     &         ac(13) * (2/pi) * atan(ac(14)*x**ac(15)/(1-x)**ac(16)) +        &
 !     &         ac(17) * (2/pi) * atan(ac(18)*x**ac(19)/(1-x)**ac(20))
       IF (x .ge. one) THEN
-         pcurr = ac(0) + ac(1) + ac(5) + ac(9) + ac(13) + ac(17)
+         pcurr = ac(0) + ac(1)*sum_atan_edge(ac(2), ac(4))                     &
+     &                 + ac(5)*sum_atan_edge(ac(6), ac(8))                     &
+     &                 + ac(9)*sum_atan_edge(ac(10), ac(12))                   &
+     &                 + ac(13)*sum_atan_edge(ac(14), ac(16))                  &
+     &                 + ac(17)*sum_atan_edge(ac(18), ac(20))
       ELSE
           pcurr = ac(0) + (2.0_dp/pi) *                                                      &
      &                (ac(1) * atan(ac(2)*x**ac(3)/(1-x)**ac(4)) +             &
@@ -365,6 +369,7 @@
       USE stel_constants, ONLY: zero, one, pi
       USE vmec_input, ONLY: ai, piota_type, ai_aux_s, ai_aux_f
       USE line_segment
+      USE functions, ONLY: sum_atan_edge
       IMPLICIT NONE
 ! ai assumed to be dimensioned (0:n), with n >= 20
 !-----------------------------------------------
@@ -389,7 +394,11 @@
 !     &         ai(13) * (2/pi) * atan(ai(14)*x**ai(15)/(1-x)**ai(16)) +        &
 !     &         ai(17) * (2/pi) * atan(ai(18)*x**ai(19)/(1-x)**ai(20))
       IF (x .ge. one) THEN
-         piota = ai(0) + ai(1) + ai(5) + ai(9) + ai(13) + ai(17)
+         piota = ai(0) + ai(1)*sum_atan_edge(ai(2), ai(4))                     &
+     &                 + ai(5)*sum_atan_edge(ai(6), ai(8))                     &
+     &                 + ai(9)*sum_atan_edge(ai(10), ai(12))                   &
+     &                 + ai(13)*sum_atan_edge(ai(14), ai(16))                  &
+     &                 + ai(17)*sum_atan_edge(ai(18), ai(20))
       ELSE
           piota = ai(0) + (2.0_dp/pi) *                                                    &
      &                (ai(1) * atan(ai(2)*x**ai(3)/(1-x)**ai(4)) +             &

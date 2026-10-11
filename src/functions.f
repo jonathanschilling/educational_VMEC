@@ -4,10 +4,11 @@
       MODULE functions
 
       USE stel_kinds
+      USE stel_constants, ONLY: pi
 
       implicit none
 
-      PUBLIC :: two_power, two_power_gs
+      PUBLIC :: two_power, two_power_gs, sum_atan_edge
       PRIVATE :: check
 
       CONTAINS
@@ -44,6 +45,31 @@
      &                  b(i)*exp(-((x - b(i+1))/b(i+2))**2.0_dp)
       END DO
       two_power_gs = two_power_gs*two_power(x,b)
+
+      END FUNCTION
+
+!> \brief Value at \f$x = 1\f$ of one term
+!>        \f$(2/\pi) \arctan(b x^p / (1 - x)^q)\f$ of the \c sum\_atan profile,
+!>        the limit from below: \f$\mathrm{sign}(b)\f$ for \f$q > 0\f$,
+!>        \f$(2/\pi) \arctan(b)\f$ for \f$q = 0\f$ and zero for \f$q < 0\f$.
+!>
+!> @param b coefficient of \f$x^p\f$
+!> @param q exponent of \f$(1 - x)\f$
+      REAL(rprec) FUNCTION sum_atan_edge(b, q)
+
+      REAL(rprec), INTENT(in) :: b, q
+
+      IF (q .gt. 0) THEN
+         IF (ABS(b) .gt. 0) THEN
+            sum_atan_edge = SIGN(1.0_dp, b)
+         ELSE
+            sum_atan_edge = 0
+         END IF
+      ELSE IF (q .lt. 0) THEN
+         sum_atan_edge = 0
+      ELSE
+         sum_atan_edge = (2.0_dp/pi)*atan(b)
+      END IF
 
       END FUNCTION
 

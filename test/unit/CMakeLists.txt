@@ -10,3 +10,22 @@ add_executable (test_spline_akima
 set_target_properties (test_spline_akima PROPERTIES
   Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
 add_test (NAME spline_akima_reflection_symmetry COMMAND test_spline_akima)
+
+add_executable (test_sum_atan
+  ${CMAKE_CURRENT_SOURCE_DIR}/test_sum_atan.f90
+  ${CMAKE_SOURCE_DIR}/src/data/stel_kinds.f90
+  ${CMAKE_SOURCE_DIR}/src/data/stel_constants.f90
+  ${CMAKE_SOURCE_DIR}/src/data/vparams.f90
+  ${CMAKE_SOURCE_DIR}/src/data/vsvd0.f90
+  ${CMAKE_SOURCE_DIR}/src/data/vmec_input.f90
+  ${CMAKE_SOURCE_DIR}/src/functions.f
+  ${CMAKE_SOURCE_DIR}/src/line_segment.f
+  ${CMAKE_SOURCE_DIR}/src/tolower.f90
+  ${CMAKE_SOURCE_DIR}/src/spline_akima.f
+  ${CMAKE_SOURCE_DIR}/src/spline_akima_int.f
+  ${CMAKE_SOURCE_DIR}/src/spline_cubic.f
+  ${CMAKE_SOURCE_DIR}/src/spline_cubic_int.f
+  ${CMAKE_SOURCE_DIR}/src/profile_functions.f)
+set_target_properties (test_sum_atan PROPERTIES
+  Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules_sum_atan)
+add_test (NAME sum_atan_edge_limit COMMAND test_sum_atan)

@@ -24,6 +24,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   USE vmec_io
   USE mgrid_mod
   USE stel_constants, ONLY: pi
+  USE cross_section, ONLY: cross_section_extrema
 
   use dbgout
 
@@ -35,7 +36,7 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
   REAL(rprec), DIMENSION(nrzt), INTENT(out) :: tau
   REAL(rprec), DIMENSION(ns,0:ntor,0:mpol1,3*ntmax), TARGET, INTENT(in) :: rzl_array
 
-  INTEGER :: i, icount, itheta, js, l, loff,                       &
+  INTEGER :: i, js, l, loff,                                       &
      lpi, lt, n, n1, noff,                          &
      iv, iu, lk, nplanes
   REAL(rprec), DIMENSION(:), POINTER :: rmags, zmags, rmaga, zmaga
@@ -58,8 +59,8 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      sumbpol, sumbtot, sumbtor, sump,                            &
      sump2, sump20, t1, tz, jpar_perp=0, jparPs_perp=0,                 &
      toroidal_flux, vnorm, xmax,                    &
-     xmida, xmidb, xmin, rzmax, rzmin, zxmax, zxmin,    &
-     zmax, zmin, yr1u, yz1u, waist(2), height(2)
+     xmida, xmidb, xmin, rzmax,                         &
+     zmax, zmin, waist(2), height(2)
   REAL(rprec) d_of_kappa, loc_jpar_perp, loc_jparPs_perp
   REAL(rprec), DIMENSION(:), ALLOCATABLE :: rax_symm, zax_symm, rax_asym, zax_asym
 
@@ -503,50 +504,9 @@ SUBROUTINE eqfor(br, bz, bsubu, bsubv, tau, rzl_array, ier_flag)
      ygeo(nplanes, 1) = zero
      DO js = 2, ns
 
-        zmin =  HUGE(zmin)
-        zmax = -HUGE(zmax)
-        xmin =  HUGE(xmin)
-        xmax = -HUGE(xmax)
-
-        rzmax = zero
-
-        ! Theta = 0 to pi in upper half of X-Z plane
-        DO icount = 1,2 ! TODO: why second loop over toroidal offset ?
-           ! nphi-plane, n1 = noff,...,nzeta
-           n1 = noff
-           IF (icount .eq. 2) then
-              ! (twopi-v), reflected plane
-              n1 = MOD(nzeta-(noff-1),nzeta)+1
-           end if
-           loff = js + ns*(n1-1)
-
-           t1 = one
-           IF (icount .eq. 2) t1 = -one
-
-           DO itheta = 1,ntheta2
-              yr1u = r1(loff,0) + sqrts(js)*r1(loff,1)
-              yz1u = z1(loff,0) + sqrts(js)*z1(loff,1)
-              yz1u = t1*yz1u
-
-              IF (yz1u .ge. zmax) THEN
-                 zmax = ABS(yz1u)
-                 rzmax = yr1u
-              ELSEIF (yz1u .le. zmin) THEN
-                 zmin = yz1u
-                 rzmin = yr1u
-              END IF
-
-              IF (yr1u .ge. xmax) THEN
-                 xmax = yr1u
-                 zxmax = yz1u
-              ELSEIF (yr1u .le. xmin) THEN
-                 xmin = yr1u
-                 zxmin = yz1u
-              END IF
-
-              loff = loff + ns*nzeta
-           END DO ! itheta
-        END DO ! icount
+        CALL cross_section_extrema(r1, z1, sqrts(js), js, noff, ns, nzeta,  &
+                                   ntheta2, ntheta3, lasym,                &
+                                   xmin, xmax, zmin, zmax, rzmax)
 
         ! ----------
 

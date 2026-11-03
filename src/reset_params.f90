@@ -7,7 +7,7 @@ SUBROUTINE reset_params
 
   USE vmec_main, ONLY: ivac, ftolv, fsqr, fsqz, fsq,      &
                        res0, delt0r, iter1, iter2, ijacob, first, &
-                       lconm1, z00, dp
+                       lconm1, z00, dp, vertically_unstable
   USE vmec_input, ONLY: delt
   USE stel_constants, only: zero
   USE mgrid_mod, ONLY: nextcur, mgrid_mode
@@ -15,6 +15,8 @@ SUBROUTINE reset_params
   IMPLICIT NONE
 
   ivac  = -1
+
+  vertically_unstable = .TRUE.
 
   fsqr = 1.0_dp
   fsqz = 1.0_dp

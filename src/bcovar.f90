@@ -7,7 +7,7 @@
 !> @param lv \f$- \partial\lambda / \partial\zeta\f$
 SUBROUTINE bcovar (lu, lv)
   USE vmec_main, fpsi => bvco, p5 => cp5
-  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale, ntmax, &
+  USE vmec_params, ONLY: ns4, signgs, pdamp, lamscale, ntmax, zcc, &
                          meven, modd
   USE realspace
   USE vforces, r12 => armn_o, ru12 => azmn_e, gsqrt => azmn_o,      &
@@ -26,7 +26,7 @@ SUBROUTINE bcovar (lu, lv)
 
   ! GENERALLY, IF TEMPORAL CONVERGENCE IS POOR, TRY TO INCREASE PDAMP (< 1) (STORED IN VMEC_PARAMS)
 
-  INTEGER :: l, js, ndim, lk, ku, m, n, rzl
+  INTEGER :: l, js, ndim, lk, ku, m, n, rzl, iz00
   REAL(rprec) :: r2, volume, curpol_temp
 
   integer :: dim_j, dim_k, dim_l, linear_index
@@ -435,7 +435,13 @@ SUBROUTINE bcovar (lu, lv)
        fnorm = one/(SUM(guu(1:nrzt)*wint(1:nrzt))*(r2*r2))
 
        !> Norm for preconditioned R,Z forces
-       fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)
+       IF (lasym) THEN
+          ! leave out the m = 0, n = 0 coefficient of Z as well as that of R
+          iz00 = irzloff + (zcc-1)*mns
+          fnorm1 = one/(SUM(xc(1+ns:iz00)**2) + SUM(xc(iz00+ns+1:2*irzloff)**2))
+       ELSE
+          fnorm1 = one/SUM(xc(1+ns:2*irzloff)**2)
+       END IF
 
        !> Norm for unpreconditioned Lambda force
        fnormL = one/(SUM((bsubuh(1:nrzt)**2 + bsubvh(1:nrzt)**2)*wint(1:nrzt))*lamscale**2)

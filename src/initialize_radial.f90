@@ -36,6 +36,12 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
 
   ijacob = 0
   first  = 1
+
+  vertical_state_set = .FALSE.
+  vertical_stiffness_sum = 0
+  vertical_stiffness_magnitude = 0
+  boundary_height_travel = 0
+
   res0   = -1
   delt0  = delt
 

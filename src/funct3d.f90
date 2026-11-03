@@ -28,6 +28,7 @@ SUBROUTINE funct3d (ier_flag)
   INTEGER, INTENT(inout) :: ier_flag
 
   INTEGER :: l0pi, l, lk, ivacskip, js, ku, m, n
+  REAL(dp) :: slope, height_change, stiffness_term
   INTEGER :: nvskip0 = 0
   REAL(dp), DIMENSION(mnmax) :: rmnc, zmns, lmns, rmns, zmnc, lmnc
   REAL(dp), DIMENSION(:), POINTER :: lu, lv
@@ -466,6 +467,32 @@ SUBROUTINE funct3d (ier_flag)
 
      fsqrz = fsqr + fsqz
      old_fsqz = fsqz
+
+     IF (lasym .and. lfreeb .and. ivac.ge.1 .and. iter2.gt.1) THEN
+        ! partial vacuum updates leave a sawtooth in the vacuum pressure
+        IF (ivacskip .eq. 0) THEN
+           ! The interior forces cancel in the net force on a rigid vertical shift, so
+           ! dW/dZ = \oint P_vac n_Z dS, with n_Z dS = signgs R_u R dtheta dzeta.
+           slope = signgs*SUM(ru0(ns:nrzt:ns)*rbsq(1:nznt))
+           IF (fsqrz.lt.1.0e-6_dp .and. iter2.gt.iter1 .and. vertical_state_set) THEN
+              height_change = zmnc(1) - boundary_height
+              stiffness_term = (slope - vertical_slope)*height_change
+              vertical_stiffness_sum = vertical_stiffness_sum + stiffness_term
+              vertical_stiffness_magnitude = vertical_stiffness_magnitude + ABS(stiffness_term)
+              boundary_height_travel = boundary_height_travel + ABS(height_change)
+
+              ! Other modes relaxing add terms of either sign, so the sum decides once it
+              ! outweighs them; below this travel the height is round-off.
+              IF (boundary_height_travel.gt.1.0e-9_dp*rmnc(1) .and.                     &
+                  ABS(vertical_stiffness_sum).ge.0.5_dp*vertical_stiffness_magnitude) THEN
+                 vertically_unstable = vertical_stiffness_sum .lt. 0
+              END IF
+           END IF
+           vertical_slope = slope
+           boundary_height = zmnc(1)
+           vertical_state_set = .TRUE.
+        END IF
+     END IF
 
      CALL residue    (gc,     gc(1+irzloff),     gc(1+2*irzloff),     fsqrz, old_fsqz)
      call residue_con(gc_con, gc_con(1+irzloff), gc_con(1+2*irzloff), fsqrz, old_fsqz)

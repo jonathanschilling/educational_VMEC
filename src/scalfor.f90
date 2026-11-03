@@ -100,7 +100,13 @@ SUBROUTINE scalfor(gcx, axm, bxm, axd, bxd, cx, iflag, skip_scalfor_dbg)
 
       IF (iflag .eq. 1) THEN ! this is only active for z
          ! METHOD 1: SUBTRACT (INSTABILITY) Pedge ~ fac*z/hs FROM PRECONDITIONER AT EDGE
-         dx(ns,0,0) = dx(ns,0,0)*(1.0_dp-mult_fac)/(1.0_dp+edge_pedestal)
+         ! A stiffness of the wrong sign makes the shift grow: add it where the vacuum
+         ! restores the plasma.
+         IF (vertically_unstable) THEN
+            dx(ns,0,0) = dx(ns,0,0)*(1.0_dp-mult_fac)/(1.0_dp+edge_pedestal)
+         ELSE
+            dx(ns,0,0) = dx(ns,0,0)*(1.0_dp+mult_fac)/(1.0_dp+edge_pedestal)
+         END IF
       END IF
   ENDIF
 

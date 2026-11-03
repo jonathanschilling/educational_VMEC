@@ -161,6 +161,14 @@ MODULE vmec_main
   integer :: iter2   !< total number of iterations
   integer :: ivac    !< counts number of free-boundary iterations
 
+  logical :: vertically_unstable !< sign of the stiffness of a rigid vertical shift in the preconditioner
+  logical :: vertical_state_set  !< vertical_slope and boundary_height hold the last full vacuum update
+  real(rprec) :: vertical_slope  !< slope of the energy in the boundary's height
+  real(rprec) :: boundary_height !< m = 0, n = 0 coefficient of Z on the boundary
+  real(rprec) :: vertical_stiffness_sum       !< over this multigrid step: sum of the products of their changes,
+  real(rprec) :: vertical_stiffness_magnitude !< of those products' magnitudes,
+  real(rprec) :: boundary_height_travel       !< and of the height's changes
+
   integer :: vacuum_calls
 !  integer :: profil3d_calls
 !  integer :: funct3d_calls

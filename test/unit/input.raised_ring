@@ -1,0 +1,31 @@
+&INDATA
+  MGRID_FILE = 'mgrid_raised_ring.nc'
+  LFREEB = T
+  LASYM = T
+  DELT = 0.9
+  TCON0 = 1.0
+  NFP = 1
+  MPOL = 6
+  NTOR = 0
+  NTHETA = 24
+  NZETA = 1
+  NS_ARRAY = 25
+  FTOL_ARRAY = 1.0E-14
+  NITER_ARRAY = 5000
+  NSTEP = 200
+  NVACSKIP = 1
+  GAMMA = 0.0
+  PHIEDGE = 0.7853981633974483
+  NCURR = 1
+  PCURR_TYPE = 'power_series'
+  AC = 1.0
+  CURTOR = 250.0E3
+  PMASS_TYPE = 'power_series'
+  AM = 0.0
+  PRES_SCALE = 0.0
+  EXTCUR = 1.0
+  RAXIS_CC = 2.5
+  ZAXIS_CC = 1.0E-3
+  RBC(0,0) = 2.5   ZBC(0,0) = 1.0E-3
+  RBC(0,1) = 0.5   ZBS(0,1) = 0.5
+/

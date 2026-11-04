@@ -21,6 +21,9 @@ SUBROUTINE eqsolve(ier_flag)
   REAL(rprec), PARAMETER :: p98 = 0.98_dp
   REAL(rprec), PARAMETER :: p96 = 0.96_dp
 
+  !> reverts without progress at which a multi-grid step goes over to the PARVMEC time-step control
+  INTEGER, PARAMETER :: max_reverts_without_progress = 8
+
   REAL(rprec) :: w0
   LOGICAL :: liter_flag
 
@@ -145,18 +148,34 @@ SUBROUTINE eqsolve(ier_flag)
      IF (iter2.eq.iter1 .or. res0.eq.-1) then
         ! if res0 has never been assigned (-1), give it the current value of fsq
         res0 = fsq
+        res1 = fsqr+fsqz+fsql
      end if
 
      ! res0 is the best force residual we got so far
      res0 = MIN(res0,fsq)
+     res1 = MIN(res1,fsqr+fsqz+fsql)
 
-     IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
+     ! reverts reset res0 and leave res_best
+     IF (fsq .lt. 0.5_dp*res_best) THEN
+        res_best = fsq
+        reverts_without_progress = 0
+     END IF
+
+     IF (parvmec_control) THEN
+        ! PARVMEC control: store when both residual minima improve
+        IF (fsq.le.res0 .and. fsqr+fsqz+fsql.le.res1) THEN
+           CALL restart_iter(delt0r)
+        ELSE IF (iter2-iter1.gt.10 .and. (fsq.gt.1.0e4_dp*res0 .or. fsqr+fsqz+fsql.gt.1.0e4_dp*res1)) THEN
+           first = 3
+        END IF
+     ELSE IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
         ! Store current state (first=1)
         ! --> was able to reduce force consistenly over at least 10 iterations
         CALL restart_iter(delt0r)
      ELSE IF (fsq.gt.100*res0 .and. iter2.gt.iter1) THEN
         ! Residuals are growing in time, reduce time step
         first = 2
+        CALL count_revert
      ELSE IF (iter2-iter1 .gt. ns4/2 .and.                              &
               iter2       .gt. 2*ns4 .and.                              &
               fsqr+fsqz   .gt. c1pm2       ) THEN ! 1.0e-2
@@ -169,6 +188,7 @@ SUBROUTINE eqsolve(ier_flag)
         ! --> lower threshold, e.g. 1e-4 ?
 
         first = 3
+        CALL count_revert
      ENDIF
 
 
@@ -223,5 +243,24 @@ SUBROUTINE eqsolve(ier_flag)
   ! write MHD energy at end of iterations for current number of surfaces
   WRITE (nthreed, 60) w0*twopi**2.0_dp
 60 FORMAT(/,' MHD Energy = ',1p,e12.6)
+
+CONTAINS
+
+  !> The VMEC 8.52 control reverts without limit to a stored state.
+  !> That state can be worse than the one just reached.
+  SUBROUTINE count_revert
+
+    reverts_without_progress = reverts_without_progress + 1
+
+    IF (reverts_without_progress.ge.max_reverts_without_progress) THEN
+       parvmec_control = .true.
+       res0 = -1
+       res1 = -1
+       PRINT 130, reverts_without_progress
+    END IF
+
+130 FORMAT(2x,'NO PROGRESS IN ',i0,' RESTARTS: CONTINUING WITH THE PARVMEC TIME-STEP CONTROL')
+
+  END SUBROUTINE count_revert
 
 END SUBROUTINE eqsolve

@@ -137,6 +137,10 @@ MODULE vmec_main
   REAL(rprec) :: ctor !< toroidal current (?)
   REAL(rprec) :: delbsq
   REAL(rprec) :: res0
+  REAL(rprec) :: res1 !< running minimum of fsqr + fsqz + fsql, for the PARVMEC time-step control
+  REAL(rprec) :: res_best !< lowest fsq of this multi-grid step
+  INTEGER :: reverts_without_progress !< reverts since res_best last halved
+  LOGICAL :: parvmec_control !< this multi-grid step runs under the PARVMEC time-step control
   REAL(rprec) :: delt0r
 
   LOGICAL :: lthreed

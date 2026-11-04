@@ -37,6 +37,10 @@ SUBROUTINE initialize_radial(nsval, ns_old, delt0)
   ijacob = 0
   first  = 1
   res0   = -1
+  res1   = -1
+  res_best = HUGE(res_best)
+  reverts_without_progress = 0
+  parvmec_control = .false.
   delt0  = delt
 
   ! start: INITIALIZE MESH-DEPENDENT SCALARS

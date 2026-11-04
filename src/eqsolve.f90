@@ -21,6 +21,9 @@ SUBROUTINE eqsolve(ier_flag)
   REAL(rprec), PARAMETER :: p98 = 0.98_dp
   REAL(rprec), PARAMETER :: p96 = 0.96_dp
 
+  !> reverts without progress at which a multi-grid step goes over to the PARVMEC time-step control
+  INTEGER, PARAMETER :: max_reverts_without_progress = 8
+
   REAL(rprec) :: w0
   LOGICAL :: liter_flag
 
@@ -172,6 +175,7 @@ SUBROUTINE eqsolve(ier_flag)
      ELSE IF (fsq.gt.100*res0 .and. iter2.gt.iter1) THEN
         ! Residuals are growing in time, reduce time step
         first = 2
+        CALL count_revert
      ELSE IF (iter2-iter1 .gt. ns4/2 .and.                              &
               iter2       .gt. 2*ns4 .and.                              &
               fsqr+fsqz   .gt. c1pm2       ) THEN ! 1.0e-2
@@ -184,6 +188,7 @@ SUBROUTINE eqsolve(ier_flag)
         ! --> lower threshold, e.g. 1e-4 ?
 
         first = 3
+        CALL count_revert
      ENDIF
 
 
@@ -238,5 +243,24 @@ SUBROUTINE eqsolve(ier_flag)
   ! write MHD energy at end of iterations for current number of surfaces
   WRITE (nthreed, 60) w0*twopi**2.0_dp
 60 FORMAT(/,' MHD Energy = ',1p,e12.6)
+
+CONTAINS
+
+  !> The VMEC 8.52 control reverts without limit to a stored state.
+  !> That state can be worse than the one just reached.
+  SUBROUTINE count_revert
+
+    reverts_without_progress = reverts_without_progress + 1
+
+    IF (reverts_without_progress.ge.max_reverts_without_progress) THEN
+       parvmec_control = .true.
+       res0 = -1
+       res1 = -1
+       PRINT 130, reverts_without_progress
+    END IF
+
+130 FORMAT(2x,'NO PROGRESS IN ',i0,' RESTARTS: CONTINUING WITH THE PARVMEC TIME-STEP CONTROL')
+
+  END SUBROUTINE count_revert
 
 END SUBROUTINE eqsolve

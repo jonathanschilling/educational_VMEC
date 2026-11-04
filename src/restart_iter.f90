@@ -16,9 +16,6 @@ SUBROUTINE restart_iter(time_step)
   REAL(rprec), PARAMETER :: c1p03 = 1.03_dp
   REAL(rprec), PARAMETER :: cp90  = 0.90_dp
 
-  !> reverts without progress at which a multi-grid step goes over to the PARVMEC time-step control
-  INTEGER, PARAMETER :: max_reverts_without_progress = 8
-
 !   if (first .ne. 1) then
 !     print *, "bad jacobian --> restart_iter (first = ", first, ")"
 !   end if
@@ -37,8 +34,6 @@ SUBROUTINE restart_iter(time_step)
 
      first = 1
 
-     CALL count_revert
-
      RETURN
   CASE (3)
 
@@ -51,32 +46,11 @@ SUBROUTINE restart_iter(time_step)
 
      first = 1
 
-     CALL count_revert
-
      RETURN
   CASE DEFAULT ! 1, 4
      ! save current state vector, e.g. first=1
      xstore(:neqs) = xc(:neqs)
      RETURN
   END SELECT
-
-CONTAINS
-
-  !> The VMEC 8.52 control reverts without limit to a stored state.
-  !> That state can be worse than the one just reached.
-  SUBROUTINE count_revert
-
-    reverts_without_progress = reverts_without_progress + 1
-
-    IF (.not.parvmec_control .and. reverts_without_progress.ge.max_reverts_without_progress) THEN
-       parvmec_control = .true.
-       res0 = -1
-       res1 = -1
-       PRINT 100, reverts_without_progress
-    END IF
-
-100 FORMAT(2x,'NO PROGRESS IN ',i0,' RESTARTS: CONTINUING WITH THE PARVMEC TIME-STEP CONTROL')
-
-  END SUBROUTINE count_revert
 
 END SUBROUTINE restart_iter

@@ -1,0 +1,29 @@
+! A spherical tokamak above its kink threshold, from an axisymmetric axis guess under a
+! helical shift of the boundary.
+&INDATA
+ lasym = .false.
+ nfp = 1
+ mpol = 6
+ ntor = 1
+ ns_array = 25
+ ftol_array = 1.0e-12
+ niter_array = 6000
+ nstep = 100
+ delt = 1.0
+ lfreeb = .false.
+ phiedge = 5.0
+ ncurr = 0
+ piota_type = 'power_series'
+ ai = 1.0, 0.0, 0.0, 0.0, -0.6666666666666666
+ pmass_type = 'power_series'
+ am = 1.0, -4.0, 6.0, -4.0, 1.0
+ pres_scale = 1.2e5
+ gamma = 0.0
+ raxis_cc = 1.5, 0.0
+ zaxis_cs = 0.0, 0.0
+ rbc(0, 0) = 1.5
+ rbc(0, 1) = 1.0
+ zbs(0, 1) = 1.6
+ rbc(1, 0) = 0.02142
+ zbs(1, 0) = -0.02142
+/

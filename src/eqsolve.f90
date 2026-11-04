@@ -145,12 +145,27 @@ SUBROUTINE eqsolve(ier_flag)
      IF (iter2.eq.iter1 .or. res0.eq.-1) then
         ! if res0 has never been assigned (-1), give it the current value of fsq
         res0 = fsq
+        res1 = fsqr+fsqz+fsql
      end if
 
      ! res0 is the best force residual we got so far
      res0 = MIN(res0,fsq)
+     res1 = MIN(res1,fsqr+fsqz+fsql)
 
-     IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
+     ! reverts reset res0 and leave res_best
+     IF (fsq .lt. 0.5_dp*res_best) THEN
+        res_best = fsq
+        reverts_without_progress = 0
+     END IF
+
+     IF (parvmec_control) THEN
+        ! PARVMEC control: store when both residual minima improve
+        IF (fsq.le.res0 .and. fsqr+fsqz+fsql.le.res1) THEN
+           CALL restart_iter(delt0r)
+        ELSE IF (iter2-iter1.gt.10 .and. (fsq.gt.1.0e4_dp*res0 .or. fsqr+fsqz+fsql.gt.1.0e4_dp*res1)) THEN
+           first = 3
+        END IF
+     ELSE IF (fsq.le.res0 .and. iter2-iter1.gt.10) THEN
         ! Store current state (first=1)
         ! --> was able to reduce force consistenly over at least 10 iterations
         CALL restart_iter(delt0r)

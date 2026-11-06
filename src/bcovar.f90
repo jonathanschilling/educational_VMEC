@@ -468,7 +468,8 @@ SUBROUTINE bcovar (lu, lv)
             STOP 'arnorm or aznorm=0 in bcovar'
          end if
 
-         tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2
+         tcon(js) = MIN(ABS(ard(js,1)/arnorm), ABS(azd(js,1)/aznorm)) * tcon_mul*(32*hs)**2 &
+                    * (1 + (tcon_axis_factor - 1)*MAX(zero, 1 - (js-1)*hs/0.2_rprec))
        END DO
 
 !       print *, "tcon profile: ", tcon

@@ -35,6 +35,8 @@ MODULE vmec_input
   REAL(rprec)                       :: curtor
   REAL(rprec)                       :: delt
   REAL(rprec)                       :: tcon0
+  !> factor on the constraint force on the axis, tapering linearly to 1 at s = 0.2
+  REAL(rprec)                       :: tcon_axis_factor
   REAL(rprec)                       :: gamma
   REAL(rprec)                       :: bloat
   REAL(rprec)                       :: pres_scale
@@ -209,6 +211,7 @@ MODULE vmec_input
      ns_array,      &
      ftol_array,    &
      tcon0,         &
+     tcon_axis_factor, &
      curtor,        &
      extcur,        &
      phiedge,       &
@@ -340,6 +343,7 @@ SUBROUTINE read_indata_namelist (iunit, istat)
   nfilter_fbdy = -1
 
   tcon0 = 1
+  tcon_axis_factor = 1
   curtor = 0
   extcur = 0
   phiedge = 1
@@ -401,6 +405,7 @@ SUBROUTINE write_indata_namelist (iunit, istat)
   WRITE(iunit,outflt) 'DELT',delt
   WRITE(iunit,outint) 'NSTEP',nstep
   WRITE(iunit,outflt) 'TCON0',tcon0
+  WRITE(iunit,outflt) 'TCON_AXIS_FACTOR',tcon_axis_factor
   ins = MAXLOC(ns_array)
   WRITE(iunit,'(a,(1p,4i14))') '  NS_ARRAY =    ',(ns_array(i), i=1,ins(1))
   iftol = 1

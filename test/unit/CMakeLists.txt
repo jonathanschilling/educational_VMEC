@@ -28,3 +28,9 @@ add_test (NAME nestor_two_rings_source_point_axisymmetric COMMAND test_nestor_tw
 add_test (NAME nestor_two_rings_source_point_even_nzeta COMMAND test_nestor_two_rings 2 4 32 44 F 3e-5)
 add_test (NAME nestor_two_rings_source_point_odd_nzeta COMMAND test_nestor_two_rings 2 4 31 44 F 3e-5)
 add_test (NAME nestor_two_rings_source_point_lasym COMMAND test_nestor_two_rings 2 4 32 44 T 3e-5)
+
+# The axisymmetric grid with nfp other than 1, whose integral in v goes around
+# the whole torus.
+add_test (NAME nestor_two_rings_axisymmetric_nfp2 COMMAND test_nestor_two_rings 2 0 1 22 F)
+add_test (NAME nestor_two_rings_axisymmetric_nfp5 COMMAND test_nestor_two_rings 5 0 1 22 F)
+add_test (NAME nestor_two_rings_axisymmetric_nfp5_lasym COMMAND test_nestor_two_rings 5 0 1 22 T)

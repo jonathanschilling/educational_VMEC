@@ -79,6 +79,10 @@ subroutine set_nestor_sizes(nfp, ntor, mpol, nzeta, ntheta, lasym)
 
   IF (nv == 1) THEN
      ! AXISYMMETRIC CASE: DO FP SUM TO INTEGRATE IN V
+     ! The images go around the whole torus, so the torus is one field period:
+     ! v is the toroidal angle in the metric, the normal and the normalization
+     ! of the integrals.
+     nfper = 1
      nvper = 64
      nuv_tan = 2*nu*nvper
   ELSE

@@ -8,6 +8,7 @@
 !> @param ip
 SUBROUTINE greenf(delgr, delgrp, ip)
   USE vacmod
+  USE greenf_singular, only: singular_defects
 
 !  use dbgout
   
@@ -18,7 +19,10 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   INTEGER, DIMENSION(2) :: ilow, ihigh
   INTEGER :: ivoff, iskip, iuoff, i, kp, nloop, ivoff0
+  INTEGER :: kua, kva, kv0, kvm, iup, ium, ivp, ivm
   REAL(rprec):: xip, yip, ftemp, htemp ! xper, yper, sxsave, sysave
+  REAL(rprec) :: hv, su, du, sv, dv
+  REAL(rprec) :: wg(3), wk(3), dphi, area
 
   REAL(rprec), dimension(nvper) :: xper, yper, sxsave, sysave
   integer,     dimension(nvper,nuv) :: idx_tanu, idx_tanv
@@ -117,6 +121,87 @@ SUBROUTINE greenf(delgr, delgrp, ip)
              delgr(i)  = delgr(i)  +       htemp                                                          -           ga1(kp,i)
            END DO
         END DO
+
+        ! ga1 and ga1*ga2 vanish with a kink where u - u' or v - v' is pi,
+        ! where the Green's function is smooth. The trapezoidal sum across a
+        ! kink of slope s is off by h**2*s/6, so the nodes on the kink take
+        ! h*s/6 in place of zero, and the node where the u and v kinks cross
+        ! takes the v value. For odd nv the v kink lies midway between two
+        ! nodes, and each of them takes h*s/24 less.
+        hv = alv
+        if (nv .eq. 1) then
+           hv = pi2/nvper
+        end if
+        su = alu/(24*sqrt(guu_b(ip)))
+        du = su*auu(ip)/guu_b(ip)
+        sv = hv/(24*sqrt(gvv_b(ip)))
+        dv = sv*avv(ip)/gvv_b(ip)
+        kua = mod(iskip + nu/2, nu)*nv
+        if (nv .eq. 1) then
+           if (2*(kp - 1) .eq. nvper) then
+              delgr  = delgr  - sv
+              delgrp = delgrp - dv
+           else
+              delgr (kua + 1) = delgr (kua + 1) - su
+              delgrp(kua + 1) = delgrp(kua + 1) - du
+           end if
+        else
+           delgr (kua + 1:kua + nv) = delgr (kua + 1:kua + nv) - su
+           delgrp(kua + 1:kua + nv) = delgrp(kua + 1:kua + nv) - du
+           kv0 = mod(ip - 1, nv)
+           if (mod(nv, 2) .eq. 0) then
+              kva = mod(kv0 + nv/2, nv) + 1
+              delgr (kua + kva) = delgr (kua + kva) + su
+              delgrp(kua + kva) = delgrp(kua + kva) + du
+              delgr (kva:nuv:nv) = delgr (kva:nuv:nv) - sv
+              delgrp(kva:nuv:nv) = delgrp(kva:nuv:nv) - dv
+           else
+              do kvm = kv0 + (nv - 1)/2, kv0 + (nv + 1)/2
+                 kva = mod(kvm, nv) + 1
+                 delgr (kva:nuv:nv) = delgr (kva:nuv:nv) + sv/4
+                 delgrp(kva:nuv:nv) = delgrp(kva:nuv:nv) + dv/4
+                 delgr (kua + kva) = delgr (kua + kva) - sv/4
+                 delgrp(kua + kva) = delgrp(kua + kva) - dv/4
+              end do
+           end if
+        end if
+
+        ! The sum skips the source point, where the remainders tend to a
+        ! direction-dependent limit and rise linearly; its defects for the
+        ! weights 1, u - u' and v - v' go onto the source node and its
+        ! neighbours. For nv = 1 the v step is the image spacing in the
+        ! toroidal angle, along which the modes do not vary.
+        if (kp .eq. 1) then
+           kv0 = mod(ip - 1, nv)
+           dphi = onp
+           if (nv .eq. 1) then
+              dphi = one
+           end if
+           call singular_defects(rtay(:,:,ip), ztay(:,:,ip), xip, yip, z1b(ip), alvp*kv0, dphi, &
+                                 sxsave(1), sysave(1), snz(ip), guu_b(ip), guv_b(ip), gvv_b(ip), &
+                                 auu(ip), auv(ip), avv(ip), alu, hv, wg, wk)
+           area = alu*hv
+           iup = ip + nv
+           if (iup .gt. nuv) iup = iup - nuv
+           ium = ip - nv
+           if (ium .lt. 1) ium = ium + nuv
+           delgr (ip)  = delgr (ip)  + wg(1)/area
+           delgrp(ip)  = delgrp(ip)  + wk(1)/area
+           delgr (iup) = delgr (iup) + wg(2)/(2*alu*area)
+           delgr (ium) = delgr (ium) - wg(2)/(2*alu*area)
+           delgrp(iup) = delgrp(iup) + wk(2)/(2*alu*area)
+           delgrp(ium) = delgrp(ium) - wk(2)/(2*alu*area)
+           if (nv .gt. 1) then
+              ivp = ip + 1
+              if (kv0 .eq. nv - 1) ivp = ivp - nv
+              ivm = ip - 1
+              if (kv0 .eq. 0) ivm = ivm + nv
+              delgr (ivp) = delgr (ivp) + wg(3)/(2*hv*area)
+              delgr (ivm) = delgr (ivm) - wg(3)/(2*hv*area)
+              delgrp(ivp) = delgrp(ivp) + wk(3)/(2*hv*area)
+              delgrp(ivm) = delgrp(ivm) - wk(3)/(2*hv*area)
+           end if
+        end if
 
         ! update the upper bound of the first loop
         ! --> in Tokamak case, skip exact singularity only if in first toroidal "module"

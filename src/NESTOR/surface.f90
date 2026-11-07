@@ -12,7 +12,8 @@
 !> @param mnmax
 !> @param lasym
 !> @param signgs
-SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
+!> @param ivac_skip
+SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs, ivac_skip)
   USE vacmod
 
   use dbgout
@@ -24,9 +25,12 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
   REAL(rprec), DIMENSION(mnmax), intent(in) :: rc, rs, zs, zc, xm, xn
   logical, intent(in) :: lasym
   real(rprec), intent(in) :: signgs
+  integer, intent(in) :: ivac_skip
 
-  INTEGER :: i, mn, m, n, n1
-  REAL(rprec) :: cosmn1, sinmn1
+  INTEGER :: i, mn, m, n, n1, ia, ja
+  REAL(rprec) :: cosmn1, sinmn1, rsn, zcn
+  REAL(rprec) :: mpow(0:4), npow(0:4), tfac(0:4,0:4), rph(0:3), zph(0:3)
+  REAL(rprec), PARAMETER :: fact(0:4) = [1, 1, 2, 6, 24]
 
   ! THIS ROUTINE COMPUTES THE SURFACE VALUES OF R,Z AND DERIVATIVES
   !
@@ -40,11 +44,35 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
 
   r1b = 0;   rub = 0;   rvb = 0;  ruu = 0; ruv = 0; rvv = 0
   z1b = 0;   zub = 0;   zvb = 0;  zuu = 0; zuv = 0; zvv = 0
+  rtay = 0;  ztay = 0
 
   DO mn = 1, mnmax
      m = NINT(xm(mn))
      n = NINT(xn(mn)/(nfper))
      n1 = ABS(n)
+
+     ! Taylor coefficients of R and Z to fourth order in the steps of u and of
+     ! the v of one field period, for the source point of greenf:
+     ! d**(ia+ja)/(ia! ja!) takes cos(mu - nv) to
+     ! m**ia*(-n)**ja*cos(mu - nv + (ia + ja)*pi/2)
+     rsn = 0
+     zcn = 0
+     IF (lasym) THEN
+        rsn = rs(mn)
+        zcn = zc(mn)
+     END IF
+     mpow(0) = 1
+     npow(0) = 1
+     DO ia = 1, 4
+        mpow(ia) = mpow(ia - 1)*m
+        npow(ia) = -npow(ia - 1)*n
+     END DO
+     DO ia = 0, 4
+        DO ja = 0, 4 - ia
+           tfac(ia,ja) = mpow(ia)*npow(ja)/(fact(ia)*fact(ja))
+        END DO
+     END DO
+
      DO i = 1, nuv2
         cosmn1 = cosu1(i,m)*cosv1(i,n1) + csign(n)*sinu1(i,m)*sinv1(i,n1)
         sinmn1 = sinu1(i,m)*cosv1(i,n1) - csign(n)*cosu1(i,m)*sinv1(i,n1)
@@ -73,6 +101,22 @@ SUBROUTINE surface(rc, rs, zs, zc, xm, xn, mnmax, lasym, signgs)
            zuu(i) = zuu(i) - xm(mn) * xm(mn) * zc(mn) * cosmn1
            zuv(i) = zuv(i) + xm(mn) * xn(mn) * zc(mn) * cosmn1
            zvv(i) = zvv(i) - xn(mn) * xn(mn) * zc(mn) * cosmn1
+        END IF
+        IF (ivac_skip .EQ. 0) THEN
+           rph(0) = rc(mn)*cosmn1 + rsn*sinmn1
+           rph(1) = rsn*cosmn1 - rc(mn)*sinmn1
+           zph(0) = zs(mn)*sinmn1 + zcn*cosmn1
+           zph(1) = zs(mn)*cosmn1 - zcn*sinmn1
+           rph(2) = -rph(0)
+           rph(3) = -rph(1)
+           zph(2) = -zph(0)
+           zph(3) = -zph(1)
+           DO ia = 0, 4
+              DO ja = 0, 4 - ia
+                 rtay(ia,ja,i) = rtay(ia,ja,i) + tfac(ia,ja)*rph(mod(ia + ja, 4))
+                 ztay(ia,ja,i) = ztay(ia,ja,i) + tfac(ia,ja)*zph(mod(ia + ja, 4))
+              END DO
+           END DO
         END IF
      END DO
   END DO

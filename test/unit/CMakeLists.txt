@@ -21,3 +21,10 @@ add_test (NAME nestor_two_rings_axisymmetric COMMAND test_nestor_two_rings 1 0 1
 add_test (NAME nestor_two_rings_even_nzeta COMMAND test_nestor_two_rings 2 4 32 22 F)
 add_test (NAME nestor_two_rings_odd_nzeta COMMAND test_nestor_two_rings 2 4 31 22 F)
 add_test (NAME nestor_two_rings_lasym COMMAND test_nestor_two_rings 2 4 31 22 T)
+
+# The same problem on finer grids, where the error that remains is the
+# third-order defect of the sums of greenf at the source point.
+add_test (NAME nestor_two_rings_source_point_axisymmetric COMMAND test_nestor_two_rings 1 0 1 32 F 6e-5)
+add_test (NAME nestor_two_rings_source_point_even_nzeta COMMAND test_nestor_two_rings 2 4 32 44 F 3e-5)
+add_test (NAME nestor_two_rings_source_point_odd_nzeta COMMAND test_nestor_two_rings 2 4 31 44 F 3e-5)
+add_test (NAME nestor_two_rings_source_point_lasym COMMAND test_nestor_two_rings 2 4 32 44 T 3e-5)

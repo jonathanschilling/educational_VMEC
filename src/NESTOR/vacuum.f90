@@ -119,7 +119,7 @@ SUBROUTINE vacuum(rmnc, rmns, zmns, zmnc, xm, xn,             &
    IF (.not. precal_done) then
       CALL precal
    end if
-   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs)
+   CALL surface (rmnc, rmns, zmns, zmnc, xm, xn, mnmax, lasym, signgs, ivac_skip)
    CALL bextern (plascur, wint)
 
    ! NOTE: all fine up to here against NESTOR.py

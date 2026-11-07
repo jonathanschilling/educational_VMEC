@@ -3,9 +3,9 @@
 !> and R = 1.06 m, with opposite currents of 10 kA. Outside the torus the field
 !> of the rings is the gradient of a single-valued potential, so the total
 !> vacuum field on the boundary is zero and the field NESTOR returns there is
-!> its error. The command line gives nfp, ntor, nzeta, ntheta and lasym. The
-!> test stops with an error unless the rms of that field over the rms of the
-!> field of the rings is below the tolerance.
+!> its error. The command line gives nfp, ntor, nzeta, ntheta, lasym and the
+!> tolerance, 5e-4 if not given. The test stops with an error unless the rms
+!> of that field over the rms of the field of the rings is below the tolerance.
 program test_nestor_two_rings
   use stel_kinds, only: dp
   use vacmod0, only: set_nestor_sizes, nu3, nuv2
@@ -25,7 +25,7 @@ program test_nestor_two_rings
   integer, parameter :: nr = 701, nz = 700
   real(dp), parameter :: spacing = 1.0e-3_dp
 
-  real(dp), parameter :: tolerance = 5.0e-4_dp
+  real(dp) :: tolerance = 5.0e-4_dp
 
   ! The rings carry no net toroidal current, rbtor is only compared with the
   ! R*BTOR of the vacuum field, and signgs is the sign of the Jacobian of this
@@ -49,6 +49,10 @@ program test_nestor_two_rings
   read (argument, *) ntheta
   call get_command_argument(5, argument)
   read (argument, *) lasym
+  if (command_argument_count() > 5) then
+    call get_command_argument(6, argument)
+    read (argument, *) tolerance
+  end if
 
   nr0b = nr
   nz0b = nz

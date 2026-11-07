@@ -8,6 +8,7 @@
 !> @param ip
 SUBROUTINE greenf(delgr, delgrp, ip)
   USE vacmod
+  USE greenf_singular, only: singular_defects
 
 !  use dbgout
   
@@ -18,9 +19,10 @@ SUBROUTINE greenf(delgr, delgrp, ip)
 
   INTEGER, DIMENSION(2) :: ilow, ihigh
   INTEGER :: ivoff, iskip, iuoff, i, kp, nloop, ivoff0
-  INTEGER :: kua, kva, kv0, kvm
+  INTEGER :: kua, kva, kv0, kvm, iup, ium, ivp, ivm
   REAL(rprec):: xip, yip, ftemp, htemp ! xper, yper, sxsave, sysave
   REAL(rprec) :: hv, su, du, sv, dv
+  REAL(rprec) :: wg(3), wk(3), dphi, area
 
   REAL(rprec), dimension(nvper) :: xper, yper, sxsave, sysave
   integer,     dimension(nvper,nuv) :: idx_tanu, idx_tanv
@@ -161,6 +163,43 @@ SUBROUTINE greenf(delgr, delgrp, ip)
                  delgr (kua + kva) = delgr (kua + kva) - sv/4
                  delgrp(kua + kva) = delgrp(kua + kva) - dv/4
               end do
+           end if
+        end if
+
+        ! The sum skips the source point, where the remainders tend to a
+        ! direction-dependent limit and rise linearly; its defects for the
+        ! weights 1, u - u' and v - v' go onto the source node and its
+        ! neighbours. For nv = 1 the v step is the image spacing in the
+        ! toroidal angle, along which the modes do not vary.
+        if (kp .eq. 1) then
+           kv0 = mod(ip - 1, nv)
+           dphi = onp
+           if (nv .eq. 1) then
+              dphi = one
+           end if
+           call singular_defects(rtay(:,:,ip), ztay(:,:,ip), xip, yip, z1b(ip), alvp*kv0, dphi, &
+                                 sxsave(1), sysave(1), snz(ip), guu_b(ip), guv_b(ip), gvv_b(ip), &
+                                 auu(ip), auv(ip), avv(ip), alu, hv, wg, wk)
+           area = alu*hv
+           iup = ip + nv
+           if (iup .gt. nuv) iup = iup - nuv
+           ium = ip - nv
+           if (ium .lt. 1) ium = ium + nuv
+           delgr (ip)  = delgr (ip)  + wg(1)/area
+           delgrp(ip)  = delgrp(ip)  + wk(1)/area
+           delgr (iup) = delgr (iup) + wg(2)/(2*alu*area)
+           delgr (ium) = delgr (ium) - wg(2)/(2*alu*area)
+           delgrp(iup) = delgrp(iup) + wk(2)/(2*alu*area)
+           delgrp(ium) = delgrp(ium) - wk(2)/(2*alu*area)
+           if (nv .gt. 1) then
+              ivp = ip + 1
+              if (kv0 .eq. nv - 1) ivp = ivp - nv
+              ivm = ip - 1
+              if (kv0 .eq. 0) ivm = ivm + nv
+              delgr (ivp) = delgr (ivp) + wg(3)/(2*hv*area)
+              delgr (ivm) = delgr (ivm) - wg(3)/(2*hv*area)
+              delgrp(ivp) = delgrp(ivp) + wk(3)/(2*hv*area)
+              delgrp(ivm) = delgrp(ivm) - wk(3)/(2*hv*area)
            end if
         end if
 

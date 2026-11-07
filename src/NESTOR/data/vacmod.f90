@@ -90,6 +90,10 @@ MODULE vacmod
   REAL(rprec), ALLOCATABLE, DIMENSION(:) :: zuv
   REAL(rprec), ALLOCATABLE, DIMENSION(:) :: zvv
 
+  ! Taylor coefficients of R and Z to fourth order, for the source point of greenf
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: rtay
+  REAL(rprec), ALLOCATABLE, DIMENSION(:,:,:) :: ztay
+
   ! from bextern
   REAL(rprec), ALLOCATABLE :: brad(:)
   REAL(rprec), ALLOCATABLE :: bphi(:)
@@ -221,7 +225,8 @@ subroutine allocate_nestor
   IF (istat1.ne.0) STOP 'allocation error in precal'
 
   ! from surface()
-  ALLOCATE (ruu(nuv2), ruv(nuv2), rvv(nuv2), zuu(nuv2), zuv(nuv2), zvv(nuv2), stat = i)
+  ALLOCATE (ruu(nuv2), ruv(nuv2), rvv(nuv2), zuu(nuv2), zuv(nuv2), zvv(nuv2), &
+            rtay(0:4,0:4,nuv2), ztay(0:4,0:4,nuv2), stat = i)
   IF (i .NE. 0) STOP 'Allocation error in SURFACE'
 
   ! from bextern
@@ -337,7 +342,7 @@ subroutine free_mem_nestor
 
   ! from surface
   if (allocated(ruu)) then
-     DEALLOCATE (ruu, ruv, rvv, zuu, zuv, zvv, stat=i)
+     DEALLOCATE (ruu, ruv, rvv, zuu, zuv, zvv, rtay, ztay, stat=i)
   end if
 
   ! from bextern
